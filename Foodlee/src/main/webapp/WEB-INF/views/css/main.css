@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css");
+
+hr{
+    margin: 0;
+}
+ul{
+    margin: 0;
+}
+body#wrapper{
+    margin: 150px auto 0;
+    width: 1200px;
+    font-family: 'Nanum Gothic', sans-serif;
+    height: 1000px;
+}
+
+#main-header{
+    width: 1200px;
+    height: 90px;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+    display: block;
+}
+.logo
+{
+    position: absolute;
+/*  left : 133px;*/
+/*    float: left;*/
+  top : 25px;
+    left: 20px;
+  width : 158px;
+  height : 51px;
+}
+#loginjoin{
+    position: absolute;
+    top: 50px;
+    left: 1085px;
+    font-size: 12px;
+}
+#login, #join
+{
+    color : #000000;
+    font-weight: bold;  
+}
+.line
+{
+  border-color : rgba(115,110,103,.5);
+  border-style : Solid;
+  border-width : 1px;
+  width : 1200px;
+    position: fixed;
+    top: 90px;
+    display: block;
+}
+#menu-list{
+    text-align: center;   
+}
+
+#menu-list li{
+    display: inline-block;
+    margin: 60px 50px 0 50px;
+    font-size: 1.0em;
+    font-weight: bold;
+}
+#menu-list li a,span a{
+    color: rgba(0,0,0);
+    text-decoration: none;
+}
