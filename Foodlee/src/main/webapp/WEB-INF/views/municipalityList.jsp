@@ -28,7 +28,6 @@
             white-space: pre-line;
         }
     </style>
-</head>    
 	<title> 성동구 푸드트럭 정보 </title>
 </head>
 
