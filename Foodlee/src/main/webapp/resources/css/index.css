@@ -4,11 +4,10 @@
 .topo{
     display: block;
 }
-#chart, .btn{
+#chart, .index-btn{
     display: inline-block;
 }
-.btn
-{
+.index-btn{
   background : #F29C11;
   background : rgba(242, 156, 17, 1);
   position : relative;
@@ -43,7 +42,7 @@ i .far{
 */
 
 
-#main{
+#main-content{
     margin: 0 120px;
 }
 .wrap_muni{

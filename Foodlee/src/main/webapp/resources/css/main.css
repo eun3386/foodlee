@@ -13,7 +13,6 @@ body#wrapper{
     font-family: 'Nanum Gothic', sans-serif;
     height: 1000px;
 }
-
 #main-header{
     width: 1200px;
     height: 90px;
@@ -64,7 +63,7 @@ body#wrapper{
     font-size: 1.0em;
     font-weight: bold;
 }
-#menu-list li a,span a{
+#menu-list li a,span#loginjoin a{
     color: rgba(0,0,0);
     text-decoration: none;
 }

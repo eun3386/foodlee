@@ -91,16 +91,12 @@
         <span id="loginjoin"><a href="#" id='login'>로그인</a> / <a href="#" id='join'>회원가입</a></span>
     <hr class="line">
     </div>
-    
-    <div id="main">
+    <div id="main-content">
         <div class="topo">
         <h3>서울시 푸드트럭 찾기</h3>
         <div id="chart"></div>
-        
-        
     </div>
-        
-        <div class="btn">
+        <div class="index-btn">
         <P id="search">내 주변 푸드트럭<br>찾기 <i class="far fa-compass"></i></P>
         </div>
     </div>
