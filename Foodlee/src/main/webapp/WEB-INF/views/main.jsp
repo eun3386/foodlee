@@ -93,7 +93,7 @@
     </div>
     <div id="main-content">
         <div class="topo">
-        <h3>서울시 푸드트럭 찾기</h3>
+        <h3 id="muni">서울시 푸드트럭 찾기</h3>
         <div id="chart"></div>
     </div>
         <div class="index-btn">

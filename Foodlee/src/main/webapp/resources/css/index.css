@@ -84,7 +84,7 @@ svg text {
           text-anchor: middle;
         }
        
-        h3{
+        h3#muni{
             font-family: 'Jua', sans-serif;
             font-size: 19px;
             font-weight: 600;
@@ -117,12 +117,12 @@ svg text {
     overflow: hidden;
 }
 */
-#gu-list-wrap td{
-    font-size: smaller;
-    color: #676767;
-    text-align: center;
+/* #gu-list-wrap td{ */
+/*     font-size: smaller; */
+/*     color: #676767; */
+/*     text-align: center; */
     
-}
+/* } */
 #gu-list-table{
     width: 800px;
     
@@ -142,10 +142,13 @@ svg text {
     font-family: 'jua', sans-serif;
 }
 
-tbody td{
+#gu-list-table tbody td{
     width: auto;
     box-sizing: border-box;
     max-height: 80px;
+    font-size: smaller;
+    color: #676767;
+    text-align: center;
     
 }
 #th-menu{
