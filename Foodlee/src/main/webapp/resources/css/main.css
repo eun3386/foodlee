@@ -8,10 +8,11 @@ ul{
     margin: 0;
 }
 body#wrapper{
-    margin: 150px auto 0;
+    margin:150px auto 0;
     width: 1200px;
     font-family: 'Nanum Gothic', sans-serif;
     height: 1000px;
+   	
 }
 #main-header{
     width: 1200px;
@@ -67,7 +68,6 @@ body#wrapper{
     color: rgba(0,0,0);
     text-decoration: none;
 }
-
 /*  장재석 css ---------------------------------------------------------------------------->*/
 #map_wrap {width: 1200px; margin: 0 auto;}
 #map_header {background: url("../imgs/mapMain/header_bg.jpg") repeat-x center top;}
