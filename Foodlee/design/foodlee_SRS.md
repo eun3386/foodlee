@@ -162,6 +162,10 @@ CURRENT_TIMESTAMP
 - String menuInfor 메뉴정보 ⇔ varchar(512) menu_infor NN
 - String rawMaterials 메뉴 원재료 ⇔ varchar(256) raw_Materials
 
+#### Menu
+- String category;
+- 
+
 #### menuOrigin 메뉴 원산지 ⇔ varchar(32) menu_origin
 - 원산지 의무 표시 품목
 - 원산지 국명
@@ -209,6 +213,8 @@ String adLocation 노출 위치 ⇔ text ad_location
 - int qaPnum 답글일 경우 부모(문의) 번호 ⇔ int qa_pnum 
 - Date qaCreatedAt 문의작성일 ⇔ timestamp qa_created_at CURRENT_TIMESTAMP  NN
 
+
+
 #### OrderVO ⇔ orders
 - int orderId <<PK>> 주문번호 ⇔ integer order_id <<PK>> NN AI
 - String login <<FK>> 주문한 사람의 아이디 ⇔ varchar(12) login <<FK>> NN
@@ -219,8 +225,8 @@ String adLocation 노출 위치 ⇔ text ad_location
 
 
 ## URL 매핑 정의
-- default.my "/"
-	=> 약식으로 member_login_form.my (form; get; 비회원)
+- default.fdl "/"
+	main.fdl (form; get; 비회원)
 - mypage.my 마이페이지 (로그인 인증 후 리다이렉트; 회원)
 - 가입 할 수 있다 (암호화 저장 처리)
 	member_new_form.my (form; get; 비회원) 
