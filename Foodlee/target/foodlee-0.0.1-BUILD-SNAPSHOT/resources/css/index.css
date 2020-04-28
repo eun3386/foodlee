@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css");
+
+.topo{
+    display: block;
+}
+#chart, .index-btn{
+    display: inline-block;
+}
+.index-btn{
+  background : #F29C11;
+  background : rgba(242, 156, 17, 1);
+  position : relative;
+  left : 100px;
+  top : -250px;
+  width : 306px;
+  height : 306px;
+  border-radius : 50px;
+  -moz-border-radius : 50px;
+  -webkit-border-radius : 50px;
+    cursor: pointer;
+}
+.fa-compass{
+    position: static;
+    display: inline !important;
+}
+#search{
+    position : relative;
+    left: 38px;
+    top: 105px;
+    color: white;
+    font-family: 'Jua', sans-serif;
+    font-size: 36px;
+    width: 250px;
+    display: inline;
+
+}
+/*
+i .far{
+    display: inline;
+}
+*/
+
+
+#main-content{
+    margin: 0 120px;
+}
+.wrap_muni{
+    background-color: #fff9f2;
+}
+.topo, .btn{
+    display: inline-block;
+}
+
+svg text {
+          pointer-events: none;
+        }
+        svg .municipality {
+          fill: rgba(115,110,103,.1);
+/*              #efefef;*/
+          stroke: #fff;
+        }
+        svg .municipality:hover {
+            cursor: pointer;
+            fill: #BDD98C;
+/*                #34CEC3;*/
+/*            color: #823007;*/
+        }
+        svg .municipality-label {
+          fill: #6E6B67;
+/*              #bbb;*/
+          font-size: 12px;
+          font-weight: 300;
+          text-anchor: middle;
+        }
+/*
+        svg .municipality:hover{
+            fill: #34CEC3;
+        }
+*/
+        svg #map text {
+          color: #333;
+          font-size: 10px;
+          text-anchor: middle;
+        }
+       
+        h3#muni{
+            font-family: 'Jua', sans-serif;
+            font-size: 19px;
+            font-weight: 600;
+        }
+
+#gu-list-wrap{
+    margin: 0 100px;
+    width: 800px;
+    height: 580px;
+    display: inline-block;
+    
+}
+#gu-list-wrap thead{
+    background-color: rgba(115,110,103,.1);
+}
+#gu-list-wrap thead th{
+    font-size: smaller;
+}
+#gu-list-wrap thead th,td{
+    border: solid 2px rgba(115,110,103,.3);
+    border-left: 0px; 
+    border-right: 0px; 
+    font-family: 'Nanum Gothic', sans-serif;
+    vertical-align: middle;
+}
+
+/*
+#gu-list-wrap tbody tr{
+    height: 75px;
+    overflow: hidden;
+}
+*/
+/* #gu-list-wrap td{ */
+/*     font-size: smaller; */
+/*     color: #676767; */
+/*     text-align: center; */
+    
+/* } */
+#gu-list-table{
+    width: 800px;
+    
+}
+#gu-truck-info{
+    font-family: 'Jua', sans-serif;
+    font-size: 26px;
+    margin: 15px 0 15px 15px;
+    text-align: justify;
+}
+.face{
+    position: relative;
+    top: 10px;
+}
+#gu{
+    color: #F7931E;
+    font-family: 'jua', sans-serif;
+}
+
+#gu-list-table tbody td{
+    width: auto;
+    box-sizing: border-box;
+    max-height: 80px;
+    font-size: smaller;
+    color: #676767;
+    text-align: center;
+    
+}
+#th-menu{
+    width: 270px;
+    
+}
+tbody tr:hover{
+    cursor: pointer;
+    background-color: #BDD98C;
+}
+.fas fa-times{
+    position: relative;
+    left: 100px;
+    
+}
+#page{
+    width: 800px;
+     text-align: center;
+    margin-top: 20px;
+    
+}
+#page li{
+    display: inline-block;
+    font-size: 0.7em;
+    color: rgba(115,110,103,.5);
+    vertical-align: middle;
+}
+#page li#selected{
+    color: rgba(115,110,103);
+}
+.fa-times{
+    float: right;
+    display: inline !important;
+    padding-right: 15px;
+}
+.meme{
+    max-height: 70px;
+    word-wrap: break-word;
+    display: block;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 268px;
+    white-space: nowrap;
+}
