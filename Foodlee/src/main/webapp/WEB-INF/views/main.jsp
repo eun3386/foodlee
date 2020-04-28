@@ -17,7 +17,7 @@
                     var geocodes =[];
 
         $(document).ready(function () {
-            
+        	var ROOTCP = '<%= application.getContextPath()%>';
        
             var width = 500,
             height = 375;
@@ -67,8 +67,19 @@
 //                window.open("municipality-list.html","","width=1006px,height=580px");
 //            });
 //            console.log("d");
+	        $('.index-btn').on('click', function() {
+	        	location.href = '<%= application.getContextPath()%>/mapMain.fdl';
+// 	    		console.log("버튼")
+// 	    		var url = ROOTCP +"/mapMain.fdl";
+// 	    			url = url + "?pg=sourrounding";
+// 	    		$('.map_container').load(url, function() {
+// 	    			document.getElementById('map_content').scrollIntoView();
+// 	    			console.log("sourrounding 로딩 완료!")
+// 	    			var offset = $('#map_container').offset();
+// 	        		$('html').animate({scrollTop : offset.top}, 400);
+// 	    		})
+	    	});
         });
-            
         
 //https://kin.naver.com/qna/detail.nhn?d1id=1&dirId=1040205&docId=283031734&qb=aHRtbCDsg4jssL0g7YGs6riw&enc=utf8&section=kin&rank=1&search_sort=0&spq=0
 </script>
