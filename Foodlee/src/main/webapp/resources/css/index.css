@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic&display=swap');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css");
 
-.topo{
-    display: block;
-}
+
 #chart, .index-btn{
     display: inline-block;
 }
@@ -48,47 +46,47 @@ i .far{
 .wrap_muni{
     background-color: #fff9f2;
 }
-.topo, .btn{
+.topo{
     display: inline-block;
 }
 
 svg text {
           pointer-events: none;
-        }
-        svg .municipality {
-          fill: rgba(115,110,103,.1);
+}
+svg .municipality {
+  fill: rgba(115,110,103,.1);
 /*              #efefef;*/
-          stroke: #fff;
-        }
-        svg .municipality:hover {
-            cursor: pointer;
-            fill: #BDD98C;
+  stroke: #fff;
+}
+svg .municipality:hover {
+    cursor: pointer;
+    fill: #BDD98C;
 /*                #34CEC3;*/
 /*            color: #823007;*/
-        }
-        svg .municipality-label {
-          fill: #6E6B67;
+}
+svg .municipality-label {
+  fill: #6E6B67;
 /*              #bbb;*/
-          font-size: 12px;
-          font-weight: 300;
-          text-anchor: middle;
-        }
+  font-size: 12px;
+  font-weight: 300;
+  text-anchor: middle;
+}
 /*
         svg .municipality:hover{
             fill: #34CEC3;
         }
 */
-        svg #map text {
-          color: #333;
-          font-size: 10px;
-          text-anchor: middle;
-        }
-       
-        h3#muni{
-            font-family: 'Jua', sans-serif;
-            font-size: 19px;
-            font-weight: 600;
-        }
+svg #map text {
+  color: #333;
+  font-size: 10px;
+  text-anchor: middle;
+}
+
+h3#muni{
+    font-family: 'Jua', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+}
 
 #gu-list-wrap{
     margin: 0 100px;
