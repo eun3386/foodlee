@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.fdl</groupId>
-	<artifactId>foodleee</artifactId>
-	<name>foodleee</name>
+	<artifactId>foodlee</artifactId>
+	<name>foodlee</name>
 	<packaging>war</packaging>
 	<version>0.0.1-BUILD-SNAPSHOT</version>
 	<properties>
