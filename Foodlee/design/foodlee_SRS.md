@@ -263,41 +263,41 @@ webapp/WEB-INF/views/reply
 /WEB-INF/spring/appServlet/servlet-context.xml
 
 ## java 패키지 구조 정의 (src/main/java)
-com.fdl.foodlee.
-com.fdl.foodlee.controller. 컨트롤러 (서블릿)
-com.fdl.foodlee.controller.MemberEditFormController
-com.fdl.foodlee.controller.MemberJoinController
-com.fdl.foodlee.controller.MemberListController
-com.fdl.foodlee.controller.MemberLoginController
-com.fdl.foodlee.controller.MemberLoginFormController
-com.fdl.foodlee.controller.MemberJoinFormController
-com.fdl.foodlee.controller.MemberShowController
-com.fdl.foodlee.controller.MemberUpdateController
-com.fdl.foodlee.model.  // data, VO/DTO 엔티티 도메인 표현
-com.fdl.foodlee.model.vo.MemberVO <-> members TBL
-com.fdl.foodlee.model.vo.SellerVO <-> sellers TBL
-com.fdl.foodlee.model.vo.FoodtruckVO <-> foodtrucks TBL
-com.fdl.foodlee.model.vo.MenuVO <-> menus TBL
-com.fdl.foodlee.model.vo.NoticeVO <-> notices TBL
-com.fdl.foodlee.model.vo.ReplyVO <-> replies TBL
-com.fdl.foodlee.model.dao. // DAO 중개 (저장단과 다른 계층을 중개)
-com.fdl.foodlee.model.dao.inf. (DAO 인터페이스)
-com.fdl.foodlee.model.dao.inf.IMemberDAO
-com.fdl.foodlee.model.dao.inf.ISellerDAO
-com.fdl.foodlee.model.dao.inf.IFoodtruckDAO
-com.fdl.foodlee.model.dao.inf.IMenuDAO
-com.fdl.foodlee.model.dao.inf.INoticeDAO
-com.fdl.foodlee.model.dao.inf.IReplyDAO
-com.fdl.foodlee.model.dao.impl. (DAO 구현체)
-com.fdl.foodlee.model.dao.impl.MemberMysqlDAOImpl
-com.fdl.foodlee.model.dao.impl.SellerMysqlDAOImpl
-com.fdl.foodlee.model.dao.impl.FoodtruckMysqlDAOImpl
-com.fdl.foodlee.model.dao.impl.MenuMysqlDAOImpl
-com.fdl.foodlee.model.dao.impl.NoticeMysqlDAOImpl
-com.fdl.foodlee.model.dao.impl.ReplyMysqlDAOImpl
-com.fdl.foodlee.service.
-com.fdl.foodlee.service.inf.
-com.fdl.foodlee.service.inf.
-com.fdl.foodlee.service.impl.
-com.fdl.foodlee.service.impl.
+com.fdl.foodleee.
+com.fdl.foodleee.controller. 컨트롤러 (서블릿)
+com.fdl.foodleee.controller.MemberEditFormController
+com.fdl.foodleee.controller.MemberJoinController
+com.fdl.foodleee.controller.MemberListController
+com.fdl.foodleee.controller.MemberLoginController
+com.fdl.foodleee.controller.MemberLoginFormController
+com.fdl.foodleee.controller.MemberJoinFormController
+com.fdl.foodleee.controller.MemberShowController
+com.fdl.foodleee.controller.MemberUpdateController
+com.fdl.foodleee.model.  // data, VO/DTO 엔티티 도메인 표현
+com.fdl.foodleee.model.vo.MemberVO <-> members TBL
+com.fdl.foodleee.model.vo.SellerVO <-> sellers TBL
+com.fdl.foodleee.model.vo.FoodtruckVO <-> foodtrucks TBL
+com.fdl.foodleee.model.vo.MenuVO <-> menus TBL
+com.fdl.foodleee.model.vo.NoticeVO <-> notices TBL
+com.fdl.foodleee.model.vo.ReplyVO <-> replies TBL
+com.fdl.foodleee.model.dao. // DAO 중개 (저장단과 다른 계층을 중개)
+com.fdl.foodleee.model.dao.inf. (DAO 인터페이스)
+com.fdl.foodleee.model.dao.inf.IMemberDAO
+com.fdl.foodleee.model.dao.inf.ISellerDAO
+com.fdl.foodleee.model.dao.inf.IFoodtruckDAO
+com.fdl.foodleee.model.dao.inf.IMenuDAO
+com.fdl.foodleee.model.dao.inf.INoticeDAO
+com.fdl.foodleee.model.dao.inf.IReplyDAO
+com.fdl.foodleee.model.dao.impl. (DAO 구현체)
+com.fdl.foodleee.model.dao.impl.MemberMysqlDAOImpl
+com.fdl.foodleee.model.dao.impl.SellerMysqlDAOImpl
+com.fdl.foodleee.model.dao.impl.FoodtruckMysqlDAOImpl
+com.fdl.foodleee.model.dao.impl.MenuMysqlDAOImpl
+com.fdl.foodleee.model.dao.impl.NoticeMysqlDAOImpl
+com.fdl.foodleee.model.dao.impl.ReplyMysqlDAOImpl
+com.fdl.foodleee.service.
+com.fdl.foodleee.service.inf.
+com.fdl.foodleee.service.inf.
+com.fdl.foodleee.service.impl.
+com.fdl.foodleee.service.impl.
 

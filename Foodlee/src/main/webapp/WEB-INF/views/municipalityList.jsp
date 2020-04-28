@@ -34,7 +34,7 @@
 <body class="wrap_muni">
 <div id = "gu-list-wrap">
     <table id="gu-list-table" border="0">
-        <caption id="gu-truck-info"><img src="css/imgs/foodlee-face.png" class="face"> <span id="gu">성동구</span> 푸드트럭 정보<i class="fas fa-times" style="color: firebrick"></i></caption>
+        <caption id="gu-truck-info"><img src="css/imgs/foodleee-face.png" class="face"> <span id="gu">성동구</span> 푸드트럭 정보<i class="fas fa-times" style="color: firebrick"></i></caption>
         <thead>
             <tr>
                 <th id="th-no">No.</th> <th id="th-img"><img src="css/imgs/truck.png"></th> <th id="th-name">상호</th> <th id="th-menu">대표메뉴</th> <th id="th-loca">위치</th> <th id="th-hour">영업시간</th> <th id="th-like"><i class="fas fa-heart"></i></th>
