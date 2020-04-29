@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MainMapContriller {
 	private static final Logger logger = LoggerFactory.getLogger(MainMapContriller.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
 	public String mapMain() {
 		return "mapMain";
