@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainMapContriller {
-	private static final Logger logger = LoggerFactory.getLogger(MainMapContriller.class);
 	
 	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
 	public String mapMain() {

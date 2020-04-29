@@ -69,6 +69,9 @@
 //            console.log("d");
 	        $('.index-btn').on('click', function() {
 	        	location.href = '<%= application.getContextPath()%>/mapMain.fdl';
+	        	document.getElementById($('#map_content')).scrollIntoView();
+	    		var offset = $('#map_container').offset();
+	        	$('html').animate({scrollTop : offset.top}, 400);
 // 	    		console.log("버튼")
 // 	    		var url = ROOTCP +"/mapMain.fdl";
 // 	    			url = url + "?pg=sourrounding";

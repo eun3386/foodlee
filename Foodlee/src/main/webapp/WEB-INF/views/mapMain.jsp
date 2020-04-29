@@ -98,10 +98,10 @@ $(document).ready(function() {
 // 		})
 // 	});
 	
-	$('#s_search').click(function() {
-		var offset = $('#map_container').offset();
-		$('html').animate({scrollTop : offset.top}, 400);
-	});
+// 	$('#s_search').click(function() {
+// 		var offset = $('#map_container').offset();
+// 		$('html').animate({scrollTop : offset.top}, 400);
+// 	});
 // 	$('#d_search').click(function() {
 // 		var offset = $('#gu-list-table').offset();
 // 		$('html').animate({scrollTop : offset.top}, 400);
