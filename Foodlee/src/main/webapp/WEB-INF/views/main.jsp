@@ -99,7 +99,7 @@
             </ul>
         </div>
         <a href="#"><img class="logo" src="resources/css/imgs/logo.png"></a>
-        <span id="loginjoin"><a href="#" id='login'>로그인</a> / <a href="#" id='join'>회원가입</a></span>
+        <span id="loginjoin"><a href="member_login_form.my" id='login'>로그인</a> / <a href="#" id='join'>회원가입</a></span>
     <hr class="line">
     </div>
     <div id="main-content">
