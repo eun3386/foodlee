@@ -4,8 +4,8 @@
      <div class="map_row">
          <div class="map_header">
              <div class="map_header_login">
-                 <a href="#">Login</a>
-                 <a href="#">Join</a>
+                 <a href="member_login_form.fdl">Login</a>
+                 <a href="mb_sign_up_choice_form.fdl">Join</a>
              </div>
              <!-- //header_menu -->
              <div class="map_header_tit">
