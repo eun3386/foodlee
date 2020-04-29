@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class MainMapContriller {
+public class MainController {
 	
 	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
 	public String mapMain() {

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class TruckDetailContriller {
-	private static final Logger logger = LoggerFactory.getLogger(TruckDetailContriller.class);
+public class TruckDetailController {
+	private static final Logger logger = LoggerFactory.getLogger(TruckDetailController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
