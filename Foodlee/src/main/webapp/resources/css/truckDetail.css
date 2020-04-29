@@ -1,0 +1,220 @@
+@charset "UTF-8";
+* {
+	
+}
+
+#info {
+	width: 80%;
+	margin: 0 auto;
+	max-width: 800px;
+	margin-top: 15px;
+	/* 	margin-top: 15px; */
+	/* 	margin-left: 29%; */
+	/* 	margin-right: auto; */
+}
+
+.main_box {
+	/* 	border: 1px solid red; */
+	font-family: "Do Hyeon", sans-serif;
+	background-color: orange;
+	width: 100%;
+	height: 70px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.common {
+	display: inline-table;
+	/* 	background-color: white; */
+	/*  	border: 1px solid blue;  */
+	font-size: 20px;
+	/*  	width: 100px; */
+	height: 50px;
+	position: relative;
+	top: 10px;
+}
+
+.content {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.menu {
+	float: left;
+	border: none;
+}
+
+.logo {
+	clear: left;
+	margin-left: 40px;
+	font-size: 42px;
+}
+
+.login {
+	float: right;
+}
+
+#info, #reply {
+	font-family: "나눔바른고딕";
+}
+
+#car_des {
+	width: 360px;
+	word-break: break-word;
+	margin-top: 10px;
+	font-size: 18px;
+}
+
+#car_like_map {
+	margin-top: 10px;
+	word-break: break-word;
+}
+
+.order_div {
+	 text-align: center; 
+	 background-color: #D3D3D3; 
+	 color: white; 
+	 font-size: 27px; 
+	 width: 100%; 
+	 cursor: pointer;
+}
+
+.order_div:hover {
+	background-color: orange;
+}
+
+.fa-heart {
+	color: orange;
+}
+
+.fa-heart:hover {
+	color: red;
+	cursor: pointer;
+}
+
+.fa-map:hover {
+	color: green;
+	cursor: pointer;
+}
+
+p {
+	margin: 0 0 20px;
+	line-height: 1.5;
+}
+
+.tab {
+	min-width: 320px;
+	max-width: 800px;
+	/* 	padding: 50px; */
+	margin: 0 auto;
+	background: #ffffff;
+}
+
+section {
+	display: none;
+	padding: 20px 0 0;
+	border-top: 1px solid #ddd;
+}
+
+/*라디오버튼 숨김*/
+input {
+	display: none;
+}
+
+label {
+	display: inline-block;
+	margin: 0 0 -1px;
+	padding: 15px 25px;
+	font-weight: 600;
+	text-align: center;
+	color: #bbb;
+	border: 1px solid transparent;
+	font-family: 나눔바른고딕;
+}
+
+label:hover {
+	color: #2e9cdf;
+	cursor: pointer;
+}
+
+/*input 클릭시, label 스타일*/
+input:checked+label {
+	color: #555;
+	border: 1px solid #ddd;
+	border-top: 2px solid orange;
+	border-bottom: 1px solid #ffffff;
+}
+
+#tab1:checked ~ #content1, #tab2:checked ~ #content2, #tab3:checked ~
+	#content3, #tab4:checked ~ #content4 {
+	display: block;
+}
+
+.wrap2 {
+	white-space: nowrap;
+	position: relative;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+}
+
+.wrap2 div {
+	width: 24.5%;
+	background-color: #eee;
+	float: none;
+	margin: 0 0.25%;
+	display: inline-block;
+	zoom: 1;
+}
+
+.fa-trash:hover {
+	color: red;
+	cursor: pointer;
+}
+
+#mask {  
+    position:absolute;  
+    z-index:9000;  
+    background-color:#000;  
+    display:none;  
+    left:0;
+    top:0;
+} 
+/* 팝업으로 뜨는 윈도우 css  */ 
+.window {
+    display: none;
+    position:absolute;  
+    left:50%;
+    top:50px;
+    margin-left: -500px;
+    width:1000px;
+    height:500px;
+    background-color:#FFF;
+    z-index:10000;   
+}
+
+.reply {
+	display: none;
+}
+
+#read-more:hover {
+	cursor: pointer;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+#car_des { 
+	border-style: solid; border-width: 0 0 2px 8px;  padding: 8px; word-break: break-all;
+	border-color: DodgerBlue;
+}
+
+tr:hover {
+	background-color: #FFA500;
+}
+
+.add:hover {
+	background-color: #FFA500;
+}
