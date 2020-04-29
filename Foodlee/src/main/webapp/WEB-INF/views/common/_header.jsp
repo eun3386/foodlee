@@ -53,11 +53,6 @@
 		        </div>
 		        <div>
 					<ol>
-						<li><a id="d_search" href="#">구별 찾기</a></li>
-					</ol>
-		        </div>
-		        <div>
-					<ol>
 						<li><a id="s_search" href="#">주변 찾기</a></li>
 					</ol>
 		        </div>
