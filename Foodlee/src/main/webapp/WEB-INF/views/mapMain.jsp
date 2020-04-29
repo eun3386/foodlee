@@ -45,10 +45,10 @@
 $(document).ready(function() {
 	var ROOTCP = '<%= application.getContextPath()%>';
 	
-// 	$('#map_logo').click(function() {
-// 		$(location).attr('href','main.html');
-// 	});
-
+	$('.map_header_tit').click(function() {
+		$(location).attr('href','main.fdl');
+	});
+	
 	$(".map_title").click(function(e) {
 		e.preventDefault();
 		$(".map_nav").slideToggle();
@@ -61,6 +61,9 @@ $(document).ready(function() {
 	         //open이 없을 때
 	         $(".btn").find(">i").attr("class","fas fa-bars fa");
 	     }
+	});
+	$('.h_search').click (function() {
+		$(location).attr('href','main.fdl');
 	});
 // 	$(".btn").click(function(e){
 //         e.preventDefault();
@@ -77,9 +80,7 @@ $(document).ready(function() {
 //             $(".btn").find(">i").attr("class","fas fa-bars fa");
 //         }
 //     });
-	$('.h_search').click (function() {
-		$(location).attr('href','main.html');
-	});
+
 // 	$('#s_search').click(function() {
 // 		var url = ROOTCP +"/frame/surrounding_area.jsp";
 // 			url = url + "?pg=sourrounding";
@@ -127,9 +128,9 @@ $(document).ready(function() {
 // 	슬라이드
 		$('.map_slider').slick({
 			  dots: false, // 속성설정
-			  slidesToShow: 3, // 보여주는 화면 개수
+			  slidesToShow: 1, // 보여주는 화면 개수
 			  slidesToScroll: 1, // 한줄 슬라이드
-			  autoplay: true, // 자동 재생
+			  autoplay: false, // 자동 재생
 			  autoplaySpeed: 1500, // 재생 속도
 			  arrows: false, // 화살표 없애기
 			  responsive: [ // 반응형 에 대한 설정

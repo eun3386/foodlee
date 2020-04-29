@@ -9,7 +9,7 @@
              </div>
              <!-- //header_menu -->
              <div class="map_header_tit">
-                 <h1>Food Truck Nadeul-i</h1><br>
+                 <h1>Food Truck Nadeulee</h1><br>
                  <a class="map_hsub_tit" href="#">푸들이</a>
              </div>
              <!-- //header_tit -->
