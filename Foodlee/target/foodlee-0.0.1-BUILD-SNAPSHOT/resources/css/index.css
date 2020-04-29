@@ -7,14 +7,15 @@
 #chart, .index-btn{
     display: inline-block;
 }
-.index-btn{
+.index-btn
+{
   background : #F29C11;
   background : rgba(242, 156, 17, 1);
   position : relative;
   left : 100px;
   top : -250px;
   width : 306px;
-  height : 306px;
+  height : 306px; 
   border-radius : 50px;
   -moz-border-radius : 50px;
   -webkit-border-radius : 50px;
@@ -45,10 +46,8 @@ i .far{
 #main-content{
     margin: 0 120px;
 }
-.wrap_muni{
-    background-color: #fff9f2;
-}
-.topo, .btn{
+
+.topo, .index-btn{
     display: inline-block;
 }
 
@@ -89,13 +88,17 @@ svg text {
             font-size: 19px;
             font-weight: 600;
         }
-
+.wrap_muni{
+    background-color: #fff9f2;
+}
 #gu-list-wrap{
     margin: 0 100px;
-    width: 800px;
+    width: 960px;
     height: 580px;
     display: inline-block;
-    
+}
+#gu-list-table{
+    width: 960px;
 }
 #gu-list-wrap thead{
     background-color: rgba(115,110,103,.1);
@@ -117,12 +120,12 @@ svg text {
     overflow: hidden;
 }
 */
-/* #gu-list-wrap td{ */
-/*     font-size: smaller; */
-/*     color: #676767; */
-/*     text-align: center; */
+#gu-list-wrap td{
+    font-size: smaller;
+    color: #676767;
+    text-align: center;
     
-/* } */
+}
 #gu-list-table{
     width: 800px;
     
@@ -137,6 +140,10 @@ svg text {
     position: relative;
     top: 10px;
 }
+.face-white{
+    position: relative;
+    top: 13px;
+}
 #gu{
     color: #F7931E;
     font-family: 'jua', sans-serif;
@@ -146,16 +153,13 @@ svg text {
     width: auto;
     box-sizing: border-box;
     max-height: 80px;
-    font-size: smaller;
-    color: #676767;
-    text-align: center;
     
 }
 #th-menu{
     width: 270px;
     
 }
-tbody tr:hover{
+#gu-list-table tbody tr:hover{
     cursor: pointer;
     background-color: #BDD98C;
 }
@@ -193,6 +197,6 @@ tbody tr:hover{
     -webkit-box-orient:vertical;
     text-overflow: ellipsis;
     overflow: hidden;
-    width: 268px;
+    width: auto;
     white-space: nowrap;
 }

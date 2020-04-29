@@ -8,10 +8,11 @@ ul{
     margin: 0;
 }
 body#wrapper{
-    margin: 150px auto 0;
+    margin:150px auto 0;
     width: 1200px;
     font-family: 'Nanum Gothic', sans-serif;
     height: 1000px;
+   	
 }
 #main-header{
     width: 1200px;
@@ -67,3 +68,418 @@ body#wrapper{
     color: rgba(0,0,0);
     text-decoration: none;
 }
+/*  장재석 css ---------------------------------------------------------------------------->*/
+#map_wrap {width: 1200px; margin: 0 auto;}
+#map_header {background: url("../imgs/mapMain/header_bg.jpg") repeat-x center top;}
+#map_nav {background-color: #ffca28;}
+#map_title {background-color: rgb(243, 156, 18);}
+#map_content {
+/* 	width: 560px; */
+}
+#map_content .map_container {
+	border-right: 0.5px solid #dbdbdb; 
+	border-left: 0.5px solid #dbdbdb;
+	min-height: 421.5px;
+}
+#cont_left {
+	width: 569.5px;
+	border-right: 0.5px solid #dbdbdb;
+	padding: 15px;
+	margin: 0px;
+	float: left;
+		
+}
+#cont_right {
+	overflow: hidden;
+	width: 569.5px;
+	padding: 15px;;
+	margin: 0px;
+}
+.map_sidebar {
+	height: 326.19px;
+	overflow-y: scroll;
+    -ms-overflow-style: none; 
+/*     IE and Edge */
+    scrollbar-width: none; 
+/*     Firefox */
+}
+.map_sidebar::-webkit-scrollbar {
+	display: none; /*Chrome, Safari, Opera*/
+}
+#map_view {
+	width: 95%; 
+	height: 326px;
+	margin-left : 15px;
+	border: 0.1px solid #D8D8D8 ;
+	background-color : #f5f2f0;
+	position: absolute;
+	border-radius: 10px;
+	z-index:1;
+}
+
+#map_footer {
+ 	clear: both;
+  	text-align: center;
+  	border-top: 1px solid #dbdbdb;
+}
+
+/* 컨테이너 */
+.map_container {width: 1200px; margin: 0 auto; position: relative; /*background: rgba(0,0,0,0.1);*/}
+.map_row {padding: 0 10px;}
+
+/* 헤더 */
+.map_header {height: 300px;}
+.map_header .map_header_login {text-align: right; font-weight: 900;}
+.map_header .map_header_login a {color: #fff; padding: 8px 0 6px 10px; display: inline-block; transition: color 0.3s ease; font-family: 'Abel', sans-serif;}
+.map_header .map_header_login a:hover {color: rgb(243, 156, 18);}
+
+.map_header .map_header_tit {text-align: center; text-transform: uppercase; margin-top: 25px; font-family: 'Abel', sans-serif;}
+
+.map_header .map_header_tit h1 {font-size: 30px; color: #fff; background: #ffca28; display: inline-block; padding: 5px 30px 5px 30px; letter-spacing: 2px; font-weight: 900; transition: box-shadow 0.25s ease-in-out;}
+.map_header .map_header_tit h1:hover {box-shadow: inset -9em 0 0 0 rgb(243, 156, 18), inset 9em 0 0 0 rgb(243, 156, 18);}
+.map_header .map_header_tit a {font-size: 16px; color: #fff; background: rgb(243, 156, 18); display: inline-block; padding: 10px 20px 10px 20px; margin-top: -7px; transition: box-shadow 0.25s ease-in-out;}
+.map_header .map_header_tit a:hover {box-shadow: 0 0 0 5px #ffca28 inset, 0 0 0 100px #ffca28 inset;}
+
+.map_header .map_header_icon {text-align: center; margin-top: 40px; padding-bottom: 45px;}
+.map_header .map_header_icon li {display: inline; margin: 0 2px;}
+.map_header .map_header_icon li a {
+    position: relative;
+    background-color: #ffca28;
+    border-radius: 50%;
+    width: 60px; 
+    height: 60px;  
+    color: #fff;
+    display: inline-block;
+    font-size: 35px;
+    line-height: 60px;
+    transition: all 0.3s ease;
+}
+.map_header .map_header_icon li a span {
+    position: absolute; 
+    opacity: 0;
+    left: 50%; top: -40px;
+    transform: translateX(-50%);
+    font-size: 12px;
+    line-height: 1.6;
+    background: rgb(243, 156, 18); 
+    padding: 3px 9px;
+    border-radius: 6px 0;
+    transition: all 0.3s ease;
+}
+.map_header .map_header_icon li a span:before {
+    content: '';
+    position: absolute;
+    left: 50%; bottom: -5px;
+    margin-left: -5px;
+    border-top: 5px solid #ffca28;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+.map_header .map_header_icon li a:hover span {
+    opacity: 1;
+    top: -33px;
+}
+.map_header .map_header_icon li a:hover {
+    box-shadow: 
+        0 0 0 3px rgba(243,156,18,0.9) inset,
+        0 0 0 100px rgba(0,0,0,0.1) inset;
+}
+/* 네비 */
+.map_nav {overflow: hidden; padding: 10px 0; display: none; text-align: center;}
+.map_nav > div {width: 15%; display: inline-block;}
+.map_nav > div ol {overflow: hidden;}
+.map_nav > div li {float: left; width: 50%; position: relative; padding-left: 8px; box-sizing: border-box;}
+.map_nav > div li a {position: relative;}
+.map_nav > div li a {
+    font-size: 18px; 
+    color: #f6fdff; 
+    font-weight: bold; 
+    margin-bottom: 4px;
+}
+.map_nav > div li a:hover {
+	color: rgb(243, 156, 18);
+	transition: all .2s ease-out;
+}
+/* 타이틀 */
+.map_title {position: relative; text-align: center;}
+.map_title h2 {font-family: 'Nanum Brush Script', cursive; font-size: 39px; color: #f6fdff; padding: 5px 0;}
+.map_title .map_btn {
+    position: absolute; right: 0; top: 4px;
+    width: 60px; 
+    height: 60px; 
+    line-height: 60px; 
+    color: #fff;
+    font-size: 35px; 
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.map_title .map_btn:hover {
+    box-shadow: 
+        0 0 0 3px #ffca28 inset,
+        0 0 0 100px rgba(0,0,0,0.1) inset;
+}
+.map_title_Fixed {
+        position: fixed;
+        top: 0px;
+      }
+/* 컨텐츠 영역 */
+.cl_tit {
+	font-size: 20px;
+    color: rgb(243, 156, 18);
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+.cl_dotted {
+	border-bottom: 1px dashed #dbdbdb;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    color: #878787;
+    line-height: 18px;
+}
+.map_truck_list {
+
+}
+		
+.map_truck_list li {
+	margin: 0;
+	padding: 1.5em 0em 3em 0em;
+	border-top: 1px solid #ECECEC;
+}
+
+.map_truck_list li:first-child
+{
+	padding-top: 0;
+	border-top: none;
+}
+
+.map_truck_list img {
+	float: left;
+	margin-right: 20px;
+	width: 90px;
+}
+
+.map_truck_list p {
+}
+.truck_list .map_text {
+	
+}
+.map_truck_list .truck_list {
+	padding: 0em 0em 1em 0em;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-size: 8pt;
+	color: #A2A2A2;
+}
+
+/* .map_truck_list .first { */
+/* 	padding-top: 0px; */
+/* 	border-top: none; */
+/* } */
+ /* 이미지 슬라이드 */
+	.map_slider figure {position: relative;}
+	.map_slider img {
+		/* 슬라이드 이미지 */
+		width: 80px;
+	}
+	.map_slider figcaption {
+	    position: absolute; bottom: 0; left: 0; width: 100%; padding: 1px;
+	    box-sizing: border-box;
+	    background-color: rgba(0,0,0,0.5);
+	    color: #fff;
+	    font-size: 18px;
+	    text-align: center;
+	}
+	.map_slider figcaption em {
+	    display: block; font-weight: bold; font-size: 28px;
+	    text-transform: uppercase; font-family: 'Abel', sans-serif;
+	    opacity: 0;
+	    transition: all .84s ease; /*서서히 나타남*/
+	    transform: translateX(50px); /*오른쪽에서 나오는 효과 */
+	}
+	.map_slider figcaption span {
+	    display: block;
+	    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+	    opacity: 0;
+	    transition: all .84s .2s ease;
+	    transform: translateX(50px);
+	}
+	.map_slider .slick-active figcaption em {opacity: 1; transform: translateX(0);}
+	.map_slider .slick-active figcaption span {opacity: 1; transform: translateX(0);}
+	
+	/* 슬라이드 버튼 */
+	.map_slider .slick-dots {display: block; width: 100%; text-align: center;}
+	.map_slider .slick-dots li {display: inline-block; width: 15px; height: 15px; margin: 5px;}
+	.map_slider .slick-dots li button {
+	    font-size: 0; line-height: 0;
+	    display: block; width: 15px; height: 15px;
+	    cursor: pointer;
+	    background: #5dbfeb;
+	    border-radius: 50%;
+	}
+	.map_slider .slick-dots li.slick-active button {background: #2b91c8;} 액티브 활성화 버튼
+	
+	.map_slider .slick-prev {
+	    position: absolute; left: 0; bottom: 0; z-index: 1000;
+	    width: 30px; height: 30px;
+	    display: inline-block;
+	    text-indent: -9999px;
+	    font: normal normal normal 14px/1 FontAwesome;
+	}
+	.map_slider .slick-prev.slick-arrow { 액티브 버튼 컬러
+		background-color: white;
+	}
+	.map_slider .slick-prev::before {
+	    content:"\f053";
+	    color: #5dbfeb;
+	    text-indent: 0;
+	    position: absolute; left: 9px; top: 8px;
+	}
+	.map_slider .slick-next {position: absolute; right: 0; bottom: 0; z-index: 1000;
+	    width: 30px; height: 30px;
+	    display: inline-block;
+	    text-indent: -9999px; 글씨 없애기 위해서
+	    font: normal normal normal 14px/1 FontAwesome;
+	}
+	.map_slider .slick-next.slick-arrow {액티브 버튼 컬러
+		background-color: white;
+	}
+	.map_slider .slick-next::before { 
+	    content:"\f054";
+	    color: #5dbfeb;
+	    text-indent: 0;
+	    position: absolute; left: 11px; top: 8px;
+	}
+
+/* 푸터 */
+.map_footer {text-align: center; padding: 30px 50px; }
+.map_footer li {position: relative; display: inline; padding: 0 7px 0 10px; white-space: nowrap;}
+.map_footer li:before {content: ''; width: 1px; height: 12px; background-color: rgb(243, 156, 18); position: absolute; left: 0; top: 2px;}
+.map_footer li:first-child:before {width: 0;}
+.map_footer address {padding-top: 15px;}
+
+/* media query*/
+@media (max-width: 1220px){
+    .map_container {width: 100%;}
+    .map_row {padding: 0 15px;}
+}
+
+ /* 화면 너비 0~600px */
+@media ( max-width: 600px ) {
+	.map_header {
+		height: auto;
+		background-color: #ffca28;
+		padding-right: 20px;
+		
+	}
+	.map_row {
+		padding: 0;
+	}
+	.map_nav {
+		background: url("../imgs/mapMain/nav_bg.jpg") repeat-x center top;
+	}
+	.map_nav > div {
+		width: 15%; 
+		}
+	.map_nav > div ol {
+		width: 100%;
+	}	
+	.map_nav > div:nth-child(6) li {width: 85%;}
+	.map_nav > div:nth-child(7) li {width: 85%;}
+	
+	.map_header .map_header_tit {display: none;}
+	.map_header .map_header_icon {display: none;}
+	.map_title .map_btn {display: none;}
+	
+  #map_wrap {
+    width: auto;
+    padding: 0 1px;
+  }
+  #map_content {
+    float: none;
+    width: auto;
+  }
+  #map_container {
+  	float: none;
+    width: auto;
+  }
+  #cont_left {
+  	float: none;
+    width: auto;
+  }
+  #cont_right {
+  	float: none;
+    width: auto;
+  }
+  #gu-list-wrap {
+  	float: none;
+  }
+  #gu-list-table {
+  	float: none;
+	width: auto;
+  }
+	.map_slider figcaption {padding: 10px;}
+    .map_slider figcaption em {font-size: 18px;}
+    .map_slider figcaption span {font-size: 14px;}
+} 
+
+/* naverMap css */
+.btn_mylct {
+	z-index:100;
+	overflow:hidden;
+	display:inline-block;
+	position:absolute;
+	top:7px;
+	left:5px;
+	width:28px;
+	height:28px;
+	border:1px solid rgba(58,70,88,.45);
+	border-radius:2px;
+	background-color: #fcfcfd;
+	text-align: center;
+	-webkit-background-clip:padding;
+	background-clip:padding-box;
+}
+.spr_trff {
+	overflow:hidden;
+	display:inline-block;
+	color:transparent!important;
+	vertical-align:top;
+	background:url(https://ssl.pstatic.net/static/maps/m/spr_trff_v6.png) 0 0;
+	background-size:200px 200px;
+	-webkit-background-size:200px 200px;
+}
+.spr_ico_mylct{
+   	width:20px;
+   	height:20px;
+   	margin:5px 0 0 1px;
+   	background-position:-153px -31px;
+}
+.spr_ico_mylct:focus {
+	outline: 0;
+}
+.search { 
+	position:absolute;
+	z-index:1000;
+	top:8px;
+	left:40px; 
+}
+.search #address {
+	width:150px;
+	height:20px;
+	line-height:20px;
+	border:solid 1px #555;
+	padding:5px;
+	font-size:12px;
+	box-sizing:content-box; 
+}
+.search #submit {
+	height:30px;
+	line-height:30px;
+	padding:0 10px;
+	font-size:12px;
+	border:solid 1px #555;
+	border-radius:3px;
+	cursor:pointer;
+	box-sizing:content-box; 
+}
+/*  장재석 css ---------------------------------------------------------------------------->*/

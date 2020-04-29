@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!--<link href="css/reset.css" type="text/css" rel="stylesheet">-->
-<link href="css/main.css" type="text/css" rel="stylesheet">
-<link href="css/index.css" type="text/css" rel="stylesheet">
+<!-- <link href="css/reset.css" type="text/css" rel="stylesheet"> -->
+<link href="resources/css/main.css" type="text/css" rel="stylesheet">
+<link href="resources/css/index.css" type="text/css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
 <!--<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">    -->
 <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -17,7 +17,7 @@
                     var geocodes =[];
 
         $(document).ready(function () {
-            
+        	var ROOTCP = '<%= application.getContextPath()%>';
        
             var width = 500,
             height = 375;
@@ -35,7 +35,7 @@
 
         var path = d3.geo.path().projection(projection);
 
-        d3.json("seoul_municipalities_topo_simple.json", function(error, data) {
+        d3.json("json/seoul_municipalities_topo_simple.json", function(error, data) {
           var features = topojson.feature(data, data.objects.seoul_municipalities_geo).features;
           map.selectAll('path')
               .data(features)
@@ -67,8 +67,19 @@
 //                window.open("municipality-list.html","","width=1006px,height=580px");
 //            });
 //            console.log("d");
+	        $('.index-btn').on('click', function() {
+	        	location.href = '<%= application.getContextPath()%>/mapMain.fdl';
+// 	    		console.log("버튼")
+// 	    		var url = ROOTCP +"/mapMain.fdl";
+// 	    			url = url + "?pg=sourrounding";
+// 	    		$('.map_container').load(url, function() {
+// 	    			document.getElementById('map_content').scrollIntoView();
+// 	    			console.log("sourrounding 로딩 완료!")
+// 	    			var offset = $('#map_container').offset();
+// 	        		$('html').animate({scrollTop : offset.top}, 400);
+// 	    		})
+	    	});
         });
-            
         
 //https://kin.naver.com/qna/detail.nhn?d1id=1&dirId=1040205&docId=283031734&qb=aHRtbCDsg4jssL0g7YGs6riw&enc=utf8&section=kin&rank=1&search_sort=0&spq=0
 </script>
@@ -87,7 +98,7 @@
                 <li><a href="#">메뉴</a></li>
             </ul>
         </div>
-        <a href="#"><img class="logo" src="css/imgs/logo.png"></a>
+        <a href="#"><img class="logo" src="resources/css/imgs/logo.png"></a>
         <span id="loginjoin"><a href="#" id='login'>로그인</a> / <a href="#" id='join'>회원가입</a></span>
     <hr class="line">
     </div>
@@ -104,4 +115,3 @@
     <div id="footer"></div>
 </body>
 </html>
-
