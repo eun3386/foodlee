@@ -151,7 +151,8 @@ CURRENT_TIMESTAMP
 - Date eventStartDate 이벤트 시작 날짜 ⇔ datetime event_start_date NN
 - Date eventEndDate 이벤트 종료 날짜 ⇔ datetime event_end_date 
 - boolean eventOngoing 진행중 여부 ⇔ integer event_ongoing NN
-- Timestamp eventCreatedAt 이벤트등록날짜 ⇔ timestamp event_created_at   CURRENT_TIMESTAMP NN                                 
+- Timestamp eventCreatedAt 이벤트등록날짜 ⇔ timestamp event_created_at   CURRENT_TIMESTAMP NN 
+- Timestamp eventUpdatedAt 이벤트등록날짜 ⇔ timestamp event_updated_at   CURRENT_TIMESTAMP                                
 
 #### MenuVO ⇔ menus
 - int menuId <<PK>> 메뉴번호 ⇔ integer menu_id <<PK>> NN AI
