@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="slider_top">
 			<figure>
-				<img src="resources/imgs/mapMain/logoFont.png" alt="이미지1">
+				<img src="resources/imgs/mapMain/배너.jpg" style="max-width: 100%" alt="이미지1">
 				<figcaption>
 					<em>Responsive Site1</em><span>슬라이드 플러그를 사용</span>
 				</figcaption>
