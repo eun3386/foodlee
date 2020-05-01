@@ -64,9 +64,13 @@ body#wrapper{
     font-size: 1.0em;
     font-weight: bold;
 }
-#menu-list li a,span#loginjoin a{
+#menu-list li a/*,span#loginjoin a*/{
     color: rgba(0,0,0);
     text-decoration: none;
+}
+span#loginjoin a{
+	color:#44591F;
+	text-decoration: none;
 }
 /*  장재석 css ---------------------------------------------------------------------------->*/
 #map_wrap {width: 1200px; margin: 0 auto;}
