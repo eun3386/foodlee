@@ -1,5 +1,5 @@
 package com.fdl.foodlee.model.dao.inf;
 
-public interface IReplyDAO {
+public interface IReviewDAO {
 
 }
