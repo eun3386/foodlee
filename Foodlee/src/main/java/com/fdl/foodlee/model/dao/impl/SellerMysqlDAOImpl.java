@@ -11,11 +11,14 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.ISellerDAO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 
+// 빈 자동 등록 : MVC 저장단 처리
+@Repository
 public class SellerMysqlDAOImpl implements ISellerDAO {
 	// SQL 정의부
 	private static final String SQL_INSERT_SELLER_CRYPTO 

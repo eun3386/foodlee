@@ -11,10 +11,13 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IMemberDAO;
 import com.fdl.foodlee.model.vo.MemberVO;
 
+// 빈 자동 등록 : MVC 저장단 처리
+@Repository
 public class MemberMysqlDAOImpl implements IMemberDAO {
 	// SQL 정의부
 	private static final String SQL_INSERT_MEMBER_CRYPTO 
