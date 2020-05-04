@@ -10,7 +10,7 @@
 	 	<property 
 	 	 name="driverClassName" value="com.mysql.jdbc.Driver"/>
 	 	<property name="url" 
-	 	 value="jdbc:mysql://localhost:3306/mysns_db"/>
+	 	 value="jdbc:mysql://localhost:3306/foodell_db"/>
 	 	<property name="username" value="fusion"/>
 	 	<property name="password" value="123456"/>
 	 </bean>	
