@@ -303,9 +303,9 @@ com.fdl.foodlee.model.dao.impl.MenuMysqlDAOImpl
 com.fdl.foodlee.model.vo.FoodtruckVO
 com.fdl.foodlee.model.dao.inf.IFoodtruckDAO
 com.fdl.foodlee.model.dao.impl.FoodtruckMysqlDAOImpl
-com.fdl.foodlee.model.vo.BossVO
-com.fdl.foodlee.model.dao.inf.IBossDAO
-com.fdl.foodlee.model.dao.impl.BossMysqlDAOImpl
+com.fdl.foodlee.model.vo.SellerVO
+com.fdl.foodlee.model.dao.inf.ISellerDAO
+com.fdl.foodlee.model.dao.impl.SellerMysqlDAOImpl
 com.fdl.foodlee.model.vo.BossVO
 com.fdl.foodlee.model.dao.inf.IBossDAO
 com.fdl.foodlee.model.dao.impl.BossMysqlDAOImpl
