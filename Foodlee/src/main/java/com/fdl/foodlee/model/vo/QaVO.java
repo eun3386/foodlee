@@ -2,26 +2,30 @@ package com.fdl.foodlee.model.vo;
 
 import java.sql.Timestamp;
 
-import com.mysql.fabric.xmlrpc.base.Data;
-
 public class QaVO {
 	private int qaId; // 문의번호 <<PK>> AI
 	private String login; // 문의 작성자 <<FK>>
-	private String title;
-	private String qaCountent; //문의내용
-	private Timestamp qaCreatedAt; // 문의작성일
-	
+	private String qaCountent; // 문의내용
+	private int qaDepth; // 답글 여부 문의 0 답글 1
+	private int qaPnum; // 답글일 경우 해당 문의번호
+	private Timestamp qaCreatedAt; // 문의 작성일
+
 	public QaVO() {}
 	
-	public QaVO(String login, String title) {
-		this(0, login, title, "", null);
-	}
-	public QaVO(int qaId, String login, String title, String qaCountent, Timestamp qaCreatedAt) {
-		super();
+	public QaVO(int qaId, String login, String qaCountent, int qaDepth, Timestamp qaCreatedAt) {
 		this.qaId = qaId;
 		this.login = login;
-		this.title = title;
 		this.qaCountent = qaCountent;
+		this.qaDepth = qaDepth;
+		this.qaCreatedAt = qaCreatedAt;
+	}
+
+	public QaVO(int qaId, String login, String qaCountent, int qaDepth, int qaPnum, Timestamp qaCreatedAt) {
+		this.qaId = qaId;
+		this.login = login;
+		this.qaCountent = qaCountent;
+		this.qaDepth = qaDepth;
+		this.qaPnum = qaPnum;
 		this.qaCreatedAt = qaCreatedAt;
 	}
 
@@ -40,21 +44,29 @@ public class QaVO {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
-	public String getTitle() {
-		return title;
-	}
-	
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
+
 	public String getQaCountent() {
 		return qaCountent;
 	}
 
 	public void setQaCountent(String qaCountent) {
 		this.qaCountent = qaCountent;
+	}
+
+	public int getQaDepth() {
+		return qaDepth;
+	}
+
+	public void setQaDepth(int qaDepth) {
+		this.qaDepth = qaDepth;
+	}
+
+	public int getQaPnum() {
+		return qaPnum;
+	}
+
+	public void setQaPnum(int qaPnum) {
+		this.qaPnum = qaPnum;
 	}
 
 	public Timestamp getQaCreatedAt() {
@@ -67,7 +79,8 @@ public class QaVO {
 
 	@Override
 	public String toString() {
-		return "QaVO [qaId=" + qaId + ", login=" + login + ", qaCountent=" + qaCountent + ", qaCreatedAt=" + qaCreatedAt
-				+ "]";
+		return "QaVO [qaId=" + qaId + ", login=" + login + ", qaCountent=" + qaCountent + ", qaDepth=" + qaDepth
+				+ ", qaPnum=" + qaPnum + ", qaCreatedAt=" + qaCreatedAt + "]";
 	}
+
 }
