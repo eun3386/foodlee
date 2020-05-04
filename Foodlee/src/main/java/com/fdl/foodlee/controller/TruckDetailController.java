@@ -19,7 +19,7 @@ public class TruckDetailController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "truckDetail.fdl", method = RequestMethod.GET)
-	public String mapMain() {
+	public String truckDetail() {
 		return "truckDetail";
 	}
 	

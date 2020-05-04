@@ -3,17 +3,45 @@ package com.fdl.foodlee.model.vo;
 import java.sql.Timestamp;
 
 public class ReviewVO {
-	private int reviewId;
-	private String login;
-	private int reviewDepth;
-	private int reviewPnum;
-	private String reviewContent;
-	private String reviewPic;
-	private Timestamp reviewCreatedAt;
+	private int reviewId; // 리뷰 번호 <<PK>>
+	private String login; // 리뷰 작성자 <<FK>>
+	private int reviewDepth; // 사장님 답글 여부(문의 0 답글 1)
+	private int reviewPnum; // 답글일 경우 해당 문의 번호
+	private String reviewContent; // 리뷰 내용
+	private String reviewPic; // 리뷰 사진
+	private Timestamp reviewCreatedAt; // 리뷰 작성일
+	
+	public ReviewVO() {}
+	
+	public ReviewVO(int reviewId, String login, int reviewDepth, String reviewContent, Timestamp reviewCreatedAt) {
+		this.reviewId = reviewId;
+		this.login = login;
+		this.reviewDepth = reviewDepth;
+		this.reviewContent = reviewContent;
+		this.reviewCreatedAt = reviewCreatedAt;
+	}
+	
+	public ReviewVO(int reviewId, String login, int reviewDepth, String reviewContent, String reviewPic,
+			Timestamp reviewCreatedAt) {
+		this.reviewId = reviewId;
+		this.login = login;
+		this.reviewDepth = reviewDepth;
+		this.reviewContent = reviewContent;
+		this.reviewPic = reviewPic;
+		this.reviewCreatedAt = reviewCreatedAt;
+	}
+	
+	public ReviewVO(int reviewId, String login, int reviewDepth, int reviewPnum, String reviewContent, Timestamp reviewCreatedAt) {
+		this.reviewId = reviewId;
+		this.login = login;
+		this.reviewDepth = reviewDepth;
+		this.reviewPnum = reviewPnum;
+		this.reviewContent = reviewContent;
+		this.reviewCreatedAt = reviewCreatedAt;
+	}
 
 	public ReviewVO(int reviewId, String login, int reviewDepth, int reviewPnum, String reviewContent, String reviewPic,
 			Timestamp reviewCreatedAt) {
-		super();
 		this.reviewId = reviewId;
 		this.login = login;
 		this.reviewDepth = reviewDepth;

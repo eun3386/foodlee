@@ -2,26 +2,13 @@ package com.fdl.foodlee.model.vo;
 
 import java.sql.Timestamp;
 
-/*
-- int mbId <<PK>> 회원번호 ⇔ int id <<PK>>  AI(AutoIncrement)
-- String login <<UQ>> 아이디 ⇔ varchar(12) login <<UQ>> NN
-- String password 비밀번호 ⇔ varchar(24) password NN
-- String name 이름 ⇔ varchar(12) name NN
-- String gender 성별 ⇔ varchar(4) gender
-- String residentRN 주민번호 // Resident Registration Number, resident_rn ⇔  varchar(13) rRN
-- String email 이메일 ⇔  varchar(24) email
-- String phoneNumber 연락처 ⇔ varchar(12) phone_number NN
-- String address 주소 ⇔ varchar(128) address
-- timestamp joinedAt 가입날짜 ⇔ timestamp joined_at
-- timestamp updatedAt 수정날짜 ⇔ timestamp updated_at
- */
 public class MemberVO {
-	private int mbId; // <<PK>> 회원번호 ⇔ int id <<PK>>  AI(AutoIncrement)
-	private String login; // <<UQ>> 아이디 ⇔ varchar(12) login <<UQ>> NN
+	private int mbId; // 회원번호 ⇔ int mb_id <<PK>> AI(AutoIncrement)
+	private String login; // 아이디 ⇔ varchar(12) login <<UQ>> NN
 	private String password; // 비밀번호 ⇔ varchar(24) password NN
 	private String name; // 이름 ⇔ varchar(12) name NN
 	private String gender; // 성별 ⇔ varchar(4) gender
-	private String residentRN; // 주민번호 // Resident Registration Number, RRN ⇔  varchar(13) rRN
+	private String residentRN; // 주민번호 Resident Registration Number, RRN ⇔  varchar(13) resident_rn
 	private String email; // 이메일 ⇔  varchar(24) email
 	private String phoneNumber; // 연락처 ⇔ varchar(12) phone_number NN
 	private String address; // 주소 ⇔ varchar(128) address

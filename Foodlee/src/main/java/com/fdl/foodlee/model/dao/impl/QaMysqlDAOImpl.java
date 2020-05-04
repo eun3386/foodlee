@@ -2,10 +2,20 @@ package com.fdl.foodlee.model.dao.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
+
 import com.fdl.foodlee.model.dao.inf.IQaDAO;
 import com.fdl.foodlee.model.vo.QaVO;
 
+@Repository
 public class QaMysqlDAOImpl implements IQaDAO {
+
+	@Autowired
+	private JdbcTemplate jtem;
+	private SimpleJdbcInsert simIn;
 
 	@Override
 	public boolean insertNewQa(QaVO qa) {
@@ -14,13 +24,7 @@ public class QaMysqlDAOImpl implements IQaDAO {
 	}
 
 	@Override
-	public QaVO selectOneQa(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean updateQa(String login, String title) {
+	public boolean updateQa(int id, String qaContent) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -32,7 +36,7 @@ public class QaMysqlDAOImpl implements IQaDAO {
 	}
 
 	@Override
-	public List<QaVO> showAllArticles() {
+	public List<QaVO> showAllQa() {
 		// TODO Auto-generated method stub
 		return null;
 	}
