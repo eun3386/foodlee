@@ -280,6 +280,8 @@ webapp/WEB-INF/views/menu
 webapp/WEB-INF/views/notice
 webapp/WEB-INF/views/reply
 webapp/WEB-INF/views/event
+webapp/WEB-INF/views/event/event_new_form.jsp
+webapp/WEB-INF/views/event/event_list.jsp
 
 ## 문맥 설정
 /WEB-INF/spring/appServlet/servlet-context.xml
@@ -306,7 +308,9 @@ com.fdl.foodlee.model.dao.impl.FoodtruckMysqlDAOImpl
 com.fdl.foodlee.model.vo.SellerVO
 com.fdl.foodlee.model.dao.inf.ISellerDAO
 com.fdl.foodlee.model.dao.impl.SellerMysqlDAOImpl
-
+com.fdl.foodlee.model.vo.EventVO
+com.fdl.foodlee.model.dao.inf.IEventDAO
+com.fdl.foodlee.model.dao.impl.EventMysqlDAOImpl
 ... 
 
 ## java 패키지 구조 정의 (src/main/java)
