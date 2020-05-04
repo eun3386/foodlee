@@ -40,7 +40,7 @@
 				<div class="cards clearfix">
 					<div class="card_wrap">
 						<div class="card">
-							<div class="thumb"><img src="./resources/css/imgs/menu/1.png"></div>
+							<div class="thumb"><img src="./resources/css/imgs/mypage/menu/1.png"></div>
 							<div class="content">
 								<div class="menu_name">BOP (밥)</div>
 								<div class="description">눈꽃 목살 스테이크</div>
@@ -50,7 +50,7 @@
 					</div>
 					<div class="card_wrap">
 						<div class="card">
-							<div class="thumb"><img src="./resources/css/imgs/menu/2.png"></div>
+							<div class="thumb"><img src="./resources/css/imgs/mypage/menu/2.png"></div>
 							<div class="content">
 								<div class="menu_name">브라더 또띠아</div>
 								<div class="description">불고기 부리또</div>
@@ -60,7 +60,7 @@
 					</div>
 					<div class="card_wrap">
 						<div class="card">
-							<div class="thumb"><img src="./resources/css/imgs/menu/3.png"></div>
+							<div class="thumb"><img src="./resources/css/imgs/mypage/menu/3.png"></div>
 							<div class="content">
 								<div class="menu_name">로우코 바비큐 하우스</div>
 								<div class="description">저크치킨스테이크</div>
@@ -70,7 +70,7 @@
 					</div>
 					<div class="card_wrap">
 						<div class="card">
-							<div class="thumb"><img src="./resources/css/imgs/menu/4.png"></div>
+							<div class="thumb"><img src="./resources/css/imgs/mypage/menu/4.png"></div>
 							<div class="content">
 								<div class="menu_name">안녕연어</div>
 								<div class="description">안녕연어덮밥</div>
@@ -214,8 +214,8 @@
 				</div>
 				<div class="content">
 					<div class="profile_wrap">
-						<img src="./resources/css/imgs/profile.png">
-						<img class="photo" src="./resources/css/imgs/photo.png">
+						<img src="./resources/css/imgs/mypage/profile.png">
+						<img class="photo" src="./resources/css/imgs/mypage/photo.png">
 					</div>
 					<table class="table_edit">
 						<tbody>
