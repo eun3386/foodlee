@@ -8,10 +8,10 @@ import java.sql.Timestamp;
 - String password 비밀번호 ⇔ varchar(24) password NN
 - String name 이름 ⇔ varchar(12) name NN
 - String gender 성별 ⇔ varchar(4) gender
-- String rRN 주민번호 // Resident Registration Number, RRN ⇔  varchar(13) rRN
+- String residentRN 주민번호 // Resident Registration Number, resident_rn ⇔  varchar(13) rRN
 - String email 이메일 ⇔  varchar(24) email
 - String phoneNumber 연락처 ⇔ varchar(12) phone_number NN
-- String address 주소 ⇔ varchar(24) address
+- String address 주소 ⇔ varchar(128) address
 - timestamp joinedAt 가입날짜 ⇔ timestamp joined_at
 - timestamp updatedAt 수정날짜 ⇔ timestamp updated_at
  */
@@ -21,19 +21,19 @@ public class MemberVO {
 	private String password; // 비밀번호 ⇔ varchar(24) password NN
 	private String name; // 이름 ⇔ varchar(12) name NN
 	private String gender; // 성별 ⇔ varchar(4) gender
-	private String rRN; // 주민번호 // Resident Registration Number, RRN ⇔  varchar(13) rRN
+	private String residentRN; // 주민번호 // Resident Registration Number, RRN ⇔  varchar(13) rRN
 	private String email; // 이메일 ⇔  varchar(24) email
 	private String phoneNumber; // 연락처 ⇔ varchar(12) phone_number NN
-	private String address; // 주소 ⇔ varchar(24) address
+	private String address; // 주소 ⇔ varchar(128) address
 	private Timestamp joinedAt; // 가입날짜 ⇔ timestamp joined_at
 	private Timestamp updatedAt; // 수정날짜 ⇔ timestamp updated_at
 	
 	public MemberVO() {}
-	public MemberVO(String login, String password, String name, String gender, String rRN, String email,
+	public MemberVO(String login, String password, String name, String gender, String residentRN, String email,
 			String phoneNumber, String address) {
-		this(0, login, password, name, gender, rRN, email, phoneNumber, address, null, null);
+		this(0, login, password, name, gender, residentRN, email, phoneNumber, address, null, null);
 	}
-	public MemberVO(int mbId, String login, String password, String name, String gender, String rRN, String email,
+	public MemberVO(int mbId, String login, String password, String name, String gender, String residentRN, String email,
 			String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt) {
 		super();
 		this.mbId = mbId;
@@ -41,7 +41,7 @@ public class MemberVO {
 		this.password = password;
 		this.name = name;
 		this.gender = gender;
-		this.rRN = rRN;
+		this.residentRN = residentRN;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
@@ -52,7 +52,7 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [mbId=" + mbId + ", login=" + login + ", password=" + password + ", name=" + name + ", gender="
-				+ gender + ", rRN=" + rRN + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address
+				+ gender + ", residentRN=" + residentRN + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address
 				+ ", joinedAt=" + joinedAt + ", updatedAt=" + updatedAt + "]";
 	}
 	
@@ -86,11 +86,11 @@ public class MemberVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getrRN() {
-		return rRN;
+	public String getResidentRN() {
+		return residentRN;
 	}
-	public void setrRN(String rRN) {
-		this.rRN = rRN;
+	public void setResidentRN(String residentRN) {
+		this.residentRN = residentRN;
 	}
 	public String getEmail() {
 		return email;

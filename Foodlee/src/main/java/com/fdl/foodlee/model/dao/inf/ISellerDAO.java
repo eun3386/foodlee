@@ -1,10 +1,10 @@
 package com.fdl.foodlee.model.dao.inf;
 
-import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.SellerVO;
 
-public interface IMemberDAO {
+public interface ISellerDAO {
 //	가입 할 수 있다. (암호화 저장 처리)
-	boolean insertNewMemberWithCrypto(MemberVO mb);
+	boolean insertNewSellerWithCrypto(SellerVO mb);
 	
 //	아이디를 찾을 수 있다.
 	
@@ -13,22 +13,22 @@ public interface IMemberDAO {
 	
 	
 //	로그인 중복체크 할 수 있다.
-	boolean isDuplicatedMember(String login);
+	boolean isDuplicatedSeller(String login);
 	
 //	로그인 할 수 있다. (세션 + 암호화 인증)
-	String loginAuthenticate( String login, int id );
+	String loginAuthenticate(String login, int id);
 	
 //	로그아웃 할 수 있다.
 	
 	
 //	자신의 정보를 확인 할 수 있다.
-	MemberVO selectOneMember(int id); // pk 
-	MemberVO selectOneMember(String login); // uq
-	int selectMemberIdbyLogin(String login);
+	SellerVO selectOneSeller(int id); // pk 
+	SellerVO selectOneSeller(String login); // uq
+	int selectSellerIdbyLogin(String login);
 	
 //	자신의 정보를 갱신 할 수 있다.
-	boolean updateOneMember(MemberVO mb);
+	boolean updateOneSeller(SellerVO mb);
 	
 //	탈퇴 할 수 있다.
-	boolean deleteOneMember(int id);
+	boolean deleteOneSeller(int id);
 }
