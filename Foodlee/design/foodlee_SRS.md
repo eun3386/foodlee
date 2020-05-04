@@ -152,7 +152,7 @@ CURRENT_TIMESTAMP
 - Date eventEndDate 이벤트 종료 날짜 ⇔ datetime event_end_date 
 - boolean eventOngoing 진행중 여부 ⇔ integer event_ongoing NN
 - Timestamp eventCreatedAt 이벤트등록날짜 ⇔ timestamp event_created_at   CURRENT_TIMESTAMP NN 
-- Timestamp eventUpdatedAt 이벤트등록날짜 ⇔ timestamp event_updated_at   CURRENT_TIMESTAMP                                
+- Timestamp eventUpdatedAt 이벤트수정날짜 ⇔ timestamp event_updated_at   CURRENT_TIMESTAMP                      
 
 #### MenuVO ⇔ menus
 - int menuId <<PK>> 메뉴번호 ⇔ integer menu_id <<PK>> NN AI
@@ -228,25 +228,45 @@ String adLocation 노출 위치 ⇔ text ad_location
 ## URL 매핑 정의
 - default.fdl "/"
 	main.fdl (form; get; 비회원)
-- mypage.my 마이페이지 (로그인 인증 후 리다이렉트; 회원)
+- mypage.fdl 마이페이지 (로그인 인증 후 리다이렉트; 회원)
 - 가입 할 수 있다 (암호화 저장 처리)
-	member_new_form.my (form; get; 비회원) 
-	member_join.my (proc; post; dao; 비회원)
+	member_new_form.fdl (form; get; 비회원) 
+	member_join.fdl (proc; post; dao; 비회원)
 - 로그인 중복체크 할 수 있다
-	member_dupcheck.my (proc; get; dao; 비회원)
+	member_dupcheck.fdl (proc; get; dao; 비회원)
 - 로그인 할 수 있다 (세션+암호화 인증)
-	member_login.my (proc, post, dao; 암호화; 세션; 회원)
+	member_login.fdl (proc, post, dao; 암호화; 세션; 회원)
 - 로그아웃 할 수 있다
-	member_logout.my (proc, get, 세션; 회원)
+	member_logout.fdl (proc, get, 세션; 회원)
 - 자신의 정보를 상세보기 할 수 있다
-	member_show.my (proc, get, ?mbId=x, 비회원)
+	member_show.fdl (proc, get, ?mbId=x, 비회원)
 - 자신의 정보를 갱신 할 수 있다
-	member_edit_form.my (proc, get, ?mbId=x, 회원, 인증; 세션)
-	member_update.my (proc, post, 세션, dao, 회원)
+	member_edit_form.fdl (proc, get, ?mbId=x, 회원, 인증; 세션)
+	member_update.fdl (proc, post, 세션, dao, 회원)
 - 탈퇴 할 수 있다 (미정) x
 - 전체 회원의 리스트를 조회 할 수 있다 (어드민)
-	member_list.my (proc, get, dao, 어드민 회원)
-	member_list.my (proc, get, ?pg=1, dao, 어드민 회원)
+	member_list.fdl (proc, get, dao, 어드민 회원)
+	member_list.fdl (proc, get, ?pg=1, dao, 어드민 회원)
+
+//
+- 관리자가 신규 이벤트 게시글을 등록할 수 있다.(+파일업로드..)
+	event_new_form.fdl (get)
+	event_add.fdl (post, proc, dao, param..vo)
+- 이벤트 게시글 상세보기 할 수 있다
+	event_show.fdl (get, proc, dao, param?id)
+- 회원이 이벤트 게시글을 좋아요 할 수 있다
+	event_like.fdl (get, proc, dao, param?atId&mbId..) 
+- 관리자가 자신의 게시글을 편집 갱신 할 수 있다
+	event_edit_form.fdl (get, proc, dao, param?id)
+	event_update.fdl (post, proc, dao, param...vo)
+- 관리자가 자신의 게시글을 삭제 할 수 있다
+	event_remove.fdl (get, proc, dao, param?id)
+- 이벤트 게시글 리스트를 조회할 수 있다. (페이지네이션, 정렬, 태그)
+	event_list.fdl (get, proc, dao)
+	event_list.fdl (get, proc, dao, param?pn&order)
+- 이벤트 게시글 리스트를 검색할 수 있다. (페이지네이션, 정렬)
+	event_form.fdl (get, form) 
+	event_search.fdl (post, proc, dao, param?pn&order&keyword&날짜 범위..)
 
 ## view 디렉터리 구조 (/webapp)
 webapp/resources (css, js, html, images, ...)
@@ -259,46 +279,74 @@ webapp/WEB-INF/views/seller
 webapp/WEB-INF/views/menu
 webapp/WEB-INF/views/notice
 webapp/WEB-INF/views/reply
+webapp/WEB-INF/views/event
 
 ## 문맥 설정
 /WEB-INF/spring/appServlet/servlet-context.xml
 
+## Java 패키지 구조 (src/main/java)
+com.fdl.foodlee.
+com.fdl.foodlee.controller.
+com.fdl.foodlee.controller.HomeController
+com.fdl.foodlee.controller.BossController
+com.fdl.foodlee.controller.MapController
+com.fdl.foodlee.controller.MemberController (어노테이션)
+com.fdl.foodlee.controller.TruckDetailController
+
+com.fdl.foodlee.model.
+com.fdl.foodlee.model.vo.MemberVO
+com.fdl.foodlee.model.dao.inf.IMemberDAO
+com.fdl.foodlee.model.dao.impl.MemberMysqlDAOImpl
+com.fdl.foodlee.model.vo.MenuVO
+com.fdl.foodlee.model.dao.inf.IMenuDAO
+com.fdl.foodlee.model.dao.impl.MenuMysqlDAOImpl
+com.fdl.foodlee.model.vo.FoodtruckVO
+com.fdl.foodlee.model.dao.inf.IFoodtruckDAO
+com.fdl.foodlee.model.dao.impl.FoodtruckMysqlDAOImpl
+com.fdl.foodlee.model.vo.BossVO
+com.fdl.foodlee.model.dao.inf.IBossDAO
+com.fdl.foodlee.model.dao.impl.BossMysqlDAOImpl
+com.fdl.foodlee.model.vo.BossVO
+com.fdl.foodlee.model.dao.inf.IBossDAO
+com.fdl.foodlee.model.dao.impl.BossMysqlDAOImpl
+... 
+
 ## java 패키지 구조 정의 (src/main/java)
-com.fdl.foodleee.
-com.fdl.foodleee.controller. 컨트롤러 (서블릿)
-com.fdl.foodleee.controller.MemberEditFormController
-com.fdl.foodleee.controller.MemberJoinController
-com.fdl.foodleee.controller.MemberListController
-com.fdl.foodleee.controller.MemberLoginController
-com.fdl.foodleee.controller.MemberLoginFormController
-com.fdl.foodleee.controller.MemberJoinFormController
-com.fdl.foodleee.controller.MemberShowController
-com.fdl.foodleee.controller.MemberUpdateController
-com.fdl.foodleee.model.  // data, VO/DTO 엔티티 도메인 표현
-com.fdl.foodleee.model.vo.MemberVO <-> members TBL
-com.fdl.foodleee.model.vo.SellerVO <-> sellers TBL
-com.fdl.foodleee.model.vo.FoodtruckVO <-> foodtrucks TBL
-com.fdl.foodleee.model.vo.MenuVO <-> menus TBL
-com.fdl.foodleee.model.vo.NoticeVO <-> notices TBL
-com.fdl.foodleee.model.vo.ReplyVO <-> replies TBL
-com.fdl.foodleee.model.dao. // DAO 중개 (저장단과 다른 계층을 중개)
-com.fdl.foodleee.model.dao.inf. (DAO 인터페이스)
-com.fdl.foodleee.model.dao.inf.IMemberDAO
-com.fdl.foodleee.model.dao.inf.ISellerDAO
-com.fdl.foodleee.model.dao.inf.IFoodtruckDAO
-com.fdl.foodleee.model.dao.inf.IMenuDAO
-com.fdl.foodleee.model.dao.inf.INoticeDAO
-com.fdl.foodleee.model.dao.inf.IReplyDAO
-com.fdl.foodleee.model.dao.impl. (DAO 구현체)
-com.fdl.foodleee.model.dao.impl.MemberMysqlDAOImpl
-com.fdl.foodleee.model.dao.impl.SellerMysqlDAOImpl
-com.fdl.foodleee.model.dao.impl.FoodtruckMysqlDAOImpl
-com.fdl.foodleee.model.dao.impl.MenuMysqlDAOImpl
-com.fdl.foodleee.model.dao.impl.NoticeMysqlDAOImpl
-com.fdl.foodleee.model.dao.impl.ReplyMysqlDAOImpl
-com.fdl.foodleee.service.
-com.fdl.foodleee.service.inf.
-com.fdl.foodleee.service.inf.
-com.fdl.foodleee.service.impl.
-com.fdl.foodleee.service.impl.
+com.fdl.foodlee.
+com.fdl.foodlee.controller. 컨트롤러 (서블릿)
+com.fdl.foodlee.controller.MemberEditFormController
+com.fdl.foodlee.controller.MemberJoinController
+com.fdl.foodlee.controller.MemberListController
+com.fdl.foodlee.controller.MemberLoginController
+com.fdl.foodlee.controller.MemberLoginFormController
+com.fdl.foodlee.controller.MemberJoinFormController
+com.fdl.foodlee.controller.MemberShowController
+com.fdl.foodlee.controller.MemberUpdateController
+com.fdl.foodlee.model.  // data, VO/DTO 엔티티 도메인 표현
+com.fdl.foodlee.model.vo.MemberVO <-> members TBL
+com.fdl.foodlee.model.vo.SellerVO <-> sellers TBL
+com.fdl.foodlee.model.vo.FoodtruckVO <-> foodtrucks TBL
+com.fdl.foodlee.model.vo.MenuVO <-> menus TBL
+com.fdl.foodlee.model.vo.NoticeVO <-> notices TBL
+com.fdl.foodlee.model.vo.ReplyVO <-> replies TBL
+com.fdl.foodlee.model.dao. // DAO 중개 (저장단과 다른 계층을 중개)
+com.fdl.foodlee.model.dao.inf. (DAO 인터페이스)
+com.fdl.foodlee.model.dao.inf.IMemberDAO
+com.fdl.foodlee.model.dao.inf.ISellerDAO
+com.fdl.foodlee.model.dao.inf.IFoodtruckDAO
+com.fdl.foodlee.model.dao.inf.IMenuDAO
+com.fdl.foodlee.model.dao.inf.INoticeDAO
+com.fdl.foodlee.model.dao.inf.IReplyDAO
+com.fdl.foodlee.model.dao.impl. (DAO 구현체)
+com.fdl.foodlee.model.dao.impl.MemberMysqlDAOImpl
+com.fdl.foodlee.model.dao.impl.SellerMysqlDAOImpl
+com.fdl.foodlee.model.dao.impl.FoodtruckMysqlDAOImpl
+com.fdl.foodlee.model.dao.impl.MenuMysqlDAOImpl
+com.fdl.foodlee.model.dao.impl.NoticeMysqlDAOImpl
+com.fdl.foodlee.model.dao.impl.ReplyMysqlDAOImpl
+com.fdl.foodlee.service.
+com.fdl.foodlee.service.inf.
+com.fdl.foodlee.service.inf.
+com.fdl.foodlee.service.impl.
+com.fdl.foodlee.service.impl.
 

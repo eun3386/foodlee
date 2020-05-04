@@ -1,5 +1,5 @@
 package com.fdl.foodlee.model.vo;
 
-public class SellerVO {
+public class BossVO {
 
 }
