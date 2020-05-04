@@ -2,23 +2,8 @@ package com.fdl.foodlee.model.vo;
 
 import java.sql.Timestamp;
 
-/*
-- int sellerId <<PK>> 판매자 번호 ⇔  int seller_id <<PK>>  AI(AutoIncrement)
-- String login <<UQ>> 아이디 ⇔  varchar(12) login <<UQ>> NN
-- String password 비밀번호 ⇔  varchar(24) password NN
-- String name 이름 ⇔  varchar(12) name NN
-- String gender 성별 ⇔  varchar() gender
-- String rRN 주민번호 // Resident Registration Number, RRN
-	⇔  varchar() rrn
-- String email 이메일 ⇔ varchar() email
-- String phoneNumber 연락처 ⇔ varchar() phone_number NN
-- String address 주소 ⇔ varchar() address
-- timestamp joinedAt 가입날짜 ⇔ timestamp joined_at
-- timestamp updatedAt 수정날짜 ⇔ timestamp updated_at
-- String cRN 사업자등록번호 Company Registration Number, CRN ⇔ varchar() crn
- */
 public class SellerVO {
-	private int sellerId; // <<PK>> 판매자 번호 ⇔  int seller_id <<PK>>  AI(AutoIncrement)
+	private int sellerId; // 판매자 번호 ⇔  int seller_id <<PK>> AI(AutoIncrement)
 	private String login; // <<UQ>> 아이디 ⇔  varchar(12) login <<UQ>> NN
 	private String password; // 비밀번호 ⇔  varchar(24) password NN
 	private String name; // 이름 ⇔  varchar(12) name NN
@@ -29,7 +14,7 @@ public class SellerVO {
 	private String address; // 주소 ⇔ varchar(128) address
 	private Timestamp joinedAt; // 가입날짜 ⇔ timestamp joined_at
 	private Timestamp updatedAt; // 수정날짜 ⇔ timestamp updated_at
-	private String companyRN; // 사업자등록번호 Company Registration Number, CRN ⇔ varchar() company_rn
+	private String companyRN; // 사업자등록번호 Company Registration Number, CRN ⇔ varchar(10) company_rn
 	
 	public SellerVO() {}
 	public SellerVO(String login, String password, String name, String gender, String residentRN, String email,

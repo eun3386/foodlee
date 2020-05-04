@@ -16,13 +16,13 @@ public interface IMemberDAO {
 	boolean isDuplicatedMember(String login);
 	
 //	로그인 할 수 있다. (세션 + 암호화 인증)
-	String loginAuthenticate( String login, int id );
+	String loginAuthenticate( String login, int mbId );
 	
 //	로그아웃 할 수 있다.
 	
 	
 //	자신의 정보를 확인 할 수 있다.
-	MemberVO selectOneMember(int id); // pk 
+	MemberVO selectOneMember(int mbId); // pk 
 	MemberVO selectOneMember(String login); // uq
 	int selectMemberIdbyLogin(String login);
 	
@@ -30,5 +30,5 @@ public interface IMemberDAO {
 	boolean updateOneMember(MemberVO mb);
 	
 //	탈퇴 할 수 있다.
-	boolean deleteOneMember(int id);
+	boolean deleteOneMember(int mbId);
 }
