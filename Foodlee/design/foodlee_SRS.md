@@ -306,9 +306,7 @@ com.fdl.foodlee.model.dao.impl.FoodtruckMysqlDAOImpl
 com.fdl.foodlee.model.vo.SellerVO
 com.fdl.foodlee.model.dao.inf.ISellerDAO
 com.fdl.foodlee.model.dao.impl.SellerMysqlDAOImpl
-com.fdl.foodlee.model.vo.BossVO
-com.fdl.foodlee.model.dao.inf.IBossDAO
-com.fdl.foodlee.model.dao.impl.BossMysqlDAOImpl
+
 ... 
 
 ## java 패키지 구조 정의 (src/main/java)
