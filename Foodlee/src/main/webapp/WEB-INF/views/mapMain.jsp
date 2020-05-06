@@ -130,8 +130,8 @@ $(document).ready(function() {
 			  dots: false, // 속성설정
 			  slidesToShow: 1, // 보여주는 화면 개수
 			  slidesToScroll: 1, // 한줄 슬라이드
-			  autoplay: false, // 자동 재생
-			  autoplaySpeed: 1500, // 재생 속도
+			  autoplay: true, // 자동 재생
+			  autoplaySpeed: 2000, // 재생 속도
 			  arrows: false, // 화살표 없애기
 			  responsive: [ // 반응형 에 대한 설정
 	                {
