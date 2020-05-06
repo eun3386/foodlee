@@ -14,7 +14,7 @@
             </ul>
             <address>
                 Copyright ©
-                <a href="http://webstoryboy.co.kr"><strong>foodleeE</strong></a>
+                <a href="http://webstoryboy.co.kr"><strong>foodlee</strong></a>
                 All Rights Reserved.
             </address>
         </div>

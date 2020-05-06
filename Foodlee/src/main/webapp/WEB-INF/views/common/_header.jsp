@@ -48,14 +48,14 @@
 		        </div>
 		        <div>
 					<ol>
-						<li><a href="#">공지</a></li>
+						<li><a href="#">이벤트</a></li>
 					</ol>
 		        </div>
-		        <div>
-					<ol>
-						<li><a id="s_search" href="#">주변 찾기</a></li>
-					</ol>
-		        </div>
+<!-- 		        <div> -->
+<!-- 					<ol> -->
+<%-- 						<li><a id="s_search" href="#">${param[s_search] ? 's_search' : 'a' }</a></li> --%>
+<!-- 					</ol> -->
+<!-- 		        </div> -->
 			</div>
 		</div>
 	</div>
