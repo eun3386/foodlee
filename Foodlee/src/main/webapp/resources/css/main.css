@@ -283,7 +283,7 @@ span#loginjoin a{
 	.map_slider figure {position: relative;}
 	.map_slider img {
 		/* 슬라이드 이미지 */
-		width: 80px;
+		width: 100%;
 	}
 	.map_slider figcaption {
 	    position: absolute; bottom: 0; left: 0; width: 100%; padding: 5.5px;
@@ -293,20 +293,20 @@ span#loginjoin a{
 	    font-size: 18px;
 	    text-align: center;
 	}
-	.map_slider figcaption em {
-	    display: block; font-weight: bold; font-size: 28px;
-	    text-transform: uppercase; font-family: 'Abel', sans-serif;
-	    opacity: 0;
-	    transition: all .84s ease; /*서서히 나타남*/
-	    transform: translateX(50px); /*오른쪽에서 나오는 효과 */
-	}
-	.map_slider figcaption span {
-	    display: block;
-	    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-	    opacity: 0;
-	    transition: all .84s .2s ease;
-	    transform: translateX(50px);
-	}
+/* 	.map_slider figcaption em { */
+/* 	    display: block; font-weight: bold; font-size: 28px; */
+/* 	    text-transform: uppercase; font-family: 'Abel', sans-serif; */
+/* 	    opacity: 0; */
+/* 	    transition: all .84s ease; 서서히 나타남 */
+/* 	    transform: translateX(50px); 오른쪽에서 나오는 효과 */
+/* 	} */
+/* 	.map_slider figcaption span { */
+/* 	    display: block; */
+/* 	    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; */
+/* 	    opacity: 0; */
+/* 	    transition: all .84s .2s ease; */
+/* 	    transform: translateX(50px); */
+/* 	} */
 	.map_slider .slick-active figcaption em {opacity: 1; transform: translateX(0);}
 	.map_slider .slick-active figcaption span {opacity: 1; transform: translateX(0);}
 	
@@ -353,7 +353,6 @@ span#loginjoin a{
 	    text-indent: 0;
 	    position: absolute; left: 11px; top: 8px;
 	}
-
 /* 푸터 */
 .map_footer {text-align: center; padding: 30px 50px; }
 .map_footer li {position: relative; display: inline; padding: 0 7px 0 10px; white-space: nowrap;}
