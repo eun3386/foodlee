@@ -83,12 +83,12 @@ svg text {
           text-anchor: middle;
         }
        
-        h3#muni{
+        h3{
             font-family: 'Jua', sans-serif;
             font-size: 19px;
             font-weight: 600;
         }
-.wrap_muni{
+#wrap{
     background-color: #fff9f2;
 }
 #gu-list-wrap{
@@ -97,16 +97,14 @@ svg text {
     height: 580px;
     display: inline-block;
 }
-#gu-list-table{
-    width: 960px;
-}
-#gu-list-wrap thead{
+
+#gu-list-wrap thead,#event-list-wrap thead{
     background-color: rgba(115,110,103,.1);
 }
-#gu-list-wrap thead th{
+#gu-list-wrap thead th,#event-list-wrap thead th{
     font-size: smaller;
 }
-#gu-list-wrap thead th,td{
+#gu-list-wrap thead th,#event-list-wrap thead th{
     border: solid 2px rgba(115,110,103,.3);
     border-left: 0px; 
     border-right: 0px; 
@@ -120,11 +118,11 @@ svg text {
     overflow: hidden;
 }
 */
-#gu-list-wrap td{
+#gu-list-wrap td,#event-list-wrap td{
     font-size: smaller;
     color: #676767;
     text-align: center;
-    
+    vertical-align: middle;
 }
 #gu-list-table{
     width: 800px;
@@ -149,7 +147,7 @@ svg text {
     font-family: 'jua', sans-serif;
 }
 
-#gu-list-table tbody td{
+tbody td{
     width: auto;
     box-sizing: border-box;
     max-height: 80px;
@@ -159,7 +157,7 @@ svg text {
     width: 270px;
     
 }
-#gu-list-table tbody tr:hover{
+tbody tr:hover{
     cursor: pointer;
     background-color: #BDD98C;
 }
@@ -168,8 +166,7 @@ svg text {
     left: 100px;
     
 }
-#page{
-    width: 800px;
+#page{    
      text-align: center;
     margin-top: 20px;
     
@@ -199,4 +196,10 @@ svg text {
     overflow: hidden;
     width: auto;
     white-space: nowrap;
+}
+.td-ongoing{
+    vertical-align: middle;
+}
+#event-list-table{
+    width: 960px;
 }

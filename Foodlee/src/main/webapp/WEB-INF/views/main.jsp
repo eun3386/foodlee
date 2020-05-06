@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<!-- <link href="css/reset.css" type="text/css" rel="stylesheet"> -->
+<!-- <link href="resources/css/reset.css" type="text/css" rel="stylesheet"> -->
 <link href="resources/css/main.css" type="text/css" rel="stylesheet">
 <link href="resources/css/index.css" type="text/css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs=" crossorigin="anonymous"></script>
@@ -98,7 +98,7 @@
                 <li><a href="#">메뉴</a></li>
                 <li><a href="#">메뉴</a></li>
                 <li><a href="#">메뉴</a></li>
-                <li><a href="#">메뉴</a></li>
+                <li><a href="#event-list">이벤트</a></li>
             </ul>
         </div>
         <a href="#"><img class="logo" src="resources/css/imgs/logo.png"></a>
@@ -112,6 +112,9 @@
     </div>
         <div class="index-btn">
         <P id="search">내 주변 푸드트럭<br>찾기 <i class="far fa-compass"></i></P>
+        </div>
+        <div id="event-list">
+        	<%@include file="event/_event_list.jsp" %>
         </div>
     </div>
     

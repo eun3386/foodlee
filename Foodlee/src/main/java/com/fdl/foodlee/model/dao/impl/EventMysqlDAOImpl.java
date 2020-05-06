@@ -8,7 +8,56 @@ import com.fdl.foodlee.model.dao.inf.IEventDAO;
 import com.fdl.foodlee.model.vo.EventVO;
 
 public class EventMysqlDAOImpl implements IEventDAO {
-
+	public static final String SQL_EVENT_READ_INC = 
+			"update events set read_count"
+			+ " = read_count + 1 where id = ?";
+		public static final String SQL_EVENT_SHOWALL =
+			"select * from events order by created_at desc";
+		public static final String SQL_EVENT_SHOWONE =
+			"select * from events where id = ?";
+		public static final String SQL_EVENT_INSERT_VO
+			//= "insert into values(),(),()";
+			= "insert into events values("
+				+ "null,?,?,0,0,'',?,?,?,now(),now())";
+		
+		public static final String SQL_EVENT_SHOWALL_PG
+			= "SELECT * FROM events order by created_at "
+					+ "desc limit ?, ?";
+		public static final String SQL_CHECK_EVENT_NUMBERS
+			= "select count(id) as cnt from events";
+		public static final String SQL_SEARCH_TITLE 
+			= "SELECT * FROM events where title like " +
+			"concat('%',?,'%') ";
+		public static final String SQL_SEARCH_ANYCOLUMN 
+		= "SELECT * FROM events where %s like " +
+			"concat('%%',?,'%%') %s";
+		public static final String SQL_CHECK_SEARCH_ANYCOLUMN 
+		= "SELECT count(*) FROM events where %s like " +
+			"concat('%%',?,'%%')";
+		public static final String SQL_SEARCH_ANYCOLUMN_PG 
+		= "SELECT * FROM events where %s like " +
+			"concat('%%',?,'%%') %s limit ?, ?";
+				//"'%?%' order by created_at desc";	
+				//"'%'중고'%' order by created_at desc";
+		public static final String SQL_SEARCH_ALL  
+		= "SELECT * FROM events where "
+				+ "title like concat('%%',?,'%%') or "
+				+ "content like concat('%%',?,'%%') or "
+				+ "tags like concat('%%',?,'%%') %s";
+		public static final String SQL_CHECK_SEARCH_ALL  
+		= "SELECT count(*) FROM events where "
+				+ "title like concat('%',?,'%') or "
+				+ "content like concat('%',?,'%') or "
+				+ "tags like concat('%',?,'%')";
+		public static final String SQL_SEARCH_ALL_PG  
+		= "SELECT * FROM events where "
+				+ "title like concat('%%',?,'%%') or "
+				+ "content like concat('%%',?,'%%') or "
+				+ "tags like concat('%%',?,'%%') %s"
+				+ " limit ?, ?";
+		public static final String SQL_EVENT_UPDATE
+		= "update events set title=?, content=?, tags=? ,updated_at = now() where id = ?";
+		
 	@Override
 	public boolean insertNewEvent(EventVO ev) {
 		// TODO Auto-generated method stub
