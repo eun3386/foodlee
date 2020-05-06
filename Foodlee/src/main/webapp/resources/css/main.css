@@ -11,7 +11,7 @@ body#wrapper{
     margin:150px auto 0;
     width: 1200px;
     font-family: 'Nanum Gothic', sans-serif;
-    height: 1000px;
+/*     height: 1000px; */
    	
 }
 #main-header{
@@ -71,6 +71,12 @@ body#wrapper{
 span#loginjoin a{
 	color:#44591F;
 	text-decoration: none;
+}
+
+.map_footer a,.map_footer adress{
+	font-size: smaller;
+    color: #676767;
+    text-decoration: none;
 }
 /*  장재석 css ---------------------------------------------------------------------------->*/
 #map_wrap {width: 1200px; margin: 0 auto;}

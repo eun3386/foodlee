@@ -118,6 +118,8 @@
         </div>
     </div>
     
-    <div id="footer"></div>
+    <div id="footer">
+    	<%@include file="common/_footer.jsp" %>
+    </div>
 </body>
 </html>
