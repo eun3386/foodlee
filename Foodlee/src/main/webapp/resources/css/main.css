@@ -73,7 +73,7 @@ span#loginjoin a{
 	text-decoration: none;
 }
 
-.map_footer a,.map_footer adress{
+.map_footer a,.map_footer span.copy{
 	font-size: smaller;
     color: #676767;
     text-decoration: none;
