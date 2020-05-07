@@ -55,7 +55,7 @@
 			<div>
 				<table border="1">
 					<tr>
-						<td>FOODLI22**</td><td>오늘</td>
+						<td>FOODLI22**</td><td>오늘 readonly로하면 될듯</td>
 					</tr>
 					<tr>
 						<td>댓글입니다.</td>

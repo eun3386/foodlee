@@ -48,7 +48,7 @@
 </div>
 	<div id="ordermain">
 	<nav id="order_header">
-		<a class="orderlist" href="#">주문현황</a> 
+		<a class="orderlist" href="#">주문현황 orderlist2 활용하기</a> 
 		<a class="graph" href="#">판매그래프</a> 
 	</nav>
 		<h1>주문 리스트 </h1>
