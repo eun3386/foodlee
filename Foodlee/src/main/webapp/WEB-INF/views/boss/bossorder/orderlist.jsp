@@ -53,6 +53,16 @@
 	</nav>
 		<h1>주문 리스트 </h1>
 		주문 하면 상단에 자동 추가 되기 0시 리셋<br><br>
+		
+	<div class="card" style="width: 18rem;">
+	  
+	  <div class="card-body">
+	  <img class="card-img-top" src="..." alt="Card image cap">
+	    <h5 class="card-title">Card title</h5>
+	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+	    <a href="#" class="btn btn-primary">Go somewhere</a>
+	  </div>
+	</div>
 	<div id=order_list>
 	<table >
 	<tr > <td rowspan="3"><img alt="" src="../../css/imgs/gu-truck-img.jpg"></td><td >메뉴이름 : </td> <td colspan="2">메뉴</td> <td> 주문시간</td>

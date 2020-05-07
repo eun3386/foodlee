@@ -362,6 +362,7 @@
                                 </li>
                             </ul>
                         </li>
+                        
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
                                 aria-expanded="false"><i data-feather="box" class="feather-icon"></i><span
                                     class="hide-menu">UI Elements </span></a>
@@ -576,6 +577,7 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+
             <div class="container-fluid">
                 <!-- *************************************************************** -->
                 <!-- Start First Cards -->
@@ -648,6 +650,37 @@
                 <!-- *************************************************************** -->
                 <!-- End First Cards -->
                 <!-- *************************************************************** -->
+                <div class="list-group" style="max-width: 880px; ">
+				  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+				    <div style=" float: left;">
+				    <div class="d-flex w-100 justify-content-between">
+				      <h5 class="mb-1">List group item heading</h5>
+				      <small>3 days ago</small>
+				    </div>
+				    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+				    <small>Donec id elit non mi porta.</small>
+				    </div>
+				    <div style="width: 20%; float: left;">
+  						<img class="card-img-top" src="..." alt="Card image cap">
+				    </div>
+				  </a>
+				  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				    <div class="d-flex w-100 justify-content-between">
+				      <h5 class="mb-1">List group item heading</h5>
+				      <small class="text-muted">3 days ago</small>
+				    </div>
+				    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+				    <small class="text-muted">Donec id elit non mi porta.</small>
+				  </a>
+				  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+				    <div class="d-flex w-100 justify-content-between">
+				      <h5 class="mb-1">List group item heading</h5>
+				      <small class="text-muted">3 days ago</small>
+				    </div>
+				    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+				    <small class="text-muted">Donec id elit non mi porta.</small>
+				  </a>
+				</div>
                 <!-- *************************************************************** -->
                 <!-- Start Sales Charts Section -->
                 <!-- *************************************************************** -->
