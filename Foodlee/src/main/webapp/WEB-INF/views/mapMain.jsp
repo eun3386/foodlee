@@ -22,9 +22,6 @@
 <link rel="stylesheet" type="text/css" href="resources/css/slick.css"/>
 <!-- <link rel="stylesheet" type="text/css" href="resource/js/slick/slick-theme.css"/> -->
 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
 <!-- CSS -->
 <link href="<%=application.getContextPath()%>/resources/css/reset.css" type="text/css" rel="stylesheet">
 <link href="<%=application.getContextPath()%>/resources/css/main.css" type="text/css" rel="stylesheet">
@@ -121,7 +118,7 @@ $(document).ready(function() {
 		</footer>
 	</div>
 	<!-- slider -->
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
 	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="resources/js/slick.min.js"></script>
 	<script type="text/javascript">
