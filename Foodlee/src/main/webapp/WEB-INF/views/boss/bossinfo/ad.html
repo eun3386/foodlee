@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+	
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var ROOT_PATH = '<%= application.getContextPath() %>';
+		
+		$('.login').click(function() {
+			var url = ROOT_PATH
+				+'///mb_login_form.jsp';
+			$("#main").load(url);
+		});
+		
+		$('.sign_up').click(function() {
+			var url = ROOT_PATH
+				+'///mb_sign_up_choice_form.jsp';
+			$("#main").load(url);
+		});
+		
+		$('.ad').click(function() {
+			var url = ROOT_PATH
+				+'/views/bossinfo/ad.jsp';
+			$("#main").load(url);
+		});
+		$('.infomodify').click(function() {
+			var url = ROOT_PATH
+				+'/views/bossinfo/infomodify.jsp';
+			$("#main").load(url);
+		});
+		$('.position').click(function() {
+			var url = ROOT_PATH
+				+'/views/bossinfo/position.jsp';
+			$("#main").load(url);
+		});
+	});
+</script>
+<title>bossinfo</title>
+<style type="text/css">
+ 	.ad-top {
+		display: inline;
+		margin: 0;
+		padding: 1em;
+	}
+	.ad-bottom {
+		display: inline;
+		margin: 0;
+		padding: 1em;
+		
+	}
+	.ad-power {
+		border-radius: 5px;
+		
+		/* height: 450px; */
+		margin: 1px;
+		/* float: left; */
+		
+	}
+	.ad-banner {
+		
+		border-radius: 5px;
+		width: 368px;
+		/* height: 450px; */
+	/* 	float: rightror; */
+		margin: 1px;
+		
+	}
+	#ad-power-st{
+		border: 3px solid #FFBB00;
+		position: fixed;
+		width: 368px;
+		top: 15%;
+		left: 11% ;
+	}
+	#ad-banner-st{
+		border: 3px solid #477CBE;
+		position: fixed;
+		width: 368px;
+		top: 15%;
+		left: 29% ;
+	}
+	#ad-power-ing{
+		border: 3px solid #8DC73E;
+		position: fixed;
+		width: 15%/* 368px; */
+		top: 15%;
+		left: 49% ;
+	}
+	#ad-banner-ing{
+		border: 3px solid #8DC73E;
+		position: fixed;
+		width: 15%/* 368px; */
+		top: 15%;
+		left: 69% ;
+	}
+	#main {
+	
+	}
+</style>
+</head>
+<body>
+	<div id="header">
+		<a class="login" href="#">로그인</a> |
+		<a class="sign_up" href="#">회원가입</a> 
+	</div>
+	<div id="main">
+	<nav id=" main-header" class="navbar navbar-light bg-light justify-content-between">
+		<form class="form-inline">
+			<a class="infomodify" href="#">정보수정</a>
+			<a class="ad" href="#">광고노출</a> 
+			<a class="position" href="#">위치등록</a>
+ 		</form>
+	</nav>
+	<h3>광고 등록하기  진행중인 광고</h3><!--  <h3>진행중인 광고</h3> -->	
+		<div class="ad-top" > 
+		
+			<table id="ad-power-st" class= "ad-power">
+				<tr>
+					<td><h3>파워링크</h3></td>
+				</tr>
+				<tr>
+					<td><h4>소비자와 가장 가까운 광고! 높은 전환 효과를 기대할 수 있는</h4></td>
+				</tr>
+				<tr>
+					<td><h4>프리미엄 배너 광고 상품입니다.</h4></td>
+					
+				</tr>
+				<tr>
+					<td><p><h4>낮은 제작비용과 높은 타겟팅 정확도를 누려보세요.</h4></p></td>
+				</tr>
+				<tr>
+					<td>월55,000원</td>
+					
+				</tr>
+				<tr>
+					<td>적용기간</td>
+				</tr>
+				<tr>
+					<td>적용날짜</td>
+					<td>~</td>
+				</tr>
+				<tr>
+					<td>노출위치</td>
+					
+				</tr>
+				<tr>
+					<td>oo구 oo동</td>
+				</tr>
+				<tr>
+					<td><input type="reset" value="리셋"><input type="submit" value="등록"></td>
+				</tr>
+			</table> <!-- 파워링크 등록 -->
+			
+			<table  id="ad-banner-st" class= "ad-banner">
+				
+				<tr>
+					<td><h3>배너광고</h3></td>
+				</tr>
+				<tr>
+					<td><p><h4>띠베너 형태의 광고로 강력한 타겟팅 기능과</h4></p></td>
+				</tr>
+				<tr>
+					<td><p><h4>풍부하고 정확한 데이터를 지원하는 광고상품입니다.</h4></p></td>
+				</tr>
+				<tr>
+					<td><p><h4>광고 노출에 따른 인지도 증가 효과!</h4></p></td>
+				</tr>
+				<tr>
+					<td>월45,000원</td>
+					
+				</tr>
+				<tr>
+					<td>적용기간</td>
+				</tr>
+				<tr>
+					<td>적용날짜</td>
+					<td>~</td>
+				</tr>
+				<tr>
+					<td>노출위치</td>
+					
+				</tr>
+				<tr>
+					<td>서울시 oo동</td>
+				</tr>
+				<tr>
+					<td><button>등록</button></td>
+				</tr>
+			</table>	<!-- 베너광고 등록-->
+		</div>
+		
+		
+	
+		<div class="ad-bottom">
+			<table  id="ad-power-ing" class= "ad-power" >
+				
+				<tr>
+					<td><h3>파워링크</h3></td>
+				</tr>
+				<tr>
+					<td><p><h4>지역 키보드에 노출되는 검색광고 상품입니다.</h4></p></td>
+				</tr>
+				<tr>
+					<td><p><h4>검색광고 이젠 선택이 아닌 필수입니다.</h4></p></td>
+				</tr>
+				<tr>
+					<td>월55,000원</td>
+					
+				</tr>
+				<tr>
+					<td>적용기간</td>
+				</tr>
+				<tr>
+					<td>적용날짜</td>
+					<td>~</td>
+				</tr>
+				<tr>
+					<td>노출위치</td>
+					
+				</tr>
+				<tr>
+					<td>서울시 oo동</td>
+				</tr>
+				<tr>
+					<td><button>해지</button></td>
+				</tr>
+			</table><!-- 파워링크 해지 -->
+
+			<table id="ad-banner-ing" class= "ad-banner">
+				
+				<tr>
+					<td><h3>배너광고</h3></td>
+				</tr>
+				<tr>
+					<td>월45,000원</td>
+					
+				</tr>
+				<tr>
+					<td>적용기간</td>
+				</tr>
+				<tr>
+					<td>적용날짜</td>
+					<td>~</td>
+				</tr>
+				<tr>
+					<td>노출위치</td>
+					
+				</tr>
+				<tr>
+					<td>서울시 oo동</td>
+				</tr>
+				<tr>
+					<td><button>해지</button></td>
+				</tr>
+			</table>
+		</div><!-- 베너광고 해지 -->
+		
+	</div>
+	<div id="footer">
+		
+	</div>
+</body>
+</html>
