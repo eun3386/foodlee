@@ -8,39 +8,47 @@ public class MemberVO {
 	private String password; // 비밀번호 ⇔ varchar(24) password NN
 	private String name; // 이름 ⇔ varchar(12) name NN
 	private String gender; // 성별 ⇔ varchar(4) gender
+	private int age; // 나이 ⇔ int age
 	private String residentRN; // 주민번호 Resident Registration Number, RRN ⇔  varchar(13) resident_rn
-	private String email; // 이메일 ⇔  varchar(24) email
+	private String email; // 이메일 ⇔  varchar(24) email 
 	private String phoneNumber; // 연락처 ⇔ varchar(12) phone_number NN
 	private String address; // 주소 ⇔ varchar(128) address
 	private Timestamp joinedAt; // 가입날짜 ⇔ timestamp joined_at
 	private Timestamp updatedAt; // 수정날짜 ⇔ timestamp updated_at
+	private Timestamp loginTime; // 로그인일자 ⇔ timestamp login_time
+	private Timestamp logoutTime; // 로그아웃일자 ⇔ timestamp logout_time
 	
 	public MemberVO() {}
-	public MemberVO(String login, String password, String name, String gender, String residentRN, String email,
+	public MemberVO(String login, String password, String name, String gender, int age, String residentRN, String email,
 			String phoneNumber, String address) {
-		this(0, login, password, name, gender, residentRN, email, phoneNumber, address, null, null);
+		this(0, login, password, name, gender, age, residentRN, email, phoneNumber, address, null, null, null, null);
 	}
-	public MemberVO(int mbId, String login, String password, String name, String gender, String residentRN, String email,
-			String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt) {
+	public MemberVO(int mbId, String login, String password, String name, String gender, int age, String residentRN,
+			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt,
+			Timestamp loginTime, Timestamp logoutTime) {
 		super();
 		this.mbId = mbId;
 		this.login = login;
 		this.password = password;
 		this.name = name;
 		this.gender = gender;
+		this.age = age;
 		this.residentRN = residentRN;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.joinedAt = joinedAt;
 		this.updatedAt = updatedAt;
+		this.loginTime = loginTime;
+		this.logoutTime = logoutTime;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "MemberVO [mbId=" + mbId + ", login=" + login + ", password=" + password + ", name=" + name + ", gender="
-				+ gender + ", residentRN=" + residentRN + ", email=" + email + ", phoneNumber=" + phoneNumber + ", address=" + address
-				+ ", joinedAt=" + joinedAt + ", updatedAt=" + updatedAt + "]";
+				+ gender + ", age=" + age + ", residentRN=" + residentRN + ", email=" + email + ", phoneNumber="
+				+ phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt=" + updatedAt
+				+ ", loginTime=" + loginTime + ", logoutTime=" + logoutTime + "]";
 	}
 	
 	public int getMbId() {
@@ -109,6 +117,25 @@ public class MemberVO {
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public Timestamp getLoginTime() {
+		return loginTime;
+	}
+	public void setLoginTime(Timestamp loginTime) {
+		this.loginTime = loginTime;
+	}
+	public Timestamp getLogoutTime() {
+		return logoutTime;
+	}
+	public void setLogoutTime(Timestamp logoutTime) {
+		this.logoutTime = logoutTime;
+	}
+	
 	
 	
 }

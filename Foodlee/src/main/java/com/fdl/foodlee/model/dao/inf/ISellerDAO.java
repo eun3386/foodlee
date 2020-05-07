@@ -16,7 +16,8 @@ public interface ISellerDAO {
 	boolean isDuplicatedSeller(String login);
 	
 //	로그인 할 수 있다. (세션 + 암호화 인증)
-	String loginAuthenticate(String login, int selId);
+	//String loginAuthenticate(String login, int selId);
+	int loginAuthenticate(String login, int selId);
 	
 //	로그아웃 할 수 있다.
 	

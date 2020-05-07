@@ -23,12 +23,14 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	// SQL 정의부
 	private static final String SQL_INSERT_SELLER_CRYPTO 
 	= "insert into sellers values(null, ?, hex(aes_encrypt(?,?)), "
-		+"?, ?, ?, ?, ?, ?, now(), now(), ?)";
+		+"?, ?, ?, ?, ?, ?, ?, now(), now(), ?, null, null)";
 	private static final String SQL_SELLER_DUPCHECK
 	= "select count(seller_id) from sellers where login = ?";
 	private static final String SQL_LOGIN_AUTH
 	= "select login, cast(aes_decrypt(unhex(password),?) as char(32) "
 		+ "character set utf8) as password from sellers where seller_id = ?";
+	private static final String SQL__SELLER_LOGIN_TIME_UPDATE
+	= "update sellers set login_time=now() where mb_id = ?";
 	private static final String SQL_SELECT_SELLER_ID 
 	= "select * from sellers where seller_id = ?";
 	private static final String SQL_SELECT_SELLER_LOGIN 
@@ -37,7 +39,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	= "select seller_id from sellers where login = ?";
 	private static final String SQL_UPDATE_SELLER //TODO 비밀번호 변경 따로 ? 사업자등록번호 변경유무
 	= "update sellers set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
-		+"email=?, phone_number=?, address=?, updated_at=now(), company=? where seller_id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company=? where seller_id = ?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -46,7 +48,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	public boolean insertNewSellerWithCrypto(SellerVO sel) {
 		int r = jtem.update(SQL_INSERT_SELLER_CRYPTO,
 				sel.getLogin(), sel.getPassword(), sel.getLogin(),
-				sel.getName(), sel.getGender(), sel.getResidentRN(),
+				sel.getName(), sel.getGender(), sel.getAge(), sel.getResidentRN(),
 				sel.getEmail(), sel.getPhoneNumber(), sel.getAddress(),
 				sel.getCompanyRN() );
 		return r == 1;
@@ -60,14 +62,16 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	}
 
 	@Override
-	public String loginAuthenticate(String login, int id) {
+	//public String loginAuthenticate(String login, int selId) {
+	public int loginAuthenticate(String login, int selId) {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
-				new Object[]{login,id},
+				new Object[]{login,selId},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
 		String dbPassword = (String) rMap.get("password");
 		System.out.println("DB password: " + dbPassword);
-		return dbPassword;
+		//return dbPassword;
+		return jtem.update(SQL__SELLER_LOGIN_TIME_UPDATE, selId);
 	}
 
 	@Override
@@ -83,13 +87,16 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 								rs.getString("password"),
 								rs.getString("name"),
 								rs.getString("gender"),
+								rs.getInt("age"),
 								rs.getString("resident_rn"),
 								rs.getString("email"),
 								rs.getString("phone_number"),
 								rs.getString("address"), 
 								rs.getTimestamp("joined_at"),
 								rs.getTimestamp("updated_at"),
-								rs.getString("company_rn") );
+								rs.getString("company_rn"),
+								rs.getTimestamp("login_time"),
+								rs.getTimestamp("logout_time") );
 					}
 				} , selId);
 		} catch (DataAccessException e) {
@@ -127,7 +134,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		try { 
 			int r = jtem.update(SQL_UPDATE_SELLER, 
 				sel.getPassword(), sel.getLogin(), sel.getName(),
-				sel.getGender(), sel.getEmail(), sel.getPhoneNumber(),
+				sel.getGender(), sel.getAge(), sel.getEmail(), sel.getPhoneNumber(),
 				sel.getAddress(), sel.getSellerId(), sel.getCompanyRN() );
 			return r == 1;
 		} catch (DataAccessException e) {

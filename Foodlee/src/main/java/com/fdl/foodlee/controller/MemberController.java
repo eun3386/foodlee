@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 //	member_login_form.fdl (form; get; 비회원)
-	@RequestMapping(value = "member_login_form.fdl", 
+	@RequestMapping(value = "/login_form.fdl", 
 			method = RequestMethod.GET)
 	public String memberLoginForm() {	
 		System.out.println("login form 준비!!!");
@@ -15,7 +16,7 @@ public class MemberController {
 	}
 	
 //	mb_sign_up_choice_form.fdl (form; get; 비회원)
-	@RequestMapping(value = "mb_sign_up_choice_form.fdl", 
+	@RequestMapping(value = "/sign_up_choice_form.fdl", 
 			method = RequestMethod.GET)
 	public String mbSignUpChoiceForm() {	
 		System.out.println("mb sign up choice form 준비!!!");
@@ -23,9 +24,9 @@ public class MemberController {
 	}
 	
 //	mb_sign_up_form.fdl (form; get; 비회원)
-	@RequestMapping(value = "mb_sign_up_form.fdl", 
+	@RequestMapping(value = "/sign_up_form.fdl", 
 			method = RequestMethod.GET)
-	public String mbSignUpForm() {	
+	public String mbSignUpForm() {
 		System.out.println("mb sign up form 준비!!!");
 		return "member/mb_sign_up_form";
 	}
