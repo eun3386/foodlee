@@ -88,7 +88,7 @@ svg text {
             font-size: 19px;
             font-weight: 600;
         }
-#wrap{
+.wrap_muni{
     background-color: #fff9f2;
 }
 #gu-list-wrap{
@@ -169,6 +169,7 @@ tbody tr:hover{
 #page{    
      text-align: center;
     margin-top: 20px;
+    margin-right: 100px;
     
 }
 #page li{
