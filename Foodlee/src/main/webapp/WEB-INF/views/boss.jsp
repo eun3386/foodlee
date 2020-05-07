@@ -86,7 +86,7 @@
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
-                <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <div class="navbar-collapse collapse" id="navbarSupportedContent"><!-- 헤더부분 -->
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
@@ -185,15 +185,32 @@
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
+                    <ul class="nav justify-content-center">
+					  <li class="nav-item">
+					    <a class="nav-link active" href="#">시작화면</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#">메뉴화면</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="#">정보수정</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link disabled" href="#">주문리스트</a>
+					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link disabled" href="#">리뷰목록</a>
+					  </li>
+					</ul>
                     <!-- ============================================================== -->
-                    <ul class="navbar-nav float-right">
+                    <ul class="navbar-nav float-right"><!--  오른쪽 부분-->
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
                         <li class="nav-item d-none d-md-block">
                             <a class="nav-link" href="javascript:void(0)">
                                 <form>
-                                    <div class="customize-input">
+                                    <div class="customize-input"><!-- 검색부분 -->
                                         <input class="form-control custom-shadow custom-radius border-0 bg-white"
                                             type="search" placeholder="Search" aria-label="Search">
                                         <i class="form-control-icon" data-feather="search"></i>
@@ -484,7 +501,55 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">푸드트럭 푸들이~</h3>
+
+                     <!-- <div class="card-group">
+	                    <div class="card border-right">
+	                        <div class="card-body">
+	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                                    <div class="d-inline-flex align-items-center">
+                                        <h2 class="text-dark mb-1 font-weight-medium">시작화면</h2>
+                                    </div>
+	                             </div>
+	                        </div>
+	                    </div>
+	                    <div class="card border-right">
+	                        <div class="card-body">
+	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                                    <div class="d-inline-flex align-items-center">
+                                        <h2 class="text-dark mb-1 font-weight-medium">메뉴수정</h2>
+                                    </div>
+	                             </div>
+	                        </div>
+	                    </div>
+	                    <div class="card border-right">
+	                        <div class="card-body">
+	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                                    <div class="d-inline-flex align-items-center">
+                                        <h2 class="text-dark mb-1 font-weight-medium">정보수정</h2>
+                                    </div>
+	                             </div>
+	                        </div>
+	                    </div>
+	                    <div class="card border-right">
+	                        <div class="card-body">
+	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                                    <div class="d-inline-flex align-items-center">
+                                        <h2 class="text-dark mb-1 font-weight-medium">주문목록</h2>
+                                    </div>
+	                             </div>
+	                        </div>
+	                    </div>
+	                    <div class="card border-right">
+	                        <div class="card-body">
+	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
+                                    <div class="d-inline-flex align-items-center">
+                                        <h2 class="text-dark mb-1 font-weight-medium">리뷰확인</h2>
+                                    </div>
+	                             </div>
+	                        </div>
+	                    </div>
+	                   </div>
+ -->                       <!--  <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">푸드트럭 푸드리</h3> -->
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -525,7 +590,7 @@
                                         <span
                                             class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">+18.33%</span>
                                     </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">신규 고객</h6>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">판매량</h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
                                     <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
@@ -538,12 +603,13 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup
-                                            class="set-doller">$</sup>18,306</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">이달 수입
+                                            class="set-doller">￦</sup>18,306</h2>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">주간매출
                                     </h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span>
+                                	<span  > <img alt="" src="../../resources/imgs/boss/원.png" style="max-width: 24px;max-height: 24px;"></span>
+                                  <!--   <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span> -->
                                 </div>
                             </div>
                         </div>
@@ -557,10 +623,10 @@
                                         <span
                                             class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span>
                                     </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">New Projects</h6>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">좋아요</h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="file-plus"></i></span>
+                                    <span class="opacity-7 text-muted"><i data-feather="thumbs-up"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -570,7 +636,7 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <h2 class="text-dark mb-1 font-weight-medium">864</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Projects</h6>
+                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">월매출</h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
                                     <span class="opacity-7 text-muted"><i data-feather="globe"></i></span>
@@ -589,23 +655,28 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">총 매출</h4>
-                                <div id="campaign-v2" class="mt-2" style="height:283px; width:100%;"></div>
+                                <h4 class="card-title">회당 주문금액</h4>
+                                <div id="campaign-v2" class="mt-2" style="height:283px; width:100%;"></div><!-- 원형차트 -->
                                 <ul class="list-style-none mb-0">
                                     <li>
-                                        <i class="fas fa-circle text-primary font-10 mr-2"></i>
-                                        <span class="text-muted">Direct Sales</span>
-                                        <span class="text-dark float-right font-weight-medium">$2346</span>
+                                        <i class="fas fa-circle text-primary font-10 mr-2"></i><!-- 원형차트 svg -->
+                                        <span class="text-muted">만원 미만</span>
+                                        <span class="text-dark float-right font-weight-medium">23회</span>
                                     </li>
                                     <li class="mt-3">
                                         <i class="fas fa-circle text-danger font-10 mr-2"></i>
-                                        <span class="text-muted">Referral Sales</span>
-                                        <span class="text-dark float-right font-weight-medium">$2108</span>
+                                        <span class="text-muted">2만원 미만</span>
+                                        <span class="text-dark float-right font-weight-medium">08회</span>
+                                    </li>
+                                    <li class="mt-3">
+                                        <i class="fas fa-circle text-danger font-10 mr-2"></i>
+                                        <span class="text-muted">4만원 미만</span>
+                                        <span class="text-dark float-right font-weight-medium">154회</span>
                                     </li>
                                     <li class="mt-3">
                                         <i class="fas fa-circle text-cyan font-10 mr-2"></i>
-                                        <span class="text-muted">Affiliate Sales</span>
-                                        <span class="text-dark float-right font-weight-medium">$1204</span>
+                                        <span class="text-muted">5만원 이상</span>
+                                        <span class="text-dark float-right font-weight-medium">204회</span>
                                     </li>
                                 </ul>
                             </div>
@@ -614,8 +685,9 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">당기 순이익</h4>
-                                <div class="net-income mt-4 position-relative" style="height:294px;"></div>
+                                <h4 class="card-title">주간매출</h4>
+                                <!-- <div class="net-income mt-4 position-relative" style="height:294px;"></div>바차트 -->
+                                 
                                 <ul class="list-inline text-center mt-5 mb-2">
                                     <li class="list-inline-item text-muted font-italic">이달의 판매</li>
                                 </ul>
@@ -651,7 +723,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">수입 통계</h4>
+                                    <h4 class="card-title mb-0">월매출</h4>
                                     <div class="ml-auto">
                                         <div class="dropdown sub-dropdown">
                                             <button class="btn btn-link text-muted dropdown-toggle" type="button"
