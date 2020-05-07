@@ -1,0 +1,203 @@
+@charset "UTF-8";
+
+/* div {
+	border: 1px solid red;
+}
+*/
+
+/* #header, #nav, #content, #footer { */
+/* 	/* border: 1px solid gray; */ */
+/* 	left: 350px; */
+/* } */
+
+/* #header{ */
+/*     width: 1200px; */
+/*     height: 90px; */
+/*     POSITION: FIXED; */
+/*     top: 0; */
+/*     background-color: white; */
+/*     z-index: 1; */
+/*     display: block; */
+/* } */
+
+/* .logo */
+/* { */
+/*     position: absolute; */
+/*  left : 133px; */
+/*  float: left; */
+/*   top : 25px; */
+/*   left: 20px; */
+/*   width : 158px; */
+/*   height : 51px; */
+/* } */
+
+#nav {
+	float: left;
+	width: 960px;
+	height: 30px;
+	top: 90px;
+	display: block;
+}
+
+.ranktrucks {
+	text-align: center;
+	font-size: 16px;
+	background-color: #757575;
+	border: 1px solid gray;
+	border-radius: 3px;
+	color: gold;
+	top: 2px;
+	left: 2px;
+	width: 200px;
+	height: 24px;
+}
+
+.truck_search {
+	float: right;
+	right: 2px;
+	top: 3px;
+}
+
+#trucklist_page {
+	width: 960px;
+	height: 900px;
+	background-image: url('/foodlee/resources/imgs/truckDetail/background_truck2.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: white;
+}
+
+#trucklist_content {
+	float: left;
+	width: 960px;
+	height: 250px;
+	display: block;
+}
+
+.pd1, .pd2, .pd3 {
+	float: left;
+	padding: 10px;
+}
+
+.sample1, .sample2, .sample3, .sample4, .sample5, .sample6, .sample7 {
+	border: 2px solid gray;
+	background-color: orange;
+}
+
+button {
+	overflow: hidden;
+	transition: 0.5s;
+	-wdbkit-transition: 0.5s;
+	cursor: pointer;
+}
+
+#top_content button:hover {
+	background-color: yellow;
+	color: white;
+	text-shadow: 5px 1px 3px #400000;
+}
+
+#menu_truck {
+	float: left;
+	width: 960px;
+	height: 100px;
+}
+
+.menu1, .menu2, .menu3, .menu4 {
+	padding: 80px;
+}
+
+#menu_truck button {
+	width: 80px;
+	height: 50px;
+	font-size: 20px;
+	border: 2px solid orange;
+	border-radius: 10px;
+	background-color: white;
+	color: orange;
+	transition: 0.5s;
+	-wdbkit-transition: 0.5s;
+	overflow: hidden;
+
+}
+
+#menu_truck button:hover {
+	background-color: orange;
+	color: white;
+	text-shadow: 5px 1px 3px #400000;
+}
+
+.menu_pd1, .menu_pd2, .menu_pd3, .menu_pd4 {
+	padding: 40px;
+}
+
+
+#menu_content {
+	float: left;
+	width: 960px;
+	height: 600px;
+	display: block;
+}
+
+#menu_content button:hover {
+	background-color: yellow;
+	color: white;
+	text-shadow: 5px 1px 3px #400000;
+}
+
+/* #footer { */
+/* 	width: 1200px; */
+/* 	height: 60px; */
+/* /* 	position: fixed; */ */
+/* 	top: 900px; */
+/* 	background-color: white; */
+/* 	display: block; */
+/* 	text-align: center; */
+/* } */
+
+.page {
+	display: inline-block;
+}
+
+.page a {
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
+	border: 1px solid #ddd;
+	margin: 0 4px;
+	font-size: 22px;
+}
+
+/* .page a.active { */
+/* 	background-color: #4CAF50; */
+/* 	color: white; */
+/* 	border: 1px solid #4CAF50; */
+	
+/* } */
+
+.page a:hover:not(.active) {
+	background-color: #ddd;
+}
+
+.page a:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.page a:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+#trucklist_page tbody tr:hover{
+    cursor: pointer;
+    background-color: transparent !important;
+}
+
+
+
+
+
+
+

@@ -149,6 +149,9 @@
         <div id="event-list">
         	<%@include file="event/_event_list.jsp" %>
         </div>
+        <div id="truck-list">
+        	<%@include file="truck/truckList.jsp" %>
+        </div>
     </div>
     
     <div id="footer">

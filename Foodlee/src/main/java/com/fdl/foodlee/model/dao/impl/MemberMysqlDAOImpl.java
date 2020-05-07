@@ -22,12 +22,14 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	// SQL 정의부
 	private static final String SQL_INSERT_MEMBER_CRYPTO 
 	= "insert into members values(null, ?, hex(aes_encrypt(?,?)), "
-		+"?, ?, ?, ?, ?, ?, now(), now())";
+		+"?, ?, ?, ?, ?, ?, ?, now(), now(), null, null)";
 	private static final String SQL_MEMBER_DUPCHECK
 	= "select count(mb_id) from members where login = ?";
 	private static final String SQL_LOGIN_AUTH
 	= "select login, cast(aes_decrypt(unhex(password),?) as char(32) "
 		+ "character set utf8) as password from members where mb_id = ?";
+	private static final String SQL__MEMBER_LOGIN_TIME_UPDATE
+	= "update members set login_time=now() where mb_id = ?";
 	private static final String SQL_SELECT_MEMBER_ID 
 	= "select * from members where mb_id = ?";
 	private static final String SQL_SELECT_MEMBER_LOGIN 
@@ -36,7 +38,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	= "select mb_id from members where login = ?";
 	private static final String SQL_UPDATE_MEMBER //TODO 비밀번호 변경 따로 ?
 	= "update members set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
-		+"email=?, phone_number=?, address=?, updated_at=now() where mb_id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where mb_id = ?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -45,7 +47,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	public boolean insertNewMemberWithCrypto(MemberVO mb) {
 		int r = jtem.update(SQL_INSERT_MEMBER_CRYPTO,
 				mb.getLogin(), mb.getPassword(), mb.getLogin(),
-				mb.getName(), mb.getGender(), mb.getResidentRN(),
+				mb.getName(), mb.getGender(), mb.getAge(), mb.getResidentRN(),
 				mb.getEmail(), mb.getPhoneNumber(), mb.getAddress()
 				);
 		return r == 1;
@@ -59,14 +61,15 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	}
 
 	@Override
-	public String loginAuthenticate(String login, int mbId) {
+	public int loginAuthenticate(String login, int mbId) {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
 				new Object[]{login,mbId},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
 		String dbPassword = (String) rMap.get("password");
 		System.out.println("DB password: " + dbPassword);
-		return dbPassword;
+		//return dbPassword;
+		return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, mbId);
 	}
 
 	@Override
@@ -82,12 +85,15 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 								rs.getString("password"),
 								rs.getString("name"),
 								rs.getString("gender"),
+								rs.getInt("age"),
 								rs.getString("resident_rn"),
 								rs.getString("email"),
 								rs.getString("phone_number"),
 								rs.getString("address"), 
 								rs.getTimestamp("joined_at"),
-								rs.getTimestamp("updated_at") );
+								rs.getTimestamp("updated_at"),
+								rs.getTimestamp("login_time"),
+								rs.getTimestamp("logout_time") );
 					}
 				} , mbId);
 		} catch (DataAccessException e) {
@@ -125,7 +131,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 		try { 
 			int r = jtem.update(SQL_UPDATE_MEMBER, 
 				mb.getPassword(), mb.getLogin(), mb.getName(),
-				mb.getGender(), mb.getEmail(), mb.getPhoneNumber(),
+				mb.getGender(), mb.getAge(), mb.getEmail(), mb.getPhoneNumber(),
 				mb.getAddress(), mb.getMbId() );
 			return r == 1;
 		} catch (DataAccessException e) {

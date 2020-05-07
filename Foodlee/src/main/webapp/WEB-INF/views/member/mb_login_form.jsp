@@ -60,10 +60,10 @@
        		background-position: 150000%;
     	}
 	}
-	form {
-		height: 256.8px;
-		margin: 0;
-	}
+/* 	form { */
+/* 		height: 256.8px; */
+/* 		margin: 0; */
+/* 	} */
 	.slide {
 	    background-image: url('<%= application.getContextPath() %>/resources/imgs/login_image4.jpg');
 	    height: 598.5px;
@@ -79,7 +79,7 @@
 </style>
 <div id="login_wrap" class="slide">
 <div id="login_form">
-	<form>
+	<form action="" method="post">
  		<table border='0'>
  			<tr id="title"><th>푸들이 로그인</th></tr>
  			<tr>
@@ -113,21 +113,7 @@
  			</tr>
  			<tr id="submit">
  				<td>
-<!--  					<input type="submit" value="로그인"> -->
-						<input id='login_submit_btn' type="button" value="로그인">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript">
-	$(document).ready(function() {
-		var ROOT_PATH = '<%= application.getContextPath() %>';
-		
-		$('#login_submit_btn').click(function() {
-			var url = ROOT_PATH;
-			alert('로그인되었습니다.');
-			$(location).attr('href',url);
-		});
-	});
-</script>
+ 					<input type="submit" value="로그인">
  				</td>
  			</tr>
  		</table>
