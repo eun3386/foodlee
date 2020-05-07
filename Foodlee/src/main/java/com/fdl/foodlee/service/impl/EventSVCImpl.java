@@ -1,77 +1,30 @@
-package com.fdl.foodlee.model.dao.impl;
+package com.fdl.foodlee.service.impl;
 
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.dao.inf.IEventDAO;
 import com.fdl.foodlee.model.vo.EventVO;
+import com.fdl.foodlee.service.inf.IEventSVC;
 
-public class EventMysqlDAOImpl implements IEventDAO {
-	@Autowired
-	private JdbcTemplate jtem;
+@Service
+public class EventSVCImpl implements IEventSVC {
 	
-	public static final String SQL_EVENT_READ_INC = 
-			"update events set read_count"
-			+ " = read_count + 1 where id = ?";
-		public static final String SQL_EVENT_SHOWALL =
-			"select * from events order by created_at desc";
-		public static final String SQL_EVENT_SHOWONE =
-			"select * from events where id = ?";
-		public static final String SQL_EVENT_INSERT_VO
-			//= "insert into values(),(),()";
-			= "insert into events values(null,?,?,1,?,?,0,0,null,null,null,now(),null)";
-			//insert into events values(null,'2020-05-07','2020-06-30',1,'테스트','이벤트테스트',0,0,null,null,null,now(),null);
-		
-		public static final String SQL_EVENT_SHOWALL_PG
-			= "SELECT * FROM events order by created_at "
-					+ "desc limit ?, ?";
-		public static final String SQL_CHECK_EVENT_NUMBERS
-			= "select count(id) as cnt from events";
-		public static final String SQL_SEARCH_TITLE 
-			= "SELECT * FROM events where title like " +
-			"concat('%',?,'%') ";
-		public static final String SQL_SEARCH_ANYCOLUMN 
-		= "SELECT * FROM events where %s like " +
-			"concat('%%',?,'%%') %s";
-		public static final String SQL_CHECK_SEARCH_ANYCOLUMN 
-		= "SELECT count(*) FROM events where %s like " +
-			"concat('%%',?,'%%')";
-		public static final String SQL_SEARCH_ANYCOLUMN_PG 
-		= "SELECT * FROM events where %s like " +
-			"concat('%%',?,'%%') %s limit ?, ?";
-				//"'%?%' order by created_at desc";	
-				//"'%'중고'%' order by created_at desc";
-		public static final String SQL_SEARCH_ALL  
-		= "SELECT * FROM events where "
-				+ "title like concat('%%',?,'%%') or "
-				+ "content like concat('%%',?,'%%') or "
-				+ "tags like concat('%%',?,'%%') %s";
-		public static final String SQL_CHECK_SEARCH_ALL  
-		= "SELECT count(*) FROM events where "
-				+ "title like concat('%',?,'%') or "
-				+ "content like concat('%',?,'%') or "
-				+ "tags like concat('%',?,'%')";
-		public static final String SQL_SEARCH_ALL_PG  
-		= "SELECT * FROM events where "
-				+ "title like concat('%%',?,'%%') or "
-				+ "content like concat('%%',?,'%%') or "
-				+ "tags like concat('%%',?,'%%') %s"
-				+ " limit ?, ?";
-		public static final String SQL_EVENT_UPDATE
-		= "update events set title=?, content=?, tags=? ,updated_at = now() where id = ?";
-		
+	@Autowired
+	private IEventDAO evDao;
+	
 	@Override
 	public boolean insertNewEvent(EventVO ev) {
-		int r = jtem.update(SQL_EVENT_INSERT_VO, ev.getEventStartDate(), ev.getEventEndDate(), 
-							ev.getEventTitle(), ev.getEventContent());
-		return r==1;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public EventVO selectOneEvent(int id) {
+	public EventVO selectOneEvent(int evId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -84,13 +37,11 @@ public class EventMysqlDAOImpl implements IEventDAO {
 	@Override
 	public boolean updateEvent(String eventTitle, String eventContent, Date eventStartDate, 
 			boolean eventOngoing) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean increaseReadCount(int id) {
-		// TODO Auto-generated method stub
+	public boolean increaseReadCount(int evId) {
 		return false;
 	}
 

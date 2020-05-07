@@ -1,11 +1,12 @@
-package com.fdl.foodlee.model.dao.inf;
+package com.fdl.foodlee.service.inf;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
 import com.fdl.foodlee.model.vo.EventVO;
 
-public interface IEventDAO {
+public interface IEventSVC {
 //	- 관리자가 신규 이벤트 게시글을 등록할 수 있다.(+파일업로드..)
 //	event_new_form.fdl (get)
 //	event_add.fdl (post, proc, dao, param..vo)
