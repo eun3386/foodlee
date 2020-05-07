@@ -12,6 +12,8 @@
 
 <script type="text/javascript" src="./js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="./js/script.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 	<header id="header">
@@ -235,19 +237,19 @@
 								<th></th>
 							</tr>
 							<tr>
-								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary">비밀번호 변경하기</button></div></td>
+								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary" id="changePasswordButton">비밀번호 변경하기</button></div></td>
 							</tr>
-							<tr>
+							<tr class="changePassword" style="display:none">
 								<th>비밀번호 변경</th>
 								<td><input type="password" class="input"></td>
 								<th></th>
 							</tr>
-							<tr>
+							<tr class="changePassword" style="display:none">
 								<th>변경 확인</th>
 								<td><input type="password" class="input"></td>
 								<th></th>
 							</tr>
-							<tr>
+							<tr class="changePassword" style="display:none">
 								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary">비밀번호 변경</button></div></td>
 							</tr>
 							<tr>
@@ -301,5 +303,14 @@
 	<div id='footer'>
 		<jsp:include page="common/_mp_footer.jsp" />
 	</div>
+	<script>
+$(function() {
+	  $("#changePasswordButton").on("click", function(e){
+		  e.preventDefault();
+		  $(".changePassword").show();
+	  });
+
+});
+</script>
 </body>
 </html>
