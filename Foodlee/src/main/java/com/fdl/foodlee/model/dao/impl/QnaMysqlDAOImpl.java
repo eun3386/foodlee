@@ -7,36 +7,36 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import com.fdl.foodlee.model.dao.inf.IQaDAO;
-import com.fdl.foodlee.model.vo.QaVO;
+import com.fdl.foodlee.model.dao.inf.IQnaDAO;
+import com.fdl.foodlee.model.vo.QnaVO;
 
 @Repository
-public class QaMysqlDAOImpl implements IQaDAO {
+public class QnaMysqlDAOImpl implements IQnaDAO {
 
 	@Autowired
 	private JdbcTemplate jtem;
 	private SimpleJdbcInsert simIn;
 
 	@Override
-	public boolean insertNewQa(QaVO qa) {
+	public boolean insertNewQna(QnaVO qna) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean updateQa(int id, String qaContent) {
+	public boolean updateQna(int id, String qnaContent) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean deleteQa(int id) {
+	public boolean deleteQna(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public List<QaVO> showAllQa() {
+	public List<QnaVO> showAllQna() {
 		// TODO Auto-generated method stub
 		return null;
 	}
