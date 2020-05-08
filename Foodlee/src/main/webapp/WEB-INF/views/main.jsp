@@ -124,9 +124,9 @@
     <div id="main-header">
         <div id="menu-list">
             <ul>
-                <li><a href="#">메뉴</a></li>
-                <li><a href="#">메뉴</a></li>
-                <li><a href="#">메뉴</a></li>
+                <li><a href="#">찾기</a></li>
+                <li><a href="#">소개</a></li>
+                <li><a href="#truck-list">푸드트럭</a></li>
                 <li><a href="#event-list">이벤트</a></li>
             </ul>
         </div>
@@ -136,21 +136,20 @@
     </div>
     <div id="main-content">
         <div class="topo">
-        <h3 id="muni">서울시 푸드트럭 찾기</h3>
-        <div id="chart"></div>
-    </div>
-    <div class="index-btn">
-        <P id="search">내 주변 푸드트럭<br>찾기 <i class="far fa-compass"></i></P>
-    </div>
-
-    <div class="map_slider">
-		<%@ include file="common/map_sliderBottom.jsp" %>
-	</div>
-        <div id="event-list">
-        	<%@include file="event/_event_list.jsp" %>
-        </div>
+        	<h3 id="muni">서울시 푸드트럭 찾기</h3>
+        	<div id="chart"></div>
+    	</div>
+	    <div class="index-btn">
+	        <P id="search">내 주변 푸드트럭<br>찾기 <i class="far fa-compass"></i></P>
+	    </div>
+	    <div class="map_slider">
+			<%@ include file="common/map_sliderBottom.jsp" %>
+		</div>
         <div id="truck-list">
         	<%@include file="truck/truckList.jsp" %>
+        </div>
+        <div id="event-list">
+        	<%@include file="event/_event_list.jsp" %>
         </div>
     </div>
     

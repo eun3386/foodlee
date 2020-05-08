@@ -41,7 +41,6 @@ body#wrapper{
 }
 #login, #join
 {
-    color : #000000;
     font-weight: bold;  
 }
 .line
@@ -64,7 +63,7 @@ body#wrapper{
     font-size: 1.0em;
     font-weight: bold;
 }
-#menu-list li a/*,span#loginjoin a*/{
+#menu-list li a{
     color: rgba(0,0,0);
     text-decoration: none;
 }
