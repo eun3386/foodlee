@@ -19,7 +19,7 @@
  			<tr id="id">
  				<td>
  					<input type="text" id='mb_login'
- 						name="login" size='25'
+ 						name="login" size='20'
  						placeholder="아이디 입력" > 					
  				</td>
  			</tr>
@@ -29,7 +29,7 @@
  			<tr>
  				<td>
  					<input type="password" id='mb_pw'
- 						name="password" size='25'
+ 						name="password" size='20'
  						maxlength="10" 						
  						placeholder="암호 입력" > 					
  				</td>

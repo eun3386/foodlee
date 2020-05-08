@@ -10,8 +10,7 @@ public class MemberController {
 //	member_login_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "/login_form.fdl", 
 			method = RequestMethod.GET)
-	public String memberLoginForm() {	
-		System.out.println("login form 준비!!!");
+	public String memberLoginForm() {
 		return "member/mb_login_form";
 	}
 	

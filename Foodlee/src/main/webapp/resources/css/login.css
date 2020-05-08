@@ -1,31 +1,15 @@
 @charset "UTF-8";
-tbody tr:hover{
-    cursor: default;
-    background-color: white;
-}
-label {
-	cursor: default;
-}
-#login_submit_btn {
-	padding: 2px;
-}
 #login_form {
 	position: absolute;
 	border: 2px solid orange;
 	width: 250px;
 	height: 300px;
 	margin-top: 150px;
-		box-sizing: border-box;
+	box-sizing: border-box;
 	padding: 30px;
 	background-color: white;
-		left: 35%;
+	left: 35%;
 }
-td {
-	border: none;
-}
-	table {
-		margin: 0 auto;
-	}
 #title {
 	vertical-align: middle;
 	height: 50px;
