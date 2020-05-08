@@ -12,6 +12,7 @@ public class LikeVO {
 	private String likeFoodtruckName; // 좋아요 한 푸드트럭 이름
 	private String likeMenuName; // 좋아요 한 메뉴 이름
 	private int likeMenuPrice; // 좋아요 한 메뉴 가격
+	private String likeMenuPage; // 좋아요 한 메뉴 페이지 주소
 	
 	private int likeMenuNum; //메뉴 좋아요 개수
 	private int likefoodtruckNum; //푸드트럭 좋아요 개수
