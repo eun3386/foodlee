@@ -4,8 +4,8 @@
      <div class="map_row">
          <div class="map_header">
              <div class="map_header_login">
-                 <a href="member_login_form.fdl">Login</a>
-                 <a href="mb_sign_up_choice_form.fdl">Join</a>
+                 <a href="${pageContext.request.contextPath}/member/login_form.fdl">Login</a>
+                 <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl">Join</a>
              </div>
              <!-- //header_menu -->
              <div class="map_header_tit">
@@ -43,12 +43,12 @@
 		        </div>
 		        <div>
 					<ol>
-						<li><a href="#">메뉴</a></li>
+						<li><a href="${pageContext.request.contextPath}/main.fdl#truck-list">메뉴</a></li>
 					</ol>
 		        </div>
 		        <div>
 					<ol>
-						<li><a href="#">이벤트</a></li>
+						<li><a class="e_search" href="${pageContext.request.contextPath}/main.fdl#event-list">이벤트</a></li>
 					</ol>
 		        </div>
 <!-- 		        <div> -->

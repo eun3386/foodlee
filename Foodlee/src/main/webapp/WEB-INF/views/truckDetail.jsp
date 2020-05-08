@@ -181,10 +181,17 @@ function wrapWindowByMask(){
 
 }
 
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (12+obj.scrollHeight)+"px";
+}
+
 $(document).ready(function() {
 	$("#sum").css("display", "none");
 	$(".order_div").css("display", "none");
 	$(".fa-trash").css("display", "none");
+	
+	$('#writeTextarea').attr('contentEditable', 'true');
 	
 	$(".fa-trash").click(function() {
 // 		if (confirm("모든 주문 메뉴를 삭제하시겠습니까??") == true) {    //확인
@@ -358,12 +365,22 @@ $(document).ready(function() {
 	});
 
 	$(".reply").slice(0, 3).show(); // select the first ten
-    $("#read-more").click(function(e){ // click event for load more
+    $("#read-more-reply").click(function(e) { // click event for load more
         e.preventDefault();
         $(".reply:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
         if($(".reply:hidden").length == 0){ // check if any hidden divs still exist
             // alert("No more divs"); // alert if there are none left
-            $('#read-more').css("display", "none");
+            $('#read-more-reply').css("display", "none");
+        }
+    });
+	
+    $(".qna").slice(0, 3).show(); // select the first ten
+    $("#read-more-qna").click(function(e) { // click event for load more
+        e.preventDefault();
+        $(".qna:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+        if($(".qna:hidden").length == 0){ // check if any hidden divs still exist
+            // alert("No more divs"); // alert if there are none left
+            $('#read-more-qna').css("display", "none");
         }
     });
 	
@@ -520,8 +537,22 @@ $(document).ready(function() {
 				<%
 					}
 				%>
-				<div id="read-more" style="text-align: center; font-size: 18px; vertical-align: middle;
-					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">댓글 더보기</div>
+				<div id="read-more-reply" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
+					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">리뷰 더보기</div>
+				<div id="reply-insert">
+					<h3 style="padding-top: 10px;">리뷰달기</h3>
+					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden;
+						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto;">
+					</div>
+<!-- 					<textarea onkeydown="resize(this)" onkeyup="resize(this)" -->
+<!-- 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;"></textarea> -->
+					<input type="file" name="file" id="file_add" style="dispaly: none;">
+					<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
+					style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
+ 						margin-left: -3px; background-color: orange; border: 1px solid gray;">이미지 추가</button>
+					<button style="width: 100px; height: 30px; float: right; margin-top: 25px; margin-bottom: 30px;
+ 						margin-left: -3px; background-color: orange; border: 1px solid gray;">리뷰달기</button>
+				</div>
 			</div>
 		</section>
 
@@ -581,7 +612,7 @@ $(document).ready(function() {
 			<%
 				for (int i = 0; i < 10; i++) {
 			%>
-			<div class="Q&A"
+			<div class="qna"
 				style="border: 1px solid gray; margin-bottom: -1px; padding-left: 10px;
 				<%= (i % 2 == 0) ? "" : " padding-left: 40px;" %>">
 				<ul style="list-style: none; padding: 0;">
@@ -633,8 +664,8 @@ $(document).ready(function() {
 			<%
 				}
 			%>
-			<div id="read-more" style="text-align: center; font-size: 18px; vertical-align: middle;
-				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">댓글 더보기</div>
+			<div id="read-more-qna" style="text-align: center; font-size: 18px; vertical-align: middle;
+				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">Q&A 더보기</div>
 		</div>
 	</section>
 	

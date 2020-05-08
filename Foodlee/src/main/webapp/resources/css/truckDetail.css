@@ -198,7 +198,15 @@ input:checked+label {
 	display: none;
 }
 
-#read-more:hover {
+.qna {
+	display: none;	
+}
+
+#read-more-reply:hover {
+	cursor: pointer;
+}
+
+#read-more-qna:hover {
 	cursor: pointer;
 }
 

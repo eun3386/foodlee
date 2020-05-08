@@ -37,9 +37,11 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <script type="text/javascript">
 $(document).ready(function() {
+
 	var ROOTCP = '<%= application.getContextPath()%>';
 	
 	$('.map_header_tit').click(function() {
@@ -59,9 +61,26 @@ $(document).ready(function() {
 	         $(".btn").find(">i").attr("class","fas fa-bars fa");
 	     }
 	});
-	$('.h_search').click (function() {
+	$('.h_search').click(function() {
 		$(location).attr('href','main.fdl');
 	});
+	
+// 	$('#s_search').click(function() {
+// 		$(location).attr('href','main.fdl#event-list-wrap');
+// 		var offset = $('#event-list-wrap').offset();
+// 		$('html').animate({scrollTop : offset.top}, 400);
+// 	});
+// 	var page_url = window.location.href; 
+// 	var page = page_url.substring(page_url.lastIndexOf("#") + 1); 
+// 	// alert(page_id); 
+// 	if (page == 'event-list') {
+// 		$('html, body').animate({
+// 			scrollTop: $('#' + page).offset().top 
+// 		}, 500);
+// 	}
+// 	$('.e_search').click(function() {
+// 		$(location).attr('href','main.fdl');
+// 	});
 // 	$(".btn").click(function(e){
 //         e.preventDefault();
 //         $(".map_nav").slideToggle();
