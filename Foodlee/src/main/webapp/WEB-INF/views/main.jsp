@@ -137,7 +137,7 @@
     <div id="main-header">
         <div id="menu-list">
             <ul>
-                <li><a href="#">찾기</a></li>
+                <li><a href="#">위치찾기</a></li>
                 <li><a href="#">소개</a></li>
                 <li><a href="#truck-list">푸드트럭</a></li>
                 <li><a href="#event-list">이벤트</a></li>
@@ -155,7 +155,7 @@
 	    <div class="index-btn">
 	        <P id="search">내 주변 푸드트럭<br>찾기 <i class="far fa-compass"></i></P>
 	    </div>
-	    <div class="map_slider">
+	    <div class="map_slider" style="position:relative; top:-160px">
 			<%@ include file="common/map_sliderBottom.jsp" %>
 		</div>
         <div id="truck-list">

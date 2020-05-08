@@ -174,11 +174,17 @@ svg text {
     left: 100px;
     
 }
-#page{    
+#gu-list-wrap #page{    
+     text-align: center;
+    margin-top: 20px;
+    width:800px;
+}
+#event-list-wrap #page{    
      text-align: center;
     margin-top: 20px;
     
 }
+
 #page li{
     display: inline-block;
     font-size: 0.7em;
