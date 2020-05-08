@@ -5,10 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IEventDAO;
 import com.fdl.foodlee.model.vo.EventVO;
-
+@Repository
 public class EventMysqlDAOImpl implements IEventDAO {
 	@Autowired
 	private JdbcTemplate jtem;
