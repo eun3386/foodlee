@@ -29,13 +29,13 @@ public class BannerMysqlDAOImpl implements IBannerDAO {
 	}
 
 	@Override
-	public List<BannerVO> insertAddBanner(int fodId, int price) {
+	public List<BannerVO> insertApplyBanner(int fodId, int price) {
 		List<BannerVO> bnList = jtem.query(SQL_ADD_BANNER, BeanPropertyRowMapper.newInstance(BannerVO.class), fodId, price);
 		return bnList;
 	}
 
 	@Override
-	public boolean insertNewBanner(BannerVO bn) {
+	public boolean insertAddBanner(BannerVO bn) {
 		int r = jtem.update(SQL_INSERT_BANNER,
 				bn.getFodId(),bn.getAdPrice(),
 				bn.getAdStarDate(),bn.getAdEndDate(),bn.getAdLocation());

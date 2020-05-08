@@ -10,7 +10,7 @@ public interface IBannerDAO {
 //	배너의 트럭 상세보기 할수 있다
 	BannerVO selectShowBanner(int id);
 //	판매자가 배너 등록을 신청할수 있다
-	boolean insertNewBanner(BannerVO bn);
+	List<BannerVO> insertApplyBanner(int fodId, int price);
 //	판매자가 일정 금액 기준 등록시간 선착순으로 배너를 등록 할 수 있다 
-	List<BannerVO> insertAddBanner(int fodId, int price);
+	boolean insertAddBanner(BannerVO bn);
 }
