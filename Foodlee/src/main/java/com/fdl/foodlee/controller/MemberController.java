@@ -1,8 +1,12 @@
 package com.fdl.foodlee.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 
 /*
 - 회원가입구분/약관동의 할 수 있다.
@@ -33,14 +37,44 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-//	member_login_form.fdl (form; get; 비회원)
-	@RequestMapping(value = "/login_form.fdl", 
-			method = RequestMethod.GET)
+//	member/login_form.fdl (form, get; 비회원)
+	@RequestMapping(value = "/login_form.fdl", method = RequestMethod.GET)
 	public String memberLoginForm() {
 		return "member/mb_login_form";
 	}
+// member/login.fdl (proc, post, dao; 암호화; 세션; 회원)
+	@RequestMapping(value = "/login.fdl", method = RequestMethod.POST)
+	public ModelAndView memberLoginProc(
+			HttpSession ses, 
+			String login, String pw) {
+		// TODO
+		System.out.println("login = "+ login);
+		System.out.println("pw = "+ pw);
+		ModelAndView mav = new ModelAndView();
+		
+//		MemberVO mbFound = mbDao.selectOneMember(login); 
+//		int authResult 
+//			= mbSvc.loginProcess(login,pw);
+////		String str = 
+////				mbDao.loginAuthenticate(login,
+////						mbFound.getId());
+//		if( authResult == MyCode.MB_LOGIN_AUTH_OK ) {
+//			ses.setAttribute("mbLoginName", login);
+//			ses.setAttribute("mbLoginTime", 
+//					System.currentTimeMillis() );
+//			int mbId = mbSvc.selectMemberIdByLogin(login);
+//			ses.setAttribute("mbId", new Integer(mbId) );
+//			mav.setViewName("redirect:member_list.my");
+//		} else {
+//			mav.addObject("msg", "로그인 실패!! - "
+//						+ authResult + " : " +
+//					MyCode.getMsg(authResult) );
+//			mav.setViewName("member/mb_login_form");
+//		}		
+		return mav;
+	}
 	
-//	mb_sign_up_choice_form.fdl (form; get; 비회원)
+//	member/join_choice_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "/join_choice_form.fdl", 
 			method = RequestMethod.GET)
 	public String mbSignUpChoiceForm() {	
