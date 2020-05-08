@@ -1,82 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style type="text/css">
-	tbody tr:hover{
-	    cursor: default;
-	    background-color: white;
-	}
-	label {
-		cursor: default;
-	}
-	#login_submit_btn {
-		padding: 2px;
-	}
-	#login_form {
-		position: absolute;
-		border: 2px solid orange;
-		width: 250px;
-		height: 300px;
-		margin-top: 150px;
- 		box-sizing: border-box;
-		padding: 30px;
-		background-color: white;
- 		left: 35%;
-	}
-	td {
-		border: none;
-	}
- 	table {
- 		margin: 0 auto;
- 	}
-	#title {
-		vertical-align: middle;
-		height: 50px;
-		font-size: large;
-	}
-	#id, #pw, #find {
-		height: 40px;
-	}
-	#submit {
-		text-align: right;
-	}
-	#id_find, #pw_find {
-		text-decoration: none;
-		color: gray;
-		font-size: small;
-	}
-   	@keyframes slideleft {
-    	from {
-        	background-position: 0%;
-    	}
-    	to {
-        	background-position: 150000%;
-    	}
-	}
-	@-webkit-keyframes slideleft {
-    	from {
-        	background-position: 0%;
-    	}
-    	to {
-       		background-position: 150000%;
-    	}
-	}
-/* 	form { */
-/* 		height: 256.8px; */
-/* 		margin: 0; */
-/* 	} */
-	.slide {
-	    background-image: url('<%= application.getContextPath() %>/resources/imgs/login_image4.jpg');
-	    height: 598.5px;
-	    background-repeat: repeat-x;
-	    animation: slideleft 20000s infinite linear;
-	    -webkit-animation: slideleft 20000s infinite linear;
-	    background-size: cover;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-	    background-attachment: fixed;
-	    position: relative;
-	}
-</style>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="<%= application.getContextPath()%>/resources/css/login.css" type="text/css" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 <div id="login_wrap" class="slide">
 <div id="login_form">
 	<form action="" method="post">
@@ -120,3 +51,5 @@
  	</form>
 </div>
 </div>
+</body>
+</html>

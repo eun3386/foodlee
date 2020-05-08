@@ -131,7 +131,7 @@
             </ul>
         </div>
         <a href="#"><img class="logo" src="resources/css/imgs/logo.png"></a>
-        <span id="loginjoin"><a href="member_login_form.fdl" id='login'>로그인</a> / <a href="mb_sign_up_choice_form.fdl" id='join'>회원가입</a></span>
+        <span id="loginjoin"><a href="${pageContext.request.contextPath}/member/login_form.fdl" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span>
     <hr class="line">
     </div>
     <div id="main-content">

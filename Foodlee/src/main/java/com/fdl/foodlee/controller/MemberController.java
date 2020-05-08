@@ -16,7 +16,7 @@ public class MemberController {
 	}
 	
 //	mb_sign_up_choice_form.fdl (form; get; 비회원)
-	@RequestMapping(value = "/sign_up_choice_form.fdl", 
+	@RequestMapping(value = "/join_choice_form.fdl", 
 			method = RequestMethod.GET)
 	public String mbSignUpChoiceForm() {	
 		System.out.println("mb sign up choice form 준비!!!");
