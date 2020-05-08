@@ -109,6 +109,19 @@
 // 	        		$('html').animate({scrollTop : offset.top}, 400);
 // 	    		})
 	    	});
+	        // 클릭시 스크롤 이동 -- 장재석
+	        var page_url = window.location.href; 
+	    	var page = page_url.substring(page_url.lastIndexOf("#") + 1); 
+	    	if (page == 'event-list') {
+	    		$('html, body').animate({
+	    			scrollTop: $('#' + page).offset().top-150 
+	    		}, 600);
+	    	} else if(page == 'truck-list') {
+	    		$('html, body').animate({
+	    		scrollTop: $('#' + page).offset().top-150 
+    			}, 600);
+	    	}
+	    	//
         });
         
 //https://kin.naver.com/qna/detail.nhn?d1id=1&dirId=1040205&docId=283031734&qb=aHRtbCDsg4jssL0g7YGs6riw&enc=utf8&section=kin&rank=1&search_sort=0&spq=0
