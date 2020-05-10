@@ -25,10 +25,10 @@ public class AdminSVCImpl implements IAdminSVC {
 	private IMemberDAO mbDao;
 	@Autowired
 	private ISellerDAO selDao;
-	@Autowired
-	private IFoodtruckDAO fdDao;
-	@Autowired
-	private IMenuDAO menuDao;
+//	@Autowired
+//	private IFoodtruckDAO fdDao;
+//	@Autowired
+//	private IMenuDAO menuDao;
 	
 	@Override
 	public List<MemberVO> showAllMember(MemberVO mb) {

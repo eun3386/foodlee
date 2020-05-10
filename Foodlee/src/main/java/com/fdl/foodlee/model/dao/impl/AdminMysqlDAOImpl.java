@@ -1,16 +1,24 @@
 package com.fdl.foodlee.model.dao.impl;
 
 import java.util.HashMap;
+
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IAdminDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
-
+@Repository
 public class AdminMysqlDAOImpl implements IAdminDAO {
-
+	
+	@Autowired
+	private JdbcTemplate jtem;
+	
 	@Override
 	public List<MemberVO> showAllMember(MemberVO mb) {
 		// TODO Auto-generated method stub
