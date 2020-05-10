@@ -14,7 +14,7 @@
             </ul>
             <address>
                 <span class="copy">Copyright ©</span>
-                <a href="http://webstoryboy.co.kr"><strong>FOODLEE</strong></a>
+                <a href="${pageContext.request.contextPath}/main.fdl"><strong>FOODLEE</strong></a>
                 <span class="copy">All Rights Reserved.</span>
             </address>
         </div>
