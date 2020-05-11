@@ -40,6 +40,8 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	private static final String SQL_UPDATE_SELLER //TODO 비밀번호 변경 따로 ? 사업자등록번호 변경유무
 	= "update sellers set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company=? where seller_id = ?";
+	private static final String SQL_DELETE_SELLER
+	= "delete from sellers where seller_id = ?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -145,8 +147,8 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 
 	@Override
 	public boolean deleteOneSeller(int selId) {
-		// TODO Auto-generated method stub
-		return false;
+		int r = jtem.update(SQL_DELETE_SELLER, selId);
+		return r == 1;
 	}
 
 }

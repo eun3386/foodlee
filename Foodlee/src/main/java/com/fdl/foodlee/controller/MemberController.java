@@ -53,7 +53,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		
 //		MemberVO mbFound = mbDao.selectOneMember(login); 
-//		int authResult 
+//		int authResult
 //			= mbSvc.loginProcess(login,pw);
 ////		String str = 
 ////				mbDao.loginAuthenticate(login,
