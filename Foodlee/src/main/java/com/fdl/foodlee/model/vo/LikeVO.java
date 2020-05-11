@@ -6,7 +6,7 @@ public class LikeVO {
 //	private MenuVO menuName; // 메뉴 이름
 //	private MenuVO menuPrice; // 메뉴 가격
 	
-	private int likeNum; // 좋아요 번호
+	private int likeId; // 좋아요 번호
 	private int likeCount; // 좋아요 수
 	private int likeMenuNum; // 좋아요 한 메뉴 번호
 	private String likeMenuPic; // 좋아요 한 메뉴 사진
@@ -27,7 +27,7 @@ public class LikeVO {
 	public LikeVO(int likeNum, int likeCount, int likeMenuNo, String likeMenuPic, String likeFoodtruckName,
 			String likeMenuName, int likeMenuPrice, String likeMenuPage, int likeMenutotalNum, int likefoodtruckNum) {
 		super();
-		this.likeNum = likeNum;
+		this.likeId = likeNum;
 		this.likeCount = likeCount;
 		this.likeMenuNum = likeMenuNo;
 		this.likeMenuPic = likeMenuPic;
@@ -40,11 +40,11 @@ public class LikeVO {
 	}
 
 	public int getLikeNum() {
-		return likeNum;
+		return likeId;
 	}
 
 	public void setLikeNum(int likeNum) {
-		this.likeNum = likeNum;
+		this.likeId = likeNum;
 	}
 
 	public int getLikeCount() {
@@ -121,7 +121,7 @@ public class LikeVO {
 
 	@Override
 	public String toString() {
-		return "LikeVO [likeNum=" + likeNum + ", likeCount=" + likeCount + ", likeMenuNum=" + likeMenuNum
+		return "LikeVO [likeNum=" + likeId + ", likeCount=" + likeCount + ", likeMenuNum=" + likeMenuNum
 				+ ", likeMenuPic=" + likeMenuPic + ", likeFoodtruckName=" + likeFoodtruckName + ", likeMenuName="
 				+ likeMenuName + ", likeMenuPrice=" + likeMenuPrice + ", likeMenuPage=" + likeMenuPage
 				+ ", likeMenutotalNum=" + likeMenutotalNum + ", likefoodtruckNum=" + likefoodtruckNum + "]";

@@ -9,7 +9,7 @@ public interface ILikeDAO {
 	List<LikeVO> showLikeList();
 	
 	// 좋아요 한 메뉴 번호를 불러올 수 있다.
-	int showLikeMenuNum();
+	int getLikeMenuNum(LikeVO vo);
 	
 	// 좋아요 한 메뉴 사진을 불러올 수 있다.
 	boolean showLikePic();
