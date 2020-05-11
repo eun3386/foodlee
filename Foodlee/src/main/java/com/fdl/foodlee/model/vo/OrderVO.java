@@ -7,17 +7,19 @@ public class OrderVO {
 	private String orderNumber; // 주문한 메뉴 개수 (,)구분
 	private String orderPrice; // 주문한 메뉴의 가격 (,)구분
 	private int orderPriceSum; // 주문한 메뉴의 총가격
+	private int orderState; // 주문 상황 (1 회원 주문 2 회원 취소 3 판매자 주문 접수 4 판매자 주문 취소)
 
 	public OrderVO() {}
 
 	public OrderVO(int orderId, String login, String orderName, String orderNumber, String orderPrice,
-			int orderPriceSum) {
+			int orderPriceSum, int orderState) {
 		this.orderId = orderId;
 		this.login = login;
 		this.orderName = orderName;
 		this.orderNumber = orderNumber;
 		this.orderPrice = orderPrice;
 		this.orderPriceSum = orderPriceSum;
+		this.orderState = orderState;
 	}
 
 	public int getOrderId() {
@@ -67,11 +69,20 @@ public class OrderVO {
 	public void setOrderPriceSum(int orderPriceSum) {
 		this.orderPriceSum = orderPriceSum;
 	}
+	
+	public int getOrderState() {
+		return orderState;
+	}
+	
+	public void setOrderState(int orderState) {
+		this.orderPriceSum = orderState;
+	}
 
 	@Override
 	public String toString() {
 		return "OrderVO [orderId=" + orderId + ", login=" + login + ", orderName=" + orderName + ", orderNumber="
-				+ orderNumber + ", orderPrice=" + orderPrice + ", orderPriceSum=" + orderPriceSum + "]";
+				+ orderNumber + ", orderPrice=" + orderPrice + ", orderPriceSum=" + orderPriceSum + 
+				"orderState" + orderState + "]";
 	}
 
 }

@@ -39,6 +39,8 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	private static final String SQL_UPDATE_MEMBER //TODO 비밀번호 변경 따로 ?
 	= "update members set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where mb_id = ?";
+	private static final String SQL_DELETE_MEMBER
+	= "delete from members where mb_id = ?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -142,8 +144,8 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 
 	@Override
 	public boolean deleteOneMember(int mbId) {
-		// TODO Auto-generated method stub
-		return false;
+		int r = jtem.update(SQL_DELETE_MEMBER, mbId);
+		return r == 1;
 	}
 
 }
