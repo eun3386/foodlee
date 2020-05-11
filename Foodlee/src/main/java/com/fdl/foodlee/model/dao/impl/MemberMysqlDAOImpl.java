@@ -63,15 +63,15 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	}
 
 	@Override
-	public int loginAuthenticate(String login, int mbId) {
+	public String loginAuthenticate(String login, int mbId) {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
 				new Object[]{login,mbId},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
 		String dbPassword = (String) rMap.get("password");
 		System.out.println("DB password: " + dbPassword);
-		//return dbPassword;
-		return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, mbId);
+		return dbPassword;
+		//return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, mbId);
 	}
 
 	@Override
