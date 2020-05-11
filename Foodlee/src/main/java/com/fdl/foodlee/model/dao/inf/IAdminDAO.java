@@ -3,12 +3,16 @@ package com.fdl.foodlee.model.dao.inf;
 import java.util.HashMap;
 import java.util.List;
 
+import com.fdl.foodlee.model.vo.AdminVO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 
 public interface IAdminDAO {
+//	- 로그인 인증을 할 수 있다. 
+	AdminVO adminLoginCheck(String login);
+	
 //-회원 조회  할 수 있다(리스트 조회 회원번호, 아이디, 로그인시간, 로그아웃 시간)
 //	admin_list.fdl(proc, get, dao)
 	//일반 회원

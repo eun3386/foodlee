@@ -9,15 +9,22 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IAdminDAO;
+import com.fdl.foodlee.model.vo.AdminVO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
-@Repository
+@Repository("jdbcAsRepo")
 public class AdminMysqlDAOImpl implements IAdminDAO {
 	
 	@Autowired
 	private JdbcTemplate jtem;
+	
+	@Override
+	public AdminVO adminLoginCheck(String login) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Override
 	public List<MemberVO> showAllMember(MemberVO mb) {
@@ -150,6 +157,5 @@ public class AdminMysqlDAOImpl implements IAdminDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

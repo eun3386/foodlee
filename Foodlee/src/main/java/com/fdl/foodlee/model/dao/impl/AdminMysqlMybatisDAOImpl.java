@@ -1,40 +1,24 @@
-package com.fdl.foodlee.service.impl;
+package com.fdl.foodlee.model.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IAdminDAO;
-import com.fdl.foodlee.model.dao.inf.IFoodtruckDAO;
-import com.fdl.foodlee.model.dao.inf.IMemberDAO;
-import com.fdl.foodlee.model.dao.inf.IMenuDAO;
-import com.fdl.foodlee.model.dao.inf.ISellerDAO;
 import com.fdl.foodlee.model.vo.AdminVO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
-import com.fdl.foodlee.service.inf.IAdminSVC;
-@Service
-public class AdminSVCImpl implements IAdminSVC {
+
+@Repository("mybatisAsRepo")
+public class AdminMysqlMybatisDAOImpl implements IAdminDAO {
 	
 	@Autowired
-	@Qualifier("mybatisAsRepo")
-//	@Qualifier("jdbcAsRepo")
-	private IAdminDAO adDao;
-//	@Autowired
-//	private IMemberDAO mbDao;
-//	@Autowired
-//	private ISellerDAO selDao;
-//	@Autowired
-//	private IFoodtruckDAO fdDao;
-//	@Autowired
-//	@Qualifier("mybatisAsRepo")
-//	@Qualifier("jdbcAsRepo")
-//	private IMenuDAO menuDao;
+	private SqlSessionTemplate sstem;
 	
 	@Override
 	public AdminVO adminLoginCheck(String login) {
@@ -44,8 +28,9 @@ public class AdminSVCImpl implements IAdminSVC {
 	
 	@Override
 	public List<MemberVO> showAllMember(MemberVO mb) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("mybatis - showAllMember()");
+		List<MemberVO> mbList = sstem.selectList("IAdminDAO.showAllMember", mb);
+		return mbList;
 	}
 
 	@Override
@@ -173,4 +158,5 @@ public class AdminSVCImpl implements IAdminSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

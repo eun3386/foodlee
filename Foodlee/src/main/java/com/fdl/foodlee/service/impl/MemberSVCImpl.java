@@ -1,10 +1,13 @@
 package com.fdl.foodlee.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.dao.MyCode;
+import com.fdl.foodlee.model.dao.inf.IAdminDAO;
 import com.fdl.foodlee.model.dao.inf.IMemberDAO;
+import com.fdl.foodlee.model.vo.AdminVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.service.inf.IMemberSVC;
 
@@ -13,7 +16,6 @@ public class MemberSVCImpl implements IMemberSVC {
 
 	@Autowired
 	private IMemberDAO mbDao;
-	
 	@Override
 	public int loginProcess(String login, String pw) {
 System.out.println("SVC: loginProcess() - " + login);
@@ -27,7 +29,7 @@ System.out.println("SVC: loginProcess() - " + login);
 		MemberVO mb = mbDao.selectOneMember(login);
 		if( mb == null ) {
 			return MyCode.MB_LOGIN_NONE; // not found
-		}
+		} 
 		int id = mb.getMbId();
 		
 		// 패스워드도 일치? 
