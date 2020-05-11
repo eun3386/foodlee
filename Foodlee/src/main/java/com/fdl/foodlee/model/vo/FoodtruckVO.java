@@ -14,10 +14,26 @@ public class FoodtruckVO {
 	private String sellerFoodtruckCoordinate; // 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
 	private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP
 	
+	//
+	static int selId = 0;
+	static int favCount = 0;
+	
 	public FoodtruckVO() {}
 	
 	public FoodtruckVO(int sellerId, String foodtruckImgPath, String foodtruckName) {
 		this(0, foodtruckImgPath, foodtruckName, "", "", "", 0, "", null);
+	}
+	
+	public FoodtruckVO(String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,
+			String foodtruckOperationHour) {
+		this(++selId, foodtruckImgPath, foodtruckName, foodtruckMainMenu, "",
+				foodtruckOperationHour, favCount, "", null);
+	}
+	
+	public FoodtruckVO(String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,
+			String foodtruckLocation, String foodtruckOperationHour, String sellerFoodtruckCoordinate) {
+		this(++selId, foodtruckImgPath, foodtruckName, foodtruckMainMenu, foodtruckLocation,
+				foodtruckOperationHour, favCount, sellerFoodtruckCoordinate, null);
 	}
 	
 	public FoodtruckVO(int sellerId, String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,

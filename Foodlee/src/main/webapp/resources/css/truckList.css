@@ -1,36 +1,26 @@
 @charset "UTF-8";
 
-/* div {
-	border: 1px solid red;
+/* 공통 부분 */
+.sample1, .sample2, .sample3, .sample4, .sample5, .sample6, .sample7, .sample8, .sample9 {
+	border: 2px solid gray;
+	background-color: orange;
+	padding: 10px;
+	margin: auto;
 }
-*/
 
-/* #header, #nav, #content, #footer { */
-/* 	/* border: 1px solid gray; */ */
-/* 	left: 350px; */
-/* } */
+button {
+	overflow: hidden;
+	transition: 0.5s;
+	-wdbkit-transition: 0.5s;
+	cursor: pointer;
+}
 
-/* #header{ */
-/*     width: 1200px; */
-/*     height: 90px; */
-/*     POSITION: FIXED; */
-/*     top: 0; */
-/*     background-color: white; */
-/*     z-index: 1; */
-/*     display: block; */
-/* } */
+#trucklist_page tbody tr:hover{
+    cursor: pointer;
+    background-color: transparent !important;
+}
 
-/* .logo */
-/* { */
-/*     position: absolute; */
-/*  left : 133px; */
-/*  float: left; */
-/*   top : 25px; */
-/*   left: 20px; */
-/*   width : 158px; */
-/*   height : 51px; */
-/* } */
-
+/* nav */
 #nav {
 	float: left;
 	width: 960px;
@@ -58,37 +48,26 @@
 	top: 3px;
 }
 
+/* trucklist_page */
 #trucklist_page {
 	width: 960px;
-	height: 900px;
-	background-image: url('/foodlee/resources/imgs/truckDetail/background_truck2.jpg');
+	height: 1020px;
+	background-image: url('/foodlee/resources/css/imgs/truckDetail/background_truck2.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-color: white;
 }
 
-#trucklist_content {
+/* top10 list */
+#toplist_content {
 	float: left;
 	width: 960px;
 	height: 250px;
 	display: block;
 }
 
-.pd1, .pd2, .pd3 {
-	float: left;
-	padding: 10px;
-}
-
-.sample1, .sample2, .sample3, .sample4, .sample5, .sample6, .sample7 {
-	border: 2px solid gray;
-	background-color: orange;
-}
-
-button {
-	overflow: hidden;
-	transition: 0.5s;
-	-wdbkit-transition: 0.5s;
-	cursor: pointer;
+#top_content_table {
+	width: 960px;
 }
 
 #top_content button:hover {
@@ -97,17 +76,19 @@ button {
 	text-shadow: 5px 1px 3px #400000;
 }
 
-#menu_truck {
+/* 메뉴 버튼 */
+#menu_content {
 	float: left;
 	width: 960px;
-	height: 100px;
+	height: 150px;
+	dispaly: block;
 }
 
 .menu1, .menu2, .menu3, .menu4 {
 	padding: 80px;
 }
 
-#menu_truck button {
+#menu_content button {
 	width: 80px;
 	height: 50px;
 	font-size: 20px;
@@ -121,30 +102,30 @@ button {
 
 }
 
-#menu_truck button:hover {
+#menu_content button:hover {
 	background-color: orange;
 	color: white;
 	text-shadow: 5px 1px 3px #400000;
 }
 
-.menu_pd1, .menu_pd2, .menu_pd3, .menu_pd4 {
-	padding: 40px;
-}
-
-
-#menu_content {
-	float: left;
+/* 메뉴별 푸드 트럭 리스트 */
+#menu_truck_content{
 	width: 960px;
-	height: 600px;
+	height: 500px;
 	display: block;
 }
 
-#menu_content button:hover {
+#menu_content_table {
+	width: 960px;
+}
+
+#menu_truck_content button:hover {
 	background-color: yellow;
 	color: white;
 	text-shadow: 5px 1px 3px #400000;
 }
 
+/* 푸터 */
 /* #footer { */
 /* 	width: 1200px; */
 /* 	height: 60px; */
@@ -155,47 +136,33 @@ button {
 /* 	text-align: center; */
 /* } */
 
-.page {
-	display: inline-block;
-}
-
-.page a {
-	color: black;
-	float: left;
-	padding: 8px 16px;
-	text-decoration: none;
-	border: 1px solid #ddd;
-	margin: 0 4px;
-	font-size: 22px;
-}
-
-/* .page a.active { */
-/* 	background-color: #4CAF50; */
-/* 	color: white; */
-/* 	border: 1px solid #4CAF50; */
-	
+/* .page { */
+/* 	display: inline-block; */
 /* } */
 
-.page a:hover:not(.active) {
-	background-color: #ddd;
-}
+/* .page a { */
+/* 	color: black; */
+/* 	float: left; */
+/* 	padding: 8px 16px; */
+/* 	text-decoration: none; */
+/* 	border: 1px solid #ddd; */
+/* 	margin: 0 4px; */
+/* 	font-size: 22px; */
+/* } */
 
-.page a:first-child {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-}
+/* .page a:hover:not(.active) { */
+/* 	background-color: #ddd; */
+/* } */
 
-.page a:last-child {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-}
+/* .page a:first-child { */
+/* 	border-top-left-radius: 5px; */
+/* 	border-bottom-left-radius: 5px; */
+/* } */
 
-#trucklist_page tbody tr:hover{
-    cursor: pointer;
-    background-color: transparent !important;
-}
-
-
+/* .page a:last-child { */
+/* 	border-top-right-radius: 5px; */
+/* 	border-bottom-right-radius: 5px; */
+/* } */
 
 
 

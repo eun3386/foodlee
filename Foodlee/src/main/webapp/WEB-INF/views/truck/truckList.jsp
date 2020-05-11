@@ -17,16 +17,16 @@
 		</div>
 		
 		<div id="trucklist_page">	
-			<div id="trucklist_content">
+			<div id="toplist_content">
 				<div id="top_content">
-				<table>
+				<table id="top_content_table">
 						<tr>
 						
 							<td>
 							<div class="pd1">
 								<button type="button">
 									<div class="sample1">
-										<img src="resources/imgs/truckDetail/그랩고.jpg" width="290px"/>
+										<img src="resources/css/imgs/truckDetail/그랩고.jpg" width="250px"/>
 										<p>
 											<b>그랩고</b> <br>
 											<br>
@@ -41,7 +41,7 @@
 							<div class="pd2">
 								<button type="button">
 								<div class="sample2">
-									<img src="resources/imgs/truckDetail/쉬림프킹.jpg" width="290px"/>
+									<img src="resources/css/imgs/truckDetail/쉬림프킹.jpg" width="250px"/>
 									<p>
 										<b>쉬림프킹</b> <br>
 										<br>
@@ -56,7 +56,7 @@
 							<div class="pd3">
 								<button type="button">
 								<div class="sample3">
-									<img src="resources/imgs/truckDetail/우주전복.jpg" width="290px"/>
+									<img src="resources/css/imgs/truckDetail/우주전복.jpg" width="250px"/>
 									<p>
 										<b>우주전복</b> <br>
 										<br>
@@ -72,7 +72,7 @@
 					</div>
 				</div>
 				
-				<div id="menu_truck">
+				<div id="menu_content">
 					<table>
 						<tr>
 							<td>
@@ -99,14 +99,14 @@
 					</table>	
 				</div>
 				
-				<div id="menu_content">
-					<table>
+				<div id="menu_truck_content">
+					<table id="menu_content_table">
 						<tr>
 							<td>
 								<div class="menu_pd1">
 									<button type="button">
 									<div class="sample4">
-										<img src="resources/imgs/truckDetail/테이스틸러.jpg" width="250px"/>
+										<img src="resources/css/imgs/truckDetail/테이스틸러.jpg" width="250px"/>
 										<p>
 											<b>테이스틸러</b><br>
 											<br>			
@@ -120,40 +120,70 @@
 							<td>	
 								<div class="menu_pd2">
 									<button type="button">
-									<div class="sample5">
-										<img src="resources/imgs/truckDetail/오프로.jpg" width="250px"/>
-										<p>
-											<b>오프로</b><br>
-											<br>
-											불초밥 - 2,000원
-										</p>
-									</div>
+										<div class="sample5">
+											<img src="resources/css/imgs/truckDetail/오프로.jpg" width="250px"/>
+											<p>
+												<b>오프로</b><br>
+												<br>
+												불초밥 - 2,000원
+											</p>
+										</div>
+									</button>
+								</div>
+							</td>
+							
+							<td>
+								<div class="menu_pd3">
+									<button type="button">
+										<div class="sample6">
+											<img src="resources/css/imgs/truckDetail/kimchibus.jpg" width="250px"/>
+											<p>
+												<b>김치 버스</b><br>
+												<br>
+												돈암동 타코 - 2,500원
+											</p>
+										</div>
 									</button>
 								</div>
 							</td>
 						</tr>
 						
 						<tr>	
-							<td>	
-								<div class="menu_pd3">
+							<td>
+								<div class="menu_pd4">
 									<button type="button">
-									<div class="sample6">
-										<img src="resources/imgs/truckDetail/치킨핏.jpg" width="250px"/>
-										<p>
-											<b>치킨핏</b><br>
-											<br>
-											닭발 - 2,500원
-										</p>
-									</div>
+										<div class="sample7">
+											<img src="resources/css/imgs/truckDetail/삐삣버거.jpg" width="250px" height="140px"/>
+											<p>
+												<b>삐삣 버거</b><br>
+												<br>
+												더블 삣 스파이시 버거 - 3,000원
+											</p>
+										</div>
+									</button>
+								</div>
+							</td>
+						
+							<td>	
+								<div class="menu_pd5">
+									<button type="button">
+										<div class="sample8">
+											<img src="resources/css/imgs/truckDetail/치킨핏.jpg" width="250px"/>
+											<p>
+												<b>치킨핏</b><br>
+												<br>
+												닭발 - 2,500원
+											</p>
+										</div>
 									</button>
 								</div>
 							</td>
 							
 							<td>	
-								<div class="menu_pd4">
+								<div class="menu_pd6">
 									<button type="button">
-									<div class="sample7">
-										<img src="resources/imgs/truckDetail/fortune_cook.jpg" width="250px" height="140px"/>
+									<div class="sample9">
+										<img src="resources/css/imgs/truckDetail/fortune_cook.jpg" width="250px" height="140px"/>
 										<p>
 											<b>fortuneCOOK</b><br>
 											<br>

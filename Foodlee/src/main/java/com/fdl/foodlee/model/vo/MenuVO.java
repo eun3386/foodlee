@@ -9,6 +9,14 @@ public class MenuVO {
 	private String menuInfor;
 	private String rawMaterials;
 
+	//
+	static int mnId = 0;
+	
+	public MenuVO() {}
+	public MenuVO(String menuName, String menuType, int menuPrice, String menuPic,
+			String menuInfor, String rawMaterials) {
+		this(++mnId, menuName, menuType, menuPrice, menuPic, menuInfor, rawMaterials);
+	}
 	public MenuVO(int menuId, String menuName, String menuType, int menuPrice, String menuPic, String menuInfor,
 			String rawMaterials) {
 		super();
