@@ -12,6 +12,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <title>seller</title>
+
     <!-- Custom CSS -->
 <!--     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet"> -->
     <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -23,7 +24,36 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    
 <![endif]-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['주문금액', '주문횟수'],
+          ['만원미만', 23],
+          ['2만원미만',    8],
+          ['4만원미만',    154],
+          ['5만원이상',    204]
+
+        ]);
+
+        var options = {
+         /*  title: '성별분포', */
+          pieHole: 0.5,
+          colors: ['#A8B6FF','#99BAE8','#B5E8FF','#99E4E8','#A8FFEB']
+          
+          /* colors: ['#a561bd','#c784de'] 툴팁제거*/
+/*           0: { color: '#a561bd' },
+          1: { color: '#c784de' } */
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 
 <body>
@@ -185,21 +215,22 @@
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
-                    <ul class="nav justify-content-center">
+                    <ul class="nav justify-content-center" >
 					  <li class="nav-item">
 					    <a class="nav-link active" href="#">시작화면</a>
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="#">메뉴화면</a>
+					    <!--  style="a {color: #7c8798} a:hover {color: #5f76e8;}"style.min.css 6242 -->
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="#">정보수정</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link disabled" href="#">주문리스트</a>
+					    <a class="nav-link" href="#">주문리스트</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link disabled" href="#">리뷰목록</a>
+					    <a class="nav-link" href="#">리뷰목록</a>
 					  </li>
 					</ul>
                     <!-- ============================================================== -->
@@ -689,7 +720,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">회당 주문금액</h4>
-                                <div id="campaign-v2" class="mt-2" style="height:283px; width:100%;"></div><!-- 원형차트 -->
+                                <div id="donutchart"  style="height:460px; width:100%;"></div><!--height:283px; 원형차트 -->
+                                <!--id="campaign-v2" class="mt-2"  -->
                                 <ul class="list-style-none mb-0">
                                     <li>
                                         <i class="fas fa-circle text-primary font-10 mr-2"></i><!-- 원형차트 svg -->

@@ -6239,13 +6239,13 @@ sup {
 }
 
 a {
-	color: #5f76e8;
+	color: #7c8798;
 	background-color: transparen;
 	text-decoration: none;
 }
 
 a:hover {
-	color: #1f3fdb
+	color: #8080ff
 }
 
 a:not ([href] ):not ([tabindex] ):focus {
