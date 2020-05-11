@@ -18,5 +18,5 @@ public interface IFoodtruckDAO {
 	// 구매자가 푸드 트럭을 좋아요 할 수 있다.
 	public boolean likeFoodtruck(int ftId, int mbId);
 	// 구매자가 푸드 트럭 리스트를 검색 할 수 있다.
-	public List<FoodtruckVO> searchOneFoodtruck(String foodtruckMainMenu);
+	public List<FoodtruckVO> searchAllFoodtruck(String foodtruckMainMenu);
 }

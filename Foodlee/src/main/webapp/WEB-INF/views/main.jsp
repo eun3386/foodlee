@@ -30,7 +30,7 @@
 
 
 <link href="resources/css/index.css" type="text/css" rel="stylesheet">
-
+<link href="resources/css/truckList.css" type="text/css" rel="stylesheet">
 
 
 

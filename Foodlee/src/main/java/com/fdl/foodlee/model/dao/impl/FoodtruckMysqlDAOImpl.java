@@ -180,7 +180,7 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 		return false;
 	}
 	// 구매자가 푸드 트럭 리스트를 검색 할 수 있다.
-	public List<FoodtruckVO> searchOneFoodtruck(String foodtruckMainMenu) {
+	public List<FoodtruckVO> searchAllFoodtruck(String foodtruckMainMenu) {
 		return null;
 	}
 	

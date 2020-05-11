@@ -1,11 +1,16 @@
 @charset "UTF-8";
 
+/* #trucklist_all_page { */
+/* 	width: 960px; */
+/* 	height: 1110px; */
+/* } */
+
 /* 공통 부분 */
 .sample1, .sample2, .sample3, .sample4, .sample5, .sample6, .sample7, .sample8, .sample9 {
 	border: 2px solid gray;
 	background-color: orange;
-	padding: 10px;
-	margin: auto;
+	padding: 3px 10px;
+	margin: 4px 4px;
 }
 
 button {
@@ -21,12 +26,11 @@ button {
 }
 
 /* nav */
-#nav {
+#trucklist_nav {
 	float: left;
 	width: 960px;
-	height: 30px;
-	top: 90px;
-	display: block;
+	height: 25px;
+	display: inline;
 }
 
 .ranktrucks {
@@ -44,8 +48,6 @@ button {
 
 .truck_search {
 	float: right;
-	right: 2px;
-	top: 3px;
 }
 
 /* trucklist_page */
@@ -63,7 +65,7 @@ button {
 	float: left;
 	width: 960px;
 	height: 250px;
-	display: block;
+	display: inline;
 }
 
 #top_content_table {
@@ -80,7 +82,7 @@ button {
 #menu_content {
 	float: left;
 	width: 960px;
-	height: 150px;
+	height: 250px;
 	dispaly: block;
 }
 
@@ -126,43 +128,43 @@ button {
 }
 
 /* 푸터 */
-/* #footer { */
-/* 	width: 1200px; */
-/* 	height: 60px; */
-/* /* 	position: fixed; */ */
-/* 	top: 900px; */
-/* 	background-color: white; */
-/* 	display: block; */
-/* 	text-align: center; */
-/* } */
+#foodtruckList_footer {
+	width: 960px;
+	height: 60px;
+	background-color: white;
+	display: block;
+	text-align: center;
+}
 
-/* .page { */
-/* 	display: inline-block; */
-/* } */
+.foodtrucklist_pagenation {
+	display: inline-block;
+}
 
-/* .page a { */
-/* 	color: black; */
-/* 	float: left; */
-/* 	padding: 8px 16px; */
-/* 	text-decoration: none; */
-/* 	border: 1px solid #ddd; */
-/* 	margin: 0 4px; */
-/* 	font-size: 22px; */
-/* } */
+.foodtrucklist_pagenation a {
+	color: black;
+	float: left;
+/* 	position: fixed; */
+/* 	left: 200px; */
+	padding: 8px 16px;
+	text-decoration: none;
+	border: 1px solid #ddd;
+	margin: 0 4px;
+	font-size: 22px;
+}
 
-/* .page a:hover:not(.active) { */
-/* 	background-color: #ddd; */
-/* } */
+.foodtrucklist_pagenation a:hover:not(.active) {
+	background-color: #ddd;
+}
 
-/* .page a:first-child { */
-/* 	border-top-left-radius: 5px; */
-/* 	border-bottom-left-radius: 5px; */
-/* } */
+.foodtrucklist_pagenation a:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
 
-/* .page a:last-child { */
-/* 	border-top-right-radius: 5px; */
-/* 	border-bottom-right-radius: 5px; */
-/* } */
+.foodtrucklist_pagenation a:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
 
 
 
