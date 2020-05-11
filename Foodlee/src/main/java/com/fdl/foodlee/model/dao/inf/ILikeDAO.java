@@ -9,20 +9,23 @@ public interface ILikeDAO {
 	List<LikeVO> showLikeList();
 	
 	// 좋아요 한 메뉴 번호를 불러올 수 있다.
-	int getLikeMenuNum(LikeVO vo);
+	int getLikeMenuNum(int likeMenuNum);
 	
 	// 좋아요 한 메뉴 사진을 불러올 수 있다.
-	boolean showLikePic();
+	boolean showLikePic(String likeMenuPic);
 	
 	// 좋아요 한 메뉴의 푸드트럭 이름을 불러올 수 있다.
-	boolean showLikeFtN();
+	boolean showLikeFtN(String likeFoodtruckName);
 	
 	// 좋아요 한 메뉴 이름을 불러올 수 있다.
-	boolean showLikeMenuN();
+	boolean showLikeMenuN(String likeMenuName);
 	
 	// 좋아요 한 메뉴 가격을 불러올 수 있다.
-	boolean showLikeMenuPrice();
+	boolean showLikeMenuPrice(int likeMenuPrice);
+	
+	// 좋아요 한 것을 불러올 수 있다.
+	boolean showLikeMenu(String likeMenuPic, String likeFoodtruckName, String likeMenuName, int likeMenuPrice);
 	
 	// 좋아요 한 것을 취소(삭제) 할 수 있다.
-	boolean deleteLike();
+	boolean deleteLike(int likeId);
 }
