@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.fdl.foodlee.model.dao.inf.IMenuDAO;
 import com.fdl.foodlee.model.vo.MenuVO;
@@ -119,6 +120,7 @@ private String rawMaterials;
 				if( rs.next() ) {
 					MenuVO mn
 						= new MenuVO(
+								rs.getInt("seller_id"),
 								rs.getString("menu_name"),
 								rs.getString("menu_type"),
 								rs.getInt("menu_price"),
@@ -185,6 +187,12 @@ private String rawMaterials;
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public List<MenuVO> showAllMenu(int sId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
