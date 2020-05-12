@@ -393,9 +393,8 @@ $(document).ready(function() {
 		var scrollTop = $(window).scrollTop();
 		var newPosition = scrollTop + floatPosition + "px";
 
-		/* 애니메이션 없이 바로 따라감
-		 $("#floatMenu").css('top', newPosition);
-		 */
+		/* 애니메이션 없이 바로 따라감 */
+		$("#_order").css('top', newPosition);
 
 		$("#_order").stop().animate({
 			"top" : newPosition
@@ -482,7 +481,7 @@ $(document).ready(function() {
 		<label for="tab1">리뷰</label> <input id="tab2" type="radio" name="tabs">
 		<label for="tab2">메뉴</label> <input id="tab3" type="radio" name="tabs">
 		<label for="tab3">정보</label> <input id="tab4" type="radio" name="tabs">
-		<label for="tab4">Q&A</label>
+		<label for="tab4">Q&amp;A</label>
 
 		<section id="content1">
 			<div id="replies">
@@ -665,7 +664,7 @@ $(document).ready(function() {
 				}
 			%>
 			<div id="read-more-qna" style="text-align: center; font-size: 18px; vertical-align: middle;
-				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">Q&A 더보기</div>
+				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">Q&amp;A 더보기</div>
 		</div>
 	</section>
 	
