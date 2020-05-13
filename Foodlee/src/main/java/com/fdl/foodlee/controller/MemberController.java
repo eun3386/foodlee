@@ -43,6 +43,7 @@ import com.fdl.foodlee.service.inf.IMemberSVC;
 @RequestMapping("/member")
 public class MemberController {
 	
+	@Autowired
 	private IMemberSVC mbSvc;
 	
 	@Autowired
@@ -64,7 +65,7 @@ public class MemberController {
 		int authResult;
 		if(login.equals("admin") == false) {
 			authResult = mbSvc.loginProcess(login, password);
-			if( authResult == MyCode.MB_LOGIN_AUTH_OK ) {
+			if( authResult == MyCode.LOGIN_AUTH_OK ) {
 				ses.setAttribute("mbLoginName", login);
 				ses.setAttribute("mbLoginTime", 
 						System.currentTimeMillis() );
@@ -77,10 +78,11 @@ public class MemberController {
 					MyCode.getMsg(authResult) );
 				mav.setViewName("member/mb_login_form");
 			}
+			
 		} else {
 			System.out.println("login, pw" + login + password);
 			authResult = adSvc.adminLoginCheck(login, password);
-			if(authResult == MyCode.MB_LOGIN_AUTH_OK ) {
+			if(authResult == MyCode.LOGIN_AUTH_OK ) {
 				ses.setAttribute("adLoginName", login);
 				ses.setAttribute("adLoginTime", 
 						System.currentTimeMillis() );

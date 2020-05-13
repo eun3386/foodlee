@@ -35,7 +35,7 @@ public class AdminController {
 		int authResult 
 			= adSvc.adminLoginCheck(login, password);
 		
-		if( authResult == MyCode.MB_LOGIN_AUTH_OK ) {
+		if( authResult == MyCode.LOGIN_AUTH_OK ) {
 			ses.setAttribute("adLoginName", login);
 			ses.setAttribute("adLoginTime", 
 					System.currentTimeMillis() );

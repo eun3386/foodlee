@@ -32,23 +32,23 @@ public class AdminSVCImpl implements IAdminSVC {
 		System.out.println("SVC: adminLoginCheck() - " + login);
 		
 		if( login == null || login.isEmpty() ) 
-				return MyCode.MB_LOGIN_PARAM_ERROR;
+				return MyCode.LOGIN_PARAM_ERROR;
 		if( pw == null || pw.isEmpty() ) 
-				return MyCode.MB_LOGIN_PW_MISMATCH;
+				return MyCode.LOGIN_PW_MISMATCH;
 		
 		// 관리자 인지?
 		AdminVO ad = adDao.selectAdmin(login);
 		if( ad == null ) {
-			return MyCode.MB_LOGIN_NONE; // not found
+			return MyCode.LOGIN_NONE; // not found
 		} 
 		int id = ad.getAdId();
 		
 		// 패스워드도 일치? 
 		String dbPW = this.adDao.adminLoginCertification(login, id);
 		if( dbPW.equals(pw) ) { // 인증
-			return MyCode.MB_LOGIN_AUTH_OK;
+			return MyCode.LOGIN_AUTH_OK;
 		} else {
-			return MyCode.MB_LOGIN_PW_MISMATCH;
+			return MyCode.LOGIN_PW_MISMATCH;
 		}
 	}
 	

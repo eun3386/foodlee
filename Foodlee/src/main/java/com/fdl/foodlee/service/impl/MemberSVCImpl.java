@@ -21,15 +21,15 @@ public class MemberSVCImpl implements IMemberSVC {
 System.out.println("SVC: loginProcess() - " + login);
 		
 		if( login == null || login.isEmpty() ) 
-				return MyCode.MB_LOGIN_PARAM_ERROR;
+				return MyCode.LOGIN_PARAM_ERROR;
 		if( pw == null || pw.isEmpty() ) 
-				return MyCode.MB_LOGIN_PW_MISMATCH;
+				return MyCode.LOGIN_PW_MISMATCH;
 		
 		// 가입된 회원인지?
 		MemberVO mb = mbDao.selectOneMember(login);
 		System.out.println(mb);
 		if( mb == null ) {
-			return MyCode.MB_LOGIN_NONE; // not found
+			return MyCode.LOGIN_NONE; // not found
 		} 
 		int id = mb.getMbId();
 		
@@ -37,9 +37,9 @@ System.out.println("SVC: loginProcess() - " + login);
 		String dbPW = this.mbDao.loginAuthenticate(login, id);
 		System.out.println(dbPW);
 		if( dbPW.equals(pw) ) { // 인증
-			return MyCode.MB_LOGIN_AUTH_OK;
+			return MyCode.LOGIN_AUTH_OK;
 		} else {
-			return MyCode.MB_LOGIN_PW_MISMATCH;
+			return MyCode.LOGIN_PW_MISMATCH;
 		}
 	}
 
