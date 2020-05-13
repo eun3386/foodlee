@@ -24,7 +24,6 @@
   </script>
     <style>
         .ui-tooltip {
-            
             white-space: pre-line;
         }
     </style>

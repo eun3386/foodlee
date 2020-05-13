@@ -1,5 +1,7 @@
 package com.fdl.foodlee.model.dao.inf;
 
+import java.util.List;
+
 import com.fdl.foodlee.model.vo.MenuVO;
 
 public interface IMenuDAO {
@@ -15,4 +17,6 @@ public interface IMenuDAO {
 	public boolean updateMenu(MenuVO mn);
 	// 등록된 메뉴를 삭제 할 수 있다.
 	public boolean deleteMenu(MenuVO mn);
+	// 전체 메뉴를 조회 할 수 있다.
+	public List<MenuVO> showAllMenu(int sId);
 }

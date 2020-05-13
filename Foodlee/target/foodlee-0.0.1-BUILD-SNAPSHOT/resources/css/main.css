@@ -11,7 +11,7 @@ body#wrapper{
     margin:150px auto 0;
     width: 1200px;
     font-family: 'Nanum Gothic', sans-serif;
-    height: 1000px;
+/*     height: 1000px; */
    	
 }
 #main-header{
@@ -41,7 +41,6 @@ body#wrapper{
 }
 #login, #join
 {
-    color : #000000;
     font-weight: bold;  
 }
 .line
@@ -64,8 +63,18 @@ body#wrapper{
     font-size: 1.0em;
     font-weight: bold;
 }
-#menu-list li a,span#loginjoin a{
+#menu-list li a{
     color: rgba(0,0,0);
+    text-decoration: none;
+}
+span#loginjoin a{
+	color:#44591F;
+	text-decoration: none;
+}
+
+.map_footer a,.map_footer span.copy{
+	font-size: smaller;
+    color: #676767;
     text-decoration: none;
 }
 /*  장재석 css ---------------------------------------------------------------------------->*/
@@ -116,7 +125,10 @@ body#wrapper{
 	border-radius: 10px;
 	z-index:1;
 }
-
+.truck_view {
+	border: 0.1px solid #D8D8D8;
+	height: 300px;
+}
 #map_footer {
  	clear: both;
   	text-align: center;
@@ -279,30 +291,30 @@ body#wrapper{
 	.map_slider figure {position: relative;}
 	.map_slider img {
 		/* 슬라이드 이미지 */
-		width: 80px;
+		width: 100%;
 	}
 	.map_slider figcaption {
-	    position: absolute; bottom: 0; left: 0; width: 100%; padding: 1px;
+	    position: absolute; bottom: 0; left: 0; width: 100%; padding: 5.5px;
 	    box-sizing: border-box;
 	    background-color: rgba(0,0,0,0.5);
 	    color: #fff;
 	    font-size: 18px;
 	    text-align: center;
 	}
-	.map_slider figcaption em {
-	    display: block; font-weight: bold; font-size: 28px;
-	    text-transform: uppercase; font-family: 'Abel', sans-serif;
-	    opacity: 0;
-	    transition: all .84s ease; /*서서히 나타남*/
-	    transform: translateX(50px); /*오른쪽에서 나오는 효과 */
-	}
-	.map_slider figcaption span {
-	    display: block;
-	    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-	    opacity: 0;
-	    transition: all .84s .2s ease;
-	    transform: translateX(50px);
-	}
+/* 	.map_slider figcaption em { */
+/* 	    display: block; font-weight: bold; font-size: 28px; */
+/* 	    text-transform: uppercase; font-family: 'Abel', sans-serif; */
+/* 	    opacity: 0; */
+/* 	    transition: all .84s ease; 서서히 나타남 */
+/* 	    transform: translateX(50px); 오른쪽에서 나오는 효과 */
+/* 	} */
+/* 	.map_slider figcaption span { */
+/* 	    display: block; */
+/* 	    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; */
+/* 	    opacity: 0; */
+/* 	    transition: all .84s .2s ease; */
+/* 	    transform: translateX(50px); */
+/* 	} */
 	.map_slider .slick-active figcaption em {opacity: 1; transform: translateX(0);}
 	.map_slider .slick-active figcaption span {opacity: 1; transform: translateX(0);}
 	
@@ -349,7 +361,6 @@ body#wrapper{
 	    text-indent: 0;
 	    position: absolute; left: 11px; top: 8px;
 	}
-
 /* 푸터 */
 .map_footer {text-align: center; padding: 30px 50px; }
 .map_footer li {position: relative; display: inline; padding: 0 7px 0 10px; white-space: nowrap;}

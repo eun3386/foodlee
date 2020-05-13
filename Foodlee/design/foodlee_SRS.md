@@ -198,6 +198,7 @@ Q&A문의리스트를 볼 수 있다
 - String foodtruckName 푸드트럭 이름 ⇔ varchar (64) foodtruck_name NN
 - String foodtruckMainMenu 푸드트럭 대표메뉴 ⇔ varchar (512) foodtruck_main_menu NN
 - String foodtruckLocation 푸드트럭 위치 ⇔ varchar(256) foodtruck_location NN
+- String foodtruckMuni 푸드트럭 구 ⇔ varchar(256) foodtruck_muni NN
 - String foodtruckOperationHour 푸드트럭 영업시간 ⇔ varchar (64)  foodtruck_operation_hour NN	
 - int favoriteCount 좋아요 트럭 ⇔ integer favorite_count <<FK>>
 - String sellerFoodtruckCoordinate 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
@@ -220,7 +221,14 @@ CURRENT_TIMESTAMP
 - Timestamp eventCreatedAt 이벤트등록날짜 ⇔ timestamp event_created_at   CURRENT_TIMESTAMP NN 
 - Timestamp eventUpdatedAt 이벤트수정날짜 ⇔ timestamp event_updated_at   CURRENT_TIMESTAMP
                       
-
+#### EventAnswerVO ⇔ event_answers
+- 순서번호/ int evAsId;  ⇔  integer ev_as_id <<PK>> AI
+- 내용/String evAsReply ⇔ text ev_as_reply NN
+- 공감수/int evAsCompassion ⇔ integer ev_as_compassion 0 
+- 대상게시글/int eventId; ⇔ integer event_id <<FK>> 
+- 글쓴회원/int memberId; ⇔ integer mb_id <<FK>> 
+- 생성일/ Timestamp createdAt ⇔ timestamp created_at 
+- 갱신일/ Timestamp updatedAt ⇔ timestamp updated_at CURRENT_TIMESTAMP 
 
 
 
@@ -385,6 +393,20 @@ banner_show.fdl(get, proc, dao, param?fdId)
 	event_form.fdl (get, form) 
 	event_search.fdl (post, proc, dao, param?pn&order&keyword&날짜 범위..)
 //
+<이벤트 댓글>
+- 회원이 대상 게시글에 대해 답글을 추가할 수 있다.
+	event_answer_new_form.my
+	event_answer_add.my	
+- 댓글 리스트가 게시글 상세보기에 연동 표시될 수 있다.
+	event_answer_list.my
+- 회원이 댓글에 대해 공감(+1) 할 수 있다.
+	event_answer_compassion.my	
+- 회원이 댓글을 갱신할 수 있다.
+	event_answer_edit_form.my
+	event_answer_update.my	
+- 회원이 댓글을 삭제할 수 있다. 
+	event_answer_remove.my
+//	
 <member>
 - 회원가입구분/약관동의 할 수 있다.
 	member/join_choice_form.fdl (get, )

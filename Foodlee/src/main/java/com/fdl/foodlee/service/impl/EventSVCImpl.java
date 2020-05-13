@@ -21,6 +21,24 @@ public class EventSVCImpl implements IEventSVC {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean insertNewEvent(String title, String content, String filePath, int memberId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean insertNewEvent(String title, String content, String filePath, String tags, int memberId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int insertNewEventReturnKey(String title, String content, String filePath, String tags, int memberId) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
 	public EventVO selectOneEvent(int evId) {
@@ -141,5 +159,7 @@ public class EventSVCImpl implements IEventSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

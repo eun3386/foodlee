@@ -5,20 +5,46 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IAdminDAO;
+import com.fdl.foodlee.model.vo.AdminVO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
-@Repository
+@Repository("jdbcAsRepo")
 public class AdminMysqlDAOImpl implements IAdminDAO {
 	
 	@Autowired
 	private JdbcTemplate jtem;
+
+	@Override
+	public int adminLoginCheck(String login, String pw) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String adminLoginCertification(String login, int adId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AdminVO selectAdmin(String login) {
+		return null;
+	}
 	
+	@Override
+	public int selectAdminIdbyLogin(String login) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	@Override
 	public List<MemberVO> showAllMember(MemberVO mb) {
 		// TODO Auto-generated method stub
@@ -150,6 +176,4 @@ public class AdminMysqlDAOImpl implements IAdminDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
 }

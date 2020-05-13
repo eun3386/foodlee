@@ -26,8 +26,8 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	private static final String SQL_MEMBER_DUPCHECK
 	= "select count(mb_id) from members where login = ?";
 	private static final String SQL_LOGIN_AUTH
-	= "select login, cast(aes_decrypt(unhex(password),?) as char(32) "
-		+ "character set utf8) as password from members where mb_id = ?";
+	= "select login, cast(aes_decrypt(unhex(password), ?) as char(32) "
+		+ "character set utf8) as pw from members where mb_id = ?";
 	private static final String SQL__MEMBER_LOGIN_TIME_UPDATE
 	= "update members set login_time=now() where mb_id = ?";
 	private static final String SQL_SELECT_MEMBER_ID 
@@ -63,15 +63,16 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	}
 
 	@Override
-	public int loginAuthenticate(String login, int mbId) {
+	public String loginAuthenticate(String login, int mbId) {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
 				new Object[]{login,mbId},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
-		String dbPassword = (String) rMap.get("password");
-		System.out.println("DB password: " + dbPassword);
-		//return dbPassword;
-		return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, mbId);
+		System.out.println("DB login: " + dbLogin);
+		String dbPW = (String) rMap.get("pw");
+		System.out.println("DB pw: " + dbPW);
+		return dbPW;
+		//return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, mbId);
 	}
 
 	@Override
