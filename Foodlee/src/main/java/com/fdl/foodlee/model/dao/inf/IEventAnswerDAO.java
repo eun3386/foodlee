@@ -2,8 +2,6 @@ package com.fdl.foodlee.model.dao.inf;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-
 import com.fdl.foodlee.model.vo.EventAnswerVO;
 import com.fdl.foodlee.model.vo.EventVO;
 
