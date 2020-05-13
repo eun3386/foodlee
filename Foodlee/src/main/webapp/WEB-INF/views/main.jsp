@@ -39,7 +39,7 @@
 
 	<script type="text/javascript" src="resources/js/slick.min.js"></script>
       <script>
-                  var geocodes =[];
+        var geocodes =[];
 
       $(document).ready(function () {
     

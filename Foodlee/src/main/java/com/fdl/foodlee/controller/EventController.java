@@ -18,7 +18,6 @@ import com.fdl.foodlee.service.inf.IEventAnswerSVC;
 import com.fdl.foodlee.service.inf.IEventFileSVC;
 import com.fdl.foodlee.service.inf.IEventSVC;
 
-import com.fdl.foodlee.service.inf.IEventFileSVC;
 
 @Controller
 public class EventController {
@@ -91,14 +90,14 @@ public class EventController {
 			System.out.println("게시글 상세조회 성공 "
 						+ ev);
 			model.addAttribute("Event", ev);
-			String atFilePath = ev.getFilePath();
+			String evFilePath = ev.getFilePath();
 			int fpsCount = -1;
-			if( atFilePath != null && !atFilePath.isEmpty() ) {
+			if( evFilePath != null && !evFilePath.isEmpty() ) {
 				String fps[] = null;
-				if( atFilePath.indexOf(
+				if( evFilePath.indexOf(
 						IEventFileSVC.MULTI_SEP)
 					 != -1 ) {
-					fps = atFilePath.split(
+					fps = evFilePath.split(
 							"\\"+IEventFileSVC.MULTI_SEP);
 //					System.out.println("fps => " + fps);
 //					System.out.println("fp0 => " + fps[0]);
@@ -107,7 +106,7 @@ public class EventController {
 					fpsCount = fps.length;					
 				} else {
 					fpsCount = 1;
-					fps = new String[]{atFilePath};
+					fps = new String[]{evFilePath};
 				}
 				model.addAttribute("fps", fps);
 			} else {
