@@ -15,6 +15,9 @@ public class AdminVO {
 	private Timestamp logoutTime; // 로그아웃일자 ⇔ timestamp logout_time
 	
 	public AdminVO() {}
+	public AdminVO(int adId, String login) {
+		this(adId, login, "", "", "", "", null, null, null, null);
+	}
 	public AdminVO(int adId, String login, String password, String email, String phoneNumber, String notice,
 			Timestamp createdAt, Timestamp updatedAt, Timestamp loginTime, Timestamp logoutTime) {
 		super();

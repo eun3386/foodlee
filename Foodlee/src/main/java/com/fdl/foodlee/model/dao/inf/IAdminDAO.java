@@ -10,8 +10,17 @@ import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 
 public interface IAdminDAO {
-//	- 로그인 인증을 할 수 있다. 
-	AdminVO adminLoginCheck(String login);
+//- 관리자 로그인 체크 
+	int adminLoginCheck(String login, String pw);
+	
+//- 관리자 찾기
+	AdminVO selectAdmin(String login);
+	
+//- 관리자 로그인 인증
+	String adminLoginCertification(String login, int adId);
+	
+//- 관리자 정보를 확인 할 수 있다.
+	int selectAdminIdbyLogin(String login);
 	
 //-회원 조회  할 수 있다(리스트 조회 회원번호, 아이디, 로그인시간, 로그아웃 시간)
 //	admin_list.fdl(proc, get, dao)

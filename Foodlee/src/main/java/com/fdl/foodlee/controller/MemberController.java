@@ -2,12 +2,14 @@ package com.fdl.foodlee.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.MyCode;
+import com.fdl.foodlee.service.inf.IAdminSVC;
 import com.fdl.foodlee.service.inf.IMemberSVC;
 
 
@@ -43,6 +45,9 @@ public class MemberController {
 	
 	private IMemberSVC mbSvc;
 	
+	@Autowired
+	private IAdminSVC adSvc;
+	
 //	member/login_form.fdl (form, get; 비회원)
 	@RequestMapping(value = "/login_form.fdl", method = RequestMethod.GET)
 	public String memberLoginForm() {
@@ -52,23 +57,42 @@ public class MemberController {
 // 	member/login.fdl (proc, post, dao; 암호화; 세션; 회원)
 	@RequestMapping(value = "/login.fdl", method = RequestMethod.POST)
 	public ModelAndView memberLoginProc(
-			HttpSession ses, String login, String pw) {
+			HttpSession ses, String login, String password) {
 		System.out.println("login = "+ login);
-		System.out.println("pw = "+ pw);
-		ModelAndView mav = new ModelAndView(); 
-		int authResult = mbSvc.loginProcess(login,pw);
-		if( authResult == MyCode.MB_LOGIN_AUTH_OK ) {
-			ses.setAttribute("mbLoginName", login);
-			ses.setAttribute("mbLoginTime", 
-					System.currentTimeMillis() );
-			int mbId = mbSvc.selectMemberIdByLogin(login);
-			ses.setAttribute("mbId", new Integer(mbId) );
-			mav.setViewName("redirect:main.fdl");
-		} else {
-			mav.addObject("msg", "로그인 실패!! - "
+		System.out.println("pw = "+ password);
+		ModelAndView mav = new ModelAndView();
+		int authResult;
+		if(login.equals("admin") == false) {
+			authResult = mbSvc.loginProcess(login, password);
+			if( authResult == MyCode.MB_LOGIN_AUTH_OK ) {
+				ses.setAttribute("mbLoginName", login);
+				ses.setAttribute("mbLoginTime", 
+						System.currentTimeMillis() );
+				int mbId = mbSvc.selectMemberIdByLogin(login);
+				ses.setAttribute("mbId", new Integer(mbId) );
+				mav.setViewName("redirect:main.fdl");
+			} else {
+				mav.addObject("msg", "로그인 실패!! - "
 						+ authResult + " : " +
 					MyCode.getMsg(authResult) );
-			mav.setViewName("member/mb_login_form");
+				mav.setViewName("member/mb_login_form");
+			}
+		} else {
+			System.out.println("login, pw" + login + password);
+			authResult = adSvc.adminLoginCheck(login, password);
+			if(authResult == MyCode.MB_LOGIN_AUTH_OK ) {
+				ses.setAttribute("adLoginName", login);
+				ses.setAttribute("adLoginTime", 
+						System.currentTimeMillis() );
+				int adId = adSvc.selectAdminIdbyLogin(login);
+				ses.setAttribute("adId", new Integer(adId) );
+				mav.setViewName("redirect:/admin.fdl");
+			} else {
+				mav.addObject("msg", "로그인 실패!! - "
+						+ authResult + " : " +
+					MyCode.getMsg(authResult) );
+				mav.setViewName("member/mb_login_form");
+			}
 		}		
 		return mav;
 	}
