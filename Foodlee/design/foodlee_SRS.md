@@ -198,6 +198,7 @@ Q&A문의리스트를 볼 수 있다
 - String foodtruckName 푸드트럭 이름 ⇔ varchar (64) foodtruck_name NN
 - String foodtruckMainMenu 푸드트럭 대표메뉴 ⇔ varchar (512) foodtruck_main_menu NN
 - String foodtruckLocation 푸드트럭 위치 ⇔ varchar(256) foodtruck_location NN
+- String foodtruckMuni 푸드트럭 구 ⇔ varchar(256) foodtruck_muni NN
 - String foodtruckOperationHour 푸드트럭 영업시간 ⇔ varchar (64)  foodtruck_operation_hour NN	
 - int favoriteCount 좋아요 트럭 ⇔ integer favorite_count <<FK>>
 - String sellerFoodtruckCoordinate 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
