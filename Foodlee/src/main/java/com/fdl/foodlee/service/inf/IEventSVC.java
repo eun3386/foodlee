@@ -11,17 +11,6 @@ public interface IEventSVC {
 //	event_new_form.fdl (get)
 //	event_add.fdl (post, proc, dao, param..vo)
 	boolean insertNewEvent(EventVO ev);
-	boolean insertNewEvent(String title,
-			String content, 
-			String filePath, int memberId);
-	boolean insertNewEvent(String title,
-			String content, 
-			String filePath, String tags, 
-			int memberId);
-	int insertNewEventReturnKey(String title,
-			String content, 
-			String filePath, String tags, 
-			int memberId);		
 	
 //	- 이벤트 게시글 상세보기 할 수 있다
 //		event_show.fdl (get, proc, dao, param?id)

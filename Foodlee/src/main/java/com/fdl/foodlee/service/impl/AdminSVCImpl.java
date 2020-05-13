@@ -4,16 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.fdl.foodlee.model.dao.MyCode;
 import com.fdl.foodlee.model.dao.inf.IAdminDAO;
 import com.fdl.foodlee.model.dao.inf.IFoodtruckDAO;
 import com.fdl.foodlee.model.dao.inf.IMemberDAO;
 import com.fdl.foodlee.model.dao.inf.IMenuDAO;
 import com.fdl.foodlee.model.dao.inf.ISellerDAO;
-import com.fdl.foodlee.model.vo.AdminVO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.MenuVO;
@@ -23,57 +20,20 @@ import com.fdl.foodlee.service.inf.IAdminSVC;
 public class AdminSVCImpl implements IAdminSVC {
 	
 	@Autowired
-	@Qualifier("admybatis")
-//	@Qualifier("jdbcAsRepo")
 	private IAdminDAO adDao;
-	
-	@Override
-	public int adminLoginCheck(String login, String pw) {
-		System.out.println("SVC: adminLoginCheck() - " + login);
-		
-		if( login == null || login.isEmpty() ) 
-				return MyCode.LOGIN_PARAM_ERROR;
-		if( pw == null || pw.isEmpty() ) 
-				return MyCode.LOGIN_PW_MISMATCH;
-		
-		// 관리자 인지?
-		AdminVO ad = adDao.selectAdmin(login);
-		if( ad == null ) {
-			return MyCode.LOGIN_NONE; // not found
-		} 
-		int id = ad.getAdId();
-		
-		// 패스워드도 일치? 
-		String dbPW = this.adDao.adminLoginCertification(login, id);
-		if( dbPW.equals(pw) ) { // 인증
-			return MyCode.LOGIN_AUTH_OK;
-		} else {
-			return MyCode.LOGIN_PW_MISMATCH;
-		}
-	}
-	
-	@Override
-	public String adminLoginCertification(String login, int abId) {
-		// TODO Auto-generated method stub
-		return adDao.adminLoginCertification(login, abId);
-	}
-	
-	@Override
-	public AdminVO selectAdmin(String login) {
-		// TODO Auto-generated method stub
-		return adDao.selectAdmin(login);
-	}
-	
-	@Override
-	public int selectAdminIdbyLogin(String login) {
-		// TODO Auto-generated method stub
-		return adDao.selectAdminIdbyLogin(login);
-	}
+	@Autowired
+	private IMemberDAO mbDao;
+	@Autowired
+	private ISellerDAO selDao;
+//	@Autowired
+//	private IFoodtruckDAO fdDao;
+//	@Autowired
+//	private IMenuDAO menuDao;
 	
 	@Override
 	public List<MemberVO> showAllMember(MemberVO mb) {
 		// TODO Auto-generated method stub
-		return adDao.showAllMember(mb);
+		return null;
 	}
 
 	@Override
@@ -201,5 +161,5 @@ public class AdminSVCImpl implements IAdminSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

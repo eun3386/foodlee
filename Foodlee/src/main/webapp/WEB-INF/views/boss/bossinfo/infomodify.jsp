@@ -76,20 +76,20 @@
             <td></td>
                 <td id="title">비밀번호</td>
                 <td>
-                    <input type="password" name="password" size='20' placeholder="암호입력" required>
+                    <input type="password" name="password" maxlength="15">
                 </td>
             </tr>
             
             <tr>
                 <td id="title">비밀번호 변경</td>
                 <td>
-                    <input type="password" name="password" size='20' placeholder="암호변경"  >
+                    <input type="password" name="password" maxlength="15">
                 </td>
             </tr>
             <tr>
                 <td id="title">변경확인</td>
                 <td>
-                    <input type="password" name="password-modify" size='20' placeholder="암호변경" >
+                    <input type="password-modify" name="password-modify" maxlength="15">
                     <input type="button" value="비밀번호 변경" > 
                 </td>
             </tr>

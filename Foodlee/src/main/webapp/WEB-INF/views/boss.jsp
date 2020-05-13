@@ -33,21 +33,19 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['주문금액', '주문횟수'],
-          ['만원미만', 246],
-          ['3만원미만', 108],
-          ['5만원미만',    124],
-          ['5만원이상',    159]
+          ['만원미만', 23],
+          ['2만원미만',    8],
+          ['4만원미만',    154],
+          ['5만원이상',    204]
 
         ]);
 
         var options = {
-         /*  title: '주문금액', */
-          pieHole: 0.4,
-          legend:{position: 'none'},
-/*           legend: { position: 'bottom', maxLines: 4 }, */
-          colors: ['#5f76e8','#ff4f70','#01caf1','#fdc16a']
+         /*  title: '성별분포', */
+          pieHole: 0.5,
+          colors: ['#A8B6FF','#99BAE8','#B5E8FF','#99E4E8','#A8FFEB']
           
-          /* colors: ['#a561bd','#c784de'] */
+          /* colors: ['#a561bd','#c784de'] 툴팁제거*/
 /*           0: { color: '#a561bd' },
           1: { color: '#c784de' } */
         };
@@ -55,73 +53,7 @@
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
       }
-
     </script>
-    <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawChart);
-    
-    function drawChart() { 
-        var data = google.visualization.arrayToDataTable([
-        	['week', '이번주','지난주'], 
-            ['월', 797, 709],  ['화', 864, 906],  ['수', 822, 802],  ['목', 814, 851],  
-            ['금', 899, 809],  ['토', 1137, 913],  ['일', 1176, 917] 
-        /* ['month', '개체수1'], 
-        ['1월', 797],   ['2월', 864],  ['3월', 822],  ['4월', 814],  ['5월', 899],  ['6월', 1137],
-        ['7월', 1176], ['8월', 1276], ['9월', 1694], ['10월', 2141], ['11월', 2609], ['12월', 2954]  */
-        ]); 
-        var options = { 
-          hAxis: { title: '한주간 수입' },
-          curveType: 'function', 
-/*           legend: { position: 'bottom' },  */
-             tooltip:{isHtml: true }, 
-             colors: ['#5f76e8','#ff4f70'],
-          focusTarget: 'category', 
-          crosshair: { trigger: 'both',orientation: 'vertical', color: 'silver', opacity: 0.1  } 
-       }; 
-       var chart = new google.visualization.LineChart(document.getElementById('curve_chart')); 
-       chart.draw(data, options); 
-      }
-    </script>
-      <script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "만 원", { role: "style" } ],
-        ["1월", 894, "#5f76e8"],
-        ["2월", 1049, "#fdc16a"],
-        ["3월", 1930, "#ff4f70"],
-        ["4월", 2145, "color: #01caf1"],
-        ["5월", 2145, "color: #5f76e8"],
-        ["6월", 245, "color: #fdc16a"],
-        ["7월", 215, "color: #ff4f70"],
-        ["8월", 145, "color: #01caf1"],
-        ["9월", 2145, "color: #5f76e8"],
-        ["10월", 0, "color: #fdc16a"],
-        ["11월", 0, "color: #ff4f70"],
-        ["12월", 0, "color: #01caf1"]
-      ]);
-
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]);
-
-      var options = {
-        title: "Density of Precious Metals, in g/cm^3",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "75%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-      chart.draw(view, options);
-  }
-  </script>
 </head>
 
 <body>
@@ -204,8 +136,8 @@
                                             <!-- Message -->
                                             <a href="javascript:void(0)"
                                                 class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <div class="btn btn-danger rounded-circle btn-circle">
-                                                <i data-feather="airplay" class="text-white"></i></div>
+                                                <div class="btn btn-danger rounded-circle btn-circle"><i
+                                                        data-feather="airplay" class="text-white"></i></div>
                                                 <div class="w-75 d-inline-block v-middle pl-2">
                                                     <h6 class="message-title mb-0 mt-1">Luanch Admin</h6>
                                                     <span class="font-12 text-nowrap d-block text-muted">Just see
@@ -288,7 +220,7 @@
 					    <a class="nav-link active" href="#">시작화면</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#">메뉴수정</a>
+					    <a class="nav-link" href="#">메뉴화면</a>
 					    <!--  style="a {color: #7c8798} a:hover {color: #5f76e8;}"style.min.css 6242 -->
 					  </li>
 					  <li class="nav-item">
@@ -736,8 +668,7 @@
                         <div class="card-body">
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                    <sup class="set-doller">￦</sup>864만</h2>
+                                    <h2 class="text-dark mb-1 font-weight-medium">864</h2>
                                     <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">월매출</h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
@@ -750,17 +681,19 @@
                 <!-- *************************************************************** -->
                 <!-- End First Cards -->
                 <!-- *************************************************************** -->
- <!--                <div class="list-group" style="max-width: 880px; ">
+                <div class="list-group" style="max-width: 880px; ">
 				  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-				    <div class="riview-list"style=" float: left;">
+				    <div style=" float: left;">
 				    <div class="d-flex w-100 justify-content-between">
 				      <h5 class="mb-1">List group item heading</h5>
-				      <small class="text-muted">3 days ago</small>
+				      <small>3 days ago</small>
 				    </div>
 				    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
 				    <small>Donec id elit non mi porta.</small>
 				    </div>
-  					<img style="width: 64px;height: 64px;" src="../../../assets/images/alert/alert3.png" alt="image" >
+				    <div style="width: 20%; float: left;">
+  						<img class="card-img-top" src="..." alt="Card image cap">
+				    </div>
 				  </a>
 				  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
 				    <div class="d-flex w-100 justify-content-between">
@@ -778,86 +711,20 @@
 				    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
 				    <small class="text-muted">Donec id elit non mi porta.</small>
 				  </a>
-				</div> -->
+				</div>
                 <!-- *************************************************************** -->
                 <!-- Start Sales Charts Section -->
                 <!-- *************************************************************** -->
-                   <div class="row"><!--옴ㄹ기기 -->
+                <div class="row">
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">총 매출</h4>
- <!--                                <div id="campaign-v2"  style="height:283px; width:100%;"></div> -->
-                                <div id="donutchart" class="mt-2 " style="height: 315px; width:100%;"></div><!-- height:460px; height:283px; 원형차트 -->
-	                               <ul class="list-style-none mb-0">
-                                    <li>
-                                        <i class="fas fa-circle text-primary font-10 mr-2"></i>
-                                        <span class="text-muted">만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">246</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-danger font-10 mr-2"></i>
-                                        <span class="text-muted">3만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">108</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-cyan font-10 mr-2"></i>
-                                        <span class="text-muted">5만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">124</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-warning font-10 mr-2"></i>
-                                        <span class="text-muted">5만원 이상</span>
-                                        <span class="text-dark float-right font-weight-medium">159</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                      <!--       <div class="card-body"> -->
-                                <h4 class="card-title">연간 매출량</h4>
-                                	<div id="curve_chart" style="height: 297px; width:100%;" ></div>
-                                <ul class="list-inline text-center mt-5 mb-2">
-                                    <li class="list-inline-item text-muted font-italic">이달의 판매</li>
-                                </ul>
-                   <!--          </div> -->
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Memo</h4>
-                                <div class="" style="height:180px">
-                                </div>
-                                <div class="row mb-3 align-items-center mt-1 mt-5">
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                </div>
-                                <div class="row align-items-center">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-<!--                 <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="pie-donutchart" >
-                            <div class="card-body" style="height: 350px;">
-                            <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">회당 주문금액</h4>
-                                    <div class="ml-auto">
-                                    </div>
-                                </div>
-                               
-                                <div id="donutchart"  style="height: 315px; width:100%;"></div>height:460px; height:283px; 원형차트
-                                id="campaign-v2" class="mt-2" 
+                                <h4 class="card-title">회당 주문금액</h4>
+                                <div id="donutchart"  style="height:460px; width:100%;"></div><!--height:283px; 원형차트 -->
+                                <!--id="campaign-v2" class="mt-2"  -->
                                 <ul class="list-style-none mb-0">
                                     <li>
-                                        <i class="fas fa-circle text-primary font-10 mr-2"></i>원형차트 svg
+                                        <i class="fas fa-circle text-primary font-10 mr-2"></i><!-- 원형차트 svg -->
                                         <span class="text-muted">만원 미만</span>
                                         <span class="text-dark float-right font-weight-medium">23회</span>
                                     </li>
@@ -883,8 +750,8 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-0">주간매출</h4>
-                                <div class="net-income mt-4 position-relative" style="height:294px;"></div>바차트
+                                <h4 class="card-title">주간매출</h4>
+                                <!-- <div class="net-income mt-4 position-relative" style="height:294px;"></div>바차트 -->
                                  
                                 <ul class="list-inline text-center mt-5 mb-2">
                                     <li class="list-inline-item text-muted font-italic">이달의 판매</li>
@@ -909,7 +776,7 @@
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <!-- *************************************************************** -->
                 <!-- End Sales Charts Section -->
                 <!-- *************************************************************** -->
@@ -920,7 +787,7 @@
                     <div class="col-md-6 col-lg-8">
                         <div class="card">
                             <div class="card-body">
-<!--                                 <div class="d-flex align-items-start">
+                                <div class="d-flex align-items-start">
                                     <h4 class="card-title mb-0">월매출</h4>
                                     <div class="ml-auto">
                                         <div class="dropdown sub-dropdown">
@@ -936,13 +803,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
-                                <div class="pl-4 mb-5" style="height: 370px;">
-                                    <div id="columnchart_values" style="height:294px; position: relative;" ></div>
                                 </div>
-<!--                                 <ul class="list-inline text-center mt-4 mb-0">
+                                <div class="pl-4 mb-5">
+                                    <div class="stats ct-charts position-relative" style="height: 315px;"></div>
+                                </div>
+                                <ul class="list-inline text-center mt-4 mb-0">
                                     <li class="list-inline-item text-muted font-italic">이달의 수입</li>
-                                </ul> -->
+                                </ul>
                             </div>
                         </div>
                     </div>

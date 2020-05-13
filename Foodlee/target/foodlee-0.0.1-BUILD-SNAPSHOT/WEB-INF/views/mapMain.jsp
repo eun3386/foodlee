@@ -22,6 +22,9 @@
 <link rel="stylesheet" type="text/css" href="resources/css/slick.css"/>
 <!-- <link rel="stylesheet" type="text/css" href="resource/js/slick/slick-theme.css"/> -->
 
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 <!-- CSS -->
 <link href="<%=application.getContextPath()%>/resources/css/reset.css" type="text/css" rel="stylesheet">
 <link href="<%=application.getContextPath()%>/resources/css/main.css" type="text/css" rel="stylesheet">
@@ -37,17 +40,15 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <script type="text/javascript">
 $(document).ready(function() {
-
 	var ROOTCP = '<%= application.getContextPath()%>';
 	
-	$('.map_header_tit').click(function() {
-		$(location).attr('href','main.fdl');
-	});
-	
+// 	$('#map_logo').click(function() {
+// 		$(location).attr('href','main.html');
+// 	});
+
 	$(".map_title").click(function(e) {
 		e.preventDefault();
 		$(".map_nav").slideToggle();
@@ -61,26 +62,6 @@ $(document).ready(function() {
 	         $(".btn").find(">i").attr("class","fas fa-bars fa");
 	     }
 	});
-	$('.h_search').click(function() {
-		$(location).attr('href','main.fdl');
-	});
-	
-// 	$('#s_search').click(function() {
-// 		$(location).attr('href','main.fdl#event-list-wrap');
-// 		var offset = $('#event-list-wrap').offset();
-// 		$('html').animate({scrollTop : offset.top}, 400);
-// 	});
-// 	var page_url = window.location.href; 
-// 	var page = page_url.substring(page_url.lastIndexOf("#") + 1); 
-// 	// alert(page_id); 
-// 	if (page == 'event-list') {
-// 		$('html, body').animate({
-// 			scrollTop: $('#' + page).offset().top 
-// 		}, 500);
-// 	}
-// 	$('.e_search').click(function() {
-// 		$(location).attr('href','main.fdl');
-// 	});
 // 	$(".btn").click(function(e){
 //         e.preventDefault();
 //         $(".map_nav").slideToggle();
@@ -96,7 +77,9 @@ $(document).ready(function() {
 //             $(".btn").find(">i").attr("class","fas fa-bars fa");
 //         }
 //     });
-
+	$('.h_search').click (function() {
+		$(location).attr('href','main.html');
+	});
 // 	$('#s_search').click(function() {
 // 		var url = ROOTCP +"/frame/surrounding_area.jsp";
 // 			url = url + "?pg=sourrounding";
@@ -114,10 +97,10 @@ $(document).ready(function() {
 // 		})
 // 	});
 	
-// 	$('#s_search').click(function() {
-// 		var offset = $('#map_container').offset();
-// 		$('html').animate({scrollTop : offset.top}, 400);
-// 	});
+	$('#s_search').click(function() {
+		var offset = $('#map_container').offset();
+		$('html').animate({scrollTop : offset.top}, 400);
+	});
 // 	$('#d_search').click(function() {
 // 		var offset = $('#gu-list-table').offset();
 // 		$('html').animate({scrollTop : offset.top}, 400);
@@ -137,17 +120,17 @@ $(document).ready(function() {
 		</footer>
 	</div>
 	<!-- slider -->
-	<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="resources/js/slick.min.js"></script>
 	<script type="text/javascript">
 // 	슬라이드
 		$('.map_slider').slick({
 			  dots: false, // 속성설정
-			  slidesToShow: 1, // 보여주는 화면 개수
+			  slidesToShow: 3, // 보여주는 화면 개수
 			  slidesToScroll: 1, // 한줄 슬라이드
 			  autoplay: true, // 자동 재생
-			  autoplaySpeed: 2000, // 재생 속도
+			  autoplaySpeed: 1500, // 재생 속도
 			  arrows: false, // 화살표 없애기
 			  responsive: [ // 반응형 에 대한 설정
 	                {

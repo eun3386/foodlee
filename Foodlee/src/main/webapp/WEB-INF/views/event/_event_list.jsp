@@ -43,17 +43,10 @@
         </thead>
         <tbody>
             <tr>
-                <td>1</td> 
-                <td><img class="td-ongoing" src="resources/css/imgs/event-on.jpg"></td> 
-                <td><b>밤도깨비 야시장 잠정 중단 안내</b></td> 
-                <td class="tooltip" title="">
-	                <div class="meme">
-	                    <p class="menu-spec">2020-04-03 ~ <br></p>
-	                </div>
-                </td> 
-                <td></td>
-                <td><i class="fas fa-heart"></i> 32</td> 
-                <td>101</td>
+                <td>1</td> <td><img class="td-ongoing" src="resources/css/imgs/event-on.jpg"></td> <td><b>포라코</b></td> <td class="tooltip" title="">
+                <div class="meme">
+                    <p class="menu-spec">치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원</p>
+                </div></td> <td></td> <td><i class="fas fa-heart"></i> 32</td> <td>101</td>
             </tr>
         </tbody>
     </table>    

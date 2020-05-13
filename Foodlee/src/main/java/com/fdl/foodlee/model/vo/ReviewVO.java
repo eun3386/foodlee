@@ -7,7 +7,7 @@ public class ReviewVO {
 	private String login; // 리뷰 작성자 <<FK>>
 	private int sellerId; // 판매자 번호 <<FK>>
 	private int reviewDepth; // 사장님 답글 여부(문의 0 답글 1)
-	private String reviewPnum; // 답글일 경우 해당 문의 번호
+	private int reviewPnum; // 답글일 경우 해당 문의 번호
 	private String reviewContent; // 리뷰 내용
 	private String reviewPic; // 리뷰 사진
 	private Timestamp reviewCreatedAt; // 리뷰 작성일
@@ -34,17 +34,17 @@ public class ReviewVO {
 		this.reviewCreatedAt = reviewCreatedAt;
 	}
 	
-	public ReviewVO(int reviewId, String login, int sellerId, String reviewPnum, int reviewDepth, String reviewContent, Timestamp reviewCreatedAt) {
+	public ReviewVO(int reviewId, String login, int sellerId, int reviewDepth, int reviewPnum, String reviewContent, Timestamp reviewCreatedAt) {
 		this.reviewId = reviewId;
 		this.login = login;
 		this.sellerId = sellerId;
-		this.reviewPnum = reviewPnum;
 		this.reviewDepth = reviewDepth;
+		this.reviewPnum = reviewPnum;
 		this.reviewContent = reviewContent;
 		this.reviewCreatedAt = reviewCreatedAt;
 	}
 
-	public ReviewVO(int reviewId, String login, int sellerId, int reviewDepth, String reviewPnum, String reviewContent, String reviewPic,
+	public ReviewVO(int reviewId, String login, int sellerId, int reviewDepth, int reviewPnum, String reviewContent, String reviewPic,
 			Timestamp reviewCreatedAt) {
 		this.reviewId = reviewId;
 		this.login = login;
@@ -88,11 +88,11 @@ public class ReviewVO {
 		this.reviewDepth = reviewDepth;
 	}
 
-	public String getReviewPnum() {
+	public int getReviewPnum() {
 		return reviewPnum;
 	}
 
-	public void setReviewPnum(String reviewPnum) {
+	public void setReviewPnum(int reviewPnum) {
 		this.reviewPnum = reviewPnum;
 	}
 

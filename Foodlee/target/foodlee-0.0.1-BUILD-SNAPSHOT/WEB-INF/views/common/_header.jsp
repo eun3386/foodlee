@@ -4,12 +4,12 @@
      <div class="map_row">
          <div class="map_header">
              <div class="map_header_login">
-                 <a href="${pageContext.request.contextPath}/member/login_form.fdl">Login</a>
-                 <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl">Join</a>
+                 <a href="#">Login</a>
+                 <a href="#">Join</a>
              </div>
              <!-- //header_menu -->
              <div class="map_header_tit">
-                 <h1>Food Truck Nadeulee</h1><br>
+                 <h1>Food Truck Nadeul-i</h1><br>
                  <a class="map_hsub_tit" href="#">푸들이</a>
              </div>
              <!-- //header_tit -->
@@ -43,19 +43,24 @@
 		        </div>
 		        <div>
 					<ol>
-						<li><a href="${pageContext.request.contextPath}/main.fdl#truck-list">메뉴</a></li>
+						<li><a href="#">메뉴</a></li>
 					</ol>
 		        </div>
 		        <div>
 					<ol>
-						<li><a class="e_search" href="${pageContext.request.contextPath}/main.fdl#event-list">이벤트</a></li>
+						<li><a href="#">공지</a></li>
 					</ol>
 		        </div>
-<!-- 		        <div> -->
-<!-- 					<ol> -->
-<%-- 						<li><a id="s_search" href="#">${param[s_search] ? 's_search' : 'a' }</a></li> --%>
-<!-- 					</ol> -->
-<!-- 		        </div> -->
+		        <div>
+					<ol>
+						<li><a id="d_search" href="#">구별 찾기</a></li>
+					</ol>
+		        </div>
+		        <div>
+					<ol>
+						<li><a id="s_search" href="#">주변 찾기</a></li>
+					</ol>
+		        </div>
 			</div>
 		</div>
 	</div>
