@@ -70,7 +70,7 @@ public class MemberController {
 						System.currentTimeMillis() );
 				int mbId = mbSvc.selectMemberIdByLogin(login);
 				ses.setAttribute("mbId", new Integer(mbId) );
-				mav.setViewName("redirect:main.fdl");
+				mav.setViewName("redirect:/main.fdl");
 			} else {
 				mav.addObject("msg", "로그인 실패!! - "
 						+ authResult + " : " +

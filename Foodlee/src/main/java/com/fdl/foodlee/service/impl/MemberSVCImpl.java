@@ -27,6 +27,7 @@ System.out.println("SVC: loginProcess() - " + login);
 		
 		// 가입된 회원인지?
 		MemberVO mb = mbDao.selectOneMember(login);
+		System.out.println(mb);
 		if( mb == null ) {
 			return MyCode.MB_LOGIN_NONE; // not found
 		} 
@@ -34,6 +35,7 @@ System.out.println("SVC: loginProcess() - " + login);
 		
 		// 패스워드도 일치? 
 		String dbPW = this.mbDao.loginAuthenticate(login, id);
+		System.out.println(dbPW);
 		if( dbPW.equals(pw) ) { // 인증
 			return MyCode.MB_LOGIN_AUTH_OK;
 		} else {
