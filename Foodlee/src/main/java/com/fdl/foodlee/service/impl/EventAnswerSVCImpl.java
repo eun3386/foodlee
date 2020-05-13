@@ -2,14 +2,22 @@ package com.fdl.foodlee.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.fdl.foodlee.model.dao.inf.IEventAnswerDAO;
 import com.fdl.foodlee.model.vo.EventAnswerVO;
 import com.fdl.foodlee.model.vo.EventVO;
 import com.fdl.foodlee.service.inf.IEventAnswerSVC;
+
+
 @Service
 public class EventAnswerSVCImpl implements IEventAnswerSVC {
-
+	@Autowired
+	@Qualifier("mybatisEvAsRepo")
+	private IEventAnswerDAO evAsDao;
+	
 	@Override
 	public boolean answerAdd(EventAnswerVO evAs) {
 		// TODO Auto-generated method stub

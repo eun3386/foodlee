@@ -2,6 +2,7 @@ package com.fdl.foodlee.model.dao.impl;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Repository;
@@ -9,8 +10,10 @@ import org.springframework.stereotype.Repository;
 import com.fdl.foodlee.model.dao.inf.IEventAnswerDAO;
 import com.fdl.foodlee.model.vo.EventAnswerVO;
 import com.fdl.foodlee.model.vo.EventVO;
+@Repository("mybatisEvAsRepo")
 public class EventAnswerMysqlMybatisDAOImpl implements IEventAnswerDAO {
-	
+	@Autowired
+	private SqlSessionTemplate sstem;
 	
 	@Override
 	public boolean answerAdd(EventAnswerVO evAs) {
