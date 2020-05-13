@@ -76,7 +76,7 @@ public class EventController {
 			return "redirect:Event_show.my?id="+atRtkey;
 		} else {
 			System.out.println("게시글 등록 실패: " + title);
-			return "Event/at_new_form"; // FW
+			return "Event/event_new_form"; // FW
 		}
 	}	
 //- 이벤트 게시글 상세보기 할 수 있다
@@ -125,7 +125,7 @@ public class EventController {
 			} else {
 				model.addAttribute("msg", "댓글리스트 조회 실패");
 			}			
-			return "Event/at_show";
+			return "Event/ev_show";
 		} else {			
 			model.addAttribute("msg", 
 				"게시글 상세조회 실패 - " + id);
