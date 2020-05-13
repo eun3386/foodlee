@@ -16,7 +16,6 @@ public interface IMemberDAO {
 	boolean isDuplicatedMember(String login);
 	
 //	로그인 할 수 있다. (세션 + 암호화 인증)
-	//String loginAuthenticate( String login, int mbId );
 	String loginAuthenticate( String login, int mbId );
 	
 //	로그아웃 할 수 있다.

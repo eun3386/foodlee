@@ -1,20 +1,17 @@
 package com.fdl.foodlee.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.dao.MyCode;
-import com.fdl.foodlee.model.dao.inf.IAdminDAO;
 import com.fdl.foodlee.model.dao.inf.IMemberDAO;
 import com.fdl.foodlee.model.dao.inf.ISellerDAO;
-import com.fdl.foodlee.model.vo.AdminVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.SellerVO;
-import com.fdl.foodlee.service.inf.IMemberSVC;
+import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Service
-public class MemberSVCImpl implements IMemberSVC {
+public class SellerSVCImpl implements ISellerSVC {
 
 	@Autowired
 	private IMemberDAO mbDao;
@@ -23,7 +20,7 @@ public class MemberSVCImpl implements IMemberSVC {
 	
 	@Override
 	public int loginProcess(String login, String pw) {
-		System.out.println("SVC: loginProcess() - " + login);
+System.out.println("SVC: loginProcess() - " + login);
 		
 		if( login == null || login.isEmpty() ) 
 				return MyCode.LOGIN_PARAM_ERROR;
@@ -56,8 +53,8 @@ public class MemberSVCImpl implements IMemberSVC {
 	}
 
 	@Override
-	public int selectMemberIdByLogin(String login) {
-		return mbDao.selectMemberIdbyLogin(login);
+	public int selectSellerIdByLogin(String login) {
+		return selDao.selectSellerIdbyLogin(login);
 	}
-
+	
 }

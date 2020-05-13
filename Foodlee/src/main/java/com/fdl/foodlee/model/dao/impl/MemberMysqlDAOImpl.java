@@ -68,7 +68,6 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 				new Object[]{login,mbId},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
-		System.out.println("DB login: " + dbLogin);
 		String dbPW = (String) rMap.get("pw");
 		System.out.println("DB pw: " + dbPW);
 		return dbPW;
@@ -100,7 +99,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 					}
 				} , mbId);
 		} catch (DataAccessException e) {
-			System.out.println("dao / 회원 편집폼 실패." + mbId );
+			System.out.println("dao / 일반 회원 편집폼 실패." + mbId );
 			return null;
 		} // 익명객체 방식의 rowmapper 인자로 전달
 	}
@@ -113,7 +112,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 							.newInstance(MemberVO.class), login);
 			 return mb;
 		} catch (EmptyResultDataAccessException e) {
-			System.out.println(login+ " 회원 없음 /dao");
+			System.out.println(login+ " 회원(일반) 없음 /dao");
 			return null;
 		} catch (DataAccessException e) {
 			// spring data의 최상위 예외 객체...
@@ -138,7 +137,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 				mb.getAddress(), mb.getMbId() );
 			return r == 1;
 		} catch (DataAccessException e) {
-			System.out.println("dao/ 회원 정보 갱신 실패 - " + mb.getMbId());
+			System.out.println("dao/ 일반 회원 정보 갱신 실패 - " + mb.getMbId());
 			return false;
 		}
 	}
