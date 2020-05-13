@@ -49,5 +49,24 @@ public class AdminController {
 			mav.setViewName("member/mb_login_form");
 		}		
 		return mav;
-	}	
+	}
+	
+	//- 로그아웃 할 수 있다- 자신의 정보를 상세보기 할 수 있다
+	// admin_logout.fdl
+		@RequestMapping(value = "admin_logout.fdl", 
+				method = RequestMethod.GET)
+		public String adminLogoutProc(HttpSession ses) {
+			String login = (String)ses
+						.getAttribute("adLoginName");
+			long loginStarted = (Long)ses
+					.getAttribute("adLoginTime");
+			long currentTime = System.currentTimeMillis();
+			long elapsedTime = currentTime - loginStarted;
+			
+			System.out.println(login + " 회원이 로그아웃: "
+					+ elapsedTime/1000.0 + "초가 로그인 활동함.." );
+			ses.invalidate();
+			
+			return "redirect:/"; // member_login_form.my?
+		}
 }

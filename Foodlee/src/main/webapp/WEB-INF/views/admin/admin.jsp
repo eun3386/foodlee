@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <head>
 
@@ -29,7 +30,7 @@
     <ul class="admin-navbar bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.fdl">
         <div class="sidebar-brand-text mx-3">FDL Admin</div>
       </a>
 
@@ -292,9 +293,14 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                <img class="img-profile rounded-circle" src="">
+                <c:if test="${not empty adLoginName}">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                <c:out value="${adLoginName}" default="guest"/> 로그인 중...
+                </span>
+                	<i class="fas fa-user-cog"></i>
+                </c:if>
               </a>
+               <a href="admin_logout.fdl">Logout</a>	
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
