@@ -83,7 +83,7 @@ svg text {
           text-anchor: middle;
         }
        
-        h3#muni{
+        h3{
             font-family: 'Jua', sans-serif;
             font-size: 19px;
             font-weight: 600;
@@ -97,21 +97,21 @@ svg text {
     height: 580px;
     display: inline-block;
 }
-#gu-list-table{
-    width: 960px;
+#event-list-wrap{
+	padding-top: 90px;
+	height: 800px; /*임시*/
 }
-#gu-list-wrap thead{
+#gu-list-wrap thead,#event-list-wrap thead{
     background-color: rgba(115,110,103,.1);
 }
-#gu-list-wrap thead th{
-    font-size: smaller;
-}
-#gu-list-wrap thead th,td{
+
+#gu-list-wrap thead th,#gu-list-wrap td,#event-list-wrap thead th,#event-list-wrap td{
     border: solid 2px rgba(115,110,103,.3);
     border-left: 0px; 
     border-right: 0px; 
     font-family: 'Nanum Gothic', sans-serif;
     vertical-align: middle;
+    font-size: smaller;
 }
 
 /*
@@ -120,12 +120,15 @@ svg text {
     overflow: hidden;
 }
 */
-#gu-list-wrap td{
-    font-size: smaller;
+#gu-list-wrap td,#event-list-wrap td{
+    
     color: #676767;
     text-align: center;
-    
+    width: auto;
+    box-sizing: border-box;
+    max-height: 80px;
 }
+
 #gu-list-table{
     width: 800px;
     
@@ -149,31 +152,39 @@ svg text {
     font-family: 'jua', sans-serif;
 }
 
-#gu-list-table tbody td{
-    width: auto;
-    box-sizing: border-box;
-    max-height: 80px;
+/* tbody td{ */
+/*     width: auto; */
+/*     box-sizing: border-box; */
+/*     max-height: 80px; */
     
-}
+/* } */
 #th-menu{
     width: 270px;
     
 }
-#gu-list-table tbody tr:hover{
+#event-list-table tbody tr:hover,#gu-list-table tbody tr:hover{
     cursor: pointer;
     background-color: #BDD98C;
+}
+#event-list-table tbody tr,#gu-list-table tbody tr{
+	border-bottom:1px;
 }
 .fas fa-times{
     position: relative;
     left: 100px;
     
 }
-#page{
-    width: 800px;
+#gu-list-wrap #page{    
+     text-align: center;
+    margin-top: 20px;
+    width:800px;
+}
+#event-list-wrap #page{    
      text-align: center;
     margin-top: 20px;
     
 }
+
 #page li{
     display: inline-block;
     font-size: 0.7em;
@@ -199,4 +210,10 @@ svg text {
     overflow: hidden;
     width: auto;
     white-space: nowrap;
+}
+.td-ongoing{
+    vertical-align: middle;
+}
+#event-list-table{
+    width: 960px;
 }

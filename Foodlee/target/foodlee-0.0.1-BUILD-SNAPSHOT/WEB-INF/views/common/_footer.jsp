@@ -13,9 +13,9 @@
                 <li><a href="#">고객센터</a></li>
             </ul>
             <address>
-                Copyright ©
-                <a href="http://webstoryboy.co.kr"><strong>foodleeE</strong></a>
-                All Rights Reserved.
+                <span class="copy">Copyright ©</span>
+                <a href="${pageContext.request.contextPath}/main.fdl"><strong>FOODLEE</strong></a>
+                <span class="copy">All Rights Reserved.</span>
             </address>
         </div>
     </div>
