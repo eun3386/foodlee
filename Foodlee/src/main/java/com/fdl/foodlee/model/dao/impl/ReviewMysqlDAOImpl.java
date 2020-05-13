@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IReviewDAO;
 import com.fdl.foodlee.model.vo.ReviewVO;
 
+@Repository
 public class ReviewMysqlDAOImpl implements IReviewDAO {
 	
 	public static final String SQL_REVIEW_NEW = "insert into review"

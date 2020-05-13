@@ -14,16 +14,39 @@ import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 
-@Repository("mybatisAsRepo")
+@Repository("admybatis")
 public class AdminMysqlMybatisDAOImpl implements IAdminDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sstem;
 	
 	@Override
-	public AdminVO adminLoginCheck(String login) {
+	public int adminLoginCheck(String login, String pw) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
+	}
+	
+	@Override
+	public String adminLoginCertification(String login, int adId) {
+		HashMap<String, Object> pMap = new HashMap<>();
+		pMap.put("login", login);
+		pMap.put("adId", adId);
+		HashMap<String, Object> rMap = 
+		sstem.selectOne("IAdminDAO.admin_login_certification", pMap);
+		System.out.println("rMap: login = " + rMap.get("login"));
+		System.out.println("rMap: pw = " + rMap.get("password"));
+		return (String)rMap.get("password");
+	}
+	
+	@Override
+	public AdminVO selectAdmin(String login) {
+			AdminVO ad = (AdminVO)sstem.selectOne("IAdminDAO.select_admin", login);
+			return ad;
+	}
+	
+	@Override
+	public int selectAdminIdbyLogin(String login) {
+		return sstem.selectOne("IAdminDAO.select_admin_idby_login", login);
 	}
 	
 	@Override

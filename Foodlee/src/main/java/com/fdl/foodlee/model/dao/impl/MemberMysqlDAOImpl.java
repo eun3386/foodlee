@@ -26,8 +26,8 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	private static final String SQL_MEMBER_DUPCHECK
 	= "select count(mb_id) from members where login = ?";
 	private static final String SQL_LOGIN_AUTH
-	= "select login, cast(aes_decrypt(unhex(password),?) as char(32) "
-		+ "character set utf8) as password from members where mb_id = ?";
+	= "select login, cast(aes_decrypt(unhex(password), ?) as char(32) "
+		+ "character set utf8) as pw from members where mb_id = ?";
 	private static final String SQL__MEMBER_LOGIN_TIME_UPDATE
 	= "update members set login_time=now() where mb_id = ?";
 	private static final String SQL_SELECT_MEMBER_ID 
@@ -68,9 +68,9 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 				new Object[]{login,mbId},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
-		String dbPassword = (String) rMap.get("password");
-		System.out.println("DB password: " + dbPassword);
-		return dbPassword;
+		String dbPW = (String) rMap.get("pw");
+		System.out.println("DB pw: " + dbPW);
+		return dbPW;
 		//return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, mbId);
 	}
 
@@ -99,7 +99,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 					}
 				} , mbId);
 		} catch (DataAccessException e) {
-			System.out.println("dao / 회원 편집폼 실패." + mbId );
+			System.out.println("dao / 일반 회원 편집폼 실패." + mbId );
 			return null;
 		} // 익명객체 방식의 rowmapper 인자로 전달
 	}
@@ -112,7 +112,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 							.newInstance(MemberVO.class), login);
 			 return mb;
 		} catch (EmptyResultDataAccessException e) {
-			System.out.println(login+ " 회원 없음 /dao");
+			System.out.println(login+ " 회원(일반) 없음 /dao");
 			return null;
 		} catch (DataAccessException e) {
 			// spring data의 최상위 예외 객체...
@@ -137,7 +137,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 				mb.getAddress(), mb.getMbId() );
 			return r == 1;
 		} catch (DataAccessException e) {
-			System.out.println("dao/ 회원 정보 갱신 실패 - " + mb.getMbId());
+			System.out.println("dao/ 일반 회원 정보 갱신 실패 - " + mb.getMbId());
 			return false;
 		}
 	}

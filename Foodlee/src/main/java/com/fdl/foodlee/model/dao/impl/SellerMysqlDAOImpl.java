@@ -65,15 +65,15 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 
 	@Override
 	//public String loginAuthenticate(String login, int selId) {
-	public int loginAuthenticate(String login, int selId) {
+	public String loginAuthenticate(String login, int selId) {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
 				new Object[]{login,selId},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
-		String dbPassword = (String) rMap.get("password");
-		System.out.println("DB password: " + dbPassword);
-		//return dbPassword;
-		return jtem.update(SQL__SELLER_LOGIN_TIME_UPDATE, selId);
+		String dbPW = (String) rMap.get("pw");
+		System.out.println("DB pw: " + dbPW);
+		return dbPW;
+		//return jtem.update(SQL__SELLER_LOGIN_TIME_UPDATE, selId);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 					}
 				} , selId);
 		} catch (DataAccessException e) {
-			System.out.println("dao / 회원 편집폼 실패." + selId );
+			System.out.println("dao / 판매자 회원 편집폼 실패." + selId );
 			return null;
 		} // 익명객체 방식의 rowmapper 인자로 전달
 	}
@@ -115,7 +115,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 							.newInstance(SellerVO.class), login);
 			 return sel;
 		} catch (EmptyResultDataAccessException e) {
-			System.out.println(login+ " 회원 없음 /dao");
+			System.out.println(login+ " 회원(판매자) 없음 /dao");
 			return null;
 		} catch (DataAccessException e) {
 			// spring data의 최상위 예외 객체...
@@ -140,7 +140,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 				sel.getAddress(), sel.getSellerId(), sel.getCompanyRN() );
 			return r == 1;
 		} catch (DataAccessException e) {
-			System.out.println("dao/ 회원 정보 갱신 실패 - " + sel.getSellerId());
+			System.out.println("dao/ 판매자 회원 정보 갱신 실패 - " + sel.getSellerId());
 			return false;
 		}
 	}
