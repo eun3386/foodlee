@@ -35,7 +35,7 @@ public class EventController {
 	public String eventNewForm() {
 		System.out.println("eventNewForm() ... ");
 		// 
-		return "event/ev_new_form";
+		return "event/naver-smarteditor2-ca95d21/demo/ev_new_form";
 	}
 //	event_add.fdl (post, proc, dao, param..vo)
 	@RequestMapping(value = "event_add.fdl", 
@@ -65,22 +65,22 @@ public class EventController {
 				+"MB");
 		
 		// public img src... 
-		int atRtkey = this.evSvc
+		int evRtkey = this.evSvc
 				.insertNewEventReturnKey(title, content, 
 				filePath, tags, memberId);
 		
 		// 상세보기 => atId?
-		if( atRtkey > 0 ) {
-			System.out.println("게시글 등록 성공: " + atRtkey);
-			return "redirect:Event_show.my?id="+atRtkey;
+		if( evRtkey > 0 ) {
+			System.out.println("게시글 등록 성공: " + evRtkey);
+			return "redirect:Event_show.my?id="+evRtkey;
 		} else {
 			System.out.println("게시글 등록 실패: " + title);
-			return "Event/event_new_form"; // FW
+			return "event/event_new_form"; // FW
 		}
 	}	
 //- 이벤트 게시글 상세보기 할 수 있다
 //	event_show.fdl (get, proc, dao, param?id)
-	@RequestMapping(value = "Event_show.my", 
+	@RequestMapping(value = "event_show.my", 
 			method = RequestMethod.GET)
 	public String EventShowProc(HttpSession ses, 
 			int id, Model model) {
@@ -89,7 +89,7 @@ public class EventController {
 		if( ev != null ) {
 			System.out.println("게시글 상세조회 성공 "
 						+ ev);
-			model.addAttribute("Event", ev);
+			model.addAttribute("event", ev);
 			String evFilePath = ev.getFilePath();
 			int fpsCount = -1;
 			if( evFilePath != null && !evFilePath.isEmpty() ) {
@@ -128,7 +128,7 @@ public class EventController {
 		} else {			
 			model.addAttribute("msg", 
 				"게시글 상세조회 실패 - " + id);
-			return "redirect:Event_list.my";
+			return "redirect:event_list.my";
 		}
 	}	
 	

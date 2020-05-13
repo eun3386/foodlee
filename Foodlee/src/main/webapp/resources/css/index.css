@@ -127,6 +127,7 @@ svg text {
     width: auto;
     box-sizing: border-box;
     max-height: 80px;
+    height: 45px;
 }
 
 #gu-list-table{
@@ -158,9 +159,17 @@ svg text {
 /*     max-height: 80px; */
     
 /* } */
+
+#event-add{
+	float:right;
+	vertical-align: middle;
+}
 #th-menu{
     width: 270px;
     
+}
+#th-term,#th-cr-date{
+	width:130px;
 }
 #event-list-table tbody tr:hover,#gu-list-table tbody tr:hover{
     cursor: pointer;
@@ -199,7 +208,7 @@ svg text {
     display: inline !important;
     padding-right: 15px;
 }
-.meme{
+.menu-spec{
     max-height: 70px;
     word-wrap: break-word;
     display: block;
@@ -216,4 +225,11 @@ svg text {
 }
 #event-list-table{
     width: 960px;
+}
+.intro_block_sub_title,.intro_block_paragraph{
+	text-align : center;
+}
+.intro_block_sub_title{
+	font-size:2em;
+	padding:0 80px 80px 80px;
 }

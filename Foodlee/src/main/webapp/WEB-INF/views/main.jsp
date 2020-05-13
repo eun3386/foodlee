@@ -138,7 +138,7 @@
         <div id="menu-list">
             <ul>
                 <li><a href="#">위치찾기</a></li>
-                <li><a href="#">소개</a></li>
+                <li><a href="#introduce">소개</a></li>
                 <li><a href="#truck-list">푸드트럭</a></li>
                 <li><a href="#event-list">이벤트</a></li>
             </ul>
@@ -157,6 +157,9 @@
 	    </div>
 	    <div class="map_slider" style="position:relative; top:-160px">
 			<%@ include file="common/map_sliderBottom.jsp" %>
+		</div>
+		<div id="introduce" style="position:relative; top:-160px; padding-top:120px;" >
+			<%@include file="common/_introduce.jsp" %>
 		</div>
         <div id="truck-list">
         	<%@include file="truck/truckList.jsp" %>
