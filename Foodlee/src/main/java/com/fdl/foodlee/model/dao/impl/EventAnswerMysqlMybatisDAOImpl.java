@@ -3,16 +3,14 @@ package com.fdl.foodlee.model.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+
 import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IEventAnswerDAO;
 import com.fdl.foodlee.model.vo.EventAnswerVO;
 import com.fdl.foodlee.model.vo.EventVO;
-@Repository
-public class EventAnswerMysqlDAOImpl implements IEventAnswerDAO {
-	@Autowired
-	private JdbcTemplate jtem;
+public class EventAnswerMysqlMybatisDAOImpl implements IEventAnswerDAO {
+	
 	
 	@Override
 	public boolean answerAdd(EventAnswerVO evAs) {

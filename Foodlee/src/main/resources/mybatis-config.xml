@@ -11,6 +11,7 @@
 		<typeAlias type="com.fdl.foodlee.model.vo.FoodtruckVO" alias="foodtruckVO"/>
 		<typeAlias type="com.fdl.foodlee.model.vo.MemberVO" alias="memberVO"/>
 		<typeAlias type="com.fdl.foodlee.model.vo.MenuVO" alias="menuVO"/>
+		<typeAlias type="com.fdl.foodlee.model.vo.EventAnswerVO" alias="eventanswerVO"/>
 	</typeAliases>
 <!-- 	<properties resource="db.properties" /> -->
 <!-- 	<typeAliases> -->
@@ -32,5 +33,6 @@
 <!-- 	</mappers> -->
 	<mappers>
 		<mapper resource="mappers/admin_mapper.xml" />
+		<mapper resource="mappers/eventanswer_mapper.xml" />
 	</mappers>
 </configuration>

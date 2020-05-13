@@ -124,6 +124,8 @@ Q&A문의리스트를 볼 수 있다
 - 회원, Member
 - 판매자, Seller
 - 푸드트럭, Foodtruck
+- 이벤트, Event
+- 이벤트댓글, EventAnswer
 - 메뉴, Menu
 - 공지사항(메인), Notice
 - 리뷰, Review
@@ -135,6 +137,8 @@ Q&A문의리스트를 볼 수 있다
 - 회원, Member => MemberVO : members table
 - 판매자, Seller => SellerVO : sellers table
 - 푸드트럭, Foodtruck => FoodtruckVO : foodtrucks table
+- 이벤트, Event => EventVO : events table
+- 이벤트댓글, EventAnswer => EventAnswerVO : event_answers table
 - 메뉴, Menu => MenuVO : menus table
 - 공지사항(메인), Notice => NoticeVO : notices table
 - 댓글/리뷰, Review => ReviewVO : reviews table
