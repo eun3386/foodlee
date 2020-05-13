@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <%
 	String CON = application.getContextPath();
 %>
@@ -431,9 +434,10 @@ $(document).ready(function() {
 			<div id="car_des"
 				style="float: left; margin-left: 420px; position: absolute;">
 				<h2 style="margin-top: 0; margin-bottom: 15px;">푸드트럭 팩토리</h2>
-
+				<div style="min-height: 110px;">
 				소비자 만족도 1위 푸드트럭! BOP푸드트럭 입니다. 저의 시그니쳐 메뉴인 눈꽃목살스테이크는 섭씨 1,300도의 중식화로를
 				이용하여 단시간에 육즙가득한 목살스테이크를 구워 드립니다. 많은 문의 부탁 드립니다!
+				</div>
 				<p />
 				<div style="margin-top: 30px;">
 					<i class="fas fa-heart fa-lg"></i> <span id="test">0</span>
@@ -485,72 +489,54 @@ $(document).ready(function() {
 
 		<section id="content1">
 			<div id="replies">
-				<%
-					for (int i = 0; i < 10; i++) {
-				%>
+				<c:forEach var="rv" items="${review}"
+				varStatus="vs">
 				<div class="reply"
-					style="border: 1px solid gray; margin-bottom: -1px; padding-left: 10px;">
+					style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
+					<c:if test="${rv.reviewDepth eq 1}">padding-left: 40px;</c:if>
+					">
 					<ul style="list-style: none; padding: 0;">
 						<li>
 							<div style="float: left;">
 <%-- 								<img align="middle" src="<%=CON%>/img/no-photo.jpg" --%>
 <!-- 									style="width: 45px; height: 45px; margin: 0 5px 0 5px;"> -->
 							</div>
-							<div class="nickname" style="padding-top: 2px;">ABC</div>
+							<div class="nickname" style="padding-top: 2px;">
+							<c:if test="${rv.reviewDepth eq 1}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i></c:if>
+							<c:choose>
+							<c:when test="${rv.reviewDepth eq 0}">${rv.login}</c:when>
+							<c:when test="${rv.reviewDepth eq 1}">사장님</c:when>
+							</c:choose>
+							</div>
 							<div class="date" style="padding-top: 4px; font-size: 12px;">
-							2020.01.01
+							<fmt:formatDate value="${rv.reviewCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
 							</div>
 						</li>
 						<li>
 							<div style="padding-top: 15px;">
-								<%
-									if (i % 2 == 0) {
-								%>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								<br>
-								<img src="<%=CON%>/resources/imgs/truckDetail/food.jpg" style="width: 180px; height: 145px;">
-								<%
-									} else {
-								%>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-								Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-								Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-								Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-								<%
-									}
-								%>
+								<c:out value="${rv.reviewContent}"/>
 							</div>
 						</li>
 					</ul>
 				</div>
-				<%
-					}
-				%>
+				</c:forEach>
 				<div id="read-more-reply" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
 					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">리뷰 더보기</div>
 				<div id="reply-insert">
 					<h3 style="padding-top: 10px;">리뷰달기</h3>
-					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden;
+					<div name="textArea" id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden;
 						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto;">
 					</div>
 <!-- 					<textarea onkeydown="resize(this)" onkeyup="resize(this)" -->
 <!-- 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;"></textarea> -->
-					<input type="file" name="file" id="file_add" style="dispaly: none;">
-					<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
-					style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
- 						margin-left: -3px; background-color: orange; border: 1px solid gray;">이미지 추가</button>
-					<button style="width: 100px; height: 30px; float: right; margin-top: 25px; margin-bottom: 30px;
- 						margin-left: -3px; background-color: orange; border: 1px solid gray;">리뷰달기</button>
+					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post">
+						<input type="file" name="file" id="file_add" style="dispaly: none;">
+						<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
+						style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
+	 						margin-left: -3px; background-color: orange; border: 1px solid gray;">이미지 추가</button>
+						<button type="submit" style="width: 100px; height: 30px; float: right; margin-top: 25px; margin-bottom: 30px;
+	 						margin-left: -3px; background-color: orange; border: 1px solid gray;">리뷰달기</button>
+					</form>
 				</div>
 			</div>
 		</section>
