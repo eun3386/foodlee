@@ -1,4 +1,4 @@
-//package com.fdl.foodlee.controller;
+package com.fdl.foodlee.controller;
 
 import java.util.logging.Logger;
 
@@ -10,9 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.service.inf.ICommentSVC;
 
-//@Controller
-//public class CommentController {
-//
+@Controller
+public class CommentController {
+
 //	Logger log = Logger.getLogger(this.getClass());
 //	
 //	@Resource(name="ICommentSVC")
@@ -22,4 +22,11 @@ import com.fdl.foodlee.service.inf.ICommentSVC;
 //	public ModelAndView openCommentList() {
 //		
 //	}
-//}
+	
+//	@Inject
+//	private ICommentSVC commentService;
+//	
+//	@RequestMapping(value="/mypage/commentList.fdl"), method=RequestMethod.GET)
+//	public String commentList() {
+//		List<> = commentService.commentList();
+	}
