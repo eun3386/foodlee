@@ -161,7 +161,7 @@
 		<a href="#" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span>
         </c:if>
         <c:if test="${not empty LoginName}"> <!-- adLoginName, selLoginName 때문에 셋다 나옴.. -->
-        <a href="${pageContext.request.contextPath}/truck/my_page.fdl" id='mypage'>마이페이지</a>
+        <a href="${pageContext.request.contextPath}/truck/my_page.fdl" id='mypage'>마이페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl">로그아웃</a>
         </c:if>
         </span>
     <hr class="line">
