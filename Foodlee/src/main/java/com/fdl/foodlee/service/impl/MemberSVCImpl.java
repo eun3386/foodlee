@@ -36,11 +36,13 @@ public class MemberSVCImpl implements IMemberSVC {
 		System.out.println(mb);
 		int id = 0;
 		String dbPW = "";
+		boolean rMb = false;
 		if( mb == null && sel == null ) {
 			return MyCode.LOGIN_NONE; // not found
 		} else if( mb != null && sel == null ) {
 			id = mb.getMbId();
 			dbPW = this.mbDao.loginAuthenticate(login, id);
+			rMb = true;
 		} else if( mb == null && sel != null ) {
 			id = sel.getSellerId();
 			dbPW = this.selDao.loginAuthenticate(login, id);
@@ -49,7 +51,11 @@ public class MemberSVCImpl implements IMemberSVC {
 		// 패스워드도 일치?
 		System.out.println(dbPW);
 		if( dbPW.equals(pw) ) { // 인증
-			return MyCode.LOGIN_AUTH_OK;
+			if( rMb ) {
+				return MyCode.MEMBER_LOGIN_AUTH_OK;
+			} else {
+				return MyCode.SELLER_LOGIN_AUTH_OK;
+			}
 		} else {
 			return MyCode.LOGIN_PW_MISMATCH;
 		}

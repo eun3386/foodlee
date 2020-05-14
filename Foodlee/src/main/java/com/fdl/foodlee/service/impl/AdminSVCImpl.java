@@ -46,7 +46,7 @@ public class AdminSVCImpl implements IAdminSVC {
 		// 패스워드도 일치? 
 		String dbPW = this.adDao.adminLoginCertification(login, id);
 		if( dbPW.equals(pw) ) { // 인증
-			return MyCode.LOGIN_AUTH_OK;
+			return MyCode.ADMIN_LOGIN_AUTH_OK;
 		} else {
 			return MyCode.LOGIN_PW_MISMATCH;
 		}

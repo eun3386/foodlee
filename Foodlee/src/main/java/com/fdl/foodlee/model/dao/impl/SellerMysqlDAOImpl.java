@@ -28,9 +28,9 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	= "select count(seller_id) from sellers where login = ?";
 	private static final String SQL_LOGIN_AUTH
 	= "select login, cast(aes_decrypt(unhex(password),?) as char(32) "
-		+ "character set utf8) as password from sellers where seller_id = ?";
+		+ "character set utf8) as pw from sellers where seller_id = ?";
 	private static final String SQL__SELLER_LOGIN_TIME_UPDATE
-	= "update sellers set login_time=now() where mb_id = ?";
+	= "update sellers set login_time=now() where seller_id = ?";
 	private static final String SQL_SELECT_SELLER_ID 
 	= "select * from sellers where seller_id = ?";
 	private static final String SQL_SELECT_SELLER_LOGIN 
@@ -39,7 +39,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	= "select seller_id from sellers where login = ?";
 	private static final String SQL_UPDATE_SELLER //TODO 비밀번호 변경 따로 ? 사업자등록번호 변경유무
 	= "update sellers set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
-		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company=? where seller_id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_rn=? where seller_id = ?";
 	private static final String SQL_DELETE_SELLER
 	= "delete from sellers where seller_id = ?";
 	
@@ -64,7 +64,6 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	}
 
 	@Override
-	//public String loginAuthenticate(String login, int selId) {
 	public String loginAuthenticate(String login, int selId) {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
 				new Object[]{login,selId},

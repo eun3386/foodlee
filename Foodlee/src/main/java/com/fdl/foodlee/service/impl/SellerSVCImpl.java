@@ -20,7 +20,7 @@ public class SellerSVCImpl implements ISellerSVC {
 	
 	@Override
 	public int loginProcess(String login, String pw) {
-System.out.println("SVC: loginProcess() - " + login);
+		System.out.println("SVC: loginProcess() - " + login);
 		
 		if( login == null || login.isEmpty() ) 
 				return MyCode.LOGIN_PARAM_ERROR;
@@ -33,11 +33,13 @@ System.out.println("SVC: loginProcess() - " + login);
 		System.out.println(mb);
 		int id = 0;
 		String dbPW = "";
+		boolean rMb = false;
 		if( mb == null && sel == null ) {
 			return MyCode.LOGIN_NONE; // not found
 		} else if( mb != null && sel == null ) {
 			id = mb.getMbId();
 			dbPW = this.mbDao.loginAuthenticate(login, id);
+			rMb = true;
 		} else if( mb == null && sel != null ) {
 			id = sel.getSellerId();
 			dbPW = this.selDao.loginAuthenticate(login, id);
@@ -46,7 +48,11 @@ System.out.println("SVC: loginProcess() - " + login);
 		// 패스워드도 일치?
 		System.out.println(dbPW);
 		if( dbPW.equals(pw) ) { // 인증
-			return MyCode.LOGIN_AUTH_OK;
+			if( rMb ) {
+				return MyCode.MEMBER_LOGIN_AUTH_OK;
+			} else {
+				return MyCode.SELLER_LOGIN_AUTH_OK;
+			}
 		} else {
 			return MyCode.LOGIN_PW_MISMATCH;
 		}

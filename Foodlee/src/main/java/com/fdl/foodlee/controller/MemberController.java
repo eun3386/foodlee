@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fdl.foodlee.model.dao.MyCode;
 import com.fdl.foodlee.service.inf.IAdminSVC;
 import com.fdl.foodlee.service.inf.IMemberSVC;
+import com.fdl.foodlee.service.inf.ISellerSVC;
 
 
 /*
@@ -49,6 +50,9 @@ public class MemberController {
 	@Autowired
 	private IAdminSVC adSvc;
 	
+	@Autowired
+	private ISellerSVC selSvc;
+	
 //	member/login_form.fdl (form, get; 비회원)
 	@RequestMapping(value = "/login_form.fdl", method = RequestMethod.GET)
 	public String memberLoginForm() {
@@ -63,14 +67,21 @@ public class MemberController {
 		System.out.println("pw = "+ password);
 		ModelAndView mav = new ModelAndView();
 		int authResult;
-		if(login.equals("admin") == false) {
+		if( login.equals("admin") == false ) {
 			authResult = mbSvc.loginProcess(login, password);
-			if( authResult == MyCode.LOGIN_AUTH_OK ) {
+			if( authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
 				ses.setAttribute("mbLoginName", login);
 				ses.setAttribute("mbLoginTime", 
 						System.currentTimeMillis() );
 				int mbId = mbSvc.selectMemberIdByLogin(login);
 				ses.setAttribute("mbId", new Integer(mbId) );
+				mav.setViewName("redirect:/main.fdl");
+			} else if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
+				ses.setAttribute("selLoginName", login);
+				ses.setAttribute("selLoginTime", 
+						System.currentTimeMillis() );
+				int selId = selSvc.selectSellerIdByLogin(login);
+				ses.setAttribute("selId", new Integer(selId) );
 				mav.setViewName("redirect:/main.fdl");
 			} else {
 				mav.addObject("msg", "로그인 실패!! - "
@@ -82,7 +93,7 @@ public class MemberController {
 		} else {
 			System.out.println("login, pw" + login + password);
 			authResult = adSvc.adminLoginCheck(login, password);
-			if(authResult == MyCode.LOGIN_AUTH_OK ) {
+			if(authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
 				ses.setAttribute("adLoginName", login);
 				ses.setAttribute("adLoginTime", 
 						System.currentTimeMillis() );
