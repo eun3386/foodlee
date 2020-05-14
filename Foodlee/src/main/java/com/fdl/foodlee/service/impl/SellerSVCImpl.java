@@ -37,11 +37,11 @@ public class SellerSVCImpl implements ISellerSVC {
 		if( mb == null && sel == null ) {
 			return MyCode.LOGIN_NONE; // not found
 		} else if( mb != null && sel == null ) {
-			id = mb.getMbId();
+			id = mb.getId();
 			dbPW = this.mbDao.loginAuthenticate(login, id);
 			rMb = true;
 		} else if( mb == null && sel != null ) {
-			id = sel.getSellerId();
+			id = sel.getId();
 			dbPW = this.selDao.loginAuthenticate(login, id);
 		}
 		

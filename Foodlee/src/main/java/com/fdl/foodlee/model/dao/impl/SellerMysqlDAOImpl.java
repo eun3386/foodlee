@@ -25,23 +25,23 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	= "insert into sellers values(null, ?, hex(aes_encrypt(?,?)), "
 		+"?, ?, ?, ?, ?, ?, ?, now(), now(), ?, null, null)";
 	private static final String SQL_SELLER_DUPCHECK
-	= "select count(seller_id) from sellers where login = ?";
+	= "select count(id) from sellers where login = ?";
 	private static final String SQL_LOGIN_AUTH
 	= "select login, cast(aes_decrypt(unhex(password),?) as char(32) "
-		+ "character set utf8) as pw from sellers where seller_id = ?";
+		+ "character set utf8) as pw from sellers where id = ?";
 	private static final String SQL__SELLER_LOGIN_TIME_UPDATE
-	= "update sellers set login_time=now() where seller_id = ?";
+	= "update sellers set login_time=now() where id = ?";
 	private static final String SQL_SELECT_SELLER_ID 
-	= "select * from sellers where seller_id = ?";
+	= "select * from sellers where id = ?";
 	private static final String SQL_SELECT_SELLER_LOGIN 
 	= "select * from sellers where login = ?";
 	private static final String SQL_SELECT_SELLER_PK
-	= "select seller_id from sellers where login = ?";
+	= "select id from sellers where login = ?";
 	private static final String SQL_UPDATE_SELLER //TODO 비밀번호 변경 따로 ? 사업자등록번호 변경유무
 	= "update sellers set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
-		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_rn=? where seller_id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_rn=? where id = ?";
 	private static final String SQL_DELETE_SELLER
-	= "delete from sellers where seller_id = ?";
+	= "delete from sellers where id = ?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -64,26 +64,27 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	}
 
 	@Override
-	public String loginAuthenticate(String login, int selId) {
+	public String loginAuthenticate(String login, int id) {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
-				new Object[]{login,selId},
+				new Object[]{login,id},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
 		String dbPW = (String) rMap.get("pw");
 		System.out.println("DB pw: " + dbPW);
 		return dbPW;
-		//return jtem.update(SQL__SELLER_LOGIN_TIME_UPDATE, selId);
+		//return jtem.update(SQL__SELLER_LOGIN_TIME_UPDATE, id);
 	}
 
 	@Override
-	public SellerVO selectOneSeller(int selId) {
+	public SellerVO selectOneSeller(int id) {
 		try {			
 			return jtem.queryForObject(SQL_SELECT_SELLER_ID,
 				new RowMapper<SellerVO>() {
 					@Override
 					public SellerVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 						return new SellerVO(
-								rs.getInt("seller_id"),
+								rs.getInt("id"),
+								rs.getString("type"),
 								rs.getString("login"),
 								rs.getString("password"),
 								rs.getString("name"),
@@ -99,9 +100,9 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 								rs.getTimestamp("login_time"),
 								rs.getTimestamp("logout_time") );
 					}
-				} , selId);
+				} , id);
 		} catch (DataAccessException e) {
-			System.out.println("dao / 판매자 회원 편집폼 실패." + selId );
+			System.out.println("dao / 판매자 회원 편집폼 실패." + id );
 			return null;
 		} // 익명객체 방식의 rowmapper 인자로 전달
 	}
@@ -136,17 +137,17 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 			int r = jtem.update(SQL_UPDATE_SELLER, 
 				sel.getPassword(), sel.getLogin(), sel.getName(),
 				sel.getGender(), sel.getAge(), sel.getEmail(), sel.getPhoneNumber(),
-				sel.getAddress(), sel.getSellerId(), sel.getCompanyRN() );
+				sel.getAddress(), sel.getId(), sel.getCompanyRN() );
 			return r == 1;
 		} catch (DataAccessException e) {
-			System.out.println("dao/ 판매자 회원 정보 갱신 실패 - " + sel.getSellerId());
+			System.out.println("dao/ 판매자 회원 정보 갱신 실패 - " + sel.getId());
 			return false;
 		}
 	}
 
 	@Override
-	public boolean deleteOneSeller(int selId) {
-		int r = jtem.update(SQL_DELETE_SELLER, selId);
+	public boolean deleteOneSeller(int id) {
+		int r = jtem.update(SQL_DELETE_SELLER, id);
 		return r == 1;
 	}
 

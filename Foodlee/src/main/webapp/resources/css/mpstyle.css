@@ -31,15 +31,28 @@ body{
 .table th{background-color:#eee;}
 .table td{border-top:1px solid #ddd;background-color:white;}
 
+.logo
+{
+    position: absolute;
+/*  left : 133px;*/
+/*    float: left;*/
+  top : 20px;
+    left: 20px;
+  width : 158px;
+  height : 51px;
+  padding-bottom: 10px;
+}
+
 /* 헤더 */
-#header{box-shadow: 0 0 10px rgba(0,0,0, 0.2); }
+/* #header{box-shadow: 0 0 10px rgba(0,0,0, 0.2); } */
+#header{position:fixed;background-color: white;width:100%;top:0;left:0;z-index: 99;}
 #header>.wrapper>.nav{}
 #header>.wrapper>.nav>li{float:right; }
 #header>.wrapper>.nav>li>a{display: inline-block; color: #555; text-decoration: none; padding: 20px 20px; font-size: 19px; font-weight: 500; }
 #header>.wrapper>.nav>li>a:hover{color:#000; }
 
 #main_nav_spacer{padding:25px 0;}
-#main_nav{text-align: center;  background-color: white;width:100%;top:0;left:0;z-index: 99;}
+#main_nav{text-align: center;  background-color: white;width:100%;top:0;left:0;z-index: 98;padding-top:47px;}
 #main_nav.active{position:fixed;box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);}
 #main_nav>button{display:inline-block; min-width:150px; background-color:#f39c12; border:none; color:white; margin:3px 2px; padding:15px 10px; box-sizing: border-box; font-size:17px; text-decoration: none; text-align: center; transition: background-color 0.3s; cursor:pointer; outline:none;}
 #main_nav>button:hover{background-color:#ffa71c;}

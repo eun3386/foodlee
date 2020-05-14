@@ -1,14 +1,25 @@
 @charset "UTF-8";
+
+#truck_insert_wrap {
+	display: inline-block;
+	width: 650px;
+	height: 650px;
+}
+
+.truck_insert_slide {
+	
+}
+
 #insert_form {
-	position: absolute;
+	position: fixed;
 	border: 2px solid orange;
-	width: 960px;
-	height: 1080px;
-	margin-top: 150px;
+	width: 600px;
+	height: 600px;
+	margin-top: 200px;
 	box-sizing: border-box;
 	padding: 30px;
 	background-color: white;
-	left: 35%;
+	left: 37%;
 }
 
 

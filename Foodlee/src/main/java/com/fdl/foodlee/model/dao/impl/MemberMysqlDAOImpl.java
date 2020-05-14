@@ -24,23 +24,23 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	= "insert into members values(null, ?, hex(aes_encrypt(?,?)), "
 		+"?, ?, ?, ?, ?, ?, ?, now(), now(), null, null)";
 	private static final String SQL_MEMBER_DUPCHECK
-	= "select count(mb_id) from members where login = ?";
+	= "select count(id) from members where login = ?";
 	private static final String SQL_LOGIN_AUTH
 	= "select login, cast(aes_decrypt(unhex(password), ?) as char(32) "
-		+ "character set utf8) as pw from members where mb_id = ?";
+		+ "character set utf8) as pw from members where id = ?";
 	private static final String SQL__MEMBER_LOGIN_TIME_UPDATE
-	= "update members set login_time=now() where mb_id = ?";
+	= "update members set login_time=now() where id = ?";
 	private static final String SQL_SELECT_MEMBER_ID 
-	= "select * from members where mb_id = ?";
+	= "select * from members where id = ?";
 	private static final String SQL_SELECT_MEMBER_LOGIN 
 	= "select * from members where login = ?";
 	private static final String SQL_SELECT_MEMBER_PK
-	= "select mb_id from members where login = ?";
+	= "select id from members where login = ?";
 	private static final String SQL_UPDATE_MEMBER //TODO 비밀번호 변경 따로 ?
 	= "update members set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
-		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where mb_id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where id = ?";
 	private static final String SQL_DELETE_MEMBER
-	= "delete from members where mb_id = ?";
+	= "delete from members where id = ?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -63,26 +63,27 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	}
 
 	@Override
-	public String loginAuthenticate(String login, int mbId) {
+	public String loginAuthenticate(String login, int id) {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
-				new Object[]{login,mbId},
+				new Object[]{login,id},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
 		String dbPW = (String) rMap.get("pw");
 		System.out.println("DB pw: " + dbPW);
 		return dbPW;
-		//return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, mbId);
+		//return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, id);
 	}
 
 	@Override
-	public MemberVO selectOneMember(int mbId) {
+	public MemberVO selectOneMember(int id) {
 		try {			
 			return jtem.queryForObject(SQL_SELECT_MEMBER_ID,
 				new RowMapper<MemberVO>() {
 					@Override
 					public MemberVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 						return new MemberVO(
-								rs.getInt("mb_id"),
+								rs.getInt("id"),
+								rs.getString("type"),
 								rs.getString("login"),
 								rs.getString("password"),
 								rs.getString("name"),
@@ -97,9 +98,9 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 								rs.getTimestamp("login_time"),
 								rs.getTimestamp("logout_time") );
 					}
-				} , mbId);
+				} , id);
 		} catch (DataAccessException e) {
-			System.out.println("dao / 일반 회원 편집폼 실패." + mbId );
+			System.out.println("dao / 일반 회원 편집폼 실패." + id );
 			return null;
 		} // 익명객체 방식의 rowmapper 인자로 전달
 	}
@@ -134,17 +135,17 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 			int r = jtem.update(SQL_UPDATE_MEMBER, 
 				mb.getPassword(), mb.getLogin(), mb.getName(),
 				mb.getGender(), mb.getAge(), mb.getEmail(), mb.getPhoneNumber(),
-				mb.getAddress(), mb.getMbId() );
+				mb.getAddress(), mb.getId() );
 			return r == 1;
 		} catch (DataAccessException e) {
-			System.out.println("dao/ 일반 회원 정보 갱신 실패 - " + mb.getMbId());
+			System.out.println("dao/ 일반 회원 정보 갱신 실패 - " + mb.getId());
 			return false;
 		}
 	}
 
 	@Override
-	public boolean deleteOneMember(int mbId) {
-		int r = jtem.update(SQL_DELETE_MEMBER, mbId);
+	public boolean deleteOneMember(int id) {
+		int r = jtem.update(SQL_DELETE_MEMBER, id);
 		return r == 1;
 	}
 

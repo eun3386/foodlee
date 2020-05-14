@@ -33,18 +33,19 @@ public class MemberSVCImpl implements IMemberSVC {
 		// 가입된 회원인지?
 		MemberVO mb = mbDao.selectOneMember(login);
 		SellerVO sel = selDao.selectOneSeller(login);
-		System.out.println(mb);
+		System.out.println("멤버 = "+mb);
+		System.out.println("판매자 = "+sel);
 		int id = 0;
 		String dbPW = "";
 		boolean rMb = false;
 		if( mb == null && sel == null ) {
 			return MyCode.LOGIN_NONE; // not found
 		} else if( mb != null && sel == null ) {
-			id = mb.getMbId();
+			id = mb.getId();
 			dbPW = this.mbDao.loginAuthenticate(login, id);
 			rMb = true;
 		} else if( mb == null && sel != null ) {
-			id = sel.getSellerId();
+			id = sel.getId();
 			dbPW = this.selDao.loginAuthenticate(login, id);
 		}
 		

@@ -19,8 +19,14 @@ public class TruckListController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "truckList.fdl", method = RequestMethod.GET)
-	public String mapMain() {
+	public String truckList() {
 		return "truckList";
+	}
+	
+	@RequestMapping(value = "ft_new_form.fdl",method = RequestMethod.GET)
+	public String foodtruckNewForm() {
+		System.out.println("테스트foodtruckNewForm");
+		return "truck/ft_new_form";
 	}
 	
 }

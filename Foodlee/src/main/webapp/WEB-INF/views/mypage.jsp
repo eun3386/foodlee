@@ -8,7 +8,7 @@
 <title>푸들이-푸드트럭나들이</title>
 <link rel="stylesheet" type="text/css" href="./resources/css/mpreset.css">
 <link rel="stylesheet" type="text/css" href="./resources/css/mpstyle.css">
-<link href='./resources/css/main.css' rel="stylesheet" type="text/css"/>
+<!-- <link href='./resources/css/main.css' rel="stylesheet" type="text/css"/> -->
 
 <script type="text/javascript" src="./js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="./js/script.js"></script>
@@ -17,8 +17,14 @@
 </head>
 <body>
 	<header id="header">
+		<a href="#">
+			<img class="logo" src="./resource/css/imgs/logo.png">
+		</a>
 		<div class="wrapper">
-			<%@ include file='common/_mp_header.jsp' %>
+			<ul class="nav clearfix">
+				<li><a href="#">회원가입</a></li>
+				<li><a href="#">로그인</a></li>
+			</ul>
 		</div>
 	</header>
 	<div class="main">

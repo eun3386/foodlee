@@ -13,6 +13,7 @@
 		font-size: 1.5em;
 /* 		transition: all 5.0s, color 0.5; */
 /* 		-webkit-transition: all 5.0s, color 0.5; */
+		margin: 0 auto;
 	}
 	td {
 		border: none;
@@ -26,6 +27,9 @@
 		width: 600px;
 		text-align: center;
 		height: 300px;
+	}
+	#choice_btn {
+		margin: 0 auto;
 	}
 	/*
  	@media ( min-width: 1023px ) {
@@ -58,7 +62,7 @@
 	.checkBox textarea{width: 96%;height: 90px; margin: 0 2%;background-color: #f7f7f7;color: #888; border: none; resize: none;}
 	.footBtwrap{margin-top: 15px;}
 	.footBtwrap>li{float: left;width: 50%;height: 60px;}
-	.footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;}
+/* 	.footBtwrap>li>button{display: block; width: 100%;height: 100%; font-size: 20px;text-align: center;line-height: 60px;} */
 	.fpmgBt1{background-color: #fff;color:#888}
 	.fpmgBt2{background-color: lightsalmon;color: #fff}
 	/* 복붙	*/
@@ -90,7 +94,7 @@
 </script>
 <div class="wrap">
 <div>
-	<table border="0">
+	<table border="0" id="choice_btn">
 		<tr>
 			<td id="btn">
 				<button class="button">일반<br>회원가입</button>
@@ -159,10 +163,10 @@
  
                 </li>
             </ul>
-            <ul class="footBtwrap clearfix">
-                <li><button class="fpmgBt1">비동의</button></li>
-                <li><button class="fpmgBt2">동의</button></li>
-            </ul>
+<!--             <ul class="footBtwrap clearfix"> -->
+<!--                 <li><button class="fpmgBt1">비동의</button></li> -->
+<!--                 <li><button class="fpmgBt2">동의</button></li> -->
+<!--             </ul> -->
         </form>
 </div>
 </div>

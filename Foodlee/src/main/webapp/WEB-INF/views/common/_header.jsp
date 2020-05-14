@@ -12,6 +12,7 @@
              	<a href="${pageContext.request.contextPath}/admin.fdl"">
              	<c:out value="${adLoginName}" default=""/> 로그인 중...
              	</a>
+             	<a href="admin_logout.fdl">로그아웃</a>
              </c:if>
              </div>
              <!-- //header_menu -->
