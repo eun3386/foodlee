@@ -66,23 +66,24 @@
         d3.json("json/seoul_municipalities_topo_simple.json", function(error, data) {
           var features = topojson.feature(data, data.objects.seoul_municipalities_geo).features;
           map.selectAll('path')
-              .data(features)
-            .enter().append('path')
-              .attr('class', function(d) { console.log(d.properties.code); 
-                                          geocodes.push(d.properties.code);
-                                           $(document).on('click',".c"+d.properties.code,function(){
-                window.open("municipalityList.jsp","","width=1006px,height=580px");
-            });
-                                          return 'municipality c' + d.properties.code })
+             .data(features)
+             .enter().append('path')
+             .attr('class', function(d) { 
+            	 console.log(d.properties.code); 
+                 geocodes.push(d.properties.code);
+					$(document).on('click',".c"+d.properties.code,function(){
+		                window.open("municipalityList.jsp","","width=1006px,height=580px");
+		            });
+						 return 'municipality c' + d.properties.code })
               .attr('d', path);
 
           map.selectAll('text')
-              .data(features)
-            .enter().append("text")
-              .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
-              .attr("dy", ".35em")
-              .attr("class", "municipality-label")
-              .text(function(d) { return d.properties.name; })
+             .data(features)
+             .enter().append("text")
+             .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+             .attr("dy", ".35em")
+             .attr("class", "municipality-label")
+             .text(function(d) { return d.properties.name; })
         });
       
         
@@ -160,7 +161,7 @@
 		<c:if test="${empty mbLoginName}">
 		<a href="#" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span>
         </c:if>
-        <c:if test="${not empty mbLoginName}"> <!-- adLoginName, selLoginName 때문에 셋다 나옴.. -->
+        <c:if test="${not empty mbLoginName}">
         <a href="${pageContext.request.contextPath}/truck/my_page.fdl" id='mypage'>마이페이지</a>
         </c:if>
         </span>
