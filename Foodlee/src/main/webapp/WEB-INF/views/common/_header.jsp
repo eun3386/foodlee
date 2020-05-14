@@ -4,8 +4,15 @@
      <div class="map_row">
          <div class="map_header">
              <div class="map_header_login">
+             <c:if test="${empty adLoginName}">
                  <a href="${pageContext.request.contextPath}/member/login_form.fdl">Login</a>
                  <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl">Join</a>
+             </c:if>
+             <c:if test="${not empty adLoginName}">
+             	<a href="${pageContext.request.contextPath}/admin.fdl"">
+             	<c:out value="${adLoginName}" default=""/> 로그인 중...
+             	</a>
+             </c:if>
              </div>
              <!-- //header_menu -->
              <div class="map_header_tit">
