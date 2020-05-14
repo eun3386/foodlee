@@ -73,14 +73,15 @@ function onSuccessGeolocation(position) {
     map.setZoom(15); // 지도의 줌 레벨을 변경합니다.
     var marker = new naver.maps.Marker({ // 지도위의 마커 표시
         position: location,
+		map: map,
         icon: {
-        	url: '<%=application.getContextPath()%>/resources/imgs/mapMain/star.png',
-        	size: new naver.maps.Size(25, 33),
-            scaledSize: new naver.maps.Size(25, 33),
+        	url: '<%=application.getContextPath()%>/resources/imgs/mapMain/marker-blue.png',
+//         	size: new naver.maps.Size(25, 33),
+//             scaledSize: new naver.maps.Size(25, 33),
             origin: new naver.maps.Point(0, 0),
-            anchor: new naver.maps.Point(13, 16)
+            anchor: new naver.maps.Point(13, 16),
         },
-		map: map
+        animation: naver.maps.Animation.BOUNCE
     });
 /////////////////////////////// 써클
     var GREEN_FACTORY = location;
@@ -94,6 +95,56 @@ function onSuccessGeolocation(position) {
     });
     console.log('Coordinates: ' + location.toString());
 }
+// truck 위치 마커
+// var truckmarkerList = [];
+
+// for (var i=0, ii=latlngs.length; i<ii; i++) {
+//     var icon = {
+//             url: HOME_PATH +'/img/example/sp_pins_spot_v3.png',
+//             size: new naver.maps.Size(24, 37),
+//             anchor: new naver.maps.Point(12, 37),
+//             origin: new naver.maps.Point(i * 29, 0)
+//         },
+//         marker = new naver.maps.Marker({
+//             position: latlngs[i],
+//             map: map,
+//             icon: icon
+//         });
+
+//     marker.set('seq', i);
+
+//     truckmarkerList.push(marker);
+
+//     marker.addListener('mouseover', onMouseOver);
+//     marker.addListener('mouseout', onMouseOut);
+
+//     icon = null;
+//     marker = null;
+// }
+
+// function onMouseOver(e) {
+//     var marker = e.overlay,
+//         seq = marker.get('seq');
+
+//     marker.setIcon({
+//         url: HOME_PATH +'/img/example/sp_pins_spot_v3_over.png',
+//         size: new naver.maps.Size(24, 37),
+//         anchor: new naver.maps.Point(12, 37),
+//         origin: new naver.maps.Point(seq * 29, 50)
+//     });
+// }
+
+// function onMouseOut(e) {
+//     var marker = e.overlay,
+//         seq = marker.get('seq');
+
+//     marker.setIcon({
+//         url: HOME_PATH +'/img/example/sp_pins_spot_v3.png',
+//         size: new naver.maps.Size(24, 37),
+//         anchor: new naver.maps.Point(12, 37),
+//         origin: new naver.maps.Point(seq * 29, 0)
+//     });
+// }
 ////////////////////////////////
 function onErrorGeolocation() {
     var center = map.getCenter();
@@ -125,7 +176,7 @@ naver.maps.Event.addListener(map, 'zoom_changed', function (zoom) {
     console.log('zoom:' + zoom);
 });
 
-var markerList = [];
+// var markerList = [];
 var menuLayer = $('<div style="position:absolute;z-index:10000;background-color:#fff;border:solid 1px #333;padding:10px;display:none;"></div>');
 
 map.getPanes().floatPane.appendChild(menuLayer[0]);
@@ -134,9 +185,8 @@ map.getPanes().floatPane.appendChild(menuLayer[0]);
 naver.maps.Event.addListener(map, 'click', function(e) {
     var marker = new naver.maps.Marker({ // 지도위의 마커 표시
     	icon: {
-        	url: '<%=application.getContextPath()%>/resources/imgs/mapMain/pin.png',
-        	size: new naver.maps.Size(25, 33),
-            scaledSize: new naver.maps.Size(24, 33),
+        	url: '<%=application.getContextPath()%>/resources/imgs/mapMain/marker-blue.png',
+//         	size: new naver.maps.Size(25, 33),
             origin: new naver.maps.Point(0, 0),
             anchor: new naver.maps.Point(13, 16)
         },
