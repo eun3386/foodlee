@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
 <div id = "event-list-wrap">
     <table id="event-list-table" border="0">
         <caption id="gu-truck-info"><img src="resources/css/imgs/foodlee-face-white.png" class="face-white"> <span id="gu">푸들이</span> EVENT
-<%--         	<c:if test="${eq}"> --%>
+<%--         	<c:if test="${mbLoginName eq admin}"> --%>
         		<input id="event-add" type="button" value="글쓰기" onclick="addEvent()">
 <!--         	</c:if> -->
         </caption>

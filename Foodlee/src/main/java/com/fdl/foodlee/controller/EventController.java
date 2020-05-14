@@ -72,7 +72,7 @@ public class EventController {
 		// 상세보기 => atId?
 		if( evRtkey > 0 ) {
 			System.out.println("게시글 등록 성공: " + evRtkey);
-			return "redirect:Event_show.my?id="+evRtkey;
+			return "redirect:event_show.my?id="+evRtkey;
 		} else {
 			System.out.println("게시글 등록 실패: " + title);
 			return "event/event_new_form"; // FW
@@ -82,7 +82,7 @@ public class EventController {
 //	event_show.fdl (get, proc, dao, param?id)
 	@RequestMapping(value = "event_show.my", 
 			method = RequestMethod.GET)
-	public String EventShowProc(HttpSession ses, 
+	public String eventShowProc(HttpSession ses, 
 			int id, Model model) {
 		EventVO ev = 
 			this.evSvc.selectOneEvent(id);
@@ -124,7 +124,7 @@ public class EventController {
 			} else {
 				model.addAttribute("msg", "댓글리스트 조회 실패");
 			}			
-			return "Event/ev_show";
+			return "event/ev_show";
 		} else {			
 			model.addAttribute("msg", 
 				"게시글 상세조회 실패 - " + id);
