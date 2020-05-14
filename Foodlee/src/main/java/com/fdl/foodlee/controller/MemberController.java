@@ -125,4 +125,21 @@ public class MemberController {
 		System.out.println("mb sign up form 준비!!!");
 		return "member/mb_sign_up_form";
 	}
+	
+// 	member_logout.fdl
+	@RequestMapping(value = "member_logout.fdl", 
+			method = RequestMethod.GET)
+	public String memberLogoutProc(HttpSession ses) {
+		String login = (String)ses
+					.getAttribute("mbLoginName");
+		long loginStarted = (Long)ses
+				.getAttribute("mbLoginTime");
+		long currentTime = System.currentTimeMillis();
+		long elapsedTime = currentTime - loginStarted;
+		
+		System.out.println(login + " 회원이 로그아웃: "
+				+ elapsedTime/1000.0 + "초가 로그인 활동함.." );
+		ses.invalidate();
+		return "redirect:/";
+	}
 }

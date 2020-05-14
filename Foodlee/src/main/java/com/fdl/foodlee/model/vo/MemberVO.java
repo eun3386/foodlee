@@ -3,7 +3,8 @@ package com.fdl.foodlee.model.vo;
 import java.sql.Timestamp;
 
 public class MemberVO {
-	private int mbId; // 회원번호 ⇔ int mb_id <<PK>> AI(AutoIncrement)
+	private int id; // 회원번호 ⇔ int mb_id <<PK>> AI(AutoIncrement)
+	private String type; // 회원구분
 	private String login; // 아이디 ⇔ varchar(12) login <<UQ>> NN
 	private String password; // 비밀번호 ⇔ varchar(24) password NN
 	private String name; // 이름 ⇔ varchar(12) name NN
@@ -21,13 +22,14 @@ public class MemberVO {
 	public MemberVO() {}
 	public MemberVO(String login, String password, String name, String gender, int age, String residentRN, String email,
 			String phoneNumber, String address) {
-		this(0, login, password, name, gender, age, residentRN, email, phoneNumber, address, null, null, null, null);
+		this(0, "member", login, password, name, gender, age, residentRN, email, phoneNumber, address, null, null, null, null);
 	}
-	public MemberVO(int mbId, String login, String password, String name, String gender, int age, String residentRN,
+	public MemberVO(int id, String type, String login, String password, String name, String gender, int age, String residentRN,
 			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt,
 			Timestamp loginTime, Timestamp logoutTime) {
 		super();
-		this.mbId = mbId;
+		this.id = id;
+		this.type = type;
 		this.login = login;
 		this.password = password;
 		this.name = name;
@@ -45,17 +47,23 @@ public class MemberVO {
 	
 	@Override
 	public String toString() {
-		return "MemberVO [mbId=" + mbId + ", login=" + login + ", password=" + password + ", name=" + name + ", gender="
-				+ gender + ", age=" + age + ", residentRN=" + residentRN + ", email=" + email + ", phoneNumber="
-				+ phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt=" + updatedAt
-				+ ", loginTime=" + loginTime + ", logoutTime=" + logoutTime + "]";
+		return "MemberVO [id=" + id + ", type=" + type + ", login=" + login + ", password=" + password + ", name="
+				+ name + ", gender=" + gender + ", age=" + age + ", residentRN=" + residentRN + ", email=" + email
+				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt="
+				+ updatedAt + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime + "]";
 	}
 	
-	public int getMbId() {
-		return mbId;
+	public int getId() {
+		return id;
 	}
-	public void setMbId(int mbId) {
-		this.mbId = mbId;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	public String getLogin() {
 		return login;

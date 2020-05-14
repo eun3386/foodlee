@@ -3,7 +3,8 @@ package com.fdl.foodlee.model.vo;
 import java.sql.Timestamp;
 
 public class SellerVO {
-	private int sellerId; // 판매자 번호 ⇔  int seller_id <<PK>> AI(AutoIncrement)
+	private int id; // 판매자 번호 ⇔  int seller_id <<PK>> AI(AutoIncrement)
+	private String type; // 회원구분
 	private String login; // <<UQ>> 아이디 ⇔  varchar(12) login <<UQ>> NN
 	private String password; // 비밀번호 ⇔  varchar(24) password NN
 	private String name; // 이름 ⇔  varchar(12) name NN
@@ -22,13 +23,14 @@ public class SellerVO {
 	public SellerVO() {}
 	public SellerVO(String login, String password, String name, String gender, int age, String residentRN, String email,
 			String phoneNumber, String address, String companyRN) {
-		this(0, login, password, name, gender, age, residentRN, email, phoneNumber, address, null, null, companyRN, null, null);
+		this(0, "seller", login, password, name, gender, age, residentRN, email, phoneNumber, address, null, null, companyRN, null, null);
 	}
-	public SellerVO(int sellerId, String login, String password, String name, String gender, int age, String residentRN,
+	public SellerVO(int id, String type, String login, String password, String name, String gender, int age, String residentRN,
 			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt, String companyRN,
 			Timestamp loginTime, Timestamp logoutTime) {
 		super();
-		this.sellerId = sellerId;
+		this.id = id;
+		this.type = type;
 		this.login = login;
 		this.password = password;
 		this.name = name;
@@ -47,18 +49,24 @@ public class SellerVO {
 	
 	@Override
 	public String toString() {
-		return "SellerVO [sellerId=" + sellerId + ", login=" + login + ", password=" + password + ", name=" + name
-				+ ", gender=" + gender + ", age=" + age + ", residentRN=" + residentRN + ", email=" + email
+		return "SellerVO [id=" + id + ", type=" + type + ", login=" + login + ", password=" + password + ", name="
+				+ name + ", gender=" + gender + ", age=" + age + ", residentRN=" + residentRN + ", email=" + email
 				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt="
 				+ updatedAt + ", companyRN=" + companyRN + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime
 				+ "]";
 	}
 	
-	public int getSellerId() {
-		return sellerId;
+	public int getId() {
+		return id;
 	}
-	public void setSellerId(int sellerId) {
-		this.sellerId = sellerId;
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	public String getLogin() {
 		return login;
