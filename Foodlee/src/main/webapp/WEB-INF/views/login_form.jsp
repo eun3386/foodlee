@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="<%= application.getContextPath()%>/resources/css/reset.css" type="text/css" rel="stylesheet">
 <link href="<%= application.getContextPath()%>/resources/css/login.css" type="text/css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -10,7 +11,7 @@
 <body>
 <div id="login_wrap" class="slide">
 	<div id="login_form">
-		<form action="<%= application.getContextPath()%>/member/login.fdl" method="post">
+		<form action="<%= application.getContextPath()%>/login.fdl" method="post">
 	 		<table border='0'>
 	 			<tr id="title"><th>푸들이 로그인</th></tr>
 	 			<tr>
