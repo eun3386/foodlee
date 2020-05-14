@@ -46,15 +46,15 @@ public class LoginController {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
-				int mbId = mbSvc.selectMemberIdByLogin(login);
-				ses.setAttribute("mbId", new Integer(mbId) );
+				int id = mbSvc.selectMemberIdByLogin(login);
+				ses.setAttribute("id", new Integer(id) );
 				mav.setViewName("redirect:/main.fdl");
 			} else if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
-				int selId = selSvc.selectSellerIdByLogin(login);
-				ses.setAttribute("selId", new Integer(selId) );
+				int id = selSvc.selectSellerIdByLogin(login);
+				ses.setAttribute("id", new Integer(id) );
 				mav.setViewName("redirect:/main.fdl");
 			} else {
 				mav.addObject("msg", "로그인 실패!! - "
@@ -65,13 +65,13 @@ public class LoginController {
 			
 		} else {
 			System.out.println("login, pw" + login + password);
-			authResult = adSvc.adminLoginCheck(login, password);
-			if(authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
+			authResult = logSvc.loginProcess(login, password);
+			if(authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
-				int adId = adSvc.selectAdminIdbyLogin(login);
-				ses.setAttribute("adId", new Integer(adId) );
+				int id = mbSvc.selectMemberIdByLogin(login);
+				ses.setAttribute("id", new Integer(id) );
 				mav.setViewName("redirect:/admin.fdl");
 			} else {
 				mav.addObject("msg", "로그인 실패!! - "
