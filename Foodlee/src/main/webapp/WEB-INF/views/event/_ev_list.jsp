@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<%@ include file="../common/_common.jsp" %>
+
   <script>
       $( function() {
         $( document ).tooltip();
@@ -37,7 +37,9 @@ pageEncoding="UTF-8"%>
 <div id = "event-list-wrap">
     <table id="event-list-table" border="0">
         <caption id="gu-truck-info"><img src="resources/css/imgs/foodlee-face-white.png" class="face-white"> <span id="gu">푸들이</span> EVENT
+        		<c:if test="${mbLoginName eq 'admin'}">
         		<input id="event-add" type="button" value="글쓰기" onclick="addEvent()">
+        		</c:if>
         </caption>
         
         <thead>
