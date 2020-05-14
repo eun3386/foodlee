@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<!-- <!DOCTYPE html> -->
-<!-- <html lang="en"> -->
-<!-- <head> -->
-<!-- <meta charset="UTF-8"> -->
-<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-<!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
-<!-- <link href="resources/css/reset.css" type="text/css" rel="stylesheet"> -->
-<!-- <link href="resources/css/main.css" type="text/css" rel="stylesheet"> -->
-<!-- <link href="resources/css/index.css" type="text/css" rel="stylesheet"> -->
-<!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
-<!--   <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-<!--   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<%@ include file="../common/_common.jsp" %>
   <script>
       $( function() {
         $( document ).tooltip();
@@ -26,6 +15,13 @@ pageEncoding="UTF-8"%>
 		url += "/event_new_form.fdl";
 		window.location.href = url;
 	}
+    
+	function selectEvent(evId) {
+		window.location.href		
+			= '${pageContext.request.contextPath}'
+			+ '/event_show.my?id='+ evId;
+	}
+
   </script>
     <style>
         .ui-tooltip {
@@ -34,16 +30,14 @@ pageEncoding="UTF-8"%>
         }
     </style>   
 	<title> 푸들이 - 이벤트 </title>
-</head>
+
 <!--http://naver.github.io/smarteditor2/demo/-->
 <!--네이버 스마트 에디터-->
 <body>
 <div id = "event-list-wrap">
     <table id="event-list-table" border="0">
         <caption id="gu-truck-info"><img src="resources/css/imgs/foodlee-face-white.png" class="face-white"> <span id="gu">푸들이</span> EVENT
-<%--         	<c:if test="${mbLoginName eq admin}"> --%>
         		<input id="event-add" type="button" value="글쓰기" onclick="addEvent()">
-<!--         	</c:if> -->
         </caption>
         
         <thead>
@@ -53,7 +47,7 @@ pageEncoding="UTF-8"%>
         </thead>
         <tbody>
         <%for(int i=1; i<=10; i++){%> 
-            <tr>
+            <tr >
                 <td><%=i %></td> 
                 <td><img class="td-ongoing" src="resources/css/imgs/event-on.jpg"></td> 
                 <td><b>밤도깨비 야시장 잠정 중단 안내</b></td> 
