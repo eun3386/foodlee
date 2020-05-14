@@ -155,13 +155,9 @@
         </div>
         <a href="#"><img class="logo" src="resources/css/imgs/logo.png"></a>
         <span id="loginjoin">
-        
-        <%--         <span id="loginjoin"><a href="${pageContext.request.contextPath}/member/login_form.fdl" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span> --%>
-		
 		<c:if test="${empty LoginName}">
 		<a href="#" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span>
         </c:if>
-
         <c:if test="${not empty LoginName}">
         <a href="${pageContext.request.contextPath}/truck/my_page.fdl" id='mypage'>마이페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl">로그아웃</a>
         </c:if>
