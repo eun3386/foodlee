@@ -43,15 +43,15 @@ public class LoginController {
 		if( login.equals("admin") == false ) {
 			authResult = logSvc.loginProcess(login, password);
 			if( authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
-				ses.setAttribute("mbLoginName", login);
-				ses.setAttribute("mbLoginTime", 
+				ses.setAttribute("LoginName", login);
+				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
 				int mbId = mbSvc.selectMemberIdByLogin(login);
 				ses.setAttribute("mbId", new Integer(mbId) );
 				mav.setViewName("redirect:/main.fdl");
 			} else if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
-				ses.setAttribute("selLoginName", login);
-				ses.setAttribute("selLoginTime", 
+				ses.setAttribute("LoginName", login);
+				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
 				int selId = selSvc.selectSellerIdByLogin(login);
 				ses.setAttribute("selId", new Integer(selId) );
@@ -67,8 +67,8 @@ public class LoginController {
 			System.out.println("login, pw" + login + password);
 			authResult = adSvc.adminLoginCheck(login, password);
 			if(authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
-				ses.setAttribute("adLoginName", login);
-				ses.setAttribute("adLoginTime", 
+				ses.setAttribute("LoginName", login);
+				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
 				int adId = adSvc.selectAdminIdbyLogin(login);
 				ses.setAttribute("adId", new Integer(adId) );
@@ -88,9 +88,9 @@ public class LoginController {
 			method = RequestMethod.GET)
 	public String adminLogoutProc(HttpSession ses) {
 		String login = (String)ses
-					.getAttribute("adLoginName");
+					.getAttribute("LoginName");
 		long loginStarted = (Long)ses
-				.getAttribute("adLoginTime");
+				.getAttribute("LoginTime");
 		long currentTime = System.currentTimeMillis();
 		long elapsedTime = currentTime - loginStarted;
 		

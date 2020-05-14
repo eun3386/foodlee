@@ -10,16 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.service.inf.ICommentSVC;
 
-@Controller
-public class CommentController {
-
-	Logger log = Logger.getLogger(this.getClass());
-	
-	@Resource(name="ICommentSVC")
-	private ICommentSVC replyService;
-	
-	@RequestMapping(value="/mypage/commentList")
-	public ModelAndView openCommentList() {
-		
-	}
-}
+//@Controller
+//public class CommentController {
+//
+//	Logger log = Logger.getLogger(this.getClass());
+//	
+//	@Resource(name="ICommentSVC")
+//	private ICommentSVC replyService;
+//	
+//	@RequestMapping(value="/mypage/commentList")
+//	public ModelAndView openCommentList() {
+//		
+//	}
+//}
