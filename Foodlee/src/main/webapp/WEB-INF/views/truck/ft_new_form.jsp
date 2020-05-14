@@ -8,9 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<%-- 	<%@ include file="../common/_header.jsp" %> --%>
+	
 	<div id="truck_insert_wrap" class="truck_insert_slide">
 		<div id="insert_form">
-			<form>
+			<form action="insertNewFoodtruck.do" method="post">
 				<table border='0'>
 					<tr id="ft_insert_title"><th>푸드 트럭 등록</th></tr>
 					<tr>
@@ -93,11 +96,25 @@
 							<input type="time" id="close_time">
 						</td>
 					</tr>
+					<tr><td>좋아요:</td> <td>$(foodtruck.favoriteCount)</td></tr>
+					<tr><td>푸드 트럭 위치 좌표(</td> <td>$(foodtruck.sellerFoodtruckCoordinate))</td></tr>
+					<tr>
+						<td>위치 이동 날짜:</td> 
+						<td><fmt:formatDate value="${foodtruck.locationUpdateAt}"
+								parttern="yyyy년 MM월 dd일 - HH시 mm분 ss초" /></td>
+					</tr>
 					
+					<tr>
+						<td><input type="reset" value="리셋"></td>
+						<td><input type="submit" value="푸드 트럭 등록"></td>
+					</tr>
 				</table>
 			</form>
 		</div>
 	</div>
+	
+	<%@ include file="../common/_footer.jsp" %>
+	
 </body>
 </html>
 
