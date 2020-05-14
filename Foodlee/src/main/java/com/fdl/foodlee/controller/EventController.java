@@ -69,7 +69,7 @@ public class EventController {
 				.insertNewEventReturnKey(title, content, 
 				filePath, tags, memberId);
 		
-		// 상세보기 => atId?
+		// 상세보기 => evId?
 		if( evRtkey > 0 ) {
 			System.out.println("게시글 등록 성공: " + evRtkey);
 			return "redirect:event_show.my?id="+evRtkey;
@@ -133,7 +133,7 @@ public class EventController {
 	}	
 	
 //- 회원이 이벤트 게시글을 좋아요 할 수 있다
-//	event_like.fdl (get, proc, dao, param?atId&mbId..) 
+//	event_like.fdl (get, proc, dao, param?evId&mbId..) 
 //- 관리자가 자신의 게시글을 편집 갱신 할 수 있다
 //	event_edit_form.fdl (get, proc, dao, param?id)
 //	event_update.fdl (post, proc, dao, param...vo)
