@@ -28,6 +28,8 @@ public class LoginSVCImpl implements ILoginSVC {
 		if( pw == null || pw.isEmpty() ) 
 				return MyCode.LOGIN_PW_MISMATCH;
 		
+		if( login.equals("admin") )
+			return MyCode.ADMIN_LOGIN_AUTH_OK;
 		// 가입된 회원인지?
 		MemberVO mb = mbDao.selectOneMember(login);
 		SellerVO sel = selDao.selectOneSeller(login);

@@ -40,7 +40,6 @@ public class LoginController {
 		System.out.println("pw = "+ password);
 		ModelAndView mav = new ModelAndView();
 		int authResult;
-		if( login.equals("admin") == false ) {
 			authResult = logSvc.loginProcess(login, password);
 			if( authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
@@ -56,17 +55,7 @@ public class LoginController {
 				int id = selSvc.selectSellerIdByLogin(login);
 				ses.setAttribute("id", new Integer(id) );
 				mav.setViewName("redirect:/main.fdl");
-			} else {
-				mav.addObject("msg", "로그인 실패!! - "
-						+ authResult + " : " +
-					MyCode.getMsg(authResult) );
-				mav.setViewName("login_form");
-			}
-			
-		} else {
-			System.out.println("login, pw" + login + password);
-			authResult = logSvc.loginProcess(login, password);
-			if(authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
+			} else if( authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
@@ -78,8 +67,7 @@ public class LoginController {
 						+ authResult + " : " +
 					MyCode.getMsg(authResult) );
 				mav.setViewName("login_form");
-			}
-		}		
+			}	
 		return mav;
 	}
 	
