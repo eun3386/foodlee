@@ -32,7 +32,8 @@
 <link href="resources/css/index.css" type="text/css" rel="stylesheet">
 <link href="resources/css/truckList.css" type="text/css" rel="stylesheet">
 
-
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://d3js.org/topojson.v1.min.js"></script>
@@ -122,6 +123,13 @@
     			}, 600);
 	    	}
 	    	//
+	    	$('#login').on('click', function() {
+	    		var ROOT_PATH = '<%= application.getContextPath() %>';
+	    		var url = ROOT_PATH+'/login_form.fdl';
+				$("#main-content").load(url);
+	    	});
+	    	//
+	    	// 로그인시 환영문구,마이페이지btn,로그아웃btn html변경 -- 윤찬규
         });
         
 //https://kin.naver.com/qna/detail.nhn?d1id=1&dirId=1040205&docId=283031734&qb=aHRtbCDsg4jssL0g7YGs6riw&enc=utf8&section=kin&rank=1&search_sort=0&spq=0
@@ -146,7 +154,8 @@
         <a href="#"><img class="logo" src="resources/css/imgs/logo.png"></a>
         <span id="loginjoin">
         <c:if test="${empty mbLoginName}">
-        <a href="${pageContext.request.contextPath}/member/login_form.fdl" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a>
+        <%--         <span id="loginjoin"><a href="${pageContext.request.contextPath}/member/login_form.fdl" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span> --%>
+		<span id="loginjoin"><a href="#" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span>
         </c:if>
         <c:if test="${not empty mbLoginName}"> <!-- adLoginName, selLoginName 때문에 셋다 나옴.. -->
         <a href="${pageContext.request.contextPath}/truck/my_page.fdl" id='mypage'>마이페이지</a>
