@@ -1,61 +1,59 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<!-- saved from url=(0041)http://naver.github.io/smarteditor2/demo/ -->
-<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
-<title>네이버 :: Smart Editor 2 ™</title>
-<link href="./네이버 __ Smart Editor 2 ™_files/smart_editor2.css" rel="stylesheet" type="text/css">
+<title>네이버 :: Smart Editor 2 &#8482;</title>
+<link href="/css/ko_KR/smart_editor2.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 	body { margin: 10px; }
 </style>
-<script type="text/javascript" src="./네이버 __ Smart Editor 2 ™_files/jindo2.all.js.다운로드" charset="utf-8"></script>
-<script type="text/javascript" src="./네이버 __ Smart Editor 2 ™_files/jindo_component.js.다운로드" charset="utf-8"></script>
-<script type="text/javascript" src="./네이버 __ Smart Editor 2 ™_files/SE2M_Configuration.js.다운로드" charset="utf-8"></script>	<!-- 설정 파일 -->
-<script type="text/javascript" src="./네이버 __ Smart Editor 2 ™_files/SE2BasicCreator.js.다운로드" charset="utf-8"></script>
-<script type="text/javascript" src="./네이버 __ Smart Editor 2 ™_files/smarteditor2.js.다운로드" charset="utf-8"></script>
+<script type="text/javascript" src="./js/lib/jindo2.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/lib/jindo_component.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/service/SE2M_Configuration.js" charset="utf-8"></script>	<!-- 설정 파일 -->
+<script type="text/javascript" src="./js/service/SE2BasicCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="./js/smarteditor2.js" charset="utf-8"></script>
 
-<link type="text/css" rel="stylesheet" href="./네이버 __ Smart Editor 2 ™_files/smart_editor2_items.css"></head>
-<body cz-shortcut-listen="true">
+</head>
+<body>
 
 <!-- SE2 Markup Start -->	
-<div id="smart_editor2" style="width: 768px;">
-	<div id="smart_editor2_content"><a href="http://naver.github.io/smarteditor2/demo/#se2_iframe" class="blind">글쓰기영역으로 바로가기</a>
-		<div class="se2_tool" id="se2_tool" style="display: block;">
+<div id="smart_editor2">
+	<div id="smart_editor2_content"><a href="#se2_iframe" class="blind">글쓰기영역으로 바로가기</a>
+		<div class="se2_tool" id="se2_tool">
 			
 			<div class="se2_text_tool husky_seditor_text_tool">
 			<ul class="se2_font_type">
-				<li class="husky_seditor_ui_fontName"><button type="button" class="se2_font_family" title="글꼴"><span class="husky_se2m_current_fontName">돋움</span></button>
+				<li class="husky_seditor_ui_fontName"><button type="button" class="se2_font_family" title="글꼴"><span class="husky_se2m_current_fontName">글꼴</span></button>
 					<!-- 글꼴 레이어 -->
 					<div class="se2_layer husky_se_fontName_layer">
 						<div class="se2_in_layer">
 							<ul class="se2_l_font_fam">
-							<li class="active"><button type="button"><span>돋움<span>(</span><em style="font-family:돋움,Dotum;">가나다라</em><span>)</span></span></button></li><li><button type="button"><span>돋움체<span>(</span><em style="font-family:돋움체,DotumChe,AppleGothic;">가나다라</em><span>)</span></span></button></li><li><button type="button"><span>굴림<span>(</span><em style="font-family:굴림,Gulim;">가나다라</em><span>)</span></span></button></li><li><button type="button"><span>굴림체<span>(</span><em style="font-family:굴림체,GulimChe;">가나다라</em><span>)</span></span></button></li><li><button type="button"><span>바탕<span>(</span><em style="font-family:바탕,Batang,AppleMyungjo;">가나다라</em><span>)</span></span></button></li><li><button type="button"><span>바탕체<span>(</span><em style="font-family:바탕체,BatangChe;">가나다라</em><span>)</span></span></button></li><li><button type="button"><span>궁서<span>(</span><em style="font-family:궁서,Gungsuh,GungSeo;">가나다라</em><span>)</span></span></button></li><li><button type="button"><span>Arial<span>(</span><em style="font-family:Arial;">abcd</em><span>)</span></span></button></li><li><button type="button"><span>Tahoma<span>(</span><em style="font-family:Tahoma;">abcd</em><span>)</span></span></button></li><li><button type="button"><span>Times New Roman<span>(</span><em style="font-family:Times New Roman;">abcd</em><span>)</span></span></button></li><li><button type="button"><span>Verdana<span>(</span><em style="font-family:Verdana;">abcd</em><span>)</span></span></button></li><li><button type="button"><span>Courier New<span>(</span><em style="font-family:Courier New;">abcd</em><span>)</span></span></button></li><li style="display:none"><button type="button"><span>@DisplayName@<span>(</span><em style="font-family:FontFamily;">@SampleText@</em><span>)</span></span></button></li>
-							<li class="se2_division husky_seditor_font_separator" style="display: block;"></li>
-							<li style="display: block;"><button type="button"><span>나눔고딕<span>(</span><em style="font-family:&#39;나눔고딕&#39;,NanumGothic;">가나다라</em><span>)</span></span></button></li>
-							<li style="display: block;"><button type="button"><span>나눔명조<span>(</span><em style="font-family:&#39;나눔명조&#39;,NanumMyeongjo;">가나다라</em><span>)</span></span></button></li>
-							<li style="display: none;"><button type="button"><span>나눔고딕코딩<span>(</span><em style="font-family:&#39;나눔고딕코딩&#39;,NanumGothicCoding;">가나다라</em><span>)</span></span></button></li>
-							<li style="display: block;"><button type="button"><span>나눔바른고딕<span>(</span><em style="font-family:&#39;나눔바른고딕&#39;,NanumBarunGothic,NanumBarunGothicOTF;">가나다라</em><span>)</span></span></button></li>
-							<li style="display: block;"><button type="button"><span>나눔바른펜<span>(</span><em style="font-family:&#39;나눔바른펜&#39;,NanumBarunpen;">가나다라</em><span>)</span></span></button></li>
+							<li style="display:none"><button type="button"><span>@DisplayName@<span>(</span><em style="font-family:FontFamily;">@SampleText@</em><span>)</span></span></button></li>
+							<li class="se2_division husky_seditor_font_separator"></li>
+							<li><button type="button"><span>나눔고딕<span>(</span><em style="font-family:'나눔고딕',NanumGothic;">가나다라</em><span>)</span></span></button></li>
+							<li><button type="button"><span>나눔명조<span>(</span><em style="font-family:'나눔명조',NanumMyeongjo;">가나다라</em><span>)</span></span></button></li>
+							<li><button type="button"><span>나눔고딕코딩<span>(</span><em style="font-family:'나눔고딕코딩',NanumGothicCoding;">가나다라</em><span>)</span></span></button></li>
+							<li><button type="button"><span>나눔바른고딕<span>(</span><em style="font-family:'나눔바른고딕',NanumBarunGothic,NanumBarunGothicOTF;">가나다라</em><span>)</span></span></button></li>
+							<li><button type="button"><span>나눔바른펜<span>(</span><em style="font-family:'나눔바른펜',NanumBarunpen;">가나다라</em><span>)</span></span></button></li>
 							</ul>
 						</div>
 					</div>
 					<!-- //글꼴 레이어 -->
 				</li>
 
-				<li class="husky_seditor_ui_fontSize"><button type="button" class="se2_font_size" title="글자크기"><span class="husky_se2m_current_fontSize">9pt</span></button>
+				<li class="husky_seditor_ui_fontSize"><button type="button" class="se2_font_size" title="글자크기"><span class="husky_se2m_current_fontSize">크기</span></button>
 					<!-- 폰트 사이즈 레이어 -->
 					<div class="se2_layer husky_se_fontSize_layer">
 						<div class="se2_in_layer">
 							<ul class="se2_l_font_size">
 							<li><button type="button"><span style="margin-top:4px; margin-bottom:3px; margin-left:5px; font-size:7pt;">가나다라마바사<span style=" font-size:7pt;">(7pt)</span></span></button></li>
 							<li><button type="button"><span style="margin-bottom:2px; font-size:8pt;">가나다라마바사<span style="font-size:8pt;">(8pt)</span></span></button></li>
-							<li class="active"><button type="button"><span style="margin-bottom:1px; font-size:9pt;">가나다라마바사<span style="font-size:9pt;">(9pt)</span></span></button></li>
+							<li><button type="button"><span style="margin-bottom:1px; font-size:9pt;">가나다라마바사<span style="font-size:9pt;">(9pt)</span></span></button></li>
 							<li><button type="button"><span style="margin-bottom:1px; font-size:10pt;">가나다라마바사<span style="font-size:10pt;">(10pt)</span></span></button></li>
 							<li><button type="button"><span style="margin-bottom:2px; font-size:11pt;">가나다라마바사<span style="font-size:11pt;">(11pt)</span></span></button></li>
-							<li class=""><button type="button"><span style="margin-bottom:1px; font-size:12pt;">가나다라마바사<span style="font-size:12pt;">(12pt)</span></span></button></li>
+							<li><button type="button"><span style="margin-bottom:1px; font-size:12pt;">가나다라마바사<span style="font-size:12pt;">(12pt)</span></span></button></li>
 							<li><button type="button"><span style="margin-bottom:2px; font-size:14pt;">가나다라마바사<span style="margin-left:6px;font-size:14pt;">(14pt)</span></span></button></li>
 							<li><button type="button"><span style="margin-bottom:1px; font-size:18pt;">가나다라마바사<span style="margin-left:8px;font-size:18pt;">(18pt)</span></span></button></li>
 							<li><button type="button"><span style="margin-left:3px; font-size:24pt;">가나다라마<span style="margin-left:11px;font-size:24pt;">(24pt)</span></span></button></li>
@@ -74,11 +72,11 @@
 
 				<li class="husky_seditor_ui_lineThrough"><button type="button" title="취소선[Ctrl+D]" class="se2_tdel"><span class="_buttonRound">취소선[Ctrl+D]</span></button></li>
 
-				<li class="se2_pair husky_seditor_ui_fontColor"><span class="selected_color husky_se2m_fontColor_lastUsed" style="background-color: rgb(0, 0, 0);"></span><span class="husky_seditor_ui_fontColorA"><button type="button" title="글자색" class="se2_fcolor"><span>글자색</span></button></span><span class="husky_seditor_ui_fontColorB"><button type="button" title="더보기" class="se2_fcolor_more"><span class="_buttonRound">더보기</span></button></span>				
+				<li class="se2_pair husky_seditor_ui_fontColor"><span class="selected_color husky_se2m_fontColor_lastUsed" style="background-color:#4477f9"></span><span class="husky_seditor_ui_fontColorA"><button type="button" title="글자색" class="se2_fcolor"><span>글자색</span></button></span><span class="husky_seditor_ui_fontColorB"><button type="button" title="더보기" class="se2_fcolor_more"><span class="_buttonRound">더보기</span></button></span>				
 					<!-- 글자색 -->
 					<div class="se2_layer husky_se2m_fontcolor_layer" style="display:none">
 						<div class="se2_in_layer husky_se2m_fontcolor_paletteHolder">
-							<div class="se2_palette husky_se2m_color_palette" style="display: none;">
+							<div class="se2_palette husky_se2m_color_palette">
 								<ul class="se2_pick_color">
 								<li><button type="button" title="#ff0000" style="background:#ff0000"><span><span>#ff0000</span></span></button></li>
 								<li><button type="button" title="#ff6c00" style="background:#ff6c00"><span><span>#ff6c00</span></span></button></li>
@@ -153,7 +151,7 @@
 									<!-- //최근 사용한 색 템플릿 -->
 									</ul>
 								</div>								
-								<div class="se2_palette2 husky_se2m_color_palette_colorpicker" style="display: none;">
+								<div class="se2_palette2 husky_se2m_color_palette_colorpicker">
 									<!--form action="http://test.emoticon.naver.com/colortable/TextAdd.nhn" method="post"-->
 										<div class="se2_color_set">
 											<span class="se2_selected_color"><span class="husky_se2m_cp_preview" style="background:#e97d81"></span></span><input type="text" name="" class="input_ty1 husky_se2m_cp_colorcode" value="#e97d81"><button type="button" class="se2_btn_insert husky_se2m_color_palette_ok_btn" title="입력"><span>입력</span></button></div>
@@ -162,8 +160,8 @@
 										<input type="hidden" name="text_key" value="" />
 										<input type="hidden" name="text_data" value="" />
 									</form-->
-									<div class="se2_gradation1 husky_se2m_cp_colpanel" style="position: relative;"></div>
-									<div class="se2_gradation2 husky_se2m_cp_huepanel" style="position: relative;"></div>
+									<div class="se2_gradation1 husky_se2m_cp_colpanel"></div>
+									<div class="se2_gradation2 husky_se2m_cp_huepanel"></div>
 								</div>
 							</div>
                         </div>
@@ -171,7 +169,7 @@
                     <!-- //글자색 -->
 				</li>
 
-				<li class="se2_pair husky_seditor_ui_BGColor"><span class="selected_color husky_se2m_BGColor_lastUsed" style="background-color: rgb(119, 119, 119);"></span><span class="husky_seditor_ui_BGColorA"><button type="button" title="배경색" class="se2_bgcolor"><span>배경색</span></button></span><span class="husky_seditor_ui_BGColorB"><button type="button" title="더보기" class="se2_bgcolor_more"><span class="_buttonRound">더보기</span></button></span>
+				<li class="se2_pair husky_seditor_ui_BGColor"><span class="selected_color husky_se2m_BGColor_lastUsed" style="background-color:#4477f9"></span><span class="husky_seditor_ui_BGColorA"><button type="button" title="배경색" class="se2_bgcolor"><span>배경색</span></button></span><span class="husky_seditor_ui_BGColorB"><button type="button" title="더보기" class="se2_bgcolor_more"><span class="_buttonRound">더보기</span></button></span>
 					<!-- 배경색 -->
 					<div class="se2_layer se2_layer husky_se2m_BGColor_layer" style="display:none">
 						<div class="se2_in_layer">
@@ -201,7 +199,7 @@
 
 				<li class="husky_seditor_ui_subscript last_child"><button type="button" title="아래첨자" class="se2_sub"><span class="_buttonRound tool_bg">아래첨자</span></button></li>
 </ul><ul>
-				<li class="husky_seditor_ui_justifyleft first_child active"><button type="button" title="왼쪽정렬" class="se2_left"><span class="_buttonRound tool_bg">왼쪽정렬</span></button></li>
+				<li class="husky_seditor_ui_justifyleft first_child"><button type="button" title="왼쪽정렬" class="se2_left"><span class="_buttonRound tool_bg">왼쪽정렬</span></button></li>
 
 				<li class="husky_seditor_ui_justifycenter"><button type="button" title="가운데정렬" class="se2_center"><span class="_buttonRound">가운데정렬</span></button></li>
 
@@ -217,7 +215,7 @@
 
 				<li class="husky_seditor_ui_indent"><button type="button" title="들여쓰기[Tab]" class="se2_indent"><span class="_buttonRound">들여쓰기[Tab]</span></button></li>			
 
-				<li class="husky_seditor_ui_lineHeight last_child"><button type="button" title="줄간격" class="se2_lineheight"><span class="_buttonRound tool_bg">줄간격</span></button>
+				<li class="husky_seditor_ui_lineHeight last_child"><button type="button" title="줄간격" class="se2_lineheight" ><span class="_buttonRound tool_bg">줄간격</span></button>
 					<!-- 줄간격 레이어 -->
 					<div class="se2_layer husky_se2m_lineHeight_layer">
 						<div class="se2_in_layer">
@@ -356,7 +354,7 @@
 				<li class="husky_seditor_ui_table"><button type="button" title="표" class="se2_table"><span class="_buttonRound">표</span></button>
 					<!--@lazyload_html create_table-->
 					<!-- 표 -->
-					<div class="se2_layer husky_se2m_table_layer" style="margin-left: -171px;">
+					<div class="se2_layer husky_se2m_table_layer" style="margin-left:-171px">
 						<div class="se2_in_layer">
 							<div class="se2_table_set">
 								<fieldset>
@@ -374,12 +372,6 @@
 									</dd>
 									</dl>
 									<table border="0" cellspacing="1" class="se2_pre_table husky_se2m_table_preview">
-									<tbody><tr>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									<td>&nbsp;</td>
-									</tr>
 									<tr>
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
@@ -392,12 +384,18 @@
 									<td>&nbsp;</td>
 									<td>&nbsp;</td>
 									</tr>
-									</tbody></table>
+									<tr>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									</tr>
+									</table>
 								</fieldset>
 								<fieldset>
 									<legend>속성직접입력</legend>
 									<dl class="se2_t_proper1">
-									<dt><input type="radio" id="se2_tbp1" name="se2_tbp" checked=""><label for="se2_tbp1">속성직접입력</label></dt>
+									<dt><input type="radio" id="se2_tbp1" name="se2_tbp" checked><label for="se2_tbp1">속성직접입력</label></dt>
 									<dd>
 										<dl class="se2_t_proper1_1">
 										<dt><label>표스타일</label></dt>
@@ -568,15 +566,15 @@
 
 		<hr>
 		<!-- 입력 -->
-		<div class="se2_input_area husky_seditor_editing_area_container" style="width: 766px; height: 412px;">
+		<div class="se2_input_area husky_seditor_editing_area_container">
 			
 			
-			<iframe src="./네이버 __ Smart Editor 2 ™_files/smart_editor2_inputarea.html" id="se2_iframe" name="se2_iframe" class="se2_input_wysiwyg" width="400" height="300" title="글쓰기 영역 : 도구 모음은 ALT+F10을, 도움말은 ALT+0을 누르세요." frameborder="0" style="display: block; height: 412px; visibility: visible;"></iframe>
-			<textarea name="" rows="10" cols="100" title="HTML 편집 모드" class="se2_input_syntax se2_input_htmlsrc" style="display: none; outline-style: none; resize: none; height: 412px;"> </textarea>
-			<textarea name="" rows="10" cols="100" title="TEXT 편집 모드" class="se2_input_syntax se2_input_text" style="display: none; outline-style: none; resize: none; height: 412px;"> </textarea>
+			<iframe src="about:blank" id="se2_iframe" name="se2_iframe" class="se2_input_wysiwyg" width="400" height="300" title="글쓰기 영역 : 도구 모음은 ALT+F10을, 도움말은 ALT+0을 누르세요." frameborder="0" style="display:block;"></iframe>
+			<textarea name="" rows="10" cols="100" title="HTML 편집 모드" class="se2_input_syntax se2_input_htmlsrc" style="display:none;outline-style:none;resize:none"> </textarea>
+			<textarea name="" rows="10" cols="100" title="TEXT 편집 모드" class="se2_input_syntax se2_input_text" style="display:none;outline-style:none;resize:none;"> </textarea>
 			
 			<!-- 입력창 조절 안내 레이어 -->
-			<div class="ly_controller husky_seditor_resize_notice" style="z-index: 20; display: block;">
+			<div class="ly_controller husky_seditor_resize_notice" style="z-index:20;display:none;">
 				<p>아래 영역을 드래그하여 입력창 크기를 조절할 수 있습니다.</p>
 				<button type="button" title="닫기" class="bt_clse"><span>닫기</span></button>
 				<span class="ic_arr"></span>
@@ -752,15 +750,15 @@
 				<!--//@lazyload_html-->
 				<!-- 이미지 간단편집기 -->
 			</div>
-		<div style="position: absolute; overflow: hidden; z-index: 99; display: none;"><div onmousedown="return false" style="background-color:#000000;filter:alpha(opacity=0);opacity:0.0;-moz-opacity:0.0;-khtml-opacity:0.0;cursor: col-resize; left: 0px; top: 0px; width: 100%; height: 100%;font-size:1px;z-index: 999; "></div></div></div>
+		</div>
 		<!-- //입력 -->
 		<!-- 입력창조절/ 모드전환 -->
 		<div class="se2_conversion_mode">
-			<button type="button" class="se2_inputarea_controller husky_seditor_editingArea_verticalResizer" title="입력창 크기 조절" style="cursor: n-resize; display: block;"><span>입력창 크기 조절</span></button>
+			<button type="button" class="se2_inputarea_controller husky_seditor_editingArea_verticalResizer" title="입력창 크기 조절"><span>입력창 크기 조절</span></button>
 			<ul class="se2_converter">
-			<li class="active"><button type="button" class="se2_to_editor" disabled="" style="display: block;"><span>Editor</span></button></li>
-			<li><button type="button" class="se2_to_html" style="display: block;"><span>HTML</span></button></li>
-			<li><button type="button" class="se2_to_text" style="display: block;"><span>TEXT</span></button></li>
+			<li class="active"><button type="button" class="se2_to_editor"><span>Editor</span></button></li>
+			<li><button type="button" class="se2_to_html"><span>HTML</span></button></li>
+			<li><button type="button" class="se2_to_text"><span>TEXT</span></button></li>
 			</ul>
 		</div>
 		<!-- //입력창조절/ 모드전환 -->
@@ -772,7 +770,7 @@
 				<p class="se2_alert_btns">
 					<button type="button" class="se2_confirm"><span>확인</span></button><button type="button" class="se2_cancel"><span>취소</span></button>
 				</p>
-				<a href="http://naver.github.io/smarteditor2/demo/#" class="btn_close">닫기</a>
+				<a href="#" class="btn_close">닫기</a>
 			</div>
 			<!-- 레이어 중앙정렬 -->
 			<span class="va_line"></span>
@@ -785,12 +783,13 @@
 
 <!--Example Start-->
 <div id="se2_sample" style="margin:10px 0;">
-	<input type="button" onclick="pasteHTML();" value="본문에 내용 넣기">
-	<input type="button" onclick="showHTML();" value="본문 내용 가져오기">
-	<input type="button" onclick="submitContents();" value="서버로 내용 전송">
-	<input type="button" onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)">
-	<form action="http://naver.github.io/smarteditor2/demo/sample/viewer/index.php" method="post">
-		<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;">			&lt;p&gt;글 수정시 여기에 값을 넣어주면 됩니다.&lt;/p&gt;
+	<input type="button" onclick="pasteHTML();" value="본문에 내용 넣기" />
+	<input type="button" onclick="showHTML();" value="본문 내용 가져오기" />
+	<input type="button" onclick="submitContents();" value="서버로 내용 전송" />
+	<input type="button" onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
+	<form action="sample/viewer/index.php" method="post">
+		<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;">
+			<p>글 수정시 여기에 값을 넣어주면 됩니다.</p>
 		</textarea>
 	</form>
 </div>
@@ -843,5 +842,5 @@ if(window.frameElement){
 }
 </script>
 <!--Example End-->
-
-</body></html>
+</body>
+</html>

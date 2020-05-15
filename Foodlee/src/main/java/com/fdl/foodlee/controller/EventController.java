@@ -35,7 +35,7 @@ public class EventController {
 	public String eventNewForm() {
 		System.out.println("eventNewForm() ... ");
 		// 
-		return "event/naver-smarteditor2-ca95d21/demo/ev_new_form";
+		return "event/ev_new_form";
 	}
 //	event_add.fdl (post, proc, dao, param..vo)
 	@RequestMapping(value = "event_add.fdl", 

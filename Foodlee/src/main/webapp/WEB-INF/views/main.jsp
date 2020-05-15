@@ -133,8 +133,7 @@
 	    	//
 	    	// 로그인시 환영문구,마이페이지btn,로그아웃btn html변경 -- 윤찬규
         });
-        
-//https://kin.naver.com/qna/detail.nhn?d1id=1&dirId=1040205&docId=283031734&qb=aHRtbCDsg4jssL0g7YGs6riw&enc=utf8&section=kin&rank=1&search_sort=0&spq=0
+       
 </script>
 
 
@@ -153,7 +152,7 @@
                 <li><a href="#event-list">이벤트</a></li>
             </ul>
         </div>
-        <a href="#"><img class="logo" src="resources/css/imgs/logo.png"></a>
+        <a href="${pageContext.request.contextPath}/main.fdl"><img class="logo" src="resources/css/imgs/logo.png"></a>
         <span id="loginjoin">
 		<c:if test="${empty LoginName}">
 		<a href="#" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span>

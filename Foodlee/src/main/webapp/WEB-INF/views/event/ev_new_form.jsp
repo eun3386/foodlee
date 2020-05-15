@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE Html>
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <title>네이버 :: Smart Editor 2 &#8482;</title>
-<link href="/css/ko_KR/smart_editor2.css" rel="stylesheet" type="text/css">
+<link href="smartEditor/css/ko_KR/smart_editor2.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 	body { margin: 10px; }
 </style>
-<script type="text/javascript" src="./js/lib/jindo2.all.js" charset="utf-8"></script>
-<script type="text/javascript" src="./js/lib/jindo_component.js" charset="utf-8"></script>
-<script type="text/javascript" src="./js/service/SE2M_Configuration.js" charset="utf-8"></script>	<!-- 설정 파일 -->
-<script type="text/javascript" src="./js/service/SE2BasicCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="./js/smarteditor2.js" charset="utf-8"></script>
+<script type="text/javascript" src="smartEditor/js/lib/jindo2.all.js" charset="utf-8"></script>
+<script type="text/javascript" src="smartEditor/js/lib/jindo_component.js" charset="utf-8"></script>
+<script type="text/javascript" src="smartEditor/js/service/SE2M_Configuration.js" charset="utf-8"></script>	<!-- 설정 파일 -->
+<script type="text/javascript" src="smartEditor/js/service/SE2BasicCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="smartEditor/js/smarteditor2.js" charset="utf-8"></script>
 
 </head>
 <body>
@@ -276,6 +276,7 @@
 						<div class="se2_in_layer">
 							<div class="se2_url2">
 								<input type="text" class="input_ty1" value="http://">
+								<input type="checkbox" id="se2_url_new" class="se2_url_new"><label for="se2_url_new">새창으로 열기</label>
 								<button type="button" class="se2_apply"><span>적용</span></button><button type="button" class="se2_cancel"><span>취소</span></button>
 							</div>
 						</div>
@@ -844,5 +845,13 @@ if(window.frameElement){
 }
 </script>
 <!--Example End-->
+</head>
+<body>
+	<form action="sample/viewer/index.php" method="post">
+		<textarea name="eventContent" id="eventContent" rows="10" cols="100" style="width:766px; height:412px; display:none;">
+		</textarea>
+	</form>
+</body>
+</html>	
 </body>
 </html>
