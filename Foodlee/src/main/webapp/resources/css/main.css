@@ -33,11 +33,14 @@ body#wrapper{
   width : 158px;
   height : 51px;
 }
-#loginjoin{
+#loginjoin, #adminlogout{
     position: absolute;
     top: 50px;
     left: 1085px;
     font-size: 12px;
+}
+#adminlogout{
+    left: 1070px;
 }
 /* #login, #join */
 /* { */
@@ -68,6 +71,11 @@ body#wrapper{
     text-decoration: none;
 }
 span#loginjoin a{
+	color:#44591F;
+	text-decoration: none;
+	font-weight: bold;
+}
+span#adminlogout a{
 	color:#44591F;
 	text-decoration: none;
 	font-weight: bold;

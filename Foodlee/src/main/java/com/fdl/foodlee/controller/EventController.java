@@ -27,7 +27,6 @@ public class EventController {
 	private IEventFileSVC evFileSvc;
 	@Autowired
 	private IEventAnswerSVC asSvc;
-	
 //- 관리자가 신규 이벤트 게시글을 등록할 수 있다.(+파일업로드..)
 //	event_new_form.fdl (get)
 	@RequestMapping(value = "event_new_form.fdl", 
@@ -80,7 +79,7 @@ public class EventController {
 	}	
 //- 이벤트 게시글 상세보기 할 수 있다
 //	event_show.fdl (get, proc, dao, param?id)
-	@RequestMapping(value = "event_show.my", 
+	@RequestMapping(value = "event_show.fdl", 
 			method = RequestMethod.GET)
 	public String eventShowProc(HttpSession ses, 
 			int id, Model model) {
@@ -128,7 +127,7 @@ public class EventController {
 		} else {			
 			model.addAttribute("msg", 
 				"게시글 상세조회 실패 - " + id);
-			return "redirect:event_list.my";
+			return "redirect:event_list.fdl";
 		}
 	}	
 	
