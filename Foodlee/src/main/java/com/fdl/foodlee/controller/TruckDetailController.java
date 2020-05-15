@@ -1,17 +1,19 @@
 package com.fdl.foodlee.controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,18 +43,24 @@ public class TruckDetailController {
 		return "truckDetail";
 	}
 	
+	@RequestMapping(value = "review_list.fdl", method = RequestMethod.GET)
+	public List<ReviewVO> reviewList(Model model) {
+		System.out.println(rvSvc.showAllReview());
+		return rvSvc.showAllReview();
+	}
+
 	@RequestMapping(value = "new_review.fdl", method = RequestMethod.POST)
-	public String answerAddProc(
-			@ModelAttribute(value="rv") ReviewVO rv, HttpSession ses, Model model) {
-			ReviewVO rvTe = new ReviewVO();
-		if( rvSvc.insertNewReview(rv) ) {		
-			//return "redirect:/answer/list.my";
-			//return "redirect:/answer/list.my?atId="
-			//		+as.getArticleId();
-			return "truckDetail";
-		} else {
-			System.out.println("댓글 등록 실패!");
-			return "";
+	public Map<String, Object> newReview(@RequestBody ReviewVO reviewVO) {
+		System.out.println(reviewVO.getReviewContent());
+		Map<String, Object> result = new HashMap<>();
+		ReviewVO rv = new ReviewVO(0, "anna", 1, 0, reviewVO.getReviewContent(), null);
+		try {
+			rvSvc.insertNewReview(rv);
+			result.put("status", "OK");
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("status", "False");
 		}
-	}	
+		return result;
+	}
 }
