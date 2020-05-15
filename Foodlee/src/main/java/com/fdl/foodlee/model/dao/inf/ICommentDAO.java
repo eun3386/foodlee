@@ -6,7 +6,7 @@ import com.fdl.foodlee.model.vo.CommentVO;
 
 public interface ICommentDAO {
 	// 댓글 리스트
-	List<CommentVO> getCommentList();
+	List<CommentVO> getCommentList(int commentNum);
 	// 댓글 저장
 	int saveComment(CommentVO commentVO);
 	// 댓글 수정

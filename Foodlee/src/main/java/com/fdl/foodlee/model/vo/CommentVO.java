@@ -1,6 +1,7 @@
 package com.fdl.foodlee.model.vo;
 
 public class CommentVO {
+	private int commentNum; // 댓글 일련번호
 	private int commentId; // 댓글번호
 	private String commentRegId; // 댓글 작성자
 	private String commentFtName; // 댓글 단 푸드트럭
@@ -10,15 +11,24 @@ public class CommentVO {
 	
 	public CommentVO() {}
 
-	public CommentVO(int commentId, String commentRegId, String commentFtName, String commentMenu, int commentMenuId,
-			String commentContents) {
+	public CommentVO(int commentNum, int commentId, String commentRegId, String commentFtName, String commentMenu,
+			int commentMenuId, String commentContents) {
 		super();
+		this.commentNum = commentNum;
 		this.commentId = commentId;
 		this.commentRegId = commentRegId;
 		this.commentFtName = commentFtName;
 		this.commentMenu = commentMenu;
 		this.commentMenuId = commentMenuId;
 		this.commentContents = commentContents;
+	}
+
+	public int getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
 	}
 
 	public int getCommentId() {
@@ -71,9 +81,9 @@ public class CommentVO {
 
 	@Override
 	public String toString() {
-		return "CommentVO [commentId=" + commentId + ", commentRegId=" + commentRegId + ", commentFtName="
-				+ commentFtName + ", commentMenu=" + commentMenu + ", commentMenuId=" + commentMenuId
-				+ ", commentContents=" + commentContents + "]";
+		return "CommentVO [commentNum=" + commentNum + ", commentId=" + commentId + ", commentRegId=" + commentRegId
+				+ ", commentFtName=" + commentFtName + ", commentMenu=" + commentMenu + ", commentMenuId="
+				+ commentMenuId + ", commentContents=" + commentContents + "]";
 	}
 
 	
