@@ -137,21 +137,22 @@
 					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">리뷰 더보기</div>
 				<div id="reply-insert">
 					<h3 style="padding-top: 10px;">리뷰달기</h3>
-					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden;
-						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto;">
-					</div>
-<!-- 					<textarea onkeydown="resize(this)" onkeyup="resize(this)" -->
-<!-- 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;"></textarea> -->
-					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post">
+<!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
+<!--  						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto; white-space: pre-line;"> -->
+<!-- 					</div> -->
+<%-- 					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post"> --%>
+					<textarea name="rv_con" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
+						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;"></textarea>
 						<input type="file" name="file" id="file_add" style="dispaly: none;">
 						<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
 						style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
 	 						margin-left: -3px; background-color: orange; border: 1px solid gray;">이미지 추가</button>
-						<button type="submit" style="width: 100px; height: 30px; float: right; margin-top: 25px; margin-bottom: 30px;
-	 						margin-left: -3px; background-color: orange; border: 1px solid gray;">리뷰달기</button>
-					</form>
+						<button onclick="commentList()" id="review_add" style="width: 100px; height: 30px; float: right; margin-top: 25px; 
+						margin-bottom: 30px; margin-left: -3px; background-color: orange; border: 1px solid gray;">리뷰달기</button>
+<!-- 					</form> -->
 				</div>
 			</div>
+			<div id="test_list"></div>
 		</section>
 
 		<section id="content2">

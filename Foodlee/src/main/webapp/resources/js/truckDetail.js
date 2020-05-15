@@ -161,12 +161,26 @@ function resize(obj) {
   obj.style.height = (12+obj.scrollHeight)+"px";
 }
 
+function getContextPath() {
+  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+  return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+};
+
+function commentList() {
+	var URLHD = getContextPath()+'/';
+	$.getJSON(URLHD + 'review_list.fdl', function(data) {
+		$(data).each(function () {
+			console.log(this.review_content);
+		})
+	});
+}
+
 $(document).ready(function() {
 	$("#sum").css("display", "none");
 	$(".order_div").css("display", "none");
 	$(".fa-trash").css("display", "none");
 	
-	$('#writeTextarea').attr('contentEditable', 'true');
+	// $('#writeTextarea').attr('contentEditable', 'true');
 	
 	$(".fa-trash").click(function() {
 // 		if (confirm("모든 주문 메뉴를 삭제하시겠습니까??") == true) {    //확인
@@ -376,9 +390,8 @@ $(document).ready(function() {
 		}, 500);
 
 	}).scroll();
-
 	
-});
+}); // document.ready 끝
 // 	$(".remove").click(function() {
 // 		console.log("dd")
 // 		alert("dd");
