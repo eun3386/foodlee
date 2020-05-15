@@ -18,11 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 	member/find_pw.fdl
 - 아이디 중복체크를 할 수 있다.
 	member/dupcheck.fdl
-- 로그인 할 수 있다.
-	member/login_form.fdl
-	member/login.fdl
-- 로그아웃 할 수 있다.
-	member/logout.fdl
 - 자신의 정보를 확인 할 수 있다.
 	member/show.fdl
 - 자신의 정보를 갱신 할 수 있다.
@@ -52,20 +47,4 @@ public class MemberController {
 		return "member/mb_sign_up_form";
 	}
 	
-// 	member_logout.fdl
-	@RequestMapping(value = "member_logout.fdl", 
-			method = RequestMethod.GET)
-	public String memberLogoutProc(HttpSession ses) {
-		String login = (String)ses
-					.getAttribute("mbLoginName");
-		long loginStarted = (Long)ses
-				.getAttribute("mbLoginTime");
-		long currentTime = System.currentTimeMillis();
-		long elapsedTime = currentTime - loginStarted;
-		
-		System.out.println(login + " 회원이 로그아웃: "
-				+ elapsedTime/1000.0 + "초가 로그인 활동함.." );
-		ses.invalidate();
-		return "redirect:/";
-	}
 }

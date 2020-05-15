@@ -19,10 +19,10 @@ public class LoginController {
 	
 	@Autowired
 	private IMemberSVC mbSvc;
-	@Autowired
-	private IAdminSVC adSvc;
+	
 	@Autowired
 	private ISellerSVC selSvc;
+	
 	@Autowired
 	private ILoginSVC logSvc;
 	
@@ -72,16 +72,12 @@ public class LoginController {
 	}
 	
 //	logout.fdl
-	@RequestMapping(value = "logout.fdl", 
-			method = RequestMethod.GET)
+	@RequestMapping(value = "logout.fdl", method = RequestMethod.GET)
 	public String adminLogoutProc(HttpSession ses) {
-		String login = (String)ses
-					.getAttribute("LoginName");
-		long loginStarted = (Long)ses
-				.getAttribute("LoginTime");
+		String login = (String)ses.getAttribute("LoginName");
+		long loginStarted = (Long)ses.getAttribute("LoginTime");
 		long currentTime = System.currentTimeMillis();
 		long elapsedTime = currentTime - loginStarted;
-		
 		System.out.println(login + " 회원이 로그아웃: "
 				+ elapsedTime/1000.0 + "초가 로그인 활동함.." );
 		ses.invalidate();
