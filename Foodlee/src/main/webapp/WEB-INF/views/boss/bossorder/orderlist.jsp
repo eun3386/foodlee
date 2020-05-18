@@ -564,7 +564,7 @@
 		<h1>주문 리스트 </h1>
 		주문 하면 상단에 자동 추가 되기 0시 리셋<br><br>
 		
-	<div class="card" style="width: 18rem;">
+<!-- 	<div class="card" style="width: 18rem;">
 	  
 	  <div class="card-body">
 	  <img class="card-img-top" src="..." alt="Card image cap">
@@ -572,7 +572,7 @@
 	    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 	    <a href="#" class="btn btn-primary">Go somewhere</a>
 	  </div>
-	</div>
+	</div> -->
 	<div id=order_list>
 	<table >
 	<tr > <td rowspan="3"><img alt="" src="../../css/imgs/gu-truck-img.jpg"></td><td >메뉴이름 : </td> <td colspan="2">메뉴</td> <td> 주문시간</td>
@@ -624,24 +624,23 @@
                                 <!-- .row -->
                                 <div class="row">
                                     <div class="col-md-8 p-4">
-                                        <h4 class="card-title">Media object</h4>
+                                        <h4 class="card-title">주문 리스트</h4>
                                         <ul class="list-unstyled">
                                             <li class="media">
                                                 <img class="d-flex mr-3" src="assets/images/users/1.jpg" width="60"
                                                     alt="Generic placeholder image">
                                                 <div class="media-body">
-<!--                                                      <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1 text-white">List group item heading</h5>
-                                                    <small>3 days ago</small>
-                                                </div>
-                                                <h5 class="mt-0 mb-1">List-based media object</h5>
-                                                <small>3 days ago</small> -->
-                                                <h5 class="mb-1">List-based media object </h5><small>3 days ago</small>
-                                                	<p>Cras sit amet
-                                                    nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                                    sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus
-                                                    viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                                                    Donec lacinia congue felis in faucibus.</p>
+                                                	<a href="javascript:void(0)"
+                                                class="list-group-item list-group-item-action flex-column align-items-start active">
+	                                                <div class="d-flex w-100 justify-content-between">
+	                                                    <h5 class="mb-1 text-white">아이디명</h5>
+	                                                    <small>3 days ago</small>
+	                                                </div>
+	                                                <p>우리가 숭고해질 수 있음을 그리고 떠날 때 시간의 모래 위에 발자국을 남길 수 있음을.  
+													      그 발자국은 훗날 인생이라는 바다를 항해하다 쓸쓸히 난파당한 형제들에게 용기를 주게 될 것이다.
+													      그러니 일어나 앞을 향해 나아가자
+													      어떤 운명에도 굴하지 않는 마음으로 끊임없이 이루고 끊임없이 추구하면서 노력하며 배우자구나. </p>
+                                            		</a>
                                                 </div>
                                             </li>
                                             <li class="media my-4">
@@ -680,31 +679,6 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                    </div>
-                                    <div class="col-md-4 col-sm-12 p-4">
-                                        <h4 class="card-title">Custom content</h4>
-                                        <div class="list-group">
-                                            <a href="javascript:void(0)"
-                                                class="list-group-item list-group-item-action flex-column align-items-start active">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1 text-white">List group item heading</h5>
-                                                    <small>3 days ago</small>
-                                                </div>
-                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus.
-                                                    Maecenas sed diam eget risus varius blandit.</p>
-                                                <small>Donec id elit non mi porta.</small>
-                                            </a>
-                                            <a href="javascript:void(0)"
-                                                class="list-group-item list-group-item-action flex-column align-items-start">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">List group item heading</h5>
-                                                    <small class="text-muted">3 days ago</small>
-                                                </div>
-                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus.
-                                                    Maecenas sed diam eget risus varius blandit.</p>
-                                                <small class="text-muted">Donec id elit non mi porta.</small>
-                                            </a>	
-                                        </div>
                                     </div>
                                 </div>
                             </div>

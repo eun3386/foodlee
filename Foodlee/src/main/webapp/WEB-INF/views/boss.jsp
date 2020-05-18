@@ -90,18 +90,10 @@
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ["Element", "만 원", { role: "style" } ],
-        ["1월", 894, "#5f76e8"],
-        ["2월", 1049, "#fdc16a"],
-        ["3월", 1930, "#ff4f70"],
-        ["4월", 2145, "color: #01caf1"],
-        ["5월", 2145, "color: #5f76e8"],
-        ["6월", 245, "color: #fdc16a"],
-        ["7월", 215, "color: #ff4f70"],
-        ["8월", 145, "color: #01caf1"],
-        ["9월", 2145, "color: #5f76e8"],
-        ["10월", 0, "color: #fdc16a"],
-        ["11월", 0, "color: #ff4f70"],
-        ["12월", 0, "color: #01caf1"]
+        ["1월", 894, "#5f76e8"], ["2월", 1049, "#fdc16a"], ["3월", 1930, "#ff4f70"],
+        ["4월", 2145, "color: #01caf1"], ["5월", 2145, "color: #5f76e8"], ["6월", 245, "color: #fdc16a"],
+        ["7월", 215, "color: #ff4f70"],  ["8월", 145, "color: #01caf1"],  ["9월", 2145, "color: #5f76e8"],
+        ["10월", 0, "color: #fdc16a"],   ["11월", 0, "color: #ff4f70"],   ["12월", 0, "color: #01caf1"]
       ]);
 
       var view = new google.visualization.DataView(data);
@@ -110,7 +102,8 @@
                          sourceColumn: 1,
                          type: "string",
                          role: "annotation" },
-                       2]);
+                       2]
+      );
 
       var options = {
         title: "Density of Precious Metals, in g/cm^3",
@@ -602,55 +595,6 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-
-                     <!-- <div class="card-group">
-	                    <div class="card border-right">
-	                        <div class="card-body">
-	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">시작화면</h2>
-                                    </div>
-	                             </div>
-	                        </div>
-	                    </div>
-	                    <div class="card border-right">
-	                        <div class="card-body">
-	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">메뉴수정</h2>
-                                    </div>
-	                             </div>
-	                        </div>
-	                    </div>
-	                    <div class="card border-right">
-	                        <div class="card-body">
-	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">정보수정</h2>
-                                    </div>
-	                             </div>
-	                        </div>
-	                    </div>
-	                    <div class="card border-right">
-	                        <div class="card-body">
-	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">주문목록</h2>
-                                    </div>
-	                             </div>
-	                        </div>
-	                    </div>
-	                    <div class="card border-right">
-	                        <div class="card-body">
-	                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">리뷰확인</h2>
-                                    </div>
-	                             </div>
-	                        </div>
-	                    </div>
-	                   </div>
- -->                       <!--  <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">푸드트럭 푸드리</h3> -->
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
@@ -749,38 +693,6 @@
                     </div>
                 </div>
                 <!-- *************************************************************** -->
-                <!-- End First Cards -->
-                <!-- *************************************************************** -->
- <!--                <div class="list-group" style="max-width: 880px; ">
-				  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-				    <div class="riview-list"style=" float: left;">
-				    <div class="d-flex w-100 justify-content-between">
-				      <h5 class="mb-1">List group item heading</h5>
-				      <small class="text-muted">3 days ago</small>
-				    </div>
-				    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-				    <small>Donec id elit non mi porta.</small>
-				    </div>
-  					<img style="width: 64px;height: 64px;" src="../../../assets/images/alert/alert3.png" alt="image" >
-				  </a>
-				  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-				    <div class="d-flex w-100 justify-content-between">
-				      <h5 class="mb-1">List group item heading</h5>
-				      <small class="text-muted">3 days ago</small>
-				    </div>
-				    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-				    <small class="text-muted">Donec id elit non mi porta.</small>
-				  </a>
-				  <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-				    <div class="d-flex w-100 justify-content-between">
-				      <h5 class="mb-1">List group item heading</h5>
-				      <small class="text-muted">3 days ago</small>
-				    </div>
-				    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-				    <small class="text-muted">Donec id elit non mi porta.</small>
-				  </a>
-				</div> -->
-                <!-- *************************************************************** -->
                 <!-- Start Sales Charts Section -->
                 <!-- *************************************************************** -->
                    <div class="row"><!--옴ㄹ기기 -->
@@ -844,73 +756,6 @@
                         </div>
                     </div>
                 </div>
-<!--                 <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="pie-donutchart" >
-                            <div class="card-body" style="height: 350px;">
-                            <div class="d-flex align-items-start">
-                                    <h4 class="card-title mb-0">회당 주문금액</h4>
-                                    <div class="ml-auto">
-                                    </div>
-                                </div>
-                               
-                                <div id="donutchart"  style="height: 315px; width:100%;"></div>height:460px; height:283px; 원형차트
-                                id="campaign-v2" class="mt-2" 
-                                <ul class="list-style-none mb-0">
-                                    <li>
-                                        <i class="fas fa-circle text-primary font-10 mr-2"></i>원형차트 svg
-                                        <span class="text-muted">만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">23회</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-danger font-10 mr-2"></i>
-                                        <span class="text-muted">2만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">08회</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-danger font-10 mr-2"></i>
-                                        <span class="text-muted">4만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">154회</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-cyan font-10 mr-2"></i>
-                                        <span class="text-muted">5만원 이상</span>
-                                        <span class="text-dark float-right font-weight-medium">204회</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-0">주간매출</h4>
-                                <div class="net-income mt-4 position-relative" style="height:294px;"></div>바차트
-                                 
-                                <ul class="list-inline text-center mt-5 mb-2">
-                                    <li class="list-inline-item text-muted font-italic">이달의 판매</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Memo</h4>
-                                <div class="" style="height:180px">
-                                </div>
-                                <div class="row mb-3 align-items-center mt-1 mt-5">
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                </div>
-                                <div class="row align-items-center">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <!-- *************************************************************** -->
                 <!-- End Sales Charts Section -->
                 <!-- *************************************************************** -->
