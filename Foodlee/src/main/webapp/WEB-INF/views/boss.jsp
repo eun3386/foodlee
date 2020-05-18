@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <link href="<%=application.getContextPath()%>/boss/bossorder/orderlist.fdl" >
+    <%-- <link href="<%=application.getContextPath()%>/boss/bossorder/orderlist.fdl" > --%>
     <title>seller</title>
 
     <!-- Custom CSS -->
@@ -296,7 +296,7 @@
 					    <a class="nav-link" href="#">정보수정</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/boss/bossorder/orderlist.fdl" >주문리스트</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="#">리뷰목록</a>
