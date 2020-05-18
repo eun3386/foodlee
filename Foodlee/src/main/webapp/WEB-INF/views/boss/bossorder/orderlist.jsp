@@ -211,20 +211,20 @@
                     <!-- Right side toggle and nav items -->
                     <ul class="nav justify-content-center" >
 					  <li class="nav-item">
-					    <a class="nav-link active" href="#">시작화면</a>
+					    <a class="nav-link active" href="boss.fdl">시작화면</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#">메뉴수정</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/menumodify.fdl">메뉴수정</a>
 					    <!--  style="a {color: #7c8798} a:hover {color: #5f76e8;}"style.min.css 6242 -->
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#">정보수정</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/infomodify.fdl">정보수정</a>
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="#">리뷰목록</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">리뷰목록</a>
 					  </li>
 					</ul>
                     <!-- ============================================================== -->
