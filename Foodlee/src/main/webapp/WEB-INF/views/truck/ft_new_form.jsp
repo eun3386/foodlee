@@ -13,7 +13,7 @@
 	
 	<div id="truck_insert_wrap" class="truck_insert_slide">
 		<div id="insert_form">
-			<form action="insertNewFoodtruck.do" method="post">
+			<form action="<%= application.getContextPath() %>/ft_new.fdl" method="post">
 				<table border='0'>
 					<tr id="ft_insert_title"><th>푸드 트럭 등록</th></tr>
 					<tr>
@@ -99,9 +99,8 @@
 					<tr><td>좋아요:</td> <td>$(foodtruck.favoriteCount)</td></tr>
 					<tr><td>푸드 트럭 위치 좌표(</td> <td>$(foodtruck.sellerFoodtruckCoordinate))</td></tr>
 					<tr>
-						<td>위치 이동 날짜:</td> 
-						<td><fmt:formatDate value="${foodtruck.locationUpdateAt}"
-								parttern="yyyy년 MM월 dd일 - HH시 mm분 ss초" /></td>
+						<td><label for="move_date">위치 이동 날짜:</label></td> 
+						<td><input type="date" id="move_date"></td>
 					</tr>
 					
 					<tr>
@@ -112,9 +111,9 @@
 			</form>
 		</div>
 	</div>
-	
+	<div id="foot">
 	<%@ include file="../common/_footer.jsp" %>
-	
+	</div>
 </body>
 </html>
 

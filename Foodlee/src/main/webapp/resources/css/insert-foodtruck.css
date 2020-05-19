@@ -1,20 +1,27 @@
 @charset "UTF-8";
 
 #truck_insert_wrap {
-	display: inline-block;
-	width: 650px;
-	height: 650px;
+
 }
 
 .truck_insert_slide {
-	
+	background-image: url('../imgs/truckDetail/insert_truck_background.jpg');
+	height: 1200px;
+    background-repeat: repeat-x;
+    animation: slideleft 20000s infinite linear;
+    -webkit-animation: slideleft 20000s infinite linear;
+    background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+    background-attachment: fixed;
+    position: relative;
 }
 
 #insert_form {
-	position: fixed;
+	position: absolute;
 	border: 2px solid orange;
 	width: 600px;
-	height: 600px;
+	height: 500px;
 	margin-top: 200px;
 	box-sizing: border-box;
 	padding: 30px;
@@ -22,7 +29,11 @@
 	left: 37%;
 }
 
-
+#foot {
+	position: absolute;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
 
 
 
