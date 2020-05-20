@@ -1,6 +1,7 @@
 package com.fdl.foodlee.controller;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,14 +48,14 @@ public class HomeController {
 		return "main";
 	}
 	
-// 	munu_list.fdl 
-	@RequestMapping(value = "munu_list.fdl", method = RequestMethod.GET)
+// 	muni_list.fdl 
+	@RequestMapping(value = "muni_list.fdl", method = RequestMethod.GET)
 	public ModelAndView muniListPage(
-			@PathVariable(value = "muniName") String muniName ) {
-		System.out.println("muniName = "+ muniName);
+			@PathVariable(value = "muniCode") int muniCode) {
+		System.out.println("muniCode = "+ muniCode);
 		ModelAndView mav = new ModelAndView();
-		List<FoodtruckVO> ftTrucks = ftSvc.searchMuniFoodtruck(muniName);
-		mav.addObject("ftTrucks",ftTrucks);
+		List<FoodtruckVO> fdTrucks = ftSvc.searchMuniFoodtruck(muniCode);
+		mav.addObject("fdTrucks",fdTrucks);
 		mav.setViewName("municipalityList");
 		return mav;
 	}

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,14 +44,14 @@
             </tr>
         </thead>
         <tbody>
-        	<%for(int i=1; i<=5; i++){%> 
+        	<c:forEach var="fdTr" items="${fdTrucks}">
             <tr>
-                <td><%=i%></td> <td><img src="css/imgs/gu-truck-img.jpg"></td> <td><b>포라코</b></td> <td class="tooltip" title="치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대  10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원">
+                <td>1</td> <td><img src="${fdTr.foodtruckImgPath}"></td> <td><b>${fdTrfoodtruckName}</b></td> <td class="tooltip" title="치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대  10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원">
                 <div class="meme">
                     <p class="menu-spec">치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원</p>
                 </div></td> <td title="왕십리역 13번출구">왕십리역 13번출구</td> <td>15:00-00:00</td> <td><i class="fas fa-heart"></i> 23</td>
             </tr>
-            <%} %>
+            </c:forEach>
         </tbody>
     </table>    
     <ul id="page">

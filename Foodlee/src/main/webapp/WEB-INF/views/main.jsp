@@ -90,7 +90,7 @@
          			$.ajax({
          				type: 'get',
          				url: URLHD+'muni_list.fdl',
-         				data: 'muniName='+ gunames[d.properties.code],
+         				data: 'muniCode='+ d.properties.code,
          				dataType: 'json',
          				success: function() {
          					window.open(url,"","width=1006px,height=580px");

@@ -59,19 +59,12 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 	}
 
 	@Override
-	public List<FoodtruckVO> searchMuniFoodtruck(String foodtruckLocation) {
+	public List<FoodtruckVO> searchMuniFoodtruck(int foodtruckLocationCode) {
 		List<FoodtruckVO> ftList = new ArrayList<FoodtruckVO>();
-		if(foodtruckLocation == null || foodtruckLocation.isEmpty()) {
-			System.out.println("구 정보 입력 안됨");
-		} else {
-			
-	
-				FoodtruckVO ft = ftDao.selectOneFoodtruck(foodtruckName);
-			}
-			
+		for (FoodtruckVO ft : ftList) {
+		Food
+		
 		}
 		return null;
 	}
-	
-
 }
