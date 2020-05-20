@@ -307,7 +307,7 @@
 		</section>
 	</div>
 	<div id='footer'>
-		<jsp:include page="common/_mp_footer.jsp" />
+		<jsp:include page="common/_footer.jsp" />
 	</div>
 	<script>
 $(function() {
