@@ -1,66 +1,86 @@
 package com.fdl.foodlee.model.vo;
 
 public class LikeVO {
-//	private MenuVO menuPic; // 메뉴 사진
-//	private FoodtruckVO foodtruckName; // 푸드트럭 이름
-//	private MenuVO menuName; // 메뉴 이름
-//	private MenuVO menuPrice; // 메뉴 가격
 	
 	private int likeId; // 좋아요 번호
-	private int likeCount; // 좋아요 수
-	private int likeMenuNum; // 좋아요 한 메뉴 번호
+	private int likeMemberId; // 좋아요 한 회원 번호
+	private int likeMenuId; // 좋아요 한 메뉴 번호
+	private int likeFoodtruckId; // 좋아요 한 푸드트럭(판매자) 번호
+	
 	private String likeMenuPic; // 좋아요 한 메뉴 사진
 	private String likeFoodtruckName; // 좋아요 한 푸드트럭 이름
 	private String likeMenuName; // 좋아요 한 메뉴 이름
 	private int likeMenuPrice; // 좋아요 한 메뉴 가격
 	private String likeMenuPage; // 좋아요 한 메뉴 페이지 주소
-	
-	private int likeMenutotalNum; //메뉴 좋아요 총개수
-	private int likefoodtruckNum; //푸드트럭 좋아요 개수
+
+	private int likeTotalCount; // 좋아요 총 횟수
 	
 	public LikeVO() {}
-	
-//	public LikeVO(String likeMenuPic, String likeFoodtruckName, String likeMenuName, int likeMenuPrice) {
-//		this(0, 0, likeMenuPic, likeFoodtruckName, likeMenuName, likeMenuPrice, 0, 0);
-//	}
 
-	public LikeVO(int likeNum, int likeCount, int likeMenuNo, String likeMenuPic, String likeFoodtruckName,
-			String likeMenuName, int likeMenuPrice, String likeMenuPage, int likeMenutotalNum, int likefoodtruckNum) {
+	public LikeVO(int likeId, int likeMemberId, int likeMenuId, int likeFoodtruckId) {
 		super();
-		this.likeId = likeNum;
-		this.likeCount = likeCount;
-		this.likeMenuNum = likeMenuNo;
+		this.likeId = likeId;
+		this.likeMemberId = likeMemberId;
+		this.likeMenuId = likeMenuId;
+		this.likeFoodtruckId = likeFoodtruckId;
+	}
+	
+	public LikeVO(String likeMenuPic, String likeFoodtruckName, String likeMenuName, int likeMenuPrice,
+			String likeMenuPage, int likeTotalCount) {
+		super();
 		this.likeMenuPic = likeMenuPic;
 		this.likeFoodtruckName = likeFoodtruckName;
 		this.likeMenuName = likeMenuName;
 		this.likeMenuPrice = likeMenuPrice;
 		this.likeMenuPage = likeMenuPage;
-		this.likeMenutotalNum = likeMenutotalNum;
-		this.likefoodtruckNum = likefoodtruckNum;
+		this.likeTotalCount = likeTotalCount;
 	}
 
-	public int getLikeNum() {
+	public LikeVO(int likeId, int likeMemberId, int likeMenuId, int likeFoodtruckId, String likeMenuPic,
+			String likeFoodtruckName, String likeMenuName, int likeMenuPrice, String likeMenuPage, int likeTotalCount) {
+		super();
+		this.likeId = likeId;
+		this.likeMemberId = likeMemberId;
+		this.likeMenuId = likeMenuId;
+		this.likeFoodtruckId = likeFoodtruckId;
+		this.likeMenuPic = likeMenuPic;
+		this.likeFoodtruckName = likeFoodtruckName;
+		this.likeMenuName = likeMenuName;
+		this.likeMenuPrice = likeMenuPrice;
+		this.likeMenuPage = likeMenuPage;
+		this.likeTotalCount = likeTotalCount;
+	}
+
+	public int getLikeId() {
 		return likeId;
 	}
 
-	public void setLikeNum(int likeNum) {
-		this.likeId = likeNum;
+	public void setLikeId(int likeId) {
+		this.likeId = likeId;
 	}
 
-	public int getLikeCount() {
-		return likeCount;
+	public int getLikeMemberId() {
+		return likeMemberId;
 	}
 
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
+	public void setLikeMemberId(int likeMemberId) {
+		this.likeMemberId = likeMemberId;
 	}
 
-	public int getLikeMenuNum() {
-		return likeMenuNum;
+	public int getLikeMenuId() {
+		return likeMenuId;
 	}
 
-	public void setLikeMenuNum(int likeMenuNum) {
-		this.likeMenuNum = likeMenuNum;
+	public void setLikeMenuId(int likeMenuId) {
+		this.likeMenuId = likeMenuId;
+	}
+
+	public int getLikeFoodtruckId() {
+		return likeFoodtruckId;
+	}
+
+	public void setLikeFoodtruckId(int likeFoodtruckId) {
+		this.likeFoodtruckId = likeFoodtruckId;
 	}
 
 	public String getLikeMenuPic() {
@@ -103,34 +123,21 @@ public class LikeVO {
 		this.likeMenuPage = likeMenuPage;
 	}
 
-	public int getLikeMenutotalNum() {
-		return likeMenutotalNum;
+	public int getLikeTotalCount() {
+		return likeTotalCount;
 	}
 
-	public void setLikeMenutotalNum(int likeMenutotalNum) {
-		this.likeMenutotalNum = likeMenutotalNum;
-	}
-
-	public int getLikefoodtruckNum() {
-		return likefoodtruckNum;
-	}
-
-	public void setLikefoodtruckNum(int likefoodtruckNum) {
-		this.likefoodtruckNum = likefoodtruckNum;
+	public void setLikeTotalCount(int likeTotalCount) {
+		this.likeTotalCount = likeTotalCount;
 	}
 
 	@Override
 	public String toString() {
-		return "LikeVO [likeNum=" + likeId + ", likeCount=" + likeCount + ", likeMenuNum=" + likeMenuNum
-				+ ", likeMenuPic=" + likeMenuPic + ", likeFoodtruckName=" + likeFoodtruckName + ", likeMenuName="
-				+ likeMenuName + ", likeMenuPrice=" + likeMenuPrice + ", likeMenuPage=" + likeMenuPage
-				+ ", likeMenutotalNum=" + likeMenutotalNum + ", likefoodtruckNum=" + likefoodtruckNum + "]";
+		return "LikeVO [likeId=" + likeId + ", likeMemberId=" + likeMemberId + ", likeMenuId=" + likeMenuId
+				+ ", likeFoodtruckId=" + likeFoodtruckId + ", likeMenuPic=" + likeMenuPic + ", likeFoodtruckName="
+				+ likeFoodtruckName + ", likeMenuName=" + likeMenuName + ", likeMenuPrice=" + likeMenuPrice
+				+ ", likeMenuPage=" + likeMenuPage + ", likeTotalCount=" + likeTotalCount + "]";
 	}
-	
-	
-	
-	
-	
 	
 	
 }
