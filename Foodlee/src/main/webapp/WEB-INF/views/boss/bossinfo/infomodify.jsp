@@ -4,11 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="../../css/main.css" type="text/css" rel="stylesheet">
-<link href="../../css/reset.css" type="text/css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+
+<link rel="stylesheet" type="text/css" href="<%= application.getContextPath() %>/resources/css/mpreset.css">
+<link rel="stylesheet" type="text/css" href="<%= application.getContextPath() %>/resources/css/mpstyle.css">
 <style type="text/css">
 	
 </style>
+<!-- <script type="text/javascript" src="./js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="./js/script.js"></script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
@@ -47,10 +52,11 @@
 </head>
 <body id="wrapper">
 <div>
-	<header id="_header">
+<%-- 	<header id="_header">
 			<%@ include file="../../common/_header.jsp"%>
-		</header>
+		</header> --%>
 </div>
+<div id="main">
 	<div id="infomain">
 	<nav id=" in-main-header" class="navbar navbar-light bg-light justify-content-between">
 		<form class="form-inline">
@@ -59,121 +65,109 @@
 			<a class="position" href="#">위치등록</a>
  		</form>
 	</nav>
-		<form>
-        <table border="0">
-        	<tr>
-        		<td><img alt="" src="<%= application.getContextPath() %>/imgs/profile_dummy.PNG"> </td>
-        	</tr>
-            <tr>
-                <td id="title">아이디</td>
-                <td>
-                    <input type="text" name="id" maxlength="20">
-                       
-                </td>
-            </tr>
-                    
-            <tr>
-            <td></td>
-                <td id="title">비밀번호</td>
-                <td>
-                    <input type="password" name="password" size='20' placeholder="암호입력" required>
-                </td>
-            </tr>
-            
-            <tr>
-                <td id="title">비밀번호 변경</td>
-                <td>
-                    <input type="password" name="password" size='20' placeholder="암호변경"  >
-                </td>
-            </tr>
-            <tr>
-                <td id="title">변경확인</td>
-                <td>
-                    <input type="password" name="password-modify" size='20' placeholder="암호변경" >
-                    <input type="button" value="비밀번호 변경" > 
-                </td>
-            </tr>
-                
-            <tr>
-                <td id="title">이름</td>
-                <td>
-                    <input type="text" name="name" maxlength="40">
-                </td>
-            </tr>
-                
-            <tr>
-                <td id="title">성별</td>
-                <td>
-                    <input type="radio" name="gender" value="남" checked>남
-                    <input type="radio" name="gender" value="여" checked>여
-                </td>
-            </tr>
-                
-            <tr>
-                <td id="title">생일</td>
-                <td>
-                    <input type="text" name="birth_yy" maxlength="4" placeholder="년(4자)" size="6" >
-                    <select name="birth_mm">
-                        <option value="">월</option>
-                        <option value="01" >1</option>
-                        <option value="02" >2</option>
-                        <option value="03" >3</option>
-                        <option value="04" >4</option>
-                        <option value="05" >5</option>
-                        <option value="06" >6</option>
-                        <option value="07" >7</option>
-                        <option value="08" >8</option>
-                        <option value="09" >9</option>
-                        <option value="10" >10</option>
-                        <option value="11" >11</option>
-                        <option value="12" >12</option>
-                    </select>
-                    <input type="text" name="birth_dd" maxlength="2" placeholder="일" size="4" >
-                </td>
-            </tr>
-            <tr>
-                <td id="title">주민번호</td>
-                <td>
-                    <input type="text" name="social-ID" />
-                </td>
-            </tr>
-            <tr>
-                <td id="title">사업자 번호</td>
-                <td>
-                    <input type="text" name="business-number" />
-                </td>
-            </tr>    
-            <tr>
-                <td id="title">연락처</td>
-                <td>
-                    <input type="text" name="phone" />
-                </td>
-            </tr>
-            <tr>
-                <td id="title">우편번호</td>
-                <td>
-                    <input type="text" size="50" name="address"/>
-                    
-                </td>
-                <td><input type="button" value="우편번호 찾기" > </td>
-            </tr>
-            <tr>
-                <td id="title">주소</td>
-                <td>
-                    <input type="text" size="50" name="address"/>
-                </td>
-                
-            </tr>
-            <tr>
-            	<td></td>
-            	<td>
-                    <input type="text" size="50" name="address"/>
-                </td>
-            </tr>
-        </table>
-        <br>
-        <input type="submit" value="수정"/>  <input type="button" value="취소">
-    </form>
+	<!-- 마이페이지 시작-->
+	
+			<section class="main_section" id="section_edit">
+			<div class="wrapper">
+				<div class="title">
+					<div class="icon">
+						<svg width="70" height="70" viewBox="0 0 32.24800109863281 32.24800109863281" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="rgb(44, 62, 80)" data-svg-content="true"><g><path d="M 21.172,21.172L 19.39,15.792L 9.11,5.512L 5.512,9.11L 15.792,19.39 zM 0.746,0.746c-0.994,0.994-0.994,2.604,0,3.598l 2.648,2.648l 3.598-3.598L 4.344,0.746 C 3.35-0.248, 1.74-0.248, 0.746,0.746zM 30,6L 15.822,6 l 2,2L 30,8 l0,22 L 8,30 L 8,17.822 l-2-2L 6,30 c0,1.104, 0.896,2, 2,2l 22,0 c 1.104,0, 2-0.896, 2-2L 32,8 C 32,6.896, 31.104,6, 30,6z"></path></g></svg>
+						<div class="msg">나의 정보 수정</div>
+					</div>
+				</div>
+				<div class="content">
+					<div class="profile_wrap">
+						<img src="./resources/css/imgs/mypage/profile.png">
+						<img class="photo" src="./resources/css/imgs/mypage/photo.png">
+					</div>
+					<table class="table_edit">
+						<tbody>
+							<tr>
+								<th>이름</th>
+								<td><input type="text" class="input"></td>
+								<th></th>
+							</tr>
+							<tr>
+								<th>아이디</th>
+								<td><span class='id'>test123</span></td>
+								<th></th>
+							</tr>
+							<tr>
+								<th>비밀번호</th>
+								<td><input type="password" class="input" value="11111111"></td>
+								<th></th>
+							</tr>
+							<tr>
+								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary" id="changePasswordButton">비밀번호 변경하기</button></div></td>
+							</tr>
+							<tr class="changePassword" style="display:none">
+								<th>비밀번호 변경</th>
+								<td><input type="password" class="input"></td>
+								<th></th>
+							</tr>
+							<tr class="changePassword" style="display:none">
+								<th>변경 확인</th>
+								<td><input type="password" class="input"></td>
+								<th></th>
+							</tr>
+							<tr class="changePassword" style="display:none">
+								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary">비밀번호 변경</button></div></td>
+							</tr>
+							<tr>
+								<th>성별</th>
+								<td><label><input type="radio" name="gender">남</label> <label><input type="radio" name="gender">여</label></td>
+								<th></th>
+							</tr>
+							<tr>
+								<th>주민번호</th>
+								<td><span class="reg_id">123456-1******</span></td>
+								<th></th>
+							</tr>
+							<tr>
+								<th>사업자 번호</th>
+								<td><input type="text" class="input sm" value="01023"> - <input type="text" class="input sm" value="12345"> - <input type="text" class="input sm" value="12346"></td>
+								<th></th>
+							</tr>
+							<tr>
+								<th>연락처</th>
+								<td><input type="text" class="input sm" value="010"> - <input type="text" class="input sm" value="1234"> - <input type="text" class="input sm" value="1234"></td>
+								<th></th>
+							</tr>
+							<tr>
+								<th>우편번호</th>
+								<td><input type="text" class="input" value="123-456"></td>
+								<th></th>
+							</tr>
+							<tr>
+								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary">우편번호 찾기</button></div></td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td><input type="text" class="input" name="address" value="서울시"></td>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<td><input type="text" class="input" value="123호"></td>
+								<th></th>
+							</tr>
+							<tr>
+								<th></th>
+								<td>
+									<button class="btn btn-primary">수정</button>
+									<button class="btn btn-primary">취소</button>
+									<button class="btn btn-danger">회원탈퇴</button>
+								</td>
+								<th></th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+	
+	<!--마이페이지 끝  -->
+	</div>
 	</div>
 	<div id="footer">
 		
