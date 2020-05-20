@@ -62,29 +62,72 @@
             .translate([width/2, height/2]);
 
         var path = d3.geo.path().projection(projection);
-
+		var gunames = {};
         d3.json("json/seoul_municipalities_topo_simple.json", function(error, data) {
           var features = topojson.feature(data, data.objects.seoul_municipalities_geo).features;
+          
+//           map.selectAll('text')
+//           .data(features)
+//           .enter().append("text")
+//           .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+//           .attr("dy", ".35em")
+//           .attr("class", "municipality-label")
+//           .text(function(d) { 
+//         	  gunames[d.properties.code]=[d.properties.name];
+//         	  return d.properties.name; })
+//      });
           map.selectAll('path')
              .data(features)
              .enter().append('path')
              .attr('class', function(d) { 
             	 console.log(d.properties.code); 
                  geocodes.push(d.properties.code);
-					$(document).on('click',".c"+d.properties.code,function(){
-		                window.open("municipalityList.jsp","","width=1006px,height=580px");
-		            });
-						 return 'municipality c' + d.properties.code })
-              .attr('d', path);
+                 $(document).on('click',".c"+d.properties.code,function(){
+//          			window.open("muni_list.fdl","","width=1006px,height=580px");
+         			console.log(gunames);
+         			console.log(gunames[d.properties.code]);
+         			var URLHD = '${pageContext.request.contextPath}/';
+         			$.ajax({
+         				type: 'get',
+         				url: URLHD+'muni_list.fdl',
+         				data: 'muniName='+ gunames[d.properties.code],
+         				dataType: 'json',
+         				success: function() {
+         					window.open(url,"","width=1006px,height=580px");
+        					
 
+        				},
+        				error: function(xhr,status) {
+        					console.log(xhr);
+        					console.log(xhr.status);
+        					console.log(status);
+        				}
+         			});
+                 });
+                   return 'municipality c' + d.properties.code })		 
+        		
+         	 .attr('d', path);
+          
           map.selectAll('text')
-             .data(features)
-             .enter().append("text")
-             .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
-             .attr("dy", ".35em")
-             .attr("class", "municipality-label")
-             .text(function(d) { return d.properties.name; })
-        });
+          .data(features)
+          .enter().append("text")
+          .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+          .attr("dy", ".35em")
+          .attr("class", "municipality-label")
+          .text(function(d) { 
+        	  gunames[d.properties.code]=[d.properties.name];
+        	  return d.properties.name; });
+      });
+      
+      
+//           map.selectAll('text')
+//              .data(features)
+//              .enter().append("text")
+//              .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+//              .attr("dy", ".35em")
+//              .attr("class", "municipality-label")
+//              .text(function(d) { return d.properties.name; })
+//         });
       
         
 //            for(var g=0; g< geocodes.length; g++){
@@ -166,6 +209,11 @@
 	        <a href="${pageContext.request.contextPath}/admin.fdl" id='admin_page'>어드민페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
 	        </c:if>
         </span>
+<!--         <span id="sellerlogout"> -->
+<%-- 	        <c:if test="${not empty LoginName}"> --%>
+<%-- 	        <a href="${pageContext.request.contextPath}/boss.fdl" id='boss_page'>판매자페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a> --%>
+<%-- 	        </c:if> --%>
+<!--         </span> -->
     <hr class="line">
     </div>
     <div id="main-content">

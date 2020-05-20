@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,9 +21,10 @@ import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IFoodtruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
-
+@Repository("ftJdbc")
 public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
-
+	@Autowired
+	private SqlSessionTemplate sstem;
 	
 	
 /*
@@ -110,6 +112,11 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	// 구매자가 푸드 트럭 리스트를 검색 할 수 있다.
 	@Override
 	public List<FoodtruckVO> searchAllFoodtruck(String foodtruckMainMenu) {
+		return null;
+	}
+	
+	@Override
+	public List<FoodtruckVO> searchMuniFoodtruck(String foodtruckLocation) {
 		return null;
 	}
 	

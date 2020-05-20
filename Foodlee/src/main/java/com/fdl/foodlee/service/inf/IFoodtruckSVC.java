@@ -1,10 +1,10 @@
-package com.fdl.foodlee.model.dao.inf;
+package com.fdl.foodlee.service.inf;
 
 import java.util.List;
 
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 
-public interface IFoodtruckDAO {
+public interface IFoodtruckSVC {
 	// 판매자의 새 푸드트럭을 등록 할 수 있다.
 	public boolean insertNewFoodtruck(FoodtruckVO ft);
 	// 판매자의 ID를 받아 푸드트럭 정보를 조회 할 수 있다.
@@ -20,4 +20,5 @@ public interface IFoodtruckDAO {
 	// 구매자가 푸드 트럭 리스트를 검색 할 수 있다.
 	public List<FoodtruckVO> searchAllFoodtruck(String foodtruckMainMenu);
 	public List<FoodtruckVO> searchMuniFoodtruck(String foodtruckLocation);
+
 }
