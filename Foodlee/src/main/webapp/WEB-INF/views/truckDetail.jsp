@@ -132,8 +132,19 @@
 								<c:out value="${rv.reviewContent}"/>
 							</div>
 							<c:if test="${!empty rv.reviewPic}">
-							<img src="<%=CON%>/resources/imgs/truckDetail/${rv.reviewPic}" 
-								style="margin-top:10px; width: 250px; height: 150px;"></c:if>
+							<c:choose>
+								<c:when test="${fn:endsWith(rv.reviewPic,'.png') 
+									or fn:endsWith(rv.reviewPic,'.jpg') 
+									or fn:endsWith(rv.reviewPic,'.gif')}">
+									<div id="file_show_${rv.reviewPic}" class="image_file">
+										<img src="${pageContext.request.contextPath}${rv.reviewPic}" 
+											style="margin-top:10px; width: 250px; height: 150px;">
+									</div>
+								</c:when>
+							</c:choose>
+<%-- 							<img src="<%=CON%>/resources/imgs/truckDetail/${rv.reviewPic}"  --%>
+<!-- 								style="margin-top:10px; width: 250px; height: 150px;"> -->
+							</c:if>
 						</li>
 					</ul>
 				</div>
@@ -145,10 +156,10 @@
 <!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
 <!--  						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto; white-space: pre-line;"> -->
 <!-- 					</div> -->
-					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post">
+					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post" enctype="multipart/form-data">
 					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty rv ? rv.review_content:''}</textarea>
-						<input type="file" name="file" id="file_add" style="dispaly: none;">
+						<input type="file" name="imgfiles" id="file_add" style="dispaly: none;">
 						<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
 						style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
 	 						margin-left: -3px; background-color: orange; border: 1px solid gray;">이미지 추가</button>

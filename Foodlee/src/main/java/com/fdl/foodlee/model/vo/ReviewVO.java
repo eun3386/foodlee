@@ -34,16 +34,6 @@ public class ReviewVO {
 		this.reviewCreatedAt = reviewCreatedAt;
 	}
 	
-	public ReviewVO(int reviewId, String login, int sellerId, String reviewPnum, int reviewDepth, String reviewContent, Timestamp reviewCreatedAt) {
-		this.reviewId = reviewId;
-		this.login = login;
-		this.sellerId = sellerId;
-		this.reviewPnum = reviewPnum;
-		this.reviewDepth = reviewDepth;
-		this.reviewContent = reviewContent;
-		this.reviewCreatedAt = reviewCreatedAt;
-	}
-
 	public ReviewVO(int reviewId, String login, int sellerId, int reviewDepth, String reviewPnum, String reviewContent, String reviewPic,
 			Timestamp reviewCreatedAt) {
 		this.reviewId = reviewId;
