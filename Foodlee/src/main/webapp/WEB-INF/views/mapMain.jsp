@@ -61,7 +61,7 @@ $(document).ready(function() {
 	         $(".btn").find(">i").attr("class","fas fa-bars fa");
 	     }
 	});
-	$('.h_search').click(function() {
+	$('.e_home').click(function() {
 		$(location).attr('href','main.fdl');
 	});
 	

@@ -5,16 +5,18 @@ import java.util.Date;
 public class BannerVO {
 	private int fodId; // 푸드트럭 번호 <<FK>>
 	private int adPrice; // 광고금액
+	private String adImg; // 광고 이미지
 	private Date adStarDate; // 적용 시작 기간
 	private Date adEndDate; // 적용 종료 기간
 	private String adLocation; // 노출 위치
 	
 	public BannerVO() {}
 	
-	public BannerVO(int fodId, int adPrice, Date adStarDate, Date adEndDate, String adLocation) {
+	public BannerVO(int fodId, int adPrice, String adImg, Date adStarDate, Date adEndDate, String adLocation) {
 		super();
 		this.fodId = fodId;
 		this.adPrice = adPrice;
+		this.adImg = adImg;
 		this.adStarDate = adStarDate;
 		this.adEndDate = adEndDate;
 		this.adLocation = adLocation;
@@ -35,7 +37,15 @@ public class BannerVO {
 	public void setAdPrice(int adPrice) {
 		this.adPrice = adPrice;
 	}
-
+	
+	public String getAdImg() {
+		return adImg;
+	}
+	
+	public void setAdImg(String adImg) {
+		this.adImg = adImg;
+	}
+	
 	public Date getAdStarDate() {
 		return adStarDate;
 	}
