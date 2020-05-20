@@ -28,6 +28,10 @@ public class BossController {
 	public String order() {//리뷰목록
 		return "/boss/bossreview/review";
 	}
+	@RequestMapping(value = "position.fdl", method = RequestMethod.GET)
+	public String position() {//리뷰목록
+		return "/boss/bossinfo/position";
+	}
 }
 
 

@@ -78,7 +78,9 @@
              tooltip:{isHtml: true }, 
              colors: ['#5f76e8','#ff4f70'],
           focusTarget: 'category', 
-          crosshair: { trigger: 'both',orientation: 'vertical', color: 'silver', opacity: 0.1  } 
+          crosshair: { trigger: 'both',orientation: 'vertical', color: 'silver', opacity: 0.1  },
+          pointSize: 5,
+          pointShape: 'sircle'
        }; 
        var chart = new google.visualization.LineChart(document.getElementById('curve_chart')); 
        chart.draw(data, options); 
