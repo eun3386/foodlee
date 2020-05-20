@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,13 +19,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.MyCode;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
+import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
-	
+	@Autowired
+	private IFoodtruckSVC ftSvc;
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -44,14 +47,16 @@ public class HomeController {
 		return "main";
 	}
 	
-//// 	munu_list.fdl 
-//	@RequestMapping(value = "munu_list.fdl", method = RequestMethod.GET)
-//	public ModelAndView muniListPage(
-//			@PathVariable(value = "muniName") String muniName ) {
-//		System.out.println("muniName = "+ muniName);
-//		ModelAndView mav = new ModelAndView();
-//		List<FoodtruckVO> ftList = 
-//		return mav;
-//	}
+// 	munu_list.fdl 
+	@RequestMapping(value = "munu_list.fdl", method = RequestMethod.GET)
+	public ModelAndView muniListPage(
+			@PathVariable(value = "muniName") String muniName ) {
+		System.out.println("muniName = "+ muniName);
+		ModelAndView mav = new ModelAndView();
+		List<FoodtruckVO> ftTrucks = ftSvc.searchMuniFoodtruck(muniName);
+		mav.addObject("ftTrucks",ftTrucks);
+		mav.setViewName("municipalityList");
+		return mav;
+	}
 
 }

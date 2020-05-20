@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,8 +24,7 @@ import com.fdl.foodlee.model.vo.FoodtruckVO;
 @Repository("ftJdbc")
 
 public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
-	@Autowired
-	private SqlSessionTemplate sstem;
+
 	
 	
 /*

@@ -1,5 +1,6 @@
 package com.fdl.foodlee.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,16 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 
 	@Override
 	public List<FoodtruckVO> searchMuniFoodtruck(String foodtruckLocation) {
-		// TODO Auto-generated method stub
+		List<FoodtruckVO> ftList = new ArrayList<FoodtruckVO>();
+		if(foodtruckLocation == null || foodtruckLocation.isEmpty()) {
+			System.out.println("구 정보 입력 안됨");
+		} else {
+			
+	
+				FoodtruckVO ft = ftDao.selectOneFoodtruck(foodtruckName);
+			}
+			
+		}
 		return null;
 	}
 	
