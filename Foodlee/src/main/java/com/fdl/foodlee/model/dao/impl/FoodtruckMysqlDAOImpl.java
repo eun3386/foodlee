@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IFoodtruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
-
+@Repository
 public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 
 	

@@ -1,12 +1,46 @@
 @charset "UTF-8";
 
-#truck_insert_wrap {
+#main-content {
+	margin: 0 120px;
+	height: 600px;
+}
 
+/* #truck_insert_wrap { */
+
+/* } */
+
+#insert_form {
+	position: absolute;
+	border: 2px solid orange;
+	width: 500px;
+	height: 500px;
+	margin-top: 50px;
+	box-sizing: border-box;
+	padding: 30px;
+	background-color: white;
+	left: 25%;
+}
+
+@keyframes slideleft {
+   	from {
+       	background-position: 0%;
+   	}
+   	to {
+       	background-position: 150000%;
+   	}
+}
+@-webkit-keyframes slideleft {
+   	from {
+       	background-position: 0%;
+   	}
+   	to {
+      	background-position: 150000%;
+   	}
 }
 
 .truck_insert_slide {
 	background-image: url('../imgs/truckDetail/insert_truck_background.jpg');
-	height: 1200px;
+	height: 600px;
     background-repeat: repeat-x;
     animation: slideleft 20000s infinite linear;
     -webkit-animation: slideleft 20000s infinite linear;
@@ -17,23 +51,7 @@
     position: relative;
 }
 
-#insert_form {
-	position: absolute;
-	border: 2px solid orange;
-	width: 600px;
-	height: 500px;
-	margin-top: 200px;
-	box-sizing: border-box;
-	padding: 30px;
-	background-color: white;
-	left: 37%;
-}
 
-#foot {
-	position: absolute;
-	margin-top: 50px;
-	margin-bottom: 50px;
-}
 
 
 
