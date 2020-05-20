@@ -226,3 +226,12 @@ tr:hover {
 .add:hover {
 	background-color: #FFA500;
 }
+
+.img_wrap {
+    width: 300px;
+    margin-top: 50px;
+}
+
+.img_wrap img {
+    max-width: 100%;
+}

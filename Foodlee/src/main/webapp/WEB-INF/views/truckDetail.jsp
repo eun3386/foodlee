@@ -102,9 +102,8 @@
 
 		<section id="content1">
 			<div id="replies">
-				<c:forEach var="rv" items="${review}"
-				varStatus="vs">
-				<div class="reply"
+				<c:forEach var="rv" items="${review}" varStatus="vs">
+				<div id="reply_${rv.reviewId}" class="reply"
 					style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
 					<c:if test="${rv.reviewDepth eq 1}">padding-left: 40px;</c:if>
 					">
@@ -123,12 +122,18 @@
 							</div>
 							<div class="date" style="padding-top: 4px; font-size: 12px;">
 							<fmt:formatDate value="${rv.reviewCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<span style="float: right; margin-right: 15px;">
+							<button style="margin-bottom: 3px;">수정</button>
+							<br><button>삭제</button></span>
 							</div>
 						</li>
 						<li>
 							<div style="padding-top: 15px;">
 								<c:out value="${rv.reviewContent}"/>
 							</div>
+							<c:if test="${!empty rv.reviewPic}">
+							<img src="<%=CON%>/resources/imgs/truckDetail/${rv.reviewPic}" 
+								style="margin-top:10px; width: 250px; height: 150px;"></c:if>
 						</li>
 					</ul>
 				</div>
@@ -140,16 +145,22 @@
 <!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
 <!--  						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto; white-space: pre-line;"> -->
 <!-- 					</div> -->
-<%-- 					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post"> --%>
-					<textarea name="rv_con" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
-						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;"></textarea>
+					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post">
+					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
+						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty rv ? rv.review_content:''}</textarea>
 						<input type="file" name="file" id="file_add" style="dispaly: none;">
 						<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
 						style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
 	 						margin-left: -3px; background-color: orange; border: 1px solid gray;">이미지 추가</button>
-						<button onclick="commentList()" id="review_add" style="width: 100px; height: 30px; float: right; margin-top: 25px; 
+						<button type="submit" id="review_add" style="width: 100px; height: 30px; float: right; margin-top: 25px; 
 						margin-bottom: 30px; margin-left: -3px; background-color: orange; border: 1px solid gray;">리뷰달기</button>
-<!-- 					</form> -->
+						<div>
+					        <div class="img_wrap">
+					        	<div id="img_pr" style="display: none; margin-bottom: 10px;"><br>이미지 미리보기</div>
+					            <img id="img"/>
+					        </div>
+					    </div>
+					</form>
 				</div>
 			</div>
 			<div id="test_list"></div>
@@ -166,8 +177,7 @@
 					onclick="addToList(<%=i%>)">
 					<img src="<%=CON%>/resources/imgs/truckDetail/food.jpg"
 						style="width: 250px; height: 150px;">
-					<h3 id="pname<%=i%>">
-						닭꼬치<%=i + 1%></h3>
+					<h3 id="pname<%=i%>">닭꼬치<%=i + 1%></h3>
 					<span id="pprice<%=i%>"><%=3000 + (i * 100)%></span>원
 				</div>
 				<%
@@ -184,8 +194,8 @@
 						%>
 							<tr style="cursor: pointer; border: 1px solid gray;" onclick="addToList(<%=i%>)">
 								<td>
-									<div style="width: 650px;">
-										<b>닭꼬치<%=i + 1%></b><br><%=3000 + (i * 100)%>원
+									<div style="width: 650px;"><b>닭꼬치<%=i + 1%></b>
+									<br><%=3000 + (i * 100)%>원
 									</div>
 								</td>
 								<td style="border-left: none;"><img

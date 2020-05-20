@@ -20,7 +20,7 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 			+ ", review_pic=? where review_id=?";
 	public static final String SQL_REVIEW_DELETE = "delete from review where review_id = ?";
 	public static final String SQL_REVIEW_LIST = "SELECT * FROM review " + 
-			"ORDER BY IF(ISNULL(review_pnum), review_id, review_pnum), review_depth asc";
+			"ORDER BY IF(ISNULL(review_pnum), review_id, review_pnum*1), review_depth asc";
 	
 	private JdbcTemplate jtem;	
 	private SimpleJdbcInsert simIn;
