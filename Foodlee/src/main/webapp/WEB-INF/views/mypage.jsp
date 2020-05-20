@@ -6,19 +6,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no">
 <title>푸들이-푸드트럭나들이</title>
-<link rel="stylesheet" type="text/css" href="./resources/css/mpreset.css">
-<link rel="stylesheet" type="text/css" href="./resources/css/mpstyle.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/mpreset.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/mpstyle.css">
 <!-- <link href='./resources/css/main.css' rel="stylesheet" type="text/css"/> -->
 
-<script type="text/javascript" src="./js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="./js/script.js"></script>
+<script type="text/javascript" src="/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 	<header id="header">
 		<a href="#">
-			<img class="logo" src="./resource/css/imgs/logo.png">
+			<img class="logo" src="/resources/css/imgs/logo.png">
 		</a>
 		<div class="wrapper">
 			<ul class="nav clearfix">
@@ -307,7 +307,7 @@
 		</section>
 	</div>
 	<div id='footer'>
-		<jsp:include page="common/_mp_footer.jsp" />
+		<jsp:include page="common/_footer.jsp" />
 	</div>
 	<script>
 $(function() {

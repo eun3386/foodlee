@@ -7,6 +7,7 @@ import com.fdl.foodlee.model.vo.ReviewVO;
 public interface IReviewDAO {
 	// 리뷰를 작성 할 수 있다.
 	boolean insertNewReview(ReviewVO rv);
+	int insertNewArticleReturnKey(ReviewVO rv); 
 	// 리뷰를 수정 할 수 있다.
 	boolean updateReview(int id, String rvContent, String reviewPic);
 	// 리뷰를 삭제 할 수 있다.

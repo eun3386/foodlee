@@ -49,6 +49,44 @@
 			$("#main").load(url);
 		});
 	});
+    $(document).ready(function(){
+        $(".moveBtn1").on("click",function(event){
+          // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
+ 
+          // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
+          var offset = $("#move1").offset();
+ 
+          // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
+          // position은 부모를 기준으로한 상대위치를 가져온다.
+          $("html body").animate({scrollTop:offset.top},2000);
+ 
+        });
+        $(".moveBtn2").on("click",function(event){
+            // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
+   
+            // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
+            var offset = $("#move2").offset();
+   
+            // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
+            // position은 부모를 기준으로한 상대위치를 가져온다.
+            $("html body").animate({scrollTop:offset.top},2000);
+   
+          });
+        $(".moveBtn3").on("click",function(event){
+            // 이동 버튼을 클릭시 pre 태그로 스크롤의 위치가 이동되도록 한다.
+   
+            // 1. pre태그의 위치를 가지고 있는 객체를 얻어온다. => offset 객체
+            var offset = $("#move3").offset();
+   
+            // offset은 절대 위치를 가져온다. offset.top을 통해 상단의 좌표를 가져온다.
+            // position은 부모를 기준으로한 상대위치를 가져온다.
+            $("html body").animate({scrollTop:offset.top},2000);
+   
+          });
+      });// end of ready()
+
+
+출처: https://rongscodinghistory.tistory.com/40 [악덕고용주의 개발 일기]
 </script>
 <title>orderlist</title>
 </head>
@@ -262,9 +300,6 @@
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
                                         class="svg-icon mr-2 ml-1"></i>
                                     My Balance</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Inbox</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
                                         class="svg-icon mr-2 ml-1"></i>
@@ -463,41 +498,6 @@
                                             class="hide-menu"> Simple Line Icons </span></a></li>
                             </ul>
                         </li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow" href="javascript:void(0)"
-                                aria-expanded="false"><i data-feather="crosshair" class="feather-icon"></i><span
-                                    class="hide-menu">Multi
-                                    level
-                                    dd</span></a>
-                            <ul aria-expanded="false" class="collapse first-level base-level-line">
-                                <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><span
-                                            class="hide-menu"> item 1.1</span></a>
-                                </li>
-                                <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><span
-                                            class="hide-menu"> item 1.2</span></a>
-                                </li>
-                                <li class="sidebar-item"> <a class="has-arrow sidebar-link" href="javascript:void(0)"
-                                        aria-expanded="false"><span class="hide-menu">Menu 1.3</span></a>
-                                    <ul aria-expanded="false" class="collapse second-level base-level-line">
-                                        <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><span
-                                                    class="hide-menu"> item
-                                                    1.3.1</span></a></li>
-                                        <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><span
-                                                    class="hide-menu"> item
-                                                    1.3.2</span></a></li>
-                                        <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><span
-                                                    class="hide-menu"> item
-                                                    1.3.3</span></a></li>
-                                        <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><span
-                                                    class="hide-menu"> item
-                                                    1.3.4</span></a></li>
-                                    </ul>
-                                </li>
-                                <li class="sidebar-item"><a href="javascript:void(0)" class="sidebar-link"><span
-                                            class="hide-menu"> item
-                                            1.4</span></a></li>
-                            </ul>
-                        </li>
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Extra</span></li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="docs/docs.html"
@@ -529,19 +529,15 @@
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                                    <li class="breadcrumb-item text-muted active" aria-current="page">Library</li>
+                                    <li class="breadcrumb-item"><a href="#move1" class="text-muted moveBtn1">주문리스트</a></li>
+                                    <li class="breadcrumb-item"><a href="#move2" class="text-muted moveBtn2">리뷰목록</a></li>
+                                    <li class="breadcrumb-item"><a href="#move3" class="text-muted moveBtn3">문의사항</a></li>
+                                   
+                                   <!--  <li class="breadcrumb-item text-muted active" aria-current="page">Library</li> -->
+                                   <!--각 div마다 1,2,3,페이지   표시하기(리뷰랑 문의사항만?) -->
+                                   <!-- 클릳하면 스크롤 내려가게 하기! -->
                                 </ol>
                             </nav>
-                        </div>
-                    </div>
-                    <div class="col-5 align-self-center">
-                        <div class="customize-input float-right">
-                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 19</option>
-                                <option value="1">July 19</option>
-                                <option value="2">Jun 19</option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -573,48 +569,6 @@
 	    <a href="#" class="btn btn-primary">Go somewhere</a>
 	  </div>
 	</div> -->
-	<div id=order_list>
-	<table >
-	<tr > <td rowspan="3"><img alt="" src="../../css/imgs/gu-truck-img.jpg"></td><td >메뉴이름 : </td> <td colspan="2">메뉴</td> <td> 주문시간</td>
-	</tr>
-	<tr> <td>주문자 이름 : </td> <td colspan="2">주문자</td> 
-	</tr>
-	<tr> <td>요청사항</td><td colspan="2">요청내용입니다.</td>   
-	</tr>
-	</table>
-	<br>
-	
-	
-	<table >
-	<tr > <td rowspan="3"><img alt="" src="../../css/imgs/gu-truck-img.jpg"></td><td >메뉴이름 : </td> <td colspan="2">메뉴</td> <td> 주문시간</td>
-	</tr>
-	<tr> <td>주문자 이름 : </td> <td colspan="2">주문자</td> 
-	</tr>
-	<tr> <td>요청사항</td><td colspan="2">요청내용입니다.</td>   
-	</tr>
-	</table>
-	<br>
-	
-	<table >
-	<tr > <td rowspan="3"><img alt="" src="../../css/imgs/gu-truck-img.jpg"></td><td >메뉴이름 : </td> <td colspan="2">메뉴</td> <td> 주문시간</td>
-	</tr>
-	<tr> <td>주문자 이름 : </td> <td colspan="2">주문자</td> 
-	</tr>
-	<tr> <td>요청사항</td><td colspan="2">요청내용입니다.</td>   
-	</tr>
-	</table>
-	<br>
-	
-	<table >
-	<tr > <td rowspan="3"><img alt="" src="../../css/imgs/gu-truck-img.jpg"></td><td >메뉴이름 : </td> <td colspan="2">메뉴</td> <td> 주문시간</td>
-	</tr>
-	<tr> <td>주문자 이름 : </td> <td colspan="2">주문자</td> 
-	</tr>
-	<tr> <td>요청사항</td><td colspan="2">요청내용입니다.</td>   
-	</tr>
-	</table>
-	
-	</div><!--  -->
 		
 	</div><!-- main -->
                 <div class="row">
@@ -623,23 +577,24 @@
                             <div class="card-body">
                                 <!-- .row -->
                                 <div class="row">
-                                    <div class="col-md-8 p-4">
+                                    <div class="col-md-8 p-4" id="move1">
                                         <h4 class="card-title">주문 리스트</h4>
                                         <ul class="list-unstyled">
                                             <li class="media">
                                                 <img class="d-flex mr-3" src="assets/images/users/1.jpg" width="60"
                                                     alt="Generic placeholder image">
                                                 <div class="media-body">
-                                                	<a href="javascript:void(0)"
-                                                class="list-group-item list-group-item-action flex-column align-items-start active">
+                                                	<!-- <a href="javascript:void(0)"
+                                                class="list-group-item list-group-item-action flex-column align-items-start active"> -->
 	                                                <div class="d-flex w-100 justify-content-between">
-	                                                    <h5 class="mb-1 text-white">아이디명</h5>
+	                                                    <h4 class="mb-1">메뉴이름</h4>
 	                                                    <small>3 days ago</small>
 	                                                </div>
-	                                                <p>우리가 숭고해질 수 있음을 그리고 떠날 때 시간의 모래 위에 발자국을 남길 수 있음을.  
-													      그 발자국은 훗날 인생이라는 바다를 항해하다 쓸쓸히 난파당한 형제들에게 용기를 주게 될 것이다.
-													      그러니 일어나 앞을 향해 나아가자
+	                                                <div>
+	                                                <p>주문자 이름 : 주문자id</p>
+	                                                <p> 요청사항: 우리가 숭고해질 수 있음을 그리고 떠날 때 시간의 모래 위에 발자국을 남길 수 있음을.  
 													      어떤 운명에도 굴하지 않는 마음으로 끊임없이 이루고 끊임없이 추구하면서 노력하며 배우자구나. </p>
+													 </div>
                                             		</a>
                                                 </div>
                                             </li>
@@ -647,11 +602,14 @@
                                                 <img class="d-flex mr-3" src="assets/images/users/2.jpg" width="60"
                                                     alt="Generic placeholder image">
                                                 <div class="media-body">
-                                                    <h5 class="mt-0 mb-1">List-based media object</h5> Cras sit amet
-                                                    nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                                    sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus
-                                                    viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
-                                                    Donec lacinia congue felis in faucibus.
+                                                    <div class="d-flex w-100 justify-content-between">
+	                                                    <h4 class="mb-1">메뉴이름</h4>
+	                                                    <small>3 days ago</small>
+	                                                </div>
+	                                                <div>
+	                                                <p>주문자 이름 : 주문자id</p>
+	                                                <p> 요청사항: 우리가 숭고해질 수 있음을 그리고 떠날 때 시간의 모래 위에 발자국을 남길 수 있음을.</p>
+													 </div>
                                                 </div>
                                             </li>
                                             <li class="media">
@@ -684,20 +642,22 @@
                             </div>
                         </div>
                         <!-- /.row -->
-                        <div class="row">
-                            <div class="col-12">
+                        <div class="row" id="move2">
+                            <div class="col-12" >
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Nesting</h5>
+                                        <h5 class="card-title">리뷰목록</h5>
                                         <div class="media">
                                             <img class="mr-3 w-25" src="assets/images/big/img1.jpg"
                                                 alt="Generic placeholder image">
                                             <div class="media-body">
-                                                <h5 class="mt-0">Media heading</h5> Cras sit amet nibh libero, in
+                                                <h5 class="mt-0">Media heading</h5> <p>Cras sit amet nibh libero, in
                                                 gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus
                                                 odio, vestibulum in vulputate at, tempus viverra turpis. Fusce
                                                 condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis
-                                                in faucibus.
+                                                in faucibus.</p>
+                                                	<p>큐브 스테이크 ♡</p>
+                                                	<p>큐브 스테이크 ♥</p>
                                                 <div class="media mt-3">
                                                     <a class="pr-3 w-25" href="#">
                                                         <img src="assets/images/big/img1.jpg" class="w-100"
@@ -713,10 +673,37 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- 페이지 넘기기 top -->
+	                                        <div class="col-lg-4 mb-4">
+	                                          <nav aria-label="Page navigation example">
+	                                            <ul class="pagination justify-content-center">
+	                                                <li class="page-item">
+	                                                    <a class="page-link" href="javascript:void(0)"
+	                                                        aria-label="Previous">
+	                                                        <span aria-hidden="true">&laquo;</span>
+	                                                        <span class="sr-only">Previous</span>
+	                                                    </a>
+	                                                </li>
+	                                                <li class="page-item"><a class="page-link"
+	                                                        href="javascript:void(0)">1</a></li>
+	                                                <li class="page-item"><a class="page-link"
+	                                                        href="javascript:void(0)">2</a></li>
+	                                                <li class="page-item"><a class="page-link"
+	                                                        href="javascript:void(0)">3</a></li>
+	                                                <li class="page-item">
+	                                                    <a class="page-link" href="javascript:void(0)" aria-label="Next">
+	                                                        <span aria-hidden="true">&raquo;</span>
+	                                                        <span class="sr-only">Next</span>
+	                                                    </a>
+	                                                </li>
+	                                            </ul>
+	                                        </nav>
+	                                    </div>
+                                        <!-- 페이지 넘기기 end -->
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12" id="move3">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">Order</h5>
@@ -730,6 +717,34 @@
                                             </div>
                                             <img class="ml-3 w-25" src="assets/images/big/img1.jpg"
                                                 alt="Generic placeholder image">
+                                        </div>
+                                        <div>
+                                        	<ul>
+                                        		<li class="media"><!-- 문의사항 -->
+                                                <img class="d-flex mr-3" src="assets/images/users/3.jpg" width="60"
+                                                    alt="Generic placeholder image">
+                                                <div class="media-body">
+                                                    <h5 class="mt-0 mb-1">List-based media object</h5> Cras sit amet
+                                                    nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                                                    sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus
+                                                    viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
+                                                    Donec lacinia congue felis in faucibus.
+                                                    <div class="media mt-3">
+                                                        <a class="d-flex pr-3" href="javascript:void(0)">
+                                                            <img src="assets/images/users/4.jpg" width="60"
+                                                                height="60" alt="Generic placeholder image">
+                                                        </a>
+                                                        <div class="media-body">
+                                                            <h5 class="mt-0">Media heading</h5> Cras sit amet nibh
+                                                            libero, in gravida nulla. Nulla vel metus scelerisque ante
+                                                            sollicitudin. Cras purus odio, vestibulum in vulputate at,
+                                                            tempus viverra turpis. Fusce condimentum nunc ac nisi
+                                                            vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        	</ul>
                                         </div>
                                     </div>
                                 </div>

@@ -21,7 +21,9 @@ import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IFoodtruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
+
 @Repository("ftJdbc")
+
 public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 	@Autowired
 	private SqlSessionTemplate sstem;

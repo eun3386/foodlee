@@ -41,12 +41,12 @@
 				<h2 class="map_ir_su"></h2>
 		        <div>
 					<ol>
-						<li><a class='h_search' href="#">홈</a></li>
+						<li><a class='e_home' href="#">홈</a></li>
 					</ol>
 		        </div>
 		        <div>
 					<ol>
-						<li><a href="#">소개</a></li>
+						<li><a class="e_introduce" href="${pageContext.request.contextPath}/main.fdl#introduce">소개</a></li>
 					</ol>
 		        </div>
 		        <div>
@@ -56,7 +56,7 @@
 		        </div>
 		        <div>
 					<ol>
-						<li><a class="e_search" href="${pageContext.request.contextPath}/main.fdl#event-list">이벤트</a></li>
+						<li><a class="e_event" href="${pageContext.request.contextPath}/main.fdl#event-list">이벤트</a></li>
 					</ol>
 		        </div>
 <!-- 		        <div> -->

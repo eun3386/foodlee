@@ -36,15 +36,15 @@ public class MemberController {
 			method = RequestMethod.GET)
 	public String mbSignUpChoiceForm() {	
 		System.out.println("mb sign up choice form 준비!!!");
-		return "member/mb_sign_up_choice_form";
+		return "member/join_choice_form";
 	}
 	
-//	mb_sign_up_form.fdl (form; get; 비회원)
-	@RequestMapping(value = "/sign_up_form.fdl", 
+//	join_form.fdl (form; get; 비회원)
+	@RequestMapping(value = "/join_form.fdl", 
 			method = RequestMethod.GET)
 	public String mbSignUpForm() {
 		System.out.println("mb sign up form 준비!!!");
-		return "member/mb_sign_up_form";
+		return "member/join_form";
 	}
 	
 }

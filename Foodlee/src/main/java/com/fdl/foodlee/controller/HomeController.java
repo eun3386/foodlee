@@ -44,14 +44,14 @@ public class HomeController {
 		return "main";
 	}
 	
-// 	munu_list.fdl 
-	@RequestMapping(value = "munu_list.fdl", method = RequestMethod.GET)
-	public ModelAndView muniListPage(
-			@PathVariable(value = "muniName") String muniName ) {
-		System.out.println("muniName = "+ muniName);
-		ModelAndView mav = new ModelAndView();
-		List<FoodtruckVO> ftList = 
-		return mav;
-	}
+//// 	munu_list.fdl 
+//	@RequestMapping(value = "munu_list.fdl", method = RequestMethod.GET)
+//	public ModelAndView muniListPage(
+//			@PathVariable(value = "muniName") String muniName ) {
+//		System.out.println("muniName = "+ muniName);
+//		ModelAndView mav = new ModelAndView();
+//		List<FoodtruckVO> ftList = 
+//		return mav;
+//	}
 
 }

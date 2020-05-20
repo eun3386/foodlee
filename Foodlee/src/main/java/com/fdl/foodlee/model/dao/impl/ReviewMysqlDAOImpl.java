@@ -1,11 +1,17 @@
 package com.fdl.foodlee.model.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IReviewDAO;
@@ -20,7 +26,7 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 			+ ", review_pic=? where review_id=?";
 	public static final String SQL_REVIEW_DELETE = "delete from review where review_id = ?";
 	public static final String SQL_REVIEW_LIST = "SELECT * FROM review " + 
-			"ORDER BY IF(ISNULL(review_pnum), review_id, review_pnum), review_depth asc";
+			"ORDER BY IF(ISNULL(review_pnum), review_id, review_pnum*1), review_depth asc";
 	
 	private JdbcTemplate jtem;	
 	private SimpleJdbcInsert simIn;
@@ -33,6 +39,29 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 		this.simIn = new SimpleJdbcInsert(jtem.getDataSource());
 		simIn.withTableName("review");
 		simIn.usingGeneratedKeyColumns("id");
+	}
+	
+	@Override
+	public int insertNewArticleReturnKey(ReviewVO rv) {
+		KeyHolder kh = new GeneratedKeyHolder();
+		PreparedStatementCreator psc = new PreparedStatementCreator() {
+
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt = con.prepareStatement(SQL_REVIEW_NEW, new String[] { "id" });
+				pstmt.setString(1, rv.getLogin());
+				pstmt.setInt(2, rv.getSellerId());
+				pstmt.setInt(3, rv.getReviewDepth());
+				pstmt.setString(4, rv.getReviewPnum());
+				pstmt.setString(5, rv.getReviewContent());
+				pstmt.setString(6, rv.getReviewPic() == "" ? null : rv.getReviewPic());
+				return pstmt;
+			}
+		};
+
+		jtem.update(psc, kh);
+		Number r = kh.getKey(); // PK
+		return r.intValue();
 	}
 
 	@Override

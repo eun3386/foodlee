@@ -476,13 +476,13 @@ menu/new_truck/fdl
 
 <foodtruck>
 -푸드트럭을 등록 할 수 있다.
-	foodtruck/new_foodtruck/fdl
+	foodtruck/new_foodtruck_form.fdl
 -푸드 트럭을 조회 할 수 있다.
-	foodtruck/foodtruck_select/fdl
+	foodtruck/foodtruck_select_form.fdl
 -푸드 트럭을 수정 할 수 있다.
-	foodtruck/foodtruck_update/fdl
+	foodtruck/foodtruck_update_form.fdl
 -푸드 트럭을 삭제할 수 있다.
-	foodtruck/foodtruck_delete/fdl
+	foodtruck/foodtruck_delete_form.fdl
 
 <review>
 - 리뷰를 작성 할 수 있다.

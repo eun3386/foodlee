@@ -160,12 +160,16 @@
 	    	var page = page_url.substring(page_url.lastIndexOf("#") + 1); 
 	    	if (page == 'event-list') {
 	    		$('html, body').animate({
-	    			scrollTop: $('#' + page).offset().top-150 
+	    			scrollTop: $('#' + page).offset().top-10 
 	    		}, 600);
 	    	} else if(page == 'truck-list') {
 	    		$('html, body').animate({
-	    		scrollTop: $('#' + page).offset().top-150 
+	    		scrollTop: $('#' + page).offset().top-100 
     			}, 600);
+	    	} else if(page == 'introduce') {
+	    		$('html, body').animate({
+		    	scrollTop: $('#' + page).offset().top-70 
+	    		}, 600);
 	    	}
 	    	//
 	    	$('#login').on('click', function() {

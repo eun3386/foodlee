@@ -1,64 +1,73 @@
 var start = 0;
-var arr = new Array(start);
+var arrName = new Array(start);
+var arrNum = new Array(start);
 
-var remove_div = function(test, starta) {
-	arr.splice(starta, 1);
+var remove_div = function(tid, starta) {
 // 	for (var i = 0; i < starta; i++) {
-// 		arr[i + 1] = arr[i];
+// 		arrNum[i + 1] = arr[i];
 // 	}
+	console.log(starta);
 	var priSum = document.getElementById("priceSum");
 	var n1 = Number(priSum.innerHTML);
 	
-	var price = document.getElementById("price"+test.id);
+	var price = document.getElementById("price"+tid.id);
 	var n2 = Number(price.innerHTML);
 	
 	priSum.innerHTML = n1 - n2;
 	
-	$("#"+test.id).remove();
+	$("#"+tid.id).remove();
+	console.log(arrName);
+	arrName.splice(starta, 1); // arrName.splice(starta, 1);
+	console.log(arrName);
+	arrNum.splice(starta, 1); // arrNum.splice(starta, 1);
 	--start;
-	
 	if(start == 0) {
 		$("#none").css("display", "block");
 		$("#sum").css("display", "none");
 		$(".fa-trash").css("display", "none");
 		$(".order_div").css("display", "none");
-		arr = new Array(start);
+		arrName = new Array(start);
+		arrNum = new Array(start);
 	}
 }
 
-var plus = function(test, i) {
-	var numSpan = document.getElementById("num"+test.id);
+var plus = function(tid, i, st) {
+	var numSpan = document.getElementById("num"+tid.id);
 	var pprice = Number(document.getElementById("pprice"+i).innerHTML);
 	
 	var n1 = Number(numSpan.innerHTML);
 	if (n1 >= 1) {
 		numSpan.innerHTML = n1 + 1;
 		
-		var price = document.getElementById("price"+test.id);
+		var price = document.getElementById("price"+tid.id);
 		var n2 = Number(price.innerHTML);
 		price.innerHTML = pprice * (n1 + 1);
 		
 		var priSum = document.getElementById("priceSum");
 		var n3 = Number(priSum.innerHTML);
 		priSum.innerHTML = n3 + pprice;
+		
+		arrNum[st] = numSpan.innerHTML;
 	}
 }
 
-var minus = function(test, i) {
-	var numSpan = document.getElementById("num"+test.id);
+var minus = function(tid, i, st) {
+	var numSpan = document.getElementById("num"+tid.id);
 	var pprice = Number(document.getElementById("pprice"+i).innerHTML);
 	
 	var n1 = Number(numSpan.innerHTML);
 	if (n1 > 1) {
 		numSpan.innerHTML = n1 - 1;
 		
-		var price = document.getElementById("price"+test.id);
+		var price = document.getElementById("price"+tid.id);
 		var n2 = Number(price.innerHTML);
 		price.innerHTML -= pprice;
 		
 		var priSum = document.getElementById("priceSum");
 		var n3 = Number(priSum.innerHTML);
 		priSum.innerHTML = n3 - pprice;
+		
+		arrNum[st] = numSpan.innerHTML;
 	}
 }
 
@@ -68,23 +77,23 @@ function addToList(i) {
 	// $(".addasdasdad").click(function() {
 	var pname = document.getElementById("pname"+i).innerHTML;
 	var pprice = document.getElementById("pprice"+i).innerHTML;
-	var test = "t" + i;
+	var tid = "t" + i;
 	var dup = false;
 	var dupNum;
 	
 	$("#none").css("display", "none");
 	$(".order_div").css("display", "block");
 	$(".fa-trash").css("display", "inline");
-	var html = '<li id="'+test+'" class="inner" style="padding-left: 10px;">' +
+	var html = '<li id="'+tid+'" class="inner" style="padding-left: 10px;">' +
 	"<div style='height: 50px; margin-bottom: 5px;'>" +
 		"<div id='d"+i+"' style='margin-top: 10px; font-size: 18px; margin-bottom: 10px;'>"+pname+"</div>" +
 		"<div style='float: left; width: 65%;'>"+
-		'<a href="#" class="remove" onclick="remove_div('+test+', '+start+')"><i class="fas fa-times-circle fa-lg remove" style="color: black;"></i></a>'+
-			"<span id='price"+test+"'>"+pprice+"</span>원</div>"+
+		'<a href="#" id=a'+start+' class="remove" data-val='+start+' onclick="remove_div('+tid+', '+start+')"><i class="fas fa-times-circle fa-lg remove" style="color: black;"></i></a>'+
+			"<span id='price"+tid+"'>"+pprice+"</span>원</div>"+
 			"<span>" +
-			"<i class='fas fa-plus-circle fa-lg' onclick='plus("+test+", "+i+")' style='color: red; cursor: pointer;'></i>"+
-			"<span id='num"+test+"'>1</span>"+
-			"<i class='fas fa-minus-circle fa-lg' onclick='minus("+test+", "+i+")' style='color: red; cursor: pointer;'></i></span>"+
+			"<i class='fas fa-plus-circle fa-lg' onclick='plus("+tid+", "+i+", "+start+")' style='color: red; cursor: pointer;'></i>"+
+			"<span id='num"+tid+"'>1</span>"+
+			"<i class='fas fa-minus-circle fa-lg' onclick='minus("+tid+", "+i+", "+start+")' style='color: red; cursor: pointer;'></i></span>"+
 		"</div>"+
 		"</li>";
 	
@@ -94,8 +103,8 @@ function addToList(i) {
 		dupA = dupB.substring(1, 2);
 	}
 	
-	for (var j = 0; j < arr.length; j++) {
-		if (arr[j] == pname) {
+	for (var j = 0; j < arrName.length; j++) {
+		if (arrName[j] == pname) {
 			dup = true;
 			dupNum = dupA;
 			break;
@@ -105,7 +114,8 @@ function addToList(i) {
 	// 중복체크
 	if(dup == false) {
 		$("#menu_list").append(html);
-		arr[start] = pname;
+		arrName[start] = pname;
+		arrNum[start] = document.getElementById("num"+tid).innerHTML;
 		++start;
 		var priSum = document.getElementById("priceSum");
 		var n = Number(priSum.innerHTML);
@@ -119,8 +129,12 @@ function addToList(i) {
 		var pprice = Number(ppriceB.innerHTML);
 		// console.log(tag + numSpan + pprice);
 		var n1 = Number(numSpan.innerHTML);
+		console.log(arrNum);
+		console.log("dupNum=" + dupNum);
+		// arrNum[dupNum] = n1 + 1;
 		if (n1 >= 1) {
 			numSpan.innerHTML = n1 + 1;
+			// arrNum[dupNum] = numSpan.innerHTML;
 			var price = document.getElementById("price"+tag);
 			var n2 = Number(price.innerHTML);
 			price.innerHTML = pprice * (n1 + 1);
@@ -168,14 +182,38 @@ function getContextPath() {
 
 function commentList() {
 	var URLHD = getContextPath()+'/';
-	$.getJSON(URLHD + 'review_list.fdl', function(data) {
+	$.getJSON('new_review.fdl', function(data) {
 		$(data).each(function () {
-			console.log(this.review_content);
+			// console.log(this.review_content);
 		})
 	});
 }
 
+var sel_file;
+
+function handleImgFileSelect(e) {
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            swal("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_file = f;
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $("#img").attr("src", e.target.result);
+        }
+        reader.readAsDataURL(f);
+        $('#img_pr').css("display", "block");
+    });
+}
+
 $(document).ready(function() {
+	$("#file_add").on("change", handleImgFileSelect);
 	$("#sum").css("display", "none");
 	$(".order_div").css("display", "none");
 	$(".fa-trash").css("display", "none");
@@ -212,7 +250,8 @@ $(document).ready(function() {
 			 	  $("#sum").css("display", "none");
 			 	  $(".fa-trash").css("display", "none");
 			 	  $(".order_div").css("display", "none");
-			 	  arr = new Array(start);
+			 	  arrName = new Array(start);
+			 	  arrNum = new Array(start);
 			 	  var priSum = document.getElementById("priceSum");
 			 	  priSum.innerHTML = 0;
 			  } else {
@@ -222,8 +261,10 @@ $(document).ready(function() {
 	});
 	
 	$(".order_div").click(function() {
+		alert(arrName);
+		alert(arrNum + "    length=" + arrNum.length);
 		var priceSum = Number(document.getElementById("priceSum").innerHTML);
-		
+		/*
         var IMP = window.IMP; // 생략가능
         IMP.init('imp64360008'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
         var msg;
@@ -277,6 +318,7 @@ $(document).ready(function() {
                 //alert(msg);
             }
         });
+        */
 	});
 	
 // 네이버 지도	
@@ -348,7 +390,7 @@ $(document).ready(function() {
     });      
     
 	$('.fa-heart').click(function() {
-		var td = document.getElementById("test");
+		var td = document.getElementById("tid");
 		var n = Number(td.innerHTML);
 		td.innerHTML = n + 1;
 	});

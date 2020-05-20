@@ -16,9 +16,9 @@ public class BossController {
 	public String menumodify() {//메뉴수정
 		return "boss/bossmenu/menumodify";
 	}
-	@RequestMapping(value = "infolist.fdl", method = RequestMethod.GET)
+	@RequestMapping(value = "infomodify.fdl", method = RequestMethod.GET)
 	public String infomodify() {//정보수정
-		return "boss/bossinfo/infolist";
+		return "boss/bossinfo/infomodify";
 	}
 	@RequestMapping(value = "orderlist.fdl", method = RequestMethod.GET)
 	public String orderlist() { //주문리스트
@@ -27,6 +27,10 @@ public class BossController {
 	@RequestMapping(value = "review.fdl", method = RequestMethod.GET)
 	public String order() {//리뷰목록
 		return "/boss/bossreview/review";
+	}
+	@RequestMapping(value = "position.fdl", method = RequestMethod.GET)
+	public String position() {//리뷰목록
+		return "/boss/bossinfo/position";
 	}
 }
 

@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MapController {
 	
-	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
-	public String mapMain() {
-		return "mapMain";
-	}
+//	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
+//	public String mapMain() {
+//		return "mapMain";
+//	}
 	
 }

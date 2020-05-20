@@ -12,9 +12,11 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script type="text/javascript"
+ <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ksauwx09vv"></script>
-<script type="text/javascript"
+<!-- <script type="text/javascript"	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=b9v0vyjexc">
+</script>sol-map -->
+ <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ksauwx09vv&submodules=geocoder"></script>
 
 <!-- fontawesome, jquery -->
