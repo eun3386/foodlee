@@ -1,5 +1,6 @@
 package com.fdl.foodlee.service.inf;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,6 +10,9 @@ import com.fdl.foodlee.model.vo.ReviewVO;
 public interface IReviewSVC {
 	// 리뷰를 작성 할 수 있다.
 	boolean insertNewReview(ReviewVO rv);
+	int insertNewArticleReturnKey(ReviewVO rvGet);
+	int insertNewArticleReturnKey(String login, int sellerId, int reviewDepth, String reviewPnum, String reviewContent,
+			String reviewPic, Timestamp reviewCreatedAt);
 	// 리뷰를 수정 할 수 있다.
 	boolean updateReview(int id, String rvContent, String reviewPic);
 	// 리뷰를 삭제 할 수 있다.

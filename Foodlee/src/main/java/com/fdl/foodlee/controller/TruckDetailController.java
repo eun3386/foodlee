@@ -23,12 +23,15 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.vo.ReviewVO;
+import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.IReviewSVC;
 
 @Controller
 public class TruckDetailController {
 	@Autowired
 	IReviewSVC rvSvc;
+	@Autowired
+	private IReviewFileSVC rvFileSvc;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -53,37 +56,45 @@ public class TruckDetailController {
 	}
 
 	@RequestMapping(value = "new_review.fdl", method = RequestMethod.POST)
-	public String newReview(@ModelAttribute(value="rv") ReviewVO rv
-			, HttpSession ses, Model model) {
+	public String newReview(@ModelAttribute(value="rv") ReviewVO rv, List<MultipartFile> imgfiles, HttpSession ses, Model model) {
 		System.out.println(rv.getReviewContent());
+		System.out.println(imgfiles);
 		Map<String, Object> result = new HashMap<>();
-		ReviewVO rvT = new ReviewVO(0, "anna", 0, 0, rv.getReviewContent(), null);
-		try {
-			rvSvc.insertNewReview(rvT);
+		
+		String realPath = ses.getServletContext().getRealPath(IReviewFileSVC.DEF_UPLOAD_DEST) + "/";
+		rvFileSvc.makeUserDir(ses, "poro");
+		Map<String, Object> rMap = rvFileSvc.writeUploadedMultipleFiles(imgfiles, realPath, "poro"
+				/*(String) ses.getAttribute("mbLoginName")*/);
+		
+		String filePath = (String)rMap.get("muliFPs");
+		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
+		System.out.println("총 볼륨(MB): " + rMap.get("totalMB") + "MB");
+		
+		ReviewVO rvT = new ReviewVO(0, "poro", 0, 0, rv.getReviewContent(), filePath, null);
+		
+		int atRtkey = this.rvSvc.insertNewArticleReturnKey(rvT);
+
+		// 상세보기 => atId?
+		if (atRtkey > 0) {
+			// System.out.println("게시글 등록 성공: " + title);
+			System.out.println("리뷰 등록 성공: " + atRtkey);
 			result.put("status", "OK");
-		} catch (Exception e) {
-			e.printStackTrace();
+			return "redirect:/truckDetail.fdl";
+			// return "redirect:article_list.my"; // RD
+		} else {
+			System.out.println("리뷰 등록 실패: " + rv.getReviewContent());
 			result.put("status", "False");
-		}
-		return "redirect:/truckDetail.fdl";
-	}
-	
-	@RequestMapping(value = "upload.fdl" , method = {RequestMethod.GET, RequestMethod.POST})
-	public String upload(MultipartHttpServletRequest mtf) throws Exception {
-		// 파일 태그
-		String fileTag = "file";
-	    	// 업로드 파일이 저장될 경로
-		String filePath = "C:\\temp\\";
-		// 파일 이름	
-		MultipartFile file = mtf.getFile(fileTag);
-		String fileName = file.getOriginalFilename();
-		// 파일 전송
-		try {
-		    file.transferTo(new File(filePath + fileName));
-		} catch(Exception e) {
-		    System.out.println("업로드 오류");
+			return "redirect:/truckDetail.fdl";
 		}
 		
-		return "upload";
+//		try {
+//			rvSvc.insertNewReview(rvT);
+//			result.put("status", "OK");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			result.put("status", "False");
+//		}
+		
 	}
+	
 }
