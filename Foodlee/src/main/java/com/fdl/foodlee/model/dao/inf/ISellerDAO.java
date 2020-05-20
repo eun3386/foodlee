@@ -16,13 +16,10 @@ public interface ISellerDAO {
 	boolean isDuplicatedSeller(String login);
 	
 //	로그인 할 수 있다. (세션 + 암호화 인증)
-	String loginAuthenticate(String login, int selId);
-	
-//	로그아웃 할 수 있다.
-	
+	String loginAuthenticate(String login, int id);
 	
 //	자신의 정보를 확인 할 수 있다.
-	SellerVO selectOneSeller(int selId); // pk 
+	SellerVO selectOneSeller(int id); // pk 
 	SellerVO selectOneSeller(String login); // uq
 	int selectSellerIdbyLogin(String login);
 	
@@ -30,5 +27,5 @@ public interface ISellerDAO {
 	boolean updateOneSeller(SellerVO sel);
 	
 //	탈퇴 할 수 있다.
-	boolean deleteOneSeller(int selId);
+	boolean deleteOneSeller(int id);
 }

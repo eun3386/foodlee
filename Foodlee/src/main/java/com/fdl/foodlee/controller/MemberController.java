@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 /*
-- 회원가입구분/약관동의 할 수 있다.
-	member/join_choice_form.fdl (get, )
 - 회원가입 할 수 있다.
 	member/new_join_form.fdl
 	member/join.fdl

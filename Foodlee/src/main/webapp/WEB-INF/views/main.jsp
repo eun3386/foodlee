@@ -178,7 +178,12 @@
 				$("#main-content").load(url);
 	    	});
 	    	//
-	    	// 로그인시 환영문구,마이페이지btn,로그아웃btn html변경 -- 윤찬규
+	    	$('#join').on('click', function() {
+	    		var ROOT_PATH = '<%= application.getContextPath() %>';
+	    		var url = ROOT_PATH+'/member/join_choice_form.fdl';
+				$("#main-content").load(url);
+	    	});
+	    	//
         });
        
 </script>
@@ -202,7 +207,7 @@
         <a href="${pageContext.request.contextPath}/main.fdl"><img class="logo" src="resources/css/imgs/logo.png"></a>
         <span id="loginjoin">
 			<c:if test="${empty LoginName}">
-			<a href="#" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl" id='join'>회원가입</a></span>
+			<a href="#" id='login'>로그인</a> / <a href="#" id='join'>회원가입</a></span>
 	        </c:if>
 	        <c:if test="${not empty LoginName and LoginName ne 'admin'}">
 	        <a href="${pageContext.request.contextPath}/my_page.fdl" id='mypage'>마이페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
