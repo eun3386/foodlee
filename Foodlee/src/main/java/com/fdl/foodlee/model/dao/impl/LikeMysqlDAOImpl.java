@@ -14,59 +14,39 @@ public class LikeMysqlDAOImpl implements ILikeDAO {
 	@Autowired
 	private JdbcTemplate jtem;
 
+	public static final String SQL_LIKE_CHECK = "insert into like" + " values(null, ?, ?, ?)";
+	public static final String SQL_LIKE_UPDATE = "update like ";
+	public static final String SQL_LIKE_DELETE = "delete from like where like_id = ?";
+	public static final String SQL_LIKE_LIST = "SELECT * FROM like";
 	@Override
 	public List<LikeVO> showLikeList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 	@Override
 	public boolean checkLike(int likeMemberId, int likeFoodtruckId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 	@Override
 	public boolean deleteLike(int likeId, int likeMemberId, int likeFoodtruckId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	@Override
+	public int getLikeMenu(String likeMenuPic, String likeFoodtruckName, String likeMenuName, int likeMenuPrice) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	@Override
 	public int getLikeMenuName(String likeMenuName) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
 
-	@Override
-	public boolean showLikePic(String likeMenuPic) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public boolean showLikeFtN(String likeFoodtruckName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public boolean showLikeMenuN(String likeMenuName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean showLikeMenuPrice(int likeMenuPrice) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean showLikeMenu(String likeMenuPic, String likeFoodtruckName, String likeMenuName, int likeMenuPrice) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	
 	
