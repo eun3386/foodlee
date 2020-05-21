@@ -19,39 +19,18 @@ public class FoodtruckVO {
 	private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP
 	
 	
-	//
-	
-	
 	public FoodtruckVO() {}
 	
-	
 	public FoodtruckVO(String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,
-			String foodtruckLocation, String foodtruckMuni, String foodtruckGuCode, String foodtruckOperationHour, String sellerFoodtruckCoordinate) {
-		this(0, foodtruckImgPath, foodtruckName, foodtruckMainMenu, foodtruckLocation, foodtruckMuni, foodtruckGuCode,
-				foodtruckOperationHour, 0, sellerFoodtruckCoordinate, null);
-	}
-	
-	public FoodtruckVO(int sellerId, String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,
-			String foodtruckLocation, String foodtruckOperationHour, int favoriteCount, int memberLikeCount,
-			String memberLikeIds, String sellerFoodtruckCoordinate, Timestamp locationUpdatedAt, int foodtruckGuCode) {
-		super();
-		this.sellerId = sellerId;
-		this.foodtruckImgPath = foodtruckImgPath;
-		this.foodtruckName = foodtruckName;
-		this.foodtruckMainMenu = foodtruckMainMenu;
-		this.foodtruckLocation = foodtruckLocation;
-		this.foodtruckOperationHour = foodtruckOperationHour;
-		this.favoriteCount = favoriteCount;
-		this.memberLikeCount = memberLikeCount;
-		this.memberLikeIds = memberLikeIds;
-		this.sellerFoodtruckCoordinate = sellerFoodtruckCoordinate;
-		this.locationUpdatedAt = locationUpdatedAt;
-		this.foodtruckGuCode = foodtruckGuCode;
+			String foodtruckLocation, String foodtruckMuni, String foodtruckGuCode, String foodtruckOperationHour,
+			String sellerFoodtruckCoordinate) {
+		this(0, foodtruckImgPath, foodtruckName, foodtruckMainMenu, foodtruckLocation, foodtruckMuni, foodtruckGuCode, foodtruckOperationHour, 0, 0, foodtruckOperationHour, sellerFoodtruckCoordinate, null);
 	}
 	
 	public FoodtruckVO(int sellerId, String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,
 			String foodtruckLocation, String foodtruckMuni, String foodtruckGuCode, String foodtruckOperationHour,
-			int favoriteCount, String sellerFoodtruckCoordinate, Timestamp locationUpdatedAt) {
+			int favoriteCount, int memberLikeCount, String memberLikeIds, String sellerFoodtruckCoordinate,
+			Timestamp locationUpdatedAt) {
 		super();
 		this.sellerId = sellerId;
 		this.foodtruckImgPath = foodtruckImgPath;
@@ -62,9 +41,12 @@ public class FoodtruckVO {
 		this.foodtruckGuCode = foodtruckGuCode;
 		this.foodtruckOperationHour = foodtruckOperationHour;
 		this.favoriteCount = favoriteCount;
+		this.memberLikeCount = memberLikeCount;
+		this.memberLikeIds = memberLikeIds;
 		this.sellerFoodtruckCoordinate = sellerFoodtruckCoordinate;
 		this.locationUpdatedAt = locationUpdatedAt;
 	}
+	
 	
 	public int getSellerId() {
 		return sellerId;
@@ -144,16 +126,24 @@ public class FoodtruckVO {
 	public void setLocationUpdatedAt(Timestamp locationUpdatedAt) {
 		this.locationUpdatedAt = locationUpdatedAt;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "FoodtruckVO [sellerId=" + sellerId + ", foodtruckImgPath=" + foodtruckImgPath + ", foodtruckName="
 				+ foodtruckName + ", foodtruckMainMenu=" + foodtruckMainMenu + ", foodtruckLocation="
 				+ foodtruckLocation + ", foodtruckMuni=" + foodtruckMuni + ", foodtruckGuCode=" + foodtruckGuCode
 				+ ", foodtruckOperationHour=" + foodtruckOperationHour + ", favoriteCount=" + favoriteCount
+				+ ", memberLikeCount=" + memberLikeCount + ", memberLikeIds=" + memberLikeIds
 				+ ", sellerFoodtruckCoordinate=" + sellerFoodtruckCoordinate + ", locationUpdatedAt="
 				+ locationUpdatedAt + "]";
 	}
-
+	
+	
+	//
+	
+	
+	
 	
 	
 
