@@ -15,9 +15,8 @@ public class LikeMysqlDAOImpl implements ILikeDAO {
 	private JdbcTemplate jtem;
 
 	public static final String SQL_LIKE_CHECK = "insert into like" + " values(null, ?, ?, ?)";
-	public static final String SQL_LIKE_UPDATE = "update like ";
 	public static final String SQL_LIKE_DELETE = "delete from like where like_id = ?";
-	public static final String SQL_LIKE_LIST = "SELECT * FROM like";
+	public static final String SQL_LIKE_LIST = "SELECT * FROM like " + "ORDER BY IF";
 	@Override
 	public List<LikeVO> showLikeList() {
 		// TODO Auto-generated method stub

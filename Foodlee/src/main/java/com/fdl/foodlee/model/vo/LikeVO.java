@@ -16,6 +16,17 @@ public class LikeVO {
 	private int likeTotalCount; // 좋아요 총 횟수
 	
 	public LikeVO() {}
+	
+	public LikeVO(int likeId, int likeMemberId) {
+		this.likeId = likeId;
+		this.likeMemberId = likeMemberId;
+	}
+	
+	public LikeVO(int likeId, int likeMemberId, int likeFoodtruckId) {
+		this.likeId = likeId;
+		this.likeMemberId = likeMemberId;
+		this.likeFoodtruckId = likeFoodtruckId;
+	}
 
 	public LikeVO(int likeId, int likeMemberId, int likeMenuId, int likeFoodtruckId) {
 		super();
