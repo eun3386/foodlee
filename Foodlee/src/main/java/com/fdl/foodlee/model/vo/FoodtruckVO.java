@@ -11,6 +11,8 @@ public class FoodtruckVO {
 	private String foodtruckLocation; // 푸드트럭 위치 ⇔ varchar(256) foodtruck_location NN
 	private String foodtruckOperationHour; // 푸드트럭 영업시간 ⇔ varchar (64)  foodtruck_operation_hour NN	
 	private int favoriteCount; // 좋아요 트럭 ⇔ integer favorite_count <<FK>>
+	private int memberLikeCount; // 좋아요 횟수⇔ member_like_count 
+	private String memberLikeIds; // 좋아요 한 회원의 ID목록들⇔ varchar(512) member_like_ids
 	private String sellerFoodtruckCoordinate; // 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
 	private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP
 	private int foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code
@@ -36,6 +38,25 @@ public class FoodtruckVO {
 		this(++selId, foodtruckImgPath, foodtruckName, foodtruckMainMenu, foodtruckLocation,
 				foodtruckOperationHour, favCount, sellerFoodtruckCoordinate, null, foodtruckGuCode);
 	}
+	
+	public FoodtruckVO(int sellerId, String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,
+			String foodtruckLocation, String foodtruckOperationHour, int favoriteCount, int memberLikeCount,
+			String memberLikeIds, String sellerFoodtruckCoordinate, Timestamp locationUpdatedAt, int foodtruckGuCode) {
+		super();
+		this.sellerId = sellerId;
+		this.foodtruckImgPath = foodtruckImgPath;
+		this.foodtruckName = foodtruckName;
+		this.foodtruckMainMenu = foodtruckMainMenu;
+		this.foodtruckLocation = foodtruckLocation;
+		this.foodtruckOperationHour = foodtruckOperationHour;
+		this.favoriteCount = favoriteCount;
+		this.memberLikeCount = memberLikeCount;
+		this.memberLikeIds = memberLikeIds;
+		this.sellerFoodtruckCoordinate = sellerFoodtruckCoordinate;
+		this.locationUpdatedAt = locationUpdatedAt;
+		this.foodtruckGuCode = foodtruckGuCode;
+	}
+	
 	public FoodtruckVO(int sellerId, String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,
 			String foodtruckLocation, String foodtruckOperationHour, int favoriteCount,
 			String sellerFoodtruckCoordinate, Timestamp locationUpdatedAt, int foodtruckGuCode) {
@@ -94,6 +115,18 @@ public class FoodtruckVO {
 	}
 	public void setFavoriteCount(int favoriteCount) {
 		this.favoriteCount = favoriteCount;
+	}
+	public int getMemberLikeCount() {
+		return memberLikeCount;
+	}
+	public void setMemberLikeCount(int memberLikeCount) {
+		this.memberLikeCount = memberLikeCount;
+	}
+	public String getMemberLikeIds() {
+		return memberLikeIds;
+	}
+	public void setMemberLikeIds(String memberLikeIds) {
+		this.memberLikeIds = memberLikeIds;
 	}
 	public String getSellerFoodtruckCoordinate() {
 		return sellerFoodtruckCoordinate;
