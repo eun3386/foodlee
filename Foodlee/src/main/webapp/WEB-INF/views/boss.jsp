@@ -4,9 +4,11 @@
 <html dir="ltr" lang="ko">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--     <meta http-equiv="X-UA-Compatible" content="IE=edge"> charset랑 같음 이게 버전이 더 낮음 -->
     <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- - width=device-width : 페이지의 너비를 기기의 스크린 너비로 설정합니다. 즉, 렌더링 영역을 기기의 뷰포트의 크기와 같게 만들어 줍니다.
+- initial-scale=1.0 : 처음 페이지 로딩시 확대/축소가 되지 않은 원래 크기를 사용하도록 합니다. 0~10 사이의 값을 가집니다.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicon icon -->
@@ -108,7 +110,7 @@
       );
 
       var options = {
-        title: "Density of Precious Metals, in g/cm^3",
+        //title: 월별 매출,
         width: 600,
         height: 400,
         bar: {groupWidth: "75%"},
@@ -656,8 +658,8 @@
                                     </h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
-                                	<span  > <img alt="" src="../../resources/imgs/boss/원.png" style="max-width: 24px;max-height: 24px;"></span>
-                                  <!--   <span class="opacity-7 text-muted"><i data-feather="dollar-sign"></i></span> -->
+<!--                                 	<span  > <img alt="" src="../../resources/imgs/boss/원.png" style="max-width: 24px;max-height: 24px;"></span> -->
+                                    <span class="opacity-7"><i class="fas fa-won-sign"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -732,7 +734,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card">
                       <!--       <div class="card-body"> -->
-                                <h4 class="card-title">연간 매출량</h4>
+                                <h4 class="card-title">주간 매출량</h4>
                                 	<div id="curve_chart" style="height: 297px; width:100%;" ></div>
                                 <ul class="list-inline text-center mt-5 mb-2">
                                     <li class="list-inline-item text-muted font-italic">이달의 판매</li>
@@ -744,16 +746,22 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title mb-4">Memo</h4>
-                                <div class="" style="height:180px">
+                                <div class="" style="height:250px">
+                                <form>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="10" placeholder="Text Here..."></textarea>
+                                        <small id="textHelp" class="form-text text-muted">Helper Text</small>
+                                    </div>
+                                </form>
                                 </div>
-                                <div class="row mb-3 align-items-center mt-1 mt-5">
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                </div>
-                                <div class="row mb-3 align-items-center">
-                                </div>
-                                <div class="row align-items-center">
-                                </div>
+<!--                                                     <div class="col-sm-12 col-md-6 col-lg-4"> -->
+<!--                         <div class="card"> -->
+<!--                             <div class="card-body"> -->
+<!--                                 <h4 class="card-title">Textarea With Helper Text</h4> -->
+                                
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
                             </div>
                         </div>
                     </div>
@@ -771,6 +779,9 @@
                                 <div class="pl-4 mb-5" style="height: 370px;">
                                     <div id="columnchart_values" style="height:294px; position: relative;" ></div>
                                 </div>
+                                <ul class="list-inline text-center mt-5 mb-2">
+                                    <li class="list-inline-item text-muted font-italic">이달의 판매</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -784,6 +795,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <!-- *************************************************************** -->
                 <!-- End Location and Earnings Charts Section -->
                 <!-- *************************************************************** -->

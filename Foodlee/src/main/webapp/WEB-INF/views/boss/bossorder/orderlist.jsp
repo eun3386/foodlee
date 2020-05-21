@@ -14,10 +14,10 @@
 
     <!-- Custom CSS -->
 <!--     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet"> -->
-    <link href="<%=application.getContextPath()%>/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="<%=application.getContextPath()%>/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <!-- Custom CSS -->
-    <link href="<%=application.getContextPath()%>/dist/css/style.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/dist/css/style.min.css" rel="stylesheet">
     
 <!-- <link href="../../css/main.css" type="text/css" rel="stylesheet">
 <link href="../../css/reset.css" type="text/css" rel="stylesheet"> -->
@@ -779,26 +779,27 @@
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
+    <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="<%=application.getContextPath()%>/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="<%=application.getContextPath()%>/assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="<%=application.getContextPath()%>/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- apps -->
     <!-- apps -->
-    <script src="<%=application.getContextPath()%>/dist/js/app-style-switcher.js"></script>
-    <script src="<%=application.getContextPath()%>/dist/js/feather.min.js"></script>
+    <script src="${pageContext.request.contextPath}/dist/js/app-style-switcher.js"></script>
+    <script src="${pageContext.request.contextPath}/dist/js/feather.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="<%=application.getContextPath()%>/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="<%=application.getContextPath()%>/assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/extra-libs/sparkline/sparkline.js"></script>
     <!--Wave Effects -->
     <!-- themejs -->
     <!--Menu sidebar -->
-    <script src="<%=application.getContextPath()%>/dist/js/sidebarmenu.js"></script>
+    <script src="${pageContext.request.contextPath}/dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="<%=application.getContextPath()%>/dist/js/custom.min.js"></script>
+    <script src="${pageContext.request.contextPath}/dist/js/custom.min.js"></script>
     <!-- This Page JS -->
-    <script src="<%=application.getContextPath()%>/assets/extra-libs/prism/prism.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/extra-libs/prism/prism.js"></script>
 </body>
 </html>

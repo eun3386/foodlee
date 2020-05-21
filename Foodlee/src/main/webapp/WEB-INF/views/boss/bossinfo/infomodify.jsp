@@ -4,18 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, user-scalable=no">
-
-<link rel="stylesheet" type="text/css" href="<%= application.getContextPath() %>/resources/css/mpreset.css">
-<link rel="stylesheet" type="text/css" href="<%= application.getContextPath() %>/resources/css/mpstyle.css">
+<!-- <link rel="stylesheet" type="text/css" href="/foodlee/resources/css/mpreset.css"> -->
+<link rel="stylesheet" type="text/css" href="/foodlee/resources/css/mpstyle.css">
 <style type="text/css">
-	
+	#section_edit{display:block; background-color:#d1e6f5;}
 </style>
-<!-- <script type="text/javascript" src="./js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="./js/script.js"></script> -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var ROOT_PATH = '<%= application.getContextPath() %>';
@@ -47,16 +45,22 @@
 			$("#main").load(url);
 		});
 	});
+	$(function() {
+		  $("#changePasswordButton").on("click", function(e){
+			  e.preventDefault();
+			  $(".changePassword").show();
+		  });
+
+	});
 </script>
 <title>bossinfo</title>
 </head>
 <body id="wrapper">
 <div>
-<%-- 	<header id="_header">
-			<%@ include file="../../common/_header.jsp"%>
-		</header> --%>
+	<header id="_header">
+<%-- 			<%@ include file="../../common/_header.jsp"%> --%>
+		</header>
 </div>
-<div id="main">
 	<div id="infomain">
 	<nav id=" in-main-header" class="navbar navbar-light bg-light justify-content-between">
 		<form class="form-inline">
@@ -84,7 +88,7 @@
 						<tbody>
 							<tr>
 								<th>이름</th>
-								<td><input type="text" class="input"></td>
+								<td><span class='name'>홍길동</span></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -165,9 +169,7 @@
 				</div>
 			</div>
 		</section>
-	
 	<!--마이페이지 끝  -->
-	</div>
 	</div>
 	<div id="footer">
 		
