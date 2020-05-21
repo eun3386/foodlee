@@ -12,7 +12,7 @@ public interface IFoodtruckSVC {
 	// 푸드트럭 이름을 받아 푸드트럭 정보를 조회 할 수 있다.
 	public FoodtruckVO selectOneFoodtruck(String foodtruckName);
 	// 구 코드를 받아 푸드트럭 정보를 조회 할 수 있다.
-	public List<FoodtruckVO> selectOneFoodtruckWithGuCode(int foodtruckLocationCode);
+	public FoodtruckVO selectOneFoodtruckWithGuCode(int foodtruckLocationCode);
 	// 판매자가 자신의 푸드 트럭 정보를 업데이트 할 수 있다.
 	public boolean updateOneFoodtruck(FoodtruckVO ft);
 	// 판매자가 등록된 자신의 푸드 트럭을 삭제 할 수 있다.

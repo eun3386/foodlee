@@ -41,7 +41,7 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 	}
 	
 	@Override
-	public List<FoodtruckVO> selectOneFoodtruckWithGuCode(int foodtruckLocationCode) {
+	public FoodtruckVO selectOneFoodtruckWithGuCode(int foodtruckLocationCode) {
 		return null;
 	}
 	
