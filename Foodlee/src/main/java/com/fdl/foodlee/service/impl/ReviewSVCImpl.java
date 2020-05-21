@@ -38,8 +38,8 @@ public class ReviewSVCImpl implements IReviewSVC {
 	}
 	
 	@Override
-	public boolean updateReview(int id, String rvContent, String reviewPic) {
-		return rvDao.updateReview(id, rvContent, reviewPic);
+	public boolean updateReview(int id, String rvContent) {
+		return rvDao.updateReview(id, rvContent);
 	}
 
 	@Override

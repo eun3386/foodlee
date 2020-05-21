@@ -9,7 +9,7 @@ public interface IReviewDAO {
 	boolean insertNewReview(ReviewVO rv);
 	int insertNewArticleReturnKey(ReviewVO rv); 
 	// 리뷰를 수정 할 수 있다.
-	boolean updateReview(int id, String rvContent, String reviewPic);
+	boolean updateReview(int id, String rvContent);
 	// 리뷰를 삭제 할 수 있다.
 	boolean deleteReview(int id);
 	// 리뷰 전체를 가져와 조회 할 수 있다.

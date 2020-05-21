@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,15 +45,30 @@ public class TruckDetailController {
 			model.addAttribute("rvSize", rvList.size());
 			model.addAttribute("review", rvList);
 			System.out.println("리뷰 리스트 조회 성공: " + rvList.size());
+			
 		} else {
 			System.out.println("조회 실패");
 		}
 		return "truckDetail";
 	}
 	
+	@RequestMapping(value = "reivew_delete.fdl", method = RequestMethod.GET)
+	public String reviewDelete(@RequestParam("id")int id) {
+		rvSvc.deleteReview(id);
+		return "redirect:/truckDetail.fdl";
+	}
+	
+	@RequestMapping(value = "reivew_update.fdl", method = RequestMethod.POST)
+	@ResponseBody
+	public String reviewUpdate(HttpServletRequest req) {
+		int id = Integer.parseInt(req.getParameter("id")); 
+		String rvContent = req.getParameter("text");
+		rvSvc.updateReview(id, rvContent);
+		return null;
+	}
+	
 	@RequestMapping(value = "review_list.fdl", method = RequestMethod.GET)
 	public List<ReviewVO> reviewList(Model model) {
-		System.out.println(rvSvc.showAllReview());
 		return rvSvc.showAllReview();
 	}
 
