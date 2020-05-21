@@ -210,6 +210,7 @@
 				</tr>
 				<tr>
 					<td class="ad-text">oo구 oo동</td>
+					
 				</tr>
 				<tr>
 					<td><button>해지</button></td>
