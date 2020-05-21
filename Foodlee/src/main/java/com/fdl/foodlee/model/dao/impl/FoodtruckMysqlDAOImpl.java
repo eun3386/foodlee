@@ -40,13 +40,15 @@ private String foodtruckMuni; // 푸드트럭 구 이름 ⇔ varchar(256) foodtr
 private String foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code NN
 private String foodtruckOperationHour; // 푸드트럭 영업시간 ⇔ varchar (64)  foodtruck_operation_hour NN	
 private int favoriteCount; // 좋아요 트럭 ⇔ integer favorite_count <<FK>>
+private int memberLikeCount; // 좋아요 횟수⇔ member_like_count 
+private String memberLikeIds; // 좋아요 한 회원의 ID목록들⇔ varchar(512) member_like_ids
 private String sellerFoodtruckCoordinate; // 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
-private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP
- */
+private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP 
+*/
 	
 	// SQL부
 	private static final String
-		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,?,?,?,?,0,?,null)";
+		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,?,?,?,?,0,0,null,?,null)";
 	private static final String
 		SQL_SELECT_FOODTRUCK_SELLER_ID = "select * from foodtrucks where seller_id = ?";
 	private static final String
@@ -140,7 +142,6 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	
 	@Override
 	public List<FoodtruckVO> searchAllFoodtruckWithGuCode(int guCode) {
-		
 		return jtem.query(SQL_SELECT_FOODTRUCK_GU_CODE, 
 				BeanPropertyRowMapper
 				.newInstance(FoodtruckVO.class), guCode);
