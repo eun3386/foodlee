@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.MyCode;
@@ -28,13 +29,13 @@ public class LoginController {
 	
 //	login_form.fdl (form, get; 비회원)
 	@RequestMapping(value = "login_form.fdl", method = RequestMethod.GET)
-	public String memberLoginForm() {
+	public String loginForm() {
 		return "login_form";
 	}
 	
 // 	login.fdl (proc, post, dao; 암호화; 세션; 회원)
 	@RequestMapping(value = "login.fdl", method = RequestMethod.POST)
-	public ModelAndView memberLoginProc(
+	public ModelAndView loginProc(
 			HttpSession ses, String login, String password) {
 		System.out.println("login = "+ login);
 		System.out.println("pw = "+ password);
@@ -45,7 +46,7 @@ public class LoginController {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
-				int id = mbSvc.selectMemberIdByLogin(login);
+				int id = mbSvc.selectMemberIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
 				mav.setViewName("redirect:/main.fdl");
 			} else if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
@@ -59,21 +60,21 @@ public class LoginController {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
-				int id = mbSvc.selectMemberIdByLogin(login);
+				int id = mbSvc.selectMemberIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
 				mav.setViewName("redirect:/admin.fdl");
 			} else {
 				mav.addObject("msg", "로그인 실패!! - "
 						+ authResult + " : " +
 					MyCode.getMsg(authResult) );
-				mav.setViewName("login_form");
+				mav.setViewName("redirect:/main.fdl");
 			}	
 		return mav;
 	}
 	
 //	logout.fdl
 	@RequestMapping(value = "logout.fdl", method = RequestMethod.GET)
-	public String adminLogoutProc(HttpSession ses) {
+	public String logoutProc(HttpSession ses) {
 		String login = (String)ses.getAttribute("LoginName");
 		long loginStarted = (Long)ses.getAttribute("LoginTime");
 		long currentTime = System.currentTimeMillis();
@@ -83,4 +84,16 @@ public class LoginController {
 		ses.invalidate();
 		return "redirect:/";
 	}
+	
+//	find_form.fdl
+	@RequestMapping(value = "find_form.fdl", method = RequestMethod.GET)
+	public String findForm() {
+//			@RequestParam(value = "find",
+//			required = false,
+//			defaultValue = "id")
+//			String find) {
+		
+		return "find_form";
+	}
+	
 }

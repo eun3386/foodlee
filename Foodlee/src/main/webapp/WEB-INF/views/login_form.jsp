@@ -7,6 +7,17 @@
 <link href="<%= application.getContextPath()%>/resources/css/login.css" type="text/css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	$(document).ready(function () {
+		
+		$('#id_find, #pw_find').on('click', function() {
+    		var ROOT_PATH = '<%= application.getContextPath() %>';
+    		var url = ROOT_PATH+'/find_form.fdl';
+			$("#login_form").load(url);
+    	});
+		
+	});
+</script>
 </head>
 <body>
 <div id="login_wrap" class="slide">

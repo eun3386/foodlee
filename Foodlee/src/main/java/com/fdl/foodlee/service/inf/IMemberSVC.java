@@ -13,7 +13,7 @@ public interface IMemberSVC {
 	
 	
 //	로그인 중복체크 할 수 있다.
-	int selectMemberIdByLogin(String login);
+	boolean isDuplicatedMember(String login);
 	
 //	로그인 할 수 있다. (세션 + 암호화 인증)
 	String loginAuthenticate(String login, int id);

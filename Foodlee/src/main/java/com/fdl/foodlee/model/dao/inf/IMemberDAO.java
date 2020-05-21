@@ -5,6 +5,7 @@ import com.fdl.foodlee.model.vo.MemberVO;
 public interface IMemberDAO {
 //	가입 할 수 있다. (암호화 저장 처리)
 	boolean insertNewMemberWithCrypto(MemberVO mb);
+	int insertNewMemberWithCryptoReturnKey(MemberVO mb);
 	
 //	아이디를 찾을 수 있다.
 	
