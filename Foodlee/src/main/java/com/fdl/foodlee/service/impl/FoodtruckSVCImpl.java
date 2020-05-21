@@ -1,7 +1,9 @@
 package com.fdl.foodlee.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,8 +26,8 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 
 	@Override
 	public FoodtruckVO selectOneFoodtruck(int sellerId) {
-		// TODO Auto-generated method stub
-		return null;
+		FoodtruckVO foodtruckVO = ftDao.selectOneFoodtruck(sellerId);
+		return foodtruckVO;
 	}
 
 	@Override

@@ -46,7 +46,7 @@
 				style="width: 350px; height: 250px; float: left; margin-bottom: 15px;">
 			<div id="car_des"
 				style="float: left; margin-left: 420px; position: absolute;">
-				<h2 style="margin-top: 0; margin-bottom: 15px;">푸드트럭 팩토리</h2>
+				<h2 style="margin-top: 0; margin-bottom: 15px;"><c:out value="${foodT.foodtruckName}"/></h2>
 				<div style="min-height: 110px;">
 				<c:out value="${mbId}"></c:out>
 				소비자 만족도 1위 푸드트럭! BOP푸드트럭 입니다. 저의 시그니쳐 메뉴인 눈꽃목살스테이크는 섭씨 1,300도의 중식화로를

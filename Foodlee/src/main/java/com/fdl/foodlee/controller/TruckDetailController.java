@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.ReviewVO;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
@@ -45,6 +46,9 @@ public class TruckDetailController {
 	 */
 	@RequestMapping(value = "truckDetail.fdl", method = RequestMethod.GET)
 	public String truckDetail(HttpSession ses, Model model) {
+		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(1);
+		System.out.println(fd.getFoodtruckName());
+		model.addAttribute("foodT", fd);
 		List<ReviewVO> rvList = rvSvc.showAllReview();
 		if (rvList != null) {
 			model.addAttribute("rvSize", rvList.size());
