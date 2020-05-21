@@ -180,6 +180,9 @@ function getContextPath() {
   return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 };
 
+var URLHD = getContextPath() + '/';
+
+/*
 function commentList() {
 	var URLHD = getContextPath()+'/';
 	$.getJSON('new_review.fdl', function(data) {
@@ -188,7 +191,68 @@ function commentList() {
 		})
 	});
 }
+*/
 
+//function fileUploadAction() {
+//    console.log("fileUploadAction");
+//    $("#file_add").trigger('click');
+//}
+
+var sel_files = [];
+// 이미지 여러개
+
+function handleImgFileSelect(e) {
+	if($("#file_add")[0].files.length > 4) {
+		swal("사진 업로드는 4개까지만 가능합니다.");
+		$("#file_add").val("");
+		$(".imgs_wrap").html("");
+		$("#img_pr").css("display", "none");
+		return;
+	}
+    // 이미지 정보들을 초기화
+    sel_files = [];
+    $(".imgs_wrap").empty();
+
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    var index = 0;
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+        	swal("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_files.push(f);
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            // var html = "CONTENT";
+//        	$("#img_pr").css("display", "block");
+        	var html = // (index == 0 ? "<div style='margin-bottom: 10px;'><br>이미지 미리보기</div>" : "") + 
+        			"<img src=\"" + e.target.result + "\" style='margin-right:3px;'" +
+        					"data-file='"+f.name+"' class='selProductFile'>";
+        	$(".imgs_wrap").css("display", "block");
+            $(".imgs_wrap").append(html);
+            index++;
+        }
+        $("#img_pr").css("display", "block");
+        reader.readAsDataURL(f);
+    });
+}
+
+/* 이미지 삭제
+function deleteImageAction(index) {            
+    console.log("index : "+index);
+    sel_files.splice(index, 1);
+
+    var img_id = "#img_id_"+index;
+    $(img_id).remove();
+
+}    
+*/
+
+/* 이미지 하나만
 var sel_file;
 
 function handleImgFileSelect(e) {
@@ -211,6 +275,74 @@ function handleImgFileSelect(e) {
         $('#img_pr').css("display", "block");
     });
 }
+*/
+var text;
+function modify_review(id) {
+	// $("#con_"+id).html;
+	 $("#mod_"+id).css('display', 'none');
+	
+	text = $("#con_"+id).text().trim();
+	$("#con_"+id).html("<textarea style='resize:none; width: 700px; min-height: 80px; max-height: 180px;'>"+text+"</textarea>");
+	$("#con_"+id).append("<button onclick='modify("+id+")' style='margin-top: 3px;'>수정하기</button>" +
+			"<button id='cancel_"+id+"' onclick='cancel("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button>");
+	
+}
+
+function modify(id) {
+	var moText = $("#con_"+id).children("textarea").val();
+	$("#con_"+id).html("<div id='con_"+id+"'>"+moText+"</div>");
+	$("#mod_"+id).css('display', 'inline');
+	
+	var d = new Date();
+	var dateString = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + (d.getDate())).slice(-2) + " " +  
+	('0' + (d.getHours())).slice(-2) + ":" + ('0' + (d.getMinutes())).slice(-2) + ":" + ('0' + (d.getSeconds())).slice(-2);
+	
+	$("#fmt_"+id).text(dateString);
+	
+	$.ajax({
+	    type: "POST",
+	    url: URLHD + 'reivew_update.fdl',
+	    data: {"text" : moText,
+	    	"id" : id},
+	    dataType: "json",
+	    success: function(data, textStatus) {
+	        if (data.redirect) {
+	        	console.log("성공");
+	        }
+	        else {
+	        }
+	    }
+	});
+}
+
+function cancel(id) {
+	$("#con_"+id).html("<div id='con_"+id+"'>"+text+"</div>");
+	$("#mod_"+id).css('display', 'inline');
+	$("#cancel_"+id).css('display', 'none');
+}
+
+function del_review(id) {
+	/*
+	var chk = confirm("리뷰를 삭제하시겠습니까?");
+	if (chk) {
+		var URLHD = getContextPath()+'/';
+		location.href= URLHD + 'reivew_delete.fdl?id='+id;
+	}*/
+	swal({
+		  title: "리뷰를 삭제하시겠습니까?",
+		  text: "",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+			  location.href= URLHD + 'reivew_delete.fdl?id='+id;
+		  } else {
+		    return;
+		  }
+	});
+}	
 
 $(document).ready(function() {
 	$("#file_add").on("change", handleImgFileSelect);

@@ -23,7 +23,7 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 	public static final String SQL_REVIEW_NEW = "insert into review"
 			+ " values(null, ?, ?, ?, ?, ?, ?, now())";
 	public static final String SQL_REVIEW_UPDATE = "update review set review_content=?"
-			+ ", review_pic=? where review_id=?";
+			+ " where review_id=?";
 	public static final String SQL_REVIEW_DELETE = "delete from review where review_id = ?";
 	public static final String SQL_REVIEW_LIST = "SELECT * FROM review " + 
 			"ORDER BY IF(ISNULL(review_pnum), review_id, review_pnum*1), review_depth asc";
@@ -42,7 +42,7 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 	}
 	
 	@Override
-	public int insertNewArticleReturnKey(ReviewVO rv) {
+	public int insertNewReviewReturnKey(ReviewVO rv) {
 		KeyHolder kh = new GeneratedKeyHolder();
 		PreparedStatementCreator psc = new PreparedStatementCreator() {
 
@@ -74,8 +74,8 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 	}
 
 	@Override
-	public boolean updateReview(int id, String rvContent, String reviewPic) {
-		int r = jtem.update(SQL_REVIEW_UPDATE, rvContent, reviewPic, id); 
+	public boolean updateReview(int id, String rvContent) {
+		int r = jtem.update(SQL_REVIEW_UPDATE, rvContent, id); 
 		return r == 1;
 	}
 

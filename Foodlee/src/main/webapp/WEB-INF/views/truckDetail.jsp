@@ -46,8 +46,9 @@
 				style="width: 350px; height: 250px; float: left; margin-bottom: 15px;">
 			<div id="car_des"
 				style="float: left; margin-left: 420px; position: absolute;">
-				<h2 style="margin-top: 0; margin-bottom: 15px;">푸드트럭 팩토리</h2>
+				<h2 style="margin-top: 0; margin-bottom: 15px;"><c:out value="${foodT.foodtruckName}"/></h2>
 				<div style="min-height: 110px;">
+				<c:out value="${mbId}"></c:out>
 				소비자 만족도 1위 푸드트럭! BOP푸드트럭 입니다. 저의 시그니쳐 메뉴인 눈꽃목살스테이크는 섭씨 1,300도의 중식화로를
 				이용하여 단시간에 육즙가득한 목살스테이크를 구워 드립니다. 많은 문의 부탁 드립니다!
 				</div>
@@ -121,27 +122,51 @@
 							</c:choose>
 							</div>
 							<div class="date" style="padding-top: 4px; font-size: 12px;">
-							<fmt:formatDate value="${rv.reviewCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<span id="fmt_${rv.reviewId}"><fmt:formatDate value="${rv.reviewCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</span>
 							<span style="float: right; margin-right: 15px;">
-							<button style="margin-bottom: 3px;">수정</button>
-							<br><button>삭제</button></span>
+							<button id="mod_${rv.reviewId}" onclick="modify_review(${rv.reviewId})" 
+							style="margin-bottom: 3px;">수정</button>
+							<br><button onclick="del_review(${rv.reviewId})">
+							삭제</button></span>
 							</div>
 						</li>
 						<li>
-							<div style="padding-top: 15px;">
-								<c:out value="${rv.reviewContent}"/>
+							<div id="con_${rv.reviewId}" style="padding-top: 15px;"><c:out value="${rv.reviewContent}"/>
 							</div>
 							<c:if test="${!empty rv.reviewPic}">
-							<c:choose>
-								<c:when test="${fn:endsWith(rv.reviewPic,'.png') 
-									or fn:endsWith(rv.reviewPic,'.jpg') 
-									or fn:endsWith(rv.reviewPic,'.gif')}">
-									<div id="file_show_${rv.reviewPic}" class="image_file">
-										<img src="${pageContext.request.contextPath}${rv.reviewPic}" 
-											style="margin-top:10px; width: 250px; height: 150px;">
-									</div>
-								</c:when>
-							</c:choose>
+							
+							<c:set var="flName" value="${rv.reviewPic}"></c:set>
+							<%
+								String filePath = (String)pageContext.getAttribute("flName");
+								String fps[] = null;
+								int fpsCount = 1;
+								if (filePath != null && !filePath.isEmpty()) {
+									if (filePath.indexOf("|") != -1) {
+										fps = filePath.split("\\" + "|");
+										fpsCount = fps.length;
+									} else {
+										fpsCount = 1;
+										fps = new String[] { filePath };
+									}
+								} else {
+									fpsCount = 0;
+								}
+								pageContext.setAttribute("fps", fps);
+							%>
+							<c:forEach var="fp" items="${pageScope.fps}" varStatus="vs">
+								<c:choose>
+									<%-- fp -> rv.reviewPic --%>
+									<c:when test="${fn:endsWith(fp,'.png')
+										or fn:endsWith(fp,'.jpg') 
+										or fn:endsWith(fp,'.gif')}">
+										<div id="file_show_${fp}" class="image_file">
+											<img src="${pageContext.request.contextPath}${fp}" 
+												style="margin-top:10px; width: 250px;">
+										</div>
+									</c:when>
+								</c:choose>
+							</c:forEach>
 <%-- 							<img src="<%=CON%>/resources/imgs/truckDetail/${rv.reviewPic}"  --%>
 <!-- 								style="margin-top:10px; width: 250px; height: 150px;"> -->
 							</c:if>
@@ -157,20 +182,18 @@
 <!--  						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto; white-space: pre-line;"> -->
 <!-- 					</div> -->
 					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post" enctype="multipart/form-data">
-					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
+					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="사진 업로드는 4개까지만 가능합니다."
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty rv ? rv.review_content:''}</textarea>
-						<input type="file" name="imgfiles" id="file_add" style="dispaly: none;">
+						<input type="file" name="imgfiles" id="file_add" multiple="multiple" style="dispaly: none;">
 						<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
 						style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
 	 						margin-left: -3px; background-color: orange; border: 1px solid gray;">이미지 추가</button>
 						<button type="submit" id="review_add" style="width: 100px; height: 30px; float: right; margin-top: 25px; 
 						margin-bottom: 30px; margin-left: -3px; background-color: orange; border: 1px solid gray;">리뷰달기</button>
-						<div>
-					        <div class="img_wrap">
-					        	<div id="img_pr" style="display: none; margin-bottom: 10px;"><br>이미지 미리보기</div>
-					            <img id="img"/>
-					        </div>
-					    </div>
+				        <div id="img_pr" style="position: absolute; display:none; margin-top: 40px;"><br>이미지 미리보기</div>
+				        <div class="imgs_wrap">
+				            <img id="img"/>
+				        </div>
 					</form>
 				</div>
 			</div>

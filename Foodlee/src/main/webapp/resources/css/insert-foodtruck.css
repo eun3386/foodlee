@@ -2,7 +2,7 @@
 
 #main-content {
 	margin: 0 120px;
-	height: 600px;
+	height: 700px;
 }
 
 /* #truck_insert_wrap { */
@@ -13,7 +13,7 @@
 	position: absolute;
 	border: 2px solid orange;
 	width: 500px;
-	height: 500px;
+	height: 600px;
 	margin-top: 50px;
 	box-sizing: border-box;
 	padding: 30px;
@@ -40,10 +40,10 @@
 
 .truck_insert_slide {
 	background-image: url('../imgs/truckDetail/insert_truck_background.jpg');
-	height: 600px;
+	height: 700px;
     background-repeat: repeat-x;
-    animation: slideleft 20000s infinite linear;
-    -webkit-animation: slideleft 20000s infinite linear;
+    animation: slideleft 10000s infinite linear;
+    -webkit-animation: slideleft 10000s infinite linear;
     background-size: cover;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;

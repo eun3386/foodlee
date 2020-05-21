@@ -3,150 +3,31 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="ko">
 <head>
-    <meta charset="utf-8">
-<!--     <meta http-equiv="X-UA-Compatible" content="IE=edge"> charset랑 같음 이게 버전이 더 낮음 -->
-    <!-- Tell the browser to be responsive to screen width -->
-    <!-- - width=device-width : 페이지의 너비를 기기의 스크린 너비로 설정합니다. 즉, 렌더링 영역을 기기의 뷰포트의 크기와 같게 만들어 줍니다.
-- initial-scale=1.0 : 처음 페이지 로딩시 확대/축소가 되지 않은 원래 크기를 사용하도록 합니다. 0~10 사이의 값을 가집니다.-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Roboto|Courgette|Pacifico:400,700" rel="stylesheet">
+<title>ad2</title>
+<link href="${pageContext.request.contextPath}/dist/css/style.min.css" rel="stylesheet">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+ 
+ <link href="${pageContext.request.contextPath}/resources/css/boss-ad.css" rel="stylesheet">
 <style type="text/css">
 #main-wrapper[data-layout=vertical][data-sidebartype=full] .page-wrapper
 	{
-	margin-left: 130px !important;
-	margin-right: 130px;!important
+	margin-left: 260px;
+	margin-right: 260px;
 }
 </style>
-
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <%-- <link href="<%=application.getContextPath()%>/boss/bossorder/orderlist.fdl" > --%>
-    <title>seller</title>
-
-    <!-- Custom CSS -->
-<!--     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet"> -->
-    <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link href="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
-    <!-- Custom CSS -->
-    <link href="dist/css/style.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    
-<![endif]-->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['주문금액', '주문횟수'],
-          ['만원미만', 246],
-          ['3만원미만', 108],
-          ['5만원미만',    124],
-          ['5만원이상',    159]
-
-        ]);
-
-        var options = {
-         /*  title: '주문금액', */
-          pieHole: 0.4,
-          legend:{position: 'none'},
-/*           legend: { position: 'bottom', maxLines: 4 }, */
-          colors: ['#5f76e8','#ff4f70','#01caf1','#fdc16a']
-          
-          /* colors: ['#a561bd','#c784de'] */
-/*           0: { color: '#a561bd' },
-          1: { color: '#c784de' } */
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
-
-    </script>
-    <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
-    google.charts.setOnLoadCallback(drawChart);
-    
-    function drawChart() { 
-        var data = google.visualization.arrayToDataTable([
-        	['week', '이번주','지난주'], 
-            ['월', 797, 709],  ['화', 864, 906],  ['수', 822, 802],  ['목', 814, 851],  
-            ['금', 899, 809],  ['토', 1137, 913],  ['일', 1176, 917] 
-        /* ['month', '개체수1'], 
-        ['1월', 797],   ['2월', 864],  ['3월', 822],  ['4월', 814],  ['5월', 899],  ['6월', 1137],
-        ['7월', 1176], ['8월', 1276], ['9월', 1694], ['10월', 2141], ['11월', 2609], ['12월', 2954]  */
-        ]); 
-        var options = { 
-          hAxis: { title: '한주간 수입' },
-          curveType: 'function', 
-/*           legend: { position: 'bottom' },  */
-             tooltip:{isHtml: true }, 
-             colors: ['#5f76e8','#ff4f70'],
-          focusTarget: 'category', 
-          crosshair: { trigger: 'both',orientation: 'vertical', color: 'silver', opacity: 0.1  },
-          pointSize: 5,
-          pointShape: 'sircle'
-       }; 
-       var chart = new google.visualization.LineChart(document.getElementById('curve_chart')); 
-       chart.draw(data, options); 
-      }
-    </script>
-      <script type="text/javascript">
-    google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Element", "만 원", { role: "style" } ],
-        ["1월", 894, "#5f76e8"], ["2월", 1049, "#fdc16a"], ["3월", 1930, "#ff4f70"],
-        ["4월", 2145, "color: #01caf1"], ["5월", 2145, "color: #5f76e8"], ["6월", 245, "color: #fdc16a"],
-        ["7월", 215, "color: #ff4f70"],  ["8월", 145, "color: #01caf1"],  ["9월", 2145, "color: #5f76e8"],
-        ["10월", 0, "color: #fdc16a"],   ["11월", 0, "color: #ff4f70"],   ["12월", 0, "color: #01caf1"]
-      ]);
-
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" },
-                       2]
-      );
-
-      var options = {
-        //title: 월별 매출,
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "75%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-      chart.draw(view, options);
-  }
-  </script>
 </head>
-
 <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <div class="lds-ripple">
-            <div class="lds-pos"></div>
-            <div class="lds-pos"></div>
-        </div>
-    </div>
-    <!-- ============================================================== -->
+ <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
-        <!-- ============================================================== -->
+            <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin6">
@@ -369,8 +250,7 @@
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
+                <!-- Page wrapper  -->
         <!-- ============================================================== -->
         <div class="page-wrapper">
             <!-- ============================================================== -->
@@ -388,15 +268,6 @@
                             </nav>
                         </div>
                     </div>
-                    <div class="col-5 align-self-center">
-                        <div class="customize-input float-right">
-                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 19</option>
-                                <option value="1">July 19</option>
-                                <option value="2">Jun 19</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- ============================================================== -->
@@ -407,125 +278,133 @@
             <!-- ============================================================== -->
 
             <div class="container-fluid">
-                <!-- *************************************************************** -->
-                <!-- Start First Cards -->
-                <!-- *************************************************************** -->
-                <div class="card-group">
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">236</h2>
-                                        <span
-                                            class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">+18.33%</span>
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">판매량</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="user-plus"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup
-                                            class="set-doller">￦</sup>18,306</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">주간매출
-                                    </h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-<!--                                 	<span  > <img alt="" src="../../resources/imgs/boss/원.png" style="max-width: 24px;max-height: 24px;"></span> -->
-                                    <span class="opacity-7"><i class="fas fa-won-sign"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card border-right">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">1538</h2>
-                                        <span
-                                            class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span>
-                                    </div>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">좋아요</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="thumbs-up"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex d-lg-flex d-md-block align-items-center">
-                                <div>
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                    <sup class="set-doller">￦</sup>864만</h2>
-                                    <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">월매출</h6>
-                                </div>
-                                <div class="ml-auto mt-md-3 mt-lg-0">
-                                    <span class="opacity-7 text-muted"><i data-feather="globe"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- *************************************************************** -->
+	                <!-- *************************************************************** -->
                 <!-- Start Sales Charts Section -->
                 <!-- *************************************************************** -->
                    <div class="row"><!--옴ㄹ기기 -->
-                    <div class="col-lg-7 col-md-12">
-                        <div class="card">
-                            <div class="card-body">
- <!--                                <div id="campaign-v2"  style="height:283px; width:100%;"></div> -->
- 								<div class="float-left">
-                                <div id="donutchart" class="mt-2 float-left" style="height: 315px; width:100%;"></div><!-- height:460px; height:283px; 원형차트 -->
-                                </div>
-	                               <ul class="list-style-none mb-0">
-                                    <li>
-                                        <i class="fas fa-circle text-primary font-10 mr-2"></i>
-                                        <span class="text-muted">만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">246</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-danger font-10 mr-2"></i>
-                                        <span class="text-muted">3만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">108</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-cyan font-10 mr-2"></i>
-                                        <span class="text-muted">5만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">124</span>
-                                    </li>
-                                    <li class="mt-3">
-                                        <i class="fas fa-circle text-warning font-10 mr-2"></i>
-                                        <span class="text-muted">5만원 이상</span>
-                                        <span class="text-dark float-right font-weight-medium">159</span>
-                                    </li>
-                                </ul>
-                                <div class="mt-3">
-                                <ul class="list-inline text-center mt-5 mb-2">
-                                    <li class="list-inline-item text-muted font-italic">총 매출</li>
-                                </ul>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-lg-6 col-md-12">
+                       <div class="signup-form pl-4 mb-5">
+						    <form action="/examples/actions/confirmation.php" method="post">
+								<div class="form-header">
+									<h2>파워링크</h2>
+<!-- 									<p>Fill out this form to start your free trial!</p> -->
+								</div>
+						        <div class="form-group">
+								<h1 class="text-center">55,000 <small><i class="fas fa-won-sign"></i></small></h1>
+						        </div>
+						        <div class="form-group">
+									<p>소비자와 가장 가까운 광고!<br>
+										높은 전환 효과를 기대할 수 있는
+										프리미엄 배너 광고 상품입니다.
+										낮은 비용과 높은 타겟팅 정확도를 누리세요!
+									</p>
+						        </div>
+								<div class="form-group">
+									<label>적용기간</label>
+						            <input type="date" class="form-control" name="startdate" required="required">
+						            <!-- 오늘 날짜 default로 !! -->
+						        </div>
+								<div class="form-group">
+									<label>노출위치</label>
+									<select name="location"  class="form-control" id="inlineFormCustomSelect">
+										<option value="강남구">강남구</option>
+										<option value="강동구">강동구</option>
+										<option value="강북구">강북구</option>
+										<option value="강서구">강서구</option>
+										<option value="관악구">관악구</option>
+										<option value="광진구">광진구</option>
+										<option value="구로구">구로구</option>
+										<option value="금천구">금천구</option>
+										<option value="노원구">노원구</option>
+										<option value="도봉구">도봉구</option>
+										<option value="동대문구">동대문구</option>
+										<option value="동작구">동작구</option>
+										<option value="마포구">마포구</option>
+										<option value="서대문구">서대문구</option>
+										<option value="서초구">서초구</option>
+										<option value="성동구">성동구</option>
+										<option value="성북구">성북구</option>
+										<option value="송파구">송파구</option>
+										<option value="양천구">양천구</option>
+										<option value="영등포구">영등포구</option>
+										<option value="용산구">용산구</option>
+										<option value="은평구">은평구</option>
+										<option value="종로구">종로구</option>
+										<option value="중구">중구</option>
+										<option value="중랑구">중랑구</option>
+									</select>
+						        </div>        
+						        <div class="form-group">
+									<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block btn-lg">등록</button>
+								</div>	
+						    </form>
+							<div class="text-center small">Already have an account? <a href="#">Login here</a></div>
+						</div>
                     </div>
-                    <div class="col-lg-5 col-md-12">
-                        <div class="card">
-                      <!--       <div class="card-body"> -->
-                                	<div id="curve_chart" style="height: 297px; width:100%;" ></div>
-                                <ul class="list-inline text-center mt-5 mb-2">
-                                    <li class="list-inline-item text-muted font-italic">주간 매출량</li>
-                                </ul>
-                   <!--          </div> -->
-                        </div>
+                    <div class="col-lg-6 col-md-12">
+                       <div class="signup-form pl-4 mb-5">
+						    <form action="/examples/actions/confirmation.php" method="post">
+								<div class="form-header">
+									<h2>배너광고</h2>
+<!-- 									<p>Fill out this form to start your free trial!</p> -->
+								</div>
+						        <div class="form-group">
+								<h1 class="text-center">45,000 <small><i class="fas fa-won-sign"></i></small></h1>
+						        </div>
+						        <div class="form-group">
+									<p>광고 노출에 따른 인지도 증가 효과!<br>
+										띠배너 형태의 광고로 강력한 타겟팅 기능과
+										풍부하고 정확한 데이터를 지원하는 광고상품입니다.
+									</p>
+						        </div>
+								<div class="form-group">
+									<label>적용기간</label>
+						            <input type="date" class="form-control" name="startdate" required="required">
+						            <!-- 오늘 날짜 default로 !! -->
+						        </div>
+								<div class="form-group">
+									<label>노출위치</label>
+<!-- 						            <input type="password" class="form-control" name="confirm_password" required="required"> -->
+						            <select name="location"  class="form-control" id="inlineFormCustomSelect">
+										<option value="강남구">강남구</option>
+										<option value="강동구">강동구</option>
+										<option value="강북구">강북구</option>
+										<option value="강서구">강서구</option>
+										<option value="관악구">관악구</option>
+										<option value="광진구">광진구</option>
+										<option value="구로구">구로구</option>
+										<option value="금천구">금천구</option>
+										<option value="노원구">노원구</option>
+										<option value="도봉구">도봉구</option>
+										<option value="동대문구">동대문구</option>
+										<option value="동작구">동작구</option>
+										<option value="마포구">마포구</option>
+										<option value="서대문구">서대문구</option>
+										<option value="서초구">서초구</option>
+										<option value="성동구">성동구</option>
+										<option value="성북구">성북구</option>
+										<option value="송파구">송파구</option>
+										<option value="양천구">양천구</option>
+										<option value="영등포구">영등포구</option>
+										<option value="용산구">용산구</option>
+										<option value="은평구">은평구</option>
+										<option value="종로구">종로구</option>
+										<option value="중구">중구</option>
+										<option value="중랑구">중랑구</option>
+									</select>
+						        </div>        
+						        <div class="form-group">
+									<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block btn-lg">등록</button>
+								</div>	
+						    </form>
+							<div class="text-center small">Already have an account? <a href="#">Login here</a></div>
+						</div>
                     </div>
                 </div>
                 <!-- *************************************************************** -->
@@ -535,32 +414,76 @@
                 <!-- Start Location and Earnings Charts Section -->
                 <!-- *************************************************************** -->
                 <div class="row">
-                    <div class="col-lg-7 col-md-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="pl-4 mb-5" style="height: 370px;">
-                                    <div id="columnchart_values" style="height:294px; position: relative;" ></div>
-                                </div>
-                                <ul class="list-inline text-center mt-5 mb-2">
-                                    <li class="list-inline-item text-muted font-italic">이달의 판매</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="col-lg-6 col-md-12">
+                       <div class="signup-form pl-4 mb-5">
+						    <form action="/examples/actions/confirmation.php" method="post">
+								<div class="form-header">
+									<h2>파워링크</h2>
+<!-- 									<p>Fill out this form to start your free trial!</p> -->
+								</div>
+						        <div class="form-group">
+								<h1 class="text-center">55,000 <small><i class="fas fa-won-sign"></i></small></h1>
+						        </div>
+						        <div class="form-group">
+									<p>소비자와 가장 가까운 광고!<br>
+										높은 전환 효과를 기대할 수 있는
+										프리미엄 배너 광고 상품입니다.
+										낮은 비용과 높은 타겟팅 정확도를 누리세요!
+									</p>
+						        </div>
+								<div class="form-group">
+									<label>적용기간</label>
+						            <input type="date" class="form-control" name="startdate" required="required">
+						            <!-- 오늘 날짜 default로 !! -->
+						        </div>
+								<div class="form-group">
+									<label>노출위치</label>
+						            <input type="password" class="form-control" name="confirm_password" required="required">
+						        </div>        
+<!-- 						        <div class="form-group"> -->
+<!-- 									<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label> -->
+<!-- 								</div> -->
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block btn-lg">해지</button>
+								</div>	
+						    </form>
+							<div class="text-center small">Already have an account? <a href="#">Login here</a></div>
+						</div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Memo</h4>
-                                <div class="" style="height:250px">
-                                <form>
-                                    <div class="form-group">
-                                        <textarea class="form-control" rows="10" placeholder="Text Here..."></textarea>
-                                        <small id="textHelp" class="form-text text-muted">Helper Text</small>
-                                    </div>
-                                </form>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-lg-6 col-md-12">
+                       <div class="signup-form pl-4 mb-5">
+						    <form action="/examples/actions/confirmation.php" method="post">
+								<div class="form-header">
+									<h2>배너광고</h2>
+<!-- 									<p>Fill out this form to start your free trial!</p> -->
+								</div>
+						        <div class="form-group">
+								<h1 class="text-center">45,000 <small><i class="fas fa-won-sign"></i></small></h1>
+						        </div>
+						        <div class="form-group">
+									<p>광고 노출에 따른 인지도 증가 효과!<br>
+										띠배너 형태의 광고로 강력한 타겟팅 기능과
+										풍부하고 정확한 데이터를 지원하는 광고상품입니다.
+									</p>
+						        </div>
+								<div class="form-group">
+									<label>적용기간</label>
+						            <input type="date" class="form-control" name="startdate" required="required">
+						            <!-- 오늘 날짜 default로 !! -->
+						        </div>
+								<div class="form-group">
+									<label>노출위치</label>
+						            <input type="password" class="form-control" name="confirm_password" required="required">
+						        </div>        
+<!-- 						        <div class="form-group"> -->
+<!-- 									<label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label> -->
+<!-- 								</div> -->
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary btn-block btn-lg">해지</button>
+								</div>	
+						    </form>
+							<div class="text-center small">Already have an account? <a href="#">Login here</a></div>
+						</div>
                     </div>
                 </div>
                 
@@ -590,29 +513,31 @@
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
-    </div>
+</div> <!-- End Main wrapper -->
+
     <!-- ============================================================== -->
-    <!-- End Wrapper -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="${pageContext.request.contextPath}/assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- apps -->
-    <script src="dist/js/app-style-switcher.js"></script>
-    <script src="dist/js/feather.min.js"></script>
-    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-    <script src="dist/js/sidebarmenu.js"></script>
+    <!-- apps -->
+    <script src="${pageContext.request.contextPath}/dist/js/app-style-switcher.js"></script>
+    <script src="${pageContext.request.contextPath}/dist/js/feather.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="${pageContext.request.contextPath}/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <!-- themejs -->
+    <!--Menu sidebar -->
+    <script src="${pageContext.request.contextPath}/dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
-    <script src="dist/js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <script src="assets/extra-libs/c3/d3.min.js"></script>
-    <script src="assets/extra-libs/c3/c3.min.js"></script>
-    <script src="assets/libs/chartist/dist/chartist.min.js"></script>
-    <script src="assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="dist/js/pages/dashboards/dashboard1.min.js"></script>
-</body>
+    <script src="${pageContext.request.contextPath}/dist/js/custom.min.js"></script>
+    <!-- This Page JS -->
+    <script src="${pageContext.request.contextPath}/assets/extra-libs/prism/prism.js"></script>
 
-</html>
+
+</body>
+</html>                            

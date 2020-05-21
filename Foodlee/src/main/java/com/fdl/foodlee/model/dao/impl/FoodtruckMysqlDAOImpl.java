@@ -80,7 +80,7 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	// 판매자의 ID를 받아 푸드트럭 정보를 조회 할 수 있다.
 	@Override
 	public FoodtruckVO selectOneFoodtruck(int sellerId) {
-		return (FoodtruckVO) jtem.query(SQL_SELECT_FOODTRUCK_SELLER_ID, 
+		return (FoodtruckVO) jtem.queryForObject(SQL_SELECT_FOODTRUCK_SELLER_ID, 
 				BeanPropertyRowMapper
 				.newInstance(FoodtruckVO.class), sellerId);
 	}
@@ -88,7 +88,7 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	// 푸드트럭 이름을 받아 푸드트럭 정보를 조회 할 수 있다.
 	@Override
 	public FoodtruckVO selectOneFoodtruck(String foodtruckName) {
-		return (FoodtruckVO) jtem.query(SQL_SELECT_FOODTRUCK_NAME, 
+		return (FoodtruckVO) jtem.queryForObject(SQL_SELECT_FOODTRUCK_NAME, 
 				BeanPropertyRowMapper
 				.newInstance(FoodtruckVO.class), foodtruckName);
 	}
@@ -145,7 +145,7 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 				BeanPropertyRowMapper
 				.newInstance(FoodtruckVO.class), guCode);
 	}
-	
+
 }
 
 

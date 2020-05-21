@@ -1,29 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<!-- 	<div id="all"> -->
-<!-- 		<div id="header"> -->
-<%-- 			<img class="logo" src="<%=CON%>/resources/css/imgs/logo.png"> --%>
-<!-- 		</div> -->
-<!-- 		<div id="trucklist_all_page"> -->
-			<div id="trucklist_nav">
-				<div class="ranktrucks" style="display: inline-block">
-					<em>Top 10 푸드 트럭 리스트</em>
+		<div id="trucklist_all_page">
+			<div id="trucklist_page" class="tl_page">	
+				<div id="trucklist_nav">
+					<div id="ranktrucks" style="display: inline-block">
+						<em>Top 10 푸드 트럭 리스트</em>
+					</div>
+				
+					<div id="truck_search" style="display: inline-block">
+						<input type="search" name="search" placeholder="검색" id="ft_search">
+					</div>
 				</div>
-			
-				<div class="truck_search" style="display: inline-block">
-					<input type="search" name="search" placeholder="검색">
-				</div>
-			</div>
-			
-			<div id="trucklist_page">	
 				<div id="toplist_content">
 					<div id="top_content">
 					<table id="top_content_table">
-							<tr>
-							
-								<td>
-								<div class="pd1">
+						<tr>
+						
+							<td>
+							<div class="slider_bottom">
+								<figure>
 									<button type="button">
 										<div class="sample1">
 											<img src="resources/css/imgs/truckDetail/그랩고.jpg" width="250px"/>
@@ -34,11 +29,16 @@
 											</p>
 										</div>
 									</button>
-								</div>
-								</td>
-								
-								<td>
-								<div class="pd2">
+									<figcaption>
+	<!-- 								<em>Responsive Site7</em><span>슬라이드 플러그를 사용</span> -->
+									</figcaption>
+								</figure>
+							</div>
+							</td>
+							
+							<td>
+							<div class="slider_bottom">
+								<figure>
 									<button type="button">
 									<div class="sample2">
 										<img src="resources/css/imgs/truckDetail/쉬림프킹.jpg" width="250px"/>
@@ -49,11 +49,16 @@
 										</p>
 									</div>
 									</button>
-								</div>
-								</td>
-								
-								<td>	
-								<div class="pd3">
+									<figcaption>
+	<!-- 								<em>Responsive Site7</em><span>슬라이드 플러그를 사용</span> -->
+									</figcaption>
+								</figure>
+							</div>
+							</td>
+							
+							<td>	
+							<div class="slider_bottom">
+								<figure>
 									<button type="button">
 									<div class="sample3">
 										<img src="resources/css/imgs/truckDetail/우주전복.jpg" width="250px"/>
@@ -64,13 +69,17 @@
 										</p>
 									</div>
 									</button>
-								</div>
-								</td>
-								
-							</tr>
-						</table>
-						</div>
+									<figcaption>
+	<!-- 								<em>Responsive Site7</em><span>슬라이드 플러그를 사용</span> -->
+									</figcaption>
+								</figure>
+							</div>
+							</td>
+							
+						</tr>
+					</table>
 					</div>
+				</div>
 					
 					<div id="menu_content">
 						<table>
@@ -101,7 +110,7 @@
 					
 					<div id="menu_truck_content">
 						<table id="menu_content_table">
-							<tr>
+							<tr id="highline">
 								<td>
 									<div class="menu_pd1">
 										<button type="button">
@@ -212,7 +221,7 @@
 					<a href="#">&raquo;</a>
 				</div>
 			</div>
-<!-- 		</div> -->
+		</div>
 
 
 

@@ -46,16 +46,16 @@
 	</nav>
 	<div>
 		<table border="0">
-			<tr><td>메인사진</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-			<tr  ><td rowspan="5" ><img alt="" src="../../css/imgs/gu-truck-img.jpg" width="256" height="256"></td><td><textarea rows="" cols=""></textarea></td><td>영업시간:</td><td>시간부터</td><td>~</td><td>시간까지</td></tr>
-			<tr><td></td><td></td><td>휴게시간 : </td><td>시간부터</td><td></td><td>~</td><td>시간까지</td><td></td></tr>
-			<tr><td></td><td></td><td></td><td>대표번호 : </td><td>010</td><td>-</td><td>1234</td><td>-</td><td>5678</td></tr>
+			<tr><td>메인사진</td></tr>
+			<tr><td rowspan="5" ><img alt="" src="../../css/imgs/gu-truck-img.jpg" width="256" height="256"></td><td><textarea rows="" cols=""></textarea></td><td>영업시간:</td><td>시간부터</td><td>~</td><td>시간까지</td></tr>
+			<tr><td></td><td></td><td>휴게시간 : </td><td>시간부터</td><td>~</td><td>시간까지</td></tr>
+<!-- 		Tlqkf 넣을 방법이 없네 	<tr><td></td><td>대표번호 : </td><td>010</td><td>-</td><td>1234</td><td>-</td><td>5678</td></tr> -->
 			<br>
 			<tr><td></td><td>jpg,png 파일만 넣을실 수 있습니다. </td></tr>
 			<tr><td></td><td>최대 10mb용량까지 넣으실 수 있습니다.</td></tr>
-			<tr><td>로고사진</td><td></td><td>인스타그램주소</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-			<tr><td><img alt="" src="../../css/imgs/gu-truck-img.jpg" width="64" height="64"></td><td></td><td><textarea rows="" cols=""></textarea></td></tr>
-			<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			<tr><td>로고사진</td><td></td><td>인스타그램주소</td></tr>
+			<tr><td><img alt="" src="../../css/imgs/gu-truck-img.jpg" width="64" height="64"></td><td><textarea rows="" cols=""></textarea></td></tr>
+			<tr><td></td></tr>
 		</table>
 	</div>
 	<div><button>적용</button><button>취소</button></div>

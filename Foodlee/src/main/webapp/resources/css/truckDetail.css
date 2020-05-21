@@ -227,11 +227,28 @@ tr:hover {
 	background-color: #FFA500;
 }
 
-.img_wrap {
-    width: 300px;
+.imgs_wrap {
+	display: none;
+	float: inherit;
+    width: 800px;
     margin-top: 50px;
+    overflow-x: auto; 
+    white-space: nowrap;
+	position: relative;
+/* 	overflow-x: scroll; */
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
 }
 
-.img_wrap img {
-    max-width: 100%;
+.imgs_wrap img {
+    max-width: 300px;
+}
+
+.imgs_wrap div {
+	width: 24.5%;
+	background-color: #eee;
+	float: none;
+	margin: 0 0.25%;
+	display: inline-block;
+	zoom: 1;
 }
