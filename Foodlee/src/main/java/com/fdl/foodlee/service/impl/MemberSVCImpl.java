@@ -14,11 +14,6 @@ public class MemberSVCImpl implements IMemberSVC {
 	private IMemberDAO mbDao;
 
 	@Override
-	public int selectMemberIdByLogin(String login) {
-		return mbDao.selectMemberIdbyLogin(login);
-	}
-
-	@Override
 	public boolean insertNewMemberWithCrypto(MemberVO mb) {
 		return mbDao.insertNewMemberWithCrypto(mb);
 	}
@@ -51,6 +46,11 @@ public class MemberSVCImpl implements IMemberSVC {
 	@Override
 	public boolean deleteOneMember(int id) {
 		return mbDao.deleteOneMember(id);
+	}
+
+	@Override
+	public boolean isDuplicatedMember(String login) {
+		return mbDao.isDuplicatedMember(login);
 	}
 
 }

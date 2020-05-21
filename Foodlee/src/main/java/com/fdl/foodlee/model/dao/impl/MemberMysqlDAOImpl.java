@@ -54,6 +54,12 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 				);
 		return r == 1;
 	}
+	
+	@Override
+	public int insertNewMemberWithCryptoReturnKey(MemberVO mb) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
 	public boolean isDuplicatedMember(String login) {
