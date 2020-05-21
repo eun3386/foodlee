@@ -39,7 +39,12 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	@Override
+	public List<FoodtruckVO> selectOneFoodtruckWithGuCode(int foodtruckLocationCode) {
+		return null;
+	}
+	
 	@Override
 	public boolean deleteOneFoodtruck(FoodtruckVO ft) {
 		// TODO Auto-generated method stub
@@ -57,14 +62,11 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public List<FoodtruckVO> searchMuniFoodtruck(int foodtruckLocationCode) {
-		List<FoodtruckVO> ftList = new ArrayList<FoodtruckVO>();
-		for (FoodtruckVO ft : ftList) {
-		Food
-		
-		}
+	public List<FoodtruckVO> searchAllFoodtruck(FoodtruckVO ftVO) {
+		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

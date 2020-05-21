@@ -54,7 +54,8 @@ public class HomeController {
 			@PathVariable(value = "muniCode") int muniCode) {
 		System.out.println("muniCode = "+ muniCode);
 		ModelAndView mav = new ModelAndView();
-		List<FoodtruckVO> fdTrucks = ftSvc.searchMuniFoodtruck(muniCode);
+		FoodtruckVO fdTrucks = ftSvc.selectOneFoodtruckWithGuCode(muniCode);
+		
 		mav.addObject("fdTrucks",fdTrucks);
 		mav.setViewName("municipalityList");
 		return mav;

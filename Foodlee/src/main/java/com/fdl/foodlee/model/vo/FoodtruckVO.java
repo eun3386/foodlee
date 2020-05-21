@@ -14,6 +14,7 @@ public class FoodtruckVO {
 	private String sellerFoodtruckCoordinate; // 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
 	private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP
 	
+	
 	//
 	static int selId = 0;
 	static int favCount = 0;
