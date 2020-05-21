@@ -37,11 +37,12 @@ private String foodtruckOperationHour; // 푸드트럭 영업시간 ⇔ varchar 
 private int favoriteCount; // 좋아요 트럭 ⇔ integer favorite_count <<FK>>
 private String sellerFoodtruckCoordinate; // 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
 private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP
+private int foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code
  */
 	
 	// SQL부
 	private static final String
-		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,'',?,0,'',now())";
+		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,'',?,0,'',now(),?)";
 	private static final String
 		SQL_SELECT_FOODTRUCK_SELLER_ID = "select * from foodtrucks where seller_id = ?";
 	private static final String
@@ -49,7 +50,7 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	private static final String
 		SQL_UPDATE_FOODTRUCK = "update foodtrucks set foodtruck_img_path=?, foodtruck_name=?, "
 				+ "foodtruck_main_menu, foodtruck_location='', foodtruck_operation_hour=?, "
-				+ "seller_foodtruck_coordinate='', location_updated_at=now()";
+				+ "seller_foodtruck_coordinate='', location_updated_at=now(), foodtruck_gu_code=?";
 	private static final String
 		SQL_DELETE_FOODTRUCK = "delete from foodtrucks where foodtruck_name = ?";
 	
@@ -65,7 +66,7 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 					ft.getFoodtruckName(), ft.getFoodtruckMainMenu(),
 					ft.getFoodtruckLocation(), ft.getFoodtruckOperationHour(),
 					ft.getFavoriteCount(), ft.getSellerFoodtruckCoordinate(),
-					ft.getLocationUpdatedAt());
+					ft.getLocationUpdatedAt(), ft.getFoodtruckGuCode());
 		return r == 1;
 	}
 
@@ -92,7 +93,7 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 				ft.getFoodtruckImgPath(), ft.getFoodtruckName(),
 				ft.getFoodtruckMainMenu(), ft.getFoodtruckLocation(),
 				ft.getFoodtruckOperationHour(), ft.getSellerFoodtruckCoordinate(),
-				ft.getLocationUpdatedAt());
+				ft.getLocationUpdatedAt(), ft.getFoodtruckGuCode());
 		return r == 1;
 	}
 	
@@ -116,7 +117,8 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	}
 	
 	@Override
-	public List<FoodtruckVO> searchMuniFoodtruck(String foodtruckLocation) {
+	public List<FoodtruckVO> searchAllFoodtruck(FoodtruckVO ftVO) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
