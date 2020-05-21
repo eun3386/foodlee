@@ -42,7 +42,7 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 	}
 	
 	@Override
-	public int insertNewArticleReturnKey(ReviewVO rv) {
+	public int insertNewReviewReturnKey(ReviewVO rv) {
 		KeyHolder kh = new GeneratedKeyHolder();
 		PreparedStatementCreator psc = new PreparedStatementCreator() {
 

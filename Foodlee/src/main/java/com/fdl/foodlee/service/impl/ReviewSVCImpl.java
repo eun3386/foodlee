@@ -22,19 +22,19 @@ public class ReviewSVCImpl implements IReviewSVC {
 	}
 
 	@Override
-	public int insertNewArticleReturnKey(ReviewVO rvGet) {
+	public int insertNewReviewReturnKey(ReviewVO rvGet) {
 
 		// ReviewVO rv = new ReviewVO(0, login, sellerId, reviewDepth, reviewPnum, reviewContent, reviewPic, reviewCreatedAt);
 
 		// return atDao.insertNewArticleReturnKey(at);
-		return rvDao.insertNewArticleReturnKey(rvGet);
+		return rvDao.insertNewReviewReturnKey(rvGet);
 	}
 
 	@Override
-	public int insertNewArticleReturnKey(String login, int sellerId, int reviewDepth, String reviewPnum,
+	public int insertNewReviewReturnKey(String login, int sellerId, int reviewDepth, String reviewPnum,
 			String reviewContent, String reviewPic, Timestamp reviewCreatedAt) {
 		ReviewVO rv = new ReviewVO(0, login, sellerId, reviewDepth, reviewPnum, reviewContent, reviewPic, reviewCreatedAt);
-		return rvDao.insertNewArticleReturnKey(rv);
+		return rvDao.insertNewReviewReturnKey(rv);
 	}
 	
 	@Override
