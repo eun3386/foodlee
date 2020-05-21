@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.MyCode;
@@ -51,12 +52,13 @@ public class HomeController {
 // 	muni_list.fdl 
 	@RequestMapping(value = "muni_list.fdl", method = RequestMethod.GET)
 	public ModelAndView muniListPage(
-			@PathVariable(value = "muniCode") int muniCode) {
+			@RequestParam(value = "muniCode") int muniCode, String guName) {
 		System.out.println("muniCode = "+ muniCode);
 		ModelAndView mav = new ModelAndView();
-		FoodtruckVO fdTrucks = ftSvc.selectOneFoodtruckWithGuCode(muniCode);
-		
-		mav.addObject("fdTrucks",fdTrucks);
+//		FoodtruckVO fdTrucks = ftSvc.selectOneFoodtruckWithGuCode(muniCode);
+		List<FoodtruckVO> ftList = ftSvc.searchAllFoodtruckWithGuCode(muniCode);
+		mav.addObject("ftList",ftList);
+		mav.addObject("guName",guName);
 		mav.setViewName("municipalityList");
 		return mav;
 	}

@@ -33,16 +33,16 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public FoodtruckVO selectOneFoodtruckWithGuCode(int guCode) {
+		return null;
+	}
+	
 	@Override
 	public boolean updateOneFoodtruck(FoodtruckVO ft) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-	
-	@Override
-	public FoodtruckVO selectOneFoodtruckWithGuCode(int foodtruckLocationCode) {
-		return null;
 	}
 	
 	@Override
@@ -64,9 +64,22 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 	}
 	
 	@Override
-	public List<FoodtruckVO> searchAllFoodtruck(FoodtruckVO ftVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FoodtruckVO> searchAllFoodtruckWithGuCode(int guCode) {
+		List<FoodtruckVO> ftList = ftDao.searchAllFoodtruckWithGuCode(guCode);
+//		FoodtruckVO fdTrucks = ftDao.selectOneFoodtruckWithGuCode(guCode);
+//				List<FoodtruckVO> ftList = new ArrayList<FoodtruckVO>();
+//				String guCodes = fdTrucks.getFoodtruckGuCode();
+//		if(guCodes.indexOf(GU_SEP)==-1){
+//			FoodtruckVO one = ftDao.selectOneFoodtruckWithGuCode(guCode);
+//			ftList.add(one);
+//		} else {
+//			String guCodeList[] = guCodes.split(GU_SEP);
+//			for(String gu:guCodeList) {
+//				FoodtruckVO ft = ftDao.selectOneFoodtruckWithGuCode(Integer.parseInt(gu));
+//				ftList.add(ft);
+//			}
+//		}
+		return ftList;
 	}
 
 }

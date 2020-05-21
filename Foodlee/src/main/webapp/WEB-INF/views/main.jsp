@@ -87,22 +87,22 @@
          			console.log(gunames);
          			console.log(gunames[d.properties.code]);
          			var URLHD = '${pageContext.request.contextPath}/';
-         			$.ajax({
-         				type: 'get',
-         				url: URLHD+'muni_list.fdl',
-         				data: 'muniCode='+ d.properties.code,
-         				dataType: 'json',
-         				success: function() {
-         					window.open(url,"","width=1006px,height=580px");
-        					
-
-        				},
-        				error: function(xhr,status) {
-        					console.log(xhr);
-        					console.log(xhr.status);
-        					console.log(status);
-        				}
-         			});
+         			window.open(URLHD+'muni_list.fdl?muniCode='+ d.properties.code
+         					+"&guName="+encodeURIComponent(gunames[d.properties.code]),"","width=1006px,height=580px");
+//          			$.ajax({
+//          				type: 'get',
+//          				url: URLHD+'muni_list.fdl',
+//          				data: 'muniCode='+ d.properties.code,
+//          				dataType: 'json',
+//          				success: function() {
+//          					window.open(url,"","width=1006px,height=580px");
+//         				},
+//         				error: function(xhr,status) {
+//         					console.log(xhr);
+//         					console.log(xhr.status);
+//         					console.log(status);
+//         				}
+//          			});
                  });
                    return 'municipality c' + d.properties.code })		 
         		

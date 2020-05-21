@@ -3,13 +3,16 @@ package com.fdl.foodlee.model.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -33,24 +36,27 @@ private String foodtruckImgPath; // 푸드트럭 이미지 경로 ⇔ varchar (2
 private String foodtruckName; // 푸드트럭 이름 ⇔ varchar (64) foodtruck_name NN
 private String foodtruckMainMenu; // 푸드트럭 대표메뉴 ⇔ varchar (512) foodtruck_main_menu NN
 private String foodtruckLocation; // 푸드트럭 위치 ⇔ varchar(256) foodtruck_location NN
+private String foodtruckMuni; // 푸드트럭 구 이름 ⇔ varchar(256) foodtruck_muni NN
+private String foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code NN
 private String foodtruckOperationHour; // 푸드트럭 영업시간 ⇔ varchar (64)  foodtruck_operation_hour NN	
 private int favoriteCount; // 좋아요 트럭 ⇔ integer favorite_count <<FK>>
 private String sellerFoodtruckCoordinate; // 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
 private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP
-private int foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code
  */
 	
 	// SQL부
 	private static final String
-		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,'',?,0,'',now(),?)";
+		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,?,?,?,?,0,?,null)";
 	private static final String
 		SQL_SELECT_FOODTRUCK_SELLER_ID = "select * from foodtrucks where seller_id = ?";
 	private static final String
 		SQL_SELECT_FOODTRUCK_NAME = "select * from foodtrucks where foodtruck_name = ?";
 	private static final String
+		SQL_SELECT_FOODTRUCK_GU_CODE = "select * from foodtrucks where foodtruck_gu_code = ?";
+	private static final String
 		SQL_UPDATE_FOODTRUCK = "update foodtrucks set foodtruck_img_path=?, foodtruck_name=?, "
-				+ "foodtruck_main_menu, foodtruck_location='', foodtruck_operation_hour=?, "
-				+ "seller_foodtruck_coordinate='', location_updated_at=now(), foodtruck_gu_code=?";
+				+ "foodtruck_main_menu=?, foodtruck_location=?, foodtruck_muni=?, foodtruck_gu_code=?,foodtruck_operation_hour=?, "
+				+ "seller_foodtruck_coordinate=?";
 	private static final String
 		SQL_DELETE_FOODTRUCK = "delete from foodtrucks where foodtruck_name = ?";
 	
@@ -64,9 +70,10 @@ private int foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code
 		int r = jtem.update(SQL_INSERT_FOODTRUCK,
 					ft.getSellerId(), ft.getFoodtruckImgPath(),
 					ft.getFoodtruckName(), ft.getFoodtruckMainMenu(),
-					ft.getFoodtruckLocation(), ft.getFoodtruckOperationHour(),
+					ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
+					ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(),
 					ft.getFavoriteCount(), ft.getSellerFoodtruckCoordinate(),
-					ft.getLocationUpdatedAt(), ft.getFoodtruckGuCode());
+					ft.getLocationUpdatedAt());
 		return r == 1;
 	}
 
@@ -85,15 +92,29 @@ private int foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code
 				BeanPropertyRowMapper
 				.newInstance(FoodtruckVO.class), foodtruckName);
 	}
-
+	// 구 코드를 받아 푸드트럭 정보를 조회 할 수 있다.
+	@Override
+	public FoodtruckVO selectOneFoodtruckWithGuCode(int guCode) {
+		try {
+		return jtem.queryForObject(SQL_SELECT_FOODTRUCK_GU_CODE, 
+				BeanPropertyRowMapper
+				.newInstance(FoodtruckVO.class), guCode);
+		} catch(EmptyResultDataAccessException e){
+			System.out.println("등록된 구가 아닙니다.");
+			return null;
+		}
+	}
+	
 	// 판매자가 자신의 푸드 트럭 정보를 업데이트 할 수 있다.
 	@Override
 	public boolean updateOneFoodtruck(FoodtruckVO ft) {
 		int r = jtem.update(SQL_UPDATE_FOODTRUCK,
-				ft.getFoodtruckImgPath(), ft.getFoodtruckName(),
-				ft.getFoodtruckMainMenu(), ft.getFoodtruckLocation(),
-				ft.getFoodtruckOperationHour(), ft.getSellerFoodtruckCoordinate(),
-				ft.getLocationUpdatedAt(), ft.getFoodtruckGuCode());
+				ft.getSellerId(), ft.getFoodtruckImgPath(),
+				ft.getFoodtruckName(), ft.getFoodtruckMainMenu(),
+				ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
+				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(),
+				ft.getFavoriteCount(), ft.getSellerFoodtruckCoordinate(),
+				ft.getLocationUpdatedAt());
 		return r == 1;
 	}
 	
@@ -113,13 +134,16 @@ private int foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code
 	// 구매자가 푸드 트럭 리스트를 검색 할 수 있다.
 	@Override
 	public List<FoodtruckVO> searchAllFoodtruck(String foodtruckMainMenu) {
+		
 		return null;
 	}
 	
 	@Override
-	public List<FoodtruckVO> searchAllFoodtruck(FoodtruckVO ftVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FoodtruckVO> searchAllFoodtruckWithGuCode(int guCode) {
+		
+		return jtem.query(SQL_SELECT_FOODTRUCK_GU_CODE, 
+				BeanPropertyRowMapper
+				.newInstance(FoodtruckVO.class), guCode);
 	}
 	
 }

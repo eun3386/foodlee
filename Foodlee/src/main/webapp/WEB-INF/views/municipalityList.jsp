@@ -31,25 +31,26 @@
             white-space: pre-line;
         }
     </style>
-	<title> 성동구 푸드트럭 정보 </title>
+	<title> ${guName} 푸드트럭 정보 </title>
 </head>
 
 <body class="wrap_muni">
 <div id = "gu-list-wrap">
     <table id="gu-list-table" border="0">
-        <caption id="gu-truck-info"><img src="css/imgs/foodleee-face.png" class="face"> <span id="gu">성동구</span> 푸드트럭 정보<i class="fas fa-times" style="color: firebrick"></i></caption>
+        <caption id="gu-truck-info"><img src="css/imgs/foodleee-face.png" class="face"> <span id="gu">${guName}</span> 푸드트럭 정보<i class="fas fa-times" style="color: firebrick"></i></caption>
         <thead>
             <tr>
                 <th id="th-no">No.</th> <th id="th-img"><img src="css/imgs/truck.png"></th> <th id="th-name">상호</th> <th id="th-menu">대표메뉴</th> <th id="th-loca">위치</th> <th id="th-hour">영업시간</th> <th id="th-like"><i class="fas fa-heart"></i></th>
             </tr>
         </thead>
         <tbody>
-        	<c:forEach var="fdTr" items="${fdTrucks}">
+        	<c:forEach var="ft" items="${ftList}">
             <tr>
-                <td>1</td> <td><img src="${fdTr.foodtruckImgPath}"></td> <td><b>${fdTrfoodtruckName}</b></td> <td class="tooltip" title="치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대  10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원">
+                <td>${ft.sellerId}</td> <td><img src="${ft.foodtruckImgPath}"></td> <td><b>${ft.foodtruckName}</b></td> <td class="tooltip" title="${ft.foodtruckMainMenu}">
+<!--                 치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대  10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원"> -->
                 <div class="meme">
-                    <p class="menu-spec">치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원<br>치킨 소 7,000원/대 10,000원</p>
-                </div></td> <td title="왕십리역 13번출구">왕십리역 13번출구</td> <td>15:00-00:00</td> <td><i class="fas fa-heart"></i> 23</td>
+                    <p class="menu-spec">${ft.foodtruckMainMenu }
+                </div></td> <td title="${ft.foodtruckLocation}">${ft.foodtruckLocation }</td> <td>${ft.foodtruckOperationHour }</td> <td><i class="fas fa-heart"></i> ${ft.favoriteCount }</td>
             </tr>
             </c:forEach>
         </tbody>
