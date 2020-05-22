@@ -63,8 +63,9 @@
 							style="margin-left: 80px; position: absolute;"></i>
 					</div>
 				</div>
+				<div id="follow_msg" style="margin-top: 5px; font-size: 11px; display:none; font-color: red;"></div>
 				<c:if test="${isAlreadyLiked eq true}">
-					<div class="follow_msg" style="margin-top: 5px; font-size: 11px; font-color: red;">해당 푸드트럭을 좋아요 하고 있습니다.</div>
+					<div class="follow_msg already" style="margin-top: 5px; font-size: 11px; font-color: red;">해당 푸드트럭을 좋아요 하고 있습니다.</div>
 				</c:if>
 			</div>
 		</div>
@@ -117,8 +118,6 @@
 					<ul style="list-style: none; padding: 0;">
 						<li>
 							<div style="float: left;">
-<%-- 								<img align="middle" src="<%=CON%>/img/no-photo.jpg" --%>
-<!-- 									style="width: 45px; height: 45px; margin: 0 5px 0 5px;"> -->
 							</div>
 							<div class="nickname" style="padding-top: 2px;">
 							<c:if test="${rv.reviewDepth eq 1}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i></c:if>
@@ -133,13 +132,13 @@
 							
 							<c:if test="${rv.reviewContent ne '삭제된 리뷰입니다.'}">
 								<span style="float: right; margin-right: 15px;">
-								<c:if test="${rv.login eq login}">
+<%-- 								<c:if test="${rv.login eq login}"> 수정 삭제 테스트--%>
 									<button id="mod_${rv.reviewId}" onclick="modify_review(${rv.reviewId})" 
 									style="margin-bottom: 3px;">수정</button>
 									<br><button onclick="del_review(${rv.reviewId}, ${rv.reviewDepth})" style="margin-bottom: 3px;">
 									삭제</button>
 									<br>
-								</c:if>
+<%-- 								</c:if> --%>
 								<c:if test="${foodT.sellerId eq sellerId and rv.reviewDepth eq 0 and empty review[vs.index+1].reviewPnum}">
 									<button id="reply_button_${rv.reviewId}" onclick="reply_review(${rv.reviewId})">답변</button>
 								</c:if>
@@ -172,7 +171,6 @@
 							%>
 							<c:forEach var="fp" items="${pageScope.fps}" varStatus="vs">
 								<c:choose>
-									<%-- fp -> rv.reviewPic --%>
 									<c:when test="${fn:endsWith(fp,'.png')
 										or fn:endsWith(fp,'.jpg') 
 										or fn:endsWith(fp,'.gif')}">
@@ -183,8 +181,6 @@
 									</c:when>
 								</c:choose>
 							</c:forEach>
-<%-- 							<img src="<%=CON%>/resources/imgs/truckDetail/${rv.reviewPic}"  --%>
-<!-- 								style="margin-top:10px; width: 250px; height: 150px;"> -->
 							</c:if>
 						</li>
 					</ul>
