@@ -49,7 +49,7 @@ public class TruckDetailController {
 		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(1);
 		System.out.println(fd.getFoodtruckName());
 		model.addAttribute("foodT", fd);
-		List<ReviewVO> rvList = rvSvc.showAllReview();
+		List<ReviewVO> rvList = rvSvc.showAllReview(1);
 		if (rvList != null) {
 			model.addAttribute("rvSize", rvList.size());
 			model.addAttribute("review", rvList);
@@ -77,7 +77,7 @@ public class TruckDetailController {
 	
 	@RequestMapping(value = "review_list.fdl", method = RequestMethod.GET)
 	public List<ReviewVO> reviewList(Model model) {
-		return rvSvc.showAllReview();
+		return rvSvc.showAllReview(1);
 	}
 
 	@RequestMapping(value = "new_review.fdl", method = RequestMethod.POST)
@@ -88,6 +88,7 @@ public class TruckDetailController {
 		
 		String realPath = ses.getServletContext().getRealPath(IReviewFileSVC.DEF_UPLOAD_DEST) + "/";
 		rvFileSvc.makeUserDir(ses, "poro");
+		System.out.println("경로" + realPath);
 		Map<String, Object> rMap = rvFileSvc.writeUploadedMultipleFiles(imgfiles, realPath, "poro"
 				/*(String) ses.getAttribute("mbLoginName")*/);
 		
@@ -95,7 +96,7 @@ public class TruckDetailController {
 		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
 		System.out.println("총 볼륨(MB): " + rMap.get("totalMB") + "MB");
 		
-		ReviewVO rvT = new ReviewVO(0, "poro", 0, 0, rv.getReviewContent(), filePath, null);
+		ReviewVO rvT = new ReviewVO(0, "poro", 1, 0, null, rv.getReviewContent(), filePath, null);
 		
 		int atRtkey = this.rvSvc.insertNewReviewReturnKey(rvT);
 

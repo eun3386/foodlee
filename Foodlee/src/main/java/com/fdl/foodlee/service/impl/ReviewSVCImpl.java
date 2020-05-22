@@ -48,9 +48,13 @@ public class ReviewSVCImpl implements IReviewSVC {
 	}
 
 	@Override
-	public List<ReviewVO> showAllReview() {
-		return rvDao.showAllReview();
+	public List<ReviewVO> showAllReview(int sellerId) {
+		return rvDao.showAllReview(sellerId);
 	}
-
+	
+	@Override
+	public List<ReviewVO> showAllReviewLogin(String login) {
+		return rvDao.showAllReviewLogin(login);
+	}
 
 }

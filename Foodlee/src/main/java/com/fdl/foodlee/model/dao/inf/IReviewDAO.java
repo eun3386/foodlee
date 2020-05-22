@@ -13,5 +13,6 @@ public interface IReviewDAO {
 	// 리뷰를 삭제 할 수 있다.
 	boolean deleteReview(int id);
 	// 리뷰 전체를 가져와 조회 할 수 있다.
-	List<ReviewVO> showAllReview();
+	List<ReviewVO> showAllReview(int sellerId);
+	List<ReviewVO> showAllReviewLogin(String login);
 }

@@ -25,8 +25,10 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 	public static final String SQL_REVIEW_UPDATE = "update review set review_content=?"
 			+ " where review_id=?";
 	public static final String SQL_REVIEW_DELETE = "delete from review where review_id = ?";
-	public static final String SQL_REVIEW_LIST = "SELECT * FROM review " + 
+	public static final String SQL_REVIEW_LIST = "SELECT * FROM review where seller_id = ? " + 
 			"ORDER BY IF(ISNULL(review_pnum), review_id, review_pnum*1), review_depth asc";
+	public static final String SQL_REVIEW_LIST_LOGIN = "SELECT * FROM review where login = ? " + 
+			"ORDER BY review_created_at desc";
 	
 	private JdbcTemplate jtem;	
 	private SimpleJdbcInsert simIn;
@@ -86,9 +88,15 @@ public class ReviewMysqlDAOImpl implements IReviewDAO {
 	}
 
 	@Override
-	public List<ReviewVO> showAllReview() {
-		return jtem.query(SQL_REVIEW_LIST,
-		 		 BeanPropertyRowMapper.newInstance(ReviewVO.class));
+	public List<ReviewVO> showAllReview(int sellerId) {
+		return jtem.query(SQL_REVIEW_LIST, 
+		 		 BeanPropertyRowMapper.newInstance(ReviewVO.class), sellerId);
+	}
+	
+	@Override
+	public List<ReviewVO> showAllReviewLogin(String login) {
+		return jtem.query(SQL_REVIEW_LIST_LOGIN, 
+		 		 BeanPropertyRowMapper.newInstance(ReviewVO.class), login);
 	}
 
 }

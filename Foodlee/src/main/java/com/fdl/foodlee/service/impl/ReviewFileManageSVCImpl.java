@@ -85,6 +85,8 @@ public class ReviewFileManageSVCImpl implements IReviewFileSVC {
 		System.out.println("userRealPath = " + userRealPath);
 
 		try {
+			File upFolder = new File(ses.getServletContext().getRealPath(DEF_UPLOAD_DEST));
+			upFolder.mkdir();
 			File userFolder = new File(userRealPath);
 			// userFolder.canWrite();
 			return userFolder.mkdir();

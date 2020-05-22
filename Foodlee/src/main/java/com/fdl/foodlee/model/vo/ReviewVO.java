@@ -45,7 +45,7 @@ public class ReviewVO {
 		this.reviewPic = reviewPic;
 		this.reviewCreatedAt = reviewCreatedAt;
 	}
-
+	
 	public int getReviewId() {
 		return reviewId;
 	}
