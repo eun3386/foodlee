@@ -59,23 +59,24 @@ DROP TABLE IF EXISTS `members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `members` (
-  `mb_id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(12) NOT NULL,
-  `password` varchar(24) NOT NULL,
-  `name` varchar(12) NOT NULL,
-  `gender` varchar(4) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  `resident_rn` varchar(13) DEFAULT NULL,
-  `email` varchar(24) DEFAULT NULL,
-  `phone_number` varchar(12) NOT NULL,
-  `address` varchar(24) DEFAULT NULL,
-  `joined_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `login_time` timestamp NULL DEFAULT NULL,
-  `logout_time` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`mb_id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원번호',
+  `type` varchar(15) DEFAULT NULL,
+  `login` varchar(12) NOT NULL COMMENT '아이디',
+  `password` varchar(64) NOT NULL COMMENT '비밀번호',
+  `name` varchar(12) NOT NULL COMMENT '이름',
+  `gender` varchar(4) DEFAULT NULL COMMENT '성별',
+  `age` int(11) DEFAULT '20',
+  `resident_rn` varchar(13) DEFAULT NULL COMMENT '주민번호',
+  `email` varchar(24) DEFAULT NULL COMMENT '이메일',
+  `phone_number` varchar(12) NOT NULL COMMENT '연락처',
+  `address` varchar(128) DEFAULT NULL COMMENT '주소',
+  `joined_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '가입날짜',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '수정날짜',
+  `login_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '메뉴 원재료',
+  `logout_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,8 +85,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (1,'poro','1234','1234','남',20,'1234','1234','1234','1234',NULL,NULL,NULL,NULL),(2,'2345','2345','2345','여',21,'2345','2345','2345','2345',NULL,NULL,NULL,NULL),(3,'t','t','t','t',0,'t','t','t','t',NULL,NULL,NULL,NULL),(4,'a','a','t','t',0,'t','t','t','t',NULL,NULL,NULL,NULL),(5,'b','b','b','b',0,'b','b','b','b',NULL,NULL,NULL,NULL);
-/*!40000 ALTER TABLE `members` ENABLE KEYS */;
+INSERT INTO `members` VALUES (1,'admin','admin','87CA744203A74F0E8A8CCADC92E13D49','관리자','관리',20,'1111111111111','admin@admin.com','11111111111','서울','2020-05-14 09:42:44','2020-05-14 09:42:44',NULL,NULL),(2,'member','yoon','363D063E3E1A3DB958745E85353F7E4E','윤찬규','남',32,'9001011111111','yoon@yoon.com','01011111111','인천','2020-05-14 09:42:44','2020-05-14 09:42:44',NULL,NULL);
 UNLOCK TABLES;
 
 --
@@ -155,22 +155,24 @@ DROP TABLE IF EXISTS `sellers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sellers` (
-  `seller_id` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(12) NOT NULL,
-  `password` varchar(24) NOT NULL,
-  `name` varchar(12) NOT NULL,
-  `gender` varchar(4) DEFAULT NULL,
-  `age` int(11) DEFAULT NULL,
-  `resident_rn` varchar(13) DEFAULT NULL,
-  `email` varchar(24) DEFAULT NULL,
-  `phone_number` varchar(12) NOT NULL,
-  `address` varchar(128) DEFAULT NULL,
-  `joined_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `company_rn` varchar(10) DEFAULT NULL,
-  `login_time` timestamp NULL DEFAULT NULL,
-  `logout_time` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`seller_id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '판매자 번호',
+  `type` varchar(15) DEFAULT NULL,
+  `login` varchar(12) NOT NULL COMMENT '아이디',
+  `password` varchar(50) NOT NULL COMMENT '비밀번호',
+  `name` varchar(12) NOT NULL COMMENT '이름',
+  `gender` varchar(4) DEFAULT NULL COMMENT '성별',
+  `age` int(11) DEFAULT '20',
+  `resident_rn` varchar(20) DEFAULT NULL COMMENT '주민번호',
+  `email` varchar(24) DEFAULT NULL COMMENT '이메일',
+  `phone_number` varchar(15) NOT NULL COMMENT '연락처',
+  `address` varchar(128) DEFAULT NULL COMMENT '주소',
+  `joined_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '가입날짜',
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '수정날짜',
+  `company_rn` varchar(45) DEFAULT NULL COMMENT '사업자등록번호',
+  `login_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `logout_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `login_UNIQUE` (`login`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
