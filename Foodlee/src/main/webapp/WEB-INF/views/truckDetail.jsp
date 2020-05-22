@@ -48,13 +48,15 @@
 				style="float: left; margin-left: 420px; position: absolute;">
 				<h2 style="margin-top: 0; margin-bottom: 15px;"><c:out value="${foodT.foodtruckName}"/></h2>
 				<div style="min-height: 110px;">
-				<c:out value="${mbId}"></c:out>
 				소비자 만족도 1위 푸드트럭! BOP푸드트럭 입니다. 저의 시그니쳐 메뉴인 눈꽃목살스테이크는 섭씨 1,300도의 중식화로를
 				이용하여 단시간에 육즙가득한 목살스테이크를 구워 드립니다. 많은 문의 부탁 드립니다!
 				</div>
 				<p />
-				<div style="margin-top: 30px;">
-					<i class="fas fa-heart fa-lg"></i> <span id="test">0</span>
+				<div id="member_like" style="margin-top: 30px;">
+				<span id="follow" tg_sr='${foodT.sellerId}' ses_mb='${mbId}' class="mb_follow">
+					<i class="fas fa-heart fa-lg"></i>
+				</span>
+				<span id="follow_cnt"><c:out value="${cntLikes}" default="0" /></span>
 					<div style="float: left;">
 						<i class="fas fa-map fa-lg"
 							style="margin-left: 80px; position: absolute;"></i>

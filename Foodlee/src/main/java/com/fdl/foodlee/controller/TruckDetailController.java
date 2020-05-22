@@ -26,9 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fdl.foodlee.model.dao.inf.IMemberLikeTruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.ReviewVO;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
+import com.fdl.foodlee.service.inf.IMemberLikeTruckSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.IReviewSVC;
 
@@ -40,12 +42,15 @@ public class TruckDetailController {
 	private IReviewFileSVC rvFileSvc;
 	@Autowired
 	IFoodtruckSVC fdSvc;
+	@Autowired
+	IMemberLikeTruckSVC mltSvc;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "truckDetail.fdl", method = RequestMethod.GET)
 	public String truckDetail(HttpSession ses, Model model) {
+		ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
 		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(1);
 		System.out.println(fd.getFoodtruckName());
 		model.addAttribute("foodT", fd);
@@ -123,23 +128,17 @@ public class TruckDetailController {
 		
 	}
 	
-	@RequestMapping(value = "foodTruck_like.my", method = RequestMethod.GET)
+	@RequestMapping(value = "foodTruck_like.fdl", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> foodTruckLike(@RequestParam(value = "tgSr") int tgSr,
 			@RequestParam(value = "sesMb") int sesMb, HttpSession ses) {
-		System.out.println("tgMb = " + tgSr);
+		System.out.println("tgSr = " + tgSr);
 		System.out.println("sesMb = " + sesMb);
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> map = new HashMap<>();
 		int sesMbId = 1; // (int) ses.getAttribute("mbId");
 		if (sesMbId == sesMb) {
-			// 새롭게 좋아요 추가 성공
-			// 새롭게 좋아요 추가 실패(DB, 예외)
-			// 기존 좋아요 취소 성공
-			// 기존 좋아요 취소 실패(DB, 예외)
-//				int cntLikes = 
-//					mbSvc.processMemberLike(tgMb, sesMb);
-			Map<String, Object> lkMap = null; // fdSvc.processMemberLike(tgSr, sesMb);
+			Map<String, Object> lkMap = mltSvc.processMemberLike(tgSr, sesMb);
 			int cntLikes = (int) lkMap.get("cntLikes");
 			String typeLike = (String) lkMap.get("typeLike");
 			if (cntLikes >= 0) {

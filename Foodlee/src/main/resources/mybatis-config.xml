@@ -33,6 +33,7 @@
 <!-- 	</mappers> -->
 	<mappers>
 		<mapper resource="mappers/admin_mapper.xml" />
+		<mapper resource="mappers/memberLikeFoodtruck_mapper.xml" />
 		<mapper resource="mappers/eventanswer_mapper.xml" />
 	</mappers>
 </configuration>

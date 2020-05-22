@@ -392,6 +392,7 @@ $(document).ready(function() {
 		});
 	});
 	
+	// 결제
 	$(".order_div").click(function() {
 		alert(arrName);
 		alert(arrNum + "    length=" + arrNum.length);
@@ -452,6 +453,47 @@ $(document).ready(function() {
         });
         */
 	});
+	
+	// 좋아요
+	$(document).on("click", "span.mb_follow", function() {
+			var tgSr = $(this).attr("tg_sr");
+			var sesMb = $(this).attr("ses_mb");
+			$.ajax({
+				type: 'get',
+				url: URLHD + 'foodTruck_like.fdl',
+				data: 'tgSr='+ tgSr + "&sesMb="+ sesMb,
+				dataType: 'json',
+				success: function(res,status,xhr) {
+				console.log(res);
+				console.log("코드: "+ res.code
+					+ ", 메세지: " + res.msg	);
+				var likeCode = res.code;
+				switch( likeCode ) {
+					case 1:
+						$('.follow_cnt').text(res.cntLikes);
+						// $('.follow_msg').html(res.msg);							
+						// $('.follow_msg').css('color', 'blue');
+						if( res.type == 'add' )
+							$('.fas fa-heart fa-lg').css('background-color', 'green');
+						else // 'cancel'
+							$('.fas fa-heart fa-lg').css('background-color', 'gray');
+						break;
+					case 2:
+						$('.follow_msg').html(res.msg);
+						$('.follow_msg').css('color', 'red');
+						break;
+					default:
+						
+				}
+			},
+			error: function(xhr,status) {
+				console.log("에러");
+				console.log(xhr);
+				console.log(xhr.status);
+				console.log(status);
+			}
+			});
+		});
 	
 // 네이버 지도	
 // 	var mapOptions = {
@@ -521,11 +563,13 @@ $(document).ready(function() {
 
     });      
     
+    /*
 	$('.fa-heart').click(function() {
 		var td = document.getElementById("tid");
 		var n = Number(td.innerHTML);
 		td.innerHTML = n + 1;
 	});
+	*/
 
 	$(".reply").slice(0, 3).show(); // select the first ten
     $("#read-more-reply").click(function(e) { // click event for load more
