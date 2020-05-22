@@ -595,7 +595,11 @@
 	                                                <p> 요청사항: 우리가 숭고해질 수 있음을 그리고 떠날 때 시간의 모래 위에 발자국을 남길 수 있음을.  
 													      어떤 운명에도 굴하지 않는 마음으로 끊임없이 이루고 끊임없이 추구하면서 노력하며 배우자구나. </p>
 													 </div>
-                                            		</a>
+													 <div class="text-right">
+													 <button type="button" class="btn waves-effect waves-light btn-rounded btn-outline-danger">
+													 취소</button>
+                                        </div>
+													 
                                                 </div>
                                             </li>
                                             <li class="media my-4">
@@ -621,19 +625,6 @@
                                                     sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus
                                                     viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
                                                     Donec lacinia congue felis in faucibus.
-                                                    <div class="media mt-3">
-                                                        <a class="d-flex pr-3" href="javascript:void(0)">
-                                                            <img src="assets/images/users/4.jpg" width="60"
-                                                                height="60" alt="Generic placeholder image">
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <h5 class="mt-0">Media heading</h5> Cras sit amet nibh
-                                                            libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                                            sollicitudin. Cras purus odio, vestibulum in vulputate at,
-                                                            tempus viverra turpis. Fusce condimentum nunc ac nisi
-                                                            vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </li>
                                         </ul>
@@ -706,7 +697,7 @@
                             <div class="col-12" id="move3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Order</h5>
+                                        <h5 class="card-title">문의하기</h5>
                                         <div class="media">
                                             <div class="media-body">
                                                 <h5 class="mt-0 mb-1">Media object</h5> Cras sit amet nibh libero, in

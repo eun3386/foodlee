@@ -36,6 +36,7 @@ public class BossController {
 	public String ad() {//리뷰목록
 		return "/boss/bossinfo/ad2";
 	}
+	
 }
 
 
