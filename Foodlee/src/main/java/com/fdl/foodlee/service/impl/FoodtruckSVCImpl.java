@@ -84,4 +84,10 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 		return ftList;
 	}
 
+	@Override
+	public List<FoodtruckVO> searchAddAllFoodtruckList() {
+		// TODO Auto-generated method stub
+		return ftDao.searchAddAllFoodtruckList();
+	}
+
 }

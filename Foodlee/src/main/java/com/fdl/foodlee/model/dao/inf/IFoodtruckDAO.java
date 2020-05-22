@@ -23,5 +23,6 @@ public interface IFoodtruckDAO {
 	public List<FoodtruckVO> searchAllFoodtruck(String foodtruckMainMenu);
 	
 	public List<FoodtruckVO> searchAllFoodtruckWithGuCode(int guCode);
-	
+	// 등록된 푸드 트럭 리스트를 조회 할수 있다
+	public List<FoodtruckVO> searchAddAllFoodtruckList();
 }

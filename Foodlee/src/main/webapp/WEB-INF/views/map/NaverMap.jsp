@@ -276,7 +276,7 @@ function searchCoordinateToAddress(latlng) {
         }
         var mapPath = infoWindow.setContent([
             '<div style="padding:10px;min-width:200px;line-height:100%;">',
-            '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
+            '<h4 style="margin-top:5px;">검색 좌표</h4>',
             htmlAddresses.join('<br />'),
             '</div>'
         ].join('\n'));
@@ -310,15 +310,34 @@ function searchAddressToCoordinate(address) {
         if (item.englishAddress) {
             htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
         }
-		console.log('point: '+point);
+		var marker = new naver.maps.Marker({ // 지도위의 마커 표시
+	    	icon: {
+	        	url: '<%=application.getContextPath()%>/resources/imgs/mapMain/marker-blue.png',
+//		         	size: new naver.maps.Size(25, 33),
+		            origin: new naver.maps.Point(0, 0),
+		            anchor: new naver.maps.Point(13, 16)
+		        },
+		        position: point,
+		        map: map
+	    });	
+		naver.maps.Event.addListener(map, 'click', function(e) {
+	        marker.setPosition(e.coord);
+	    });
         var mapAddress = infoWindow.setContent([
-            '<div style="padding:10px;min-width:200px;line-height:100%;">',
-            '<h5 style="margin-top:5px;">검색 주소 : '+ address +'</h5><br />',
+            '<div style="padding:10px;min-width:200px;line-height:150%;">',
+            '<h4 style="margin-top:5px;">검색 주소 : '+ address +'</h4>',
             htmlAddresses.join('<br />'),
             '</div>'
         ].join('\n'));
-        map.setCenter(point);
+        naver.maps.Event.addListener(map, 'keydown', function(e) {
+        	var keyCode = e.which;
+            if (keyCode === 13) { // Enter Key
+		        marker.setPosition(e.coord);
+            }
+	    });
         infoWindow.open(map, point);
+        map.setCenter(point);
+		console.log('point: '+point);
     });
 }
 
@@ -326,18 +345,19 @@ function initGeocoder() {
     if (!map.isStyleMapReady) {
         return;
     }
-
+	// 마우스버튼 클릭
     map.addListener('click', function(e) {
         searchCoordinateToAddress(e.coord);
+        
     });
-
+	// 검색 창  키 이벤트
     $('#address').on('keydown', function(e) {
         var keyCode = e.which;
         if (keyCode === 13) { // Enter Key
             searchAddressToCoordinate($('#address').val());
         }
     });
-
+	// 검색창 마우스 이벤트
     $('#submit').on('click', function(e) {
         e.preventDefault();
         searchAddressToCoordinate($('#address').val());

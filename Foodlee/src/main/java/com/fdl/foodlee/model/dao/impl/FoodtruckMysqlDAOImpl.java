@@ -47,6 +47,8 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 */
 	
 	// SQL부
+	private static final String SQL_SELECT_ALL_FOODTRUCK =
+			"select * from foodtrucks"; 
 	private static final String
 		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,?,?,?,?,0,0,null,?,null)";
 	private static final String
@@ -136,7 +138,6 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	// 구매자가 푸드 트럭 리스트를 검색 할 수 있다.
 	@Override
 	public List<FoodtruckVO> searchAllFoodtruck(String foodtruckMainMenu) {
-		
 		return null;
 	}
 	
@@ -145,6 +146,11 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 		return jtem.query(SQL_SELECT_FOODTRUCK_GU_CODE, 
 				BeanPropertyRowMapper
 				.newInstance(FoodtruckVO.class), guCode);
+	}
+	// 등록된 푸드 트럭 리스트를 조회 할수 있다
+	@Override
+	public List<FoodtruckVO> searchAddAllFoodtruckList() {
+		return jtem.query(SQL_SELECT_ALL_FOODTRUCK, BeanPropertyRowMapper.newInstance(FoodtruckVO.class));
 	}
 
 }
