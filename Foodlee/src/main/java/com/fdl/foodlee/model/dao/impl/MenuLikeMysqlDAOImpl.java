@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.fdl.foodlee.model.dao.inf.ILikeDAO;
-import com.fdl.foodlee.model.vo.LikeVO;
+import com.fdl.foodlee.model.dao.inf.IMenuLikeDAO;
+import com.fdl.foodlee.model.vo.MenuLikeVO;
 
 @Repository
-public class LikeMysqlDAOImpl implements ILikeDAO {
+public class MenuLikeMysqlDAOImpl implements IMenuLikeDAO {
 	@Autowired
 	private JdbcTemplate jtem;
 
@@ -18,7 +18,7 @@ public class LikeMysqlDAOImpl implements ILikeDAO {
 	public static final String SQL_LIKE_DELETE = "delete from like where like_id = ?";
 	public static final String SQL_LIKE_LIST = "SELECT * FROM like " + "ORDER BY IF";
 	@Override
-	public List<LikeVO> showLikeList() {
+	public List<MenuLikeVO> showLikeList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

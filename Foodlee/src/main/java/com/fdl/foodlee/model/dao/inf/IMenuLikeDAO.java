@@ -2,11 +2,11 @@ package com.fdl.foodlee.model.dao.inf;
 
 import java.util.List;
 
-import com.fdl.foodlee.model.vo.LikeVO;
+import com.fdl.foodlee.model.vo.MenuLikeVO;
 
-public interface ILikeDAO {
+public interface IMenuLikeDAO {
 	// 좋아요 한 것을 리스트로 나열 할 수 있다.
-	List<LikeVO> showLikeList();
+	List<MenuLikeVO> showLikeList();
 	
 	// 좋아요를 누를수 있다.
 	boolean checkLike(int likeMemberId, int likeFoodtruckId);

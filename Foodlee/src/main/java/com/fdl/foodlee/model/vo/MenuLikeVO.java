@@ -1,6 +1,6 @@
 package com.fdl.foodlee.model.vo;
 
-public class LikeVO {
+public class MenuLikeVO {
 	
 	private int likeId; // 좋아요 번호
 	private int likeMemberId; // 좋아요 한 회원 번호
@@ -15,20 +15,20 @@ public class LikeVO {
 
 	private int likeTotalCount; // 좋아요 총 횟수
 	
-	public LikeVO() {}
+	public MenuLikeVO() {}
 	
-	public LikeVO(int likeId, int likeMemberId) {
+	public MenuLikeVO(int likeId, int likeMemberId) {
 		this.likeId = likeId;
 		this.likeMemberId = likeMemberId;
 	}
 	
-	public LikeVO(int likeId, int likeMemberId, int likeFoodtruckId) {
+	public MenuLikeVO(int likeId, int likeMemberId, int likeFoodtruckId) {
 		this.likeId = likeId;
 		this.likeMemberId = likeMemberId;
 		this.likeFoodtruckId = likeFoodtruckId;
 	}
 
-	public LikeVO(int likeId, int likeMemberId, int likeMenuId, int likeFoodtruckId) {
+	public MenuLikeVO(int likeId, int likeMemberId, int likeMenuId, int likeFoodtruckId) {
 		super();
 		this.likeId = likeId;
 		this.likeMemberId = likeMemberId;
