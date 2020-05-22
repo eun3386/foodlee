@@ -54,7 +54,7 @@
 				<p />
 				<div id="member_like" style="margin-top: 30px;">
 				<span id="follow" tg_sr='${foodT.sellerId}' ses_mb='${mbId}' class="mb_follow">
-					<i class="fas fa-heart fa-lg"></i>
+					<i class="fas fa-heart fa-lg follow_${isAlreadyLiked ? 'red': 'orange'}"></i>
 				</span>
 				<span id="follow_cnt"><c:out value="${cntLikes}" default="0" /></span>
 					<div style="float: left;">

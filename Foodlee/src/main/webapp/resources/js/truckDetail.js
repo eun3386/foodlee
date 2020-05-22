@@ -457,7 +457,8 @@ $(document).ready(function() {
 	// 좋아요
 	$(document).on("click", "span.mb_follow", function() {
 			var tgSr = $(this).attr("tg_sr");
-			var sesMb = $(this).attr("ses_mb");
+			// var sesMb = $(this).attr("ses_mb");
+			var sesMb = 3;
 			$.ajax({
 				type: 'get',
 				url: URLHD + 'foodTruck_like.fdl',
@@ -470,13 +471,13 @@ $(document).ready(function() {
 				var likeCode = res.code;
 				switch( likeCode ) {
 					case 1:
-						$('.follow_cnt').text(res.cntLikes);
+						$('#follow_cnt').text(res.cntLikes);
 						// $('.follow_msg').html(res.msg);							
 						// $('.follow_msg').css('color', 'blue');
 						if( res.type == 'add' )
-							$('.fas fa-heart fa-lg').css('background-color', 'green');
+							$('.fa-heart').css('color', 'red');
 						else // 'cancel'
-							$('.fas fa-heart fa-lg').css('background-color', 'gray');
+							$('.fa-heart').css('color', 'gray');
 						break;
 					case 2:
 						$('.follow_msg').html(res.msg);

@@ -51,9 +51,14 @@ public class TruckDetailController {
 	@RequestMapping(value = "truckDetail.fdl", method = RequestMethod.GET)
 	public String truckDetail(HttpSession ses, Model model) {
 		ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
+		int isAlreadyLiked = mltSvc.isAlreadyLikedMember(1, (int) ses.getAttribute("mbId"));
+		model.addAttribute("isAlreadyLiked", (isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_ONE
+				|| isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_OTHERS));
+		
 		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(1);
 		System.out.println(fd.getFoodtruckName());
 		model.addAttribute("foodT", fd);
+		model.addAttribute("cntLikes", fd.getMemberLikeCount());
 		List<ReviewVO> rvList = rvSvc.showAllReview(1);
 		if (rvList != null) {
 			model.addAttribute("rvSize", rvList.size());
@@ -132,8 +137,6 @@ public class TruckDetailController {
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> foodTruckLike(@RequestParam(value = "tgSr") int tgSr,
 			@RequestParam(value = "sesMb") int sesMb, HttpSession ses) {
-		System.out.println("tgSr = " + tgSr);
-		System.out.println("sesMb = " + sesMb);
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> map = new HashMap<>();
 		int sesMbId = 1; // (int) ses.getAttribute("mbId");

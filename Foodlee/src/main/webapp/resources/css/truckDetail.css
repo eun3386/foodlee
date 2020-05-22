@@ -84,9 +84,19 @@
 	background-color: orange;
 }
 
+.follow_red {
+	color: red;
+}
+
+.follow_orange {
+	color: orange;
+}
+
+/*
 .fa-heart {
 	color: orange;
 }
+*/
 
 .fa-heart:hover {
 	color: red;
