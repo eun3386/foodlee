@@ -155,25 +155,23 @@ DROP TABLE IF EXISTS `sellers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sellers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '판매자 번호',
-  `type` varchar(15) DEFAULT NULL,
-  `login` varchar(12) NOT NULL COMMENT '아이디',
-  `password` varchar(50) NOT NULL COMMENT '비밀번호',
+  `seller_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '판매자 번호',
+  `login` varchar(12) NOT NULL COMMENT '<<UQ>> 아이디 ',
+  `password` varchar(64) NOT NULL COMMENT '비밀번호',
   `name` varchar(12) NOT NULL COMMENT '이름',
-  `gender` varchar(4) DEFAULT NULL COMMENT '성별',
-  `age` int(11) DEFAULT '20',
-  `resident_rn` varchar(20) DEFAULT NULL COMMENT '주민번호',
-  `email` varchar(24) DEFAULT NULL COMMENT '이메일',
-  `phone_number` varchar(15) NOT NULL COMMENT '연락처',
-  `address` varchar(128) DEFAULT NULL COMMENT '주소',
-  `joined_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '가입날짜',
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '수정날짜',
-  `company_rn` varchar(45) DEFAULT NULL COMMENT '사업자등록번호',
-  `login_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `logout_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `gender` varchar(10) NOT NULL COMMENT '성별',
+  `age` int(11) NOT NULL COMMENT '나이',
+  `resident_rn` varchar(16) NOT NULL COMMENT '주민번호',
+  `email` varchar(24) NOT NULL COMMENT '이메일',
+  `phone_number` varchar(45) NOT NULL COMMENT '연락처',
+  `address` varchar(45) NOT NULL COMMENT '주소',
+  `joined_at` timestamp NULL DEFAULT NULL COMMENT '가입날짜 ',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT '수정날짜',
+  `company_rn` varchar(45) NOT NULL COMMENT '사업자등록번호',
+  `login_time` timestamp NULL DEFAULT NULL COMMENT '로그인일자',
+  `logout_time` timestamp NULL DEFAULT NULL COMMENT '로그아웃일자',
+  PRIMARY KEY (`seller_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,7 +180,7 @@ CREATE TABLE `sellers` (
 
 LOCK TABLES `sellers` WRITE;
 /*!40000 ALTER TABLE `sellers` DISABLE KEYS */;
-INSERT INTO `sellers` VALUES (1,'seller','1234','1','1',1,'1','1','1','1','2020-05-22 07:45:49',NULL,NULL,NULL,NULL);
+INSERT INTO `sellers` VALUES (1,'foodmarkee','38BA5702892062BE76B848B2D470E484','푸드마케ㅌ','남자',32,'7511251031457','fmk@fmk.com','01012345678','서울','2020-05-14 03:12:39',NULL,'1111',NULL,NULL),(2,'brother','A874B737710F50C9E9B8F8E5F6B19022','형아네','남자',34,'8512251032311','bro@bro.com','01012425643','서울','2020-05-14 03:16:39',NULL,'3242',NULL,NULL),(3,'bms','F78893E010701F5F70C115866D20CEC3','bam','남자',31,'8912251032311','bam@bam.com','01012224643','서울','2020-05-14 03:24:13',NULL,'4232',NULL,NULL),(4,'Midnight','665C91CC091BAA7CDFD99BD3B141DFC5','mid','남자',28,'9207121034121','mid@mid.com','01011326143','서울','2020-05-14 03:27:34',NULL,'6212',NULL,NULL),(5,'YoChef','EBD5AB82014A76020A0C496E358270A6','chef','남자',32,'8907121034121','chef@chef.com','01011334122','서울','2020-05-14 03:29:34',NULL,'6212',NULL,NULL),(6,'fireice','34878E68AA8161F56ACC53E716E7F04D','fier','남자',33,'8807121034121','fier@fier.com','01042334122','서울','2020-05-14 03:31:30',NULL,'5432',NULL,NULL),(7,'ichiken','42EB46C4C9F3221BA4857D4292E4EEB3','ichken','남자',33,'8807221243212','ichken@ichken.com','01021322122','서울','2020-05-14 03:33:09',NULL,'5321',NULL,NULL),(8,'zzang','6C3E7590A37FDCB092D1CDD424109423','zzang','남자',33,'8801121223214','zzg@zzg.com','01031422127','서울','2020-05-14 03:34:42',NULL,'7253',NULL,NULL),(9,'firenemo','728505314CBF67CDB5653B3651B6F02E','firenemo','남자',33,'8801212873241','nemo@nemo.com','01031422127','서울','2020-05-14 03:35:38',NULL,'8235',NULL,NULL),(10,'arafood','E041913F7EAE06FDE943698C697474AC','arafood','남자',32,'8901212337341','ara@ara.com','01031428627','서울','2020-05-14 03:36:51',NULL,'9344',NULL,NULL);
 /*!40000 ALTER TABLE `sellers` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
