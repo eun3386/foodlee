@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-			<c:forEach var="bg" items="${baList}" varStatus="status">
-				<div class="slider_top">
-					<figure>
-						<img src="resources/imgs/mapMain/${bg.adImg}">
-					</figure>
-				</div>
-			</c:forEach>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:forEach var="bg" items="${baTopList}" varStatus="status">
+	<div class="slider_top" onclick="selectOneBanner">
+		<figure>
+			<img src="resources/imgs/mapMain/${bg.imgPath}">
+		</figure>
+	</div>
+</c:forEach>

@@ -41,8 +41,10 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function() {
-
-	var ROOTCP = '<%= application.getContextPath()%>';
+	
+// 	var URLHD = '${pageContext.request.contextPath}/';
+// 	var url= URLHD+'banner_top_list.fdl';
+// 	$('div.map_slider').load(url)
 	
 	$('.map_header_tit').click(function() {
 		$(location).attr('href','main.fdl');
@@ -64,64 +66,10 @@ $(document).ready(function() {
 	$('.e_home').click(function() {
 		$(location).attr('href','main.fdl');
 	});
-	
-// 	$('#s_search').click(function() {
-// 		$(location).attr('href','main.fdl#event-list-wrap');
-// 		var offset = $('#event-list-wrap').offset();
-// 		$('html').animate({scrollTop : offset.top}, 400);
-// 	});
-// 	var page_url = window.location.href; 
-// 	var page = page_url.substring(page_url.lastIndexOf("#") + 1); 
-// 	// alert(page_id); 
-// 	if (page == 'event-list') {
-// 		$('html, body').animate({
-// 			scrollTop: $('#' + page).offset().top 
-// 		}, 500);
-// 	}
-// 	$('.e_search').click(function() {
-// 		$(location).attr('href','main.fdl');
-// 	});
-// 	$(".btn").click(function(e){
-//         e.preventDefault();
-//         $(".map_nav").slideToggle();
-//         $(".btn").toggleClass("open");
-// //         var btn = $(".btn").find(">i").attr("class");
-// //         alert(btn);
-
-//         if($(".btn").hasClass("open")){
-//             //open이 있을 때
-//             $(".btn").find(">i").attr("class","fa fa-angle-up");
-//         } else {
-//             //open이 없을 때
-//             $(".btn").find(">i").attr("class","fas fa-bars fa");
-//         }
-//     });
-
-// 	$('#s_search').click(function() {
-// 		var url = ROOTCP +"/frame/surrounding_area.jsp";
-// 			url = url + "?pg=sourrounding";
-// 		$('#map_container').load(url, function() {
-// 			document.getElementById('map_content').scrollIntoView();
-// 			console.log("sourrounding 로딩 완료!")
-// 		})
-// 	});
-// 	$('#d_search').click(function() {
-// 		var url = ROOTCP +"/frame/distinct_area.jsp";
-// 			url = url + "?pg=distinct";
-// 		$('#map_container').load(url, function() {
-// 			document.getElementById('gu-list-table').scrollIntoView();
-// 			console.log("distinct 로딩 완료!");
-// 		})
-// 	});
-	
-// 	$('#s_search').click(function() {
-// 		var offset = $('#map_container').offset();
-// 		$('html').animate({scrollTop : offset.top}, 400);
-// 	});
-// 	$('#d_search').click(function() {
-// 		var offset = $('#gu-list-table').offset();
-// 		$('html').animate({scrollTop : offset.top}, 400);
-// 	});
+	function selectOneBanner() {
+		location.href = 
+			'y?login='+mbLogin;
+	}
 });
 </script>
 <body>

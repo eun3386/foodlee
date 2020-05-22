@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.dao.inf.IBannerDAO;
+import com.fdl.foodlee.model.vo.BannerAddVO;
 import com.fdl.foodlee.model.vo.BannerVO;
 import com.fdl.foodlee.service.inf.IBannerSVC;
 
@@ -16,9 +17,9 @@ public class BannerSVCImpl implements IBannerSVC {
 	private IBannerDAO bannerDAO;
 	
 	@Override
-	public List<BannerVO> showAllBanner() {
+	public List<BannerAddVO> showAddBannerList(int min, int max, int limit) {
 		// TODO Auto-generated method stub
-		return bannerDAO.showAllBanner();
+		return bannerDAO.showAddBannerList(min, max, limit);
 	}
 
 	@Override

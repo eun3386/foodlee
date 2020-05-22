@@ -2,12 +2,14 @@ package com.fdl.foodlee.model.dao.inf;
 
 import java.util.List;
 
+import com.fdl.foodlee.model.vo.BannerAddVO;
 import com.fdl.foodlee.model.vo.BannerVO;
 
 public interface IBannerDAO {
 	
 //	배너의 리스트 볼 수 있다
-	List<BannerVO> showAllBanner();
+//	List<BannerVO> showAllBanner();
+	List<BannerAddVO> showAddBannerList(int min, int max, int limit);
 	List<BannerVO> showAllBannerId(int id);
 //	배너의 트럭 상세보기 할수 있다
 	BannerVO selectShowBanner(int id);
