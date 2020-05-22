@@ -43,8 +43,8 @@ public class ReviewSVCImpl implements IReviewSVC {
 	}
 
 	@Override
-	public boolean deleteReview(int id) {
-		return rvDao.deleteReview(id);
+	public boolean deleteReview(int id, int depth) {
+		return rvDao.deleteReview(id, depth);
 	}
 
 	@Override
@@ -55,6 +55,11 @@ public class ReviewSVCImpl implements IReviewSVC {
 	@Override
 	public List<ReviewVO> showAllReviewLogin(String login) {
 		return rvDao.showAllReviewLogin(login);
+	}
+
+	@Override
+	public boolean reviewReply(ReviewVO rv) {
+		return rvDao.reviewReply(rv);
 	}
 
 }

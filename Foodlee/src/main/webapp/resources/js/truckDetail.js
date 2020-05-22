@@ -279,12 +279,12 @@ function handleImgFileSelect(e) {
 var text;
 function modify_review(id) {
 	// $("#con_"+id).html;
-	 $("#mod_"+id).css('display', 'none');
+	$("#mod_"+id).css('display', 'none');
 	
 	text = $("#con_"+id).text().trim();
 	$("#con_"+id).html("<textarea style='resize:none; width: 700px; min-height: 80px; max-height: 180px;'>"+text+"</textarea>");
 	$("#con_"+id).append("<button onclick='modify("+id+")' style='margin-top: 3px;'>수정하기</button>" +
-			"<button id='cancel_"+id+"' onclick='cancel("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button>");
+			"<button id='cancel_"+id+"' onclick='cancel_modify("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button>");
 	
 }
 
@@ -315,13 +315,38 @@ function modify(id) {
 	});
 }
 
-function cancel(id) {
+function reply_add(id) {
+	var moText = $("#review_reply_"+id).children("textarea").val();
+	var login = "admin";
+	var sellerId = $("#sellerId").val();
+		
+	$.ajax({
+	    type: "POST",
+	    url: URLHD + 'review_reply_add.fdl',
+	    data: {
+	    	"text" : moText,
+	    	"login" : login,
+	    	"pnum" : id,
+	    	"sellerId" : sellerId
+	    	},
+	    	success: function(data, textStatus) {
+	    		location.href = URLHD + "truckDetail.fdl";
+	    }
+	});
+}
+
+function cancel_modify(id) {
 	$("#con_"+id).html("<div id='con_"+id+"'>"+text+"</div>");
 	$("#mod_"+id).css('display', 'inline');
 	$("#cancel_"+id).css('display', 'none');
 }
 
-function del_review(id) {
+function cancel_reply(id) {
+	$("#review_reply_"+id).css("display", "none");
+	$("#reply_button_"+id).css("display", "inline");
+}
+
+function del_review(id, rd) {
 	/*
 	var chk = confirm("리뷰를 삭제하시겠습니까?");
 	if (chk) {
@@ -337,12 +362,22 @@ function del_review(id) {
 		})
 		.then((willDelete) => {
 		  if (willDelete) {
-			  location.href= URLHD + 'reivew_delete.fdl?id='+id;
+			  location.href= URLHD + 'reivew_delete.fdl?id='+id+'&depth='+rd;
 		  } else {
 		    return;
 		  }
 	});
-}	
+}
+
+function reply_review(id) {
+	$("#reply_button_"+id).css("display", "none");
+	$('#reply_'+id).after("<div id='review_reply_"+id+"' style='border: 1px solid #ccc; padding-left:10px; margin-bottom: -1px;'>" +
+			"<div style='margin-top:5px;'><i class='fas fa-reply fa-rotate-180 fa-lg'></i>  답변하기</div>" +
+			"<textarea style='resize:none; width: 750px; margin-top: 10px; min-height: 80px; max-height: 180px;'></textarea>" +
+			"<div style='margin-bottom:5px;'><button onclick='reply_add("+id+")' style='margin-top: 3px;'>답변하기</button>" +
+			"<button id='cancel_"+id+"' onclick='cancel_reply("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button></div>" +
+			"</div>");
+}
 
 $(document).ready(function() {
 	$("#file_add").on("change", handleImgFileSelect);
@@ -457,8 +492,7 @@ $(document).ready(function() {
 	// 좋아요
 	$(document).on("click", "span.mb_follow", function() {
 			var tgSr = $(this).attr("tg_sr");
-			// var sesMb = $(this).attr("ses_mb");
-			var sesMb = 3;
+			var sesMb = $(this).attr("ses_mb");
 			$.ajax({
 				type: 'get',
 				url: URLHD + 'foodTruck_like.fdl',
@@ -472,16 +506,20 @@ $(document).ready(function() {
 				switch( likeCode ) {
 					case 1:
 						$('#follow_cnt').text(res.cntLikes);
+						// $('.follow_msg').css('display', 'inline');
 						// $('.follow_msg').html(res.msg);							
 						// $('.follow_msg').css('color', 'blue');
 						if( res.type == 'add' )
 							$('.fa-heart').css('color', 'red');
-						else // 'cancel'
+						else { // 'cancel'
+							$('.follow_msg').text("좋아요를 취소 하였습니다.");
 							$('.fa-heart').css('color', 'gray');
+						}
 						break;
 					case 2:
-						$('.follow_msg').html(res.msg);
-						$('.follow_msg').css('color', 'red');
+						// $('.follow_msg').css('display', 'inline');
+						// $('.follow_msg').html(res.msg);
+						// $('.follow_msg').css('color', 'red');
 						break;
 					default:
 						

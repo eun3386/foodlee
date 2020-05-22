@@ -53,6 +53,7 @@
 				</div>
 				<p />
 				<div id="member_like" style="margin-top: 30px;">
+				<input id="sellerId" type="hidden" value="${foodT.sellerId}">
 				<span id="follow" tg_sr='${foodT.sellerId}' ses_mb='${mbId}' class="mb_follow">
 					<i class="fas fa-heart fa-lg follow_${isAlreadyLiked ? 'red': 'orange'}"></i>
 				</span>
@@ -62,6 +63,9 @@
 							style="margin-left: 80px; position: absolute;"></i>
 					</div>
 				</div>
+				<c:if test="${isAlreadyLiked eq true}">
+					<div class="follow_msg" style="margin-top: 5px; font-size: 11px; font-color: red;">해당 푸드트럭을 좋아요 하고 있습니다.</div>
+				</c:if>
 			</div>
 		</div>
 
@@ -126,11 +130,21 @@
 							<div class="date" style="padding-top: 4px; font-size: 12px;">
 							<span id="fmt_${rv.reviewId}"><fmt:formatDate value="${rv.reviewCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
 							</span>
-							<span style="float: right; margin-right: 15px;">
-							<button id="mod_${rv.reviewId}" onclick="modify_review(${rv.reviewId})" 
-							style="margin-bottom: 3px;">수정</button>
-							<br><button onclick="del_review(${rv.reviewId})">
-							삭제</button></span>
+							
+							<c:if test="${rv.reviewContent ne '삭제된 리뷰입니다.'}">
+								<span style="float: right; margin-right: 15px;">
+								<c:if test="${rv.login eq login}">
+									<button id="mod_${rv.reviewId}" onclick="modify_review(${rv.reviewId})" 
+									style="margin-bottom: 3px;">수정</button>
+									<br><button onclick="del_review(${rv.reviewId}, ${rv.reviewDepth})" style="margin-bottom: 3px;">
+									삭제</button>
+									<br>
+								</c:if>
+								<c:if test="${foodT.sellerId eq sellerId and rv.reviewDepth eq 0 and empty review[vs.index+1].reviewPnum}">
+									<button id="reply_button_${rv.reviewId}" onclick="reply_review(${rv.reviewId})">답변</button>
+								</c:if>
+								</span>
+							</c:if>
 							</div>
 						</li>
 						<li>
@@ -178,6 +192,7 @@
 				</c:forEach>
 				<div id="read-more-reply" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
 					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">리뷰 더보기</div>
+<%-- 				<c:if test="${foodT.sellerId ne sellerId}"> 리뷰 달기 판매자 금지--%>
 				<div id="reply-insert">
 					<h3 style="padding-top: 10px;">리뷰달기</h3>
 <!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
@@ -198,6 +213,7 @@
 				        </div>
 					</form>
 				</div>
+<%-- 			</c:if> --%>
 			</div>
 			<div id="test_list"></div>
 		</section>

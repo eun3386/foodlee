@@ -51,6 +51,9 @@ public class TruckDetailController {
 	@RequestMapping(value = "truckDetail.fdl", method = RequestMethod.GET)
 	public String truckDetail(HttpSession ses, Model model) {
 		ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
+		ses.setAttribute("login", "seller"); // 로그인 임시설정
+		ses.setAttribute("sellerId", 1); // 판매자 번호 임시생성
+		
 		int isAlreadyLiked = mltSvc.isAlreadyLikedMember(1, (int) ses.getAttribute("mbId"));
 		model.addAttribute("isAlreadyLiked", (isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_ONE
 				|| isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_OTHERS));
@@ -71,8 +74,8 @@ public class TruckDetailController {
 	}
 	
 	@RequestMapping(value = "reivew_delete.fdl", method = RequestMethod.GET)
-	public String reviewDelete(@RequestParam("id")int id) {
-		rvSvc.deleteReview(id);
+	public String reviewDelete(@RequestParam("id")int id, @RequestParam("depth")int depth) {
+		rvSvc.deleteReview(id, depth);
 		return "redirect:/truckDetail.fdl";
 	}
 	
@@ -83,6 +86,18 @@ public class TruckDetailController {
 		String rvContent = req.getParameter("text");
 		rvSvc.updateReview(id, rvContent);
 		return null;
+	}
+	
+	@RequestMapping(value = "review_reply_add.fdl", method = RequestMethod.POST)
+	public String reviewReply(HttpServletRequest req) {
+		String pnum = req.getParameter("pnum");
+		int sellerId = Integer.parseInt(req.getParameter("sellerId"));
+		String login = req.getParameter("login");
+		String rvReply = req.getParameter("text");
+		ReviewVO rv = new ReviewVO(0, login, sellerId, 1, pnum, rvReply, null, null);
+		boolean r = rvSvc.reviewReply(rv);
+		
+		return "redirect:/truckDetail.fdl";
 	}
 	
 	@RequestMapping(value = "review_list.fdl", method = RequestMethod.GET)
@@ -98,6 +113,7 @@ public class TruckDetailController {
 		
 		String realPath = ses.getServletContext().getRealPath(IReviewFileSVC.DEF_UPLOAD_DEST) + "/";
 		rvFileSvc.makeUserDir(ses, "poro");
+		
 		System.out.println("경로" + realPath);
 		Map<String, Object> rMap = rvFileSvc.writeUploadedMultipleFiles(imgfiles, realPath, "poro"
 				/*(String) ses.getAttribute("mbLoginName")*/);
@@ -147,7 +163,7 @@ public class TruckDetailController {
 			if (cntLikes >= 0) {
 				map.put("code", 1); // OK
 				map.put("type", typeLike);
-				map.put("msg", "좋아요 " + (typeLike.equals("add") ? "추가" : "취소") + " OK");
+				map.put("msg", "좋아요 " + (typeLike.equals("add") ? "추가" : "취소") + " 완료");
 				map.put("cntLikes", cntLikes);
 				re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 			} else {

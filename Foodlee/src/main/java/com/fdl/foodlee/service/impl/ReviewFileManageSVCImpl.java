@@ -2,6 +2,7 @@ package com.fdl.foodlee.service.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -81,17 +82,33 @@ public class ReviewFileManageSVCImpl implements IReviewFileSVC {
 	@Override
 	public boolean makeUserDir(HttpSession ses, String login) {
 		// 사용자 전용 고유 폴더 만들기..
-		String userRealPath = ses.getServletContext().getRealPath(DEF_UPLOAD_DEST) + "/" + login;
+		String userRealPath = ses.getServletContext().getRealPath(DEF_UPLOAD_DEST) + "\\" + login;
 		System.out.println("userRealPath = " + userRealPath);
-
-		try {
-			File upFolder = new File(ses.getServletContext().getRealPath(DEF_UPLOAD_DEST));
-			upFolder.mkdir();
-			File userFolder = new File(userRealPath);
-			// userFolder.canWrite();
-			return userFolder.mkdir();
-		} catch (SecurityException se) {
-			System.out.println("폴더 생성 에러: 권한문제?");
+		
+		File upbFolder = new File(ses.getServletContext().getRealPath(DEF_UPLOAD_DES));
+		if (!upbFolder.isDirectory()) {
+			try {
+				Files.createDirectory(upbFolder.toPath());
+				
+				File upFolder = new File(ses.getServletContext().getRealPath(DEF_UPLOAD_DEST));
+				// upFolder.mkdir();
+				
+				Files.createDirectory(upFolder.toPath());
+				
+				File userFolder = new File(userRealPath);
+				
+				Files.createDirectory(userFolder.toPath());
+				// userFolder.canWrite();
+				// return userFolder.mkdir();
+				System.out.println("폴더 생성에 성공함");
+				return true;
+			} catch (IOException e) {
+				System.out.println("폴더 생성 에러 에러 이유:");
+				e.printStackTrace();
+				return false;
+			}
+		} else {
+			System.err.println("이미 폴더가 존재");
 			return false;
 		}
 	}

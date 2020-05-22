@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface IReviewFileSVC {
+	String DEF_UPLOAD_DES = "/uploads"; 
 	String DEF_UPLOAD_DEST = "/uploads/review";
 	String DEF_UP_PREFIX = "UP_";
 	String MULTI_SEP = "|"; // ","
