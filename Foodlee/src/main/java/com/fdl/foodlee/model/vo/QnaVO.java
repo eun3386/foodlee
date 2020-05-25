@@ -6,27 +6,27 @@ public class QnaVO {
 	private int qnaId; // 문의번호 <<PK>> AI
 	private String login; // 문의 작성자 <<FK>>
 	private int sellerId; // 판매자 번호 <<FK>>
-	private String qnaCountent; // 문의내용
+	private String qnaContent; // 문의내용
 	private int qnaDepth; // 답글 여부 문의 0 답글 1
-	private int qnaPnum; // 답글일 경우 해당 문의번호
+	private String qnaPnum; // 답글일 경우 해당 문의번호
 	private Timestamp qnaCreatedAt; // 문의 작성일
 
 	public QnaVO() {}
 	
-	public QnaVO(int qnaId, String login, int sellerId, String qnaCountent, int qnaDepth, Timestamp qnaCreatedAt) {
+	public QnaVO(int qnaId, String login, int sellerId, String qnaContent, int qnaDepth, Timestamp qnaCreatedAt) {
 		this.qnaId = qnaId;
 		this.login = login;
 		this.sellerId = sellerId;
-		this.qnaCountent = qnaCountent;
+		this.qnaContent = qnaContent;
 		this.qnaDepth = qnaDepth;
 		this.qnaCreatedAt = qnaCreatedAt;
 	}
 
-	public QnaVO(int qnaId, String login, int sellerId, String qnaCountent, int qnaDepth, int qnaPnum, Timestamp qnaCreatedAt) {
+	public QnaVO(int qnaId, String login, int sellerId, String qnaContent, int qnaDepth, String qnaPnum, Timestamp qnaCreatedAt) {
 		this.qnaId = qnaId;
 		this.login = login;
 		this.sellerId = sellerId;
-		this.qnaCountent = qnaCountent;
+		this.qnaContent = qnaContent;
 		this.qnaDepth = qnaDepth;
 		this.qnaPnum = qnaPnum;
 		this.qnaCreatedAt = qnaCreatedAt;
@@ -56,12 +56,12 @@ public class QnaVO {
 		this.sellerId = sellerId;
 	}
 
-	public String getQnaCountent() {
-		return qnaCountent;
+	public String getQnaContent() {
+		return qnaContent;
 	}
 
-	public void setQnaCountent(String qnaCountent) {
-		this.qnaCountent = qnaCountent;
+	public void setQnaContent(String qnaContent) {
+		this.qnaContent = qnaContent;
 	}
 
 	public int getQnaDepth() {
@@ -72,11 +72,11 @@ public class QnaVO {
 		this.qnaDepth = qnaDepth;
 	}
 
-	public int getQnaPnum() {
+	public String getQnaPnum() {
 		return qnaPnum;
 	}
 
-	public void setQnaPnum(int qnaPnum) {
+	public void setQnaPnum(String qnaPnum) {
 		this.qnaPnum = qnaPnum;
 	}
 
@@ -90,7 +90,7 @@ public class QnaVO {
 
 	@Override
 	public String toString() {
-		return "QnaVO [qnaId=" + qnaId + ", login=" + login + ", sellerId=" + sellerId + ", qnaCountent=" + qnaCountent + ", qnaDepth=" + qnaDepth
+		return "QnaVO [qnaId=" + qnaId + ", login=" + login + ", sellerId=" + sellerId + ", qnaContent=" + qnaContent + ", qnaDepth=" + qnaDepth
 				+ ", qnaPnum=" + qnaPnum + ", qnaCreatedAt=" + qnaCreatedAt + "]";
 	}
 

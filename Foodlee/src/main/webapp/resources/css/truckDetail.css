@@ -208,11 +208,11 @@ input:checked+label {
 	display: none;
 }
 
-.qna {
+.qna_items {
 	display: none;	
 }
 
-#read-more-reply:hover {
+#read-more-review:hover {
 	cursor: pointer;
 }
 

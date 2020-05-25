@@ -1,6 +1,8 @@
 package com.fdl.foodlee.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,9 +30,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.inf.IMemberLikeTruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
+import com.fdl.foodlee.model.vo.QnaVO;
 import com.fdl.foodlee.model.vo.ReviewVO;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.IMemberLikeTruckSVC;
+import com.fdl.foodlee.service.inf.IQnaSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.IReviewSVC;
 
@@ -38,6 +42,8 @@ import com.fdl.foodlee.service.inf.IReviewSVC;
 public class TruckDetailController {
 	@Autowired
 	IReviewSVC rvSvc;
+	@Autowired
+	IQnaSVC qnaSvc;
 	@Autowired
 	private IReviewFileSVC rvFileSvc;
 	@Autowired
@@ -62,11 +68,19 @@ public class TruckDetailController {
 		System.out.println(fd.getFoodtruckName());
 		model.addAttribute("foodT", fd);
 		model.addAttribute("cntLikes", fd.getMemberLikeCount());
+		
 		List<ReviewVO> rvList = rvSvc.showAllReview(1);
-		if (rvList != null) {
+		List<QnaVO> qnaList = qnaSvc.showAllQna(1);
+		
+		if (rvList != null && qnaList != null) {
 			model.addAttribute("rvSize", rvList.size());
-			model.addAttribute("review", rvList);
+			model.addAttribute("reviewList", rvList);
+			
+			model.addAttribute("qnaSize", qnaList.size());
+			model.addAttribute("qnaList", qnaList);
+			
 			System.out.println("리뷰 리스트 조회 성공: " + rvList.size());
+			System.out.println("qna 리스트 조회 성공: " + qnaList.size());
 		} else {
 			System.out.println("조회 실패");
 		}
@@ -89,6 +103,7 @@ public class TruckDetailController {
 	}
 	
 	@RequestMapping(value = "review_reply_add.fdl", method = RequestMethod.POST)
+	@ResponseBody
 	public String reviewReply(HttpServletRequest req) {
 		String pnum = req.getParameter("pnum");
 		int sellerId = Integer.parseInt(req.getParameter("sellerId"));
@@ -122,7 +137,7 @@ public class TruckDetailController {
 		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
 		System.out.println("총 볼륨(MB): " + rMap.get("totalMB") + "MB");
 		
-		ReviewVO rvT = new ReviewVO(0, "poro", 1, 0, null, rv.getReviewContent(), filePath, null);
+		ReviewVO rvT = new ReviewVO(0, "poro", rv.getSellerId(), 0, null, rv.getReviewContent(), filePath, null);
 		
 		int atRtkey = this.rvSvc.insertNewReviewReturnKey(rvT);
 
@@ -148,6 +163,64 @@ public class TruckDetailController {
 //		}
 		
 	}
+	
+	// QNA 시작
+	@RequestMapping(value = "qna_delete.fdl", method = RequestMethod.GET)
+	public String QnaDelete(@RequestParam("id")int id, @RequestParam("depth")int depth) {
+		qnaSvc.deleteQna(id, depth);
+		return "redirect:/truckDetail.fdl";
+	}
+	
+	@RequestMapping(value = "qna_update.fdl", method = RequestMethod.POST)
+	@ResponseBody
+	public String QnaUpdate(HttpServletRequest req) {
+		int id = Integer.parseInt(req.getParameter("id")); 
+		String qnaContent = req.getParameter("text");
+		qnaSvc.updateQna(id, qnaContent);
+		return null;
+	}
+	
+	@RequestMapping(value = "qna_reply_add.fdl", method = RequestMethod.POST)
+	@ResponseBody
+	public String QnaReply(HttpServletRequest req) {
+		String pnum = req.getParameter("pnum");
+		int sellerId = Integer.parseInt(req.getParameter("sellerId"));
+		String login = req.getParameter("login");
+		String qnaReply = req.getParameter("text");
+		QnaVO qna = new QnaVO(0, login, sellerId, qnaReply, 1, pnum, null);
+		boolean r = qnaSvc.QnaReply(qna);
+		
+		return "redirect:/truckDetail.fdl";
+	}
+	
+	@RequestMapping(value = "qna_list.fdl", method = RequestMethod.GET)
+	public List<QnaVO> QnaList(Model model) {
+		return qnaSvc.showAllQna(1);
+	}
+
+	@RequestMapping(value = "new_qna.fdl", method = RequestMethod.POST)
+	public String newQna(@ModelAttribute(value="qna") QnaVO qna, HttpSession ses, Model model) {
+		System.out.println(qna.getQnaContent());
+		Map<String, Object> result = new HashMap<>();
+		
+		QnaVO qnaT = new QnaVO(0, "poro", qna.getSellerId(), qna.getQnaContent(), 0, null, null);
+		int atRtkey = this.qnaSvc.insertNewQnaReturnKey(qnaT);
+
+		// 상세보기 => atId?
+		if (atRtkey > 0) {
+			// System.out.println("게시글 등록 성공: " + title);
+			System.out.println("리뷰 등록 성공: " + atRtkey);
+			result.put("status", "OK");
+			return "redirect:/truckDetail.fdl";
+			// return "redirect:article_list.my"; // RD
+		} else {
+			System.out.println("리뷰 등록 실패: " + qna.getQnaContent());
+			result.put("status", "False");
+			return "redirect:/truckDetail.fdl";
+		}
+		
+	}
+	// QNA 끝
 	
 	@RequestMapping(value = "foodTruck_like.fdl", method = RequestMethod.GET)
 	@ResponseBody
@@ -179,6 +252,23 @@ public class TruckDetailController {
 			re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.FORBIDDEN);
 		}
 		return re;
+	}
+	
+	@RequestMapping(value = "menu_order.fdl", method = RequestMethod.POST)
+	@ResponseBody
+	public String menuOrder(HttpServletRequest req) {
+		String[] arrMenuName = req.getParameterValues("arrMenuName[]");
+		String[] arrMenuPrice = req.getParameterValues("arrMenuPrice[]");
+		String[] arrMenuNumber = req.getParameterValues("arrMenuNumber[]");
+		int priceSum = Integer.parseInt(req.getParameter("priceSum"));
+		
+		System.out.println(Arrays.deepToString(arrMenuName));
+		System.out.println(Arrays.deepToString(arrMenuPrice));
+		System.out.println(Arrays.deepToString(arrMenuNumber));
+		System.out.println(priceSum);
+		
+		// return "redirect:/truckDetail.fdl";
+		return null;
 	}
 	
 }
