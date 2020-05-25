@@ -67,8 +67,8 @@ public class LoginController {
 				mav.addObject("msg", "로그인 실패!! - "
 						+ authResult + " : " +
 					MyCode.getMsg(authResult) );
-				mav.setViewName("redirect:/main.fdl");
-			}	
+				mav.setViewName("login.form");
+			}
 		return mav;
 	}
 	
