@@ -1,7 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-    
+    img {
+    	width: 150px;
+    	height: 150px;
+    }
+    .lb {
+    	text-align: right;
+    	padding: 5px 20px;
+    }
+    .input {
+    	padding-left: 50px;
+    }
+    #join_submit {
+    	text-align: right;
+    	padding-right: 100px;
+    }
+    #join_table {
+    	margin: 0 auto;
+    	width: 960px;
+    }
+    #txtarea {
+    	padding: 20px 50px;
+    }
+    input {
+    	height: 25px;
+    }
+    #dupchk {
+    	width: 70px;
+    }
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -49,91 +76,92 @@
 		
 	});
 </script>
-<div>   
+<div id="join_form">   
     <form action="${pageContext.request.contextPath}/member/join.fdl" method="post">
-    	<div>
-        <table border="0">
+        <table id="join_table" border="0">
         	<tr>
         		<td><img alt="사진" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG"> </td>
-        		<td colspan="2"><textarea rows="10" cols="60" readonly>일반 회원가입 소개글 더미</textarea></td>
+        		<td id="txtarea"><textarea rows="10" cols="100" style="resize: none;" readonly>일반 회원가입 소개글 더미</textarea></td>
         	</tr>
             <tr>
-                <td><label for="id">*아이디</label></td>
-                <td>
-                    <input type="text" id="id" name="id" maxlength="20" required>
+                <td class="lb"><label for="id">*아이디</label></td>
+                <td class="input">
+                    <input type="text" id="id" name="id" maxlength="20" size="45" required>
                     <input type="button" id="dupchk" value="중복확인">
                 </td>
             </tr>
                     
             <tr>
-                <td><label for="password">*비밀번호</label></td>
-                <td>
-                    <input type="password" id="password" name="password" maxlength="15" required>
+                <td class="lb"><label for="password">*비밀번호</label></td>
+                <td class="input">
+                    <input type="password" id="password" name="password" size="45" maxlength="15" required>
                 </td>
             </tr>
             
             <tr>
-                <td><label for="passwordCheck">*비밀번호 확인</label></td>
-                <td>
-                    <input type="password" id="passwordCheck" name="passwordCheck" maxlength="15" required>
+                <td class="lb"><label for="passwordCheck">*비밀번호 확인</label></td>
+                <td class="input">
+                    <input type="password" id="passwordCheck" name="passwordCheck" size="45" maxlength="15" required>
                 </td>
             </tr>
                 
             <tr>
-                <td><label for="name">*이름</label></td>
-                <td>
-                    <input type="text" id="name" name="name" maxlength="40" required>
+                <td class="lb"><label for="name">*이름</label></td>
+                <td class="input">
+                    <input type="text" id="name" name="name" maxlength="40" size="45" required>
                 </td>
             </tr>
                 
             <tr>
-                <td><label for="man">성별</label></td>
-                <td>
-                    <input type="radio" id="man" name="gender" value="남" checked><label for="man">남</label>
-                    <input type="radio" id="woman" name="gender" value="여"><label for="woman">여</label>
+                <td class="lb"><label for="man">성별</label></td>
+                <td class="input">
+                    <input type="radio" id="man" name="gender" value="남" checked><label for="man"> 남</label>&nbsp;&nbsp;
+                    <input type="radio" id="woman" name="gender" value="여"><label for="woman"> 여</label>
                 </td>
             </tr>
                 
             <tr>
-                <td><label for="age">나이</label></td>
-                <td>
-                    <input type="number" id="age" name="age" value="20">
+                <td class="lb"><label for="age">나이</label></td>
+                <td class="input">
+                    <input type="number" id="age" name="age" size="19" value="20">
                 </td>
             </tr>
                 
             <tr>
-                <td><label for="residentRN1">*주민번호</label></td>
-                <td>
-                    <input type="text" id="residentRN1" name="residentRN1" maxlength="6" required>&nbsp;-&nbsp;
+                <td class="lb"><label for="residentRN1">*주민번호</label></td>
+                <td class="input">
+                    <input type="text" id="residentRN1" name="residentRN1" maxlength="6" size="19" required>&nbsp;&nbsp;-&nbsp;
                     <input type="password" id="residentRN2" name="residentRN2" maxlength="7" required>
                 </td>
             </tr>
                 
             <tr>
-                <td><label for="email">*이메일주소</label></td>
-                <td>
-                    <input type="email" id="email" name="email" maxlength="30" required>
+                <td class="lb"><label for="email">*이메일주소</label></td>
+                <td class="input">
+                    <input type="email" id="email" name="email" maxlength="30" size="45" required>
                 </td>
             </tr>
                 
             <tr>
-                <td><label for="phoneNumber">*휴대전화번호</label></td>
-                <td>
-                    <input type="text" id="phoneNumber" maxlength="13" placeholder="ex)010-1234-5678" name="phoneNumber" required>
+                <td class="lb"><label for="phoneNumber">*휴대전화번호</label></td>
+                <td class="input">
+                    <input type="text" id="phoneNumber" maxlength="13" placeholder="ex)010-1234-5678" name="phoneNumber" size="45" required>
                 </td>
             </tr>
+            
             <tr>
-                <td><label for="address">주소(사는곳)</label></td>
-                <td>
-                    <input type="text" size="50" id="address" name="address">
+                <td class="lb"><label for="address">주소(사는곳)</label></td>
+                <td class="input">
+                    <input type="text" size="70" id="address" name="address">
                 </td>
             </tr>
+            
             <tr>
-            	<td></td>
-            	<td><input type="submit" value="가입" disabled="disabled"> <input type="reset" value="리셋"></td>
+            	<td class="lb"></td>
+            	<td id="join_submit"><input type="submit" value="가입" style="width: 40px; height: 30px; font: 20px;" disabled="disabled">&nbsp;&nbsp;<input type="reset" style="width: 40px; height: 30px;" value="리셋"></td>
             </tr>
+            
         </table>
-        </div>
     </form>
 </div>
 

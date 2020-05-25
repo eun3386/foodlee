@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="<%= application.getContextPath()%>/resources/css/login.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/login.css" type="text/css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
