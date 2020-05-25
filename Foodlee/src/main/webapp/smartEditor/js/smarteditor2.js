@@ -15884,7 +15884,8 @@ nhn.husky.SE2B_CSSLoader = jindo.$Class({
 		}
 		
 		//nhn.husky.SE2M_Utils.loadCSS("css/smart_editor2.css");
-		var sCssUrl = this.htOptions.sCSSBaseURI;
+		var sCssUrl = "smartEditor/"+this.htOptions.sCSSBaseURI;
+		console.log("sCSSBaseURI="+this.htOptions.sCSSBaseURI);
 		var sLocale = this.oApp && this.oApp.htOptions.I18N_LOCALE;
 		if(sLocale){
 			sCssUrl += "/" + sLocale;
