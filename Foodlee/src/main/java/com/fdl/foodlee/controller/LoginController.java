@@ -44,30 +44,36 @@ public class LoginController {
 			authResult = logSvc.loginProcess(login, password);
 			if( authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
+				ses.setAttribute("LoginType", authResult);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
 				int id = mbSvc.selectMemberIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
+				mbSvc.updateMemberLoginTime(id);
 				mav.setViewName("redirect:/main.fdl");
 			} else if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
+				ses.setAttribute("LoginType", authResult);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
 				int id = selSvc.selectSellerIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
+				selSvc.updateSellerLoginTime(id);
 				mav.setViewName("redirect:/main.fdl");
 			} else if( authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
+				ses.setAttribute("LoginType", authResult);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
 				int id = mbSvc.selectMemberIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
+				mbSvc.updateMemberLoginTime(id);
 				mav.setViewName("redirect:/admin.fdl");
 			} else {
 				mav.addObject("msg", "로그인 실패!! - "
 						+ authResult + " : " +
 					MyCode.getMsg(authResult) );
-				mav.setViewName("login.form");
+				mav.setViewName("login_form");
 			}
 		return mav;
 	}
@@ -76,11 +82,20 @@ public class LoginController {
 	@RequestMapping(value = "logout.fdl", method = RequestMethod.GET)
 	public String logoutProc(HttpSession ses) {
 		String login = (String)ses.getAttribute("LoginName");
+		int loginType = (Integer)ses.getAttribute("LoginType");
+		int id = (Integer)ses.getAttribute("id");
 		long loginStarted = (Long)ses.getAttribute("LoginTime");
 		long currentTime = System.currentTimeMillis();
 		long elapsedTime = currentTime - loginStarted;
 		System.out.println(login + " 회원이 로그아웃: "
 				+ elapsedTime/1000.0 + "초가 로그인 활동함.." );
+		if( loginType == MyCode.MEMBER_LOGIN_AUTH_OK ) {
+			mbSvc.updateMemberLogoutTime(id);
+		} else if( loginType == MyCode.SELLER_LOGIN_AUTH_OK ) {
+			selSvc.updateSellerLogoutTime(id);
+		} else if( loginType == MyCode.ADMIN_LOGIN_AUTH_OK ) {
+			mbSvc.updateMemberLogoutTime(id);
+		}
 		ses.invalidate();
 		return "redirect:/";
 	}

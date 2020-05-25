@@ -52,5 +52,15 @@ public class SellerSVCImpl implements ISellerSVC {
 	public boolean isDuplicatedSeller(String login) {
 		return selDao.isDuplicatedSeller(login);
 	}
+
+	@Override
+	public boolean updateSellerLoginTime(int id) {
+		return selDao.updateSellerLoginTime(id);
+	}
+
+	@Override
+	public boolean updateSellerLogoutTime(int id) {
+		return selDao.updateSellerLogoutTime(id);
+	}
 	
 }

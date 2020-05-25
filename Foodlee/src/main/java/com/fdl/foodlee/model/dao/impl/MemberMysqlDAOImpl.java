@@ -28,8 +28,10 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	private static final String SQL_LOGIN_AUTH
 	= "select login, cast(aes_decrypt(unhex(password), ?) as char(32) "
 		+ "character set utf8) as pw from members where id = ?";
-	private static final String SQL__MEMBER_LOGIN_TIME_UPDATE
+	private static final String SQL_UPDATE_MEMBER_LOGIN_TIME
 	= "update members set login_time=now() where id = ?";
+	private static final String SQL_UPDATE_MEMBER_LOGOUT_TIME
+	= "update members set logout_time=now() where id = ?";
 	private static final String SQL_SELECT_MEMBER_ID 
 	= "select * from members where id = ?";
 	private static final String SQL_SELECT_MEMBER_LOGIN 
@@ -152,6 +154,18 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	@Override
 	public boolean deleteOneMember(int id) {
 		int r = jtem.update(SQL_DELETE_MEMBER, id);
+		return r == 1;
+	}
+
+	@Override
+	public boolean updateMemberLoginTime(int id) {
+		int r = jtem.update(SQL_UPDATE_MEMBER_LOGIN_TIME, id);
+		return r == 1;
+	}
+
+	@Override
+	public boolean updateMemberLogoutTime(int id) {
+		int r = jtem.update(SQL_UPDATE_MEMBER_LOGOUT_TIME, id);
 		return r == 1;
 	}
 

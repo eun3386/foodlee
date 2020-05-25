@@ -13,11 +13,6 @@
 		font-size: 1.5em;
 		margin: 0 auto;
 	}
-	.choice_btn:hover {
-/* 		color: white; */
-/* 		background-color: orange;  */
-/* 		#FF8C00; */
-	}
 	#btn {
 		width: 600px;
 		text-align: center;
@@ -70,6 +65,7 @@
 		    var chk = $(this).is(":checked");//.attr('checked');
 		    if(chk) {
 		    	$(".clearfix input").prop('checked', true);
+		    	$('ul.join_box').css('border', '2px solid orange');
 		    	$('.choice_btn').css('background-color','orange');
 				$('.choice_btn').css('cursor','pointer');
 				$('.choice_btn').attr('disabled', false);
@@ -82,6 +78,7 @@
 				});
 		    }
 		    else {
+		    	$('ul.join_box').css('border', '1px solid #ddd');
 		    	$(".clearfix input").prop('checked', false);
 		    	$('.choice_btn').css('background-color','gray');
 				$('.choice_btn').css('cursor','default');
@@ -93,6 +90,7 @@
 			if($('.check02 input').is(":checked") && 
 				$('.check03 input').is(":checked") && 
 				$('.check04 input').is(":checked")) {
+				$('ul.join_box').css('border', '2px solid orange');
 				$('.choice_btn').css('background-color','orange');
 				$('.choice_btn').css('cursor','pointer');
 				$('.choice_btn').attr('disabled', false);
@@ -104,6 +102,7 @@
 					$(this).css('background-color','orange');
 				});
 			} else {
+				$('ul.join_box').css('border', '1px solid #ddd');
 				$('.choice_btn').css('background-color','gray');
 				$('.choice_btn').css('cursor','default');
 				$('.choice_btn').attr('disabled', true);
@@ -139,63 +138,59 @@
 </div>
 <div>
 	<form action="" id="joinForm">
-            <ul class="join_box">
-                <li class="checkBox check01">
-                    <ul class="clearfix">
-                        <li>이용약관, 개인정보 수집 및 이용,
-                            위치정보 이용약관, 프로모션 안내
-                            메일 수신(선택)에 모두 동의합니다.</li>
-                        <li class="checkAllBtn">
-                            <input type="checkbox" name="chkAll" id="chk" class="chkAll">
-                        </li>
-                    </ul>
-                </li>
-                <li class="checkBox check02">
-                    <ul class="clearfix">
-                        <li>이용약관 동의(필수)</li>
-                        <li class="checkBtn">
-                            <input type="checkbox" name="chk"> 
-                        </li>
-                    </ul>
-                    <textarea name="" id="">여러분을 환영합니다.
+    	<ul class="join_box">
+        	<li class="checkBox check01">
+            	<ul class="clearfix">
+                	<li>이용약관, 개인정보 수집 및 이용, 위치정보 이용약관, 프로모션 안내 메일 수신(선택)에 모두 동의합니다.</li>
+                    <li class="checkAllBtn">
+                    	<input type="checkbox" name="chkAll" id="chk" class="chkAll">
+                    </li>
+                </ul>
+            </li>
+            <li class="checkBox check02">
+                <ul class="clearfix">
+                    <li>이용약관 동의(필수)</li>
+                    <li class="checkBtn">
+                        <input type="checkbox" name="chk"> 
+                    </li>
+                </ul>
+                <textarea name="" id="">여러분을 환영합니다.
 네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-       </textarea>
-                </li>
-                <li class="checkBox check03">
-                    <ul class="clearfix">
-                        <li>개인정보 수집 및 이용에 대한 안내(필수)</li>
-                        <li class="checkBtn">
-                            <input type="checkbox" name="chk">
-                        </li>
-                    </ul>
- 
-                    <textarea name="" id="">여러분을 환영합니다.
+       			</textarea>
+            </li>
+            <li class="checkBox check03">
+                <ul class="clearfix">
+                    <li>개인정보 수집 및 이용에 대한 안내(필수)</li>
+                    <li class="checkBtn">
+                        <input type="checkbox" name="chk">
+                    </li>
+                </ul>
+				<textarea name="" id="">여러분을 환영합니다.
 네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-       </textarea>
-                </li>
-                <li class="checkBox check04">
-                    <ul class="clearfix">
-                        <li>위치정보 이용약관 동의(필수)</li>
-                        <li class="checkBtn">
-                            <input type="checkbox" name="chk">
-                        </li>
-                    </ul>
+       			</textarea>
+            </li>
+            <li class="checkBox check04">
+                <ul class="clearfix">
+                    <li>위치정보 이용약관 동의(필수)</li>
+                    <li class="checkBtn">
+                        <input type="checkbox" name="chk">
+                    </li>
+                </ul>
  
-                    <textarea name="" id="">여러분을 환영합니다.
+                <textarea name="" id="">여러분을 환영합니다.
 네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-       </textarea>
-                </li>
-                <li class="checkBox check05">
-                    <ul class="clearfix">
-                        <li>이벤트 등 프로모션 알림 메일 수신(선택)</li>
-                        <li class="checkBtn1">
-                            <input type="checkbox" name="chk">
-                        </li>
-                    </ul>
- 
-                </li>
-            </ul>
-        </form>
+       			</textarea>
+            </li>
+            <li class="checkBox check05">
+                <ul class="clearfix">
+                    <li>이벤트 등 프로모션 알림 메일 수신(선택)</li>
+                    <li class="checkBtn1">
+                        <input type="checkbox" name="chk">
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </form>
 </div>
 </div>
 

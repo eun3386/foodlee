@@ -3,6 +3,7 @@ package com.fdl.foodlee.model.dao.inf;
 import com.fdl.foodlee.model.vo.MemberVO;
 
 public interface IMemberDAO {
+	
 //	가입 할 수 있다. (암호화 저장 처리)
 	boolean insertNewMemberWithCrypto(MemberVO mb);
 	int insertNewMemberWithCryptoReturnKey(MemberVO mb);
@@ -29,4 +30,11 @@ public interface IMemberDAO {
 	
 //	탈퇴 할 수 있다.
 	boolean deleteOneMember(int id);
+	
+//	로그인 시간 갱신
+	boolean updateMemberLoginTime(int id);
+	
+//	로그아웃 시간 갱신
+	boolean updateMemberLogoutTime(int id);
+	
 }

@@ -53,4 +53,14 @@ public class MemberSVCImpl implements IMemberSVC {
 		return mbDao.isDuplicatedMember(login);
 	}
 
+	@Override
+	public boolean updateMemberLoginTime(int id) {
+		return mbDao.updateMemberLoginTime(id);
+	}
+
+	@Override
+	public boolean updateMemberLogoutTime(int id) {
+		return mbDao.updateMemberLogoutTime(id);
+	}
+
 }

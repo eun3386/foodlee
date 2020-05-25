@@ -29,8 +29,10 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	private static final String SQL_LOGIN_AUTH
 	= "select login, cast(aes_decrypt(unhex(password),?) as char(32) "
 		+ "character set utf8) as pw from sellers where id = ?";
-	private static final String SQL__SELLER_LOGIN_TIME_UPDATE
+	private static final String SQL_UPDATE_SELLER_LOGIN_TIME
 	= "update sellers set login_time=now() where id = ?";
+	private static final String SQL_UPDATE_SELLER_LOGOUT_TIME
+	= "update sellers set logout_time=now() where id = ?";
 	private static final String SQL_SELECT_SELLER_ID 
 	= "select * from sellers where id = ?";
 	private static final String SQL_SELECT_SELLER_LOGIN 
@@ -148,6 +150,18 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	@Override
 	public boolean deleteOneSeller(int id) {
 		int r = jtem.update(SQL_DELETE_SELLER, id);
+		return r == 1;
+	}
+
+	@Override
+	public boolean updateSellerLoginTime(int id) {
+		int r = jtem.update(SQL_UPDATE_SELLER_LOGIN_TIME, id);
+		return r == 1;
+	}
+
+	@Override
+	public boolean updateSellerLogoutTime(int id) {
+		int r = jtem.update(SQL_UPDATE_SELLER_LOGOUT_TIME, id);
 		return r == 1;
 	}
 

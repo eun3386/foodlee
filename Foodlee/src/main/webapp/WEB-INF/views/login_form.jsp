@@ -32,7 +32,7 @@
 	 			<tr style="height: 40px;">
 	 				<td>
 	 					<input type="text" id='login_input'
-	 						name="login" size='22'
+	 						name="login" size='22' style="height: 25px; margin: 3px auto;" 
 	 						placeholder="아이디 입력" required> 					
 	 				</td>
 	 			</tr>
@@ -42,8 +42,8 @@
 	 			<tr>
 	 				<td style="height: 25px;">
 	 					<input type="password" id='password'
-	 						name="password" size='22'
-	 						maxlength="10"				
+	 						name="password" size='22' 
+	 						maxlength="10" style="height: 25px; margin: 3px auto;" 	
 	 						placeholder="비밀번호 입력" required> 					
 	 				</td>
 	 			</tr>
@@ -57,7 +57,7 @@
 	 			</tr>
 	 			<tr id="submit">
 	 				<td>
-	 					<input type="submit" value="로그인">
+	 					<input type="submit" style="height: 25px; width: 50px;" value="로그인">
 	 				</td>
 	 			</tr>
 	 		</table>
