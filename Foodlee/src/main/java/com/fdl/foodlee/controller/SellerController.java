@@ -53,7 +53,6 @@ public class SellerController {
 		SellerVO sel = new SellerVO(login, password, name, gender, age, residentRN, email, phoneNumber, address, companyRN);
 //		int key = seSvc.insertNewSellerWithCryptoReturnKey(sel);
 		boolean b = selSvc.insertNewSellerWithCrypto(sel);
-		
 
 		// 응답 성공유무에 따라 view 분기/ mav 리턴
 		// dao 응답을 통해 model 데이터를 생성

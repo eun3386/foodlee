@@ -77,11 +77,11 @@ public class MemberController {
 //		if( key > 0 ) {
 		if( b ) {
 			mav.addObject("msg", "일반 회원 가입 성공!!");
-			mav.setViewName("redirect:/main.fdl");	
+			mav.setViewName("redirect:/main.fdl");
 		} else {
 			mav.addObject("msg", "일반 회원 가입 실패~");
 			mav.setViewName("member/join_form"); // fw?
-		}		
+		}
 		return mav;
 	}
 	
