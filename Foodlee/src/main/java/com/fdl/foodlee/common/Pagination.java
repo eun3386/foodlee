@@ -2,7 +2,7 @@ package com.fdl.foodlee.common;
 
 public class Pagination {
 
-	private int listSize = 10; // 목록개수
+	private int listSize = 3; // 목록개수
 	private int rangeSize = 10; // 페이지범위
 	private int page; // 현재 페이지
 	private int range; // 현재 페이지 범위
