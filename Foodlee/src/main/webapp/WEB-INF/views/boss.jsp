@@ -16,7 +16,7 @@
 #main-wrapper[data-layout=vertical][data-sidebartype=full] .page-wrapper
 	{
 	margin-left: 130px !important;
-	margin-right: 130px;!important
+	margin-right: 130px !important ;
 }
 </style>
 
@@ -305,7 +305,7 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">리뷰목록</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
 					  </li>
 					</ul>
                     <!-- ============================================================== -->

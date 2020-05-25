@@ -118,8 +118,8 @@
 	</nav>
 	<h3>광고 등록하기  진행중인 광고</h3><!--  <h3>진행중인 광고</h3> -->	
 		<div class="ad-top" > 
-		
-			<table id="ad-power-st" class= "ad-power">
+		<form action="${pageContext.request.contextPath}/결제.fdl" method="post">
+			<table id="ad-power-st" class= "ad-power" >
 				<tr>
 					<td><h3>파워링크</h3></td>
 				</tr>
@@ -155,7 +155,7 @@
 					<td><input type="reset" value="리셋"><input type="submit" value="등록"></td>
 				</tr>
 			</table> <!-- 파워링크 등록 -->
-			
+			</form>
 			<table  id="ad-banner-st" class= "ad-banner">
 				
 				<tr>

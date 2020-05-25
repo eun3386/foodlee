@@ -22,19 +22,23 @@ public class BossController {
 	}
 	@RequestMapping(value = "orderlist.fdl", method = RequestMethod.GET)
 	public String orderlist() { //주문리스트
-		return "/boss/bossorder/orderlist";
+		return "boss/bossorder/orderlist";
 	}
 	@RequestMapping(value = "review.fdl", method = RequestMethod.GET)
 	public String order() {//리뷰목록
-		return "/boss/bossreview/review";
+		return "boss/bossreview/review";
 	}
 	@RequestMapping(value = "position.fdl", method = RequestMethod.GET)
 	public String position() {//리뷰목록
-		return "/boss/bossinfo/position";
+		return "boss/bossinfo/position";
 	}
 	@RequestMapping(value = "ad.fdl", method = RequestMethod.GET)
 	public String ad() {//리뷰목록
-		return "/boss/bossinfo/ad2";
+		return "boss/bossinfo/ad2";
+	}
+	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET)
+	public String storeinfo() {//리뷰목록
+		return "boss/bossmenu/storeinfo";
 	}
 	
 }

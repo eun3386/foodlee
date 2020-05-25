@@ -186,7 +186,7 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">리뷰목록</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
 					  </li>
 					</ul>
                     <!-- ============================================================== -->
@@ -284,13 +284,19 @@
                    <div class="row"><!--옴ㄹ기기 -->
                     <div class="col-lg-6 col-md-12">
                        <div class="signup-form pl-4 mb-5">
-						    <form action="/examples/actions/confirmation.php" method="post">
+						    <form action="${pageContext.request.contextPath}/결제.fdl" method="post">
 								<div class="form-header">
 									<h2>파워링크</h2>
 <!-- 									<p>Fill out this form to start your free trial!</p> -->
 								</div>
 						        <div class="form-group">
 								<h1 class="text-center">55,000 <small><i class="fas fa-won-sign"></i></small></h1>
+								<form class="mt-4">
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" value="6029"  step="1000"
+                                        min="10000" max="50000" required>
+                                    </div>
+                                </form>
 						        </div>
 						        <div class="form-group">
 									<p>소비자와 가장 가까운 광고!<br>
@@ -346,7 +352,7 @@
                     </div>
                     <div class="col-lg-6 col-md-12">
                        <div class="signup-form pl-4 mb-5">
-						    <form action="/examples/actions/confirmation.php" method="post">
+						    <form action="${pageContext.request.contextPath}/결제.fdl" method="post">
 								<div class="form-header">
 									<h2>배너광고</h2>
 <!-- 									<p>Fill out this form to start your free trial!</p> -->
@@ -416,7 +422,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
                        <div class="signup-form pl-4 mb-5">
-						    <form action="/examples/actions/confirmation.php" method="post">
+						    <form action="${pageContext.request.contextPath}/결제.fdl" method="post">
 								<div class="form-header">
 									<h2>파워링크</h2>
 <!-- 									<p>Fill out this form to start your free trial!</p> -->
@@ -452,7 +458,7 @@
                     </div>
                     <div class="col-lg-6 col-md-12">
                        <div class="signup-form pl-4 mb-5">
-						    <form action="/examples/actions/confirmation.php" method="post">
+						    <form action="${pageContext.request.contextPath}/결제.fdl" method="post">
 								<div class="form-header">
 									<h2>배너광고</h2>
 <!-- 									<p>Fill out this form to start your free trial!</p> -->
