@@ -4547,13 +4547,15 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 	
 		// IE8 : 찾기/바꾸기에서 글자 일부에 스타일이 적용된 경우 찾기가 안되는 브라우저 버그로 인해 EmulateIE7 파일을 사용
 		// <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-		this.sBlankPageURL = "smart_editor2_inputarea.html";
-		this.sBlankPageURL_EmulateIE7 = "smart_editor2_inputarea_ie8.html";
+		this.sBlankPageURL = "smartEditor/smart_editor2_inputarea.html";
+		this.sBlankPageURL_EmulateIE7 = "smartEditor/smart_editor2_inputarea_ie8.html";
 		this.aAddtionalEmulateIE7 = [];
 
 		this.htOptions = nhn.husky.SE2M_Configuration.SE_EditingAreaManager;	
 		if (this.htOptions) {
-			this.sBlankPageURL = this.htOptions.sBlankPageURL || this.sBlankPageURL;
+//			this.sBlankPageURL = this.htOptions.sBlankPageURL || this.sBlankPageURL;
+			this.sBlankPageURL = this.sBlankPageURL;
+
 			this.sBlankPageURL_EmulateIE7 = this.htOptions.sBlankPageURL_EmulateIE7 || this.sBlankPageURL_EmulateIE7;
 			this.aAddtionalEmulateIE7 = this.htOptions.aAddtionalEmulateIE7 || this.aAddtionalEmulateIE7;
 		}
@@ -5721,6 +5723,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 			// add link tag
 			if (sCSSBaseURI){
 				var sCssUrl = sCSSBaseURI;
+				console.log("sCssUrl="+sCssUrl);
 				var sLocale = this.oApp && this.oApp.htOptions.I18N_LOCALE;
 				if(sLocale){
 					sCssUrl += "/" + sLocale;
