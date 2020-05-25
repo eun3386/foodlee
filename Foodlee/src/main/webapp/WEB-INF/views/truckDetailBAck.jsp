@@ -110,7 +110,7 @@
 
 		<section id="content1">
 			<div id="replies">
-				<c:forEach var="rv" items="${reviewList}" varStatus="vs">
+				<c:forEach var="rv" items="${review}" varStatus="vs">
 				<div id="reply_${rv.reviewId}" class="reply"
 					style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
 					<c:if test="${rv.reviewDepth eq 1}">padding-left: 40px;</c:if>
@@ -139,7 +139,7 @@
 									삭제</button>
 									<br>
 <%-- 								</c:if> --%>
-								<c:if test="${foodT.sellerId eq $ and rv.reviewDepth eq 0 and empty reviewList[vs.index+1].reviewPnum}">
+								<c:if test="${foodT.sellerId eq sellerId and rv.reviewDepth eq 0 and empty review[vs.index+1].reviewPnum}">
 									<button id="reply_button_${rv.reviewId}" onclick="reply_review(${rv.reviewId})">답변</button>
 								</c:if>
 								</span>
@@ -149,44 +149,11 @@
 						<li>
 							<div id="con_${rv.reviewId}" style="padding-top: 15px;"><c:out value="${rv.reviewContent}"/>
 							</div>
-							<c:if test="${!empty rv.reviewPic}">
-							
-							<c:set var="flName" value="${rv.reviewPic}"></c:set>
-							<%
-								String filePath = (String)pageContext.getAttribute("flName");
-								String fps[] = null;
-								int fpsCount = 1;
-								if (filePath != null && !filePath.isEmpty()) {
-									if (filePath.indexOf("|") != -1) {
-										fps = filePath.split("\\" + "|");
-										fpsCount = fps.length;
-									} else {
-										fpsCount = 1;
-										fps = new String[] { filePath };
-									}
-								} else {
-									fpsCount = 0;
-								}
-								pageContext.setAttribute("fps", fps);
-							%>
-							<c:forEach var="fp" items="${pageScope.fps}" varStatus="vs">
-								<c:choose>
-									<c:when test="${fn:endsWith(fp,'.png')
-										or fn:endsWith(fp,'.jpg') 
-										or fn:endsWith(fp,'.gif')}">
-										<div id="file_show_${fp}" class="image_file">
-											<img src="${pageContext.request.contextPath}${fp}" 
-												style="margin-top:10px; width: 250px;">
-										</div>
-									</c:when>
-								</c:choose>
-							</c:forEach>
-							</c:if>
 						</li>
 					</ul>
 				</div>
 				</c:forEach>
-				<div id="read-more-review" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
+				<div id="read-more-reply" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
 					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">리뷰 더보기</div>
 <%-- 				<c:if test="${foodT.sellerId ne sellerId}"> 리뷰 달기 판매자 금지--%>
 				<div id="reply-insert">
@@ -197,7 +164,6 @@
 					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post" enctype="multipart/form-data">
 					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="사진 업로드는 4개까지만 가능합니다."
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty rv ? rv.review_content:''}</textarea>
-						<input type="hidden" name="sellerId" value="${sellerId}">
 						<input type="file" name="imgfiles" id="file_add" multiple="multiple" style="dispaly: none;">
 						<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
 						style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
@@ -266,67 +232,65 @@
 	</div>
 	</section>
 	<section id="content4">
-	<div id="QnA">
-		<c:forEach var="qna" items="${qnaList}" varStatus="qnavs">
-			<div id="qna_id_${qna.qnaId}" class="qna_items"
-				style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
-				<c:if test="${qna.qnaDepth eq 1}">padding-left: 40px;</c:if>
-				">
+		<div id="Q&A">
+			<%
+				for (int i = 0; i < 10; i++) {
+			%>
+			<div class="qna"
+				style="border: 1px solid gray; margin-bottom: -1px; padding-left: 10px;
+				<%= (i % 2 == 0) ? "" : " padding-left: 40px;" %>">
 				<ul style="list-style: none; padding: 0;">
 					<li>
 						<div style="float: left;">
+						<% if (i % 2 == 0) { %> 
+<!-- 							<img align='middle' src='img/no-photo.jpg' -->
+<!-- 								style='width: 45px; height: 45px; margin: 0 5px 0 5px;'> -->
+						<% } %>
 						</div>
 						<div class="nickname" style="padding-top: 2px;">
-						<c:if test="${qna.qnaDepth eq 1}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i></c:if>
-						<c:choose>
-						<c:when test="${qna.qnaDepth eq 0}">${qna.login}</c:when>
-						<c:when test="${qna.qnaDepth eq 1}">사장님</c:when>
-						</c:choose>
-						</div>
+						<%= (i % 2 == 0) ? "ABC" : "<i class='fas fa-reply fa-rotate-180 fa-lg'></i>" + 
+							"사장님" %></div>
 						<div class="date" style="padding-top: 4px; font-size: 12px;">
-						<span id="fmt_qna_${qna.qnaId}"><fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
-						</span>
-						
-						<c:if test="${qna.qnaContent ne '삭제된 QnA입니다.'}">
-							<span style="float: right; margin-right: 15px;">
-<%-- 								<c:if test="${qna.login eq login}"> 수정 삭제 테스트--%>
-								<button id="mod_qna_${qna.qnaId}" onclick="modify_qna(${qna.qnaId})" 
-								style="margin-bottom: 3px;">수정</button>
-								<br><button onclick="del_qna(${qna.qnaId}, ${qna.qnaDepth})" style="margin-bottom: 3px;">
-								삭제</button>
-								<br>
-<%-- 								</c:if> --%>
-							<c:if test="${foodT.sellerId eq sellerId and qna.qnaDepth eq 0 and empty qnaList[qnavs.index+1].qnaPnum}">
-								<button id="reply_button_qna_${qna.qnaId}" onclick="reply_qna(${qna.qnaId})">답변</button>
-							</c:if>
-							</span>
-						</c:if>
+						2020.01.01
 						</div>
 					</li>
 					<li>
-					<div id="con_qna_${qna.qnaId}" style="padding-top: 15px;"><c:out value="${qna.qnaContent}"/>
-					</div>
+						
+						<div style="padding-top: 15px;">
+							<%
+								if (i % 2 == 0) {
+							%>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<%
+								} else {
+							%>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+							sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+							Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+							Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+							Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							<%
+								}
+							%>
+						</div>
 					</li>
 				</ul>
 			</div>
-		</c:forEach>
+			<%
+				}
+			%>
 			<div id="read-more-qna" style="text-align: center; font-size: 18px; vertical-align: middle;
 				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">Q&amp;A 더보기</div>
-				<div id="reply-insert">
-					<h3 style="padding-top: 10px;">QnA달기</h3>
-<!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
-<!--  						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto; white-space: pre-line;"> -->
-<!-- 					</div> -->
-					<form action="${pageContext.request.contextPath}/new_qna.fdl" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="sellerId" value="${sellerId}">
-					<textarea name="qnaContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
-						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty qna ? qna.qna_content:''}</textarea>
-						<button type="submit" id="qna_add" style="width: 100px; height: 30px; float: right; margin-top: 25px; 
-						margin-bottom: 30px; margin-left: -3px; background-color: orange; border: 1px solid gray;">QnA달기</button>
-					</form>
-				</div>
 		</div>
-		
 	</section>
 	
 	</div>

@@ -1,7 +1,12 @@
 var start = 0;
-const mapNames = new Map();
+var arrName = new Array(start);
+// var arrNum = new Array(start);
 
-var remove_div = function(tid, starta, nameRe) {
+var remove_div = function(tid, starta, i) {
+// 	for (var i = 0; i < starta; i++) {
+// 		arrNum[i + 1] = arr[i];
+// 	}
+	console.log(i);
 	var priSum = document.getElementById("priceSum");
 	var n1 = Number(priSum.innerHTML);
 	
@@ -9,17 +14,20 @@ var remove_div = function(tid, starta, nameRe) {
 	var n2 = Number(price.innerHTML);
 	
 	priSum.innerHTML = n1 - n2;
-	mapNames.delete("'"+nameRe+"'");
-	// console.log("삭제된 mapNames");
-	// console.log(mapNames);
+	
 	$("#"+tid.id).remove();
+	// console.log(arrName);
+	arrName.splice(starta, 1); // arrName.splice(starta, 1);
+	console.log(arrName);
+	// arrNum.splice(starta, 1); // arrNum.splice(starta, 1);
 	--start;
 	if(start == 0) {
 		$("#none").css("display", "block");
 		$("#sum").css("display", "none");
 		$(".fa-trash").css("display", "none");
 		$(".order_div").css("display", "none");
-		mapNames.clear();
+		arrName = new Array(start);
+		// arrNum = new Array(start);
 	}
 }
 
@@ -68,12 +76,11 @@ function addToList(i) {
 	// add 클릭
 	// $(".addasdasdad").click(function() {
 	var pname = document.getElementById("pname"+i).innerHTML;
-	var pnamePara = "'" + pname + "'";
 	var pprice = document.getElementById("pprice"+i).innerHTML;
 	var tid = "t" + i;
 	var dup = false;
 	var dupNum;
-	// console.log("i의 값" + i);
+	console.log("i의 값" + i);
 	$("#none").css("display", "none");
 	$(".order_div").css("display", "block");
 	$(".fa-trash").css("display", "inline");
@@ -81,7 +88,7 @@ function addToList(i) {
 	"<div style='height: 50px; margin-bottom: 5px;'>" +
 		"<div class='menu_name' id='d"+i+"' style='margin-top: 10px; font-size: 18px; margin-bottom: 10px;'>"+pname+"</div>" +
 		"<div style='float: left; width: 65%;'>"+
-		'<a href="#" id=a'+start+' class="remove" data-val='+start+' onclick="remove_div('+tid+', '+start+', '+pnamePara+')"><i class="fas fa-times-circle fa-lg remove" style="color: black;"></i></a>'+
+		'<a href="#" id=a'+start+' class="remove" data-val='+start+' onclick="remove_div('+tid+', '+start+', '+i+')"><i class="fas fa-times-circle fa-lg remove" style="color: black;"></i></a>'+
 			"<span class='menu_price' id='price"+tid+"'>"+pprice+"</span>원</div>"+
 			"<span>" +
 			"<i class='fas fa-plus-circle fa-lg' onclick='plus("+tid+", "+i+", "+start+")' style='color: red; cursor: pointer;'></i>"+
@@ -96,25 +103,19 @@ function addToList(i) {
 		dupA = dupB.substring(1, 2);
 	}
 	
-	
-	if(mapNames != null) {
-		for (let v of mapNames.values()) {
-			if (v == pname) {
-				dup = true;
-				dupNum = dupA;
-				break;
-			}
+	for (var j = 0; j < arrName.length; j++) {
+		if (arrName[j] == pname) {
+			dup = true;
+			dupNum = dupA;
+			break;
 		}
 	}
-	
 	
 	// 중복체크
 	if(dup == false) {
 		$("#menu_list").append(html);
-		mapNames.set("'"+pname+"'", pname);
-		// console.log("추가후");
-		// console.log(mapNames);
-		
+		arrName[start] = pname;
+		// arrNum[start] = document.getElementById("num"+tid).innerHTML;
 		++start;
 		var priSum = document.getElementById("priceSum");
 		var n = Number(priSum.innerHTML);
@@ -126,9 +127,14 @@ function addToList(i) {
 		var pprice = Number(document.getElementById("pprice"+dupNum).innerHTML);
 		// var ppriceB = document.getElementById("pprice"+dupNum);
 		// var pprice = Number(ppriceB.innerHTML);
+		// console.log(tag + numSpan + pprice);
 		var n1 = Number(numSpan.innerHTML);
+		// console.log(arrNum);
+		// console.log("dupNum=" + dupNum);
+		// arrNum[dupNum] = n1 + 1;
 		if (n1 >= 1) {
 			numSpan.innerHTML = n1 + 1;
+			// arrNum[dupNum] = numSpan.innerHTML;
 			var price = document.getElementById("price"+tag);
 			var n2 = Number(price.innerHTML);
 			price.innerHTML = pprice * (n1 + 1);
@@ -270,20 +276,19 @@ function handleImgFileSelect(e) {
     });
 }
 */
-var reviewText;
-
+var text;
 function modify_review(id) {
 	// $("#con_"+id).html;
 	$("#mod_"+id).css('display', 'none');
 	
-	reviewText = $("#con_"+id).text().trim();
-	$("#con_"+id).html("<textarea onkeydown='resize(this)' onkeyup='resize(this)' style='resize:none; width: 685px; min-height: 80px; max-height: 180px;'>"+reviewText+"</textarea>");
-	$("#con_"+id).append("<button onclick='modify_after_review("+id+")' style='margin-top: 3px;'>수정하기</button>" +
-			"<button id='cancel_"+id+"' onclick='cancel_modify_review("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button>");
+	text = $("#con_"+id).text().trim();
+	$("#con_"+id).html("<textarea onkeydown='resize(this)' onkeyup='resize(this)' style='resize:none; width: 685px; min-height: 80px; max-height: 180px;'>"+text+"</textarea>");
+	$("#con_"+id).append("<button onclick='modify("+id+")' style='margin-top: 3px;'>수정하기</button>" +
+			"<button id='cancel_"+id+"' onclick='cancel_modify("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button>");
 	
 }
 
-function modify_after_review(id) {
+function modify(id) {
 	var moText = $("#con_"+id).children("textarea").val();
 	$("#con_"+id).html("<div id='con_"+id+"'>"+moText+"</div>");
 	$("#mod_"+id).css('display', 'inline');
@@ -310,7 +315,7 @@ function modify_after_review(id) {
 	});
 }
 
-function reply_add_review(id) {
+function reply_add(id) {
 	var moText = $("#review_reply_"+id).children("textarea").val();
 	var login = "admin";
 	var sellerId = $("#sellerId").val();
@@ -330,8 +335,8 @@ function reply_add_review(id) {
 	});
 }
 
-function cancel_modify_review(id) {
-	$("#con_"+id).html("<div id='con_"+id+"'>"+reviewText+"</div>");
+function cancel_modify(id) {
+	$("#con_"+id).html("<div id='con_"+id+"'>"+text+"</div>");
 	$("#mod_"+id).css('display', 'inline');
 	$("#cancel_"+id).css('display', 'none');
 }
@@ -369,110 +374,10 @@ function reply_review(id) {
 	$('#reply_'+id).after("<div id='review_reply_"+id+"' style='border: 1px solid #ccc; padding-left:10px; margin-bottom: -1px;'>" +
 			"<div style='margin-top:5px;'><i class='fas fa-reply fa-rotate-180 fa-lg'></i>  답변하기</div>" +
 			"<textarea onkeydown='resize(this)' onkeyup='resize(this)' style='resize:none; width: 750px; margin-top: 10px; min-height: 80px; max-height: 180px;'></textarea>" +
-			"<div style='margin-bottom:5px;'><button onclick='reply_add_review("+id+")' style='margin-top: 3px;'>답변하기</button>" +
+			"<div style='margin-bottom:5px;'><button onclick='reply_add("+id+")' style='margin-top: 3px;'>답변하기</button>" +
 			"<button id='cancel_"+id+"' onclick='cancel_reply("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button></div>" +
 			"</div>");
 }
-
-// qna 시작----------------------------------------------------------------------------------------------------------------------------
-var qnaText;
-function modify_qna(id) {
-	// $("#con_"+id).html;
-	$("#mod_qna_"+id).css('display', 'none');
-	
-	qnaText = $("#con_qna_"+id).text().trim();
-	$("#con_qna_"+id).html("<textarea onkeydown='resize(this)' onkeyup='resize(this)' style='resize:none; width: 685px; min-height: 80px; max-height: 180px;'>"+qnaText+"</textarea>");
-	$("#con_qna_"+id).append("<button onclick='modify_after_qna("+id+")' style='margin-top: 3px;'>수정하기</button>" +
-			"<button id='cancel_"+id+"' onclick='cancel_modify_qna("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button>");
-	
-}
-
-function modify_after_qna(id) {
-	var moText = $("#con_qna_"+id).children("textarea").val();
-	$("#con_qna_"+id).html("<div id='con_"+id+"'>"+moText+"</div>");
-	$("#mod_qna_"+id).css('display', 'inline');
-	
-	var d = new Date();
-	var dateString = d.getFullYear() + "-" + ('0' + (d.getMonth() + 1)).slice(-2) + "-" + ('0' + (d.getDate())).slice(-2) + " " +  
-	('0' + (d.getHours())).slice(-2) + ":" + ('0' + (d.getMinutes())).slice(-2) + ":" + ('0' + (d.getSeconds())).slice(-2);
-	
-	$("#fmt_qna_"+id).text(dateString);
-	
-	$.ajax({
-	    type: "post",
-	    url: URLHD + 'qna_update.fdl',
-	    data: {"text" : moText,
-	    	"id" : id},
-	    dataType: "json",
-	    success: function(data, textStatus) {
-	        if (data.redirect) {
-	        	console.log("성공");
-	        }
-	        else {
-	        }
-	    }
-	});
-}
-
-function reply_add_qna(id) {
-	var moText = $("#qna_reply_"+id).children("textarea").val();
-	var login = "admin";
-	var sellerId = $("#sellerId").val();
-		
-	$.ajax({
-	    type: "post",
-	    url: URLHD + 'qna_reply_add.fdl',
-	    data: {
-	    	"text" : moText,
-	    	"login" : login,
-	    	"pnum" : id,
-	    	"sellerId" : sellerId
-	    	},
-	    	success: function(data, textStatus) {
-	    		location.href = URLHD + "truckDetail.fdl";
-	    }
-	});
-}
-
-function cancel_modify_qna(id) {
-	$("#con_qna_"+id).html("<div id='con_"+id+"'>"+qnaText+"</div>");
-	$("#mod_qna_"+id).css('display', 'inline');
-	$("#cancel_qna_"+id).css('display', 'none');
-}
-
-function cancel_reply_qna(id) {
-	$("#qna_reply_"+id).css("display", "none");
-	$("#reply_button_qna_"+id).css("display", "inline");
-}
-
-function del_qna(id, rd) {
-	swal({
-		  title: "QnA를 삭제하시겠습니까?",
-		  text: "",
-		  icon: "warning",
-		  buttons: true,
-		  dangerMode: true,
-		})
-		.then((willDelete) => {
-		  if (willDelete) {
-			  location.href= URLHD + 'qna_delete.fdl?id='+id+'&depth='+rd;
-		  } else {
-		    return;
-		  }
-	});
-}
-
-function reply_qna(id) {
-	$("#reply_button_qna_"+id).css("display", "none");
-	$('#qna_id_'+id).after("<div id='qna_reply_"+id+"' style='border: 1px solid #ccc; padding-left:10px; margin-bottom: -1px;'>" +
-			"<div style='margin-top:5px;'><i class='fas fa-reply fa-rotate-180 fa-lg'></i>  답변하기</div>" +
-			"<textarea onkeydown='resize(this)' onkeyup='resize(this)' style='resize:none; width: 750px; margin-top: 10px; min-height: 80px; max-height: 180px;'></textarea>" +
-			"<div style='margin-bottom:5px;'><button onclick='reply_add_qna("+id+")' style='margin-top: 3px;'>답변하기</button>" +
-			"<button id='cancel_qna_"+id+"' onclick='cancel_reply_qna("+id+")' style='margin-top: 3px; margin-left: 2px;'>취소</button></div>" +
-			"</div>");
-}
-
-// qna끝----------------------------------------------------------------------------------------------------------------------------
 
 $(document).ready(function() {
 	$("#file_add").on("change", handleImgFileSelect);
@@ -512,7 +417,7 @@ $(document).ready(function() {
 			 	  $("#sum").css("display", "none");
 			 	  $(".fa-trash").css("display", "none");
 			 	  $(".order_div").css("display", "none");
-			 	  mapNames.clear();
+			 	  arrName = new Array(start);
 			 	  // arrNum = new Array(start);
 			 	  var priSum = document.getElementById("priceSum");
 			 	  priSum.innerHTML = 0;
@@ -524,7 +429,7 @@ $(document).ready(function() {
 	
 	// 결제클릭
 	$(".order_div").click(function() {
-		// alert(mapNames);
+		// alert(arrName);
 		// alert(arrNum + "    length=" + arrNum.length);
 		var arrSize = $('.menu_name').size();
 		
@@ -738,36 +643,26 @@ $(document).ready(function() {
 		td.innerHTML = n + 1;
 	});
 	*/
-    
-    if ($(".reply").size() >= 3) {
-		$(".reply").slice(0, 3).show(); // select the first ten
-	    $("#read-more-review").click(function(e) { // click event for load more
-	        e.preventDefault();
-	        $(".reply:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
-	        if($(".reply:hidden").length == 0){ // check if any hidden divs still exist
-	            // alert("No more divs"); // alert if there are none left
-	            $('#read-more-review').css("display", "none");
-	        }
-	    });
-    }
-    else {
-    	$('#read-more-review').css("display", "none");
-    }
+
+	$(".reply").slice(0, 3).show(); // select the first ten
+    $("#read-more-reply").click(function(e) { // click event for load more
+        e.preventDefault();
+        $(".reply:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+        if($(".reply:hidden").length == 0){ // check if any hidden divs still exist
+            // alert("No more divs"); // alert if there are none left
+            $('#read-more-reply').css("display", "none");
+        }
+    });
 	
-    if ($(".qna_items").size() >= 3) {
-	    $(".qna_items").slice(0, 3).show(); // select the first ten
-	    $("#read-more-qna").click(function(e) { // click event for load more
-	        e.preventDefault();
-	        $(".qna_items:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
-	        if($(".qna_items:hidden").length == 0){ // check if any hidden divs still exist
-	            // alert("No more divs"); // alert if there are none left
-	            $('#read-more-qna').css("display", "none");
-	        }
-	    });
-    	}
-    else {
-    	$('#read-more-qna').css("display", "none");
-    }
+    $(".qna").slice(0, 3).show(); // select the first ten
+    $("#read-more-qna").click(function(e) { // click event for load more
+        e.preventDefault();
+        $(".qna:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+        if($(".qna:hidden").length == 0){ // check if any hidden divs still exist
+            // alert("No more divs"); // alert if there are none left
+            $('#read-more-qna').css("display", "none");
+        }
+    });
 	
  // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 	var floatPosition = parseInt($("#_order").css('top'));
