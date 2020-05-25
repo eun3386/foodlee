@@ -52,9 +52,16 @@
 	$(document).ready(function() {
 		var ROOT_PATH = '<%= application.getContextPath() %>';
 		
-		$('.choice_btn').on('click', function() {
+		$('#choice_mb').on('click', function() {
 			var url = ROOT_PATH
 			+'/member/join_form.fdl';
+			$(".wrap").load(url);
+
+		});
+		
+		$('#choice_sel').on('click', function() {
+			var url = ROOT_PATH
+			+'/seller/join_form.fdl';
 			$(".wrap").load(url);
 
 		});
@@ -122,10 +129,10 @@
 	<table border="0" id="choice_table">
 		<tr>
 			<td id="btn">
-				<button type="button" class="choice_btn" disabled="disabled">일반<br>회원가입</button>
+				<button type="button" id="choice_mb" class="choice_btn" disabled="disabled">일반<br>회원가입</button>
 			</td>
 			<td id="btn">
-				<button type="button" class="choice_btn" disabled="disabled">판매자<br>회원가입</button>
+				<button type="button" id="choice_sel" class="choice_btn" disabled="disabled">판매자<br>회원가입</button>
 			</td>
 		</tr>
 	</table>

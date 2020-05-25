@@ -96,4 +96,12 @@ public class LoginController {
 		return "find_form";
 	}
 	
+//	join_choice_form.fdl (form; get; 비회원)
+	@RequestMapping(value = "join_choice_form.fdl", 
+			method = RequestMethod.GET)
+	public String mbSignUpChoiceForm() {	
+		System.out.println("join choice form 준비!!!");
+		return "join_choice_form";
+	}
+	
 }

@@ -39,14 +39,6 @@ public class MemberController {
 	@Autowired
 	private IMemberSVC mbSvc;
 	
-//	member/join_choice_form.fdl (form; get; 비회원)
-	@RequestMapping(value = "/join_choice_form.fdl", 
-			method = RequestMethod.GET)
-	public String mbSignUpChoiceForm() {	
-		System.out.println("join choice form 준비!!!");
-		return "member/join_choice_form";
-	}
-	
 //	member/join_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "/join_form.fdl", 
 			method = RequestMethod.GET)
