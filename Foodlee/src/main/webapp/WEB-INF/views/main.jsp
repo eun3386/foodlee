@@ -176,12 +176,14 @@
 	    		var ROOT_PATH = '<%= application.getContextPath() %>';
 	    		var url = ROOT_PATH+'/login_form.fdl';
 				$("#main-content").load(url);
+				$('#menu-list').html('');
 	    	});
 	    	//
 	    	$('#join').on('click', function() {
 	    		var ROOT_PATH = '<%= application.getContextPath() %>';
 	    		var url = ROOT_PATH+'/join_choice_form.fdl';
 				$("#main-content").load(url);
+				$('#menu-list').html('');
 	    	});
 	    	//
         });
