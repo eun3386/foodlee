@@ -19,13 +19,13 @@
 </head>
 <body>
 	<header id="header">
-		<a href="#">
+		<a href="/foodlee/main.fdl">
 			<img class="logo" src="${pageContext.request.contextPath}/resources/css/imgs/logo.png">
 		</a>
 		<div class="wrapper">
 			<ul class="nav clearfix">
 <!-- 				<li><a href="#">회원가입</a></li> -->
-				<li><a href="#">로그아웃</a></li>
+				<li><a href="/foodlee/logout.fdl">로그아웃</a></li>
 			</ul>
 		</div>
 	</header>
@@ -155,14 +155,19 @@
 						<tr>
 							<th>NO.</th>
 							<th>가게</th>
-							<th>메뉴</th>
-							<th>댓글</th>
+							<th>사진</th>
+							<th>내용</th>
 						</tr>
 					</thead>
 					<tbody>
-							<tr><td>1</td><td></td><td></td><td></td></tr>
-							<tr><td>2</td><td></td><td></td><td></td></tr>
-							<tr><td>3</td><td></td><td></td><td></td></tr>
+						<c:forEach items="${reviewList}" var="review">
+							<tr>
+								<td>${review.id}</td>
+								<td>${review.foodtruck}</td>
+								<td>${review.picture}</td>
+								<td>${review.content}</td>
+							</tr>
+						</c:forEach>	
 					</tbody>
 				</table>
 				
