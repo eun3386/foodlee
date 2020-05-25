@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		
-		$('#id_find, #pw_find').on('click', function() {
+		$('#id_pw_find').on('click', function() {
     		var ROOT_PATH = '${pageContext.request.contextPath}';
     		var url = ROOT_PATH+'/find_form.fdl';
 			$("#login_form").load(url);
@@ -48,11 +48,8 @@
 	 				</td>
 	 			</tr>
 	 			<tr>
-	 				<td style="height: 40px;">
-	 					<small>
-	 					<a id="id_find" href="#">아이디찾기</a>&nbsp;&nbsp;&nbsp;
-	 					<a id="pw_find" href="#">비밀번호찾기</a>
-	 					</small>
+	 				<td style="height: 40px; text-align: right;">
+	 					<a id="id_pw_find" href="#" style="text-decoration: none; color: gray; font-size: small;">아이디/비밀번호 찾기</a>
 	 				</td>
 	 			</tr>
 	 			<tr id="submit">

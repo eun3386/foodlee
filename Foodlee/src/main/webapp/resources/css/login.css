@@ -19,11 +19,6 @@
 #submit {
 	text-align: right;
 }
-#id_find, #pw_find {
-	text-decoration: none;
-	color: gray;
-	font-size: small;
-}
 @keyframes slideleft {
    	from {
        	background-position: 0%;

@@ -103,12 +103,19 @@ public class LoginController {
 //	find_form.fdl
 	@RequestMapping(value = "find_form.fdl", method = RequestMethod.GET)
 	public String findForm() {
-//			@RequestParam(value = "find",
-//			required = false,
-//			defaultValue = "id")
-//			String find) {
-		
 		return "find_form";
+	}
+	
+//	find_id.fdl
+	@RequestMapping(value = "find_id.fdl", method = RequestMethod.POST)
+	public String findIdProc() {
+		return null;
+	}
+	
+//	find_pw.fdl
+	@RequestMapping(value = "find_pw.fdl", method = RequestMethod.POST)
+	public String findPasswordProc() {
+		return null;
 	}
 	
 //	join_choice_form.fdl (form; get; 비회원)
