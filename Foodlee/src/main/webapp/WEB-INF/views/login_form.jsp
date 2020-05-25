@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
 <link href="${pageContext.request.contextPath}/resources/css/login.css" type="text/css" rel="stylesheet">
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function () {
 		
@@ -15,12 +10,8 @@
 			$("#login_form").load(url);
     	});
 		
-		
-		
 	});
 </script>
-</head>
-<body>
 <div id="login_wrap" class="slide">
 	<div id="login_form">
 		<form style="padding-left: 14.59px;" action="${pageContext.request.contextPath}/login.fdl" method="post">
@@ -61,5 +52,3 @@
 	 	</form>
 	</div>
 </div>
-</body>
-</html>
