@@ -21,7 +21,7 @@ import com.fdl.foodlee.model.vo.MemberVO;
 public class MemberMysqlDAOImpl implements IMemberDAO {
 	// SQL 정의부
 	private static final String SQL_INSERT_MEMBER_CRYPTO 
-	= "insert into members values(null, ?, hex(aes_encrypt(?,?)), "
+	= "insert into members values(null, 'member', ?, hex(aes_encrypt(?,?)), "
 		+"?, ?, ?, ?, ?, ?, ?, now(), now(), null, null)";
 	private static final String SQL_MEMBER_DUPCHECK
 	= "select count(id) from members where login = ?";

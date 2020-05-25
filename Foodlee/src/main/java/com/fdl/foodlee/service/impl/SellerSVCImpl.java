@@ -14,11 +14,6 @@ public class SellerSVCImpl implements ISellerSVC {
 	private ISellerDAO selDao;
 
 	@Override
-	public int selectSellerIdByLogin(String login) {
-		return selDao.selectSellerIdbyLogin(login);
-	}
-
-	@Override
 	public boolean insertNewSellerWithCrypto(SellerVO sel) {
 		return selDao.insertNewSellerWithCrypto(sel);
 	}
@@ -51,6 +46,11 @@ public class SellerSVCImpl implements ISellerSVC {
 	@Override
 	public boolean deleteOneSeller(int id) {
 		return selDao.deleteOneSeller(id);
+	}
+
+	@Override
+	public boolean isDuplicatedSeller(String login) {
+		return selDao.isDuplicatedSeller(login);
 	}
 	
 }

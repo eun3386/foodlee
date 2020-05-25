@@ -22,7 +22,7 @@ import com.fdl.foodlee.model.vo.SellerVO;
 public class SellerMysqlDAOImpl implements ISellerDAO {
 	// SQL 정의부
 	private static final String SQL_INSERT_SELLER_CRYPTO 
-	= "insert into sellers values(null, ?, hex(aes_encrypt(?,?)), "
+	= "insert into sellers values(null, 'seller', ?, hex(aes_encrypt(?,?)), "
 		+"?, ?, ?, ?, ?, ?, ?, now(), now(), ?, null, null)";
 	private static final String SQL_SELLER_DUPCHECK
 	= "select count(id) from sellers where login = ?";

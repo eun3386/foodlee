@@ -1,133 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style>
-	* {
-		padding: 0;
-		margin: 0;
-		box-sizing: border-box;
-	}
-    textarea {
-    	width: 90%;
-    	resize: none;
-    }
-    #join {
-    	text-align: center;
-    }
-    .title {
-    	text-align: right;
-    }
-    .input {
-/*     	width: 90%; */
-    }
-    td {
-    	padding-top: 10px;
-    	border: none;
-    }
-    table{
-		width: 90%;
-		margin: 20px auto;
-    }
-    img {
-     	width: 90%;
-    }
     
 </style>
-<div id="wrap">   
-    <form id="join">
-    	<div id="table">
+<div>   
+    <form action="${pageContext.request.contextPath}/member/join.fdl" method="post">
+    	<div>
         <table border="0">
         	<tr>
-        		<td><img alt="" src="<%= application.getContextPath() %>/resources/imgs/profile_dummy.PNG"> </td>
-        		<td colspan="2"><textarea rows="10" cols="60" readonly>소개글 더미</textarea></td>
+        		<td><img alt="사진" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG"> </td>
+        		<td colspan="2"><textarea rows="10" cols="60" readonly>일반 회원가입 소개글 더미</textarea></td>
         	</tr>
             <tr>
-                <td class="title">아이디</td>
-                <td class="input">
-                    <input type="text" name="id" maxlength="20">
-                    <input type="button" value="중복확인" >    
+                <td><label for="id">아이디</label></td>
+                <td>
+                    <input type="text" id="id" name="id" maxlength="20">
+                    <input type="button" value="중복확인" >
                 </td>
             </tr>
                     
             <tr>
-                <td class="title"><span>비밀번호</span></td>
-                <td class="input">
-                    <input type="password" name="password" maxlength="15">
+                <td><label for="password">비밀번호</label></td>
+                <td>
+                    <input type="password" id="password" name="password" maxlength="15">
                 </td>
             </tr>
             
             <tr>
-                <td class="title"><span>비밀번호 확인</span></td>
-                <td class="input">
-                    <input type="password" name="password" maxlength="15">
+                <td><label for="passwordCheck">비밀번호 확인</label></td>
+                <td>
+                    <input type="password" id="passwordCheck" name="passwordCheck" maxlength="15">
                 </td>
             </tr>
                 
             <tr>
-                <td class="title"><span>이름</span></td>
-                <td class="input">
-                    <input type="text" name="name" maxlength="40">
+                <td><label for="name">이름</label></td>
+                <td>
+                    <input type="text" id="name" name="name" maxlength="40">
                 </td>
             </tr>
                 
             <tr>
-                <td class="title"><span>성별</span></td>
-                <td class="input">
-                    <input type="radio" name="gender" value="남" checked>남
-                    <input type="radio" name="gender" value="여" checked>여
+                <td><label for="man">성별</label></td>
+                <td>
+                    <input type="radio" id="man" name="gender" value="남" checked><label for="man">남</label>
+                    <input type="radio" id="woman" name="gender" value="여"><label for="woman">여</label>
                 </td>
             </tr>
                 
             <tr>
-                <td class="title"><span>생일</span></td>
-                <td class="input">
-                    <input type="text" name="birth_yy" maxlength="4" placeholder="년(4자)" size="6" >
-                    <select name="birth_mm">
-                        <option value="">월</option>
-                        <option value="01" >1</option>
-                        <option value="02" >2</option>
-                        <option value="03" >3</option>
-                        <option value="04" >4</option>
-                        <option value="05" >5</option>
-                        <option value="06" >6</option>
-                        <option value="07" >7</option>
-                        <option value="08" >8</option>
-                        <option value="09" >9</option>
-                        <option value="10" >10</option>
-                        <option value="11" >11</option>
-                        <option value="12" >12</option>
-                    </select>
-                    <input type="text" name="birth_dd" maxlength="2" placeholder="일" size="4" >
+                <td><label for="age">나이</label></td>
+                <td>
+                    <input type="number" id="age" name="age" value="20">
                 </td>
             </tr>
                 
             <tr>
-                <td class="title"><span>이메일</span></td>
-                <td class="input">
-                    <input type="text" name="email_1" maxlength="30">@
-                    <select name="email_2">
-                        <option>naver.com</option>
-                        <option>daum.net</option>
-                        <option>gmail.com</option>
-                        <option>nate.com</option>                        
-                    </select>
+                <td><label for="residentRN1">주민번호</label></td>
+                <td>
+                    <input type="text" id="residentRN1" name="residentRN1" maxlength="6">&nbsp;-&nbsp;
+                    <input type="password" id="residentRN2" name="residentRN2" maxlength="7">
                 </td>
             </tr>
                 
             <tr>
-                <td class="title"><span>휴대전화</span></td>
-                <td class="input">
-                    <input type="text" maxlength="13" name="phone"/>
+                <td><label for="email">이메일주소</label></td>
+                <td>
+                    <input type="email" id="email" name="email" maxlength="30">
+                </td>
+            </tr>
+                
+            <tr>
+                <td><label for="phoneNumber">휴대전화번호</label></td>
+                <td>
+                    <input type="text" id="phoneNumber" maxlength="13" placeholder="ex)010-1234-5678" name="phoneNumber">
                 </td>
             </tr>
             <tr>
-                <td class="title"><span>주소</span></td>
-                <td class="input">
-                    <input type="text" size="50" name="address"/>
+                <td><label for="address">주소(사는곳)</label></td>
+                <td>
+                    <input type="text" size="50" id="address" name="address"/>
                 </td>
             </tr>
             <tr>
             	<td></td>
-            	<td><input type="submit" value="가입"/>  <input type="button" value="취소"></td>
+            	<td><input type="submit" value="가입"/> <input type="reset" value="리셋"></td>
             </tr>
         </table>
         </div>

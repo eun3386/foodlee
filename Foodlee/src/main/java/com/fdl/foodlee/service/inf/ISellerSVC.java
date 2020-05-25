@@ -13,7 +13,7 @@ public interface ISellerSVC {
 	
 	
 //	로그인 중복체크 할 수 있다.	
-	int selectSellerIdByLogin(String login);
+	boolean isDuplicatedSeller(String login);
 	
 //	로그인 할 수 있다. (세션 + 암호화 인증)
 	String loginAuthenticate(String login, int id);

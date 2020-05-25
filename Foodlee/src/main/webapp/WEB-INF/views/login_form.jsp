@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <link href="<%= application.getContextPath()%>/resources/css/reset.css" type="text/css" rel="stylesheet"> --%>
 <link href="<%= application.getContextPath()%>/resources/css/login.css" type="text/css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -11,7 +10,7 @@
 	$(document).ready(function () {
 		
 		$('#id_find, #pw_find').on('click', function() {
-    		var ROOT_PATH = '<%= application.getContextPath() %>';
+    		var ROOT_PATH = '${pageContext.request.contextPath}';
     		var url = ROOT_PATH+'/find_form.fdl';
 			$("#login_form").load(url);
     	});
@@ -24,7 +23,7 @@
 <body>
 <div id="login_wrap" class="slide">
 	<div id="login_form">
-		<form style="padding-left: 14.59px;" action="<%= application.getContextPath()%>/login.fdl" method="post">
+		<form style="padding-left: 14.59px;" action="${pageContext.request.contextPath}/login.fdl" method="post">
 	 		<table border='0'>
 	 			<tr id="title"><th>푸들이 로그인</th></tr>
 	 			<tr>

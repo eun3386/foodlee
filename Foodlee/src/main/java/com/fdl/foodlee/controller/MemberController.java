@@ -42,7 +42,7 @@ public class MemberController {
 //	member/join_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "/join_form.fdl", 
 			method = RequestMethod.GET)
-	public String mbSignUpForm() {
+	public String memberJoinForm() {
 		System.out.println("join form 준비!!!");
 		return "member/join_form";
 	}
@@ -56,14 +56,14 @@ public class MemberController {
 		//HttpSession ses = request.getSession();
 		
 		// 요청 파라미터 뽑기
-		String login = request.getParameter("login");
+		String login = request.getParameter("id");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String gender = request.getParameter("gender");
 		int age = Integer.parseInt(request.getParameter("age"));
-		String residentRN = request.getParameter("resident_rn");
+		String residentRN = request.getParameter("residentRN1")+"-"+request.getParameter("residentRN2");
 		String email = request.getParameter("email");
-		String phoneNumber = request.getParameter("phone_number");
+		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
 		
 		// 암호화 적용 (aes 알고리즘)
@@ -76,10 +76,10 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();		
 //		if( key > 0 ) {
 		if( b ) {
-			mav.addObject("msg", "회원 가입 성공 축하!!");
-			mav.setViewName("redirect:/login_form.fdl");	
+			mav.addObject("msg", "일반 회원 가입 성공!!");
+			mav.setViewName("redirect:/main.fdl");	
 		} else {
-			mav.addObject("msg", "회원 가입 실패~");
+			mav.addObject("msg", "일반 회원 가입 실패~");
 			mav.setViewName("member/join_form"); // fw?
 		}		
 		return mav;

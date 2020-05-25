@@ -53,7 +53,7 @@ public class LoginController {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginTime", 
 						System.currentTimeMillis() );
-				int id = selSvc.selectSellerIdByLogin(login);
+				int id = selSvc.selectSellerIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
 				mav.setViewName("redirect:/main.fdl");
 			} else if( authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
