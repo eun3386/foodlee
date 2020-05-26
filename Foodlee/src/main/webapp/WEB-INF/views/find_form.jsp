@@ -29,34 +29,40 @@
 </script>
 <form action="${pageContext.request.contextPath}/find.fdl" method="post">
 	<table border='0'>
-		<tr id="title"><th>아이디/비밀번호 찾기</th></tr>
-		<tr>
-			<td><label for='input1' id="lb1" class="lb">이름:</label></td>			
+		<tr class="title">
+			<th>아이디/비밀번호 찾기</th>
 		</tr>
-		<tr style="height: 40px;">
+		<tr>
+			<td>
+				<label for='input1' id="lb1" class="lb">이름:</label>
+			</td>			
+		</tr>
+		<tr>
 			<td>
 				<input type="text" id='input1'
-					name="input1" size='25' style="height: 25px;" 
+					name="input1" size='25' 
 					placeholder="이름 입력" required> 					
 			</td>
 		</tr>
 		<tr>
-			<td><label for='input2' id="lb2" class="lb">휴대폰번호:</label></td>
+			<td>
+				<label for='input2' id="lb2" class="lb">휴대폰번호:</label>
+			</td>
 		</tr>
 		<tr>
-			<td style="height: 25px;">
+			<td>
 				<input type="text" id='input2'
-					name="input2" size='25'	style="height: 25px;" 		
+					name="input2" size='25' 		
 					placeholder="휴대폰번호 입력" required> 					
 			</td>
 		</tr>
 		<tr>
-	 		<td style="height: 40px; padding-top: 5px;">
+	 		<td style="height: 30px;">
  				<label for="find_id" style="font-size: small;"><input type="radio" id="find_id" checked>아이디찾기</label>&nbsp;&nbsp;&nbsp;
  				<label for="find_pw" style="font-size: small;"><input type="radio" id="find_pw">비밀번호찾기</label>
 	 		</td>
 	 	</tr>
-		<tr id="submit">
+		<tr class="submit">
 			<td>
 				<input  type="submit" style="width: 40px; height: 25px;" value="찾기">
 			</td>

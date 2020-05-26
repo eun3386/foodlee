@@ -1,23 +1,16 @@
 @charset "UTF-8";
-
-#login_form {
-	position: absolute;
-	border: 2px solid orange;
-	width: 250px;
-	height: 300px;
-	margin-top: 150px;
-	box-sizing: border-box;
-	padding: 30px;
-	background-color: white;
-	left: 35%;
-}
-#title {
-	vertical-align: middle;
-	height: 50px;
-	font-size: large;
-}
-#submit {
-	text-align: right;
+/* login_form, find_form */
+#login_wrap {
+    background-image: url('../imgs/log/login_image4.jpg');
+    height: 600px;
+    background-repeat: repeat-x;
+    animation: slideleft 20000s infinite linear;
+    -webkit-animation: slideleft 20000s infinite linear;
+    background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+    background-attachment: fixed;
+    position: relative;
 }
 @keyframes slideleft {
    	from {
@@ -35,15 +28,55 @@
       	background-position: 150000%;
    	}
 }
-.slide {
-    background-image: url('../imgs/log/login_image4.jpg');
-    height: 600px;
-    background-repeat: repeat-x;
-    animation: slideleft 20000s infinite linear;
-    -webkit-animation: slideleft 20000s infinite linear;
-    background-size: cover;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-    background-attachment: fixed;
-    position: relative;
+
+#login_form {
+	position: absolute;
+	border: 2px solid orange;
+	width: 250px;
+	height: 300px;
+	margin-top: 150px;
+	box-sizing: border-box;
+	padding: 30px;
+	background-color: white;
+	left: 35%;
+}
+#login_form #form {
+	padding-left: 14.59px;
+}
+
+.title {
+	height: 50px;
+	font-size: large;
+}
+
+#login_input, #password, #input1, #input2 {
+	border: 2px solid #DADADA;
+	margin: 3px auto;
+	margin-bottom: 15px;
+	padding-left: 5px;
+	height: 25px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	/* For I.E */
+	-moz-border-radius: 5px;
+	/* For Mozilla Web Browser */
+}
+
+#find_td {
+	height: 40px;
+	text-align: right;
+}
+#id_pw_find {
+	text-decoration: none;
+	color: gray;
+	font-size: small;
+}
+
+.submit {
+	text-align: right;
+}
+.submit input {
+	border-radius: 1px;
+	height: 25px;
+	width: 50px;
 }

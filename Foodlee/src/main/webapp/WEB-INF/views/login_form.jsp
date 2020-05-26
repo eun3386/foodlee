@@ -12,40 +12,44 @@
 		
 	});
 </script>
-<div id="login_wrap" class="slide">
+<div id="login_wrap">
 	<div id="login_form">
-		<form style="padding-left: 14.59px;" action="${pageContext.request.contextPath}/login.fdl" method="post">
+		<form id="form" action="${pageContext.request.contextPath}/login.fdl" method="post">
 	 		<table border='0'>
-	 			<tr id="title"><th>푸들이 로그인</th></tr>
-	 			<tr>
-	 				<td><label for='login_input' class="lb">아이디:</label></td>			
+	 			<tr class="title">
+	 				<th>푸들이 로그인</th>
 	 			</tr>
-	 			<tr style="height: 40px;">
+	 			<tr>
 	 				<td>
-	 					<input type="text" id='login_input'
-	 						name="login" size='22' style="height: 25px; margin: 3px auto;" 
-	 						placeholder="아이디 입력" required> 					
+	 					<label for='login_input' class="lb">아이디:</label>
+	 				</td>			
+	 			</tr>
+	 			<tr>
+	 				<td>
+	 					<input type="text" id='login_input'	name="login" 
+	 						size='22' placeholder="아이디 입력" required> 					
 	 				</td>
 	 			</tr>
 	 			<tr>
-	 				<td><label for='password' class="lb">비밀번호:</label></td>
+	 				<td>
+	 					<label for='password' class="lb">비밀번호:</label>
+	 				</td>
 	 			</tr>
 	 			<tr>
-	 				<td style="height: 25px;">
+	 				<td>
 	 					<input type="password" id='password'
 	 						name="password" size='22' 
-	 						maxlength="10" style="height: 25px; margin: 3px auto;" 	
-	 						placeholder="비밀번호 입력" required> 					
+	 						maxlength="10" placeholder="비밀번호 입력" required> 					
 	 				</td>
 	 			</tr>
 	 			<tr>
-	 				<td style="height: 40px; text-align: right;">
-	 					<a id="id_pw_find" href="#" style="text-decoration: none; color: gray; font-size: small;">아이디/비밀번호 찾기</a>
+	 				<td id="find_td">
+	 					<a id="id_pw_find" href="#">아이디/비밀번호 찾기</a>
 	 				</td>
 	 			</tr>
-	 			<tr id="submit">
+	 			<tr class="submit">
 	 				<td>
-	 					<input type="submit" style="height: 25px; width: 50px;" value="로그인">
+	 					<input type="submit" value="로그인">
 	 				</td>
 	 			</tr>
 	 		</table>

@@ -45,8 +45,7 @@ public class LoginController {
 			if( authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginType", authResult);
-				ses.setAttribute("LoginTime", 
-						System.currentTimeMillis() );
+				ses.setAttribute("LoginTime", System.currentTimeMillis() );
 				int id = mbSvc.selectMemberIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
 				mbSvc.updateMemberLoginTime(id);
@@ -54,8 +53,7 @@ public class LoginController {
 			} else if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginType", authResult);
-				ses.setAttribute("LoginTime", 
-						System.currentTimeMillis() );
+				ses.setAttribute("LoginTime", System.currentTimeMillis() );
 				int id = selSvc.selectSellerIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
 				selSvc.updateSellerLoginTime(id);
@@ -63,8 +61,7 @@ public class LoginController {
 			} else if( authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
 				ses.setAttribute("LoginName", login);
 				ses.setAttribute("LoginType", authResult);
-				ses.setAttribute("LoginTime", 
-						System.currentTimeMillis() );
+				ses.setAttribute("LoginTime", System.currentTimeMillis() );
 				int id = mbSvc.selectMemberIdbyLogin(login);
 				ses.setAttribute("id", new Integer(id) );
 				mbSvc.updateMemberLoginTime(id);
@@ -107,13 +104,14 @@ public class LoginController {
 	}
 	
 //	find_id.fdl
-	@RequestMapping(value = "find_id.fdl", method = RequestMethod.POST)
-	public String findIdProc() {
+	@RequestMapping(value = "find_id.fdl", method = RequestMethod.GET)
+	public String findIdProc(HttpSession ses) {
+		int loginType = (Integer)ses.getAttribute("LoginType");
 		return null;
 	}
 	
 //	find_pw.fdl
-	@RequestMapping(value = "find_pw.fdl", method = RequestMethod.POST)
+	@RequestMapping(value = "find_pw.fdl", method = RequestMethod.GET)
 	public String findPasswordProc() {
 		return null;
 	}
