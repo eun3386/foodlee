@@ -1,5 +1,7 @@
 package com.fdl.foodlee.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -78,7 +80,21 @@ public class MemberController {
 			}
 		} else {
 			return "error";
-		} 
-	}	
+		}
+	}
+	
+//	member/find_id.fdl
+	@RequestMapping(value = "/find_id.fdl", method = RequestMethod.GET)
+	public String findIdProc(HttpSession ses) {
+		// TODO
+		int loginType = (Integer)ses.getAttribute("LoginType");
+		return null;
+	}
+	
+//	member/find_pw.fdl
+	@RequestMapping(value = "/find_pw.fdl", method = RequestMethod.GET)
+	public String findPasswordProc() {
+		return null;
+	}
 	
 }

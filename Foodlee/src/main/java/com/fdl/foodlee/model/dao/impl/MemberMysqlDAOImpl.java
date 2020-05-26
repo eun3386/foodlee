@@ -3,6 +3,7 @@ package com.fdl.foodlee.model.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,10 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	= "select * from members where login = ?";
 	private static final String SQL_SELECT_MEMBER_PK
 	= "select id from members where login = ?";
+	private static final String SQL_SELECT_MEMBER_FIND_ID
+	= "select login from members where name = ? && phone_number = ?";
+	private static final String SQL_SELECT_MEMBER_FIND_PW
+	= "select password from members where login = ? && email = ?";
 	private static final String SQL_UPDATE_MEMBER
 	= "update members set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where id = ?";
@@ -75,7 +80,6 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
 				new Object[]{login,id},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
-		String dbLogin = (String) rMap.get("login");
 		String dbPW = (String) rMap.get("pw");
 		return dbPW;
 	}
@@ -165,6 +169,22 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	public boolean updateMemberLogoutTime(int id) {
 		int r = jtem.update(SQL_UPDATE_MEMBER_LOGOUT_TIME, id);
 		return r == 1;
+	}
+
+	@Override
+	public String selectMemberLogin(String name, String phoneNumber) {
+//		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
+//				new Object[]{login,id},
+//				new int[]{Types.VARCHAR, Types.INTEGER} );
+//		String dbLogin = (String) rMap.get("login");
+//		String dbPW = (String) rMap.get("pw");
+		return null;
+	}
+
+	@Override
+	public String selectMemberPassword(String login, String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

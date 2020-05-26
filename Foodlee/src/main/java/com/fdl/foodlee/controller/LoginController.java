@@ -102,19 +102,6 @@ public class LoginController {
 		return "find_form";
 	}
 	
-//	find_id.fdl
-	@RequestMapping(value = "find_id.fdl", method = RequestMethod.GET)
-	public String findIdProc(HttpSession ses) {
-		int loginType = (Integer)ses.getAttribute("LoginType");
-		return null;
-	}
-	
-//	find_pw.fdl
-	@RequestMapping(value = "find_pw.fdl", method = RequestMethod.GET)
-	public String findPasswordProc() {
-		return null;
-	}
-	
 //	join_choice_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "join_choice_form.fdl", 
 			method = RequestMethod.GET)

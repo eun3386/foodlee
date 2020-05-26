@@ -9,10 +9,10 @@ public interface IMemberDAO {
 	int insertNewMemberWithCryptoReturnKey(MemberVO mb);
 	
 //	아이디를 찾을 수 있다.
-	
+	String selectMemberLogin(String name, String phoneNumber);
 	
 //	비밀번호를 찾을 수 있다.
-	
+	String selectMemberPassword(String login, String email);
 	
 //	로그인 중복체크 할 수 있다.
 	boolean isDuplicatedMember(String login);
