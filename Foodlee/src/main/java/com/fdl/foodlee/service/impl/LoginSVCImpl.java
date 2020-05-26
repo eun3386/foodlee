@@ -21,19 +21,17 @@ public class LoginSVCImpl implements ILoginSVC {
 	
 	@Override
 	public int loginProcess(String login, String pw) {
-		System.out.println("SVC: loginProcess() - " + login);
 		
 		if( login == null || login.isEmpty() ) 
 				return MyCode.LOGIN_PARAM_ERROR;
 		if( pw == null || pw.isEmpty() ) 
-				return MyCode.LOGIN_PW_MISMATCH;
+				return MyCode.PW_PARAM_ERROR;
 		
 		if( login.equals("admin") )
 			return MyCode.ADMIN_LOGIN_AUTH_OK;
 		// 가입된 회원인지?
 		MemberVO mb = mbDao.selectOneMember(login);
 		SellerVO sel = selDao.selectOneSeller(login);
-		System.out.println(mb);
 		int id = 0;
 		String dbPW = "";
 		boolean rMb = false;
@@ -49,7 +47,6 @@ public class LoginSVCImpl implements ILoginSVC {
 		}
 		
 		// 패스워드도 일치?
-		System.out.println(dbPW);
 		if( dbPW.equals(pw) ) { // 인증
 			if( rMb ) {
 				return MyCode.MEMBER_LOGIN_AUTH_OK;

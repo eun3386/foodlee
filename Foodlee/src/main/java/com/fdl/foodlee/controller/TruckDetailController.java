@@ -30,13 +30,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.inf.IMemberLikeTruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
+import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.QnaVO;
 import com.fdl.foodlee.model.vo.ReviewVO;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.IMemberLikeTruckSVC;
+import com.fdl.foodlee.service.inf.IMemberSVC;
+import com.fdl.foodlee.service.inf.IOrderSVC;
 import com.fdl.foodlee.service.inf.IQnaSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.IReviewSVC;
+import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
 public class TruckDetailController {
@@ -45,32 +50,50 @@ public class TruckDetailController {
 	@Autowired
 	IQnaSVC qnaSvc;
 	@Autowired
-	private IReviewFileSVC rvFileSvc;
+	IReviewFileSVC rvFileSvc;
 	@Autowired
 	IFoodtruckSVC fdSvc;
 	@Autowired
 	IMemberLikeTruckSVC mltSvc;
+	@Autowired
+	ISellerSVC sellSvc;
+	@Autowired
+	IOrderSVC orderSvc;
+	@Autowired
+	IMemberSVC memSvc;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "truckDetail.fdl", method = RequestMethod.GET)
-	public String truckDetail(HttpSession ses, Model model) {
-		ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
-		ses.setAttribute("login", "seller"); // 로그인 임시설정
-		ses.setAttribute("sellerId", 1); // 판매자 번호 임시생성
+	public String truckDetail(HttpSession ses, Model model, HttpServletRequest req) {
+		// ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
+		int getSellerId = 1;
+
+		if ((req.getParameter("sellerId") != null)) {
+			getSellerId = Integer.parseInt((req.getParameter("sellerId")));
+		}
+		// ses.setAttribute("sellerId", 1); // 푸드트럭 판매자 번호 임시생성
+		ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(getSellerId)); // 셀러
+		// int mbId = (int)ses.getAttribute("id");
 		
-		int isAlreadyLiked = mltSvc.isAlreadyLikedMember(1, (int) ses.getAttribute("mbId"));
-		model.addAttribute("isAlreadyLiked", (isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_ONE
-				|| isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_OTHERS));
 		
-		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(1);
+		if (ses.getAttribute("LoginName") != null) {
+			int isAlreadyLiked = mltSvc.isAlreadyLikedMember(getSellerId, (int) ses.getAttribute("id"));
+			model.addAttribute("isAlreadyLiked", (isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_ONE
+					|| isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_OTHERS));
+			
+			MemberVO member = memSvc.selectOneMember((String)ses.getAttribute("LoginName"));
+			model.addAttribute("member", member);
+		}
+		
+		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(getSellerId);
 		System.out.println(fd.getFoodtruckName());
 		model.addAttribute("foodT", fd);
 		model.addAttribute("cntLikes", fd.getMemberLikeCount());
 		
-		List<ReviewVO> rvList = rvSvc.showAllReview(1);
-		List<QnaVO> qnaList = qnaSvc.showAllQna(1);
+		List<ReviewVO> rvList = rvSvc.showAllReview(getSellerId);
+		List<QnaVO> qnaList = qnaSvc.showAllQna(getSellerId);
 		
 		if (rvList != null && qnaList != null) {
 			model.addAttribute("rvSize", rvList.size());
@@ -88,9 +111,9 @@ public class TruckDetailController {
 	}
 	
 	@RequestMapping(value = "reivew_delete.fdl", method = RequestMethod.GET)
-	public String reviewDelete(@RequestParam("id")int id, @RequestParam("depth")int depth) {
+	public String reviewDelete(@RequestParam("id")int id, @RequestParam("depth")int depth, @RequestParam("sid")int sid) {
 		rvSvc.deleteReview(id, depth);
-		return "redirect:/truckDetail.fdl";
+		return "redirect:/truckDetail.fdl?sellerId="+sid;
 	}
 	
 	@RequestMapping(value = "reivew_update.fdl", method = RequestMethod.POST)
@@ -112,7 +135,7 @@ public class TruckDetailController {
 		ReviewVO rv = new ReviewVO(0, login, sellerId, 1, pnum, rvReply, null, null);
 		boolean r = rvSvc.reviewReply(rv);
 		
-		return "redirect:/truckDetail.fdl";
+		return "redirect:/truckDetail.fdl?sellerId="+sellerId;
 	}
 	
 	@RequestMapping(value = "review_list.fdl", method = RequestMethod.GET)
@@ -127,7 +150,7 @@ public class TruckDetailController {
 		Map<String, Object> result = new HashMap<>();
 		
 		String realPath = ses.getServletContext().getRealPath(IReviewFileSVC.DEF_UPLOAD_DEST) + "/";
-		rvFileSvc.makeUserDir(ses, "poro");
+		rvFileSvc.makeUserDir(ses, rv.getLogin());
 		
 		System.out.println("경로" + realPath);
 		Map<String, Object> rMap = rvFileSvc.writeUploadedMultipleFiles(imgfiles, realPath, "poro"
@@ -137,7 +160,7 @@ public class TruckDetailController {
 		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
 		System.out.println("총 볼륨(MB): " + rMap.get("totalMB") + "MB");
 		
-		ReviewVO rvT = new ReviewVO(0, "poro", rv.getSellerId(), 0, null, rv.getReviewContent(), filePath, null);
+		ReviewVO rvT = new ReviewVO(0, rv.getLogin(), rv.getSellerId(), 0, null, rv.getReviewContent(), filePath, null);
 		
 		int atRtkey = this.rvSvc.insertNewReviewReturnKey(rvT);
 
@@ -146,12 +169,12 @@ public class TruckDetailController {
 			// System.out.println("게시글 등록 성공: " + title);
 			System.out.println("리뷰 등록 성공: " + atRtkey);
 			result.put("status", "OK");
-			return "redirect:/truckDetail.fdl";
+			return "redirect:/truckDetail.fdl?sellerId="+rv.getSellerId();
 			// return "redirect:article_list.my"; // RD
 		} else {
 			System.out.println("리뷰 등록 실패: " + rv.getReviewContent());
 			result.put("status", "False");
-			return "redirect:/truckDetail.fdl";
+			return "redirect:/truckDetail.fdl?sellerId="+rv.getSellerId();
 		}
 		
 //		try {
@@ -166,9 +189,9 @@ public class TruckDetailController {
 	
 	// QNA 시작
 	@RequestMapping(value = "qna_delete.fdl", method = RequestMethod.GET)
-	public String QnaDelete(@RequestParam("id")int id, @RequestParam("depth")int depth) {
+	public String QnaDelete(@RequestParam("id")int id, @RequestParam("depth")int depth, @RequestParam("sid")int sid) {
 		qnaSvc.deleteQna(id, depth);
-		return "redirect:/truckDetail.fdl";
+		return "redirect:/truckDetail.fdl?sellerId="+sid;
 	}
 	
 	@RequestMapping(value = "qna_update.fdl", method = RequestMethod.POST)
@@ -187,10 +210,12 @@ public class TruckDetailController {
 		int sellerId = Integer.parseInt(req.getParameter("sellerId"));
 		String login = req.getParameter("login");
 		String qnaReply = req.getParameter("text");
-		QnaVO qna = new QnaVO(0, login, sellerId, qnaReply, 1, pnum, null);
+		boolean secret = Boolean.parseBoolean((req.getParameter("secret")));
+		
+		QnaVO qna = new QnaVO(0, login, sellerId, qnaReply, 1, pnum, secret, null);
 		boolean r = qnaSvc.QnaReply(qna);
 		
-		return "redirect:/truckDetail.fdl";
+		return "redirect:/truckDetail.fdl?sellerId="+sellerId;
 	}
 	
 	@RequestMapping(value = "qna_list.fdl", method = RequestMethod.GET)
@@ -199,11 +224,11 @@ public class TruckDetailController {
 	}
 
 	@RequestMapping(value = "new_qna.fdl", method = RequestMethod.POST)
-	public String newQna(@ModelAttribute(value="qna") QnaVO qna, HttpSession ses, Model model) {
-		System.out.println(qna.getQnaContent());
+	public String newQna(@ModelAttribute(value="qna") QnaVO qna, @RequestParam(value="secret",
+			 required = false)String secret, HttpSession ses, Model model) {
 		Map<String, Object> result = new HashMap<>();
-		
-		QnaVO qnaT = new QnaVO(0, "poro", qna.getSellerId(), qna.getQnaContent(), 0, null, null);
+		String secretGet = (secret != null ? secret : "");
+		QnaVO qnaT = new QnaVO(0, qna.getLogin(), qna.getSellerId(), qna.getQnaContent(), 0, null, (secretGet.equals("true") ? true : false), null);
 		int atRtkey = this.qnaSvc.insertNewQnaReturnKey(qnaT);
 
 		// 상세보기 => atId?
@@ -211,12 +236,12 @@ public class TruckDetailController {
 			// System.out.println("게시글 등록 성공: " + title);
 			System.out.println("리뷰 등록 성공: " + atRtkey);
 			result.put("status", "OK");
-			return "redirect:/truckDetail.fdl";
+			return "redirect:/truckDetail.fdl?sellerId="+qna.getSellerId();
 			// return "redirect:article_list.my"; // RD
 		} else {
 			System.out.println("리뷰 등록 실패: " + qna.getQnaContent());
 			result.put("status", "False");
-			return "redirect:/truckDetail.fdl";
+			return "redirect:/truckDetail.fdl?sellerId="+qna.getSellerId();
 		}
 		
 	}
@@ -228,7 +253,7 @@ public class TruckDetailController {
 			@RequestParam(value = "sesMb") int sesMb, HttpSession ses) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> map = new HashMap<>();
-		int sesMbId = 1; // (int) ses.getAttribute("mbId");
+		int sesMbId = (int)ses.getAttribute("id"); // (int) ses.getAttribute("mbId");
 		if (sesMbId == sesMb) {
 			Map<String, Object> lkMap = mltSvc.processMemberLike(tgSr, sesMb);
 			int cntLikes = (int) lkMap.get("cntLikes");
@@ -257,17 +282,20 @@ public class TruckDetailController {
 	@RequestMapping(value = "menu_order.fdl", method = RequestMethod.POST)
 	@ResponseBody
 	public String menuOrder(HttpServletRequest req) {
+		String login = req.getParameter("login");
+		int sellerId = Integer.parseInt(req.getParameter("sellerId"));
 		String[] arrMenuName = req.getParameterValues("arrMenuName[]");
 		String[] arrMenuPrice = req.getParameterValues("arrMenuPrice[]");
 		String[] arrMenuNumber = req.getParameterValues("arrMenuNumber[]");
-		int priceSum = Integer.parseInt(req.getParameter("priceSum"));
+		int orderPriceSum = Integer.parseInt(req.getParameter("priceSum"));
 		
-		System.out.println(Arrays.deepToString(arrMenuName));
-		System.out.println(Arrays.deepToString(arrMenuPrice));
-		System.out.println(Arrays.deepToString(arrMenuNumber));
-		System.out.println(priceSum);
+		String orderName = String.join(",", arrMenuName);
+		String orderPrice = String.join(",", arrMenuPrice);
+		String orderNumber = String.join(",", arrMenuNumber);
 		
-		// return "redirect:/truckDetail.fdl";
+		OrderVO order = new OrderVO(0, login, sellerId, orderName, orderNumber, orderPrice, orderPriceSum, 1, "");
+		orderSvc.memberNewOrder(order);
+		
 		return null;
 	}
 	

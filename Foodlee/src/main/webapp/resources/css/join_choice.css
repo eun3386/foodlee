@@ -1,0 +1,41 @@
+@charset "UTF-8";
+/* join_choice_form */
+.choice_btn {
+	border: none;
+	width: 200px;
+	height: 200px;
+ 		line-height: 40px;
+ 		cursor: default;
+	border-radius: 300px;
+	background-color: gray;
+	color: black;
+	font-size: 1.5em;
+	margin: 0 auto;
+}
+#btn {
+	width: 600px;
+	text-align: center;
+	height: 300px;
+}
+#choice_table {
+	margin: 0 auto;
+}
+*{margin: 0;padding: 0;box-sizing: border-box}
+body{background-color: #f7f7f7;}
+ul>li{list-style: none}
+a{text-decoration: none;}
+.clearfix::after{content: "";display: block;clear: both;}
+#joinForm{width: 80%;margin: 0 auto;}
+ul.join_box{border: 1px solid #ddd;background-color: #fff;}
+.checkBox,.checkBox>ul{position: relative;}
+.checkBox>ul>li{float: left;}
+.checkBox>ul>li:first-child{width: 85%;padding: 15px;font-weight: 600;color: #888;}
+.checkBox>ul>li:nth-child(2){position: absolute;top: 50%;right: 30px;margin-top: -12px;}
+.checkBox textarea{width: 96%;height: 90px; margin: 0 2%;background-color: #f7f7f7;color: #888; border: none; resize: none;}
+.footBtwrap{margin-top: 15px;}
+.footBtwrap>li{float: left;width: 50%;height: 60px;}
+.fpmgBt1{background-color: #fff;color:#888}
+.fpmgBt2{background-color: lightsalmon;color: #fff}
+.wrap {
+	overflow: auto; height: 597px;
+}

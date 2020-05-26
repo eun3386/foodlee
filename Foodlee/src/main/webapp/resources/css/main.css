@@ -4,7 +4,7 @@
 hr{
     margin: 0;
 }
-ul{
+ul:not(.truckDetailUL){
     margin: 0;
 }
 body#wrapper{

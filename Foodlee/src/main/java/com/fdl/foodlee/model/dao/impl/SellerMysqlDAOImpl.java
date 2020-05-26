@@ -20,6 +20,7 @@ import com.fdl.foodlee.model.vo.SellerVO;
 // 빈 자동 등록 : MVC 저장단 처리
 @Repository
 public class SellerMysqlDAOImpl implements ISellerDAO {
+	
 	// SQL 정의부
 	private static final String SQL_INSERT_SELLER_CRYPTO 
 	= "insert into sellers values(null, 'seller', ?, hex(aes_encrypt(?,?)), "
@@ -39,7 +40,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	= "select * from sellers where login = ?";
 	private static final String SQL_SELECT_SELLER_PK
 	= "select id from sellers where login = ?";
-	private static final String SQL_UPDATE_SELLER //TODO 비밀번호 변경 따로 ? 사업자등록번호 변경유무
+	private static final String SQL_UPDATE_SELLER
 	= "update sellers set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_rn=? where id = ?";
 	private static final String SQL_DELETE_SELLER
@@ -61,7 +62,6 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	@Override
 	public boolean isDuplicatedSeller(String login) {
 		int r = jtem.queryForObject(SQL_SELLER_DUPCHECK, Integer.class, login);
-		System.out.println("dup cnt = " + r);
 		return r >= 1;
 	}
 
@@ -72,9 +72,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
 		String dbPW = (String) rMap.get("pw");
-		System.out.println("DB pw: " + dbPW);
 		return dbPW;
-		//return jtem.update(SQL__SELLER_LOGIN_TIME_UPDATE, id);
 	}
 
 	@Override

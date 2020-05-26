@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.MyCode;
@@ -35,47 +36,42 @@ public class LoginController {
 	
 // 	login.fdl (proc, post, dao; 암호화; 세션; 회원)
 	@RequestMapping(value = "login.fdl", method = RequestMethod.POST)
-	public ModelAndView loginProc(
-			HttpSession ses, String login, String password) {
-		System.out.println("login = "+ login);
-		System.out.println("pw = "+ password);
-		ModelAndView mav = new ModelAndView();
+	//public ModelAndView loginProc(
+	@ResponseBody
+	public String loginProc(HttpSession ses, String login, String password) {
 		int authResult;
-			authResult = logSvc.loginProcess(login, password);
-			if( authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
-				ses.setAttribute("LoginName", login);
-				ses.setAttribute("LoginType", authResult);
-				ses.setAttribute("LoginTime", 
-						System.currentTimeMillis() );
-				int id = mbSvc.selectMemberIdbyLogin(login);
-				ses.setAttribute("id", new Integer(id) );
-				mbSvc.updateMemberLoginTime(id);
-				mav.setViewName("redirect:/main.fdl");
-			} else if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
-				ses.setAttribute("LoginName", login);
-				ses.setAttribute("LoginType", authResult);
-				ses.setAttribute("LoginTime", 
-						System.currentTimeMillis() );
-				int id = selSvc.selectSellerIdbyLogin(login);
-				ses.setAttribute("id", new Integer(id) );
-				selSvc.updateSellerLoginTime(id);
-				mav.setViewName("redirect:/main.fdl");
-			} else if( authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
-				ses.setAttribute("LoginName", login);
-				ses.setAttribute("LoginType", authResult);
-				ses.setAttribute("LoginTime", 
-						System.currentTimeMillis() );
-				int id = mbSvc.selectMemberIdbyLogin(login);
-				ses.setAttribute("id", new Integer(id) );
-				mbSvc.updateMemberLoginTime(id);
-				mav.setViewName("redirect:/admin.fdl");
-			} else {
-				mav.addObject("msg", "로그인 실패!! - "
-						+ authResult + " : " +
-					MyCode.getMsg(authResult) );
-				mav.setViewName("login_form");
-			}
-		return mav;
+		authResult = logSvc.loginProcess(login, password);
+		if( authResult == MyCode.MEMBER_LOGIN_AUTH_OK ) {
+			ses.setAttribute("LoginName", login);
+			ses.setAttribute("LoginType", authResult);
+			ses.setAttribute("LoginTime", System.currentTimeMillis() );
+			int id = mbSvc.selectMemberIdbyLogin(login);
+			ses.setAttribute("id", new Integer(id) );
+			mbSvc.updateMemberLoginTime(id);
+			return "memberLogin";
+		} else if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
+			ses.setAttribute("LoginName", login);
+			ses.setAttribute("LoginType", authResult);
+			ses.setAttribute("LoginTime", System.currentTimeMillis() );
+			int id = selSvc.selectSellerIdbyLogin(login);
+			ses.setAttribute("id", new Integer(id) );
+			selSvc.updateSellerLoginTime(id);
+			return "sellerLogin";
+		} else if( authResult == MyCode.ADMIN_LOGIN_AUTH_OK ) {
+			ses.setAttribute("LoginName", login);
+			ses.setAttribute("LoginType", authResult);
+			ses.setAttribute("LoginTime", System.currentTimeMillis() );
+			int id = mbSvc.selectMemberIdbyLogin(login);
+			ses.setAttribute("id", new Integer(id) );
+			mbSvc.updateMemberLoginTime(id);
+			return "adminLogin";
+		} else if( authResult == MyCode.LOGIN_NONE ) {
+			return "loginNone";
+		} else if( authResult == MyCode.LOGIN_PW_MISMATCH ) {
+			return "pwMismatch";
+		} else {
+			return "loginFail";
+		}
 	}
 	
 //	logout.fdl
@@ -106,23 +102,10 @@ public class LoginController {
 		return "find_form";
 	}
 	
-//	find_id.fdl
-	@RequestMapping(value = "find_id.fdl", method = RequestMethod.POST)
-	public String findIdProc() {
-		return null;
-	}
-	
-//	find_pw.fdl
-	@RequestMapping(value = "find_pw.fdl", method = RequestMethod.POST)
-	public String findPasswordProc() {
-		return null;
-	}
-	
 //	join_choice_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "join_choice_form.fdl", 
 			method = RequestMethod.GET)
-	public String mbSignUpChoiceForm() {	
-		System.out.println("join choice form 준비!!!");
+	public String mbSignUpChoiceForm() {
 		return "join_choice_form";
 	}
 	

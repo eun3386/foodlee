@@ -25,7 +25,6 @@ public class SellerController {
 	@RequestMapping(value = "/join_form.fdl", 
 			method = RequestMethod.GET)
 	public String sellerJoinForm() {
-		System.out.println("join form 준비!!!");
 		return "seller/join_form";
 	}
 	
@@ -34,7 +33,6 @@ public class SellerController {
 			method = RequestMethod.POST)
 	public ModelAndView sellerJoinProc(
 			HttpServletRequest request, HttpSession ses) {
-		System.out.println("SellerJoinController 요청");
 		//HttpSession ses = request.getSession();
 		
 		// 요청 파라미터 뽑기
@@ -73,9 +71,8 @@ public class SellerController {
 			method = RequestMethod.GET)
 	@ResponseBody
 	public String sellerLoginDuplicateProc(
-			String login) {	
+			String login) {
 		// req.getParam과 타입맵핑을 자동으로 해줌
-		System.out.println("dupcheck.fdl..");
 		if( login != null && !login.isEmpty() ) {
 			if( selSvc.isDuplicatedSeller(login) ) {
 				return "no";
@@ -84,7 +81,20 @@ public class SellerController {
 			}
 		} else {
 			return "error";
-		} 
+		}
+	}
+	
+//	seller/find_id.fdl
+	@RequestMapping(value = "/find_id.fdl", method = RequestMethod.GET)
+	public String findIdProc(HttpSession ses) {
+		int loginType = (Integer)ses.getAttribute("LoginType");
+		return null;
+	}
+	
+//	seller/find_pw.fdl
+	@RequestMapping(value = "/find_pw.fdl", method = RequestMethod.GET)
+	public String findPasswordProc() {
+		return null;
 	}
 	
 }

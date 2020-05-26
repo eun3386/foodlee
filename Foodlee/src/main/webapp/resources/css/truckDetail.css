@@ -3,6 +3,10 @@
 	
 }
 
+.section {
+	margin-bottom: 35px;
+}
+
 #info {
 	width: 80%;
 	margin: 0 auto;
@@ -262,3 +266,11 @@ tr:hover {
 	display: inline-block;
 	zoom: 1;
 }
+
+/*
+#reviews_window {
+	height: expression( this.scrollHeight > 99 ? "840px" : "auto" );
+    max-height: 840px;
+    overflow-y: auto;	
+}
+*/

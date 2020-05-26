@@ -3,6 +3,7 @@ package com.fdl.foodlee.model.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.fdl.foodlee.model.vo.MemberVO;
 // 빈 자동 등록 : MVC 저장단 처리
 @Repository
 public class MemberMysqlDAOImpl implements IMemberDAO {
+	
 	// SQL 정의부
 	private static final String SQL_INSERT_MEMBER_CRYPTO 
 	= "insert into members values(null, 'member', ?, hex(aes_encrypt(?,?)), "
@@ -38,7 +40,11 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	= "select * from members where login = ?";
 	private static final String SQL_SELECT_MEMBER_PK
 	= "select id from members where login = ?";
-	private static final String SQL_UPDATE_MEMBER //TODO 비밀번호 변경 따로 ?
+	private static final String SQL_SELECT_MEMBER_FIND_ID
+	= "select login from members where name = ? && phone_number = ?";
+	private static final String SQL_SELECT_MEMBER_FIND_PW
+	= "select password from members where login = ? && email = ?";
+	private static final String SQL_UPDATE_MEMBER
 	= "update members set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where id = ?";
 	private static final String SQL_DELETE_MEMBER
@@ -66,7 +72,6 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	@Override
 	public boolean isDuplicatedMember(String login) {
 		int r = jtem.queryForObject(SQL_MEMBER_DUPCHECK, Integer.class, login);
-		System.out.println("dup cnt = " + r);
 		return r >= 1;
 	}
 
@@ -75,11 +80,8 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
 				new Object[]{login,id},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
-		String dbLogin = (String) rMap.get("login");
 		String dbPW = (String) rMap.get("pw");
-		System.out.println("DB pw: " + dbPW);
 		return dbPW;
-		//return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, id);
 	}
 
 	@Override
@@ -167,6 +169,22 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	public boolean updateMemberLogoutTime(int id) {
 		int r = jtem.update(SQL_UPDATE_MEMBER_LOGOUT_TIME, id);
 		return r == 1;
+	}
+
+	@Override
+	public String selectMemberLogin(String name, String phoneNumber) {
+//		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
+//				new Object[]{login,id},
+//				new int[]{Types.VARCHAR, Types.INTEGER} );
+//		String dbLogin = (String) rMap.get("login");
+//		String dbPW = (String) rMap.get("pw");
+		return null;
+	}
+
+	@Override
+	public String selectMemberPassword(String login, String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

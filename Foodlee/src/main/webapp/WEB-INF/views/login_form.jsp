@@ -10,42 +10,90 @@
 			$("#login_form").load(url);
     	});
 		
+		$('#login_submit_btn').on('click', function() {
+			var login = $('input[name=login]').val();
+			var password = $('input[name=password]').val();
+			var tUrl = "${pageContext.request.contextPath}/";
+			tUrl += 'login.fdl';
+			var param = $('form[name=form]').serialize();
+			$.ajax ({
+				type: 'post',
+				url: tUrl,
+				data: param,
+				success: function(res) {
+					var a = "${pageContext.request.contextPath}/";
+					switch (res) {
+					case 'memberLogin':
+						location.href = "${pageContext.request.contextPath}/main.fdl";
+						alert('일반 로그인 성공');
+						break;
+					case 'sellerLogin':
+						location.href = "${pageContext.request.contextPath}/main.fdl";
+						alert('판매자 로그인 성공');
+						break;
+					case 'adminLogin':
+						location.href = "${pageContext.request.contextPath}/admin.fdl";
+						alert('어드민 로그인 성공');
+						break;
+					case 'loginNone':
+						alert('로그인 실패: 아이디 불일치');
+						$('input[name=login]').focus();
+						break;
+					case 'pwMismatch':
+						alert('로그인 실패: 비밀번호 불일치');
+						$('input[name=password]').focus();
+						break;
+					case 'loginFail':
+						alert('로그인 실패');
+						$('input[name=login]').focus();
+						break;
+					}
+				}
+			});
+		});
+		
 	});
 </script>
-<div id="login_wrap" class="slide">
+<div id="login_wrap">
 	<div id="login_form">
-		<form style="padding-left: 14.59px;" action="${pageContext.request.contextPath}/login.fdl" method="post">
+<%-- 		<form id="form" action="${pageContext.request.contextPath}/login.fdl" method="post"> --%>
+		<form id="form" name="form">
 	 		<table border='0'>
-	 			<tr id="title"><th>푸들이 로그인</th></tr>
-	 			<tr>
-	 				<td><label for='login_input' class="lb">아이디:</label></td>			
+	 			<tr class="title">
+	 				<th>푸들이 로그인</th>
 	 			</tr>
-	 			<tr style="height: 40px;">
+	 			<tr>
 	 				<td>
-	 					<input type="text" id='login_input'
-	 						name="login" size='22' style="height: 25px; margin: 3px auto;" 
-	 						placeholder="아이디 입력" required> 					
+	 					<label for='login_input' class="lb">아이디:</label>
+	 				</td>			
+	 			</tr>
+	 			<tr>
+	 				<td>
+	 					<input type="text" id='login_input'	name="login" 
+	 						size='22' placeholder="아이디 입력" required> 					
 	 				</td>
 	 			</tr>
 	 			<tr>
-	 				<td><label for='password' class="lb">비밀번호:</label></td>
+	 				<td>
+	 					<label for='password' class="lb">비밀번호:</label>
+	 				</td>
 	 			</tr>
 	 			<tr>
-	 				<td style="height: 25px;">
+	 				<td>
 	 					<input type="password" id='password'
 	 						name="password" size='22' 
-	 						maxlength="10" style="height: 25px; margin: 3px auto;" 	
-	 						placeholder="비밀번호 입력" required> 					
+	 						maxlength="10" placeholder="비밀번호 입력" required> 					
 	 				</td>
 	 			</tr>
 	 			<tr>
-	 				<td style="height: 40px; text-align: right;">
-	 					<a id="id_pw_find" href="#" style="text-decoration: none; color: gray; font-size: small;">아이디/비밀번호 찾기</a>
+	 				<td id="find_td">
+	 					<a id="id_pw_find" href="#">아이디/비밀번호 찾기</a>
 	 				</td>
 	 			</tr>
-	 			<tr id="submit">
+	 			<tr class="submit">
 	 				<td>
-	 					<input type="submit" style="height: 25px; width: 50px;" value="로그인">
+<!-- 	 					<input type="submit" value="로그인"> -->
+						<input id="login_submit_btn" type="button" value="로그인">
 	 				</td>
 	 			</tr>
 	 		</table>

@@ -10,7 +10,7 @@ public interface IQnaSVC {
 		boolean insertNewQna(QnaVO qna);
 		int insertNewQnaReturnKey(QnaVO qnaGet);
 		int insertNewQnaReturnKey(String login, int sellerId, int QnaDepth, String QnaPnum, String QnaContent,
-				Timestamp QnaCreatedAt);
+				boolean QnaSecret, Timestamp QnaCreatedAt);
 		// QnA를 수정 할 수 있다.
 		boolean updateQna(int id, String qnaContent);
 		// QnA를 삭제 할 수 있다.

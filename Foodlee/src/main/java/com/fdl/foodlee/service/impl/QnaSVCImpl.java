@@ -31,8 +31,8 @@ public class QnaSVCImpl implements IQnaSVC {
 
 	@Override
 	public int insertNewQnaReturnKey(String login, int sellerId, int QnaDepth, String QnaPnum,
-			String QnaContent, Timestamp QnaCreatedAt) {
-		QnaVO rv = new QnaVO(0, login, sellerId, QnaContent, QnaDepth, QnaPnum, QnaCreatedAt);
+			String QnaContent, boolean QnaSecret, Timestamp QnaCreatedAt) {
+		QnaVO rv = new QnaVO(0, login, sellerId, QnaContent, QnaDepth, QnaPnum, QnaSecret, QnaCreatedAt);
 		return qnaDao.insertNewQnaReturnKey(rv);
 	}
 	
