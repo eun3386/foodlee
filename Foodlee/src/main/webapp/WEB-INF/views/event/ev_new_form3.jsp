@@ -20,6 +20,16 @@
 <script type="text/javascript" src="smartEditor/sample/js/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 </head>
 <body>
+<!-- <table> -->
+<!-- 	<tr> -->
+<!-- 		<td><label>제목</label></td> <td><input type="text"></td> -->
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<td><label>내용</label></td> <td> -->
+
+
+
+<span id="rev">Version: 2.8.2.4259f59 </span>
 
 <!-- SE2 Markup Start -->	
 <div id="smart_editor2">
@@ -277,7 +287,6 @@
 						<div class="se2_in_layer">
 							<div class="se2_url2">
 								<input type="text" class="input_ty1" value="http://">
-								<input type="checkbox" id="se2_url_new" class="se2_url_new"><label for="se2_url_new">새창으로 열기</label>
 								<button type="button" class="se2_apply"><span>적용</span></button><button type="button" class="se2_cancel"><span>취소</span></button>
 							</div>
 						</div>
@@ -498,8 +507,6 @@
 				<li class="husky_seditor_ui_findAndReplace last_child"><button type="button" title="찾기/바꾸기" class="se2_find"><span class="_buttonRound tool_bg">찾기/바꾸기</span></button>
 					<!--@lazyload_html find_and_replace-->
 					<!-- 찾기/바꾸기 -->
-					
-					
 					<div class="se2_layer husky_se2m_findAndReplace_layer" style="margin-left:-238px;">
 						<div class="se2_in_layer">
 							<div class="se2_bx_find_revise">
@@ -772,89 +779,13 @@
 		</div>
 		<!-- //입력창조절/ 모드전환 -->
 		<hr>
-		<!-- 얼럿 메세지 공통 -->
-		<div class="se2_alert_wrap" style="display:none">
-			<div class="se2_alert_content">
-				<div class="se2_alert_txts"></div>
-				<p class="se2_alert_btns">
-					<button type="button" class="se2_confirm"><span>확인</span></button><button type="button" class="se2_cancel"><span>취소</span></button>
-				</p>
-				<a href="#" class="btn_close">닫기</a>
-			</div>
-			<!-- 레이어 중앙정렬 -->
-			<span class="va_line"></span>
-			<div class="ie_cover"></div>
-		</div>
-		<!-- //얼럿 메세지 공통 -->
+		
 	</div>
 </div>
 <!-- SE2 Markup End -->
 
-<!--Example Start-->
-<div id="se2_sample" style="margin:10px 0;">
-	<input type="button" onclick="pasteHTML();" value="본문에 내용 넣기" />
-	<input type="button" onclick="showHTML();" value="본문 내용 가져오기" />
-	<input type="button" onclick="submitContents();" value="서버로 내용 전송" />
-	<input type="button" onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
-	<form action="sample/viewer/index.php" method="post">
-		<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;">
-			<p>글 수정시 여기에 값을 넣어주면 됩니다.</p>
-		</textarea>
-	</form>
-</div>
-
-<script type="text/javascript">
-if(window.frameElement){
-	jindo.$("se2_sample").style.display = "none";
-}else{
-	var oEditor = createSEditor2(jindo.$("ir1"), {
-		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-		//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
-		//aAdditionalFontList : [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]],	// 추가 글꼴 목록
-		fOnBeforeUnload : function(){
-			//예제 코드
-			//return "내용이 변경되었습니다.";
-		}
-	});
-	
-	oEditor.run({
-		fnOnAppReady: function(){
-			//예제 코드
-			//oEditor.exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
-		}
-	});
-	
-	function pasteHTML() {
-		var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
-		oEditor.exec("PASTE_HTML", [sHTML]);
-	}
-	
-	function showHTML() {
-		var sHTML = oEditor.getIR();
-		alert(sHTML);
-	}
-	
-	function submitContents() {
-		oEditor.exec("UPDATE_CONTENTS_FIELD");	// 에디터의 내용이 textarea에 적용됩니다.
-	
-		// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
-		jindo.$("ir1").form.submit();
-	}
-	
-	function setDefaultFont() {
-		var sDefaultFont = '궁서';
-		var nFontSize = 24;
-		oEditor.setDefaultFont(sDefaultFont, nFontSize);
-	}
-}
-</script>
-
-	<form action="sample/viewer/index.php" method="post">
-		<textarea name="eventContent" id="eventContent" rows="10" cols="100" style="width:766px; height:412px; display:none;">
-		</textarea>
-	</form>
-
+<!-- 	</td> -->
+<!-- </tr> -->
+<!-- </table> -->
 </body>
-</html>
+</html>	
