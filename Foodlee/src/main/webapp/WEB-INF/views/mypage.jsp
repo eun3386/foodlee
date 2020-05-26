@@ -122,9 +122,16 @@
 						</tr>
 					</thead>
 					<tbody>
-							<tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr>
+						<c:forEach items="${orderList}" var="order">
+							<tr>
+								<td>${order.id}</td>
+								<td>${order.foodtruck}</td>
+								<td>%{order.menu}</td>
+								<td>${order.count}</td>
+								<td>&{order.price}</td>
+								<td></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 
@@ -160,12 +167,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${reviewList}" var="review">
+						<c:forEach items="${qnaList}" var="qna">
 							<tr>
-								<td>${review.id}</td>
-								<td>${review.foodtruck}</td>
-								<td>${review.picture}</td>
-								<td>${review.content}</td>
+								<td>${qna.}</td>
+								<td>${qna.}</td>
+								<td>${qna.}</td>
+								<td>${qna.}</td>
 							</tr>
 						</c:forEach>	
 					</tbody>
@@ -201,9 +208,14 @@
 						</tr>
 					</thead>
 					<tbody>
-							<tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr>
-							<tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr>
+						<c:forEach items="${reviewList}" var="review">
+							<tr>
+								<td>${review.id}</td>
+								<td>${review.foodtruck}</td>
+								<td>${review.picture}</td>
+								<td>${review.content}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				
