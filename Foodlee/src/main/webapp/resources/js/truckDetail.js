@@ -739,35 +739,33 @@ $(document).ready(function() {
 	});
 	*/
     
-    if ($(".reply").size() >= 3) {
-		$(".reply").slice(0, 3).show(); // select the first ten
-	    $("#read-more-review").click(function(e) { // click event for load more
-	        e.preventDefault();
-	        $(".reply:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
-	        if($(".reply:hidden").length == 0){ // check if any hidden divs still exist
-	            // alert("No more divs"); // alert if there are none left
-	            $('#read-more-review').css("display", "none");
-	        }
-	    });
-    }
-    else {
+    if ($(".reply").size() <= 3) {
     	$('#read-more-review').css("display", "none");
     }
+    
+	$(".reply").slice(0, 3).show(); // select the first ten
+    $("#read-more-review").click(function(e) { // click event for load more
+        e.preventDefault();
+        $(".reply:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+        if($(".reply:hidden").length == 0){ // check if any hidden divs still exist
+            // alert("No more divs"); // alert if there are none left
+            $('#read-more-review').css("display", "none");
+        }
+    });
 	
-    if ($(".qna_items").size() >= 3) {
-	    $(".qna_items").slice(0, 3).show(); // select the first ten
-	    $("#read-more-qna").click(function(e) { // click event for load more
-	        e.preventDefault();
-	        $(".qna_items:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
-	        if($(".qna_items:hidden").length == 0){ // check if any hidden divs still exist
-	            // alert("No more divs"); // alert if there are none left
-	            $('#read-more-qna').css("display", "none");
-	        }
-	    });
-    	}
-    else {
+    if ($(".qna_items").size() <= 3) {
     	$('#read-more-qna').css("display", "none");
     }
+    
+    $(".qna_items").slice(0, 3).show(); // select the first ten
+    $("#read-more-qna").click(function(e) { // click event for load more
+        e.preventDefault();
+        $(".qna_items:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+        if($(".qna_items:hidden").length == 0){ // check if any hidden divs still exist
+            // alert("No more divs"); // alert if there are none left
+            $('#read-more-qna').css("display", "none");
+        }
+    });
 	
  // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 	var floatPosition = parseInt($("#_order").css('top'));

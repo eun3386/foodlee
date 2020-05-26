@@ -58,7 +58,7 @@ public class TruckDetailController {
 	public String truckDetail(HttpSession ses, Model model) {
 		ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
 		ses.setAttribute("login", "seller"); // 로그인 임시설정
-		ses.setAttribute("sellerId", 1); // 판매자 번호 임시생성
+		ses.setAttribute("sellerId", 2); // 판매자 번호 임시생성
 		
 		int isAlreadyLiked = mltSvc.isAlreadyLikedMember(1, (int) ses.getAttribute("mbId"));
 		model.addAttribute("isAlreadyLiked", (isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_ONE
@@ -187,7 +187,9 @@ public class TruckDetailController {
 		int sellerId = Integer.parseInt(req.getParameter("sellerId"));
 		String login = req.getParameter("login");
 		String qnaReply = req.getParameter("text");
-		QnaVO qna = new QnaVO(0, login, sellerId, qnaReply, 1, pnum, null);
+		boolean secret = Boolean.parseBoolean((req.getParameter("secret")));
+		
+		QnaVO qna = new QnaVO(0, login, sellerId, qnaReply, 1, pnum, secret, null);
 		boolean r = qnaSvc.QnaReply(qna);
 		
 		return "redirect:/truckDetail.fdl";
@@ -199,11 +201,10 @@ public class TruckDetailController {
 	}
 
 	@RequestMapping(value = "new_qna.fdl", method = RequestMethod.POST)
-	public String newQna(@ModelAttribute(value="qna") QnaVO qna, HttpSession ses, Model model) {
-		System.out.println(qna.getQnaContent());
+	public String newQna(@ModelAttribute(value="qna") QnaVO qna, @RequestParam(value="secret",
+			 required = false)String secret, HttpSession ses, Model model) {
 		Map<String, Object> result = new HashMap<>();
-		
-		QnaVO qnaT = new QnaVO(0, "poro", qna.getSellerId(), qna.getQnaContent(), 0, null, null);
+		QnaVO qnaT = new QnaVO(0, "poro", qna.getSellerId(), qna.getQnaContent(), 0, null, (secret.equals("true") ? true : false), null);
 		int atRtkey = this.qnaSvc.insertNewQnaReturnKey(qnaT);
 
 		// 상세보기 => atId?

@@ -105,8 +105,8 @@
 		<!--디폴트 메뉴-->
 		<label for="tab1">리뷰</label> <input id="tab2" type="radio" name="tabs">
 		<label for="tab2">메뉴</label> <input id="tab3" type="radio" name="tabs">
-		<label for="tab3">정보</label> <input id="tab4" type="radio" name="tabs">
-		<label for="tab4">Q&amp;A</label>
+<!-- 		<label for="tab3">정보</label> <input id="tab4" type="radio" name="tabs"> -->
+		<label for="tab3">Q&amp;A</label>
 
 		<section id="content1">
 			<div id="replies">
@@ -258,6 +258,7 @@
 			</div>
 		</section>
 
+	<!-- 
 	<section id="content3">
 	<div style="margin-left: 15px; padding-bottom: 3px; border-bottom: 1px solid gray;">
 		<i class="fas fa-store"></i> 업체정보
@@ -265,7 +266,9 @@
          	letter-spacing: -1px;">영업시간</i><span style="margin-left: 70px;">11:00 - 01:00</span></div>
 	</div>
 	</section>
-	<section id="content4">
+	 -->
+	
+	<section id="content3">
 	<div id="QnA">
 		<c:forEach var="qna" items="${qnaList}" varStatus="qnavs">
 			<div id="qna_id_${qna.qnaId}" class="qna_items"
@@ -279,12 +282,25 @@
 						<div class="nickname" style="padding-top: 2px;">
 						<c:if test="${qna.qnaDepth eq 1}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i></c:if>
 						<c:choose>
-						<c:when test="${qna.qnaDepth eq 0}">${qna.login}</c:when>
-						<c:when test="${qna.qnaDepth eq 1}">사장님</c:when>
+							<c:when test="${qna.qnaDepth eq 0 and qna.qnaSecret eq false}">${qna.login}</c:when>
+							<c:when test="${qna.qnaDepth eq 1 and qna.qnaSecret eq false}">사장님</c:when>
+							<c:when test="${qna.qnaSecret eq true}">
+								<c:if test="${qna.login eq login or foodT.sellerId eq sellerId}">
+									<i class="fas fa-lock"></i> ${qna.login}
+								</c:if>
+							</c:when>
 						</c:choose>
 						</div>
 						<div class="date" style="padding-top: 4px; font-size: 12px;">
-						<span id="fmt_qna_${qna.qnaId}"><fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+						<span id="fmt_qna_${qna.qnaId}">
+						<c:choose>
+							<c:when test="${qna.qnaSecret eq false}"><fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/></c:when>
+							<c:when test="${qna.qnaSecret eq true}">
+								<c:if test="${qna.login eq login or foodT.sellerId eq sellerId}">
+									<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+								</c:if>
+							</c:when>
+						</c:choose>
 						</span>
 						
 						<c:if test="${qna.qnaContent ne '삭제된 QnA입니다.'}">
@@ -304,7 +320,18 @@
 						</div>
 					</li>
 					<li>
-					<div id="con_qna_${qna.qnaId}" style="padding-top: 15px;"><c:out value="${qna.qnaContent}"/>
+					<div id="con_qna_${qna.qnaId}" style="padding-top: 15px;">
+					<c:choose>
+						<c:when test="${qna.qnaSecret eq false}"><c:out value="${qna.qnaContent}"/></c:when>
+						<c:when test="${qna.qnaSecret eq true and qna.login ne login}">
+						<c:if test="${foodT.sellerId ne sellerId}">
+							<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
+						</c:if>
+						<c:if test="${foodT.sellerId eq sellerId}">
+							<c:out value="${qna.qnaContent}"/>
+						</c:if>
+						</c:when>
+					</c:choose>
 					</div>
 					</li>
 				</ul>
@@ -314,12 +341,12 @@
 				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">Q&amp;A 더보기</div>
 				<div id="reply-insert">
 					<h3 style="padding-top: 10px;">QnA달기</h3>
-<!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
-<!--  						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto; white-space: pre-line;"> -->
-<!-- 					</div> -->
-					<form action="${pageContext.request.contextPath}/new_qna.fdl" method="post" enctype="multipart/form-data">
+					<form action="${pageContext.request.contextPath}/new_qna.fdl" method="post">
+					<span style="float: left;">
+					<!-- <input type='hidden' name="secret"> -->
+					<input type="checkbox" name="secret" value="true" style="display: inline;">비밀글 여부</span>
 					<input type="hidden" name="sellerId" value="${sellerId}">
-					<textarea name="qnaContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
+					<textarea name="qnaContent" id="re_area_qna" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty qna ? qna.qna_content:''}</textarea>
 						<button type="submit" id="qna_add" style="width: 100px; height: 30px; float: right; margin-top: 25px; 
 						margin-bottom: 30px; margin-left: -3px; background-color: orange; border: 1px solid gray;">QnA달기</button>

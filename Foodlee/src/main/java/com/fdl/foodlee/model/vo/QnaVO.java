@@ -9,11 +9,12 @@ public class QnaVO {
 	private String qnaContent; // 문의내용
 	private int qnaDepth; // 답글 여부 문의 0 답글 1
 	private String qnaPnum; // 답글일 경우 해당 문의번호
+	private boolean qnaSecret;
 	private Timestamp qnaCreatedAt; // 문의 작성일
 
 	public QnaVO() {}
 	
-	public QnaVO(int qnaId, String login, int sellerId, String qnaContent, int qnaDepth, Timestamp qnaCreatedAt) {
+	public QnaVO(int qnaId, String login, int sellerId, String qnaContent, int qnaDepth, int qnaSecret, Timestamp qnaCreatedAt) {
 		this.qnaId = qnaId;
 		this.login = login;
 		this.sellerId = sellerId;
@@ -22,13 +23,14 @@ public class QnaVO {
 		this.qnaCreatedAt = qnaCreatedAt;
 	}
 
-	public QnaVO(int qnaId, String login, int sellerId, String qnaContent, int qnaDepth, String qnaPnum, Timestamp qnaCreatedAt) {
+	public QnaVO(int qnaId, String login, int sellerId, String qnaContent, int qnaDepth, String qnaPnum, boolean qnaSecret, Timestamp qnaCreatedAt) {
 		this.qnaId = qnaId;
 		this.login = login;
 		this.sellerId = sellerId;
 		this.qnaContent = qnaContent;
 		this.qnaDepth = qnaDepth;
 		this.qnaPnum = qnaPnum;
+		this.qnaSecret = qnaSecret;
 		this.qnaCreatedAt = qnaCreatedAt;
 	}
 
@@ -79,6 +81,14 @@ public class QnaVO {
 	public void setQnaPnum(String qnaPnum) {
 		this.qnaPnum = qnaPnum;
 	}
+	
+	public boolean getQnaSecret() {
+		return qnaSecret;
+	}
+
+	public void setQnaSecret(boolean qnaSecret) {
+		this.qnaSecret = qnaSecret;
+	}
 
 	public Timestamp getQnaCreatedAt() {
 		return qnaCreatedAt;
@@ -91,7 +101,7 @@ public class QnaVO {
 	@Override
 	public String toString() {
 		return "QnaVO [qnaId=" + qnaId + ", login=" + login + ", sellerId=" + sellerId + ", qnaContent=" + qnaContent + ", qnaDepth=" + qnaDepth
-				+ ", qnaPnum=" + qnaPnum + ", qnaCreatedAt=" + qnaCreatedAt + "]";
+				+ ", qnaPnum=" + qnaPnum + ", qnaSecret=" + qnaSecret + ", qnaCreatedAt=" + qnaCreatedAt + "]";
 	}
 
 }

@@ -21,7 +21,7 @@ import com.fdl.foodlee.model.vo.QnaVO;
 public class QnaMysqlDAOImpl implements IQnaDAO {
 	
 	public static final String SQL_QNA_NEW = "insert into qna"
-			+ " values(null, ?, ?, ?, ?, ?, now())";
+			+ " values(null, ?, ?, ?, ?, ?, ?, now())";
 	public static final String SQL_QNA_UPDATE = "update qna set qna_content=?"
 			+ " where qna_id=?";
 	public static final String SQL_QNA_DELETE = "delete from qna where qna_id = ?";
@@ -30,7 +30,7 @@ public class QnaMysqlDAOImpl implements IQnaDAO {
 	public static final String SQL_QNA_LIST_LOGIN = "SELECT * FROM qna where login = ? " + 
 			"ORDER BY qna_created_at desc";
 	public static final String SQL_QNA_REPLY = "insert into qna"
-			+ " values(null, ?, ?, 1, ?, ?, now())";
+			+ " values(null, ?, ?, 1, ?, ?, ?, now())";
 	public static final String SQL_QNA_DELETE_BEFORE = "select count(*) from qna where qna_pnum = ?";
 	public static final String SQL_QNA_DELETE_COUNT = "select count(*) from qna where "
 			+ "qna_id=? and qna_content='삭제된 QnA입니다.'";
@@ -63,6 +63,7 @@ public class QnaMysqlDAOImpl implements IQnaDAO {
 				pstmt.setInt(3, qna.getQnaDepth());
 				pstmt.setString(4, qna.getQnaPnum());
 				pstmt.setString(5, qna.getQnaContent());
+				pstmt.setBoolean(6, qna.getQnaSecret());
 				return pstmt;
 			}
 		};
@@ -77,7 +78,7 @@ public class QnaMysqlDAOImpl implements IQnaDAO {
 		int r = jtem.update(SQL_QNA_NEW,
 				qna.getLogin(), qna.getSellerId(),
 				qna.getQnaDepth(), qna.getQnaPnum(),
-				qna.getQnaContent());
+				qna.getQnaContent(), qna.getQnaSecret());
 		return r == 1; //? true: false;
 	}
 
