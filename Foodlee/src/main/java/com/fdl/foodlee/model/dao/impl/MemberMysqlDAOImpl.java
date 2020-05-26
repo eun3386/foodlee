@@ -19,6 +19,7 @@ import com.fdl.foodlee.model.vo.MemberVO;
 // 빈 자동 등록 : MVC 저장단 처리
 @Repository
 public class MemberMysqlDAOImpl implements IMemberDAO {
+	
 	// SQL 정의부
 	private static final String SQL_INSERT_MEMBER_CRYPTO 
 	= "insert into members values(null, 'member', ?, hex(aes_encrypt(?,?)), "
@@ -38,7 +39,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	= "select * from members where login = ?";
 	private static final String SQL_SELECT_MEMBER_PK
 	= "select id from members where login = ?";
-	private static final String SQL_UPDATE_MEMBER //TODO 비밀번호 변경 따로 ?
+	private static final String SQL_UPDATE_MEMBER
 	= "update members set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where id = ?";
 	private static final String SQL_DELETE_MEMBER
@@ -66,7 +67,6 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	@Override
 	public boolean isDuplicatedMember(String login) {
 		int r = jtem.queryForObject(SQL_MEMBER_DUPCHECK, Integer.class, login);
-		System.out.println("dup cnt = " + r);
 		return r >= 1;
 	}
 
@@ -77,9 +77,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 				new int[]{Types.VARCHAR, Types.INTEGER} );
 		String dbLogin = (String) rMap.get("login");
 		String dbPW = (String) rMap.get("pw");
-		System.out.println("DB pw: " + dbPW);
 		return dbPW;
-		//return jtem.update(SQL__MEMBER_LOGIN_TIME_UPDATE, id);
 	}
 
 	@Override
