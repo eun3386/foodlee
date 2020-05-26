@@ -53,10 +53,10 @@ public class BossController {
 	public String ad() {//광고
 		return "boss/bossinfo/ad2";
 	}
-	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET)
-	public String storeinfo() {//트럭정보
-		return "boss/bossmenu/storeinfo";
-	}
+//	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET)
+//	public String storeinfo() {//트럭정보
+//		return "boss/bossmenu/storeinfo";
+//	}
 	
 }
 
