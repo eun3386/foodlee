@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.dao.inf.IFoodtruckDAO;
@@ -17,6 +19,13 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 	@Autowired
 	@Qualifier("ftJdbc")
 	IFoodtruckDAO ftDao;
+	// 의존관계 자동주입...
+	@Autowired
+	private JdbcTemplate jtem;
+	
+	// SQL부
+	private static final String
+		SQL_SEARCH_ALL_FOODTRUCK_FROM_CATEGORY = "select * from foodtrucks where menu_category = ?";
 
 	@Override
 	public boolean insertNewFoodtruck(FoodtruckVO ft) {
@@ -63,6 +72,14 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 	public List<FoodtruckVO> searchAllFoodtruck(String foodtruckMainMenu) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	// 메뉴 카테고리를 받아 푸드 트럭 리스트를 조회 하는 함수
+	@Override
+	public List<FoodtruckVO> searchAllFoodtruckFromCategory(int menuCategory) {
+		return jtem.query(SQL_SEARCH_ALL_FOODTRUCK_FROM_CATEGORY,
+				BeanPropertyRowMapper
+				.newInstance(FoodtruckVO.class), menuCategory);
 	}
 	
 	@Override

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+	<%
+		String CON = application.getContextPath();
+	%>
 		<div id="trucklist_all_page">
 			<div id="trucklist_page" class="tl_page">	
 				<div id="trucklist_nav">
@@ -86,22 +92,26 @@
 							<tr>
 								<td>
 									<div class="menu1">
-										<button type="button">간식</button>
+										<button type="button" onclick='$("#truck-list").load("<%=CON%>/truckList.fdl?mc=1");'>간식</button>
 									</div>
 								</td>
+								
 								<td>
 									<div class="menu2">
-										<button type="button">식사</button>
+										<button type="button" onclick='$("#truck-list").load("<%=CON%>/truckList.fdl?mc=2")'>식사</button>
 									</div>
 								</td>
+								
 								<td>
 									<div class="menu3">
-										<button type="button">디저트</button>
+										<button type="button" onclick='$("#truck-list").load("<%=CON%>/truckList.fdl?mc=3")'>디저트</button>
 									</div>
+									
 								</td>
+								
 								<td>
 									<div class="menu4">
-										<button type="button">밥차</button>
+										<button type="button" onclick='$("#truck-list").load("<%=CON%>/truckList.fdl?mc=4")'>밥차</button>
 									</div>
 								</td>
 							</tr>
@@ -109,101 +119,23 @@
 					</div>
 					
 					<div id="menu_truck_content">
-						<table id="menu_content_table">
-							<tr id="highline">
-								<td>
-									<div class="menu_pd1">
-										<button type="button">
-										<div class="sample4">
-											<img src="resources/css/imgs/truckDetail/테이스틸러.jpg" width="250px"/>
-											<p>
-												<b>테이스틸러</b><br>
-												<br>			
-												갈릭 스테이크 - 4,500원
-											</p>
+					${ftListsize}개 카드
+						<!-- <table id="menu_content_table">
+							<tr> -->
+								<c:forEach var="foodtruck" items="${ftList}" varStatus="vs">
+									<c:if test="${vs.index % 4 == 0}"><br></c:if>
+<!-- 									<td> -->
+										<div class="truck_card">
+											<img src="<%=CON%>/resources/imgs/foodtruck/${foodtruck.foodtruckImgPath}" width="100px" height="100px"> <br>
+											<c:out value="${foodtruck.foodtruckName}" /> <br>
+											<c:out value="${foodtruck.foodtruckMainMenu}" /> <br>
+											<c:out value="${foodtruck.foodtruckLocation}" /> <br>
+											<c:out value="♥${foodtruck.favoriteCount}" /> <br>
 										</div>
-										</button>
-									</div>
-								</td>
-								
-								<td>	
-									<div class="menu_pd2">
-										<button type="button">
-											<div class="sample5">
-												<img src="resources/css/imgs/truckDetail/오프로.jpg" width="250px"/>
-												<p>
-													<b>오프로</b><br>
-													<br>
-													불초밥 - 2,000원
-												</p>
-											</div>
-										</button>
-									</div>
-								</td>
-								
-								<td>
-									<div class="menu_pd3">
-										<button type="button">
-											<div class="sample6">
-												<img src="resources/css/imgs/truckDetail/kimchibus.jpg" width="250px"/>
-												<p>
-													<b>김치 버스</b><br>
-													<br>
-													돈암동 타코 - 2,500원
-												</p>
-											</div>
-										</button>
-									</div>
-								</td>
-							</tr>
-							
-							<tr>	
-								<td>
-									<div class="menu_pd4">
-										<button type="button">
-											<div class="sample7">
-												<img src="resources/css/imgs/truckDetail/삐삣버거.jpg" width="250px" height="140px"/>
-												<p>
-													<b>삐삣 버거</b><br>
-													<br>
-													더블 삣 스파이시 버거 - 3,000원
-												</p>
-											</div>
-										</button>
-									</div>
-								</td>
-							
-								<td>	
-									<div class="menu_pd5">
-										<button type="button">
-											<div class="sample8">
-												<img src="resources/css/imgs/truckDetail/치킨핏.jpg" width="250px"/>
-												<p>
-													<b>치킨핏</b><br>
-													<br>
-													닭발 - 2,500원
-												</p>
-											</div>
-										</button>
-									</div>
-								</td>
-								
-								<td>	
-									<div class="menu_pd6">
-										<button type="button">
-										<div class="sample9">
-											<img src="resources/css/imgs/truckDetail/fortune_cook.jpg" width="250px" height="140px"/>
-											<p>
-												<b>fortuneCOOK</b><br>
-												<br>
-												포츈 핫도그 - 4,500원
-											</p>
-										</div>
-										</button>
-									</div>
-								</td>	
-							</tr>
-						</table>	
+<!-- 									</td> -->
+								</c:forEach>
+<!-- 							</tr> -->
+<!-- 						</table>	 -->
 					</div>
 				</div>	
 				
