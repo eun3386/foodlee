@@ -62,5 +62,15 @@ public class SellerSVCImpl implements ISellerSVC {
 	public boolean updateSellerLogoutTime(int id) {
 		return selDao.updateSellerLogoutTime(id);
 	}
+
+	@Override
+	public String selectSellerLogin(String name, String phoneNumber) {
+		return selDao.selectSellerLogin(name, phoneNumber);
+	}
+
+	@Override
+	public String selectSellerPassword(String login, String email) {
+		return selDao.selectSellerPassword(login, email);
+	}
 	
 }

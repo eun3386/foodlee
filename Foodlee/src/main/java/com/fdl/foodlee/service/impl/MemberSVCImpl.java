@@ -63,4 +63,14 @@ public class MemberSVCImpl implements IMemberSVC {
 		return mbDao.updateMemberLogoutTime(id);
 	}
 
+	@Override
+	public String selectMemberLogin(String name, String phoneNumber) {
+		return mbDao.selectMemberLogin(name, phoneNumber);
+	}
+
+	@Override
+	public String selectMemberPassword(String login, String email) {
+		return mbDao.selectMemberPassword(login, email);
+	}
+
 }

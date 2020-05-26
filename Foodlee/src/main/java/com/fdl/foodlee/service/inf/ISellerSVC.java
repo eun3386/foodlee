@@ -8,10 +8,10 @@ public interface ISellerSVC {
 	boolean insertNewSellerWithCrypto(SellerVO sel);
 	
 //	아이디를 찾을 수 있다.
-	
+	String selectSellerLogin(String name, String phoneNumber);
 	
 //	비밀번호를 찾을 수 있다.
-	
+	String selectSellerPassword(String login, String email);
 	
 //	로그인 중복체크 할 수 있다.	
 	boolean isDuplicatedSeller(String login);

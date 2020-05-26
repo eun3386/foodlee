@@ -85,16 +85,14 @@ public class MemberController {
 	
 //	member/find_id.fdl
 	@RequestMapping(value = "/find_id.fdl", method = RequestMethod.GET)
-	public String findIdProc(HttpSession ses) {
-		// TODO
-		int loginType = (Integer)ses.getAttribute("LoginType");
-		return null;
+	public String findIdProc(String name, String phoneNumber) {
+		return mbSvc.selectMemberLogin(name, phoneNumber);
 	}
 	
 //	member/find_pw.fdl
 	@RequestMapping(value = "/find_pw.fdl", method = RequestMethod.GET)
-	public String findPasswordProc() {
-		return null;
+	public String findPasswordProc(String login, String email) {
+		return mbSvc.selectMemberPassword(login, email);
 	}
 	
 }

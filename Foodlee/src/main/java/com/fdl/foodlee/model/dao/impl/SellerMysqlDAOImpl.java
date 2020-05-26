@@ -21,7 +21,6 @@ import com.fdl.foodlee.model.vo.SellerVO;
 @Repository
 public class SellerMysqlDAOImpl implements ISellerDAO {
 	
-	// SQL 정의부
 	private static final String SQL_INSERT_SELLER_CRYPTO 
 	= "insert into sellers values(null, 'seller', ?, hex(aes_encrypt(?,?)), "
 		+"?, ?, ?, ?, ?, ?, ?, now(), now(), ?, null, null)";
@@ -40,6 +39,11 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	= "select * from sellers where login = ?";
 	private static final String SQL_SELECT_SELLER_PK
 	= "select id from sellers where login = ?";
+	private static final String SQL_SELECT_SELLER_FIND_ID
+	= "select login from sellers where name = ? && phone_number = ?";
+	private static final String SQL_SELECT_SELLER_FIND_PW
+	= "select cast(aes_decrypt(unhex(password), ?) as char(32) "
+		+ "character set utf8) as pw from sellers where login = ? && email = ?";
 	private static final String SQL_UPDATE_SELLER
 	= "update sellers set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_rn=? where id = ?";
@@ -70,7 +74,6 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
 				new Object[]{login,id},
 				new int[]{Types.VARCHAR, Types.INTEGER} );
-		String dbLogin = (String) rMap.get("login");
 		String dbPW = (String) rMap.get("pw");
 		return dbPW;
 	}
@@ -161,6 +164,26 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	public boolean updateSellerLogoutTime(int id) {
 		int r = jtem.update(SQL_UPDATE_SELLER_LOGOUT_TIME, id);
 		return r == 1;
+	}
+
+	
+	@Override
+	public String selectSellerLogin(String name, String phoneNumber) {
+		Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_SELLER_FIND_ID,
+				new Object[]{name, phoneNumber},
+				new int[]{Types.VARCHAR, Types.VARCHAR} );
+		String dbLogin = (String) rMap.get("login");
+		return dbLogin;
+	}
+	
+
+	@Override
+	public String selectSellerPassword(String login, String email) {
+		Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_SELLER_FIND_PW,
+				new Object[]{login, email},
+				new int[]{Types.VARCHAR, Types.VARCHAR} );
+		String dbPW = (String) rMap.get("pw");
+		return dbPW;
 	}
 
 }

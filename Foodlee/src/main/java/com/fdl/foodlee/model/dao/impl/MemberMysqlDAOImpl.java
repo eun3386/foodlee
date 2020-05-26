@@ -43,7 +43,8 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	private static final String SQL_SELECT_MEMBER_FIND_ID
 	= "select login from members where name = ? && phone_number = ?";
 	private static final String SQL_SELECT_MEMBER_FIND_PW
-	= "select password from members where login = ? && email = ?";
+	= "select cast(aes_decrypt(unhex(password), ?) as char(32) "
+		+ "character set utf8) as pw from members where login = ? && email = ?";
 	private static final String SQL_UPDATE_MEMBER
 	= "update members set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where id = ?";
@@ -173,18 +174,20 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 
 	@Override
 	public String selectMemberLogin(String name, String phoneNumber) {
-//		Map<String, Object> rMap = jtem.queryForMap(SQL_LOGIN_AUTH,
-//				new Object[]{login,id},
-//				new int[]{Types.VARCHAR, Types.INTEGER} );
-//		String dbLogin = (String) rMap.get("login");
-//		String dbPW = (String) rMap.get("pw");
-		return null;
+		Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_MEMBER_FIND_ID,
+				new Object[]{name, phoneNumber},
+				new int[]{Types.VARCHAR, Types.VARCHAR} );
+		String dbLogin = (String) rMap.get("login");
+		return dbLogin;
 	}
 
 	@Override
 	public String selectMemberPassword(String login, String email) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_MEMBER_FIND_PW,
+				new Object[]{login, email},
+				new int[]{Types.VARCHAR, Types.VARCHAR} );
+		String dbPW = (String) rMap.get("pw");
+		return dbPW;
 	}
 
 }
