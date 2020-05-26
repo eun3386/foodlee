@@ -19,7 +19,7 @@ public class BannerMysqlDAOImpl implements IBannerDAO {
 //			"select * from banner order by ad_start_date asc";
 	public static final String SQL_BANNER_ADD_LIST =
 			"select B.fod_id as sel_num,"
-			+ "(select A.login from sellers A where B.fod_id = A.seller_id) as sel_login, "
+			+ "(select A.login from sellers A where B.fod_id = A.id) as sel_login, "
 			+ "B.ad_img as img_path, B.ad_price as price, B.ad_start_date as st_day, "
 			+ "B.ad_end_date as ed_day from banner B where "
 			+ "B.ad_price between ? and ? order by ad_start_date asc limit ?";

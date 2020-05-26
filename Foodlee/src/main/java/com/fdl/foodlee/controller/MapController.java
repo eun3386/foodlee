@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.vo.BannerAddVO;
 import com.fdl.foodlee.model.vo.BannerVO;
+import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.service.inf.IBannerSVC;
+import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
@@ -26,6 +28,9 @@ public class MapController {
 	
 	@Autowired
 	ISellerSVC selSvc;
+	
+	@Autowired
+	IFoodtruckSVC fodSvc;
 	
 	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
 	public String mapMain(Model model) {
@@ -39,8 +44,6 @@ public class MapController {
 		List<BannerAddVO> baList = bSvc.showAddBannerList(min, max, limit);
 		List<BannerAddVO> baTopList = new ArrayList<BannerAddVO>();
 		List<BannerAddVO> baBtmList = new ArrayList<BannerAddVO>();
-		int A;
-		int B;
 		if (baList != null) {
 			for (BannerAddVO ba : baList) {
 					if(ba.getPrice() >= avg) {
@@ -57,10 +60,28 @@ public class MapController {
 				}
 			model.addAttribute("baTopList", baTopList);
 			model.addAttribute("baBtmList", baBtmList);
-			return "mapMain";
 		} else {
 			System.out.println("ERROR: 배너 리스트 조회 실패!!");
 			return "redirect:/mapMain.fdl";
 		}
+		// 맵에서 푸드트럭위치를 알수 있다
+		List<FoodtruckVO> fodList = fodSvc.searchAddAllFoodtruckList();
+		List<String> fod = new ArrayList<String>();
+		List<String> fodName = new ArrayList<String>();
+		if(fodList != null) {
+			for (int i = 0; i < fodList.size(); i++) {
+				String cooder = fodList.get(i).getSellerFoodtruckCoordinate();
+				String fName = fodList.get(i).getFoodtruckName();
+				fod.add(cooder);
+				fodName.add(fName);
+			}
+			model.addAttribute("fodList", fod);
+			model.addAttribute("fodName", fodName);
+			model.addAttribute("fodSize", fodList.size());
+		} else {
+			System.out.println("ERROR: 트럭 리스트 조회 실패!!");
+			return "redirect:/mapMain.fdl";
+		}
+		return "mapMain";
 	}
 }
