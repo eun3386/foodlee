@@ -13,25 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.service.inf.IMemberSVC;
 
-/*
-- 회원가입 할 수 있다.
-	member/new_join_form.fdl
-	member/join.fdl
-- 아이디, 비밀번호를 찾을 수 있다.
-	member/find_form.fdl
-	member/find_id.fdl
-	member/find_pw.fdl
-- 아이디 중복체크를 할 수 있다.
-	member/dupcheck.fdl
-- 자신의 정보를 확인 할 수 있다.
-	member/show.fdl
-- 자신의 정보를 갱신 할 수 있다.
-	member/edit_form.fdl
-	member/update.fdl
-- 탈퇴 할 수 있다.
-	member/delete.fdl
- */
-
 @Controller
 @RequestMapping("/member")
 public class MemberController {
@@ -43,7 +24,6 @@ public class MemberController {
 	@RequestMapping(value = "/join_form.fdl", 
 			method = RequestMethod.GET)
 	public String memberJoinForm() {
-		System.out.println("join form 준비!!!");
 		return "member/join_form";
 	}
 	
@@ -52,8 +32,6 @@ public class MemberController {
 			method = RequestMethod.POST)
 	public ModelAndView memberJoinProc(
 			HttpServletRequest request, HttpSession ses) {
-		System.out.println("MemberJoinController 요청");
-		//HttpSession ses = request.getSession();
 		
 		// 요청 파라미터 뽑기
 		String login = request.getParameter("id");
@@ -90,9 +68,8 @@ public class MemberController {
 			method = RequestMethod.GET)
 	@ResponseBody
 	public String memberLoginDuplicateProc(
-			String login) {	
+			String login) {
 		// req.getParam과 타입맵핑을 자동으로 해줌
-		System.out.println("dupcheck.fdl..");
 		if( login != null && !login.isEmpty() ) {
 			if( mbSvc.isDuplicatedMember(login) ) {
 				return "no";
