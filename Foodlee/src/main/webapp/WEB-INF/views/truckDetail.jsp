@@ -34,7 +34,7 @@
 <body>
 	<div class="main_box">
 		<div class="menu common">
-			<!-- 		<p class="content">메뉴</p> -->
+		<p class="content">메뉴</p>
 		</div>
 		<div class="logo common">
 			<p class="content">푸들이</p>
@@ -43,6 +43,7 @@
 			<p class="content" style="padding-top: 25px;">회원가입 로그인</p>
 		</div>
 	</div>
+	
 	<div id="info">
 		<div id="car_detail">
 			<img src="<%=CON%>/resources/imgs/truckDetail/car.jpg"
@@ -59,6 +60,10 @@
 				<!-- 공통 hidden 부분 -->
 				<input id="sellerId" type="hidden" value="${foodT.sellerId}">
 				<input id="login" type="hidden" value="${LoginName}">
+				<input id="name" type="hidden" value="${member.name}">
+				<input id="email" type="hidden" value="${member.email}">
+				<input id="phoneNumber" type="hidden" value="${member.phoneNumber}">
+				<input id="address" type="hidden" value="${member.address}">
 				<span id="follow" tg_sr='${foodT.sellerId}' ses_mb='${id}' class="mb_follow">
 					<i class="fas fa-heart fa-lg follow_${isAlreadyLiked ? 'red': 'orange'}"></i>
 				</span>
@@ -78,7 +83,10 @@
 		<div id="mask"></div>
 		<div class="window" style="margin-top: 100px;">
 			<div class="close_icon" style="vertical-align: middle; font-size:22px; height:35px; margin-top: 5px;">
-				푸드트럭 팩토리 위치
+				<c:out value="${foodT.foodtruckName}"/> 위치
+				<input type="hidden" id="foodTName" value="${foodT.foodtruckName}">
+				<input type="hidden" id="foodTMuni" value="${foodT.foodtruckMuni}">
+				<input type="hidden" id="foodTLocation" value="${foodT.foodtruckLocation}">
 				<a href="#" class="close" style="float: right;">
 				<i class="fas fa-times-circle fa-lg" style="color:red; padding-top: 5px;"></i></a>
 			</div>
@@ -113,9 +121,28 @@
 <!-- 		<label for="tab3">정보</label> <input id="tab4" type="radio" name="tabs"> -->
 		<label for="tab3">Q&amp;A</label>
 
-		<section id="content1">
+		<section class="section" id="content1">
 			<div id="reviews_section">
 			<div id="reviews_window">
+			
+			<c:choose>
+			<c:when test="${empty reviewList}">
+				<c:if test="${empty LoginName}">
+					<hr>
+						<h3 style="text-align: center; margin-top: 9px; margin-bottom: 9px;">
+							로그인 하셔서 첫 번째 리뷰를 달아주세요.
+						</h3>
+					<hr>
+				</c:if>
+				<c:if test="${not empty LoginName}">
+					<hr>
+						<h3 style="text-align: center; margin-top: 9px; margin-bottom: 9px;">
+							첫 번째 리뷰를 달아주세요.
+						</h3>
+					<hr>
+				</c:if>
+			</c:when>
+			</c:choose>
 				<c:forEach var="rv" items="${reviewList}" varStatus="vs">
 				<div id="reply_${rv.reviewId}" class="reply"
 					style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
@@ -196,15 +223,15 @@
 				<div id="read-more-review" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
 					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">리뷰 더보기</div>
 <%-- 				<c:if test="${foodT.sellerId ne sellerId}"> 리뷰 달기 판매자 금지--%>
-				<div id="reply-insert">
+				<div id="review-insert">
 					<h3 style="padding-top: 10px;">리뷰달기</h3>
 <!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
 <!--  						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto; white-space: pre-line;"> -->
 <!-- 					</div> -->
 					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post" enctype="multipart/form-data">
-					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="사진 업로드는 4개까지만 가능합니다."
+					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="사진 업로드는 4개까지 가능합니다."
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty rv ? rv.review_content:''}</textarea>
-						<input type="hidden" name="sellerId" value="${sellerId}">
+						<input type="hidden" name="sellerId" value="${foodT.sellerId}">
 						<input type="hidden" name="login" value="${LoginName}">
 						<input type="file" name="imgfiles" id="file_add" multiple="multiple" style="dispaly: none;">
 						<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
@@ -220,10 +247,10 @@
 				</div>
 <%-- 			</c:if> --%>
 			</div>
-			<div id="test_list"></div>
+<!-- 			<div id="test_list"></div> -->
 		</section>
 
-		<section id="content2">
+		<section class="section" id="content2">
 			<div class="wrap2"
 				style="overflow-x: auto; width: 800px; white-space: nowrap;">
 				<%
@@ -276,8 +303,13 @@
 	</section>
 	 -->
 	
-	<section id="content3">
+	<section class="section" id="content3">
 	<div id="QnA_Section">
+		<c:if test="${empty qnaList}">
+			<hr>
+				<h3 style="text-align: center; margin-top: 9px; margin-bottom: 9px;">QnA가 없습니다.</h3>
+			<hr>
+		</c:if>
 		<c:forEach var="qna" items="${qnaList}" varStatus="qnavs">
 			<div id="qna_id_${qna.qnaId}" class="qna_items"
 				style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
@@ -346,14 +378,14 @@
 		</c:forEach>
 			<div id="read-more-qna" style="text-align: center; font-size: 18px; vertical-align: middle;
 				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">Q&amp;A 더보기</div>
-				<div id="reply-insert">
+				<div id="qna-insert">
 					<h3 style="padding-top: 10px;">QnA달기</h3>
 					<form action="${pageContext.request.contextPath}/new_qna.fdl" method="post">
-					<span style="float: left;">
+					<span style="float: left; margin-bottom: 3px;">
 					<!-- <input type='hidden' name="secret"> -->
-					<input type="checkbox" name="secret" value="true" style="display: inline; margin-bottom: 3px;">비밀글 여부</span>
+					<input type="checkbox" name="secret" value="true" style="display: inline;">비밀글 여부</span>
 					<input type="hidden" name="login" value="${LoginName}">
-					<input type="hidden" name="sellerId" value="${sellerId}">
+					<input type="hidden" name="sellerId" value="${foodT.sellerId}">
 					<textarea name="qnaContent" id="re_area_qna" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty qna ? qna.qna_content:''}</textarea>
 						<button type="submit" id="qna_add" style="width: 100px; height: 30px; float: right; margin-top: 25px; 

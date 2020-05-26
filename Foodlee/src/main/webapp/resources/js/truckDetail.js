@@ -348,6 +348,7 @@ function del_review(id, rd) {
 		var URLHD = getContextPath()+'/';
 		location.href= URLHD + 'reivew_delete.fdl?id='+id;
 	}*/
+	var sid = $("#sellerId").val();
 	swal({
 		  title: "리뷰를 삭제하시겠습니까?",
 		  text: "",
@@ -357,9 +358,9 @@ function del_review(id, rd) {
 		})
 		.then((willDelete) => {
 		  if (willDelete) {
-			  location.href= URLHD + 'reivew_delete.fdl?id='+id+'&depth='+rd;
+			  location.href= URLHD + 'reivew_delete.fdl?id='+id+'&depth='+rd+'&sid='+sid;
 		  } else {
-		    return;
+		    return; 
 		  }
 	});
 }
@@ -447,6 +448,7 @@ function cancel_reply_qna(id) {
 }
 
 function del_qna(id, rd) {
+	var sid = $("#sellerId").val();
 	swal({
 		  title: "QnA를 삭제하시겠습니까?",
 		  text: "",
@@ -456,7 +458,7 @@ function del_qna(id, rd) {
 		})
 		.then((willDelete) => {
 		  if (willDelete) {
-			  location.href= URLHD + 'qna_delete.fdl?id='+id+'&depth='+rd;
+			  location.href= URLHD + 'qna_delete.fdl?id='+id+'&depth='+rd+'&sid='+sid;
 		  } else {
 		    return;
 		  }
@@ -475,7 +477,13 @@ function reply_qna(id) {
 
 // qna끝----------------------------------------------------------------------------------------------------------------------------
 
-$(document).ready(function() {
+$(document).ready(function() { // ready 시작
+	
+	if($("#login").val() == "") {
+		$("#review-insert").css("display", "none");
+		$("#qna-insert").css("display", "none");
+	}
+	
 	$("#file_add").on("change", handleImgFileSelect);
 	$("#sum").css("display", "none");
 	$(".order_div").css("display", "none");
@@ -525,104 +533,121 @@ $(document).ready(function() {
 	
 	// 결제클릭
 	$(".order_div").click(function() {
-		// alert(mapNames);
-		// alert(arrNum + "    length=" + arrNum.length);
-		var arrSize = $('.menu_name').size();
-		
-		var sellerId = $("#sellerId").val();
-		var login = $("#login").val();
-		var arrMenuName = new Array(arrSize);
-		var arrMenuPrice = new Array(arrSize);
-		var arrMenuNumber = new Array(arrSize);
-		var priceSum = Number(document.getElementById("priceSum").innerHTML);
-		
-		for(var i=0; i<arrSize; i++) {
-			arrMenuName[i] = $('.menu_name').eq(i).text();
-			arrMenuPrice[i] = $('.menu_price').eq(i).text();
-			arrMenuNumber[i] = $('.menu_number').eq(i).text();
+		if($("#login").val() != "") {
+			// alert(mapNames);
+			// alert(arrNum + "    length=" + arrNum.length);
+			var arrSize = $('.menu_name').size();
+			
+			var sellerId = $("#sellerId").val();
+			var login = $("#login").val();
+			var arrMenuName = new Array(arrSize);
+			var arrMenuPrice = new Array(arrSize);
+			var arrMenuNumber = new Array(arrSize);
+			var priceSum = Number(document.getElementById("priceSum").innerHTML);
+			
+			for(var i=0; i<arrSize; i++) {
+				arrMenuName[i] = $('.menu_name').eq(i).text();
+				arrMenuPrice[i] = $('.menu_price').eq(i).text();
+				arrMenuNumber[i] = $('.menu_number').eq(i).text();
+			}
+			
+			/*
+			$.ajax({
+			    type: "post",
+			    url: URLHD + 'menu_order.fdl',
+			    data: {
+			    	"arrMenuName" : arrMenuName,
+			    	"arrMenuPrice" : arrMenuPrice,
+			    	"arrMenuNumber" : arrMenuNumber,
+			    	"priceSum" : priceSum,
+			    	"login" : login,
+			    	"sellerId" : sellerId
+			    	},
+			    	success: function(data, textStatus) {
+			    		swal({
+			    			  title: "주문 완료",
+			    			  text: "주문이 완료 되었습니다.",
+			    			  icon: "success",
+			    			  button: "확인",
+			    		});
+			    }
+			});
+			*/
+			
+			var name = $("#name").val();
+			var email = $("#email").val();
+			var phoneNumber = $("#phoneNumber").val();
+			var address = $("#address").val();
+			var foodTName = $("#foodTName").val();
+			
+	        var IMP = window.IMP; // 생략가능
+	        IMP.init('imp64360008'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	        var msg;
+	        
+	        IMP.request_pay({
+	            // pg : 'kakaopay',
+	            pg : 'inicis',
+	            pay_method : 'card',
+	            merchant_uid : 'merchant_' + new Date().getTime(),
+	            name : foodTName + ' 결제',
+	            amount : 1,
+	            buyer_email : email,
+	            buyer_name : name,
+	            buyer_tel : phoneNumber,
+	            buyer_addr : address,
+	            // buyer_postcode : '777-777',
+	            //m_redirect_url : 'http://www.naver.com'
+	        }, function(rsp) {
+	            if ( rsp.success ) {
+	                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	                jQuery.ajax({
+	                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+	                    type: 'POST',
+	                    dataType: 'json',
+	                    data: {
+	                        imp_uid : rsp.imp_uid
+	                        //기타 필요한 데이터가 있으면 추가 전달
+	                    }
+	                }).done(function(data) {
+	                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+	                    if ( everythings_fine ) {
+	                        msg = '결제가 완료되었습니다.';
+	                        msg += '\n고유ID : ' + rsp.imp_uid;
+	                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+	                        msg += '\결제 금액 : ' + rsp.paid_amount;
+	                        msg += '카드 승인번호 : ' + rsp.apply_num;
+	                        
+	                        alert(msg);
+	                    } else {
+	                        //[3] 아직 제대로 결제가 되지 않았습니다.
+	                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+	                    }
+	                });
+	                //성공시 이동할 페이지
+	// <%--                 location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
+	            } else {
+	                msg = '결제에 실패하였습니다.';
+	                msg += '에러내용 : ' + rsp.error_msg;
+	                //실패시 이동할 페이지
+	// <%--                 location.href="<%=request.getContextPath()%>/order/payFail"; --%>
+	                //alert(msg);
+	            }
+	        });
+	        
+		} else {
+			swal({
+				  title: "로그인 오류",
+				  text: "주문을 하시려면 로그인을 해주세요",
+				  icon: "warning",
+				  button: "확인",
+				  dangerMode: true,
+				})
 		}
-		
-		
-		$.ajax({
-		    type: "post",
-		    url: URLHD + 'menu_order.fdl',
-		    data: {
-		    	"arrMenuName" : arrMenuName,
-		    	"arrMenuPrice" : arrMenuPrice,
-		    	"arrMenuNumber" : arrMenuNumber,
-		    	"priceSum" : priceSum,
-		    	"login" : login,
-		    	"sellerId" : sellerId
-		    	},
-		    	success: function(data, textStatus) {
-		    		swal({
-		    			  title: "주문 완료",
-		    			  text: "주문이 완료 되었습니다.",
-		    			  icon: "success",
-		    			  button: "확인",
-		    		});
-		    }
-		});
-		
-		/*
-        var IMP = window.IMP; // 생략가능
-        IMP.init('imp64360008'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-        var msg;
-        
-        IMP.request_pay({
-            pg : 'kakaopay',
-            // pg : 'inicis',
-            pay_method : 'card',
-            merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '주문 결제',
-            amount : priceSum,
-            buyer_email : 'test@test.com',
-            buyer_name : '홍길동',
-            buyer_tel : '010-1234-5678',
-            buyer_addr : 'TT',
-            buyer_postcode : '123-456',
-            //m_redirect_url : 'http://www.naver.com'
-        }, function(rsp) {
-            if ( rsp.success ) {
-                //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-                jQuery.ajax({
-                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        imp_uid : rsp.imp_uid
-                        //기타 필요한 데이터가 있으면 추가 전달
-                    }
-                }).done(function(data) {
-                    //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-                    if ( everythings_fine ) {
-                        msg = '결제가 완료되었습니다.';
-                        msg += '\n고유ID : ' + rsp.imp_uid;
-                        msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-                        msg += '\결제 금액 : ' + rsp.paid_amount;
-                        msg += '카드 승인번호 : ' + rsp.apply_num;
-                        
-                        alert(msg);
-                    } else {
-                        //[3] 아직 제대로 결제가 되지 않았습니다.
-                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-                    }
-                });
-                //성공시 이동할 페이지
-// <%--                 location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
-            } else {
-                msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
-                //실패시 이동할 페이지
-// <%--                 location.href="<%=request.getContextPath()%>/order/payFail"; --%>
-                //alert(msg);
-            }
-        });
-        */
-	});
+	}); // order_div 끝
 	
 	// 좋아요
 	$(document).on("click", "span.mb_follow", function() {
+		if($("#login").val() != "") {
 			$(".follow_msg").css("display", "none");
 			var tgSr = $(this).attr("tg_sr");
 			var sesMb = $(this).attr("ses_mb");
@@ -669,7 +694,16 @@ $(document).ready(function() {
 				console.log(status);
 			}
 			});
-		});
+		} else {
+			swal({
+			  title: "로그인 오류",
+			  text: "좋아요를 하시려면 로그인을 해주세요",
+			  icon: "warning",
+			  button: "확인",
+			  dangerMode: true,
+			});
+		}
+	});
 	
 // 네이버 지도	
 // 	var mapOptions = {
@@ -699,11 +733,13 @@ $(document).ready(function() {
 	        map: map,
 	        position: cityhall
 	    });
-	
+	var foodTName = $("#foodTName").val();
+	var foodTMuni = $("#foodTMuni").val();
+	var foodTLocation = $("#foodTLocation").val();
 	var contentString = [
         '<div class="iw_inner">',
-        '   <h3>푸드트럭 팩토리</h3>',
-        '   <p>서울특별시 중구 | 서울특별시 중구 <br />',
+        '   <h3>'+foodTName+'</h3>',
+        '   <p>서울특별시 '+foodTMuni+' | '+foodTLocation+' <br />',
         '</div>'
     ].join('');
 	
