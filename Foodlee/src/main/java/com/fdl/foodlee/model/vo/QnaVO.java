@@ -49,7 +49,7 @@ public class QnaVO {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
+
 	public int getSellerId() {
 		return sellerId;
 	}
@@ -81,8 +81,8 @@ public class QnaVO {
 	public void setQnaPnum(String qnaPnum) {
 		this.qnaPnum = qnaPnum;
 	}
-	
-	public boolean getQnaSecret() {
+
+	public boolean isQnaSecret() {
 		return qnaSecret;
 	}
 

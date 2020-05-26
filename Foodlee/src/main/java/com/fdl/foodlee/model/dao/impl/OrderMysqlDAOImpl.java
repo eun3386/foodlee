@@ -6,25 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IOrderDAO;
 import com.fdl.foodlee.model.vo.OrderVO;
 
+@Repository
 public class OrderMysqlDAOImpl implements IOrderDAO {
 	
-	public static final String SQL_ORDER_NEW = "insert into order"
+	public static final String SQL_ORDER_NEW = "insert into orders"
 			+ " values(0, ?, ?, ?, ?, ?, ?, '1', '')";
-	public static final String SQL_ORDER_CANCEL_MEMBER = "update order set order_state='2'"
+	public static final String SQL_ORDER_CANCEL_MEMBER = "update orders set order_state='2'"
 			+ " where order_id=?";
-	public static final String SQL_ORDER_MEMBER_LIST = "select * from order where login=?";
-	public static final String SQL_ORDER_RECEIPT = "update order set order_state='3'"
-			+ " where order_id=?";
-	public static final String SQL_ORDER_REJECTION = "update order set order_state='4'"
-			+ ", order_reason=? where order_id=?";
-	public static final String SQL_ORDER_CANCEL_SELLER = "update order set order_state='5'"
-			+ ", order_reason=? where order_id=?";
-	public static final String SQL_ORDER_SELLER_LIST = "select * from order where seller_id=?";
-	public static final String SQL_ORDER_SHOW_ONE = "select * from order where order_id=?";
+	public static final String SQL_ORDER_MEMBER_LIST = "select * from orders where login=?";
+	public static final String SQL_ORDER_RECEIPT = "update orders set order_state='3'"
+			+ " where order_id=? and seller_id=?"; 
+	public static final String SQL_ORDER_REJECTION_CANCEL = "update orders set order_state=?"
+			+ ", order_reason=? where order_id=? and seller_id=?";
+	public static final String SQL_ORDER_SELLER_LIST = "select * from orders where seller_id=?";
+	public static final String SQL_ORDER_SHOW_ONE = "select * from orders where order_id=?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -49,8 +49,8 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 	}
 
 	@Override
-	public boolean memberOrderCancel(int id) {
-		int r = jtem.update(SQL_ORDER_CANCEL_MEMBER, id); 
+	public boolean memberOrderCancel(int orderId, String login) {
+		int r = jtem.update(SQL_ORDER_CANCEL_MEMBER, orderId, login); 
 		return r == 1;
 	}
 
@@ -61,23 +61,17 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 	}
 
 	@Override
-	public boolean sellerOrderReceipt(int id) {
-		int r = jtem.update(SQL_ORDER_RECEIPT, id); 
-		return r == 1;
-	}
-
-	@Override
-	public boolean sellerOrderRejection(int id, String reason) {
-		int r = jtem.update(SQL_ORDER_REJECTION, id, reason); 
+	public boolean sellerOrderReceipt(int orderId, int orderState) {
+		int r = jtem.update(SQL_ORDER_RECEIPT, orderId, orderState); 
 		return r == 1;
 	}
 	
 	@Override
-	public boolean sellerOrderCancel(int id, String reason) {
-		int r = jtem.update(SQL_ORDER_CANCEL_SELLER, id, reason); 
+	public boolean sellerOrderRejectionCancel(int orderId, int sellerId, int orderState, String reason) {
+		int r = jtem.update(SQL_ORDER_REJECTION_CANCEL, orderState, reason, orderId, sellerId); 
 		return r == 1;
 	}
-
+	
 	@Override
 	public List<OrderVO> sellerOrderList(int sellerId) {
 		return jtem.query(SQL_ORDER_MEMBER_LIST,
@@ -85,9 +79,9 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 	}
 
 	@Override
-	public OrderVO showOneOrder(int id) {
+	public OrderVO showOneOrder(int orderId) {
 		return jtem.queryForObject(SQL_ORDER_SHOW_ONE,
-		 		 BeanPropertyRowMapper.newInstance(OrderVO.class), id);
+		 		 BeanPropertyRowMapper.newInstance(OrderVO.class), orderId);
 	}
 
 }

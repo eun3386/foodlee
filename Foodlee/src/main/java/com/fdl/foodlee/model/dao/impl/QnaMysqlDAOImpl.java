@@ -63,7 +63,7 @@ public class QnaMysqlDAOImpl implements IQnaDAO {
 				pstmt.setInt(3, qna.getQnaDepth());
 				pstmt.setString(4, qna.getQnaPnum());
 				pstmt.setString(5, qna.getQnaContent());
-				pstmt.setBoolean(6, qna.getQnaSecret());
+				pstmt.setBoolean(6, qna.isQnaSecret());
 				return pstmt;
 			}
 		};
@@ -78,7 +78,7 @@ public class QnaMysqlDAOImpl implements IQnaDAO {
 		int r = jtem.update(SQL_QNA_NEW,
 				qna.getLogin(), qna.getSellerId(),
 				qna.getQnaDepth(), qna.getQnaPnum(),
-				qna.getQnaContent(), qna.getQnaSecret());
+				qna.getQnaContent(), qna.isQnaSecret());
 		return r == 1; //? true: false;
 	}
 
@@ -136,7 +136,7 @@ public class QnaMysqlDAOImpl implements IQnaDAO {
 	public boolean QnaReply(QnaVO qna) {
 		int r = jtem.update(SQL_QNA_REPLY,
 				qna.getLogin(), qna.getSellerId(),
-				qna.getQnaPnum(), qna.getQnaContent());
+				qna.getQnaPnum(), qna.getQnaContent(), qna.isQnaSecret());
 		return r == 1; //? true: false;
 	}
 }

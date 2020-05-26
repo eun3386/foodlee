@@ -418,7 +418,7 @@ function reply_add_qna(id) {
 	var moText = $("#qna_reply_"+id).children("textarea").val();
 	var login = "admin";
 	var sellerId = $("#sellerId").val();
-		
+	var secret = $("#hdSecret_"+id).val();
 	$.ajax({
 	    type: "post",
 	    url: URLHD + 'qna_reply_add.fdl',
@@ -426,7 +426,8 @@ function reply_add_qna(id) {
 	    	"text" : moText,
 	    	"login" : login,
 	    	"pnum" : id,
-	    	"sellerId" : sellerId
+	    	"sellerId" : sellerId,
+	    	"secret" : secret
 	    	},
 	    	success: function(data, textStatus) {
 	    		location.href = URLHD + "truckDetail.fdl";
@@ -528,20 +529,19 @@ $(document).ready(function() {
 		// alert(arrNum + "    length=" + arrNum.length);
 		var arrSize = $('.menu_name').size();
 		
-		 var arrMenuName = new Array(arrSize);
-		 var arrMenuPrice = new Array(arrSize);
-		 var arrMenuNumber = new Array(arrSize);
-		
-		 // var arrMenuName = [];
-		 // var arrMenuPrice = [];
-		 // var arrMenuNumber = [];
+		var sellerId = $("#sellerId").val();
+		var login = $("#login").val();
+		var arrMenuName = new Array(arrSize);
+		var arrMenuPrice = new Array(arrSize);
+		var arrMenuNumber = new Array(arrSize);
+		var priceSum = Number(document.getElementById("priceSum").innerHTML);
 		
 		for(var i=0; i<arrSize; i++) {
 			arrMenuName[i] = $('.menu_name').eq(i).text();
 			arrMenuPrice[i] = $('.menu_price').eq(i).text();
 			arrMenuNumber[i] = $('.menu_number').eq(i).text();
 		}
-		var priceSum = Number(document.getElementById("priceSum").innerHTML);
+		
 		
 		$.ajax({
 		    type: "post",
@@ -550,9 +550,17 @@ $(document).ready(function() {
 		    	"arrMenuName" : arrMenuName,
 		    	"arrMenuPrice" : arrMenuPrice,
 		    	"arrMenuNumber" : arrMenuNumber,
-		    	"priceSum" : priceSum
+		    	"priceSum" : priceSum,
+		    	"login" : login,
+		    	"sellerId" : sellerId
 		    	},
 		    	success: function(data, textStatus) {
+		    		swal({
+		    			  title: "주문 완료",
+		    			  text: "주문이 완료 되었습니다.",
+		    			  icon: "success",
+		    			  button: "확인",
+		    		});
 		    }
 		});
 		
@@ -739,6 +747,8 @@ $(document).ready(function() {
 	});
 	*/
     
+    // 
+
     if ($(".reply").size() <= 3) {
     	$('#read-more-review').css("display", "none");
     }
@@ -747,10 +757,15 @@ $(document).ready(function() {
     $("#read-more-review").click(function(e) { // click event for load more
         e.preventDefault();
         $(".reply:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+        // 더보기 스크롤 자동이동
+        // var position = $("#reviews_window").offset();
+        // $('#reviews_window').animate({scrollTop : position.top}, 2000);
+        // $('#reviews_window').scrollTop($('#reviews_window').prop('scrollHeight'));
         if($(".reply:hidden").length == 0){ // check if any hidden divs still exist
             // alert("No more divs"); // alert if there are none left
             $('#read-more-review').css("display", "none");
         }
+        // $('#reviews_window').scrollTop($('#reviews_window').height());
     });
 	
     if ($(".qna_items").size() <= 3) {

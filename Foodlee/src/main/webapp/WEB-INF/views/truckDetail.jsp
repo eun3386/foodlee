@@ -14,7 +14,8 @@
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap"
 	rel="stylesheet">
 <link href="<%=CON%>/resources/css/truckDetail.css" rel="stylesheet">
-
+<%-- <link href="<%=application.getContextPath()%>/resources/css/reset.css" type="text/css" rel="stylesheet"> --%>
+<link href="<%=CON%>/resources/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -28,6 +29,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="resources/js/truckDetail.js"></script>
+<script>
+</script>
 <body>
 	<div class="main_box">
 		<div class="menu common">
@@ -53,8 +56,10 @@
 				</div>
 				<p />
 				<div id="member_like" style="margin-top: 30px;">
+				<!-- 공통 hidden 부분 -->
 				<input id="sellerId" type="hidden" value="${foodT.sellerId}">
-				<span id="follow" tg_sr='${foodT.sellerId}' ses_mb='${mbId}' class="mb_follow">
+				<input id="login" type="hidden" value="${LoginName}">
+				<span id="follow" tg_sr='${foodT.sellerId}' ses_mb='${id}' class="mb_follow">
 					<i class="fas fa-heart fa-lg follow_${isAlreadyLiked ? 'red': 'orange'}"></i>
 				</span>
 				<span id="follow_cnt"><c:out value="${cntLikes}" default="0" /></span>
@@ -89,7 +94,7 @@
 			</div>
 			<div>
 				<div id="none">메뉴가 없습니다.</div>
-				<ul id="menu_list"
+				<ul class="truckDetailUL" id="menu_list"
 					style="list-style: none; margin: 0; padding: 0; max-height: 360px; overflow-y: auto;">
 				</ul>
 			</div>
@@ -109,13 +114,14 @@
 		<label for="tab3">Q&amp;A</label>
 
 		<section id="content1">
-			<div id="replies">
+			<div id="reviews_section">
+			<div id="reviews_window">
 				<c:forEach var="rv" items="${reviewList}" varStatus="vs">
 				<div id="reply_${rv.reviewId}" class="reply"
 					style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
 					<c:if test="${rv.reviewDepth eq 1}">padding-left: 40px;</c:if>
 					">
-					<ul style="list-style: none; padding: 0;">
+					<ul class="truckDetailUL" style="list-style: none; padding: 0;">
 						<li>
 							<div style="float: left;">
 							</div>
@@ -132,14 +138,14 @@
 							
 							<c:if test="${rv.reviewContent ne '삭제된 리뷰입니다.'}">
 								<span style="float: right; margin-right: 15px;">
-<%-- 								<c:if test="${rv.login eq login}"> 수정 삭제 테스트--%>
+								<c:if test="${rv.login eq LoginName}">
 									<button id="mod_${rv.reviewId}" onclick="modify_review(${rv.reviewId})" 
 									style="margin-bottom: 3px;">수정</button>
 									<br><button onclick="del_review(${rv.reviewId}, ${rv.reviewDepth})" style="margin-bottom: 3px;">
 									삭제</button>
 									<br>
-<%-- 								</c:if> --%>
-								<c:if test="${foodT.sellerId eq $ and rv.reviewDepth eq 0 and empty reviewList[vs.index+1].reviewPnum}">
+								</c:if>
+								<c:if test="${sellerLogin.login eq LoginName and foodT.sellerId eq sellerId and rv.reviewDepth eq 0 and empty reviewList[vs.index+1].reviewPnum}">
 									<button id="reply_button_${rv.reviewId}" onclick="reply_review(${rv.reviewId})">답변</button>
 								</c:if>
 								</span>
@@ -186,6 +192,7 @@
 					</ul>
 				</div>
 				</c:forEach>
+				</div>
 				<div id="read-more-review" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
 					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">리뷰 더보기</div>
 <%-- 				<c:if test="${foodT.sellerId ne sellerId}"> 리뷰 달기 판매자 금지--%>
@@ -198,6 +205,7 @@
 					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="사진 업로드는 4개까지만 가능합니다."
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty rv ? rv.review_content:''}</textarea>
 						<input type="hidden" name="sellerId" value="${sellerId}">
+						<input type="hidden" name="login" value="${LoginName}">
 						<input type="file" name="imgfiles" id="file_add" multiple="multiple" style="dispaly: none;">
 						<button type="button" class="btn btn-primary" onclick="document.all.file_add.click();" 
 						style="width: 100px; height: 30px; float: left; margin-top: 25px; font-size: 14px; font-color: #FF8868; 
@@ -235,7 +243,7 @@
 			</div>
 			<div>
 				<h3>메뉴 목록</h3>
-				<ul style="list-style: none; margin: 0; padding: 0;">
+				<ul class="truckDetailUL" style="list-style: none; margin: 0; padding: 0;">
 					<li>
 						<table style="margin-top: 10px;">
 						<%
@@ -269,23 +277,23 @@
 	 -->
 	
 	<section id="content3">
-	<div id="QnA">
+	<div id="QnA_Section">
 		<c:forEach var="qna" items="${qnaList}" varStatus="qnavs">
 			<div id="qna_id_${qna.qnaId}" class="qna_items"
 				style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
 				<c:if test="${qna.qnaDepth eq 1}">padding-left: 40px;</c:if>
 				">
-				<ul style="list-style: none; padding: 0;">
+				<ul class="truckDetailUL" style="list-style: none; padding: 0;">
 					<li>
 						<div style="float: left;">
 						</div>
 						<div class="nickname" style="padding-top: 2px;">
-						<c:if test="${qna.qnaDepth eq 1}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i></c:if>
+						<c:if test="${qna.qnaDepth eq 1 and qna.qnaSecret eq false}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i></c:if>
 						<c:choose>
 							<c:when test="${qna.qnaDepth eq 0 and qna.qnaSecret eq false}">${qna.login}</c:when>
 							<c:when test="${qna.qnaDepth eq 1 and qna.qnaSecret eq false}">사장님</c:when>
 							<c:when test="${qna.qnaSecret eq true}">
-								<c:if test="${qna.login eq login or foodT.sellerId eq sellerId}">
+								<c:if test="${qna.login eq LoginName or sellerLogin.login eq LoginName}">
 									<i class="fas fa-lock"></i> ${qna.login}
 								</c:if>
 							</c:when>
@@ -296,7 +304,7 @@
 						<c:choose>
 							<c:when test="${qna.qnaSecret eq false}"><fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/></c:when>
 							<c:when test="${qna.qnaSecret eq true}">
-								<c:if test="${qna.login eq login or foodT.sellerId eq sellerId}">
+								<c:if test="${qna.login eq LoginName or sellerLogin.login eq LoginName}"> <!-- 비교 이전 foodT.sellerId eq sellerid -->
 									<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
 								</c:if>
 							</c:when>
@@ -305,14 +313,15 @@
 						
 						<c:if test="${qna.qnaContent ne '삭제된 QnA입니다.'}">
 							<span style="float: right; margin-right: 15px;">
-<%-- 								<c:if test="${qna.login eq login}"> 수정 삭제 테스트--%>
+							<c:if test="${qna.login eq LoginName}">
 								<button id="mod_qna_${qna.qnaId}" onclick="modify_qna(${qna.qnaId})" 
 								style="margin-bottom: 3px;">수정</button>
 								<br><button onclick="del_qna(${qna.qnaId}, ${qna.qnaDepth})" style="margin-bottom: 3px;">
 								삭제</button>
 								<br>
-<%-- 								</c:if> --%>
-							<c:if test="${foodT.sellerId eq sellerId and qna.qnaDepth eq 0 and empty qnaList[qnavs.index+1].qnaPnum}">
+							</c:if>
+							<c:if test="${sellerLogin.login eq LoginName and foodT.sellerId eq sellerId and qna.qnaDepth eq 0 and empty qnaList[qnavs.index+1].qnaPnum}">
+								<input type="hidden" id="hdSecret_${qna.qnaId}" value="${qnaList[qnavs.index].qnaSecret}">
 								<button id="reply_button_qna_${qna.qnaId}" onclick="reply_qna(${qna.qnaId})">답변</button>
 							</c:if>
 							</span>
@@ -322,14 +331,12 @@
 					<li>
 					<div id="con_qna_${qna.qnaId}" style="padding-top: 15px;">
 					<c:choose>
-						<c:when test="${qna.qnaSecret eq false}"><c:out value="${qna.qnaContent}"/></c:when>
-						<c:when test="${qna.qnaSecret eq true and qna.login ne login}">
-						<c:if test="${foodT.sellerId ne sellerId}">
-							<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
-						</c:if>
-						<c:if test="${foodT.sellerId eq sellerId}">
-							<c:out value="${qna.qnaContent}"/>
-						</c:if>
+						<c:when test="${qna.qnaSecret eq false or qna.login eq LoginName}"><c:out value="${qna.qnaContent}"/></c:when>
+						<c:when test="${sellerLogin.login eq LoginName}"><c:out value="${qna.qnaContent}"/></c:when>
+						<c:when test="${qna.qnaSecret eq true and qna.login ne LoginName}">
+<%-- 							<c:if test="${foodT.sellerId ne sellerId}"> --%>
+								<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
+<%-- 							</c:if> --%>
 						</c:when>
 					</c:choose>
 					</div>
@@ -344,7 +351,8 @@
 					<form action="${pageContext.request.contextPath}/new_qna.fdl" method="post">
 					<span style="float: left;">
 					<!-- <input type='hidden' name="secret"> -->
-					<input type="checkbox" name="secret" value="true" style="display: inline;">비밀글 여부</span>
+					<input type="checkbox" name="secret" value="true" style="display: inline; margin-bottom: 3px;">비밀글 여부</span>
+					<input type="hidden" name="login" value="${LoginName}">
 					<input type="hidden" name="sellerId" value="${sellerId}">
 					<textarea name="qnaContent" id="re_area_qna" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)"
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty qna ? qna.qna_content:''}</textarea>
@@ -364,6 +372,9 @@
 		<!-- 		<section id="content4"> -->
 		<!-- 			<p>tab menu4의 내용</p> -->
 		<!-- 		</section> -->
+	<footer id="map_footer">
+		<jsp:include page="common/_footer.jsp" />
+	</footer>
 </body>
 
 </html>

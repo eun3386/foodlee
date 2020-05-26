@@ -30,13 +30,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.inf.IMemberLikeTruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
+import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.QnaVO;
 import com.fdl.foodlee.model.vo.ReviewVO;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.IMemberLikeTruckSVC;
+import com.fdl.foodlee.service.inf.IOrderSVC;
 import com.fdl.foodlee.service.inf.IQnaSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.IReviewSVC;
+import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
 public class TruckDetailController {
@@ -50,17 +53,23 @@ public class TruckDetailController {
 	IFoodtruckSVC fdSvc;
 	@Autowired
 	IMemberLikeTruckSVC mltSvc;
+	@Autowired
+	ISellerSVC sellSvc;
+	@Autowired
+	IOrderSVC orderSvc;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "truckDetail.fdl", method = RequestMethod.GET)
 	public String truckDetail(HttpSession ses, Model model) {
-		ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
-		ses.setAttribute("login", "seller"); // 로그인 임시설정
-		ses.setAttribute("sellerId", 2); // 판매자 번호 임시생성
+		// ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
+		// ses.setAttribute("login", "seller"); // 로그인 임시설정
+		ses.setAttribute("sellerId", 1); // 푸드트럭 판매자 번호 임시생성
+		ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(1)); // 셀러
+		// int mbId = (int)ses.getAttribute("id");
 		
-		int isAlreadyLiked = mltSvc.isAlreadyLikedMember(1, (int) ses.getAttribute("mbId"));
+		int isAlreadyLiked = mltSvc.isAlreadyLikedMember(1, (int) ses.getAttribute("id"));
 		model.addAttribute("isAlreadyLiked", (isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_ONE
 				|| isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_OTHERS));
 		
@@ -127,7 +136,7 @@ public class TruckDetailController {
 		Map<String, Object> result = new HashMap<>();
 		
 		String realPath = ses.getServletContext().getRealPath(IReviewFileSVC.DEF_UPLOAD_DEST) + "/";
-		rvFileSvc.makeUserDir(ses, "poro");
+		rvFileSvc.makeUserDir(ses, rv.getLogin());
 		
 		System.out.println("경로" + realPath);
 		Map<String, Object> rMap = rvFileSvc.writeUploadedMultipleFiles(imgfiles, realPath, "poro"
@@ -137,7 +146,7 @@ public class TruckDetailController {
 		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
 		System.out.println("총 볼륨(MB): " + rMap.get("totalMB") + "MB");
 		
-		ReviewVO rvT = new ReviewVO(0, "poro", rv.getSellerId(), 0, null, rv.getReviewContent(), filePath, null);
+		ReviewVO rvT = new ReviewVO(0, rv.getLogin(), rv.getSellerId(), 0, null, rv.getReviewContent(), filePath, null);
 		
 		int atRtkey = this.rvSvc.insertNewReviewReturnKey(rvT);
 
@@ -204,7 +213,8 @@ public class TruckDetailController {
 	public String newQna(@ModelAttribute(value="qna") QnaVO qna, @RequestParam(value="secret",
 			 required = false)String secret, HttpSession ses, Model model) {
 		Map<String, Object> result = new HashMap<>();
-		QnaVO qnaT = new QnaVO(0, "poro", qna.getSellerId(), qna.getQnaContent(), 0, null, (secret.equals("true") ? true : false), null);
+		String secretGet = (secret != null ? secret : "");
+		QnaVO qnaT = new QnaVO(0, qna.getLogin(), qna.getSellerId(), qna.getQnaContent(), 0, null, (secretGet.equals("true") ? true : false), null);
 		int atRtkey = this.qnaSvc.insertNewQnaReturnKey(qnaT);
 
 		// 상세보기 => atId?
@@ -229,7 +239,7 @@ public class TruckDetailController {
 			@RequestParam(value = "sesMb") int sesMb, HttpSession ses) {
 		ResponseEntity<Map<String, Object>> re = null;
 		Map<String, Object> map = new HashMap<>();
-		int sesMbId = 1; // (int) ses.getAttribute("mbId");
+		int sesMbId = (int)ses.getAttribute("id"); // (int) ses.getAttribute("mbId");
 		if (sesMbId == sesMb) {
 			Map<String, Object> lkMap = mltSvc.processMemberLike(tgSr, sesMb);
 			int cntLikes = (int) lkMap.get("cntLikes");
@@ -258,17 +268,20 @@ public class TruckDetailController {
 	@RequestMapping(value = "menu_order.fdl", method = RequestMethod.POST)
 	@ResponseBody
 	public String menuOrder(HttpServletRequest req) {
+		String login = req.getParameter("login");
+		int sellerId = Integer.parseInt(req.getParameter("sellerId"));
 		String[] arrMenuName = req.getParameterValues("arrMenuName[]");
 		String[] arrMenuPrice = req.getParameterValues("arrMenuPrice[]");
 		String[] arrMenuNumber = req.getParameterValues("arrMenuNumber[]");
-		int priceSum = Integer.parseInt(req.getParameter("priceSum"));
+		int orderPriceSum = Integer.parseInt(req.getParameter("priceSum"));
 		
-		System.out.println(Arrays.deepToString(arrMenuName));
-		System.out.println(Arrays.deepToString(arrMenuPrice));
-		System.out.println(Arrays.deepToString(arrMenuNumber));
-		System.out.println(priceSum);
+		String orderName = String.join(",", arrMenuName);
+		String orderPrice = String.join(",", arrMenuPrice);
+		String orderNumber = String.join(",", arrMenuNumber);
 		
-		// return "redirect:/truckDetail.fdl";
+		OrderVO order = new OrderVO(0, login, sellerId, orderName, orderNumber, orderPrice, orderPriceSum, 1, "");
+		orderSvc.memberNewOrder(order);
+		
 		return null;
 	}
 	
