@@ -19,7 +19,12 @@
 
 </head>
 <body>
-
+<table>
+	<tr>
+		<td><label>제목</label></td> <td><input type="text"></td>
+	</tr>
+	<tr>
+		<td><label>내용</label></td> <td>
 <!-- SE2 Markup Start -->	
 <div id="smart_editor2">
 	<div id="smart_editor2_content"><a href="#se2_iframe" class="blind">글쓰기영역으로 바로가기</a>
@@ -845,13 +850,13 @@ if(window.frameElement){
 }
 </script>
 <!--Example End-->
-</head>
-<body>
+
 	<form action="sample/viewer/index.php" method="post">
 		<textarea name="eventContent" id="eventContent" rows="10" cols="100" style="width:766px; height:412px; display:none;">
 		</textarea>
 	</form>
+	</td>
+</tr>
+</table>
 </body>
 </html>	
-</body>
-</html>
