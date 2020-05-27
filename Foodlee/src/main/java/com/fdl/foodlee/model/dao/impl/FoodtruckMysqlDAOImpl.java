@@ -33,7 +33,7 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 	private static final String SQL_SELECT_ALL_FOODTRUCK 
 	= "select * from foodtrucks"; 
 	private static final String	SQL_INSERT_FOODTRUCK 
-	= "insert into foodtrucks values(null,?,?,?,?,?,?,?,?,0,0,null,?,null)";
+	= "insert into foodtrucks values(null,?,?,?,?,?,?,?,?,?,0,0,null,?,null)";
 	private static final String	SQL_SELECT_FOODTRUCK_SELLER_ID 
 	= "select * from foodtrucks where seller_id = ?";
 	private static final String SQL_SELECT_FOODTRUCK_NAME 
@@ -43,7 +43,7 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 	private static final String	SQL_UPDATE_FOODTRUCK 
 	= "update foodtrucks set foodtruck_img_path=?, foodtruck_name=?, "
 		+ "foodtruck_main_menu=?, foodtruck_location=?, foodtruck_muni=?, "
-		+ "foodtruck_gu_code=?,foodtruck_operation_hour=?, "
+		+ "foodtruck_gu_code=?, foodtruck_open_time=?, foodtruck_close_time=?, "
 		+ "seller_foodtruck_coordinate=?";
 	private static final String	SQL_DELETE_FOODTRUCK 
 	= "delete from foodtrucks where foodtruck_name = ?";
@@ -60,7 +60,8 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 					ft.getFoodtruckName(), ft.getFoodtruckMainMenu(), 
 					ft.getMenuCategory(), ft.getFoodtruckLocation(), 
 					ft.getFoodtruckMuni(), ft.getFoodtruckGuCode(), 
-					ft.getFoodtruckOperationHour(),	ft.getSellerFoodtruckCoordinate());
+					ft.getFoodtruckOpenTime(),	ft.getFoodtruckCloseTime(),
+					ft.getSellerFoodtruckCoordinate());
 		return r == 1;
 	}
 	
@@ -71,8 +72,9 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 				ft.getFoodtruckImgPath(), ft.getFoodtruckName(),
 				ft.getFoodtruckMainMenu(), ft.getMenuCategory(),
 				ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
-				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(),
-				ft.getSellerFoodtruckCoordinate(), ft.getLocationUpdatedAt());
+				ft.getFoodtruckGuCode(), ft.getFoodtruckOpenTime(),	
+				ft.getFoodtruckCloseTime(), ft.getSellerFoodtruckCoordinate(), 
+				ft.getLocationUpdatedAt());
 		return r == 1;
 	}
 	
