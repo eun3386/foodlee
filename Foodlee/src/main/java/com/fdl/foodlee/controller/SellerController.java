@@ -84,16 +84,4 @@ public class SellerController {
 		}
 	}
 	
-//	seller/find_id.fdl
-	@RequestMapping(value = "/find_id.fdl", method = RequestMethod.GET)
-	public String findIdProc(String name, String phoneNumber) {
-		return selSvc.selectSellerLogin(name, phoneNumber);
-	}
-	
-//	seller/find_pw.fdl
-	@RequestMapping(value = "/find_pw.fdl", method = RequestMethod.GET)
-	public String findPasswordProc(String login, String email) {
-		return selSvc.selectSellerPassword(login, email);
-	}
-	
 }

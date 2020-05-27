@@ -26,9 +26,23 @@
 			$('input[id=input2]').attr('name', 'email');
 		});
     	
+		$('#find_submit_btn').on('click', function() {
+			var tUrl = "${pageContext.request.contextPath}/";
+			tUrl += "find.fdl";
+			var param = $('form[name=find_form]').serialize();
+			$.ajax ({
+				type: get,
+				url: tUrl,
+				data: param,
+				sucess: function(res) {
+					
+				}
+			});
+		});
+		
 	});
 </script>
-<form action="${pageContext.request.contextPath}/find.fdl" method="post">
+<form name="find_form">
 	<table border='0'>
 		<tr class="title">
 			<th>아이디/비밀번호 찾기</th>
@@ -65,7 +79,7 @@
 	 	</tr>
 		<tr class="submit">
 			<td>
-				<input type="submit" value="찾기">
+				<input id="find_submit_btn" type="button" value="찾기">
 			</td>
 		</tr>
 	</table>

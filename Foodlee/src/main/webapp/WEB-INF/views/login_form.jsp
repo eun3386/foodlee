@@ -15,7 +15,7 @@
 			var password = $('input[name=password]').val();
 			var tUrl = "${pageContext.request.contextPath}/";
 			tUrl += 'login.fdl';
-			var param = $('form[name=form]').serialize();
+			var param = $('form[name=login_form1]').serialize();
 			$.ajax ({
 				type: 'post',
 				url: tUrl,
@@ -56,8 +56,7 @@
 </script>
 <div id="login_wrap">
 	<div id="login_form">
-<%-- 		<form id="form" action="${pageContext.request.contextPath}/login.fdl" method="post"> --%>
-		<form id="form" name="form">
+		<form id="form" name="login_form1">
 	 		<table border='0'>
 	 			<tr class="title">
 	 				<th>푸들이 로그인</th>
@@ -92,7 +91,6 @@
 	 			</tr>
 	 			<tr class="submit">
 	 				<td>
-<!-- 	 					<input type="submit" value="로그인"> -->
 						<input id="login_submit_btn" type="button" value="로그인">
 	 				</td>
 	 			</tr>
