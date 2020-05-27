@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.service.inf.ILoginSVC;
 import com.fdl.foodlee.service.inf.IMemberSVC;
 
 @Controller
@@ -18,6 +19,9 @@ public class MypageController {
 
 	@Autowired
     private IMemberSVC mbSvc;
+	
+	@Autowired
+	private ILoginSVC logSvc;
 	   
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 	
@@ -32,7 +36,7 @@ public class MypageController {
 	}
 	
 	// 내 정보 확인
-	@RequestMapping(value = "my_info.fdl", method = RequestMethod.GET)
+	@RequestMapping(value = "my_info_show.fdl", method = RequestMethod.GET)
     public ModelAndView memberShowProc(String login) {
         ModelAndView mav = new ModelAndView();
         if( login == null || login.isEmpty() ) {
@@ -54,21 +58,21 @@ public class MypageController {
         return mav;
     }
     
-//	// 나의 정보 수정 폼
-//    @RequestMapping(value = "my_info_edit.fdl", method = RequestMethod.GET)
-//    public ModelAndView memberEditFormProc(int id) {
-//        MemberVO mb = mbSvc.selectOneMember(id);
-//        ModelAndView mav = new ModelAndView();
-//        if( mb != null ) {
-////            mav.addObject("msg","회원편집폼 준비 성공"+ id);
-//            mav.addObject("member", mb);
-////            mav.setViewName("member/mb_edit_form");
-//        } else {
-//            mav.addObject("msg","회원 정보 수정 준비 실패" + id);
-//            mav.setViewName("redirect:my_info.fdl");
-//        }
-//        return mav; 
-//    }
+	// 나의 정보 수정 폼
+    @RequestMapping(value = "my_info_edit.fdl", method = RequestMethod.GET)
+    public ModelAndView memberEditFormProc(int id) {
+        MemberVO mb = mbSvc.selectOneMember(id);
+        ModelAndView mav = new ModelAndView();
+        if( mb != null ) {
+//            mav.addObject("msg","회원편집폼 준비 성공"+ id);
+            mav.addObject("member", mb);
+//            mav.setViewName("member/mb_edit_form");
+        } else {
+            mav.addObject("msg","회원 정보 수정 준비 실패" + id);
+            mav.setViewName("redirect:my_info.fdl");
+        }
+        return mav; 
+    }
 
     // 내 정보 수정
     @RequestMapping(value = "my_info_update.fdl", method = RequestMethod.POST)
