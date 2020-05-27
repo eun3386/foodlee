@@ -75,7 +75,7 @@
 .submit {
 	text-align: right;
 }
-input#login_submit_btn {
+.submit input {
 	border-radius: 1px;
 	height: 25px;
 	width: 50px;
