@@ -1,5 +1,7 @@
 package com.fdl.foodlee.model.vo;
 
+import java.sql.Timestamp;
+
 public class OrderVO {
 	private int orderId; // 주문번호 <<PK>>
 	private String login; // 주문한 사람의 아이디 <<FK>>
@@ -10,11 +12,13 @@ public class OrderVO {
 	private int orderPriceSum; // 주문한 메뉴의 총가격
 	private int orderState; // 주문 상황 (1 회원 주문 2 회원 취소 3 판매자 주문 접수 4 판매자 주문 거절 5 판매자 주문 취소)
 	private String orderReason; // 판매자 주문 취소/거절 사유
+	private String orderMerchantUid; // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
+	private Timestamp orderDate; // 주문일자
 
 	public OrderVO() {}
 
 	public OrderVO(int orderId, String login, int sellerId, String orderName, String orderNumber, String orderPrice,
-			int orderPriceSum, int orderState) {
+			int orderPriceSum, int orderState, String orderMerchantUid, Timestamp orderDate) {
 		this.orderId = orderId;
 		this.login = login;
 		this.sellerId = sellerId;
@@ -23,10 +27,12 @@ public class OrderVO {
 		this.orderPrice = orderPrice;
 		this.orderPriceSum = orderPriceSum;
 		this.orderState = orderState;
+		this.orderMerchantUid = orderMerchantUid;
+		this.orderDate = orderDate;
 	}
 	
 	public OrderVO(int orderId, String login, int sellerId, String orderName, String orderNumber, String orderPrice,
-			int orderPriceSum, int orderState, String orderReason) {
+			int orderPriceSum, int orderState, String orderReason, String orderMerchantUid, Timestamp orderDate) {
 		this.orderId = orderId;
 		this.login = login;
 		this.sellerId = sellerId;
@@ -36,6 +42,7 @@ public class OrderVO {
 		this.orderPriceSum = orderPriceSum;
 		this.orderState = orderState;
 		this.orderReason = orderReason;
+		this.orderDate = orderDate;
 	}
 
 	public int getOrderId() {
@@ -108,6 +115,22 @@ public class OrderVO {
 	
 	public void setOrderReason(String orderReason) {
 		this.orderReason = orderReason;
+	}
+	
+	public String getorderMerchantUid() {
+		return orderMerchantUid;
+	}
+	
+	public void setorderMerchantUid(String orderMerchantUid) {
+		this.orderMerchantUid = orderMerchantUid;
+	}
+	
+	public Timestamp getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Timestamp orderDate) {
+		this.orderDate = orderDate;
 	}
 
 	@Override
