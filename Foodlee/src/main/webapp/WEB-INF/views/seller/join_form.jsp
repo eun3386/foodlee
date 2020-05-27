@@ -1,35 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-    img {
-    	width: 150px;
-    	height: 150px;
-    }
-    .lb {
-    	text-align: right;
-    	padding: 5px 20px;
-    }
-    .input {
-    	padding-left: 50px;
-    }
-    #join_submit {
-    	text-align: right;
-    	padding-right: 100px;
-    }
-    #join_table {
-    	margin: 0 auto;
-    	width: 960px;
-    }
-    #txtarea {
-    	padding: 15px 50px;
-    }
-    input {
-    	height: 25px;
-    }
-    #dupchk {
-    	width: 70px;
-    }
-</style>
+<link href="${pageContext.request.contextPath}/resources/css/join.css" type="text/css" rel="stylesheet">
 <script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -80,8 +51,11 @@
     <form action="${pageContext.request.contextPath}/seller/join.fdl" method="post">
     	<table id="join_table" border="0">
         	<tr>
-        		<td><img alt="사진" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG"> </td>
+        		<td><img id="join_img" alt="사진" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG"> </td>
         		<td id="txtarea"><textarea rows="10" cols="100" style="resize: none;" readonly>판매자 회원가입 소개글 더미</textarea></td>
+        		<td>
+        			<input type="hidden" id="join_msg" name="join_msg" value="${msg}">
+        		</td>
         	</tr>
             <tr>
                 <td class="lb"><label for="id">*아이디</label></td>
@@ -167,7 +141,10 @@
             
             <tr>
             	<td class="lb"></td>
-            	<td id="join_submit"><input type="submit" value="가입" style="width: 40px; height: 30px; font: 20px;" disabled="disabled">&nbsp;&nbsp;<input type="reset" style="width: 40px; height: 30px; font: 20px;" value="리셋"></td>
+            	<td id="join_submit">
+            		<input type="submit" id="join_submit_btn" class="join_btn" value="가입" disabled="disabled">&nbsp;&nbsp;
+            		<input type="reset" class="join_btn" value="리셋">
+            	</td>
             </tr>
             
         </table>

@@ -211,12 +211,15 @@
 			<c:if test="${empty LoginName}">
 			<a href="#" id='login'>로그인</a> / <a href="#" id='join'>회원가입</a></span>
 	        </c:if>
-	        <c:if test="${not empty LoginName and LoginName ne 'admin'}">
+	        <c:if test="${not empty LoginName and LoginType eq 4}">
 	        <a href="${pageContext.request.contextPath}/my_page.fdl" id='mypage'>마이페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
+	        </c:if>
+	        <c:if test="${not empty LoginName and LoginType eq 5}">
+	        <a href="${pageContext.request.contextPath}/boss.fdl" id='mypage'>마이페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
 	        </c:if>
 	    </span>
 	    <span id="adminlogout">
-	        <c:if test="${not empty LoginName and LoginName eq 'admin'}">
+	        <c:if test="${not empty LoginName and LoginType eq 6}">
 	        <a href="${pageContext.request.contextPath}/admin.fdl" id='admin_page'>어드민페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
 	        </c:if>
         </span>

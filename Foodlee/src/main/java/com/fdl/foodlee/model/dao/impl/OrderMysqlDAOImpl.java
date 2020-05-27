@@ -15,7 +15,7 @@ import com.fdl.foodlee.model.vo.OrderVO;
 public class OrderMysqlDAOImpl implements IOrderDAO {
 	
 	public static final String SQL_ORDER_NEW = "insert into orders"
-			+ " values(0, ?, ?, ?, ?, ?, ?, '1', '')";
+			+ " values(0, ?, ?, ?, ?, ?, ?, '1', '', ?, now())";
 	public static final String SQL_ORDER_CANCEL_MEMBER = "update orders set order_state='2'"
 			+ " where order_id=?";
 	public static final String SQL_ORDER_MEMBER_LIST = "select * from orders where login=?";
@@ -44,7 +44,7 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 	public boolean memberNewOrder(OrderVO od) {
 		int r = jtem.update(SQL_ORDER_NEW,
 				od.getLogin(), od.getSellerId(), od.getOrderName(), od.getOrderNumber(),
-				od.getOrderPrice(), od.getOrderPriceSum());
+				od.getOrderPrice(), od.getOrderPriceSum(), od.getorderMerchantUid());
 		return r == 1; //? true: false;
 	}
 

@@ -1,6 +1,7 @@
 package com.fdl.foodlee.controller;
 
 import java.io.File;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -8,10 +9,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +40,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fdl.foodlee.model.dao.inf.IMemberLikeTruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
@@ -45,6 +59,121 @@ import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
 public class TruckDetailController {
+	
+	public class PaymentCheck {
+		public static final String IMPORT_TOKEN_URL = "https://api.iamport.kr/users/getToken";
+		public static final String IMPORT_PAYMENTINFO_URL = "https://api.iamport.kr/payments/find/";
+		public static final String IMPORT_CANCEL_URL = "https://api.iamport.kr/payments/cancel";
+		public static final String IMPORT_PREPARE_URL = "https://api.iamport.kr/payments/prepare";
+		public static final String KEY = "0128503560659101";
+		public static final String SECRET = "1qJGsdUsp7kVdDuUFbvzjvIYY4DZ6ES84BOxPJZfRka4XFZDQud90V8Y0MX6qQfvs42hN2xEmHJkmIXd";
+		
+		// 아임포트 인증(토큰)을 받아주는 함수
+		public String getImportToken() {
+			String result = "";
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpPost post = new HttpPost(IMPORT_TOKEN_URL);
+			Map<String, String> m = new HashMap<String, String>();
+			m.put("imp_key", KEY);
+			m.put("imp_secret", SECRET);
+			try {
+				post.setEntity(new UrlEncodedFormEntity(convertParameter(m)));
+				HttpResponse res = client.execute(post);
+				ObjectMapper mapper = new ObjectMapper();
+				String body = EntityUtils.toString(res.getEntity());
+				JsonNode rootNode = mapper.readTree(body);
+				JsonNode resNode = rootNode.get("response");
+				result = resNode.get("access_token").asText();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return result;
+		}
+
+		private List<NameValuePair> convertParameter(Map<String, String> paramMap) {
+			List<NameValuePair> paramList = new ArrayList<NameValuePair>();
+			Set<Entry<String, String>> entries = paramMap.entrySet();
+			for (Entry<String, String> entry : entries) {
+				paramList.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+			}
+			return paramList;
+		}
+
+		// 결제취소
+		public int cancelPayment(String token, String mid) {
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpPost post = new HttpPost(IMPORT_CANCEL_URL);
+			Map<String, String> map = new HashMap<String, String>();
+			post.setHeader("Authorization", token);
+			map.put("merchant_uid", mid);
+			String asd = "";
+			try {
+				post.setEntity(new UrlEncodedFormEntity(convertParameter(map)));
+				HttpResponse res = client.execute(post);
+				ObjectMapper mapper = new ObjectMapper();
+				String enty = EntityUtils.toString(res.getEntity());
+				JsonNode rootNode = mapper.readTree(enty);
+				asd = rootNode.get("response").asText();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (asd.equals("null")) {
+				System.err.println("환불실패");
+				return -1;
+			} else {
+				System.err.println("환불성공");
+				return 1;
+			}
+		}
+
+		// 아임포트 결제정보를 조회해서 결제금액을 뽑아주는 함수
+		public String getAmount(String token, String mId) {
+			String amount = "";
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpGet get = new HttpGet(IMPORT_PAYMENTINFO_URL + mId + "/paid");
+			get.setHeader("Authorization", token);
+			try {
+				HttpResponse res = client.execute(get);
+				ObjectMapper mapper = new ObjectMapper();
+				String body = EntityUtils.toString(res.getEntity());
+				JsonNode rootNode = mapper.readTree(body);
+				System.out.println(rootNode);
+				JsonNode resNode = rootNode.get("response");
+				amount = resNode.get("amount").asText();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return amount;
+		}
+
+		// 아임포트 결제금액 변조를 방지하는 함수
+		public String setHackCheck(String amount, String mId, String token) {
+			HttpClient client = HttpClientBuilder.create().build();
+			HttpPost post = new HttpPost(IMPORT_PREPARE_URL);
+			Map<String, String> m = new HashMap<String, String>();
+			post.setHeader("Authorization", token);
+			m.put("amount", amount);
+			m.put("merchant_uid", mId);
+			try {
+				post.setEntity(new UrlEncodedFormEntity(convertParameter(m)));
+				HttpResponse res = client.execute(post);
+				ObjectMapper mapper = new ObjectMapper();
+				String body = EntityUtils.toString(res.getEntity());
+				JsonNode rootNode = mapper.readTree(body);
+				System.out.println(rootNode);
+				return rootNode.toString();
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		
+		public void test() {
+			System.out.println("test");
+		}
+
+	}
+	
 	@Autowired
 	IReviewSVC rvSvc;
 	@Autowired
@@ -73,11 +202,12 @@ public class TruckDetailController {
 		if ((req.getParameter("sellerId") != null)) {
 			getSellerId = Integer.parseInt((req.getParameter("sellerId")));
 		}
-		// ses.setAttribute("sellerId", 1); // 푸드트럭 판매자 번호 임시생성
 		ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(getSellerId)); // 셀러
+		
 		// int mbId = (int)ses.getAttribute("id");
 		
 		
+		int getTruckSellerId = 0;
 		if (ses.getAttribute("LoginName") != null) {
 			int isAlreadyLiked = mltSvc.isAlreadyLikedMember(getSellerId, (int) ses.getAttribute("id"));
 			model.addAttribute("isAlreadyLiked", (isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_ONE
@@ -85,7 +215,16 @@ public class TruckDetailController {
 			
 			MemberVO member = memSvc.selectOneMember((String)ses.getAttribute("LoginName"));
 			model.addAttribute("member", member);
+			
+			// int getTruckSellerId = sellSvc.selectOneSeller((String)ses.getAttribute("LoginName")).getId();
+			if(ses.getAttribute("LoginType") != null) {
+				String getLoginType = String.valueOf(ses.getAttribute("LoginType"));
+				if (Integer.parseInt(getLoginType) == 5) {
+					getTruckSellerId = sellSvc.selectOneSeller((String)ses.getAttribute("LoginName")).getId();
+				}
+			}
 		}
+		ses.setAttribute("sellerId", getTruckSellerId);
 		
 		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(getSellerId);
 		System.out.println(fd.getFoodtruckName());
@@ -288,14 +427,24 @@ public class TruckDetailController {
 		String[] arrMenuPrice = req.getParameterValues("arrMenuPrice[]");
 		String[] arrMenuNumber = req.getParameterValues("arrMenuNumber[]");
 		int orderPriceSum = Integer.parseInt(req.getParameter("priceSum"));
+		String merchantUid = req.getParameter("merchantUid");
 		
 		String orderName = String.join(",", arrMenuName);
 		String orderPrice = String.join(",", arrMenuPrice);
 		String orderNumber = String.join(",", arrMenuNumber);
 		
-		OrderVO order = new OrderVO(0, login, sellerId, orderName, orderNumber, orderPrice, orderPriceSum, 1, "");
+		// OrderVO order = new OrderVO(0, login, sellerId, orderName, orderNumber, orderPrice, orderPriceSum, 1, "");
+		OrderVO order = new OrderVO(0, login, sellerId, orderName, orderNumber, orderPrice, orderPriceSum, 1, merchantUid, new Timestamp(0));
 		orderSvc.memberNewOrder(order);
 		
+		return null;
+	}
+	
+	// 주문 취소
+	@RequestMapping(value = "orderCancel.fdl", method = RequestMethod.POST)
+	@ResponseBody
+	public String orderCancel(HttpServletRequest req) {
+		new PaymentCheck().cancelPayment(new PaymentCheck().getImportToken(), "");
 		return null;
 	}
 	

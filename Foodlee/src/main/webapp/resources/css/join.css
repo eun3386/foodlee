@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+#join_img {
+	width: 150px;
+	height: 150px;
+}
+.lb {
+	text-align: right;
+	padding: 5px 20px;
+}
+.input {
+	padding-left: 50px;
+}
+#join_submit {
+	text-align: right;
+	padding-right: 100px;
+}
+#join_table {
+	margin: 0 auto;
+	width: 960px;
+}
+#txtarea {
+	padding: 15px 50px;
+}
+input {
+	height: 25px;
+}
+#dupchk {
+	width: 70px;
+}
+.join_btn {
+	width: 40px; 
+	height: 30px; 
+	font: 20px;
+}

@@ -2,15 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page import="com.fdl.foodlee.controller.TruckDetailController" %>
-<% 
-	TruckDetailController.PaymentCheck tp = new TruckDetailController().new PaymentCheck(); 
-%>  
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <%
 	String CON = application.getContextPath();
 %>
-
 <html>
 <head>
 <link rel="stylesheet"
@@ -34,6 +29,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script src="resources/js/truckDetail.js"></script>
+<script>
+</script>
 <body>
 	<div class="main_box">
 		<div class="menu common">
@@ -68,7 +65,6 @@
 				<input id="email" type="hidden" value="${member.email}">
 				<input id="phoneNumber" type="hidden" value="${member.phoneNumber}">
 				<input id="address" type="hidden" value="${member.address}">
-				<input id="LoginType" type="hidden" value="${LoginType}">
 				<span id="follow" tg_sr='${foodT.sellerId}' ses_mb='${id}' class="mb_follow">
 					<i class="fas fa-heart fa-lg follow_${isAlreadyLiked ? 'red': 'orange'}"></i>
 				</span>
@@ -93,9 +89,7 @@
 				<input type="hidden" id="foodTMuni" value="${foodT.foodtruckMuni}">
 				<input type="hidden" id="foodTLocation" value="${foodT.foodtruckLocation}">
 				<a href="#" class="close" style="float: right;">
-				<i class="fas fa-times fa-lg" style="color:red; padding-top: 3px; margin-right: 5px;"></i>
-				</a>
-				<!-- <i class="fas fa-times-circle fa-lg" style="color:red; padding-top: 3px;"></i> -->
+				<i class="fas fa-times-circle fa-lg" style="color:red; padding-top: 3px;"></i></a>
 			</div>
 			<div id="map"
 				style="width: 1000px; height: 500px; text-align: center; vertical-align: middle;"></div>
@@ -327,52 +321,28 @@
 						<div style="float: left;">
 						</div>
 						<div class="nickname" style="padding-top: 2px;">
+						<c:if test="${qna.qnaDepth eq 1 and qna.qnaSecret eq false}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i></c:if>
 						<c:choose>
-							<c:when test="${qna.qnaSecret eq false}">
-								<c:if test="${qna.qnaDepth eq 0}">${qna.login}</c:if>
-								<c:if test="${qna.qnaDepth eq 1}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i>사장님</c:if>
-							</c:when>
+							<c:when test="${qna.qnaDepth eq 0 and qna.qnaSecret eq false}">${qna.login}</c:when>
+							<c:when test="${qna.qnaDepth eq 1 and qna.qnaSecret eq false}">사장님</c:when>
 							<c:when test="${qna.qnaSecret eq true}">
-								<c:choose>
-									<c:when test="${qna.qnaDepth eq 0}">
-										<c:if test="${qna.login eq LoginName or sellerLogin.login eq LoginName}">
-											<i class="fas fa-lock"></i> ${qna.login}
-										</c:if>
-									</c:when>
-									<c:when test="${qna.qnaDepth eq 1}">
-										<c:if test="${foodT.sellerId eq sellerId}">
-											<i class="fas fa-lock"></i> <i class='fas fa-reply fa-rotate-180 fa-lg'></i>사장님
-										</c:if>									
-										<c:if test="${qnaList[qnavs.index-1].qnaId eq qnaList[qnavs.index].qnaPnum and qnaList[qnavs.index-1].login eq LoginName}">
-											<i class="fas fa-lock"></i> <i class='fas fa-reply fa-rotate-180 fa-lg'></i>사장님
-										</c:if>
-									</c:when>
-								</c:choose>
+								<c:if test="${qna.login eq LoginName or sellerLogin.login eq LoginName and qna.qnaDepth eq 0 }">
+									<i class="fas fa-lock"></i> ${qna.login}
+								</c:if>
+								<c:if test="${qna.login eq LoginName and sellerLogin.login eq LoginName and qna.qnaDepth eq 1 and LoginType eq 5}">
+									<i class="fas fa-lock"></i> <i class='fas fa-reply fa-rotate-180 fa-lg'></i> 사장님
+								</c:if>
 							</c:when>
 						</c:choose>
 						</div>
 						<div class="date" style="padding-top: 4px; font-size: 12px;">
 						<span id="fmt_qna_${qna.qnaId}">
 						<c:choose>
-							<c:when test="${qna.qnaSecret eq false}">
-								<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
-							</c:when>
+							<c:when test="${qna.qnaSecret eq false}"><fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/></c:when>
 							<c:when test="${qna.qnaSecret eq true}">
-								<c:choose>
-									<c:when test="${qna.qnaDepth eq 0}">
-										<c:if test="${qna.login eq LoginName or sellerLogin.login eq LoginName}">
-											<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
-										</c:if>
-									</c:when>
-									<c:when test="${qna.qnaDepth eq 1}">
-									<c:if test="${foodT.sellerId eq sellerId}">
-										<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
-									</c:if>	
-									<c:if test="${qnaList[qnavs.index-1].qnaId eq qnaList[qnavs.index].qnaPnum and qnaList[qnavs.index-1].login eq LoginName}">
-										<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
-									</c:if>
-									</c:when>
-								</c:choose>
+								<c:if test="${qna.login eq LoginName or sellerLogin.login eq LoginName}"> <!-- 비교 이전 foodT.sellerId eq sellerid -->
+									<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+								</c:if>
 							</c:when>
 						</c:choose>
 						</span>
@@ -397,35 +367,31 @@
 					<li>
 					<div id="con_qna_${qna.qnaId}" style="padding-top: 15px;">
 					<c:choose>
+<%-- 						<c:when test="${qna.qnaSecret eq false or qna.login eq LoginName}"><c:out value="${qna.qnaContent}"/></c:when> --%>
+<%-- 						<c:when test="${sellerLogin.login eq LoginName}"><c:out value="${qna.qnaContent}"/></c:when> --%>
+<%-- 						<c:when test="${qna.qnaSecret eq true and qna.login ne LoginName}"> --%>
+<%-- 							<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다. --%>
+<%-- 						</c:when> --%>
+<%-- 					</c:choose> --%>
 						<c:when test="${qna.qnaSecret eq false}"><c:out value="${qna.qnaContent}"/></c:when>
 						<c:when test="${qna.qnaSecret eq true}">
 							<c:choose>
-								<c:when test="${qna.qnaDepth eq 0}">
-									<c:if test="${qna.login eq LoginName}">
-										<c:out value="${qna.qnaContent}"/>
-									</c:if>
-									<c:if test="${qna.login ne LoginName and foodT.sellerId eq sellerId}">
-										<c:out value="${qna.qnaContent}"/>
-									</c:if>
-									<c:if test="${qna.login ne LoginName and foodT.sellerId ne sellerId}">
-										<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
-									</c:if>
-								</c:when>
-								<c:when test="${qna.qnaDepth eq 1}">
-									<c:choose>
-										<c:when test="${qnaList[qnavs.index-1].qnaId eq qnaList[qnavs.index].qnaPnum}">
-											<c:if test="${foodT.sellerId eq sellerId}">
-												<c:out value="${qna.qnaContent}"/>
-											</c:if>
-											<c:if test="${qnaList[qnavs.index-1].login eq LoginName}">
-												<c:out value="${qna.qnaContent}"/>
-											</c:if>
-											<c:if test="${foodT.sellerId ne sellerId and qnaList[qnavs.index-1].login ne LoginName}">
-												<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
-											</c:if>
-										</c:when>
-									</c:choose>
-								</c:when>
+							<c:when test="${qna.qnaDepth eq 0}">
+								<c:if test="${qna.login eq LoginName}">
+									<c:out value="${qna.qnaContent}"/>
+								</c:if>
+								<c:if test="${qna.login ne LoginName}">
+									<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
+								</c:if>
+							</c:when>
+							<c:when test="${qna.qnaDepth eq 1}">
+								<c:if test="${qnaList[qnavs.index-1].qnaId eq qnaList[qnavs.index].qnaPnum and qnaList[qnavs.index-1].login eq LoginName}">
+									<c:out value="${qna.qnaContent}"/>
+								</c:if>
+								<c:if test="${qnaList[qnavs.index-1].qnaId ne qnaList[qnavs.index].qnaPnum and qnaList[qnavs.index-1].login ne LoginName}">
+									<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
+								</c:if>
+							</c:when>
 							</c:choose>
 						</c:when>
 					</c:choose>
