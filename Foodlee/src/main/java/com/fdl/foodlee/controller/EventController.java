@@ -1,8 +1,17 @@
 package com.fdl.foodlee.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fdl.foodlee.model.vo.EventAnswerVO;
 import com.fdl.foodlee.model.vo.EventVO;
@@ -24,8 +32,6 @@ public class EventController {
 	@Autowired
 	private IEventSVC evSvc;
 	@Autowired
-	private IEventFileSVC evFileSvc;
-	@Autowired
 	private IEventAnswerSVC asSvc;
 //- 관리자가 신규 이벤트 게시글을 등록할 수 있다.(+파일업로드..)
 //	event_new_form.fdl (get)
@@ -37,46 +43,49 @@ public class EventController {
 		return "event/ev_new_form";
 	}
 //	event_add.fdl (post, proc, dao, param..vo)
-	@RequestMapping(value = "event_add.fdl", 
-			method = RequestMethod.POST)
-	public String eventAddProc(String title, 
-			String tags, String content,
-			List<MultipartFile> upfiles, int memberId, 
-			HttpSession ses) {
-		System.out.println("eventAddProc()");
-		System.out.println("multipart size: " 
-						+ upfiles.size());
-				
-		String realPath =  
-			ses.getServletContext()
-			.getRealPath(IEventFileSVC.DEF_UPLOAD_DEST)
-					 + "/";
-
-		//String filePath  // 다수개 처리
-		Map<String, Object> rMap
-		 = evFileSvc.writeUploadedMultipleFiles(upfiles, 
-			realPath, (String)ses
-				.getAttribute("mbLoginName"));
-		String filePath = (String)rMap.get("muliFPs");
-		
-		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
-		System.out.println("총 볼륨(MB): "+ rMap.get("totalMB") 
-				+"MB");
-		
-		// public img src... 
-		int evRtkey = this.evSvc
-				.insertNewEventReturnKey(title, content, 
-				filePath, tags, memberId);
-		
-		// 상세보기 => evId?
-		if( evRtkey > 0 ) {
-			System.out.println("게시글 등록 성공: " + evRtkey);
-			return "redirect:event_show.my?id="+evRtkey;
-		} else {
-			System.out.println("게시글 등록 실패: " + title);
-			return "event/event_new_form"; // FW
+	@RequestMapping("smartEditor/sample/photo_uploader/event_add.fdl")
+	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			// 파일정보
+			String sFileInfo = "";
+			String fileName = request.getHeader("file-name");			
+			//String dftFilePath = request.getServletContext().getRealPath(request.getContextPath()+"/");
+			String dftFilePath = request.getServletContext().getRealPath("/");
+			String filePath = dftFilePath + "resources/photo_upload";
+			File file = new File(filePath);
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			String realFileNm = "";
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+			String today = formatter.format(new java.util.Date());
+			realFileNm = today+UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
+			String rlFileNm = filePath +"/"+realFileNm;
+			
+			InputStream is = request.getInputStream();
+			OutputStream os = new FileOutputStream(rlFileNm);
+			int numRead;
+			byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
+			while((numRead = is.read(b,0,b.length))!=-1) {
+				os.write(b,0,numRead);
+			}
+			if(is != null) {
+				is.close();
+			}
+			os.flush();
+			os.close();
+			
+			sFileInfo += "&bNewLine=true";
+			sFileInfo += "&sFileName=" +fileName;
+			sFileInfo += "&sFileURL="+request.getContextPath()+"/resources/photo_upload/"+realFileNm;
+			PrintWriter print = response.getWriter();
+			print.print(sFileInfo);
+			print.flush();
+			print.close();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
-	}	
+	}
 //- 이벤트 게시글 상세보기 할 수 있다
 //	event_show.fdl (get, proc, dao, param?id)
 	@RequestMapping(value = "event_show.fdl", 
@@ -127,7 +136,7 @@ public class EventController {
 		} else {			
 			model.addAttribute("msg", 
 				"게시글 상세조회 실패 - " + id);
-			return "redirect:event_list.fdl";
+			return "redirect:main.fdl";
 		}
 	}	
 	

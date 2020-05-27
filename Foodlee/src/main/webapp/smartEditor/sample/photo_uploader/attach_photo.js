@@ -334,7 +334,8 @@
     	var tempFile,
     		sUploadURL;
     	
-    	sUploadURL= 'smartEditor/multi_image_uploader.jsp'; 	//upload URL
+//    	sUploadURL= 'smartEditor/multi_image_uploader.jsp'; 	//upload URL
+    	sUploadURL= 'event_add.fdl';
     	
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
