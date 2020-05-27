@@ -20,7 +20,19 @@
 <script type="text/javascript" src="smartEditor/sample/js/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
 </head>
 <body>
-
+<form id="frm" action="event/ev_show.jsp" method="post" >
+<!-- <form id="frm" action="event_add.fdl" method="post" > -->
+<table width="100%">
+	<tr>
+		<td>제목</td>
+		<td><input type="text" id="title" /></td>
+	</tr>
+	<tr>
+		<td>내용</td>
+		<td>
+			
+			
+			
 <!-- SE2 Markup Start -->	
 <div id="smart_editor2">
 	<div id="smart_editor2_content"><a href="#se2_iframe" class="blind">글쓰기영역으로 바로가기</a>
@@ -790,20 +802,39 @@
 </div>
 <!-- SE2 Markup End -->
 
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<input type="button" id="save" value="저장"/>
+			<input type="button" value="취소"/>
+		</td>
+	</tr>
+</table>
+</form>
 <!--Example Start-->
 <div id="se2_sample" style="margin:10px 0;">
-	<input type="button" onclick="pasteHTML();" value="본문에 내용 넣기" />
-	<input type="button" onclick="showHTML();" value="본문 내용 가져오기" />
+<!-- 	<input type="button" onclick="pasteHTML();" value="본문에 내용 넣기" /> -->
+<!-- 	<input type="button" onclick="showHTML();" value="본문 내용 가져오기" /> -->
 	<input type="button" onclick="submitContents();" value="서버로 내용 전송" />
-	<input type="button" onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
-	<form action="sample/viewer/index.php" method="post">
+<!-- 	<input type="button" onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" /> -->
+	<form action="event_show.fdl" method="post">
 		<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;">
-			<p>글 수정시 여기에 값을 넣어주면 됩니다.</p>
+			
 		</textarea>
 	</form>
 </div>
 
 <script type="text/javascript">
+
+// var oEditors = [];
+// nhn.husky.EZCreator.createInIFrame({
+//  oAppRef: oEditors,
+//  elPlaceHolder: "ir1",
+//  sSkinURI: "smartEditor/SmartEditor2Skin.html",
+//  fCreator: "createSEditor2"
+// });
+
 if(window.frameElement){
 	jindo.$("se2_sample").style.display = "none";
 }else{
@@ -815,14 +846,14 @@ if(window.frameElement){
 		//aAdditionalFontList : [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]],	// 추가 글꼴 목록
 		fOnBeforeUnload : function(){
 			//예제 코드
-			//return "내용이 변경되었습니다.";
+			return "내용이 변경되었습니다.";
 		}
 	});
 	
 	oEditor.run({
 		fnOnAppReady: function(){
 			//예제 코드
-			//oEditor.exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+			oEditor.exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
 		}
 	});
 	
@@ -843,6 +874,7 @@ if(window.frameElement){
 		jindo.$("ir1").form.submit();
 	}
 	
+	
 	function setDefaultFont() {
 		var sDefaultFont = '궁서';
 		var nFontSize = 24;
@@ -851,10 +883,6 @@ if(window.frameElement){
 }
 </script>
 
-	<form action="sample/viewer/index.php" method="post">
-		<textarea name="eventContent" id="eventContent" rows="10" cols="100" style="width:766px; height:412px; display:none;">
-		</textarea>
-	</form>
 
 </body>
 </html>

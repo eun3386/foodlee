@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fdl.foodlee.model.vo.EventAnswerVO;
 import com.fdl.foodlee.model.vo.EventVO;
@@ -40,10 +41,11 @@ public class EventController {
 	public String eventNewForm() {
 		System.out.println("eventNewForm() ... ");
 		// 
-		return "event/ev_new_form";
+//		return "event/ev_new_form";
+		return "ev_new_form";
 	}
-//	event_add.fdl (post, proc, dao, param..vo)
-	@RequestMapping("smartEditor/sample/photo_uploader/event_add.fdl")
+//	photo_uploader.fdl
+	@RequestMapping("event_add.fdl")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			// 파일정보
@@ -81,11 +83,63 @@ public class EventController {
 			PrintWriter print = response.getWriter();
 			print.print(sFileInfo);
 			print.flush();
-			print.close();
+			print.close();             
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+//	article_add.my (post, proc, dao, param..vo)
+//	@RequestMapping(value = "article_add.my", 
+//			method = RequestMethod.POST)
+//	public String articleAddProc(String title, 
+//			String tags, String content,
+//			List<MultipartFile> upfiles, int memberId, 
+//			HttpSession ses) {
+//		System.out.println("articleAddProc()");
+////		System.out.println("multipart: " + upfile.getName());
+//		System.out.println("multipart size: " 
+//						+ upfiles.size());
+//				
+//		String realPath =  
+//			ses.getServletContext()
+//			.getRealPath(IArticleFileSVC.DEF_UPLOAD_DEST)
+//					 + "/";
+//		
+////		String filePath 
+////			= atFileSvc.writeUploadedFile(upfile, 
+////				realPath, (String)ses
+////					.getAttribute("mbLoginName"));
+////		
+//		//String filePath  // 다수개 처리
+//		Map<String, Object> rMap
+//		 = atFileSvc.writeUploadedMultipleFiles(upfiles, 
+//			realPath, (String)ses
+//				.getAttribute("mbLoginName"));
+//		String filePath = (String)rMap.get("muliFPs");
+//		
+//		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
+//		System.out.println("총 볼륨(MB): "+ rMap.get("totalMB") 
+//				+"MB");
+//		
+//		// public img src... 
+//		int atRtkey = this.atSvc
+//				.insertNewArticleReturnKey(title, content, 
+//				filePath, tags, memberId);
+//		
+//		// 상세보기 => atId?
+//		if( atRtkey > 0 ) {
+//			//System.out.println("게시글 등록 성공: " + title);
+//			System.out.println("게시글 등록 성공: " + atRtkey);
+//			return "redirect:article_show.my?id="+atRtkey;
+//			//return "redirect:article_list.my"; // RD
+//		} else {
+//			System.out.println("게시글 등록 실패: " + title);
+//			return "article/at_new_form"; // FW
+//		}
+//	}		
+	
+	
 //- 이벤트 게시글 상세보기 할 수 있다
 //	event_show.fdl (get, proc, dao, param?id)
 	@RequestMapping(value = "event_show.fdl", 
