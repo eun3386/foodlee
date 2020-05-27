@@ -22,47 +22,31 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IFoodtruckDAO;
+import com.fdl.foodlee.model.dao.inf.ISellerDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
+import com.fdl.foodlee.model.vo.SellerVO;
 
 @Repository("ftJdbc")
-
 public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
-
 	
-	
-/*
-private int sellerId; // 판매자 번호 ⇔ integer seller_id NN <<FK>>
-private String foodtruckImgPath; // 푸드트럭 이미지 경로 ⇔ varchar (256) foodtruck_img_path  NN
-private String foodtruckName; // 푸드트럭 이름 ⇔ varchar (64) foodtruck_name NN
-private String foodtruckMainMenu; // 푸드트럭 대표메뉴 ⇔ varchar (512) foodtruck_main_menu NN
-private String foodtruckLocation; // 푸드트럭 위치 ⇔ varchar(256) foodtruck_location NN
-private String foodtruckMuni; // 푸드트럭 구 이름 ⇔ varchar(256) foodtruck_muni NN
-private String foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code NN
-private String foodtruckOperationHour; // 푸드트럭 영업시간 ⇔ varchar (64)  foodtruck_operation_hour NN	
-private int favoriteCount; // 좋아요 트럭 ⇔ integer favorite_count <<FK>>
-private int memberLikeCount; // 좋아요 횟수⇔ member_like_count 
-private String memberLikeIds; // 좋아요 한 회원의 ID목록들⇔ varchar(512) member_like_ids
-private String sellerFoodtruckCoordinate; // 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
-private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp location_updated_at CURRENT_TIMESTAMP 
-*/
-	
-	// SQL부
-	private static final String SQL_SELECT_ALL_FOODTRUCK =
-			"select * from foodtrucks"; 
-	private static final String
-		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,?,?,?,?,0,0,null,?,null)";
-	private static final String
-		SQL_SELECT_FOODTRUCK_SELLER_ID = "select * from foodtrucks where seller_id = ?";
-	private static final String
-		SQL_SELECT_FOODTRUCK_NAME = "select * from foodtrucks where foodtruck_name = ?";
-	private static final String
-		SQL_SELECT_FOODTRUCK_GU_CODE = "select * from foodtrucks where foodtruck_gu_code = ?";
-	private static final String
-		SQL_UPDATE_FOODTRUCK = "update foodtrucks set foodtruck_img_path=?, foodtruck_name=?, "
-				+ "foodtruck_main_menu=?, foodtruck_location=?, foodtruck_muni=?, foodtruck_gu_code=?,foodtruck_operation_hour=?, "
-				+ "seller_foodtruck_coordinate=?";
-	private static final String
-		SQL_DELETE_FOODTRUCK = "delete from foodtrucks where foodtruck_name = ?";
+	// SQL 정의부
+	private static final String SQL_SELECT_ALL_FOODTRUCK 
+	= "select * from foodtrucks"; 
+	private static final String	SQL_INSERT_FOODTRUCK 
+	= "insert into foodtrucks values(null,?,?,?,?,?,?,?,?,0,0,null,?,null)";
+	private static final String	SQL_SELECT_FOODTRUCK_SELLER_ID 
+	= "select * from foodtrucks where seller_id = ?";
+	private static final String SQL_SELECT_FOODTRUCK_NAME 
+	= "select * from foodtrucks where foodtruck_name = ?";
+	private static final String	SQL_SELECT_FOODTRUCK_GU_CODE 
+	= "select * from foodtrucks where foodtruck_gu_code = ?";
+	private static final String	SQL_UPDATE_FOODTRUCK 
+	= "update foodtrucks set foodtruck_img_path=?, foodtruck_name=?, "
+		+ "foodtruck_main_menu=?, foodtruck_location=?, foodtruck_muni=?, "
+		+ "foodtruck_gu_code=?,foodtruck_operation_hour=?, "
+		+ "seller_foodtruck_coordinate=?";
+	private static final String	SQL_DELETE_FOODTRUCK 
+	= "delete from foodtrucks where foodtruck_name = ?";
 	
 	// 의존관계 자동주입...
 	@Autowired
@@ -73,11 +57,30 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	public boolean insertNewFoodtruck(FoodtruckVO ft) {
 		int r = jtem.update(SQL_INSERT_FOODTRUCK,
 					ft.getSellerId(), ft.getFoodtruckImgPath(),
-					ft.getFoodtruckName(), ft.getFoodtruckMainMenu(),
-					ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
-					ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(),
-					ft.getFavoriteCount(), ft.getSellerFoodtruckCoordinate(),
-					ft.getLocationUpdatedAt());
+					ft.getFoodtruckName(), ft.getFoodtruckMainMenu(), 
+					ft.getMenuCategory(), ft.getFoodtruckLocation(), 
+					ft.getFoodtruckMuni(), ft.getFoodtruckGuCode(), 
+					ft.getFoodtruckOperationHour(),	ft.getSellerFoodtruckCoordinate());
+		return r == 1;
+	}
+	
+	// 판매자가 자신의 푸드 트럭 정보를 업데이트 할 수 있다.
+	@Override
+	public boolean updateOneFoodtruck(FoodtruckVO ft) {
+		int r = jtem.update(SQL_UPDATE_FOODTRUCK,
+				ft.getFoodtruckImgPath(), ft.getFoodtruckName(),
+				ft.getFoodtruckMainMenu(), ft.getMenuCategory(),
+				ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
+				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(),
+				ft.getSellerFoodtruckCoordinate(), ft.getLocationUpdatedAt());
+		return r == 1;
+	}
+	
+	// 판매자가 등록된 자신의 푸드 트럭을 삭제 할 수 있다.
+	@Override
+	public boolean deleteOneFoodtruck(FoodtruckVO ft) {
+		int r = jtem.update(SQL_DELETE_FOODTRUCK,
+				ft.getFoodtruckName());
 		return r == 1;
 	}
 
@@ -107,27 +110,6 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 			System.out.println("등록된 구가 아닙니다.");
 			return null;
 		}
-	}
-	
-	// 판매자가 자신의 푸드 트럭 정보를 업데이트 할 수 있다.
-	@Override
-	public boolean updateOneFoodtruck(FoodtruckVO ft) {
-		int r = jtem.update(SQL_UPDATE_FOODTRUCK,
-				ft.getSellerId(), ft.getFoodtruckImgPath(),
-				ft.getFoodtruckName(), ft.getFoodtruckMainMenu(),
-				ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
-				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(),
-				ft.getFavoriteCount(), ft.getSellerFoodtruckCoordinate(),
-				ft.getLocationUpdatedAt());
-		return r == 1;
-	}
-	
-	// 판매자가 등록된 자신의 푸드 트럭을 삭제 할 수 있다.
-	@Override
-	public boolean deleteOneFoodtruck(FoodtruckVO ft) {
-		int r = jtem.update(SQL_DELETE_FOODTRUCK,
-				ft.getFoodtruckName());
-		return r == 1;
 	}
 	
 	// 구매자가 푸드 트럭을 좋아요 할 수 있다.
