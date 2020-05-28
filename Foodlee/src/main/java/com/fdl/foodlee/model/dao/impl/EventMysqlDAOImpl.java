@@ -23,9 +23,9 @@ public class EventMysqlDAOImpl implements IEventDAO {
 			"select * from events where id = ?";
 		public static final String SQL_EVENT_INSERT_VO
 			//= "insert into values(),(),()";
-			= "insert into events values(null,?,?,1,?,?,0,0,null,null,null,now(),null)";
+			= "INSERT INTO events VALUES (null,?,?,?,?,1,now(),null,0,0,NULL,NULL,NULL)";
 			//insert into events values(null,'2020-05-07','2020-06-30',1,'테스트','이벤트테스트',0,0,null,null,null,now(),null);
-		
+			//*="INSERT INTO events VALUES (1,'밤도깨비야시장','잠정 중단','2020-05-28','0000-00-00',1,now(),null,0,0,NULL,NULL,NULL)";
 		public static final String SQL_EVENT_SHOWALL_PG
 			= "SELECT * FROM events order by created_at "
 					+ "desc limit ?, ?";

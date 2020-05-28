@@ -50,7 +50,7 @@ public class EventController {
 		// 
 		return "event/ev_show";
 	}
-//	photo_uploader.fdl
+//	event_add.fdl
 	@RequestMapping("/smartEditor/sample/photo_uploader/event_add.fdl")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
 		try {

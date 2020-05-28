@@ -212,18 +212,18 @@ CURRENT_TIMESTAMP
 
 #### EventVO ⇔ events
 - int eventId 이벤트번호 ⇔ integer event_id <<PK>> NN AI
+- String eventTitle 이벤트제목 ⇔ varchar(128) event_title NN
+- String eventContent 이벤트내용 ⇔ text event_content NN
 - Date eventStartDate 이벤트 시작 날짜 ⇔ datetime event_start_date NN
 - Date eventEndDate 이벤트 종료 날짜 ⇔ datetime event_end_date 
 - int eventOngoing 진행중 여부 ⇔ integer event_ongoing NN // 0종료, 1진행
-- String eventTitle 이벤트제목 ⇔ varchar(128) event_title NN
-- String eventContent 이벤트내용 ⇔ text event_content NN
-- int readCount 조회수 ⇔ integer read_count 0
-- int likeCount 좋아요수 ⇔ integer like_count 0
-- String likeMembers 좋아요회원들 ⇔ varchar(1024) like_members
-- String tags; 태그 ⇔ varchar(1024) tags
-- String filePath; 첨부파일 ⇔ varchar(512) file_path  
 - Timestamp eventCreatedAt 이벤트등록날짜 ⇔ timestamp event_created_at   CURRENT_TIMESTAMP NN 
 - Timestamp eventUpdatedAt 이벤트수정날짜 ⇔ timestamp event_updated_at   CURRENT_TIMESTAMP
+- int likeCount 좋아요수 ⇔ integer event_like_count 0
+- int readCount 조회수 ⇔ integer event_read_count 0
+- String likeMembers 좋아요회원들 ⇔ varchar(1024) event_like_members
+- String tags; 태그 ⇔ varchar(1024) event_tags
+- String filePath; 첨부파일 ⇔ varchar(2048) event_file_path  
                       
 #### EventAnswerVO ⇔ event_answers
 - 순서번호/ int evAsId;  ⇔  integer ev_as_id <<PK>> AI

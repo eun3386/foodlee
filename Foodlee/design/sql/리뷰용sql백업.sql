@@ -28,10 +28,16 @@ CREATE TABLE `events` (
   `event_content` text NOT NULL COMMENT '이벤트내용',
   `event_start_date` date NOT NULL COMMENT '이벤트 시작 날짜',
   `event_end_date` date NOT NULL COMMENT '이벤트 종료 날짜',
-  `event_ongoing` int(11) NOT NULL COMMENT '진행중 여부 0=진행 1=종료 ',
+  `event_ongoing` int(11) NOT NULL DEFAULT '1' COMMENT '진행중 여부 1=진행 0=종료 ',
   `event_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '이벤트등록날짜 CURRENT_TIMESTAMP',
+  `event_updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `event_like_count` int(11) DEFAULT '0',
+  `event_read_count` int(11) DEFAULT '0',
+  `event_like_members` varchar(1024) DEFAULT NULL,
+  `event_tags` varchar(1024) DEFAULT NULL,
+  `event_file_path` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +46,7 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
+INSERT INTO `events` VALUES (1,'밤도깨비야시장','잠정 중단','2020-05-28','0000-00-00',1,'2020-05-28 07:42:24',NULL,0,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,13 +59,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-25 16:31:30
+-- Dump completed on 2020-05-28 16:50:00
 
-
-
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
---
--- Host: localhost    Database: foodlee_db
 -- ------------------------------------------------------
 -- Server version	5.6.25
 
