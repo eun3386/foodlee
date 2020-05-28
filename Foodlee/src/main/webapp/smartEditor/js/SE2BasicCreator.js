@@ -90,6 +90,7 @@ function createSEditor2(elIRField, htParams, elSeAppContainer){
 	if(nhn.husky.SE2M_AttachQuickPhoto){
 		oEditor.registerPlugin(new nhn.husky.SE2M_AttachQuickPhoto(elAppContainer));			// 사진			
 	}
+	oEditor.registerPlugin(new nhn.husky.SE_QuickEditor_Image(elAppContainer));				// 사진크기
 
 	oEditor.registerPlugin(new nhn.husky.MessageManager(oMessageMap));
 	oEditor.registerPlugin(new nhn.husky.SE2M_QuickEditor_Common(elAppContainer));			// 퀵에디터 공통(표, 이미지)
