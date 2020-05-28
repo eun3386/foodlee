@@ -40,7 +40,6 @@ public class BossController {
 		String login = (String)ses.getAttribute("LoginName");
 		SellerVO sel = selSvc.selectOneSeller(login);
 		if( sel != null ) {
-			System.out.println("sel = " + sel);
 			mav.addObject("msg","회원조회 성공 - "+ login);
 			mav.addObject("seller", sel);
 			mav.setViewName("boss/bossinfo/infomodify");
@@ -48,7 +47,6 @@ public class BossController {
 			mav.addObject("msg","회원조회 실패 - "+ login);
 			mav.setViewName("redirect:boss.fdl");
 		}
-		
 		return mav;
 	}
 	@RequestMapping(value = "orderlist.fdl", method = RequestMethod.GET)
