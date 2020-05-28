@@ -53,11 +53,42 @@
 		
 		$("#btn-pw-edit-cancel").on("click", function(e){
 			e.preventDefault();
+			$('btn-pw-edit-submit').attr('disabled',true);
 			$(".changePassword").hide();
 			$('#btn-pw').show();
 		});
 		
+		$("#btn-edit").on("click", function(e) {
+			e.preventDefault();
+			$(".changeInfo").show();
+			$(".info").hide();
+			$('btn-edit-submit').show();
+			$("#btn-edit-cancel").attr('disabled',false);
+			$("#btn-edit-cancel").css('cursor','pointer');
+			$(this).hide();
+		});
 		
+		$("#btn-edit-cancel").on("click", function(e) {
+			e.preventDefault();
+			$(this).attr('disabled',true);
+			$(this).css('cursor','default');
+			$(".changeInfo").hide();
+			$(".info").show();
+			$("#btn-edit").show();
+		});
+		
+		$('#passwordChk').blur(function(){
+		   if( $('#newPassword').val() != $('#passwordChk').val() ) {
+		    	if($('#passwordChk').val()!=''){
+			    	alert("비밀번호가 일치하지 않습니다.");
+		    	    $('#passwordChk').val('');
+		          	$('#passwordChk').focus();
+		       	}
+		    } else {
+		    	if($('#passwordChk').val()!='')
+			    	$('btn-pw-edit-submit').attr('disabled',false);
+		    }
+		});
 		
 	});
 	
@@ -79,6 +110,7 @@
  		</form>
 	</nav>
 		<!-- 마이페이지 시작-->
+		<form action="">
 		<section class="main_section" id="section_edit">
 			<div class="wrapper">
 				<div class="title">
@@ -95,23 +127,14 @@
 					<table class="table_edit">
 						<tbody>
 							<tr>
-								<th><label for="name">이름</label></th>
+								<th><label for="login">*아이디</label></th>
 								<td>
-									<span class="info">${seller.name}</span>
-									<input type="text" id="name" name="name" class="changeInfo input">
+									<span>${seller.login}</span>
 								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<th><label for="login">아이디</label></th>
-								<td>
-									<span class="info">${seller.login}</span>
-									<input type="text" id="login" name="login" class="changeInfo input">
-								</td>
-								<th></th>
-							</tr>
-							<tr>
-								<th><label for="newPassword">비밀번호</label></th>
+								<th><label for="newPassword">*비밀번호</label></th>
 								<td>
 									<input type="password" id="newPassword" name="newPassword" class="changePassword input" style="display: none">
 								</td>
@@ -134,7 +157,7 @@
 							<tr class="changePassword" style="display:none">
 								<td colspan="3">
 									<div id="btn-pw-edit">
-										<button class="btn btn-secondary">비밀번호 변경</button>
+										<button class="btn btn-secondary" id="btn-pw-edit-submit" disabled="disabled">비밀번호 변경</button>
 									</div>
 								</td>
 							</tr>
@@ -144,6 +167,14 @@
 										<button class="btn btn-secondary">취소</button>
 									</div>
 								</td>
+							</tr>
+							<tr>
+								<th><label for="name">*이름</label></th>
+								<td>
+									<span class="info">${seller.name}</span>
+									<input type="text" id="name" name="name" class="changeInfo input">
+								</td>
+								<th></th>
 							</tr>
 							<tr>
 								<th><label for="gender">성별</label></th>
@@ -163,7 +194,7 @@
 								<th></th>
 							</tr>
 							<tr>
-								<th><label for="residentRn1">주민번호</label></th>
+								<th><label for="residentRn1">*주민번호</label></th>
 								<td>
 									<span class="info">${seller.residentRn}</span>
 									<span class="changeInfo">
@@ -174,7 +205,7 @@
 								<th></th>
 							</tr>
 							<tr>
-								<th><label for="companyRn1">사업자 번호</label></th>
+								<th><label for="companyRn1">*사업자 번호</label></th>
 								<td>
 									<span class="info">${seller.companyRn}</span>
 									<span class="changeInfo">
@@ -186,7 +217,7 @@
 								<th></th>
 							</tr>
 							<tr>
-								<th><label for="phoneNumber1">연락처</label></th>
+								<th><label for="phoneNumber1">*연락처</label></th>
 								<td>
 									<span class="info">${seller.phoneNumber}</span>
 									<span class="changeInfo">
@@ -198,7 +229,7 @@
 								<th></th>
 							</tr>
 							<tr>
-								<th><label for="email">이메일</label></th>
+								<th><label for="email">*이메일</label></th>
 								<td>
 									<span class="info">${seller.email}</span>
 									<input type="text" class="changeInfo input" id="email" name="email">
@@ -216,8 +247,9 @@
 							<tr>
 								<th></th>
 								<td>
-									<button class="btn btn-primary">수정</button>
-									<button class="btn btn-primary">취소</button>
+									<button class="btn btn-primary" id="btn-edit">수정</button>
+									<input type="submit" class="btn" id="btn-edit-submit" value="수정완료" disabled="disabled">
+									<button class="btn btn-primary" id="btn-edit-cancel" disabled="disabled">취소</button>
 									<button class="btn btn-danger">회원탈퇴</button>
 								</td>
 								<th></th>
@@ -227,6 +259,7 @@
 				</div>
 			</div>
 		</section>
+		</form>
 		<!--마이페이지 끝  -->
 	</div>
 	<div id="footer">
