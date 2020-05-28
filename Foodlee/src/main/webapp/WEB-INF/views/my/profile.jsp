@@ -19,6 +19,7 @@
 						<img src="./resources/css/imgs/mypage/profile.png">
 						<img class="photo" src="./resources/css/imgs/mypage/photo.png">
 					</div>
+					<form action="my_info_update.fdl" method="post">
 					<table class="table_edit">
 						<tbody>
 							<tr>
@@ -98,6 +99,7 @@
 							</tr>
 						</tbody>
 					</table>
+					</form>
 					<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:99;-webkit-overflow-scrolling:touch;">
 <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:99" onclick="closeDaumPostcode()" alt="닫기 버튼">
 </div>
