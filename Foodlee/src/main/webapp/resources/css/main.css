@@ -100,18 +100,19 @@ span#adminlogout a{
 	min-height: 421.5px;
 }
 #cont_left {
-	width: 569.5px;
-	border-right: 0.5px solid #dbdbdb;
+	width: 100%;
+/* 	border-right: 0.5px solid #dbdbdb; */
 	padding: 15px;
 	margin: 0px;
-	float: left;
+/* 	float: left; */
 		
 }
 #cont_right {
-	overflow: hidden;
+/* 	overflow: hidden; */
 	width: 569.5px;
 	padding: 15px;;
 	margin: 0px;
+	float: right;
 }
 .map_sidebar {
 	height: 326.19px;
@@ -125,9 +126,9 @@ span#adminlogout a{
 	display: none; /*Chrome, Safari, Opera*/
 }
 #map_view {
-	width: 95%; 
-	height: 326px;
-	margin-left : 15px;
+	width: 100%; 
+	height: 100%;
+/* 	margin-left : 15px; */
 	border: 0.1px solid #D8D8D8 ;
 	background-color : #f5f2f0;
 	position: absolute;
@@ -263,7 +264,7 @@ span#adminlogout a{
 		
 .map_truck_list li {
 	margin: 0;
-	padding: 1.5em 0em 3em 0em;
+	padding: 0.5em 0em 2.5em 0em;
 	border-top: 1px solid #ECECEC;
 }
 
@@ -277,6 +278,7 @@ span#adminlogout a{
 	float: left;
 	margin-right: 20px;
 	width: 90px;
+	height: 70px;
 }
 
 .map_truck_list p {
@@ -285,13 +287,95 @@ span#adminlogout a{
 	
 }
 .map_truck_list .truck_list {
-	padding: 0em 0em 1em 0em;
+	padding: 0em 0em 0.5em 0em;
 	letter-spacing: 1px;
 	text-transform: uppercase;
-	font-size: 8pt;
+	font-size: 15pt;
 	color: #A2A2A2;
 }
+.search_map_wrap, .search_map_wrap * {font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.search_map_wrap a, .search_map_wrap a:hover, .search_map_wrap a:active{color:#000;text-decoration: none;}
+.search_map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;right:0px;bottom:0;width:250px;margin:10px 10px 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList ul {list-style: none; }
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
 
+#placesList li {
+	margin: 0;
+	padding: 0.5em 0em 2.5em 0em;
+	border-top: 1px solid #ECECEC;
+}
+
+#placesList li:first-child
+{
+	padding-top: 0;
+	border-top: none;
+}
+
+#placesList img {
+	float: left;
+	margin-right: 20px;
+	width: 90px;
+	height: 70px;
+}
+
+.map_text {position: relative; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-left: 8px;}
+.map_text:before {
+    content: '';
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: #449ce2;
+    position: absolute; left: 0; top: 6px;
+}
+
+#placesList .truck_list {
+	padding: 0em 0em 0.5em 0em;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-size: 15pt;
+	color: #A2A2A2;
+}
+#menu_wrap {
+/* 	height: 326.19px; */
+	overflow-y: scroll;
+    -ms-overflow-style: none; 
+/*     IE and Edge */
+    scrollbar-width: none; 
+/*     Firefox */
+}
+#menu_wrap::-webkit-scrollbar {
+	display: none; /*Chrome, Safari, Opera*/
+}
 /* .map_truck_list .first { */
 /* 	padding-top: 0px; */
 /* 	border-top: none; */
@@ -448,8 +532,8 @@ span#adminlogout a{
 	overflow:hidden;
 	display:inline-block;
 	position:absolute;
-	top:7px;
-	left:5px;
+	top:10px;
+	left:10px;
 	width:28px;
 	height:28px;
 	border:1px solid rgba(58,70,88,.45);
@@ -480,8 +564,8 @@ span#adminlogout a{
 .search { 
 	position:absolute;
 	z-index:1000;
-	top:8px;
-	left:40px; 
+	top:15px;
+	left:100px; 
 }
 .search #address {
 	width:150px;

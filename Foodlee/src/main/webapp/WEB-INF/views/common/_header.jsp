@@ -1,18 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
  <div class="map_container">
      <div class="map_row">
          <div class="map_header">
              <div class="map_header_login">
-             <c:if test="${empty adLoginName}">
-                 <a href="${pageContext.request.contextPath}/member/login_form.fdl">Login</a>
-                 <a href="${pageContext.request.contextPath}/member/join_choice_form.fdl">Join</a>
+             <c:if test="${empty LoginName}">
+                 <a class="map_login" href="#">Login</a>
+                 <a class="map_join" href="#">Join</a>
              </c:if>
-             <c:if test="${not empty adLoginName}">
-             	<a href="${pageContext.request.contextPath}/admin.fdl"">
-             	<c:out value="${adLoginName}" default=""/> 로그인 중...
-             	</a>
-             	<a href="admin_logout.fdl">로그아웃</a>
+             <c:if test="${not empty LoginName and LoginName ne 'admin'}">
+             	<a href="${pageContext.request.contextPath}/my_page.fdl">마이페이지</a>
+             	<a href="${pageContext.request.contextPath}/logout.fdl">로그아웃</a>
+             </c:if>
+             <c:if test="${not empty LoginName and LoginName eq 'admin'}">
+             	<a href="${pageContext.request.contextPath}/admin.fdl">어드민페이지</a>
+             	<a href="${pageContext.request.contextPath}/logout.fdl">로그아웃</a>
              </c:if>
              </div>
              <!-- //header_menu -->

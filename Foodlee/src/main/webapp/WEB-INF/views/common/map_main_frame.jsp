@@ -13,18 +13,18 @@
 		<section id="cont_left">
 			<h3 class="cl_tit">주변 찾기</h3>
 			<p class="cl_dotted"></p>
-			<div id='map_view'>
+<!-- 			<div id='map_view'> -->
 				<%@ include file="../map/NaverMap.jsp"%>
-			</div>
+<!-- 			</div> -->
 		</section>
-		<h2 class="map_ir_su"></h2>
-		<section id="cont_right">
-			<h3 class="cl_tit">정보</h3>
-			<p class="cl_dotted"></p>
-			<div class="map_sidebar">
-				<%@ include file="map_truck_list.jsp"%>
-			</div>
-		</section>
+<!-- 		<h2 class="map_ir_su"></h2> -->
+<!-- 		<section id="cont_right"> -->
+<!-- 			<h3 class="cl_tit">정보</h3> -->
+<!-- 			<p class="cl_dotted"></p> -->
+<!-- 			<div class="map_sidebar"> -->
+<%-- 				<%@ //include file="map_truck_list.jsp"%> --%>
+<!-- 			</div> -->
+<!-- 		</section> -->
 		<section id="cont_truck_view">
 			<h3 class="cl_tit">텍스트</h3>
 			<p class="cl_dotted"></p>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>		
 <!doctype html>
 <html lang="ko">
@@ -42,7 +42,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
-// 	var URLHD = '${pageContext.request.contextPath}/';
+	var URLHD = '${pageContext.request.contextPath}/';
 // 	var url= URLHD+'banner_top_list.fdl';
 // 	$('div.map_slider').load(url)
 	
@@ -70,6 +70,15 @@ $(document).ready(function() {
 		location.href = 
 			'y?login='+mbLogin;
 	}
+	$('.map_login').on('click', function() {
+		var url = URLHD+'login_form.fdl';
+		$("#map_wrap").load(url);
+	});
+	
+	$('.map_join').on('click', function() {
+		var url = URLHD+'join_choice_form.fdl';
+		$("#map_wrap").load(url);
+	});
 });
 </script>
 <body>

@@ -1,17 +1,21 @@
 package com.fdl.foodlee.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Base64.Decoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.annotation.JsonFormat.Value;
 import com.fdl.foodlee.model.vo.BannerAddVO;
 import com.fdl.foodlee.model.vo.BannerVO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
@@ -32,6 +36,27 @@ public class MapController {
 	@Autowired
 	IFoodtruckSVC fodSvc;
 	
+	// 맵에 보여주는 푸드트럭 리스트 목록으로 볼 수 있다
+	@RequestMapping(value = "getFd.fdl", method = RequestMethod.GET)
+	public String getOneTruck(Model model, int sid ) {
+		FoodtruckVO fv = fodSvc.selectOneFoodtruck(sid);
+		model.addAttribute("fd", fv);
+//		System.out.println("getFd.fdl = " + fv);
+		return "/common/map_truck";
+		
+	}
+	
+	// 맵에 보여주는 푸드트럭 리스트 목록으로 볼 수 있다
+		@RequestMapping(value = "getFd.fdl", method = RequestMethod.GET)
+		public String searchOneTruck(Model model, int sid, String fne ) {
+			FoodtruckVO fId = fodSvc.selectOneFoodtruck(sid);
+			FoodtruckVO fNe = fodSvc.selectOneFoodtruck(fne);
+			model.addAttribute("fd", fId);
+//			System.out.println("getFd.fdl = " + fv);
+			return "/common/map_truck";
+			
+	}
+	
 	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
 	public String mapMain(Model model) {
 		
@@ -40,7 +65,7 @@ public class MapController {
 		int min = 10000; // 어드민이 설정
 		int limit = 5; // 어드민이 설정
 		int avg = (max + min)/2;
-		System.out.println("BannerList...");
+//		System.out.println("BannerList...");
 		List<BannerAddVO> baList = bSvc.showAddBannerList(min, max, limit);
 		List<BannerAddVO> baTopList = new ArrayList<BannerAddVO>();
 		List<BannerAddVO> baBtmList = new ArrayList<BannerAddVO>();
@@ -48,7 +73,7 @@ public class MapController {
 			for (BannerAddVO ba : baList) {
 					if(ba.getPrice() >= avg) {
 						baTopList.add(ba);
-							System.out.println(baTopList);
+//						System.out.println(baTopList);
 //						System.out.println("가격"+ba.getPrice());	
 //						System.out.println("배너 top 리스트 조회 성공: " + baTopList.size() + "개");
 					} else {
@@ -70,14 +95,27 @@ public class MapController {
 		List<String> fodName = new ArrayList<String>();
 		if(fodList != null) {
 			for (int i = 0; i < fodList.size(); i++) {
-				String cooder = fodList.get(i).getSellerFoodtruckCoordinate();
+				String latlngs = fodList.get(i).getSellerFoodtruckCoordinate();
 				String fName = fodList.get(i).getFoodtruckName();
-				fod.add(cooder);
+				fod.add(latlngs);
 				fodName.add(fName);
 			}
-			model.addAttribute("fodList", fod);
+			model.addAttribute("fodlatlngs", fod);
 			model.addAttribute("fodName", fodName);
 			model.addAttribute("fodSize", fodList.size());
+			
+//			for (FoodtruckVO ft : fodList) {
+//				String ftImgName = ft.getFoodtruckImgPath();
+//				try {
+//					String deFtImgName = java.net.URLDecoder.decode(ftImgName, "utf-8");
+//					System.out.println("de = " + deFtImgName);
+//					ft.setFoodtruckImgPath(deFtImgName);
+//				} catch (UnsupportedEncodingException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+			model.addAttribute("fodList", fodList);
 		} else {
 			System.out.println("ERROR: 트럭 리스트 조회 실패!!");
 			return "redirect:/mapMain.fdl";
