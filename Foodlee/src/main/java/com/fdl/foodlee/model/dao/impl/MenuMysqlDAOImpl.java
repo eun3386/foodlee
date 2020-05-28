@@ -49,6 +49,8 @@ private String rawMaterials;
 					+ "menu_pic=?, menu_infor=?, menu_rawmaterials=?";
 	private static final String
 		SQL_DELETE_MENU = "delete from menus where menu_name = ?";
+	private static final String
+		SQL_SELECT_ALL_MENU_SELLERID = "select * from menus where seller_id = ?";
 	// 의존관계 자동주입...
 	@Autowired
 	private JdbcTemplate jtem;
@@ -101,7 +103,8 @@ private String rawMaterials;
 	}
 	// 전체 메뉴를 조회 할 수 있다.
 	public List<MenuVO> showAllMenu(int sId){
-		return null;
+		return jtem.query(SQL_SELECT_ALL_MENU_SELLERID, 
+		 		 BeanPropertyRowMapper.newInstance(MenuVO.class), sId);
 	}
 }
 
