@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>푸들이-푸드트럭나들이</title>
 </head>
 <body>
 		<section class="main_section" id="section_edit">
@@ -60,7 +64,7 @@
 							</tr>
 							<tr>
 								<th>주민번호</th>
-								<td><span class="reg_id" value="${member.residentRn}">-*******</span></td>
+								<td><span class="reg_id" value="${member.residentRn}"></span></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -91,7 +95,7 @@
 							<tr>
 								<th></th>
 								<td>
-									<button class="btn btn-primary">수정</button>
+									<button class="btn btn-primary" type="submit">수정</button>
 									<button class="btn btn-primary">취소</button>
 									<button class="btn btn-danger">회원탈퇴</button>
 								</td>

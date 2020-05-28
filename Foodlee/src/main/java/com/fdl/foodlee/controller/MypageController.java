@@ -27,14 +27,24 @@ public class MypageController {
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 	
 	@RequestMapping(value = "my_page.fdl", method = RequestMethod.GET)
+	public String mypage() {
+		return "mypage";
+	}
+	
+//	@RequestMapping(value = "my_info.fdl", method = RequestMethod.GET)
+//		
+//	}
+	
+	// 내 정보 확인
+	@RequestMapping(value = "my_info_show.fdl", method = RequestMethod.GET)
 	public ModelAndView infomodify(HttpSession ses) {//정보수정
 		ModelAndView mav = new ModelAndView();
 		String login = (String)ses.getAttribute("LoginName");
-		MemberVO sel = mbSvc.selectOneMember(login);
-		if( sel != null ) {
-			System.out.println("sel = " + sel);
+		MemberVO mem = mbSvc.selectOneMember(login);
+		if( mem != null ) {
+			System.out.println("sel = " + mem);
 			mav.addObject("msg","회원조회 성공 - "+ login);
-			mav.addObject("member", sel);
+			mav.addObject("member", mem);
 			mav.setViewName("my/profile");
 		} else {
 			mav.addObject("msg","회원조회 실패 - "+ login);
@@ -43,13 +53,6 @@ public class MypageController {
 
 	return mav;
 	}
-	
-//	@RequestMapping(value = "my_info.fdl", method = RequestMethod.GET)
-//		
-//	}
-	
-//	// 내 정보 확인
-//	@RequestMapping(value = "my_info_show.fdl", method = RequestMethod.GET)
 //    public ModelAndView memberShowProc(String login) {
 //        ModelAndView mav = new ModelAndView();
 //        if( login == null || login.isEmpty() ) {
@@ -70,7 +73,7 @@ public class MypageController {
 //        
 //        return mav;
 //    }
-    
+//    
 //	// 나의 정보 수정 폼
 //    @RequestMapping(value = "my_info_edit.fdl", method = RequestMethod.GET)
 //    public ModelAndView memberEditFormProc(int id) {
