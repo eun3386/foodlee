@@ -47,8 +47,7 @@ public class MenuSVCImpl implements IMenuSVC {
 
 	@Override
 	public List<MenuVO> showAllMenu(int sId) {
-		return showAllMenu(sId);
+		return menuDao.showAllMenu(sId);
 	}
-
 
 }

@@ -499,6 +499,22 @@ function reply_qna(id) {
 
 
 $(document).ready(function() { // ready 시작
+	$('#loginHeader').on('click', function() {
+		var ROOT_PATH = getContextPath() + '/';
+		var url = ROOT_PATH+'login_form.fdl';
+		$("#main_wrap").load(url);
+		// location.href = url;
+		$('#menu-list').html('');
+	});
+	//
+	$('#join').on('click', function() {
+		var ROOT_PATH = getContextPath() + '/';
+		var url = ROOT_PATH+'join_choice_form.fdl';
+		$("#main_wrap").load(url);
+		// location.href = url;
+		$('#menu-list').html('');
+	});
+	
 	if($("#login").val() == "") {
 		$("#review-insert").css("display", "none");
 		$("#qna-insert").css("display", "none");
