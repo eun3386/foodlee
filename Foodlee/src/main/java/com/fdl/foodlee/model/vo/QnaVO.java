@@ -9,7 +9,7 @@ public class QnaVO {
 	private String qnaContent; // 문의내용
 	private int qnaDepth; // 답글 여부 문의 0 답글 1
 	private String qnaPnum; // 답글일 경우 해당 문의번호
-	private boolean qnaSecret;
+	private boolean qnaSecret; // 비밀글 여부
 	private Timestamp qnaCreatedAt; // 문의 작성일
 
 	public QnaVO() {}

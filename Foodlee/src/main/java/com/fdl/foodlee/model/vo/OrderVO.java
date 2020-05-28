@@ -13,12 +13,13 @@ public class OrderVO {
 	private int orderState; // 주문 상황 (1 회원 주문 2 회원 취소 3 판매자 주문 접수 4 판매자 주문 거절 5 판매자 주문 취소)
 	private String orderReason; // 판매자 주문 취소/거절 사유
 	private String orderMerchantUid; // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
+	private String orderRequests; // 요청사항
 	private Timestamp orderDate; // 주문일자
 
 	public OrderVO() {}
 
 	public OrderVO(int orderId, String login, int sellerId, String orderName, String orderNumber, String orderPrice,
-			int orderPriceSum, int orderState, String orderMerchantUid, Timestamp orderDate) {
+			int orderPriceSum, int orderState, String orderRequests, String orderMerchantUid, Timestamp orderDate) {
 		this.orderId = orderId;
 		this.login = login;
 		this.sellerId = sellerId;
@@ -27,12 +28,13 @@ public class OrderVO {
 		this.orderPrice = orderPrice;
 		this.orderPriceSum = orderPriceSum;
 		this.orderState = orderState;
+		this.orderRequests = orderRequests;
 		this.orderMerchantUid = orderMerchantUid;
 		this.orderDate = orderDate;
 	}
 	
 	public OrderVO(int orderId, String login, int sellerId, String orderName, String orderNumber, String orderPrice,
-			int orderPriceSum, int orderState, String orderReason, String orderMerchantUid, Timestamp orderDate) {
+			int orderPriceSum, int orderState, String orderReason, String orderRequests, String orderMerchantUid, Timestamp orderDate) {
 		this.orderId = orderId;
 		this.login = login;
 		this.sellerId = sellerId;
@@ -42,6 +44,8 @@ public class OrderVO {
 		this.orderPriceSum = orderPriceSum;
 		this.orderState = orderState;
 		this.orderReason = orderReason;
+		this.orderRequests = orderRequests;
+		this.orderMerchantUid = orderMerchantUid;
 		this.orderDate = orderDate;
 	}
 
@@ -115,6 +119,14 @@ public class OrderVO {
 	
 	public void setOrderReason(String orderReason) {
 		this.orderReason = orderReason;
+	}
+	
+	public String getOrderRequests() {
+		return orderRequests;
+	}
+	
+	public void setOrderRequests(String orderRequests) {
+		this.orderRequests = orderRequests;
 	}
 	
 	public String getorderMerchantUid() {

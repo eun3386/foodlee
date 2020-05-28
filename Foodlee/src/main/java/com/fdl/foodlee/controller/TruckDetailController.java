@@ -332,13 +332,14 @@ public class TruckDetailController {
 		String[] arrMenuNumber = req.getParameterValues("arrMenuNumber[]");
 		int orderPriceSum = Integer.parseInt(req.getParameter("priceSum"));
 		String merchantUid = req.getParameter("merchantUid");
+		String orderRequests = req.getParameter("orderRequests");
 		
 		String orderName = String.join(",", arrMenuName);
 		String orderPrice = String.join(",", arrMenuPrice);
 		String orderNumber = String.join(",", arrMenuNumber);
 		
 		// OrderVO order = new OrderVO(0, login, sellerId, orderName, orderNumber, orderPrice, orderPriceSum, 1, "");
-		OrderVO order = new OrderVO(0, login, sellerId, orderName, orderNumber, orderPrice, orderPriceSum, 1, merchantUid, new Timestamp(0));
+		OrderVO order = new OrderVO(0, login, sellerId, orderName, orderNumber, orderPrice, orderPriceSum, 1, orderRequests, merchantUid, new Timestamp(0));
 		orderSvc.memberNewOrder(order);
 		
 		return null;

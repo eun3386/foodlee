@@ -27,7 +27,9 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript"
 	src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=1zqc0e9b5c"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+<!-- <script src="https://unpkg.com/sweetalert2@latest/dist/sweetalert2.all.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <script src="resources/js/truckDetail.js"></script>
 <body>
