@@ -302,7 +302,7 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/infomodify.fdl">정보수정</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
