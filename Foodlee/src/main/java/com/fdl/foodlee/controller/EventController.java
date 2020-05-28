@@ -41,11 +41,10 @@ public class EventController {
 	public String eventNewForm() {
 		System.out.println("eventNewForm() ... ");
 		// 
-//		return "event/ev_new_form";
-		return "ev_new_form";
+		return "event/ev_new_form";
 	}
 //	photo_uploader.fdl
-	@RequestMapping("event_add.fdl")
+	@RequestMapping("/smartEditor/sample/photo_uploader/event_add.fdl")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			// 파일정보

@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 	function selectEvent(evId) {
 		window.location.href		
 			= '${pageContext.request.contextPath}'
-			+ '/event_show.my?id='+ evId;
+			+ '/event_show.fdl?id='+ evId;
 	}
 
   </script>

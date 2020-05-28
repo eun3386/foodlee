@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form id="frm" action="./insert.jsp" method="post" >
+<form id="frm" action="event_show.fdl" method="post" >
 	<table width="100%"> 
 		<tr> <td>제목</td> 
 			<td><input type="text" id="title" /></td> </tr> 
