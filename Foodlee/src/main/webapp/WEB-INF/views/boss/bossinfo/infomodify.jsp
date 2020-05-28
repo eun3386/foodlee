@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- <link rel="stylesheet" type="text/css" href="/foodlee/resources/css/mpreset.css"> -->
-<link rel="stylesheet" type="text/css" href="/foodlee/resources/css/mpstyle.css">
+<link rel="stylesheet" type="text/css" href="/foodlee/resources/css/selmypage.css">
 <style type="text/css">
 	#section_edit{display:block; background-color:#d1e6f5;}
 </style>
@@ -44,14 +44,23 @@
 				+'/views/bossinfo/position.jsp';
 			$("#main").load(url);
 		});
+		
+		$("#changePasswordButton").on("click", function(e){
+			e.preventDefault();
+			$(".changePassword").show();
+			$('#btn-pw').hide();
+		});
+		
+		$("#btn-pw-edit-cancel").on("click", function(e){
+			e.preventDefault();
+			$(".changePassword").hide();
+			$('#btn-pw').show();
+		});
+		
+		
+		
 	});
-	$(function() {
-		  $("#changePasswordButton").on("click", function(e){
-			  e.preventDefault();
-			  $(".changePassword").show();
-		  });
-
-	});
+	
 </script>
 <title>bossinfo</title>
 </head>
@@ -69,9 +78,8 @@
 			<a class="position" href="#">위치등록</a>
  		</form>
 	</nav>
-	<!-- 마이페이지 시작-->
-	
-			<section class="main_section" id="section_edit">
+		<!-- 마이페이지 시작-->
+		<section class="main_section" id="section_edit">
 			<div class="wrapper">
 				<div class="title">
 					<div class="icon">
@@ -87,72 +95,122 @@
 					<table class="table_edit">
 						<tbody>
 							<tr>
-								<th>이름</th>
-								<td><span class='name'>홍길동</span></td>
+								<th><label for="name">이름</label></th>
+								<td>
+									<span class="info">${seller.name}</span>
+									<input type="text" id="name" name="name" class="changeInfo input">
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<th>아이디</th>
-								<td><span class='id'>test123</span></td>
+								<th><label for="login">아이디</label></th>
+								<td>
+									<span class="info">${seller.login}</span>
+									<input type="text" id="login" name="login" class="changeInfo input">
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<th>비밀번호</th>
-								<td><input type="password" class="input" value="11111111"></td>
+								<th><label for="newPassword">비밀번호</label></th>
+								<td>
+									<input type="password" id="newPassword" name="newPassword" class="changePassword input" style="display: none">
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary" id="changePasswordButton">비밀번호 변경하기</button></div></td>
+								<td>
+									<div id="btn-pw">
+										<button class="btn btn-secondary" id="changePasswordButton">비밀번호 변경하기</button>
+									</div>
+								</td>
 							</tr>
 							<tr class="changePassword" style="display:none">
-								<th>비밀번호 변경</th>
-								<td><input type="password" class="input"></td>
+								<th><label for="passwordChk">비밀번호 확인</label></th>
+								<td>
+									<input type="password" id="passwordChk" name="passwordChk" class="input">
+								</td>
 								<th></th>
 							</tr>
 							<tr class="changePassword" style="display:none">
-								<th>변경 확인</th>
-								<td><input type="password" class="input"></td>
-								<th></th>
+								<td colspan="3">
+									<div id="btn-pw-edit">
+										<button class="btn btn-secondary">비밀번호 변경</button>
+									</div>
+								</td>
 							</tr>
 							<tr class="changePassword" style="display:none">
-								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary">비밀번호 변경</button></div></td>
+								<td colspan="3">
+									<div id="btn-pw-edit-cancel">
+										<button class="btn btn-secondary">취소</button>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<th>성별</th>
-								<td><label><input type="radio" name="gender">남</label> <label><input type="radio" name="gender">여</label></td>
+								<th><label for="gender">성별</label></th>
+								<td>
+									<span class="info">${seller.gender}</span>
+									<label class="changeInfo"><input type="radio" name="gender">남</label>
+									<label class="changeInfo"><input type="radio" name="gender">여</label>
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<th>주민번호</th>
-								<td><span class="reg_id">123456-1******</span></td>
+								<th><label for="age">나이</label></th>
+								<td>
+									<span class="info">${seller.age}</span>
+									<input type="number" class="changeInfo input sm" id="age" name="age" value="20">
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<th>사업자 번호</th>
-								<td><input type="text" class="input sm" value="01023"> - <input type="text" class="input sm" value="12345"> - <input type="text" class="input sm" value="12346"></td>
+								<th><label for="residentRn1">주민번호</label></th>
+								<td>
+									<span class="info">${seller.residentRn}</span>
+									<span class="changeInfo">
+										<input type="text" class="input mid" id="residentRn1" name="residentRn1" maxlength="6"> - 
+										<input type="text" class="input mid" id="residentRn2" name="residentRn2" maxlength="7">
+									</span>
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<th>연락처</th>
-								<td><input type="text" class="input sm" value="010"> - <input type="text" class="input sm" value="1234"> - <input type="text" class="input sm" value="1234"></td>
+								<th><label for="companyRn1">사업자 번호</label></th>
+								<td>
+									<span class="info">${seller.companyRn}</span>
+									<span class="changeInfo">
+										<input type="text" class="input sm" id="companyRn1" name="companyRn1" maxlength="3"> - 
+										<input type="text" class="input sm" id="companyRn2" name="companyRn2" maxlength="2"> - 
+										<input type="text" class="input sm" id="companyRn3" name="companyRn3" maxlength="5">
+									</span>
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<th>우편번호</th>
-								<td><input type="text" class="input" value="123-456"></td>
+								<th><label for="phoneNumber1">연락처</label></th>
+								<td>
+									<span class="info">${seller.phoneNumber}</span>
+									<span class="changeInfo">
+										<input type="text" class="input sm" id="phoneNumber1" name="phoneNumber1" maxlength="3"> - 
+										<input type="text" class="input sm" id="phoneNumber2" name="phoneNumber2" maxlength="4"> - 
+										<input type="text" class="input sm" id="phoneNumber3" name="phoneNumber3" maxlength="4">
+									</span>
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary">우편번호 찾기</button></div></td>
-							</tr>
-							<tr>
-								<th>주소</th>
-								<td><input type="text" class="input" name="address" value="서울시"></td>
+								<th><label for="email">이메일</label></th>
+								<td>
+									<span class="info">${seller.email}</span>
+									<input type="text" class="changeInfo input" id="email" name="email">
+								</td>
 								<th></th>
 							</tr>
 							<tr>
-								<th></th>
-								<td><input type="text" class="input" value="123호"></td>
+								<th><label for="address">주소</label></th>
+								<td>
+									<span class="info">${seller.address}</span>
+									<input type="text" class="changeInfo input" id="address" name="address">
+								</td>
 								<th></th>
 							</tr>
 							<tr>
@@ -169,7 +227,7 @@
 				</div>
 			</div>
 		</section>
-	<!--마이페이지 끝  -->
+		<!--마이페이지 끝  -->
 	</div>
 	<div id="footer">
 		
