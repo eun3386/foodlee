@@ -43,6 +43,13 @@ public class EventController {
 		// 
 		return "event/ev_new_form";
 	}
+	@RequestMapping(value = "event_show.fdl", 
+			method = RequestMethod.POST)
+	public String eventShowProc() {
+		System.out.println("eventNewForm() ... ");
+		// 
+		return "event/ev_show";
+	}
 //	photo_uploader.fdl
 	@RequestMapping("/smartEditor/sample/photo_uploader/event_add.fdl")
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
@@ -141,57 +148,57 @@ public class EventController {
 	
 //- 이벤트 게시글 상세보기 할 수 있다
 //	event_show.fdl (get, proc, dao, param?id)
-	@RequestMapping(value = "event_show.fdl", 
-			method = RequestMethod.GET)
-	public String eventShowProc(HttpSession ses, 
-			int id, Model model) {
-		EventVO ev = 
-			this.evSvc.selectOneEvent(id);
-		if( ev != null ) {
-			System.out.println("게시글 상세조회 성공 "
-						+ ev);
-			model.addAttribute("event", ev);
-			String evFilePath = ev.getFilePath();
-			int fpsCount = -1;
-			if( evFilePath != null && !evFilePath.isEmpty() ) {
-				String fps[] = null;
-				if( evFilePath.indexOf(
-						IEventFileSVC.MULTI_SEP)
-					 != -1 ) {
-					fps = evFilePath.split(
-							"\\"+IEventFileSVC.MULTI_SEP);
-//					System.out.println("fps => " + fps);
-//					System.out.println("fp0 => " + fps[0]);
-//					System.out.println("fp1 => " + fps[1]);
-//					System.out.println("fp2 => " + fps[2]);
-					fpsCount = fps.length;					
-				} else {
-					fpsCount = 1;
-					fps = new String[]{evFilePath};
-				}
-				model.addAttribute("fps", fps);
-			} else {
-				// 첨부파일 없는 정상 게시글 상세보기
-				fpsCount = 0;
-			}
-			model.addAttribute("fpsCount", fpsCount);
-			
-			// 댓글 리스트
-			List<EventAnswerVO> evAsList 
-				= asSvc.answerListForEvent(ev.getEventId());
-			if( evAsList != null ) {
-				model.addAttribute("asSize", evAsList.size());
-				model.addAttribute("answers", evAsList );
-			} else {
-				model.addAttribute("msg", "댓글리스트 조회 실패");
-			}			
-			return "event/ev_show";
-		} else {			
-			model.addAttribute("msg", 
-				"게시글 상세조회 실패 - " + id);
-			return "redirect:main.fdl";
-		}
-	}	
+//	@RequestMapping(value = "event_show.fdl", 
+//			method = RequestMethod.GET)
+//	public String eventShowProc(HttpSession ses, 
+//			int id, Model model) {
+//		EventVO ev = 
+//			this.evSvc.selectOneEvent(id);
+//		if( ev != null ) {
+//			System.out.println("게시글 상세조회 성공 "
+//						+ ev);
+//			model.addAttribute("event", ev);
+//			String evFilePath = ev.getFilePath();
+//			int fpsCount = -1;
+//			if( evFilePath != null && !evFilePath.isEmpty() ) {
+//				String fps[] = null;
+//				if( evFilePath.indexOf(
+//						IEventFileSVC.MULTI_SEP)
+//					 != -1 ) {
+//					fps = evFilePath.split(
+//							"\\"+IEventFileSVC.MULTI_SEP);
+////					System.out.println("fps => " + fps);
+////					System.out.println("fp0 => " + fps[0]);
+////					System.out.println("fp1 => " + fps[1]);
+////					System.out.println("fp2 => " + fps[2]);
+//					fpsCount = fps.length;					
+//				} else {
+//					fpsCount = 1;
+//					fps = new String[]{evFilePath};
+//				}
+//				model.addAttribute("fps", fps);
+//			} else {
+//				// 첨부파일 없는 정상 게시글 상세보기
+//				fpsCount = 0;
+//			}
+//			model.addAttribute("fpsCount", fpsCount);
+//			
+//			// 댓글 리스트
+//			List<EventAnswerVO> evAsList 
+//				= asSvc.answerListForEvent(ev.getEventId());
+//			if( evAsList != null ) {
+//				model.addAttribute("asSize", evAsList.size());
+//				model.addAttribute("answers", evAsList );
+//			} else {
+//				model.addAttribute("msg", "댓글리스트 조회 실패");
+//			}			
+//			return "event/ev_show";
+//		} else {			
+//			model.addAttribute("msg", 
+//				"게시글 상세조회 실패 - " + id);
+//			return "redirect:main.fdl";
+//		}
+//	}	
 	
 //- 회원이 이벤트 게시글을 좋아요 할 수 있다
 //	event_like.fdl (get, proc, dao, param?evId&mbId..) 

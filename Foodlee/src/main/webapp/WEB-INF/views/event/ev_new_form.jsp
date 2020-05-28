@@ -12,7 +12,7 @@
 <form id="frm" action="event_show.fdl" method="post" >
 	<table width="100%"> 
 		<tr> <td>제목</td> 
-			<td><input type="text" id="title" /></td> </tr> 
+			<td><input type="text" id="title" name="title"/></td> </tr> 
 		<tr> <td>내용</td> 
 		<td> <textarea rows="10" cols="30" id="ir1" name="content" style="width:766px; height:412px; "></textarea>
 		<script type="text/javascript"> 
