@@ -17,6 +17,12 @@
 	/* 	margin-right: auto; */
 }
 
+body{
+    margin: 100px auto 0;
+    width: 1200px;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
 .main_box {
 	/* 	border: 1px solid red; */
 	font-family: "Do Hyeon", sans-serif;
@@ -132,11 +138,11 @@ section {
 }
 
 /*라디오버튼 숨김*/
-input {
+.tab input {
 	display: none;
 }
 
-label {
+.tab label {
 	display: inline-block;
 	margin: 0 0 -1px;
 	padding: 15px 25px;
@@ -147,13 +153,13 @@ label {
 	font-family: 나눔바른고딕;
 }
 
-label:hover {
+.tab label:hover {
 	color: #2e9cdf;
 	cursor: pointer;
 }
 
 /*input 클릭시, label 스타일*/
-input:checked+label {
+.tab input:checked+label {
 	color: #555;
 	border: 1px solid #ddd;
 	border-top: 2px solid orange;
@@ -224,7 +230,7 @@ input:checked+label {
 	cursor: pointer;
 }
 
-table {
+#menu_table {
 	border-collapse: collapse;
 }
 
@@ -233,7 +239,7 @@ table {
 	border-color: DodgerBlue;
 }
 
-tr:hover {
+#menu_table tr:hover {
 	background-color: #FFA500;
 }
 

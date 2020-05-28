@@ -45,12 +45,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fdl.foodlee.model.dao.inf.IMemberLikeTruckDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.QnaVO;
 import com.fdl.foodlee.model.vo.ReviewVO;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.IMemberLikeTruckSVC;
 import com.fdl.foodlee.service.inf.IMemberSVC;
+import com.fdl.foodlee.service.inf.IMenuSVC;
 import com.fdl.foodlee.service.inf.IOrderSVC;
 import com.fdl.foodlee.service.inf.IQnaSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
@@ -59,120 +61,6 @@ import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
 public class TruckDetailController {
-	
-	public class PaymentCheck {
-		public static final String IMPORT_TOKEN_URL = "https://api.iamport.kr/users/getToken";
-		public static final String IMPORT_PAYMENTINFO_URL = "https://api.iamport.kr/payments/find/";
-		public static final String IMPORT_CANCEL_URL = "https://api.iamport.kr/payments/cancel";
-		public static final String IMPORT_PREPARE_URL = "https://api.iamport.kr/payments/prepare";
-		public static final String KEY = "0128503560659101";
-		public static final String SECRET = "1qJGsdUsp7kVdDuUFbvzjvIYY4DZ6ES84BOxPJZfRka4XFZDQud90V8Y0MX6qQfvs42hN2xEmHJkmIXd";
-		
-		// 아임포트 인증(토큰)을 받아주는 함수
-		public String getImportToken() {
-			String result = "";
-			HttpClient client = HttpClientBuilder.create().build();
-			HttpPost post = new HttpPost(IMPORT_TOKEN_URL);
-			Map<String, String> m = new HashMap<String, String>();
-			m.put("imp_key", KEY);
-			m.put("imp_secret", SECRET);
-			try {
-				post.setEntity(new UrlEncodedFormEntity(convertParameter(m)));
-				HttpResponse res = client.execute(post);
-				ObjectMapper mapper = new ObjectMapper();
-				String body = EntityUtils.toString(res.getEntity());
-				JsonNode rootNode = mapper.readTree(body);
-				JsonNode resNode = rootNode.get("response");
-				result = resNode.get("access_token").asText();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return result;
-		}
-
-		private List<NameValuePair> convertParameter(Map<String, String> paramMap) {
-			List<NameValuePair> paramList = new ArrayList<NameValuePair>();
-			Set<Entry<String, String>> entries = paramMap.entrySet();
-			for (Entry<String, String> entry : entries) {
-				paramList.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-			}
-			return paramList;
-		}
-
-		// 결제취소
-		public int cancelPayment(String token, String mid) {
-			HttpClient client = HttpClientBuilder.create().build();
-			HttpPost post = new HttpPost(IMPORT_CANCEL_URL);
-			Map<String, String> map = new HashMap<String, String>();
-			post.setHeader("Authorization", token);
-			map.put("merchant_uid", mid);
-			String asd = "";
-			try {
-				post.setEntity(new UrlEncodedFormEntity(convertParameter(map)));
-				HttpResponse res = client.execute(post);
-				ObjectMapper mapper = new ObjectMapper();
-				String enty = EntityUtils.toString(res.getEntity());
-				JsonNode rootNode = mapper.readTree(enty);
-				asd = rootNode.get("response").asText();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			if (asd.equals("null")) {
-				System.err.println("환불실패");
-				return -1;
-			} else {
-				System.err.println("환불성공");
-				return 1;
-			}
-		}
-
-		// 아임포트 결제정보를 조회해서 결제금액을 뽑아주는 함수
-		public String getAmount(String token, String mId) {
-			String amount = "";
-			HttpClient client = HttpClientBuilder.create().build();
-			HttpGet get = new HttpGet(IMPORT_PAYMENTINFO_URL + mId + "/paid");
-			get.setHeader("Authorization", token);
-			try {
-				HttpResponse res = client.execute(get);
-				ObjectMapper mapper = new ObjectMapper();
-				String body = EntityUtils.toString(res.getEntity());
-				JsonNode rootNode = mapper.readTree(body);
-				System.out.println(rootNode);
-				JsonNode resNode = rootNode.get("response");
-				amount = resNode.get("amount").asText();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return amount;
-		}
-
-		// 아임포트 결제금액 변조를 방지하는 함수
-		public String setHackCheck(String amount, String mId, String token) {
-			HttpClient client = HttpClientBuilder.create().build();
-			HttpPost post = new HttpPost(IMPORT_PREPARE_URL);
-			Map<String, String> m = new HashMap<String, String>();
-			post.setHeader("Authorization", token);
-			m.put("amount", amount);
-			m.put("merchant_uid", mId);
-			try {
-				post.setEntity(new UrlEncodedFormEntity(convertParameter(m)));
-				HttpResponse res = client.execute(post);
-				ObjectMapper mapper = new ObjectMapper();
-				String body = EntityUtils.toString(res.getEntity());
-				JsonNode rootNode = mapper.readTree(body);
-				System.out.println(rootNode);
-				return rootNode.toString();
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-		
-		public void test() {
-			System.out.println("test");
-		}
-
-	}
 	
 	@Autowired
 	IReviewSVC rvSvc;
@@ -190,6 +78,8 @@ public class TruckDetailController {
 	IOrderSVC orderSvc;
 	@Autowired
 	IMemberSVC memSvc;
+	@Autowired
+	IMenuSVC menuSvc;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -200,7 +90,13 @@ public class TruckDetailController {
 		int getSellerId = 1;
 
 		if ((req.getParameter("sellerId") != null)) {
-			getSellerId = Integer.parseInt((req.getParameter("sellerId")));
+			if(fdSvc.selectOneFoodtruck(Integer.parseInt((req.getParameter("sellerId")))) != null) {
+				getSellerId = Integer.parseInt((req.getParameter("sellerId")));
+			} else {
+				return "redirect:/main.fdl";
+			}
+		} else {
+			return "redirect:/main.fdl";
 		}
 		ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(getSellerId)); // 셀러
 		
@@ -233,16 +129,22 @@ public class TruckDetailController {
 		
 		List<ReviewVO> rvList = rvSvc.showAllReview(getSellerId);
 		List<QnaVO> qnaList = qnaSvc.showAllQna(getSellerId);
+		List<MenuVO> menuList = menuSvc.showAllMenu(getSellerId);
 		
-		if (rvList != null && qnaList != null) {
+		if (rvList != null && qnaList != null && qnaList != null) {
 			model.addAttribute("rvSize", rvList.size());
 			model.addAttribute("reviewList", rvList);
 			
 			model.addAttribute("qnaSize", qnaList.size());
 			model.addAttribute("qnaList", qnaList);
 			
+			model.addAttribute("menuSize", menuList.size());
+			model.addAttribute("menuList", menuList);
+			
 			System.out.println("리뷰 리스트 조회 성공: " + rvList.size());
 			System.out.println("qna 리스트 조회 성공: " + qnaList.size());
+			System.out.println("메뉴 리스트 조회 성공: " + menuList.size());
+			
 		} else {
 			System.out.println("조회 실패");
 		}
@@ -278,8 +180,9 @@ public class TruckDetailController {
 	}
 	
 	@RequestMapping(value = "review_list.fdl", method = RequestMethod.GET)
-	public List<ReviewVO> reviewList(Model model) {
-		return rvSvc.showAllReview(1);
+	public List<ReviewVO> reviewList(Model model, HttpServletRequest req) {
+		int getSellerId = Integer.parseInt((req.getParameter("sellerId")));
+		return rvSvc.showAllReview(getSellerId);
 	}
 
 	@RequestMapping(value = "new_review.fdl", method = RequestMethod.POST)
@@ -358,8 +261,9 @@ public class TruckDetailController {
 	}
 	
 	@RequestMapping(value = "qna_list.fdl", method = RequestMethod.GET)
-	public List<QnaVO> QnaList(Model model) {
-		return qnaSvc.showAllQna(1);
+	public List<QnaVO> QnaList(Model model, HttpServletRequest req) {
+		int getSellerId = Integer.parseInt((req.getParameter("sellerId")));
+		return qnaSvc.showAllQna(getSellerId);
 	}
 
 	@RequestMapping(value = "new_qna.fdl", method = RequestMethod.POST)
@@ -444,7 +348,7 @@ public class TruckDetailController {
 	@RequestMapping(value = "orderCancel.fdl", method = RequestMethod.POST)
 	@ResponseBody
 	public String orderCancel(HttpServletRequest req) {
-		new PaymentCheck().cancelPayment(new PaymentCheck().getImportToken(), "");
+		// new PaymentCheck().cancelPayment(new PaymentCheck().getImportToken(), "");
 		return null;
 	}
 	

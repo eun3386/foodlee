@@ -103,9 +103,9 @@ body{
 .table_edit .input.mid{width:91px; }
 .table_edit .reg_id{font-size:20px; letter-spacing: 7px;font-weight: bold;}
 .table_edit .btn-abs{position: absolute; right: 0; top: -32px; z-index: 99;width:165px;}
-#btn-pw {position: absolute; left: 132px; top: -40px; z-index: 99;width:165px;}
-#btn-pw-edit {position: absolute; right: 10px; top: -40px; z-index: 99;width:165px;}
-#btn-pw-edit-cancel {position: absolute; right: -120px; top: -43px; z-index: 99;width:165px;}
+#btn-pw {position: absolute; left: 142px; top: -40px; z-index: 99;width:165px;}
+#btn-pw-edit {position: absolute; right: 20px; top: -40px; z-index: 99;width:165px;}
+#btn-pw-edit-cancel {position: absolute; right: -110px; top: -43px; z-index: 99;width:165px;}
 #btn-edit-submit, #btn-edit-cancel, #btn-pw-edit-submit {cursor: default;}
 .changeInfo{display: none;}
 .btn{background-color:#777; color: white; border: 0; border-radius: 3px;  padding: 4px 10px 6px;cursor:pointer;font-size:16px;}

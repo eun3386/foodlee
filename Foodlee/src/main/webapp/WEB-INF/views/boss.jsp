@@ -299,10 +299,10 @@
 					    <!--  style="a {color: #7c8798} a:hover {color: #5f76e8;}"style.min.css 6242 -->
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/infomodify.fdl">정보수정</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/show_edit_form.fdl">정보수정</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>

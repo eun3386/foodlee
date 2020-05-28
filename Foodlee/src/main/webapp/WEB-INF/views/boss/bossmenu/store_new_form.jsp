@@ -1,16 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+	
 <!DOCTYPE html>
 <html dir="ltr" lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Roboto|Courgette|Pacifico:400,700" rel="stylesheet">
-<title>storeinfo</title>
+<title>store new form</title>
 <link href="${pageContext.request.contextPath}/dist/css/style.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ksauwx09vv&submodules=geocoder"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 
+ <script src="http://code.jquery.com/jquery-latest.min.js"></script>
  
  <link href="${pageContext.request.contextPath}/resources/css/boss-ad.css" rel="stylesheet">
 <style type="text/css">
@@ -22,6 +27,21 @@
 </style>
 </head>
 <body>
+<%-- 	<c:choose> --%>
+<%-- 	<c:when test="${fn:endsWith(fp,'.png') or fn:endsWith(fp, '.jpg') or fn:endsWith(fp,'.gif')}">  --%>
+<%-- 		<div id="file_show_${vs.index}" class="image_file"> --%>
+<%-- 				<b> img path: ${fp}</b><br> --%>
+<%-- 				<img alt='origin file은 ${fn:split(fp,"_"[1]}'  --%>
+<%-- 			src="${pageContext.request.contextPath}${fp}"> --%>
+<!-- 		</div> -->
+<%-- 	</c:when> --%>
+<%-- 	<c:when test="${not fn:endsWith(fp,'.png) and not fn:endsWith(fp, '.jpg') and not fn:endsWith(fp,'.gif')}">  --%>
+<%-- 		<div id="file_show_${vs.index}" class="nomal_file"> --%>
+<%-- 			<b>file name: ${fn:split(fp,"_"}[1]</b><br> --%>
+<%-- 			<a href="${pageContext.request.contextPath}">첨부파일 링크</a> --%>
+<!-- 		</div> -->
+<%-- 	</c:when> --%>
+<%-- 	</c:choose> --%>
  <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -77,97 +97,6 @@
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                        <!-- Notification -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
-                                id="bell" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <span><i data-feather="bell" class="svg-icon"></i></span>
-                                <span class="badge badge-primary notify-no rounded-circle">5</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-left mailbox animated bounceInDown">
-                                <ul class="list-style-none">
-                                    <li>
-                                        <div class="message-center notifications position-relative">
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <div class="btn btn-danger rounded-circle btn-circle">
-                                                <i data-feather="airplay" class="text-white"></i></div>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Luanch Admin</h6>
-                                                    <span class="font-12 text-nowrap d-block text-muted">Just see
-                                                        the my new
-                                                        admin!</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-success text-white rounded-circle btn-circle"><i
-                                                        data-feather="calendar" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Event today</h6>
-                                                    <span
-                                                        class="font-12 text-nowrap d-block text-muted text-truncate">Just
-                                                        a reminder that you have event</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-info rounded-circle btn-circle"><i
-                                                        data-feather="settings" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Settings</h6>
-                                                    <span
-                                                        class="font-12 text-nowrap d-block text-muted text-truncate">You
-                                                        can customize this template
-                                                        as you want</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-primary rounded-circle btn-circle"><i
-                                                        data-feather="box" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Pavan kumar</h6> <span
-                                                        class="font-12 text-nowrap d-block text-muted">Just
-                                                        see the my admin!</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:02 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link pt-3 text-center text-dark" href="javascript:void(0);">
-                                            <strong>Check all notifications</strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- End Notification -->
-                        <!-- ============================================================== -->
-                        <!-- create new -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i data-feather="settings" class="svg-icon"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
@@ -277,6 +206,7 @@
             <!-- ============================================================== -->
             <!-- Container fluid  -->
             <!-- ============================================================== -->
+
             <div class="container-fluid">
 	                <!-- *************************************************************** -->
                 <!-- Start Sales Charts Section -->
@@ -289,63 +219,72 @@
                              <!-- *************************************************************** -->
                               <!-- *************테이블************** -->
                              <!-- *************************************************************** -->
-                             <div class="table-responsive mt-3"><!-- 요일별 위치 end -->
+                             <div class="table-responsive mt-3 col-md-6 col-lg-4"><!-- 요일별 위치 end -->
                                 <table class="table table-bordered  table-responsive-lg" id="tr">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col"><code>일</code></th>
-                                            <th scope="col">월</th>
-                                            <th scope="col">화</th>
-                                            <th scope="col">수</th>
-                                            <th scope="col">목</th>
-                                            <th scope="col">금</th>
-                                            <th scope="col"><code>토</code></th>
-                                        </tr>
-                                    </thead>
+<!--                                     <thead> -->
+<!--                                         <tr> -->
+<!--                                             <th scope="col">#</th> -->
+<%--                                             <th scope="col"><code>일</code></th> --%>
+<!--                                             <th scope="col">월</th> -->
+<!--                                             <th scope="col">화</th> -->
+<!--                                             <th scope="col">수</th> -->
+<!--                                             <th scope="col">목</th> -->
+<!--                                             <th scope="col">금</th> -->
+<%--                                             <th scope="col"><code>토</code></th> --%>
+<!--                                         </tr> -->
+<!--                                     </thead> -->
                                     <tbody>
                                         <tr>
                                             <th scope="row">시작시간</th>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
+                                            <td><input type="time" name="OperationHour1" class="form-control" value="22:33:00"></td>
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
                                         </tr>
                                         <tr>
                                             <th scope="row">마감시간</th>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
+                                            <td><input type="time" name="OperationHour2" class="form-control" value="22:33:00"></td>
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
+<!--                                             <td><input type="time" class="form-control" value="22:33:00"></td> -->
                                         </tr>
 	                                     <tr>
                                             <th scope="row">구 이름</th>
 		                                <td>
-										
+										<select name="location">
+											<option value="11230,강남구">강남구</option>
+											<option value="11250,강동구">강동구</option>
+											<option value="11090,강북구">강북구</option>
+											<option value="11160,강서구">강서구</option>
+											<option value="11210,관악구">관악구</option>
+											<option value="11050,광진구">광진구</option>
+											<option value="11170,구로구">구로구</option>
+											<option value="11180,금천구">금천구</option>
+											<option value="11110,노원구">노원구</option>
+											<option value="11100,도봉구">도봉구</option>
+											<option value="11060,동대문구">동대문구</option>
+											<option value="11200,동작구">동작구</option>
+											<option value="11140,마포구">마포구</option>
+											<option value="11130,서대문구">서대문구</option>
+											<option value="11220,서초구">서초구</option>
+											<option value="11040,성동구">성동구</option>
+											<option value="11080,성북구">성북구</option>
+											<option value="11240,송파구">송파구</option>
+											<option value="11150,양천구">양천구</option>
+											<option value="11190,영등포구">영등포구</option>
+											<option value="11030,용산구">용산구</option>
+											<option value="11120,은평구">은평구</option>
+											<option value="11010,종로구">종로구</option>
+											<option value="11020,중구">중구</option>
+											<option value="11070,중랑구">중랑구</option>
+										</select>
 										</td>
-		                            	<td>
-										
-										</td>
-		                            <td>
-										
-									</td>
-		                            <td>
-										
-									</td>
-		                            <td>
-										
-									</td>
-		                            <td>
-										
-									</td>
-									<td>
-									</td>
 	                                </tr>
                                     </tbody>
                                 </table>
@@ -354,6 +293,15 @@
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">판매트럭 이름</h4>
+		                                <input type="text" name="truckName" class="form-control" >
+		                            </div>
+		                        </div>
+		                    </div><!--트럭이름   end-->
+		                    <div class="col-md-6 col-lg-4"><!--트럭위치  -->
+		                        <div class="card">
+		                            <div class="card-body">
+		                                <h4 class="card-title">판매트럭 상세위치</h4>
+		                                <input type="text" name="truckLoca" class="form-control" >
 		                            </div>
 		                        </div>
 		                    </div><!--트럭이름   end-->
@@ -361,22 +309,42 @@
 		                    style="position:relative; width: 100px; height: 100px;
 									color: black; border: 0px solid black; display: inline;"><!--트럭사진 사진 -->
 							</div><!--트럭사진 사진 -->
-	 	                    <div class="col-sm-12 col-md-6 col-lg-4">트럭사진 
+	 	                    <div class="col-sm-12 col-md-6 col-lg-4">
 		                        <div class="card">
 		                            <div class="card-body">
-		                                <h4 class="card-title">트럭사진</h4>
+		                                <h4 class="card-title">트럭사진 경로</h4>
 		                                   <div class="form-group">
+		                                   		<input type="file" name="ImgPath" multiple size="64">
 		                                   </div>
 		                            </div>
 		                        </div>
 		                    </div><!-- 트럭사진 end  -->
-				            <div class="col-md-8"><!-- 트럭카테고리  -->
+				            <div class="col-md-7"><!-- 트럭카테고리  -->
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">트럭 카테고리</h4>
 		                                <div class="form-check form-check-inline">
 		                                    <div class="custom-control custom-checkbox">
-		                                        
+		                                        <input class="form-check-input" type="radio" name="category" id="inRadio1" value="1">
+		                                        <label class="form-check-label" for="inRadio1">간식</label>
+		                                    </div>
+		                                </div>
+		                                <div class="form-check form-check-inline">
+		                                    <div class="custom-control custom-checkbox">
+		                                        <input type="radio" class="form-check-input" name="category" id="inRadio2" value="2">
+		                                        <label class="form-check-label" for="inRadio2">식사</label>
+		                                    </div>
+		                                </div>
+		                                <div class="form-check form-check-inline">
+		                                    <div class="custom-control custom-checkbox">
+		                                        <input type="radio" class="form-check-input" name="category" id="inRadio3" value="3" >
+		                                        <label class="form-check-label" for="inRadio3">디저트</label>
+		                                    </div>
+		                                </div>
+		                                <div class="form-check form-check-inline">
+		                                    <div class="custom-control custom-checkbox">
+		                                        <input type="radio" class="form-check-input"name="category" id="inRadio4" value="4" >
+		                                        <label class="form-check-label" for="inRadio4">밥차</label>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -389,21 +357,28 @@
 		                            <div class="card-body">
 		                                <h4 class="card-title">대표메뉴</h4>
 		                                   <div class="form-group">
-		                                       
+		                                       <input type="text" class="form-control" name="MainMenu">
 		                                   </div>
 		                            </div>
 		                        </div>
 		                    </div><!--대표메뉴 end  -->
-		                    <div class="col-sm-12 col-md-6 col-lg-4"><!--위치죄표  -->
+		                    <div class="col-sm-12 col-md-8 col-lg-4"><!--위치죄표  -->
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">트럭위치</h4>
-		                                   <div class="form-group">
-												
+		                                   <div class="form-group" id="NaverMap" name="naverMap" style="width: 500px;max-width: 100%; height: 325px; ">
+											
 		                                   </div>
+		                                   <div class="form-group" style="text-align: center; margin-top: 10px;">
+												<input type="text" name="namp_lat" ><!-- 위도 -->
+												<input type="text" name="namp_lng" ><!-- 경도 -->
+											</div>
 		                            </div>
 		                        </div>
 		                    </div><!--위치 end  -->
+                            <div class="form-group"><!-- 보내기 -->
+									<button type="submit" class="btn btn-primary btn-block btn-lg">등록</button>
+								</div>
                             </form>
                         </div>
                     </div>
@@ -434,6 +409,22 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
+    <script type="text/javascript">
+    var nmap = new naver.maps.Map('naverMap', {// naverMap 값은 div 의 id값
+    	center : new naver.maps.LatLng(37.5782709,126.9770043), //지도 중앙 위치: 위도,경도 설정
+    	zoom : 12, //줌 설정 1~14 숫자가 클수록 확대, default 9
+    	zoomControl : true, //줌 컨트롤 표시(기본값 표시 안함)
+    	zoomControlOptions : {//줌 컨트롤 오른쪽 위로 설정
+    		position : naver.maps.Position.TOP_RIGHT
+    	},
+    	mapTypeControl : true, //일반 위성 지도보기 컨트롤 표시(기본값 표시안함)
+    	
+    });
+    naver.maps.Event.addListener(nmap, 'click', function(e) {
+		$('[name=namp_lat]').val(e.coord.lat()); //위도
+		$('[name=namp_lng]').val(e.coord.lng()); //경도
+	});
+    </script>
     <script src="${pageContext.request.contextPath}/assets/libs/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="${pageContext.request.contextPath}/assets/libs/popper.js/dist/umd/popper.min.js"></script>

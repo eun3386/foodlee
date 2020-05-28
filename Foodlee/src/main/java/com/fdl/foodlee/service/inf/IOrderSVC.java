@@ -19,4 +19,8 @@ public interface IOrderSVC {
 	public List<OrderVO> sellerOrderList(int sellerId);
 	// 하나의 주문 내역을 볼 수 있다.
 	public OrderVO showOneOrder(int orderId);
+	
+	public String getImportToken();
+	
+	public int cancelPayment(String token, String mid);
 }

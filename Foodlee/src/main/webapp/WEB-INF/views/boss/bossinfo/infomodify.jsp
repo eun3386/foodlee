@@ -16,33 +16,17 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var ROOT_PATH = '<%= application.getContextPath() %>';
 		
-		$('.login').click(function() {
-			var url = ROOT_PATH
-				+'///mb_login_form.jsp';
-			$("#main").load(url);
-		});
-		
-		$('.sign_up').click(function() {
-			var url = ROOT_PATH
-				+'///mb_sign_up_choice_form.jsp';
-			$("#main").load(url);
-		});
-		$('.ad').click(function() {
-			var url = ROOT_PATH
-				+'/views/bossinfo/ad.jsp';
-			$("#main").load(url);
-		});
-		$('.infomodify').click(function() {
-			var url = ROOT_PATH
-				+'/views/bossinfo/infomodify.jsp';
-			$("#main").load(url);
-		});
-		$('.position').click(function() {
-			var url = ROOT_PATH
-				+'/views/bossinfo/position.jsp';
-			$("#main").load(url);
+		$('#passwordChk').blur(function(){
+		 	if( $('#newPassword').val() != $('#passwordChk').val() ) {
+		    	if($('#passwordChk').val()!=''){
+			    	alert("비밀번호가 일치하지 않습니다.");
+		    	    $('#passwordChk').val('');
+		          	$('#passwordChk').focus();
+		       	}
+		   	} else {
+			    $('btn-pw-edit-submit').attr('disabled',false);
+		    }
 		});
 		
 		$("#changePasswordButton").on("click", function(e){
@@ -51,15 +35,13 @@
 			$('#btn-pw').hide();
 		});
 		
-		$("#btn-pw-edit-cancel").on("click", function(e){
-			e.preventDefault();
+		$("#btn-pw-edit-cancel").on("click", function(){
 			$('btn-pw-edit-submit').attr('disabled',true);
 			$(".changePassword").hide();
 			$('#btn-pw').show();
 		});
 		
-		$("#btn-edit").on("click", function(e) {
-			e.preventDefault();
+		$("#btn-edit").on("click", function() {
 			$(".changeInfo").show();
 			$(".info").hide();
 			$('btn-edit-submit').show();
@@ -68,8 +50,7 @@
 			$(this).hide();
 		});
 		
-		$("#btn-edit-cancel").on("click", function(e) {
-			e.preventDefault();
+		$("#btn-edit-cancel").on("click", function() {
 			$(this).attr('disabled',true);
 			$(this).css('cursor','default');
 			$(".changeInfo").hide();
@@ -77,21 +58,7 @@
 			$("#btn-edit").show();
 		});
 		
-		$('#passwordChk').blur(function(){
-		   if( $('#newPassword').val() != $('#passwordChk').val() ) {
-		    	if($('#passwordChk').val()!=''){
-			    	alert("비밀번호가 일치하지 않습니다.");
-		    	    $('#passwordChk').val('');
-		          	$('#passwordChk').focus();
-		       	}
-		    } else {
-		    	if($('#passwordChk').val()!='')
-			    	$('btn-pw-edit-submit').attr('disabled',false);
-		    }
-		});
-		
 	});
-	
 </script>
 <title>bossinfo</title>
 </head>
@@ -121,8 +88,8 @@
 				</div>
 				<div class="content">
 					<div class="profile_wrap">
-						<img src="./resources/css/imgs/mypage/profile.png">
-						<img class="photo" src="./resources/css/imgs/mypage/photo.png">
+						<img src="${pageContext.request.contextPath}/resources/css/imgs/mypage/profile.png">
+						<img class="photo" src="${pageContext.request.contextPath}/resources/css/imgs/mypage/photo.png">
 					</div>
 					<table class="table_edit">
 						<tbody>

@@ -4,9 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="com.fdl.foodlee.controller.TruckDetailController" %>
-<% 
-	TruckDetailController.PaymentCheck tp = new TruckDetailController().new PaymentCheck(); 
-%>  
 <%
 	String CON = application.getContextPath();
 %>
@@ -19,7 +16,6 @@
 	href="https://fonts.googleapis.com/css?family=Do+Hyeon&display=swap"
 	rel="stylesheet">
 <link href="<%=CON%>/resources/css/truckDetail.css" rel="stylesheet">
-<%-- <link href="<%=application.getContextPath()%>/resources/css/reset.css" type="text/css" rel="stylesheet"> --%>
 <link href="<%=CON%>/resources/css/main.css" type="text/css" rel="stylesheet">
 </head>
 <script
@@ -35,18 +31,47 @@
 
 <script src="resources/js/truckDetail.js"></script>
 <body>
-	<div class="main_box">
-		<div class="menu common">
-		<p class="content">메뉴</p>
-		</div>
-		<div class="logo common">
-			<p class="content">푸들이</p>
-		</div>
-		<div class="login common">
-			<p class="content" style="padding-top: 25px;">회원가입 로그인</p>
-		</div>
-	</div>
-	
+
+<!-- 	<div class="main_box"> -->
+<!-- 		<div class="menu common"> -->
+<!-- 		<p class="content">메뉴</p> -->
+<!-- 		</div> -->
+<!-- 		<div class="logo common"> -->
+<!-- 			<p class="content">푸들이</p> -->
+<!-- 		</div> -->
+<!-- 		<div class="login common"> -->
+<!-- 			<p class="content" style="padding-top: 25px;">회원가입 로그인</p> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	<div id="main-header">
+        <div id="menu-list">
+            <ul>
+                <li><a href="#">위치찾기</a></li>
+                <li><a href="#introduce">소개</a></li>
+                <li><a href="#truck-list">푸드트럭</a></li>
+                <li><a href="#event-list">이벤트</a></li>
+            </ul>
+        </div>
+        <a href="${pageContext.request.contextPath}/main.fdl"><img class="logo" src="resources/css/imgs/logo.png"></a>
+        <span id="loginjoin">
+			<c:if test="${empty LoginName}">
+			<a href="#" id='loginHeader'>로그인</a> / <a href="#" id='join'>회원가입</a>
+	        </c:if>
+	        <c:if test="${not empty LoginName and LoginType eq 4}">
+	        <a href="${pageContext.request.contextPath}/my_page.fdl" id='mypage'>마이페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
+	        </c:if>
+	        <c:if test="${not empty LoginName and LoginType eq 5}">
+	        <a href="${pageContext.request.contextPath}/boss.fdl" id='mypage'>마이페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
+	        </c:if>
+	    </span>
+	    <span id="adminlogout">
+	        <c:if test="${not empty LoginName and LoginType eq 6}">
+	        <a href="${pageContext.request.contextPath}/admin.fdl" id='admin_page'>어드민페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
+	        </c:if>
+        </span>
+    <hr class="line">
+    </div>
+	<div id="main_wrap">
 	<div id="info">
 		<div id="car_detail">
 			<img src="<%=CON%>/resources/imgs/truckDetail/car.jpg"
@@ -228,7 +253,7 @@
 				</c:forEach>
 				</div>
 				<div id="read-more-review" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
-					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">리뷰 더보기</div>
+					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white; padding-top: 7px;">리뷰 더보기</div>
 <%-- 				<c:if test="${foodT.sellerId ne sellerId}"> 리뷰 달기 판매자 금지--%>
 				<div id="review-insert">
 					<h3 style="padding-top: 10px;">리뷰달기</h3>
@@ -260,40 +285,34 @@
 		<section class="section" id="content2">
 			<div class="wrap2"
 				style="overflow-x: auto; width: 800px; white-space: nowrap;">
-				<%
-					for (int i = 0; i < 10; i++) {
-				%>
+				<c:forEach var="menu" items="${menuList}" varStatus="menuvs">
 				<div class="add"
 					style="border: 1px solid gray; width: 250px; margin-right: 5px; cursor: pointer;"
-					onclick="addToList(<%=i%>)">
-					<img src="<%=CON%>/resources/imgs/truckDetail/food.jpg"
+					onclick="addToList(${menuvs.count})">
+					<img src="<%=CON%>/resources/imgs/truckDetail/sellerid/${menu.sellerId}/${menu.menuPic}"
 						style="width: 250px; height: 150px;">
-					<h3 id="pname<%=i%>">닭꼬치<%=i + 1%></h3>
-					<span id="pprice<%=i%>"><%=3000 + (i * 100)%></span>원
+					<h3 id="pname${menuvs.count}"><c:out value="${menu.menuName}"/></h3>
+					<span id="pprice${menuvs.count}"><c:out value="${menu.menuPrice}"/></span>원
 				</div>
-				<%
-					}
-				%>
+				</c:forEach>
 			</div>
 			<div>
 				<h3>메뉴 목록</h3>
 				<ul class="truckDetailUL" style="list-style: none; margin: 0; padding: 0;">
 					<li>
-						<table style="margin-top: 10px;">
-						<%
-							for (int i = 0; i < 10; i++) {
-						%>
-							<tr style="cursor: pointer; border: 1px solid gray;" onclick="addToList(<%=i%>)">
+						<table id="menu_table" style="margin-top: 10px;">
+						<c:forEach var="menu" items="${menuList}" varStatus="menuvs">
+							<tr style="cursor: pointer; border: 1px solid gray;" onclick="addToList(${menuvs.count})">
 								<td>
-									<div style="width: 650px;"><b>닭꼬치<%=i + 1%></b>
-									<br><%=3000 + (i * 100)%>원
+									<div style="width: 650px;"><b><c:out value="${menu.menuName}"></c:out></b>
+									<br><c:out value="${menu.menuPrice}"/>원
+										<div style=""><c:out value="${menu.menuInfor}"/></div>
 									</div>
 								</td>
 								<td style="border-left: none;"><img
-									src="<%=CON%>/resources/imgs/truckDetail/food.jpg"
+									src="<%=CON%>/resources/imgs/truckDetail/sellerid/${menu.sellerId}/${menu.menuPic}"
 									style="width: 130px; height: 100px;"></td>
-							</tr>
-						<% } %>
+						</c:forEach>
 						</table>
 					</li>
 				</ul>
@@ -435,7 +454,7 @@
 			</div>
 		</c:forEach>
 			<div id="read-more-qna" style="text-align: center; font-size: 18px; vertical-align: middle;
-				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white;">Q&amp;A 더보기</div>
+				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white; padding-top: 7px;">Q&amp;A 더보기</div>
 				<div id="qna-insert">
 					<h3 style="padding-top: 10px;">QnA달기</h3>
 					<form action="${pageContext.request.contextPath}/new_qna.fdl" method="post">
@@ -465,6 +484,7 @@
 	<footer id="map_footer">
 		<jsp:include page="common/_footer.jsp" />
 	</footer>
+</div>
 </body>
 
 </html>
