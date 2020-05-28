@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
@@ -82,6 +81,67 @@ public class SellerController {
 		} else {
 			return "error";
 		}
+	}
+	
+//	seller/show_edit_form.fdl
+	@RequestMapping(value = "/show_edit_form.fdl", method = RequestMethod.GET)
+	public ModelAndView infomodify(HttpSession ses) { //정보수정
+		ModelAndView mav = new ModelAndView();
+		String login = (String)ses.getAttribute("LoginName");
+		if( login == null || login.isEmpty() ) {
+			mav.addObject("msg","회원조회 실패! - 파람에러");
+			mav.setViewName("redirect:boss.fdl");
+			return mav;
+		}
+		SellerVO sel = selSvc.selectOneSeller(login);
+		if( sel != null ) {
+			mav.addObject("msg","회원조회 성공 - "+ login);
+			mav.addObject("seller", sel);
+			mav.setViewName("boss/bossinfo/infomodify");
+		} else {
+			mav.addObject("msg","회원조회 실패 - "+ login);
+			mav.setViewName("redirect:boss.fdl");
+		}
+		return mav;
+	}
+	
+//	seller/pw_chagnge.fdl
+	@RequestMapping(value = "/pw_chagnge.fdl", 
+			method = RequestMethod.POST)
+	public String memberPasswordChangeProc() {
+		return null;
+	}
+	
+//	seller/update.fdl (proc, post, 세션, dao, 회원)
+	@RequestMapping(value = "/update.fdl", 
+			method = RequestMethod.POST)
+	public ModelAndView memberUpdateProc(
+			String login, String password, String name, String gender, int age, String residentRn,
+			String email, String phoneNumber, String address , String companyRn) {
+			//HttpServletRequest request
+			//) {
+		// req params
+		// id => name, age, email, password
+		// pw => aes 암호화에서 login을 기준키로 사용하게 했음...
+		
+//		int id = Integer.parseInt(request.getParameter("id"));
+//		String name = request.getParameter("name");
+//		int age = Integer.parseInt(request.getParameter("age"));
+//		String email = request.getParameter("email");
+//		String password = request.getParameter("password");
+//		String login = request.getParameter("login");
+//		//
+		SellerVO sel = new SellerVO(login, password, name, gender, age, residentRn, email, phoneNumber, address, companyRn);
+		boolean b = selSvc.updateOneSeller(sel);
+		ModelAndView mav = new ModelAndView();
+		if( b ) {
+			mav.setViewName("redirect:seller/show_edit_form.fdl?login="+login);
+		} else {
+			mav.addObject("msg", "회원 정보 갱신 실패!! "
+						+ "<br>" + sel );
+			mav.setViewName("boss/bossinfo/infomodify");
+		}
+		return mav;
 	}
 	
 }
