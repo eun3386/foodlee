@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import com.fdl.foodlee.model.dao.inf.IMenuDAO;
 import com.fdl.foodlee.model.vo.MenuVO;
 
+@Repository
 public class MenuMysqlDAOImpl implements IMenuDAO {
 	
 //	Connection conn;
