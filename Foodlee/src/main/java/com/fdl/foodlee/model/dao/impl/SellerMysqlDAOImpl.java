@@ -46,7 +46,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		+ "character set utf8) as pw from sellers where login = ? && email = ?";
 	private static final String SQL_UPDATE_SELLER
 	= "update sellers set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
-		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_rn=? where id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_Rn=? where id = ?";
 	private static final String SQL_DELETE_SELLER
 	= "delete from sellers where id = ?";
 	
@@ -57,9 +57,9 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	public boolean insertNewSellerWithCrypto(SellerVO sel) {
 		int r = jtem.update(SQL_INSERT_SELLER_CRYPTO,
 				sel.getLogin(), sel.getPassword(), sel.getLogin(),
-				sel.getName(), sel.getGender(), sel.getAge(), sel.getResidentRN(),
+				sel.getName(), sel.getGender(), sel.getAge(), sel.getResidentRn(),
 				sel.getEmail(), sel.getPhoneNumber(), sel.getAddress(),
-				sel.getCompanyRN() );
+				sel.getCompanyRn() );
 		return r == 1;
 	}
 
@@ -93,13 +93,13 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 								rs.getString("name"),
 								rs.getString("gender"),
 								rs.getInt("age"),
-								rs.getString("resident_rn"),
+								rs.getString("resident_Rn"),
 								rs.getString("email"),
 								rs.getString("phone_number"),
 								rs.getString("address"), 
 								rs.getTimestamp("joined_at"),
 								rs.getTimestamp("updated_at"),
-								rs.getString("company_rn"),
+								rs.getString("company_Rn"),
 								rs.getTimestamp("login_time"),
 								rs.getTimestamp("logout_time") );
 					}
@@ -140,7 +140,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 			int r = jtem.update(SQL_UPDATE_SELLER, 
 				sel.getPassword(), sel.getLogin(), sel.getName(),
 				sel.getGender(), sel.getAge(), sel.getEmail(), sel.getPhoneNumber(),
-				sel.getAddress(), sel.getId(), sel.getCompanyRN() );
+				sel.getAddress(), sel.getId(), sel.getCompanyRn() );
 			return r == 1;
 		} catch (DataAccessException e) {
 			System.out.println("dao/ 판매자 회원 정보 갱신 실패 - " + sel.getId());

@@ -10,23 +10,23 @@ public class SellerVO {
 	private String name; // 이름 ⇔  varchar(12) name NN
 	private String gender; // 성별 ⇔  varchar(4) gender
 	private int age; // 나이 ⇔ int age
-	private String residentRN; // 주민번호 Resident Registration Number, RRN ⇔ varchar(13) resident_rn
+	private String residentRn; // 주민번호 Resident Registration Number, RRn ⇔ varchar(13) resident_Rn
 	private String email; // 이메일 ⇔ varchar(24) email
 	private String phoneNumber; // 연락처 ⇔ varchar(12) phone_number NN
 	private String address; // 주소 ⇔ varchar(128) address
 	private Timestamp joinedAt; // 가입날짜 ⇔ timestamp joined_at
 	private Timestamp updatedAt; // 수정날짜 ⇔ timestamp updated_at
-	private String companyRN; // 사업자등록번호 Company Registration Number, CRN ⇔ varchar(10) company_rn
+	private String companyRn; // 사업자등록번호 Company Registration Number, CRn ⇔ varchar(10) company_Rn
 	private Timestamp loginTime; // 로그인일자 ⇔ timestamp login_time
 	private Timestamp logoutTime; // 로그아웃일자 ⇔ timestamp logout_time
 	
 	public SellerVO() {}
-	public SellerVO(String login, String password, String name, String gender, int age, String residentRN, String email,
-			String phoneNumber, String address, String companyRN) {
-		this(0, "seller", login, password, name, gender, age, residentRN, email, phoneNumber, address, null, null, companyRN, null, null);
+	public SellerVO(String login, String password, String name, String gender, int age, String residentRn, String email,
+			String phoneNumber, String address, String companyRn) {
+		this(0, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null);
 	}
-	public SellerVO(int id, String type, String login, String password, String name, String gender, int age, String residentRN,
-			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt, String companyRN,
+	public SellerVO(int id, String type, String login, String password, String name, String gender, int age, String residentRn,
+			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt, String companyRn,
 			Timestamp loginTime, Timestamp logoutTime) {
 		super();
 		this.id = id;
@@ -36,13 +36,13 @@ public class SellerVO {
 		this.name = name;
 		this.gender = gender;
 		this.age = age;
-		this.residentRN = residentRN;
+		this.residentRn = residentRn;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.joinedAt = joinedAt;
 		this.updatedAt = updatedAt;
-		this.companyRN = companyRN;
+		this.companyRn = companyRn;
 		this.loginTime = loginTime;
 		this.logoutTime = logoutTime;
 	}
@@ -50,9 +50,9 @@ public class SellerVO {
 	@Override
 	public String toString() {
 		return "SellerVO [id=" + id + ", type=" + type + ", login=" + login + ", password=" + password + ", name="
-				+ name + ", gender=" + gender + ", age=" + age + ", residentRN=" + residentRN + ", email=" + email
+				+ name + ", gender=" + gender + ", age=" + age + ", residentRn=" + residentRn + ", email=" + email
 				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt="
-				+ updatedAt + ", companyRN=" + companyRN + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime
+				+ updatedAt + ", companyRn=" + companyRn + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime
 				+ "]";
 	}
 	
@@ -92,11 +92,11 @@ public class SellerVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getResidentRN() {
-		return residentRN;
+	public String getResidentRn() {
+		return residentRn;
 	}
-	public void setResidentRN(String residentRN) {
-		this.residentRN = residentRN;
+	public void setResidentRn(String residentRn) {
+		this.residentRn = residentRn;
 	}
 	public String getEmail() {
 		return email;
@@ -128,11 +128,11 @@ public class SellerVO {
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	public String getCompanyRN() {
-		return companyRN;
+	public String getCompanyRn() {
+		return companyRn;
 	}
-	public void setCompanyRN(String companyRN) {
-		this.companyRN = companyRN;
+	public void setCompanyRn(String companyRn) {
+		this.companyRn = companyRn;
 	}
 	public int getAge() {
 		return age;

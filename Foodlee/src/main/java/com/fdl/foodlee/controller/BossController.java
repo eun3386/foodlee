@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
@@ -34,8 +35,21 @@ public class BossController {
 		return "boss/bossmenu/menumodify";
 	}
 	@RequestMapping(value = "infomodify.fdl", method = RequestMethod.GET)
-	public String infomodify() {//정보수정
-		return "boss/bossinfo/infomodify";
+	public ModelAndView infomodify(HttpSession ses) {//정보수정
+		ModelAndView mav = new ModelAndView();
+		String login = (String)ses.getAttribute("LoginName");
+		SellerVO sel = selSvc.selectOneSeller(login);
+		if( sel != null ) {
+			System.out.println("sel = " + sel);
+			mav.addObject("msg","회원조회 성공 - "+ login);
+			mav.addObject("seller", sel);
+			mav.setViewName("boss/bossinfo/infomodify");
+		} else {
+			mav.addObject("msg","회원조회 실패 - "+ login);
+			mav.setViewName("redirect:boss.fdl");
+		}
+		
+		return mav;
 	}
 	@RequestMapping(value = "orderlist.fdl", method = RequestMethod.GET)
 	public String orderlist() { //주문리스트
