@@ -41,8 +41,8 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 
 	@Override
 	public FoodtruckVO selectOneFoodtruck(String foodtruckName) {
-		// TODO Auto-generated method stub
-		return null;
+		FoodtruckVO foodtruckVO = ftDao.selectOneFoodtruck(foodtruckName);
+		return foodtruckVO;
 	}
 	
 	@Override

@@ -23,7 +23,6 @@
         <div id="pagination"></div>
     </div>
 </div>
-
 <script type="text/javascript">
 
 //지도 생성 시에 옵션을 지정할 수 있습니다.
@@ -255,26 +254,20 @@ function hideMarker(map, marker) {
 }
 //
 
-//주소 검색 표시
+//트럭 검색 표시
 function searchOneTruckListToCoordinate(keyword) {
-	var tsellerId = -1;
-    if(keyword == '${fodName}') {
-    	tsellerId = fodKey[markers.indexOf(marker)];
     	$.ajax({
     		type: 'get',
-    		url: HOME_PATH+'getFd.fdl',
-    		data: 'sid='+ tsellerId,
+    		url: HOME_PATH+'getFdName.fdl',
+    		data: 'fne='+ keyword,
     		success: function(res, status, xhr) {
     			console.log("success : " + res);
-    			$('#placesList').append(res);
+    			$('#placesList').append(res)
     		}, 
     		error: function(xhr, status) {
     			console.log("error : " + status);
     		}, 
     	});
-    } else {
-    	return alert('검색어를 찾을수 없습니다');
-    }
 }
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
