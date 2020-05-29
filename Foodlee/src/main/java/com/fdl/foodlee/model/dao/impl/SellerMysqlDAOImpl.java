@@ -25,20 +25,20 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	= "insert into sellers values(null, 'seller', ?, hex(aes_encrypt(?,?)), "
 		+"?, ?, ?, ?, ?, ?, ?, now(), now(), ?, null, null)";
 	private static final String SQL_SELLER_DUPCHECK
-	= "select count(id) from sellers where login = ?";
+	= "select count(seller_id) from sellers where login = ?";
 	private static final String SQL_LOGIN_AUTH
 	= "select login, cast(aes_decrypt(unhex(password),?) as char(32) "
-		+ "character set utf8) as pw from sellers where id = ?";
+		+ "character set utf8) as pw from sellers where seller_id = ?";
 	private static final String SQL_UPDATE_SELLER_LOGIN_TIME
-	= "update sellers set login_time=now() where id = ?";
+	= "update sellers set login_time=now() where seller_id = ?";
 	private static final String SQL_UPDATE_SELLER_LOGOUT_TIME
-	= "update sellers set logout_time=now() where id = ?";
+	= "update sellers set logout_time=now() where seller_id = ?";
 	private static final String SQL_SELECT_SELLER_ID 
-	= "select * from sellers where id = ?";
+	= "select * from sellers where seller_id = ?";
 	private static final String SQL_SELECT_SELLER_LOGIN 
 	= "select * from sellers where login = ?";
 	private static final String SQL_SELECT_SELLER_PK
-	= "select id from sellers where login = ?";
+	= "select seller_id from sellers where login = ?";
 	private static final String SQL_SELECT_SELLER_FIND_ID
 	= "select login from sellers where name = ? && phone_number = ?";
 	private static final String SQL_SELECT_SELLER_FIND_PW
@@ -46,11 +46,11 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		+ "character set utf8) as pw from sellers where login = ? && email = ?";
 	private static final String SQL_UPDATE_SELLER
 	= "update sellers set name=?, gender=?, "
-		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_Rn=? where id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_Rn=? where seller_id = ?";
 	private static final String SQL_UPDATE_SELLER_PW
-	= "update sellers set password=hex(aes_encrypt(?,?)) where id=?";
+	= "update sellers set password=hex(aes_encrypt(?,?)) where seller_id=?";
 	private static final String SQL_DELETE_SELLER
-	= "delete from sellers where id = ?";
+	= "delete from sellers where seller_id = ?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -88,7 +88,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 					@Override
 					public SellerVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 						return new SellerVO(
-								rs.getInt("id"),
+								rs.getInt("seller_id"),
 								rs.getString("type"),
 								rs.getString("login"),
 								rs.getString("password"),
@@ -141,10 +141,10 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		try {
 			int r = jtem.update(SQL_UPDATE_SELLER, 
 				sel.getName(), sel.getGender(), sel.getAge(), sel.getEmail(), sel.getPhoneNumber(),
-				sel.getAddress(), sel.getCompanyRn(), sel.getId() );
+				sel.getAddress(), sel.getCompanyRn(), sel.getSellerId() );
 			return r == 1;
 		} catch (DataAccessException e) {
-			System.out.println("dao/ 판매자 회원 정보 갱신 실패 - " + sel.getId());
+			System.out.println("dao/ 판매자 회원 정보 갱신 실패 - " + sel.getSellerId());
 			return false;
 		}
 		
@@ -154,10 +154,10 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	public boolean updateOneSellerPW(SellerVO sel) {
 		try {
 			int r = jtem.update(SQL_UPDATE_SELLER_PW, 
-				sel.getPassword(), sel.getLogin(), sel.getId());
+				sel.getPassword(), sel.getLogin(), sel.getSellerId());
 			return r == 1;
 		} catch (DataAccessException e) {
-			System.out.println("dao/ 판매자 회원 비밀번호 정보 갱신 실패 - " + sel.getId());
+			System.out.println("dao/ 판매자 회원 비밀번호 정보 갱신 실패 - " + sel.getSellerId());
 			return false;
 		}
 	}

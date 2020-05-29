@@ -116,7 +116,7 @@ public class TruckDetailController {
 			if(ses.getAttribute("LoginType") != null) {
 				String getLoginType = String.valueOf(ses.getAttribute("LoginType"));
 				if (Integer.parseInt(getLoginType) == 5) {
-					getTruckSellerId = sellSvc.selectOneSeller((String)ses.getAttribute("LoginName")).getId();
+					getTruckSellerId = sellSvc.selectOneSeller((String)ses.getAttribute("LoginName")).getSellerId();
 				}
 			}
 		}

@@ -42,7 +42,7 @@ public class LoginSVCImpl implements ILoginSVC {
 			dbPW = this.mbDao.loginAuthenticate(login, id);
 			rMb = true;
 		} else if( mb == null && sel != null ) {
-			id = sel.getId();
+			id = sel.getSellerId();
 			dbPW = this.selDao.loginAuthenticate(login, id);
 		}
 		

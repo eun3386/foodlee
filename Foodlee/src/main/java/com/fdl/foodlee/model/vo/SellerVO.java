@@ -3,7 +3,7 @@ package com.fdl.foodlee.model.vo;
 import java.sql.Timestamp;
 
 public class SellerVO {
-	private int id; // 판매자 번호 ⇔  int seller_id <<PK>> AI(AutoIncrement)
+	private int sellerId; // 판매자 번호 ⇔  int seller_id <<PK>> AI(AutoIncrement)
 	private String type; // 회원구분
 	private String login; // <<UQ>> 아이디 ⇔  varchar(12) login <<UQ>> NN
 	private String password; // 비밀번호 ⇔  varchar(24) password NN
@@ -25,11 +25,11 @@ public class SellerVO {
 			String phoneNumber, String address, String companyRn) {
 		this(0, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null);
 	}
-	public SellerVO(int id, String type, String login, String password, String name, String gender, int age, String residentRn,
+	public SellerVO(int sellerId, String type, String login, String password, String name, String gender, int age, String residentRn,
 			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt, String companyRn,
 			Timestamp loginTime, Timestamp logoutTime) {
 		super();
-		this.id = id;
+		this.sellerId = sellerId;
 		this.type = type;
 		this.login = login;
 		this.password = password;
@@ -49,18 +49,18 @@ public class SellerVO {
 	
 	@Override
 	public String toString() {
-		return "SellerVO [id=" + id + ", type=" + type + ", login=" + login + ", password=" + password + ", name="
+		return "SellerVO [sellerId=" + sellerId + ", type=" + type + ", login=" + login + ", password=" + password + ", name="
 				+ name + ", gender=" + gender + ", age=" + age + ", residentRn=" + residentRn + ", email=" + email
 				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt="
 				+ updatedAt + ", companyRn=" + companyRn + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime
 				+ "]";
 	}
 	
-	public int getId() {
-		return id;
+	public int getSellerId() {
+		return sellerId;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setSellerId(int sellerId) {
+		this.sellerId = sellerId;
 	}
 	public String getType() {
 		return type;

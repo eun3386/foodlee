@@ -44,7 +44,7 @@ private String rawMaterials;
 	private static final String
 		SQL_SELECT_MENU_ID = "select * from menus where menu_id = ?";
 	private static final String
-	SQL_SELECT_MENU_SELLER_IDASDASD = "select * from menus where seller_id = ?";
+	SQL_SELECT_MENU_SELLER_ID = "select * from menus where seller_id = ?";
 	private static final String
 		SQL_SELECT_MENU_NAME = "select * from menus where menu_name = ?";
 	private static final String
