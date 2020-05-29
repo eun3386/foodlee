@@ -35,15 +35,22 @@ public class EventSVCImpl implements IEventSVC {
 	}
 
 	@Override
-	public int insertNewEventReturnKey(String title, String content, Date std, Date edd, int onGoing, String filePath) {
+	public int insertNewEventReturnKey(String title, String content, String std, String edd, int onGoing, String filePath) {
 		EventVO ev = new EventVO(title, content, std, edd, onGoing, filePath);
 		return evDao.insertNewEventReturnKey2(ev);
 	}
 
 	@Override
 	public EventVO selectOneEvent(int evId) {
-		// TODO Auto-generated method stub
-		return null;
+		EventVO ev = evDao.selectOneEvent(evId);
+		if( ev != null ) {
+			if( evDao.increaseReadCount(evId) )
+				return ev;
+//			else 
+//				return null;
+		}
+		return ev;	
+		//return atDao.selectOneArticle(id);
 	}
 
 	@Override

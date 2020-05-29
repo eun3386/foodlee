@@ -9,7 +9,7 @@
 <title>이벤트 작성</title>
 </head>
 <body>
-<form id="frm" action="event_show.fdl" method="post" >
+<form id="frm" action="event_add.fdl" method="post" >
 	<table width="100%"> 
 		<tr> 
 			<td colspan="2">제목 
@@ -19,7 +19,7 @@
 			종료일
 			<input type="date" id="edd" name="edd"/>
 			진행중 
-			<select name="ongoing"> <option value="1">진행</option> <option value="0">종료</option> </select> </td>
+			<select name="onGoing"> <option value="1">진행</option> <option value="0">종료</option> </select> </td>
 		</tr> 
 		<tr> <td>내용</td> 
 		<td> <textarea rows="10" cols="30" id="ir1" name="content" style="width:766px; height:412px; "></textarea>

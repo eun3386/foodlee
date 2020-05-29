@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -21,15 +22,15 @@ public class EventMysqlDAOImpl implements IEventDAO {
 	private JdbcTemplate jtem;
 	
 	public static final String SQL_EVENT_READ_INC = 
-			"update events set read_count"
-			+ " = read_count + 1 where id = ?";
+			"update events set event_read_count"
+			+ " = event_read_count + 1 where event_id = ?";
 		public static final String SQL_EVENT_SHOWALL =
 			"select * from events order by created_at desc";
 		public static final String SQL_EVENT_SHOWONE =
-			"select * from events where id = ?";
+			"select * from events where event_id = ?";
 		public static final String SQL_EVENT_INSERT_VO
 			//= "insert into values(),(),()";
-			= "INSERT INTO events VALUES (null,?,?,?,?,1,now(),null,0,0,NULL,NULL,NULL)";
+			= "INSERT INTO events VALUES (null,?,?,?,?,1,now(),null,0,0,NULL,NULL,?)";
 			//insert into events values(null,'2020-05-07','2020-06-30',1,'테스트','이벤트테스트',0,0,null,null,null,now(),null);
 			//*="INSERT INTO events VALUES (1,'밤도깨비야시장','잠정 중단','2020-05-28','0000-00-00',1,now(),null,0,0,NULL,NULL,NULL)";
 		public static final String SQL_EVENT_SHOWALL_PG
@@ -78,7 +79,7 @@ public class EventMysqlDAOImpl implements IEventDAO {
 	}
 	
 	@Override
-	public int insertNewEventReturnKey(String title, String content, Date std, Date edd, String filePath) {
+	public int insertNewEventReturnKey(String title, String content, String std, String edd, String filePath) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -98,12 +99,15 @@ public class EventMysqlDAOImpl implements IEventDAO {
 							new String[] {"id"});
 				pstmt.setString(1, ev.getEventTitle());
 				pstmt.setString(2, ev.getEventContent());
-				java.sql.Date std = new java.sql.Date(ev.getEventStartDate().getTime());
-				java.sql.Date edd = null;
-				if(ev.getEventEndDate()!=null)
-					edd = new java.sql.Date(ev.getEventEndDate().getTime());
-				pstmt.setDate(3, std);
-				pstmt.setDate(4, edd);
+//				java.sql.Date std = new java.sql.Date(ev.getEventStartDate().getTime());
+//				java.sql.Date edd = null;
+//				if(ev.getEventEndDate() != null)
+//					edd = new java.sql.Date(ev.getEventEndDate().getTime());
+				pstmt.setString(3, ev.getEventStartDate());
+				String edd = null;
+				if(ev.getEventEndDate()!=null) 
+					edd = ev.getEventEndDate();
+				pstmt.setString(4, edd);
 				pstmt.setString(5, ev.getFilePath());
 				return pstmt;
 			}
@@ -115,8 +119,10 @@ public class EventMysqlDAOImpl implements IEventDAO {
 	}
 
 	@Override
-	public EventVO selectOneEvent(int id) {
-		return null;
+	public EventVO selectOneEvent(int evId) {
+		return jtem.queryForObject(SQL_EVENT_SHOWONE,
+				BeanPropertyRowMapper
+				.newInstance(EventVO.class), evId);
 	}
 
 	@Override
@@ -126,7 +132,7 @@ public class EventMysqlDAOImpl implements IEventDAO {
 	}
 
 	@Override
-	public boolean updateEvent(String eventTitle, String eventContent, Date eventStartDate, 
+	public boolean updateEvent(String eventTitle, String eventContent, String eventStartDate, 
 			boolean eventOngoing) {
 		// TODO Auto-generated method stub
 		return false;
@@ -134,8 +140,8 @@ public class EventMysqlDAOImpl implements IEventDAO {
 
 	@Override
 	public boolean increaseReadCount(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		int r = jtem.update(SQL_EVENT_READ_INC, id);
+		return r==1;
 	}
 
 	@Override
@@ -187,7 +193,7 @@ public class EventMysqlDAOImpl implements IEventDAO {
 	}
 
 	@Override
-	public List<EventVO> showAllEvents(int offset, int limit, boolean order, Date startDate, Date endDate) {
+	public List<EventVO> showAllEvents(int offset, int limit, boolean order, String startDate, String endDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}

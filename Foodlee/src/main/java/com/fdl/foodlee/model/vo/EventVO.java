@@ -1,18 +1,17 @@
 package com.fdl.foodlee.model.vo;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /*
  #### EventVO ⇔ events
 - int eventId 이벤트번호 ⇔ integer event_id <<PK>> NN AI
 - String eventTitle 이벤트제목 ⇔ varchar(128) event_title NN
 - String eventContent 이벤트내용 ⇔ text event_content NN
-- Date eventStartDate 이벤트 시작 날짜 ⇔ datetime event_start_date NN
-- Date eventEndDate 이벤트 종료 날짜 ⇔ datetime event_end_date 
+- String eventStartString 이벤트 시작 날짜 ⇔ Stringtime event_start_String NN
+- String eventEndString 이벤트 종료 날짜 ⇔ Stringtime event_end_String 
 - int eventOngoing 진행중 여부 ⇔ integer event_ongoing NN // 0종료, 1진행
 - Timestamp eventCreatedAt 이벤트등록날짜 ⇔ timestamp event_created_at   CURRENT_TIMESTAMP NN 
-- Timestamp eventUpdatedAt 이벤트수정날짜 ⇔ timestamp event_updated_at   CURRENT_TIMESTAMP
+- Timestamp eventUpStringdAt 이벤트수정날짜 ⇔ timestamp event_upStringd_at   CURRENT_TIMESTAMP
 - int likeCount 좋아요수 ⇔ integer event_like_count 0
 - int readCount 조회수 ⇔ integer event_read_count 0
 - String likeMembers 좋아요회원들 ⇔ varchar(1024) event_like_members
@@ -23,11 +22,11 @@ public class EventVO {
 	int eventId;
 	String eventTitle;
 	String eventContent;
-	Date eventStartDate;
-	Date eventEndDate; 
+	String eventStartDate;
+	String eventEndDate; 
 	int eventOngoing;
 	Timestamp eventCreatedAt; 
-	Timestamp eventUpdatedAt;
+	Timestamp eventUpStringdAt;
 	int likeCount;
 	int readCount;
 	String likeMembers;
@@ -36,12 +35,12 @@ public class EventVO {
 	
 	
 	public EventVO() {}
-	public EventVO(String eventTitle, String eventContent, Date eventStartDate, Date eventEndDate,
+	public EventVO(String eventTitle, String eventContent, String eventStartDate, String eventEndDate,
 			int eventOngoing, String filePath) {
 		this(0, eventTitle, eventContent, eventStartDate, eventEndDate, eventOngoing, null, null, 0, 0, null, null, filePath);
 	}
-	public EventVO(int eventId, String eventTitle, String eventContent, Date eventStartDate, Date eventEndDate,
-			int eventOngoing, Timestamp eventCreatedAt, Timestamp eventUpdatedAt, int likeCount, int readCount,
+	public EventVO(int eventId, String eventTitle, String eventContent, String eventStartDate, String eventEndDate,
+			int eventOngoing, Timestamp eventCreatedAt, Timestamp eventUpStringdAt, int likeCount, int readCount,
 			String likeMembers, String tags, String filePath) {
 		super();
 		this.eventId = eventId;
@@ -51,7 +50,7 @@ public class EventVO {
 		this.eventEndDate = eventEndDate;
 		this.eventOngoing = eventOngoing;
 		this.eventCreatedAt = eventCreatedAt;
-		this.eventUpdatedAt = eventUpdatedAt;
+		this.eventUpStringdAt = eventUpStringdAt;
 		this.likeCount = likeCount;
 		this.readCount = readCount;
 		this.likeMembers = likeMembers;
@@ -78,17 +77,17 @@ public class EventVO {
 	public void setEventContent(String eventContent) {
 		this.eventContent = eventContent;
 	}
-	public Date getEventStartDate() {
+	public String getEventStartDate() {
 		return eventStartDate;
 	}
-	public void setEventStartDate(Date eventStartDate) {
+	public void setEventStartDate(String eventStartDate) {
 		this.eventStartDate = eventStartDate;
 	}
-	public Date getEventEndDate() {
+	public String getEventEndDate() {
 		return eventEndDate;
 	}
-	public void setEventEndDate(Date eventEndDate) {
-		this.eventEndDate = eventEndDate;
+	public void setEventEndDate(String eventEndDate) {
+		this.eventEndDate= eventEndDate;
 	}
 	public int getEventOngoing() {
 		return eventOngoing;
@@ -102,11 +101,11 @@ public class EventVO {
 	public void setEventCreatedAt(Timestamp eventCreatedAt) {
 		this.eventCreatedAt = eventCreatedAt;
 	}
-	public Timestamp getEventUpdatedAt() {
-		return eventUpdatedAt;
+	public Timestamp getEventUpStringdAt() {
+		return eventUpStringdAt;
 	}
-	public void setEventUpdatedAt(Timestamp eventUpdatedAt) {
-		this.eventUpdatedAt = eventUpdatedAt;
+	public void setEventUpStringdAt(Timestamp eventUpStringdAt) {
+		this.eventUpStringdAt = eventUpStringdAt;
 	}
 	public int getLikeCount() {
 		return likeCount;
@@ -143,8 +142,8 @@ public class EventVO {
 	@Override
 	public String toString() {
 		return "EventVO [eventId=" + eventId + ", eventTitle=" + eventTitle + ", eventContent=" + eventContent
-				+ ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + ", eventOngoing="
-				+ eventOngoing + ", eventCreatedAt=" + eventCreatedAt + ", eventUpdatedAt=" + eventUpdatedAt
+				+ ", eventStartDate=" + eventStartDate+ ", eventEndDate=" + eventEndDate + ", eventOngoing="
+				+ eventOngoing + ", eventCreatedAt=" + eventCreatedAt + ", eventUpStringdAt=" + eventUpStringdAt
 				+ ", likeCount=" + likeCount + ", readCount=" + readCount + ", likeMembers=" + likeMembers + ", tags="
 				+ tags + ", filePath=" + filePath + "]";
 	}

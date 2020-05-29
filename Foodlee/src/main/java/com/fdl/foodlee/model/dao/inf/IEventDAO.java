@@ -10,7 +10,7 @@ public interface IEventDAO {
 //	event_new_form.fdl (get)
 //	event_add.fdl (post, proc, dao, param..vo)
 	boolean insertNewEvent(EventVO ev);
-	int insertNewEventReturnKey(String title, String content, Date std, Date edd, String filePath);
+	int insertNewEventReturnKey(String title, String content, String std, String edd, String filePath);
 	int insertNewEventReturnKey2(EventVO ev);
 //	- 이벤트 게시글 상세보기 할 수 있다
 //		event_show.fdl (get, proc, dao, param?id)
@@ -21,7 +21,7 @@ public interface IEventDAO {
 //	- 관리자가 자신의 게시글을 편집 갱신 할 수 있다
 //		event_edit_form.fdl (get, proc, dao, param?id)
 //		event_update.fdl (post, proc, dao, param...vo)
-	boolean updateEvent(String eventTitle, String eventContent, Date eventStartDate, 
+	boolean updateEvent(String eventTitle, String eventContent, String eventStartDate, 
 			boolean eventOngoing);
 	boolean increaseReadCount(int evId);
 	boolean isAlreadyLikedMembers(int evId, int mbId); // lc++
@@ -38,7 +38,7 @@ public interface IEventDAO {
 //		event_list.fdl (get, proc, dao, param?pn&order)
 	List<EventVO> showAllEvents(int offset, int limit);
 	List<EventVO> showAllEvents(int offset, int limit, boolean order);
-	List<EventVO> showAllEvents(int offset, int limit, boolean order, Date startDate, Date endDate);
+	List<EventVO> showAllEvents(int offset, int limit, boolean order, String startDate, String endDate);
 //	- 이벤트 게시글 리스트를 검색할 수 있다. (페이지네이션, 정렬)
 //		event_search.fdl (post, proc, dao, param?pn&order&keyword&날짜 범위..)
 	List<EventVO> showAllEvents(String keyword, 

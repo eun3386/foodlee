@@ -18,7 +18,7 @@ public interface IEventSVC {
 			String content, 
 			String filePath, String tags, 
 			int memberId);
-	int insertNewEventReturnKey(String title, String content, Date std, Date edd, int onGoing, String filePath);		
+	int insertNewEventReturnKey(String title, String content, String std, String edd, int onGoing, String filePath);		
 	
 //	- 이벤트 게시글 상세보기 할 수 있다
 //		event_show.fdl (get, proc, dao, param?id)
