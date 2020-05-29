@@ -393,8 +393,6 @@ function getClickHandler(seq) {
     naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 }
 
-
-
 // // MouseOver
 function onMouseOver(e) {
     var marker = e.overlay,
