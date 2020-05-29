@@ -4,15 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <link rel="stylesheet" type="text/css" href="/foodlee/resources/css/mpreset.css"> -->
 <link rel="stylesheet" type="text/css" href="/foodlee/resources/css/selmypage.css">
 <style type="text/css">
 	#section_edit{display:block; background-color:#d1e6f5;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -89,7 +86,7 @@
 		$('#phoneNumber2').val(pnSplit2);
 		$('#phoneNumber3').val(pnSplit3);
 		
-		$('input[name=email]').blur(function() {
+		$('input[name=name]', 'input[name=age]', 'input[name=companyRn]', 'input[name=phoneNumber]', 'input[name=email]').blur(function() {
 			var b1 = $('input[name=name]').val();
 			var cRn1 = $('input[name=companyRn1]').val();
 			var cRn2 = $('input[name=companyRn2]').val();
@@ -110,24 +107,18 @@
 			$('#pw_form').submit();
 		});
 		
+		if( $('#addressInput').val() != null ) {
+			var val = $('#addressInput').val();
+			$('#address').attr('value',val);
+			var adVal = $('#address').val();
+		}
+		
 	});
 </script>
 <title>bossinfo</title>
 </head>
 <body id="wrapper">
-<div>
-	<header id="_header">
-<%-- 			<%@ include file="../../common/_header.jsp"%> --%>
-		</header>
-</div>
 <div id="infomain">
-	<nav id=" in-main-header" class="navbar navbar-light bg-light justify-content-between">
-		<form class="form-inline">
-			<a class="infomodify" href="#">정보수정</a>
-			<a class="ad" href="#">광고노출</a> 
-			<a class="position" href="#">위치등록</a>
- 		</form>
-	</nav>
 	<!-- 마이페이지 시작-->
 	<section class="main_section" id="section_edit">
 		<div class="wrapper">
@@ -146,7 +137,7 @@
 					<input type="hidden" name="password">
 				</form>
 				<form style="display: inline;" action="${pageContext.request.contextPath}/seller/update.fdl" method="post">
-					<input type="hidden" name="id" value="${seller.id}">
+					<input type="hidden" name="id" value="${seller.sellerId}">
 					<input type="hidden" name="login" value="${seller.login}">
 					<input type="hidden" name="password" value="${seller.password}">
 					<input type="hidden" name="residentRn" value="${seller.residentRn}">
@@ -263,7 +254,8 @@
 						<th><label for="address">주소</label></th>
 						<td>
 							<span class="info">${seller.address}</span>
-							<input type="text" class="changeInfo input" id="address" name="address" value="${seller.address}">
+							<textarea rows="2" cols="30" style="resize: none" id="addressInput" class="changeInfo input" >${seller.address}</textarea>
+							<input type="hidden" id="address" name="address">
 						</td>
 						<th></th>
 					</tr>
