@@ -10,11 +10,13 @@
 <body>
 <div id="at_show">
 		<table border='0'>
-			<tr> <td>번호:</td> <td>${event.eventId}</td> <td>시작일:</td> <td>${event.eventStartDate}</td> <td>종료일:</td> <td>${event. eventEndDate}</td> <td><c:if test="${event.eventOngoing} eq 1}">진행</c:if></td></tr>
+			<tr> <td>번호:</td> <td>${event.eventId}</td> <td>시작일:</td> <td>${event.eventStartDate}</td> 
+			<td>종료일:</td> <td>${event. eventEndDate}</td> 
+			<td><c:if test="${event.eventOngoing eq 1}">진행</c:if>
+			<c:if test="${event.eventOngoing eq 0}">종료</c:if></td></tr>
 			<tr> <td>제목:</td> <td>${event.eventTitle}</td>  </tr>
 			<tr> <td>내용:</td> 
-				<td> <textarea rows="10" cols="64" readonly 
-					>${event.eventContent}</textarea> </td>  </tr>
+				<td style="overflow: hidden;"> <div>${event.eventContent} </div></td>  </tr>
 			<tr> <td>조회수:</td> <td>${event.readCount}번</td>  </tr>
 			<tr> <td>좋아요수:</td> <td>${event.likeCount}번</td>  </tr>
 			
