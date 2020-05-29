@@ -45,8 +45,10 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	= "select cast(aes_decrypt(unhex(password), ?) as char(32) "
 		+ "character set utf8) as pw from sellers where login = ? && email = ?";
 	private static final String SQL_UPDATE_SELLER
-	= "update sellers set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
+	= "update sellers set name=?, gender=?, "
 		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_Rn=? where id = ?";
+	private static final String SQL_UPDATE_SELLER_PW
+	= "update sellers set password=hex(aes_encrypt(?,?)) where id=?";
 	private static final String SQL_DELETE_SELLER
 	= "delete from sellers where id = ?";
 	
@@ -136,14 +138,26 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 
 	@Override
 	public boolean updateOneSeller(SellerVO sel) {
-		try { 
+		try {
 			int r = jtem.update(SQL_UPDATE_SELLER, 
-				sel.getPassword(), sel.getLogin(), sel.getName(),
-				sel.getGender(), sel.getAge(), sel.getEmail(), sel.getPhoneNumber(),
-				sel.getAddress(), sel.getId(), sel.getCompanyRn() );
+				sel.getName(), sel.getGender(), sel.getAge(), sel.getEmail(), sel.getPhoneNumber(),
+				sel.getAddress(), sel.getCompanyRn(), sel.getId() );
 			return r == 1;
 		} catch (DataAccessException e) {
 			System.out.println("dao/ 판매자 회원 정보 갱신 실패 - " + sel.getId());
+			return false;
+		}
+		
+	}
+	
+	@Override
+	public boolean updateOneSellerPW(SellerVO sel) {
+		try {
+			int r = jtem.update(SQL_UPDATE_SELLER_PW, 
+				sel.getPassword(), sel.getLogin(), sel.getId());
+			return r == 1;
+		} catch (DataAccessException e) {
+			System.out.println("dao/ 판매자 회원 비밀번호 정보 갱신 실패 - " + sel.getId());
 			return false;
 		}
 	}

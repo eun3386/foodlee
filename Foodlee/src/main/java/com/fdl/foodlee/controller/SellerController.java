@@ -108,37 +108,34 @@ public class SellerController {
 //	seller/pw_chagnge.fdl
 	@RequestMapping(value = "/pw_chagnge.fdl", 
 			method = RequestMethod.POST)
-	public String memberPasswordChangeProc() {
-		return null;
+	public ModelAndView memberPasswordChangeProc(int id, String login, String password) {
+		SellerVO sel = new SellerVO(login, password, null, null, 0, null, null, null, null, null);
+		boolean b = selSvc.updateOneSeller(sel);
+		ModelAndView mav = new ModelAndView();
+		if( b ) {
+			mav.addObject("msg", "회원 비밀번호 갱신 성공!! " + "<br>" + sel );
+			mav.setViewName("redirect:/seller/show_edit_form.fdl?login="+login);
+		} else {
+			mav.addObject("msg", "회원 비밀번호 갱신 실패!! " + "<br>" + sel );
+			mav.setViewName("boss/bossinfo/infomodify");
+		}
+		return mav;
 	}
 	
 //	seller/update.fdl (proc, post, 세션, dao, 회원)
 	@RequestMapping(value = "/update.fdl", 
 			method = RequestMethod.POST)
 	public ModelAndView memberUpdateProc(
-			String login, String password, String name, String gender, int age, String residentRn,
+			int id, String login, String password, String name, String gender, int age, String residentRn,
 			String email, String phoneNumber, String address , String companyRn) {
-			//HttpServletRequest request
-			//) {
-		// req params
-		// id => name, age, email, password
-		// pw => aes 암호화에서 login을 기준키로 사용하게 했음...
-		
-//		int id = Integer.parseInt(request.getParameter("id"));
-//		String name = request.getParameter("name");
-//		int age = Integer.parseInt(request.getParameter("age"));
-//		String email = request.getParameter("email");
-//		String password = request.getParameter("password");
-//		String login = request.getParameter("login");
-//		//
-		SellerVO sel = new SellerVO(login, password, name, gender, age, residentRn, email, phoneNumber, address, companyRn);
+		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null);
 		boolean b = selSvc.updateOneSeller(sel);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
-			mav.setViewName("redirect:seller/show_edit_form.fdl?login="+login);
+			mav.addObject("msg", "회원 정보 갱신 성공!! " + "<br>" + sel );
+			mav.setViewName("redirect:/seller/show_edit_form.fdl?login="+login);
 		} else {
-			mav.addObject("msg", "회원 정보 갱신 실패!! "
-						+ "<br>" + sel );
+			mav.addObject("msg", "회원 정보 갱신 실패!! " + "<br>" + sel );
 			mav.setViewName("boss/bossinfo/infomodify");
 		}
 		return mav;
