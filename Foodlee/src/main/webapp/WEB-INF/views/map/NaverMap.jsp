@@ -146,8 +146,10 @@ function onSuccessGeolocation(position) {
 
 // truck 위치 리스트 마커
 var markers = [];
+var nameList = [];
 var infoWindows = [];
 var fodKey = [];
+var fodName = [];
 <c:forEach items="${fodlatlngs}" var="fod" varStatus="status">
 	var data = '<c:out value="${fod}"/>';
 	var x = data.split(',')[0];
@@ -171,12 +173,14 @@ for (var i=0, ii=latlngs.length; i<ii; i++) {
         zIndex: 100
     });
  	marker.set('seq', i);
-
-	<c:forEach items="${fodName}" var="fodN">
+	
+	<c:forEach items="${fodName}" var="fodN" varStatus="status">
+	nameList = '<c:out value="${fodN}"/>';
 	var contentString = [
-		'<div style="width:150px;text-align:center;padding:10px;"><c:out value="${fodN}"/></div>'
+		'<div style="width:150px;text-align:center;padding:10px;">'+nameList+'</div>'
     ].join('');
 	
+	fodName[${status.index}] = ${fodList[status.index].sellerId};
     var infoWindow = new naver.maps.InfoWindow({
         	content: contentString,
     	    borderColor: "#ffca28",
@@ -185,9 +189,7 @@ for (var i=0, ii=latlngs.length; i<ii; i++) {
     infoWindows.push(infoWindow);
     </c:forEach>
 };
-
-
-
+	
 	marker.addListener('mouseover', onMouseOver);
 	marker.addListener('mouseout', onMouseOut);
 	
@@ -195,7 +197,12 @@ for (var i=0, ii=latlngs.length; i<ii; i++) {
 // 	icon = null;
 // 	marker = null;
 </c:forEach>
-
+// for (var i = 0; i < fodKey.length; i++) {
+// 	console.log('fodKey = ' + fodKey[i]);
+// }
+// for (var i = 0; i < fodName.length; i++) {
+// 	console.log('fodName = ' + fodName[i]);
+// }
 // 보이는 부분만 마커 표시
 // 'idle' 지도의 움직임이 종료되면(유휴 상태) 이벤트가 발생합니다.
 naver.maps.Event.addListener(map, 'idle', function() {
@@ -225,6 +232,7 @@ function showMarker(map, marker) {
     
 	var tsellerId = -1;
 	tsellerId = fodKey[markers.indexOf(marker)];
+	var tt ='#placesList li#truck_'+tsellerId;
 	
 	$.ajax({
 		type: 'get',
@@ -233,6 +241,7 @@ function showMarker(map, marker) {
 		success: function(res, status, xhr) {
 			console.log("success : " + res);
 			$('#placesList').append(res);
+			
 		}, 
 		error: function(xhr, status) {
 			console.log("error : " + status);
@@ -253,23 +262,52 @@ function hideMarker(map, marker) {
 	
 }
 //
-
 //트럭 검색 표시
 function searchOneTruckListToCoordinate(keyword) {
-    	$.ajax({
-    		type: 'get',
-    		url: HOME_PATH+'getFdName.fdl',
-    		data: 'fne='+ keyword,
-    		success: function(res, status, xhr) {
-    			console.log("success : " + res);
-    			$('#placesList').append(res)
-    		}, 
-    		error: function(xhr, status) {
-    			console.log("error : " + status);
-    		}, 
-    	});
+		var empty = '';
+		if( keyword != null && keyword != empty) {
+			var name = encodeURIComponent(keyword);
+		   	$.ajax({
+		   		type: 'post',
+		   		url: HOME_PATH+'getFdName.fdl',
+		   		data: 'fne='+ name,
+		   		success: function(res, status, xhr) {
+		   			var p = $(res).find("p.truck_list");
+		   			var r = $(p).text();
+		   			console.log("success p: " + p);
+		   			console.log("success r: " + r);
+		   			switch (r) {
+					case keyword:
+						$('#placesList').html(res);
+						break;
+					default:
+						alert('검색결과가 없습니다');
+						break;
+					}
+		   			
+		   		}, 
+		   		error: function(xhr, status) {
+		   			console.log("error : " + status);                                                 
+		   		}, 
+		   	});
+		} else {
+			alert('상호명을 입력해주세요');
+		}
 }
-
+//트럭 상세정보
+function showOneTruck(foodId) {
+	$.ajax({
+		type: 'post',
+		url: HOME_PATH+'showOneTruck.fdl',
+		data: 'fsTruck='+ foodId,
+		success: function(res, status, xhr) {
+			$('#truck_show_view').append(res);
+		},
+		error: function(xhr, statis) {
+			console.log("error : " + status);         
+		}
+	});
+}
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
  var marker = new naver.maps.Marker({
@@ -355,29 +393,41 @@ function getClickHandler(seq) {
     naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
 }
 
+
+
 // // MouseOver
 function onMouseOver(e) {
     var marker = e.overlay,
         seq = marker.get('seq');
-
+    
+    var tsellerId = -1;
+	tsellerId = fodKey[markers.indexOf(marker)];
+	var tt ='#placesList li#truck_'+tsellerId;
+    console.log('tt=' + tt);
     marker.setIcon({
         url: HOME_PATH+'resources/imgs/mapMain/sp_pins_spot_v3_over.png',
         size: new naver.maps.Size(24, 37),
         anchor: new naver.maps.Point(12, 37),
         origin: new naver.maps.Point(seq * 29, 50)
     });
+    $(tt).css({"background-color": "rgb(255, 202, 40, 0.7)"});
 }
 // // MouseOut
 function onMouseOut(e) {
     var marker = e.overlay,
         seq = marker.get('seq');
-
+    
+    var tsellerId = -1;
+	tsellerId = fodKey[markers.indexOf(marker)];
+	var tt ='#placesList li#truck_'+tsellerId;
+	
     marker.setIcon({
         url: HOME_PATH+'resources/imgs/mapMain/sp_pins_spot_v3.png',
         size: new naver.maps.Size(24, 37),
         anchor: new naver.maps.Point(12, 37),
         origin: new naver.maps.Point(seq * 29, 0)
     });
+    $(tt).css({"background-color": "rgba(255, 255, 255, 0.7)"});
 }
 //
 function onErrorGeolocation() {

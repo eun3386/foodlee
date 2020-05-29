@@ -50,14 +50,23 @@ public class MapController {
 		
 	}
 	
-	// 맵에 보여주는 푸드트럭 리스트 목록으로 볼 수 있다
-		@RequestMapping(value = "getFdName.fdl", method = RequestMethod.GET)
-		public String searchOneTruck(Model model, String fne ) {
-			FoodtruckVO fNe = fodSvc.selectOneFoodtruck(fne);
-			model.addAttribute("fd", fNe);
+	// 푸드트럭을 이름으로 검색할수 있다
+	@RequestMapping(value = "getFdName.fdl", method = RequestMethod.POST)
+	public String searchOneTruck(Model model, String fne ) {
+		FoodtruckVO fNe = fodSvc.selectOneFoodtruck(fne);
+		model.addAttribute("fd", fNe);
 //			System.out.println("getFd.fdl = " + fv);
-			return "/common/map_truck";
+		return "/common/map_truck";
 	}
+	
+	// 푸드트럭 상세정보 페이지를 볼수 있다
+		@RequestMapping(value = "showOneTruck.fdl", method = RequestMethod.POST)
+		public String selectOneShowTruck(Model model, int sid) {
+			FoodtruckVO tshow = fodSvc.selectOneFoodtruck(sid);
+			model.addAttribute("ts", tshow);
+//				System.out.println("getFd.fdl = " + fv);
+			return "/common/map_truckInfo";
+		}
 	
 	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
 	public String mapMain(Model model) {

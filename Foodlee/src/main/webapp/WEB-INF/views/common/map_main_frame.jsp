@@ -26,15 +26,7 @@
 <!-- 			</div> -->
 <!-- 		</section> -->
 		<section id="cont_truck_view">
-			<h3 class="cl_tit">텍스트</h3>
-			<p class="cl_dotted"></p>
-			<div class="truck_view"></div>
-		</section>
-		<section id="cont_truck_view">
-			<h3 class="cl_tit">텍스트</h3>
-			<p class="cl_dotted"></p>
-			<div class="truck_view"></div>
-			<div></div>
+			<div id="truck_show_view"></div>
 		</section>
 	</div>
 </section>
