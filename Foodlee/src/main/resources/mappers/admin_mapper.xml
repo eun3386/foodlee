@@ -83,5 +83,54 @@
 <!-- 		DELETE FROM tablename1 WHERE -->
 <!-- 		columnname1 = #{param1} -->
 <!-- 	</delete> -->
+	<select id="SQL_SELECT_MEMBER_COUNT" resultType="int">
+		<![CDATA[
+			select count(*) from members
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_SELLER_COUNT" resultType="int">
+		<![CDATA[
+			select count(*) from sellers
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_FOODTRUCK_COUNT" resultType="int">
+		<![CDATA[
+			select count(*) from foodtrucks
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_MENU_COUNT" resultType="int">
+		<![CDATA[
+			select count(*) from menus
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_TODAY_ORDER_COUNT" resultType="int">
+		<![CDATA[
+			SELECT count(*) FROM orders
+				WHERE IFNULL(DATE_FORMAT(order_date, '%Y-%m-%d') = CURDATE(), 0);
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_TODAY_ORDER_PRICE_SUM" resultType="int">
+		<![CDATA[
+			SELECT IFNULL(sum(order_price_sum), 0) FROM orders
+				WHERE DATE_FORMAT(order_date, '%Y-%m-%d') = CURDATE()
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_ORDER_COUNT" resultType="int">
+		<![CDATA[
+			select count(*) from orders
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_ORDER_PRICE_SUM" resultType="int">
+		<![CDATA[
+			select sum(order_price_sum) from orders
+		]]>
+	</select>
 
 </mapper>

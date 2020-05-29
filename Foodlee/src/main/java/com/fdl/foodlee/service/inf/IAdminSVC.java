@@ -10,7 +10,7 @@ import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 
 public interface IAdminSVC {
-	
+	// -----------------------------------------------------신규 추가 전----------------------------------------------------
 //- 관리자 로그인 체크 
 	int adminLoginCheck(String login, String pw);
 	
@@ -82,4 +82,15 @@ public interface IAdminSVC {
 //관리자 그룹을 만들수 있다( 구별 판매자 그룹)
 //관리자 그룹 지정 할 수 있다
 //광고자 리스트를 볼 수 있다.
+	
+	// -----------------------------------------------------신규 추가----------------------------------------------------
+	int countMembers();
+	int countSellers();
+	int countFoodTrucks();
+	int countMenus();
+	int countTodayOrders();
+	int countTodayPriceSum();
+	int countOrderSum();
+	int countOrderPriceSum();
+	
 }

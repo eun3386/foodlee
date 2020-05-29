@@ -182,4 +182,44 @@ public class AdminMysqlMybatisDAOImpl implements IAdminDAO {
 		return null;
 	}
 
+	@Override
+	public int countMembers() {
+		return sstem.selectOne("IAdminDAO.SQL_SELECT_MEMBER_COUNT");
+	}
+
+	@Override
+	public int countSellers() {
+		return sstem.selectOne("IAdminDAO.SQL_SELECT_SELLER_COUNT");
+	}
+
+	@Override
+	public int countFoodTrucks() {
+		return sstem.selectOne("IAdminDAO.SQL_SELECT_FOODTRUCK_COUNT");
+	}
+
+	@Override
+	public int countMenus() {
+		return sstem.selectOne("IAdminDAO.SQL_SELECT_MENU_COUNT");
+	}
+
+	@Override
+	public int countTodayOrders() {
+		return sstem.selectOne("IAdminDAO.SQL_SELECT_TODAY_ORDER_COUNT");
+	}
+
+	@Override
+	public int countTodayPriceSum() {
+		return sstem.selectOne("IAdminDAO.SQL_SELECT_TODAY_ORDER_PRICE_SUM");
+	}
+
+	@Override
+	public int countOrderSum() {
+		return sstem.selectOne("IAdminDAO.SQL_SELECT_ORDER_COUNT");
+	}
+
+	@Override
+	public int countOrderPriceSum() {
+		return sstem.selectOne("IAdminDAO.SQL_SELECT_ORDER_PRICE_SUM");
+	}
+
 }

@@ -201,5 +201,46 @@ public class AdminSVCImpl implements IAdminSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int countMembers() {
+		return adDao.countMembers();
+	}
+
+	@Override
+	public int countSellers() {
+		return adDao.countSellers();
+	}
+
+	@Override
+	public int countFoodTrucks() {
+		return adDao.countFoodTrucks();
+	}
+
+	@Override
+	public int countMenus() {
+		return adDao.countMenus();
+	}
+
+	@Override
+	public int countTodayOrders() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int countTodayPriceSum() {
+		return adDao.countTodayPriceSum();
+	}
+
+	@Override
+	public int countOrderSum() {
+		return adDao.countOrderSum();
+	}
+
+	@Override
+	public int countOrderPriceSum() {
+		return adDao.countOrderPriceSum();
+	}
 	
 }

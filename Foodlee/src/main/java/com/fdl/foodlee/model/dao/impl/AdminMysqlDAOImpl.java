@@ -17,8 +17,20 @@ import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
-@Repository("jdbcAsRepo")
+// @Repository("jdbcAsRepo")
+@Repository
 public class AdminMysqlDAOImpl implements IAdminDAO {
+	public static final String SQL_SELECT_MEMBER_COUNT = "select count(*) from members";
+	public static final String SQL_SELECT_SELLER_COUNT = "select count(*) from sellers;";
+	public static final String SQL_SELECT_FOODTRUCK_COUNT = "select count(*) from foodtrucks;";
+	public static final String SQL_SELECT_MENU_COUNT = "select count(*) from menus";
+	public static final String SQL_SELECT_TODAY_ORDER_COUNT = "SELECT count(*) FROM orders "
+			+ "WHERE DATE_FORMAT(order_date, '%Y-%m-%d') = CURDATE()";
+	public static final String SQL_SELECT_TODAY_ORDER_PRICE_SUM = "SELECT sum(order_price_sum) FROM orders "
+			+ "WHERE DATE_FORMAT(order_date, '%Y-%m-%d') = CURDATE()";
+	public static final String SQL_SELECT_ORDER_COUNT = "select count(*) from orders";
+	public static final String SQL_SELECT_ORDER_PRICE_SUM = "select sum(order_price_sum) from orders";
+	
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -175,5 +187,45 @@ public class AdminMysqlDAOImpl implements IAdminDAO {
 	public HashMap<String, Object> showAllJoin() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int countMembers() {
+		return jtem.queryForObject(SQL_SELECT_MEMBER_COUNT, Integer.class);
+	}
+
+	@Override
+	public int countSellers() {
+		return jtem.queryForObject(SQL_SELECT_SELLER_COUNT, Integer.class);
+	}
+
+	@Override
+	public int countFoodTrucks() {
+		return jtem.queryForObject(SQL_SELECT_FOODTRUCK_COUNT, Integer.class);
+	}
+
+	@Override
+	public int countMenus() {
+		return jtem.queryForObject(SQL_SELECT_MENU_COUNT, Integer.class);
+	}
+
+	@Override
+	public int countTodayOrders() {
+		return jtem.queryForObject(SQL_SELECT_TODAY_ORDER_COUNT, Integer.class);
+	}
+
+	@Override
+	public int countTodayPriceSum() {
+		return jtem.queryForObject(SQL_SELECT_TODAY_ORDER_PRICE_SUM, Integer.class);
+	}
+
+	@Override
+	public int countOrderSum() {
+		return jtem.queryForObject(SQL_SELECT_ORDER_COUNT, Integer.class);
+	}
+
+	@Override
+	public int countOrderPriceSum() {
+		return jtem.queryForObject(SQL_SELECT_ORDER_PRICE_SUM, Integer.class);
 	}
 }
