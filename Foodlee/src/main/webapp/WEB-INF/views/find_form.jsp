@@ -73,7 +73,7 @@
 		</tr>
 		<tr>
 	 		<td style="height: 30px;">
- 				<label for="find_id" style="font-size: small;"><input type="radio" id="find_id" checked>아이디찾기</label>&nbsp;&nbsp;&nbsp;
+ 				<label for="find_id" style="font-size: small;"><input type="radio" id="find_id" checked>아이디찾기</label>&nbsp;&nbsp;
  				<label for="find_pw" style="font-size: small;"><input type="radio" id="find_pw">비밀번호찾기</label>
 	 		</td>
 	 	</tr>
