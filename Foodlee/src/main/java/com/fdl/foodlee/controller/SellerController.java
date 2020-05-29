@@ -147,7 +147,8 @@ public class SellerController {
 		String login = (String)ses.getAttribute("LoginName");
 		SellerVO sel = selSvc.selectOneSeller(login);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("sellerId", sel);
+		mav.addObject("seller", sel);
+		mav.setViewName("boss/bossmenu/menumodify");
 		return mav;
 	}
 	
@@ -155,11 +156,11 @@ public class SellerController {
 	@RequestMapping(value = "/menu_add.fdl", method = RequestMethod.POST)
 	public ModelAndView menuAddProc(String menuName, String menuType, int menuPrice, String menuPic, String menuInfor, String rawMaterials) {
 		MenuVO mn = new MenuVO(0, menuName, menuType, menuPrice, menuPic, menuInfor, rawMaterials);
-		boolean b = mnSvc.updateMenu(mn);
+		boolean b = mnSvc.insertNewMenu(mn);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
 			mav.addObject("msg", "메뉴 추가 성공!! " + "<br>" + mn );
-			mav.setViewName("redirect:boss.fdl");
+			mav.setViewName("redirect:/boss.fdl");
 		} else {
 			mav.addObject("msg", "메뉴 추가 실패!! " + "<br>" + mn );
 			mav.setViewName("boss/bossmenu/menumodify");

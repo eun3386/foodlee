@@ -82,6 +82,7 @@ public class BossController {
 		SellerVO sel = selSvc.selectOneSeller(login);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("seller", sel);
+		mav.setViewName("boss/bossmenu/menumodify");
 		return mav;
 	}
 	@RequestMapping(value = "infomodify.fdl", method = RequestMethod.GET)

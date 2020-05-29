@@ -11,13 +11,12 @@ public class MenuVO {
 	private String rawMaterials;
 
 	//
-	static int mnId = 0;
 
 	public MenuVO() {}
 
 	public MenuVO(int sellerId, String menuName, String menuType, int menuPrice, String menuPic, String menuInfor,
 			String rawMaterials) {
-		this(++mnId, sellerId, menuName, menuType, menuPrice, menuPic, menuInfor, rawMaterials);
+		this(0, sellerId, menuName, menuType, menuPrice, menuPic, menuInfor, rawMaterials);
 	}
 
 	public MenuVO(int menuId, int sellerId, String menuName, String menuType, int menuPrice, String menuPic,

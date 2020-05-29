@@ -40,14 +40,16 @@ private String rawMaterials;
  */
 	// SQL부
 	private static final String
-		SQL_INSERT_MENU = "insert into menus values(null,?,?,?,?,?,?)";
+		SQL_INSERT_MENU = "insert into menus values(null,?,?,?,?,?,?,?)";
 	private static final String
 		SQL_SELECT_MENU_ID = "select * from menus where menu_id = ?";
+	private static final String
+	SQL_SELECT_MENU_SELLER_ID = "select * from menus where seller_id = ?";
 	private static final String
 		SQL_SELECT_MENU_NAME = "select * from menus where menu_name = ?";
 	private static final String
 		SQL_UPDATE_MENU = "update menus set menu_name=?, menu_type=?, menu_price=?, "
-					+ "menu_pic=?, menu_infor=?, menu_rawmaterials=?";
+					+ "menu_pic=?, menu_infor=?, rawmaterials=?";
 	private static final String
 		SQL_DELETE_MENU = "delete from menus where menu_name = ?";
 	private static final String
@@ -60,8 +62,8 @@ private String rawMaterials;
 	@Override //TODO 사진
 	public boolean insertNewMenu(MenuVO mn) {
 		int r = jtem.update(SQL_INSERT_MENU,
-				mn.getMenuId(), mn.getMenuName(),
-				mn.getMenuType(), mn.getMenuPrice(),
+				mn.getSellerId(), mn.getMenuName(), 
+				mn.getMenuType(), mn.getMenuPrice(), 
 				mn.getMenuPic(), mn.getMenuInfor(), 
 				mn.getRawMaterials());
 		return (r == 1);
@@ -73,6 +75,8 @@ private String rawMaterials;
 				BeanPropertyRowMapper
 				.newInstance(MenuVO.class), mId);
 	}
+	
+	// 판매자 아이디를 받아 메뉴 조회
 	
 	// 사장님이 메뉴 이름을 받아 메뉴를 조회 할 수 있다.
 	public MenuVO selectOneMenu(String name) {

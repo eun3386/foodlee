@@ -51,6 +51,7 @@
 				</div>
 				<form style="display: inline;" action="${pageContext.request.contextPath}/seller/menu_add.fdl" method="post">
 					<input type="hidden" name="id" value="${seller.id}">
+					<input type="hidden" name="menuPic" value="메뉴사진더미">
 				<table class="table_edit">
 					<tr>
 						<th><label for="menuName">메뉴 이름</label></th>
@@ -74,7 +75,7 @@
 					<tr>
 						<th><label for="menuPrice">메뉴 가격</label></th>
 						<td>
-							<input type="number" id="menuPrice" name="menuPrice" class="input" value="5000" step="100" min="2000" max="15000" required>
+							<input type="number" id="menuPrice" name="menuPrice" class="input" value="5000" step="100" min="500" max="15000" required>
 						</td>
 						<th></th>
 					</tr>
