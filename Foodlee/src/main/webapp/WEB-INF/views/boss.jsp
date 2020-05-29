@@ -106,7 +106,7 @@
         ["1월", 894, "#5f76e8"], ["2월", 1049, "#fdc16a"], ["3월", 1930, "#ff4f70"],
         ["4월", 2145, "color: #01caf1"], ["5월", 2145, "color: #5f76e8"], ["6월", 245, "color: #fdc16a"],
         ["7월", 215, "color: #ff4f70"],  ["8월", 145, "color: #01caf1"],  ["9월", 2145, "color: #5f76e8"],
-        ["10월", 0, "color: #fdc16a"],   ["11월", 0, "color: #ff4f70"],   ["12월", 0, "color: #01caf1"]
+        ["10월", null, "color: #fdc16a"],   ["11월", null, "color: #ff4f70"],   ["12월", null, "color: #01caf1"]
       ]);
 
       var view = new google.visualization.DataView(data);
@@ -290,7 +290,7 @@
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
-                    <ul class="nav justify-content-center" >
+<ul class="nav justify-content-center" >
 					  <li class="nav-item">
 					    <a class="nav-link active" href="boss.fdl">시작화면</a>
 					  </li>
@@ -511,7 +511,7 @@
                                 </ul>
                                 <div class="mt-3">
                                 <ul class="list-inline text-center mt-5 mb-2">
-                                    <li class="list-inline-item text-muted font-italic">총 매출</li>
+                                    <li class="list-inline-item text-muted font-italic">회당 총 주문 금액</li>
                                 </ul>
                                 </div>
                             </div>

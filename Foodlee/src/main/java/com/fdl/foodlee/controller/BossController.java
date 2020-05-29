@@ -132,7 +132,7 @@ public class BossController {
 		}
 	 */
 
-	
+	//차트를 보여 줄 수 있다.
 	@RequestMapping(value = "boss.fdl", method = RequestMethod.GET)
 	public String boss() {//시작화면
 		
