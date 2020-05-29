@@ -51,6 +51,7 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 				ft.getFoodtruckMainMenu(), ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
 				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(), ft.getSellerFoodtruckCoordinate(), ft.getMenuCategory());
 		return r == 1;
+		
 	}
 
 	// 판매자가 자신의 푸드 트럭 정보를 업데이트 할 수 있다.
