@@ -26,7 +26,7 @@ public class EventVO {
 	String eventEndDate; 
 	int eventOngoing;
 	Timestamp eventCreatedAt; 
-	Timestamp eventUpStringdAt;
+	Timestamp eventUpdatedAt;
 	int likeCount;
 	int readCount;
 	String likeMembers;
@@ -40,7 +40,7 @@ public class EventVO {
 		this(0, eventTitle, eventContent, eventStartDate, eventEndDate, eventOngoing, null, null, 0, 0, null, null, filePath);
 	}
 	public EventVO(int eventId, String eventTitle, String eventContent, String eventStartDate, String eventEndDate,
-			int eventOngoing, Timestamp eventCreatedAt, Timestamp eventUpStringdAt, int likeCount, int readCount,
+			int eventOngoing, Timestamp eventCreatedAt, Timestamp eventUpdatedAt, int likeCount, int readCount,
 			String likeMembers, String tags, String filePath) {
 		super();
 		this.eventId = eventId;
@@ -50,7 +50,7 @@ public class EventVO {
 		this.eventEndDate = eventEndDate;
 		this.eventOngoing = eventOngoing;
 		this.eventCreatedAt = eventCreatedAt;
-		this.eventUpStringdAt = eventUpStringdAt;
+		this.eventUpdatedAt = eventUpdatedAt;
 		this.likeCount = likeCount;
 		this.readCount = readCount;
 		this.likeMembers = likeMembers;
@@ -101,11 +101,11 @@ public class EventVO {
 	public void setEventCreatedAt(Timestamp eventCreatedAt) {
 		this.eventCreatedAt = eventCreatedAt;
 	}
-	public Timestamp getEventUpStringdAt() {
-		return eventUpStringdAt;
+	public Timestamp getEventUpdatedAt() {
+		return eventUpdatedAt;
 	}
-	public void setEventUpStringdAt(Timestamp eventUpStringdAt) {
-		this.eventUpStringdAt = eventUpStringdAt;
+	public void setEventUpdatedAt(Timestamp eventUpdatedAt) {
+		this.eventUpdatedAt = eventUpdatedAt;
 	}
 	public int getLikeCount() {
 		return likeCount;
@@ -143,7 +143,7 @@ public class EventVO {
 	public String toString() {
 		return "EventVO [eventId=" + eventId + ", eventTitle=" + eventTitle + ", eventContent=" + eventContent
 				+ ", eventStartDate=" + eventStartDate+ ", eventEndDate=" + eventEndDate + ", eventOngoing="
-				+ eventOngoing + ", eventCreatedAt=" + eventCreatedAt + ", eventUpStringdAt=" + eventUpStringdAt
+				+ eventOngoing + ", eventCreatedAt=" + eventCreatedAt + ", eventUpdatedAt=" + eventUpdatedAt
 				+ ", likeCount=" + likeCount + ", readCount=" + readCount + ", likeMembers=" + likeMembers + ", tags="
 				+ tags + ", filePath=" + filePath + "]";
 	}

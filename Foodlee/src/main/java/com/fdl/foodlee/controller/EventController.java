@@ -182,40 +182,40 @@ public class EventController {
 			System.out.println("게시글 상세조회 성공 "
 						+ ev);
 			model.addAttribute("event", ev);
-			String evFilePath = ev.getFilePath();
-			int fpsCount = -1;
-			if( evFilePath != null && !evFilePath.isEmpty() ) {
-				String fps[] = null;
-				if( evFilePath.indexOf(
-						IEventFileSVC.MULTI_SEP)
-					 != -1 ) {
-					fps = evFilePath.split(
-							"\\"+IEventFileSVC.MULTI_SEP);
-//					System.out.println("fps => " + fps);
-//					System.out.println("fp0 => " + fps[0]);
-//					System.out.println("fp1 => " + fps[1]);
-//					System.out.println("fp2 => " + fps[2]);
-					fpsCount = fps.length;					
-				} else {
-					fpsCount = 1;
-					fps = new String[]{evFilePath};
-				}
-				model.addAttribute("fps", fps);
-			} else {
-				// 첨부파일 없는 정상 게시글 상세보기
-				fpsCount = 0;
-			}
-			model.addAttribute("fpsCount", fpsCount);
+//			String evFilePath = ev.getFilePath();
+//			int fpsCount = -1;
+//			if( evFilePath != null && !evFilePath.isEmpty() ) {
+//				String fps[] = null;
+//				if( evFilePath.indexOf(
+//						IEventFileSVC.MULTI_SEP)
+//					 != -1 ) {
+//					fps = evFilePath.split(
+//							"\\"+IEventFileSVC.MULTI_SEP);
+////					System.out.println("fps => " + fps);
+////					System.out.println("fp0 => " + fps[0]);
+////					System.out.println("fp1 => " + fps[1]);
+////					System.out.println("fp2 => " + fps[2]);
+//					fpsCount = fps.length;					
+//				} else {
+//					fpsCount = 1;
+//					fps = new String[]{evFilePath};
+//				}
+//				model.addAttribute("fps", fps);
+//			} else {
+//				// 첨부파일 없는 정상 게시글 상세보기
+//				fpsCount = 0;
+//			}
+//			model.addAttribute("fpsCount", fpsCount);
 			
-			// 댓글 리스트
-			List<EventAnswerVO> evAsList 
-				= asSvc.answerListForEvent(ev.getEventId());
-			if( evAsList != null ) {
-				model.addAttribute("asSize", evAsList.size());
-				model.addAttribute("answers", evAsList );
-			} else {
-				model.addAttribute("msg", "댓글리스트 조회 실패");
-			}			
+//				 댓글 리스트
+//			List<EventAnswerVO> evAsList 
+//				= asSvc.answerListForEvent(ev.getEventId());
+//			if( evAsList != null ) {
+//				model.addAttribute("asSize", evAsList.size());
+//				model.addAttribute("answers", evAsList );
+//			} else {
+//				model.addAttribute("msg", "댓글리스트 조회 실패");
+//			}			
 			return "event/ev_show";
 		} else {			
 			model.addAttribute("msg", 
