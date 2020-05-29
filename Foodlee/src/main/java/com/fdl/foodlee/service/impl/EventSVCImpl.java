@@ -35,9 +35,9 @@ public class EventSVCImpl implements IEventSVC {
 	}
 
 	@Override
-	public int insertNewEventReturnKey(String title, String content, String filePath, String tags, int memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertNewEventReturnKey(String title, String content, Date std, Date edd, int onGoing, String filePath) {
+		EventVO ev = new EventVO(title, content, std, edd, onGoing, filePath);
+		return evDao.insertNewEventReturnKey2(ev);
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class EventSVCImpl implements IEventSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	
 
 }

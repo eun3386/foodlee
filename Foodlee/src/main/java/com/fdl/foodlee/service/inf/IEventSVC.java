@@ -18,10 +18,7 @@ public interface IEventSVC {
 			String content, 
 			String filePath, String tags, 
 			int memberId);
-	int insertNewEventReturnKey(String title,
-			String content, 
-			String filePath, String tags, 
-			int memberId);		
+	int insertNewEventReturnKey(String title, String content, Date std, Date edd, int onGoing, String filePath);		
 	
 //	- 이벤트 게시글 상세보기 할 수 있다
 //		event_show.fdl (get, proc, dao, param?id)
@@ -61,4 +58,5 @@ public interface IEventSVC {
 	List<EventVO> searchEventForTags(String keyword, String target, String orderBy);
 	List<EventVO> searchEventForAll(String keyword, String target, String orderBy);
 	List<EventVO> searchEventForColumn(String keyword, String target, String orderBy);
+	
 }

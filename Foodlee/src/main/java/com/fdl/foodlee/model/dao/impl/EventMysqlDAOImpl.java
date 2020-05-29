@@ -1,10 +1,16 @@
 package com.fdl.foodlee.model.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IEventDAO;
@@ -69,6 +75,43 @@ public class EventMysqlDAOImpl implements IEventDAO {
 		int r = jtem.update(SQL_EVENT_INSERT_VO, ev.getEventStartDate(), ev.getEventEndDate(), 
 							ev.getEventTitle(), ev.getEventContent());
 		return r==1;
+	}
+	
+	@Override
+	public int insertNewEventReturnKey(String title, String content, Date std, Date edd, String filePath) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public int insertNewEventReturnKey2(EventVO ev) {
+		System.out.println("psc/keyholder...");
+		KeyHolder kh = new GeneratedKeyHolder();
+		PreparedStatementCreator psc
+		 = new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt 
+					= con.prepareStatement(
+							SQL_EVENT_INSERT_VO,
+							new String[] {"id"});
+				pstmt.setString(1, ev.getEventTitle());
+				pstmt.setString(2, ev.getEventContent());
+				java.sql.Date std = new java.sql.Date(ev.getEventStartDate().getTime());
+				java.sql.Date edd = null;
+				if(ev.getEventEndDate()!=null)
+					edd = new java.sql.Date(ev.getEventEndDate().getTime());
+				pstmt.setDate(3, std);
+				pstmt.setDate(4, edd);
+				pstmt.setString(5, ev.getFilePath());
+				return pstmt;
+			}
+		};
+		
+		jtem.update(psc, kh);
+		Number r = kh.getKey(); // PK
+		return r.intValue();
 	}
 
 	@Override
@@ -191,5 +234,6 @@ public class EventMysqlDAOImpl implements IEventDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 }

@@ -6,68 +6,77 @@ import java.util.Date;
 /*
  #### EventVO ⇔ events
 - int eventId 이벤트번호 ⇔ integer event_id <<PK>> NN AI
+- String eventTitle 이벤트제목 ⇔ varchar(128) event_title NN
+- String eventContent 이벤트내용 ⇔ text event_content NN
 - Date eventStartDate 이벤트 시작 날짜 ⇔ datetime event_start_date NN
 - Date eventEndDate 이벤트 종료 날짜 ⇔ datetime event_end_date 
 - int eventOngoing 진행중 여부 ⇔ integer event_ongoing NN // 0종료, 1진행
-- String eventTitle 이벤트제목 ⇔ varchar(128) event_title NN
-- String eventContent 이벤트내용 ⇔ text event_content NN
-- int readCount 조회수 ⇔ integer event_read_count 0
+- Timestamp eventCreatedAt 이벤트등록날짜 ⇔ timestamp event_created_at   CURRENT_TIMESTAMP NN 
+- Timestamp eventUpdatedAt 이벤트수정날짜 ⇔ timestamp event_updated_at   CURRENT_TIMESTAMP
 - int likeCount 좋아요수 ⇔ integer event_like_count 0
+- int readCount 조회수 ⇔ integer event_read_count 0
 - String likeMembers 좋아요회원들 ⇔ varchar(1024) event_like_members
 - String tags; 태그 ⇔ varchar(1024) event_tags
-- String filePath; 첨부파일 ⇔ varchar(512) event_file_path  
-- Timestamp eventCreatedAt 이벤트등록날짜 ⇔ timestamp event_created_at   CURRENT_TIMESTAMP NN 
-- Timestamp eventUpdatedAt 이벤트수정날짜 ⇔ timestamp event_updated_at   CURRENT_TIMESTAMP                      
+- String filePath; 첨부파일 ⇔ varchar(2048) event_file_path                      
  */
 public class EventVO {
 	int eventId;
-	Date eventStartDate;
-	Date eventEndDate;
-	int eventOngoing;
 	String eventTitle;
 	String eventContent;
-	int readCount;
-	int likeCount;
-	String likeMembers;
-	String tags;
-	String filePath;  
+	Date eventStartDate;
+	Date eventEndDate; 
+	int eventOngoing;
 	Timestamp eventCreatedAt; 
 	Timestamp eventUpdatedAt;
+	int likeCount;
+	int readCount;
+	String likeMembers;
+	String tags;
+	String filePath;
 	
-	//
 	
 	public EventVO() {}
-	public EventVO(Date eventStartDate, int eventOngoing, String eventTitle,
-			String eventContent, String filePath) {
-		this(0, eventStartDate, null, eventOngoing, eventTitle, eventContent, 0, 0, null, null, filePath, null, null);
+	public EventVO(String eventTitle, String eventContent, Date eventStartDate, Date eventEndDate,
+			int eventOngoing, String filePath) {
+		this(0, eventTitle, eventContent, eventStartDate, eventEndDate, eventOngoing, null, null, 0, 0, null, null, filePath);
 	}
-	public EventVO(Date eventStartDate, Date eventEndDate, int eventOngoing, String eventTitle,
-			String eventContent, String tags, String filePath) {
-		this(0, eventStartDate, eventEndDate, eventOngoing, eventTitle, eventContent, 0, 0, null, tags, filePath, null, null);
-	}
-	public EventVO(int eventId, Date eventStartDate, Date eventEndDate, int eventOngoing, String eventTitle,
-			String eventContent, int readCount, int likeCount, String likeMembers, String tags, String filePath,
-			Timestamp eventCreatedAt, Timestamp eventUpdatedAt) {
+	public EventVO(int eventId, String eventTitle, String eventContent, Date eventStartDate, Date eventEndDate,
+			int eventOngoing, Timestamp eventCreatedAt, Timestamp eventUpdatedAt, int likeCount, int readCount,
+			String likeMembers, String tags, String filePath) {
 		super();
 		this.eventId = eventId;
+		this.eventTitle = eventTitle;
+		this.eventContent = eventContent;
 		this.eventStartDate = eventStartDate;
 		this.eventEndDate = eventEndDate;
 		this.eventOngoing = eventOngoing;
-		this.eventTitle = eventTitle;
-		this.eventContent = eventContent;
-		this.readCount = readCount;
+		this.eventCreatedAt = eventCreatedAt;
+		this.eventUpdatedAt = eventUpdatedAt;
 		this.likeCount = likeCount;
+		this.readCount = readCount;
 		this.likeMembers = likeMembers;
 		this.tags = tags;
 		this.filePath = filePath;
-		this.eventCreatedAt = eventCreatedAt;
-		this.eventUpdatedAt = eventUpdatedAt;
 	}
+	
+	
 	public int getEventId() {
 		return eventId;
 	}
 	public void setEventId(int eventId) {
 		this.eventId = eventId;
+	}
+	public String getEventTitle() {
+		return eventTitle;
+	}
+	public void setEventTitle(String eventTitle) {
+		this.eventTitle = eventTitle;
+	}
+	public String getEventContent() {
+		return eventContent;
+	}
+	public void setEventContent(String eventContent) {
+		this.eventContent = eventContent;
 	}
 	public Date getEventStartDate() {
 		return eventStartDate;
@@ -87,29 +96,29 @@ public class EventVO {
 	public void setEventOngoing(int eventOngoing) {
 		this.eventOngoing = eventOngoing;
 	}
-	public String getEventTitle() {
-		return eventTitle;
+	public Timestamp getEventCreatedAt() {
+		return eventCreatedAt;
 	}
-	public void setEventTitle(String eventTitle) {
-		this.eventTitle = eventTitle;
+	public void setEventCreatedAt(Timestamp eventCreatedAt) {
+		this.eventCreatedAt = eventCreatedAt;
 	}
-	public String getEventContent() {
-		return eventContent;
+	public Timestamp getEventUpdatedAt() {
+		return eventUpdatedAt;
 	}
-	public void setEventContent(String eventContent) {
-		this.eventContent = eventContent;
-	}
-	public int getReadCount() {
-		return readCount;
-	}
-	public void setReadCount(int readCount) {
-		this.readCount = readCount;
+	public void setEventUpdatedAt(Timestamp eventUpdatedAt) {
+		this.eventUpdatedAt = eventUpdatedAt;
 	}
 	public int getLikeCount() {
 		return likeCount;
 	}
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
+	}
+	public int getReadCount() {
+		return readCount;
+	}
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
 	}
 	public String getLikeMembers() {
 		return likeMembers;
@@ -129,31 +138,16 @@ public class EventVO {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	public Timestamp getEventCreatedAt() {
-		return eventCreatedAt;
-	}
-	public void setEventCreatedAt(Timestamp eventCreatedAt) {
-		this.eventCreatedAt = eventCreatedAt;
-	}
-	public Timestamp getEventUpdatedAt() {
-		return eventUpdatedAt;
-	}
-	public void setEventUpdatedAt(Timestamp eventUpdatedAt) {
-		this.eventUpdatedAt = eventUpdatedAt;
-	}
+	
+	
 	@Override
 	public String toString() {
-		return "EventVO [eventId=" + eventId + ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate
-				+ ", eventOngoing=" + eventOngoing + ", eventTitle=" + eventTitle + ", eventContent=" + eventContent
-				+ ", readCount=" + readCount + ", likeCount=" + likeCount + ", likeMembers=" + likeMembers + ", tags="
-				+ tags + ", filePath=" + filePath + ", eventCreatedAt=" + eventCreatedAt + ", eventUpdatedAt="
-				+ eventUpdatedAt + "]";
-	}    
-	
-	
-	
-	
-	
+		return "EventVO [eventId=" + eventId + ", eventTitle=" + eventTitle + ", eventContent=" + eventContent
+				+ ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + ", eventOngoing="
+				+ eventOngoing + ", eventCreatedAt=" + eventCreatedAt + ", eventUpdatedAt=" + eventUpdatedAt
+				+ ", likeCount=" + likeCount + ", readCount=" + readCount + ", likeMembers=" + likeMembers + ", tags="
+				+ tags + ", filePath=" + filePath + "]";
+	}
 	
 	
 }

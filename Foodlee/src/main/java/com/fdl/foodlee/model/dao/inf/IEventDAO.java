@@ -10,7 +10,8 @@ public interface IEventDAO {
 //	event_new_form.fdl (get)
 //	event_add.fdl (post, proc, dao, param..vo)
 	boolean insertNewEvent(EventVO ev);
-	
+	int insertNewEventReturnKey(String title, String content, Date std, Date edd, String filePath);
+	int insertNewEventReturnKey2(EventVO ev);
 //	- 이벤트 게시글 상세보기 할 수 있다
 //		event_show.fdl (get, proc, dao, param?id)
 	EventVO selectOneEvent(int evId);
@@ -49,4 +50,7 @@ public interface IEventDAO {
 	List<EventVO> searchEventForTags(String keyword, String target, String orderBy);
 	List<EventVO> searchEventForAll(String keyword, String target, String orderBy);
 	List<EventVO> searchEventForColumn(String keyword, String target, String orderBy);
+	
+
+	
 }

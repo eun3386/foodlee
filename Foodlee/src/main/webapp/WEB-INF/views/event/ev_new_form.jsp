@@ -6,13 +6,21 @@
 <script type="text/javascript" src="smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이벤트 작성</title>
 </head>
 <body>
 <form id="frm" action="event_show.fdl" method="post" >
 	<table width="100%"> 
-		<tr> <td>제목</td> 
-			<td><input type="text" id="title" name="title"/></td> </tr> 
+		<tr> 
+			<td colspan="2">제목 
+			<input type="text" id="title" name="title" size="53%"/>
+			시작일
+			<input type="date" id="std" name="std"/>
+			종료일
+			<input type="date" id="edd" name="edd"/>
+			진행중 
+			<select name="ongoing"> <option value="1">진행</option> <option value="0">종료</option> </select> </td>
+		</tr> 
 		<tr> <td>내용</td> 
 		<td> <textarea rows="10" cols="30" id="ir1" name="content" style="width:766px; height:412px; "></textarea>
 		<script type="text/javascript"> 

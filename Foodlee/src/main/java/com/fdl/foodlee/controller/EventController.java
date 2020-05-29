@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -34,6 +35,8 @@ public class EventController {
 	private IEventSVC evSvc;
 	@Autowired
 	private IEventAnswerSVC asSvc;
+	
+	public String filePath = null;
 //- 관리자가 신규 이벤트 게시글을 등록할 수 있다.(+파일업로드..)
 //	event_new_form.fdl (get)
 	@RequestMapping(value = "event_new_form.fdl", 
@@ -43,15 +46,9 @@ public class EventController {
 		// 
 		return "event/ev_new_form";
 	}
-	@RequestMapping(value = "event_show.fdl", 
-			method = RequestMethod.POST)
-	public String eventShowProc() {
-		System.out.println("eventNewForm() ... ");
-		// 
-		return "event/ev_show";
-	}
+	
 //	event_add.fdl
-	@RequestMapping("/smartEditor/sample/photo_uploader/event_add.fdl")
+	@RequestMapping(value = "/smartEditor/sample/photo_uploader/event_add.fdl", method = RequestMethod.POST)
 	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			// 파일정보
@@ -59,7 +56,8 @@ public class EventController {
 			String fileName = request.getHeader("file-name");			
 			//String dftFilePath = request.getServletContext().getRealPath(request.getContextPath()+"/");
 			String dftFilePath = request.getServletContext().getRealPath("/");
-			String filePath = dftFilePath + "resources/photo_upload";
+			//String filePath = dftFilePath + "resources/photo_upload";
+			filePath = dftFilePath + "resources/photo_upload";
 			File file = new File(filePath);
 			if(!file.exists()) {
 				file.mkdirs();
@@ -89,13 +87,33 @@ public class EventController {
 			PrintWriter print = response.getWriter();
 			print.print(sFileInfo);
 			print.flush();
-			print.close();             
+			print.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	@RequestMapping(value = "event_show.fdl", method = RequestMethod.POST)
+	public String eventShowProc(String title, 
+			String tags, String content, Date std, Date edd, int onGoing) {
+		System.out.println("eventNewForm() ... ");
+		// 
+		// public img src... 
+			int evRtkey = this.evSvc
+					.insertNewEventReturnKey(title, content, std, edd, onGoing, filePath);
+			
+			// 상세보기 => atId?
+			if( evRtkey > 0 ) {
+				//System.out.println("게시글 등록 성공: " + title);
+				System.out.println("게시글 등록 성공: " + evRtkey);
+				return "redirect:event_show.fdl?id="+evRtkey;
+				//return "redirect:article_list.my"; // RD
+			} else {
+				System.out.println("게시글 등록 실패: " + title);
+				return "article/at_new_form"; // FW
+			}
+	}
 	
-//	article_add.my (post, proc, dao, param..vo)
+//	//article_add.my (post, proc, dao, param..vo)
 //	@RequestMapping(value = "article_add.my", 
 //			method = RequestMethod.POST)
 //	public String articleAddProc(String title, 
@@ -116,7 +134,7 @@ public class EventController {
 ////			= atFileSvc.writeUploadedFile(upfile, 
 ////				realPath, (String)ses
 ////					.getAttribute("mbLoginName"));
-////		
+//		
 //		//String filePath  // 다수개 처리
 //		Map<String, Object> rMap
 //		 = atFileSvc.writeUploadedMultipleFiles(upfiles, 
@@ -144,7 +162,7 @@ public class EventController {
 //			return "article/at_new_form"; // FW
 //		}
 //	}		
-	
+//	
 	
 //- 이벤트 게시글 상세보기 할 수 있다
 //	event_show.fdl (get, proc, dao, param?id)
