@@ -9,7 +9,7 @@ var myPieChart = new Chart(ctx, {
   data: {
     labels: ["간식", "식사", "디저트", "밥차"],
     datasets: [{
-      data: [55, 30, 15, 50],
+      data: [snack, meal, dessert, riceCar],
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', "red"],
       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', "red"],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

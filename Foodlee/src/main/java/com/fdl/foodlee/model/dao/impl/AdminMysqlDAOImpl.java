@@ -3,6 +3,7 @@ package com.fdl.foodlee.model.dao.impl;
 import java.util.HashMap;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -19,7 +20,7 @@ import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 // @Repository("jdbcAsRepo")
 @Repository
-public class AdminMysqlDAOImpl implements IAdminDAO {
+public class AdminMysqlDAOImpl { //implements IAdminDAO {
 	public static final String SQL_SELECT_MEMBER_COUNT = "select count(*) from members";
 	public static final String SQL_SELECT_SELLER_COUNT = "select count(*) from sellers;";
 	public static final String SQL_SELECT_FOODTRUCK_COUNT = "select count(*) from foodtrucks;";
@@ -31,7 +32,7 @@ public class AdminMysqlDAOImpl implements IAdminDAO {
 	public static final String SQL_SELECT_ORDER_COUNT = "select count(*) from orders";
 	public static final String SQL_SELECT_ORDER_PRICE_SUM = "select sum(order_price_sum) from orders";
 	
-	
+	/*
 	@Autowired
 	private JdbcTemplate jtem;
 
@@ -230,8 +231,15 @@ public class AdminMysqlDAOImpl implements IAdminDAO {
 	}
 
 	@Override
-	public List<Integer> countMenuCategory() {
+	public Map<String, Object> countMenuCategory() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<MemberVO> showAllMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+*/
 }

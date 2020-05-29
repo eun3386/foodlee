@@ -2,6 +2,7 @@ package com.fdl.foodlee.model.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -223,8 +224,21 @@ public class AdminMysqlMybatisDAOImpl implements IAdminDAO {
 	}
 
 	@Override
-	public List<Integer> countMenuCategory() {
-		return sstem.selectList("IAdminDAO.SQL_SELECT_MENU_CATEGORYS");
+	public Map<String,Object> countMenuCategory() {
+		Map<String,Object> am = sstem.selectOne("IAdminDAO.SQL_SELECT_MENU_CATEGORYS");
+		//Map<String,Object> am = sstem.selectMap("IAdminDAO.SQL_SELECT_MENU_CATEGORYS", "a");
+		//System.out.println("am" + am.get("a"));
+		return am;
+	}
+
+	@Override
+	public List<MemberVO> showAllMember() {
+		return sstem.selectList("IAdminDAO.SQL_SELECT_ALL_MEMBERS");
+	}
+
+	@Override
+	public List<SellerVO> showAllSeller() {
+		return sstem.selectList("IAdminDAO.SQL_SELECT_ALL_SELLERS");
 	}
 
 }

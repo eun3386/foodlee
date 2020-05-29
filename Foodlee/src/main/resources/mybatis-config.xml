@@ -10,6 +10,7 @@
 		<typeAlias type="com.fdl.foodlee.model.vo.AdminVO" alias="adminVO"/>
 		<typeAlias type="com.fdl.foodlee.model.vo.FoodtruckVO" alias="foodtruckVO"/>
 		<typeAlias type="com.fdl.foodlee.model.vo.MemberVO" alias="memberVO"/>
+		<typeAlias type="com.fdl.foodlee.model.vo.SellerVO" alias="sellerVO"/>
 		<typeAlias type="com.fdl.foodlee.model.vo.MenuVO" alias="menuVO"/>
 		<typeAlias type="com.fdl.foodlee.model.vo.EventAnswerVO" alias="eventanswerVO"/>
 	</typeAliases>

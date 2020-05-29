@@ -2,6 +2,7 @@ package com.fdl.foodlee.model.dao.inf;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.fdl.foodlee.model.vo.AdminVO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
@@ -92,5 +93,7 @@ public interface IAdminDAO {
 	int countOrderSum();
 	int countOrderPriceSum();
 	
-	List<Integer> countMenuCategory();
+	Map<String,Object> countMenuCategory();
+	List<MemberVO> showAllMember();
+	List<SellerVO> showAllSeller();
 }

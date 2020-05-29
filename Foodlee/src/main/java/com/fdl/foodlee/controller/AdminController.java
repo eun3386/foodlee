@@ -1,5 +1,8 @@
 package com.fdl.foodlee.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.dao.MyCode;
+import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.service.inf.IAdminSVC;
+import com.fdl.foodlee.service.inf.IMemberSVC;
 
 @Controller
 public class AdminController {
@@ -40,8 +46,25 @@ public class AdminController {
 		model.addAttribute("orderCount", adSvc.countOrderSum());
 		model.addAttribute("orderPriceSum", adSvc.countOrderPriceSum());
 		
-		System.out.println(adSvc.countMenuCategory());
+		Map<String, Object> am = adSvc.countMenuCategory();
+		model.addAttribute("mapCategory", am);
 		return "admin/admin";
+	}
+	
+	@RequestMapping(value = "adminMember.fdl", method = RequestMethod.GET)
+	public String adminMember(HttpSession ses, Model model) {
+		List<MemberVO> mbList = adSvc.showAllMember();
+		
+		model.addAttribute("mbList", mbList);
+		return "admin/adminMember";
+	}
+	
+	@RequestMapping(value = "adminSeller.fdl", method = RequestMethod.GET)
+	public String adminSeller(HttpSession ses, Model model) {
+		List<SellerVO> sellerList = adSvc.showAllSeller();
+		
+		model.addAttribute("sellerList", sellerList);
+		return "admin/adminSeller";
 	}
 	
 }

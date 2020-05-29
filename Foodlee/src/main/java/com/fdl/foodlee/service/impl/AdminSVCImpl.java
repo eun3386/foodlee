@@ -2,6 +2,7 @@ package com.fdl.foodlee.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -244,8 +245,18 @@ public class AdminSVCImpl implements IAdminSVC {
 	}
 
 	@Override
-	public List<Integer> countMenuCategory() {
+	public Map<String,Object> countMenuCategory() {
 		return adDao.countMenuCategory();
+	}
+
+	@Override
+	public List<MemberVO> showAllMember() {
+		return adDao.showAllMember();
+	}
+
+	@Override
+	public List<SellerVO> showAllSeller() {
+		return adDao.showAllSeller();
 	}
 	
 }

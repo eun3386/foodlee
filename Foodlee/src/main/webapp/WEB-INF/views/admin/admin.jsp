@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%
+	String CON = application.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +23,11 @@
   <!-- Custom styles for this template-->
   <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
   <script>
-  	var loginName = "${LoginName}";
-  	
+  	// var loginName = "${LoginName}";
+  	var snack = "${mapCategory['snack']}";
+  	var meal = "${mapCategory['meal']}";
+  	var dessert = "${mapCategory['dessert']}";
+  	var riceCar = "${mapCategory['riceCar']}";
   </script>
 </head>
 
@@ -35,7 +41,7 @@
 
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.fdl">
-        <div class="sidebar-brand-text mx-3">FDL Admin</div>
+        <div class="sidebar-brand-text mx-3">FDL Admin </div>
       </a>
 
       <!-- Divider -->
@@ -43,7 +49,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<%= CON %>/admin.fdl">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -66,8 +72,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Member :</h6>
             <a class="collapse-item" href="#">전체 회원 관리</a>
-            <a class="collapse-item" href="#">일반 회원 관리</a>
-            <a class="collapse-item" href="#">판매자 회원 관리</a>
+            <a class="collapse-item" href="<%= CON %>/adminMember.fdl">일반 회원 관리</a>
+            <a class="collapse-item" href="<%= CON %>/adminSeller.fdl">판매자 회원 관리</a>
           </div>
         </div>
       </li>
