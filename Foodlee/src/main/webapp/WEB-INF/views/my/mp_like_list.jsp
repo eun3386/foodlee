@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>푸들이-푸드트럭나들이</title>
+
 </head>
 <body>
-<section class="main_section" id="section_menu">
+	
+		<section class="main_section" id="section_menu">
 			<div class="wrapper">
 				<div class="title">
 					<div class="icon">
@@ -72,5 +70,13 @@
 				</div>
 			</div>
 		</section>
+
+	
+	
+
+<script>
+
+
+</script>
 </body>
 </html>

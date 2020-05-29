@@ -10,7 +10,7 @@ public class MemberVO {
 	private String name; // 이름 ⇔ varchar(12) name NN
 	private String gender; // 성별 ⇔ varchar(4) gender
 	private int age; // 나이 ⇔ int age
-	private String residentRN; // 주민번호 Resident Registration Number, RRN ⇔  varchar(13) resident_rn
+	private String residentRn; // 주민번호 Resident Registration Number, RRN ⇔  varchar(13) resident_rn
 	private String email; // 이메일 ⇔  varchar(24) email 
 	private String phoneNumber; // 연락처 ⇔ varchar(12) phone_number NN
 	private String address; // 주소 ⇔ varchar(128) address
@@ -20,11 +20,18 @@ public class MemberVO {
 	private Timestamp logoutTime; // 로그아웃일자 ⇔ timestamp logout_time
 	
 	public MemberVO() {}
-	public MemberVO(String login, String password, String name, String gender, int age, String residentRN, String email,
-			String phoneNumber, String address) {
-		this(0, "member", login, password, name, gender, age, residentRN, email, phoneNumber, address, null, null, null, null);
+	
+	public MemberVO(String login, String name, String phoneNumber, String gender) {
+		this.login = login;
+		this.gender = gender;
+		this.name = name;
+		this.phoneNumber = phoneNumber;
 	}
-	public MemberVO(int id, String type, String login, String password, String name, String gender, int age, String residentRN,
+	public MemberVO(String login, String password, String name, String gender, int age, String residentRn, String email,
+			String phoneNumber, String address) {
+		this(0, "member", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, null, null);
+	}
+	public MemberVO(int id, String type, String login, String password, String name, String gender, int age, String residentRn,
 			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt,
 			Timestamp loginTime, Timestamp logoutTime) {
 		super();
@@ -35,7 +42,7 @@ public class MemberVO {
 		this.name = name;
 		this.gender = gender;
 		this.age = age;
-		this.residentRN = residentRN;
+		this.residentRn = residentRn;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
@@ -48,7 +55,7 @@ public class MemberVO {
 	@Override
 	public String toString() {
 		return "MemberVO [id=" + id + ", type=" + type + ", login=" + login + ", password=" + password + ", name="
-				+ name + ", gender=" + gender + ", age=" + age + ", residentRN=" + residentRN + ", email=" + email
+				+ name + ", gender=" + gender + ", age=" + age + ", residentRn=" + residentRn + ", email=" + email
 				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt="
 				+ updatedAt + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime + "]";
 	}
@@ -89,11 +96,11 @@ public class MemberVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getResidentRN() {
-		return residentRN;
+	public String getResidentRn() {
+		return residentRn;
 	}
-	public void setResidentRN(String residentRN) {
-		this.residentRN = residentRN;
+	public void setResidentRn(String residentRn) {
+		this.residentRn = residentRn;
 	}
 	public String getEmail() {
 		return email;

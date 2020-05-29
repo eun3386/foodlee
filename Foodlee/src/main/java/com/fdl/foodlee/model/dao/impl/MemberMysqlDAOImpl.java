@@ -58,7 +58,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	public boolean insertNewMemberWithCrypto(MemberVO mb) {
 		int r = jtem.update(SQL_INSERT_MEMBER_CRYPTO,
 				mb.getLogin(), mb.getPassword(), mb.getLogin(),
-				mb.getName(), mb.getGender(), mb.getAge(), mb.getResidentRN(),
+				mb.getName(), mb.getGender(), mb.getAge(), mb.getResidentRn(),
 				mb.getEmail(), mb.getPhoneNumber(), mb.getAddress()
 				);
 		return r == 1;
