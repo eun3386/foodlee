@@ -1,16 +1,28 @@
 package com.fdl.foodlee.controller;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.SellerVO;
+import com.fdl.foodlee.service.inf.IFoodtruckFileSVC;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
+import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
@@ -21,6 +33,10 @@ public class BossController {
 	
 	@Autowired
 	private IFoodtruckSVC fdSvc;
+	
+	@Autowired
+	private IFoodtruckFileSVC fdfSvc;
+	
 
 	// 판매자의 새 푸드트럭을 등록 할 수 있다. 트럭 등록 성공시 트럭pk뽑아서 트럭 상세보기로 redi 한다
 	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET) 
@@ -30,10 +46,13 @@ public class BossController {
 	@RequestMapping(value = "store_new_form.fdl", method = RequestMethod.GET) 
 	public	String storeNewForm() {//트럭등록 
 		return "boss/bossmenu/store_new_form"; //form
+		
 		} 
 	
 	@RequestMapping(value = "store_add.fdl", method = RequestMethod.POST)
-	public ModelAndView sellerStoreinfoProc(HttpServletRequest request, HttpSession ses) {// 데이터와 뷰를 동시에 설정이 가능  
+	// @ResponseBody
+	public ModelAndView sellerStoreinfoProc(HttpServletRequest request, HttpSession ses, 
+			List<MultipartFile> imgfiles, Model model) {// 데이터와 뷰를 동시에 설정이 가능  
 		//트럭등록 FoodtruckVO ft
 		//boolean sb = fodSvc.insertNewFoodtruck(ft);//
 		
@@ -46,16 +65,58 @@ public class BossController {
 		String foodtruckImgPath = request.getParameter("ImgPath"); //트럭이미지 미정
 		String foodtruckOperationHour = request.getParameter("OperationHour1")+"~"+request.getParameter("OperationHour2");//영업시간
 		String sellerFoodtruckCoordinate = request.getParameter("namp_lat")+","+request.getParameter("namp_lng"); //트럭좌표 죄표 
+		System.out.println("파일값" + imgfiles);
+		String login = "test";
+		String login2 = ses.getId();
+		String realPath = ses.getServletContext().getRealPath(IFoodtruckFileSVC.DEF_UPLOAD_DEST) + "/"; //+ login;
 		
+		File trFile = new File(realPath + login);
+		trFile.mkdir();		
 		
+		//fdfSvc.makeUserDir(ses, "test");
+		
+		System.out.println("경로 : " + realPath);
+		Map<String, Object> rMap = fdfSvc.writeUploadedMultipleFiles(imgfiles, realPath, login); //(String)ses.getAttribute("sellerId"));
+				/*(String) ses.getAttribute("mbLoginName")*/
+		
+		String filePath = (String)rMap.get("muliFPs");
+		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
+		System.out.println("총 볼륨(MB): " + rMap.get("totalMB") + "MB");
+		System.out.println("login: "+login);
+		System.out.println("imgfiles: "+imgfiles);
+		
+		FoodtruckVO ft = new FoodtruckVO(filePath, foodtruckName, foodtruckMainMenu, menuCategory,
+				foodtruckLocation, foodtruckMuni, foodtruckGuCode, foodtruckOperationHour,
+				 sellerFoodtruckCoordinate);
+		model.addAttribute(ft);
+		boolean b = fdSvc.insertNewFoodtruck(ft);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("boss/bossmenu/storeinfo"); // 뷰의 이름 뷰의 경로 상세보기 readonly 실패시 ㄷ시 돌아가기
-		mv.addObject("msg", "푸드트럭 전송"); // 뷰로 보낼 데이터 값
+//		System.out.println(menuCategory);
+//		System.out.println(foodtruckGuCode);
 		
-		
+		if( b ) {
+			
+			mv.setViewName("boss/bossmenu/storeinfo"); // 뷰의 이름 뷰의 경로 상세보기 readonly 실패시 ㄷ시 돌아가기
+			mv.addObject("foodtruckOperationHour", foodtruckOperationHour); // 뷰로 보낼 데이터 값 영업시간
+			mv.addObject("foodtruckMuni", foodtruckMuni); // 뷰로 보낼 데이터 값 구 이름 
+			mv.addObject("foodtruckName", foodtruckName); // 뷰로 보낼 데이터 값 판매트럭 이름
+			mv.addObject("sellerFoodtruckCoordinate", sellerFoodtruckCoordinate); // 뷰로 보낼 데이터 값 판매트럭 상세위치
+			mv.addObject("realPath", realPath); // 뷰로 보낼 데이터 값 트럭사진 경로
+			mv.addObject("menuCategory", menuCategory); // 뷰로 보낼 데이터 값 카테고리
+			mv.addObject("foodtruckMainMenu", foodtruckMainMenu); // 뷰로 보낼 데이터 값 대표메뉴
+			mv.addObject("foodtruckLocation", foodtruckLocation); // 뷰로 보낼 데이터 값 트럭위치
+			mv.addObject("sellerId", login); // 뷰로 보낼 데이터 값 트럭위치 imgfiles
+			mv.addObject("imgfiles", imgfiles); // 뷰로 보낼 데이터 값 트럭위치 realPath
+			mv.addObject("realPath", filePath);
+
+		} else {
+			mv.addObject("msg", "푸드트럭 전송 실패"); // 뷰로 보낼 데이터 값
+			mv.setViewName("boss/bossmenu/store_new_form"); // 뷰의 이름 뷰의 경로 상세보기 readonly 실패시 ㄷ시 돌아가기
+		}		
 		return mv; 
-	
 	}
+	
+
 //public interface IFoodtruckDAO {
 	// 판매자의 새 푸드트럭을 등록 할 수 있다.
 //	public boolean insertNewFoodtruck(FoodtruckVO ft);
@@ -74,6 +135,7 @@ public class BossController {
 	
 	@RequestMapping(value = "boss.fdl", method = RequestMethod.GET)
 	public String boss() {//시작화면
+		
 		return "boss";
 	}
 	@RequestMapping(value = "menumodify.fdl", method = RequestMethod.GET)

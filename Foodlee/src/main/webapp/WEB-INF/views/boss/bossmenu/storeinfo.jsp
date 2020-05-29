@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto|Courgette|Pacifico:400,700" rel="stylesheet">
 <title>storeinfo</title>
 <link href="${pageContext.request.contextPath}/dist/css/style.min.css" rel="stylesheet">
+ <script src="http://code.jquery.com/jquery-latest.min.js"></script><!-- 제일 먼저 안하면 에러 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  
@@ -284,68 +285,22 @@
                 <div class="row">
                 <div class="col-lg-12 col-md-12"><!-- col-sm-12 col-md-6 col-lg-4 //col-sm-12 col-md-3 col-lg-3 -->
                         <div class="card">
-                        <form action="${pageContext.request.contextPath}/store_add.fdl" method="post">
-                        	<h4 class="card-title">영업시간</h4>
+                       
                              <!-- *************************************************************** -->
                               <!-- *************테이블************** -->
                              <!-- *************************************************************** -->
-                             <div class="table-responsive mt-3"><!-- 요일별 위치 end -->
+                             <div class="table-responsive mt-3 col-md-6 col-lg-4"><!-- 요일별 위치 end -->
                                 <table class="table table-bordered  table-responsive-lg" id="tr">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col"><code>일</code></th>
-                                            <th scope="col">월</th>
-                                            <th scope="col">화</th>
-                                            <th scope="col">수</th>
-                                            <th scope="col">목</th>
-                                            <th scope="col">금</th>
-                                            <th scope="col"><code>토</code></th>
-                                        </tr>
-                                    </thead>
                                     <tbody>
                                         <tr>
-                                            <th scope="row">시작시간</th>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">마감시간</th>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
-                                            <td><input type="time" class="form-control" value="22:33:00"></td>
+                                        	<td><h4 class="card-title">영업시간</h4></td>
+                                            <td><h3 class="card-title">${foodtruckOperationHour}</h3>
                                         </tr>
 	                                     <tr>
-                                            <th scope="row">구 이름</th>
+                                            <td scope="row">구 이름</td>
 		                                <td>
-										
+										<h3 class="card-title">${foodtruckMuni}</h3>
 										</td>
-		                            	<td>
-										
-										</td>
-		                            <td>
-										
-									</td>
-		                            <td>
-										
-									</td>
-		                            <td>
-										
-									</td>
-		                            <td>
-										
-									</td>
-									<td>
-									</td>
 	                                </tr>
                                     </tbody>
                                 </table>
@@ -354,6 +309,15 @@
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">판매트럭 이름</h4>
+		                                <h3 class="card-title">${foodtruckName}</h3>
+		                            </div>
+		                        </div>
+		                    </div><!--트럭이름   end-->
+		                    <div class="col-md-6 col-lg-4"><!--트럭위치  -->
+		                        <div class="card">
+		                            <div class="card-body">
+		                                <h4 class="card-title">판매트럭 상세위치</h4>
+		                                <h3 class="card-title">${sellerFoodtruckCoordinate}</h3>
 		                            </div>
 		                        </div>
 		                    </div><!--트럭이름   end-->
@@ -361,24 +325,25 @@
 		                    style="position:relative; width: 100px; height: 100px;
 									color: black; border: 0px solid black; display: inline;"><!--트럭사진 사진 -->
 							</div><!--트럭사진 사진 -->
-	 	                    <div class="col-sm-12 col-md-6 col-lg-4">트럭사진 
+	 	                    <div class="col-sm-12 col-md-6 col-lg-4">
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">트럭사진</h4>
-		                                   <div class="form-group">
-		                                   </div>
+<!-- 		                                /uploads/foodtruck/test/UP_푸들2_20200529105415_6bdfd4e8-e851-4d99-b123-ea16d8b807d8.jpg -->
+<!-- 		                                /uploads/foodtruck/login/UP_푸들2_20200529105415_6bdfd4e8-e851-4d99-b123-ea16d8b807d8.jpg -->
+<%-- 		                                <h3 class="card-title">${realPath}</h3><!-- pageContext.request.contextPath/uploads/foodtruck/test/UP_푸들2_20200529105415_6bdfd4e8-e851-4d99-b123-ea16d8b807d8.jpg --> --%>
+		                                <td style="border-left: none;">
+<%-- 		                            <img src="<%=application.getContextPath()%>/uploads/foodtruck/${sellerId}/${imgfiles}" --%>
+ 										<img src="${pageContext.request.contextPath}${realPath}"
+									style="width: 130px; height: 100px;"></td>
 		                            </div>
 		                        </div>
 		                    </div><!-- 트럭사진 end  -->
-				            <div class="col-md-8"><!-- 트럭카테고리  -->
+				            <div class="col-md-7"><!-- 트럭카테고리  -->
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">트럭 카테고리</h4>
-		                                <div class="form-check form-check-inline">
-		                                    <div class="custom-control custom-checkbox">
-		                                        
-		                                    </div>
-		                                </div>
+		                                <h3 class="card-title">${menuCategory}</h3>
 		                            </div>
 		                        </div>
 		                    </div><!--트럭카테고리 end  -->
@@ -389,22 +354,19 @@
 		                            <div class="card-body">
 		                                <h4 class="card-title">대표메뉴</h4>
 		                                   <div class="form-group">
-		                                       
+		                                       <h3 class="card-title">${foodtruckMainMenu}</h3>
 		                                   </div>
 		                            </div>
 		                        </div>
 		                    </div><!--대표메뉴 end  -->
-		                    <div class="col-sm-12 col-md-6 col-lg-4"><!--위치죄표  -->
+		                    <div class="col-sm-12 col-md-8 col-lg-4"><!--위치죄표  -->
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">트럭위치</h4>
-		                                   <div class="form-group">
-												
-		                                   </div>
+		                                <h3 class="card-title">${foodtruckLocation}</h3>
 		                            </div>
 		                        </div>
 		                    </div><!--위치 end  -->
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -447,6 +409,7 @@
     <script src="${pageContext.request.contextPath}/assets/extra-libs/sparkline/sparkline.js"></script>
     <!--Wave Effects -->
     <!-- themejs -->
+   
     <!--Menu sidebar -->
     <script src="${pageContext.request.contextPath}/dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
