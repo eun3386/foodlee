@@ -31,7 +31,7 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 
 	// SQL 정의부
 	private static final String SQL_SELECT_ALL_FOODTRUCK = "select * from foodtrucks";
-	private static final String SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,?,?,?,?,?,0,0,null,?,null)";
+	private static final String SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(0,?,?,?,?,?,?,?,0,null,?,null,?)";
 	private static final String SQL_SELECT_FOODTRUCK_SELLER_ID = "select * from foodtrucks where seller_id = ?";
 	private static final String SQL_SELECT_FOODTRUCK_NAME = "select * from foodtrucks where foodtruck_name = ?";
 	private static final String SQL_SELECT_FOODTRUCK_GU_CODE = "select * from foodtrucks where foodtruck_gu_code = ?";
@@ -47,9 +47,9 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 	// 판매자의 새 푸드트럭을 등록 할 수 있다.
 	@Override
 	public boolean insertNewFoodtruck(FoodtruckVO ft) {
-		int r = jtem.update(SQL_INSERT_FOODTRUCK, ft.getSellerId(), ft.getFoodtruckImgPath(), ft.getFoodtruckName(),
-				ft.getFoodtruckMainMenu(), ft.getMenuCategory(), ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
-				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(), ft.getSellerFoodtruckCoordinate());
+		int r = jtem.update(SQL_INSERT_FOODTRUCK, ft.getFoodtruckImgPath(), ft.getFoodtruckName(),
+				ft.getFoodtruckMainMenu(), ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
+				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(), ft.getSellerFoodtruckCoordinate(), ft.getMenuCategory());
 		return r == 1;
 	}
 

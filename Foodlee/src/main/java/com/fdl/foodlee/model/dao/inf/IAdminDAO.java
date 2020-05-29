@@ -91,4 +91,6 @@ public interface IAdminDAO {
 	int countTodayPriceSum();
 	int countOrderSum();
 	int countOrderPriceSum();
+	
+	List<Integer> countMenuCategory();
 }

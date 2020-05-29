@@ -228,4 +228,10 @@ public class AdminMysqlDAOImpl implements IAdminDAO {
 	public int countOrderPriceSum() {
 		return jtem.queryForObject(SQL_SELECT_ORDER_PRICE_SUM, Integer.class);
 	}
+
+	@Override
+	public List<Integer> countMenuCategory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

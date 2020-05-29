@@ -39,6 +39,8 @@ public class AdminController {
 		model.addAttribute("todayOrderPrice", adSvc.countTodayPriceSum());
 		model.addAttribute("orderCount", adSvc.countOrderSum());
 		model.addAttribute("orderPriceSum", adSvc.countOrderPriceSum());
+		
+		System.out.println(adSvc.countMenuCategory());
 		return "admin/admin";
 	}
 	

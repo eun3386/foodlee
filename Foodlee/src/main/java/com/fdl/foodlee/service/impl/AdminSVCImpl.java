@@ -242,5 +242,10 @@ public class AdminSVCImpl implements IAdminSVC {
 	public int countOrderPriceSum() {
 		return adDao.countOrderPriceSum();
 	}
+
+	@Override
+	public List<Integer> countMenuCategory() {
+		return adDao.countMenuCategory();
+	}
 	
 }

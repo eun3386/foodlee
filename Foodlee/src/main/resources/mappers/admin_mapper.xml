@@ -132,5 +132,13 @@
 			select sum(order_price_sum) from orders
 		]]>
 	</select>
+	
+	<select id="SQL_SELECT_MENU_CATEGORYS" resultType="int">
+		<![CDATA[
+			select count(CASE WHEN menu_category=1 then 1 end), count(CASE WHEN menu_category=2 then 1 end),
+			count(CASE WHEN menu_category=3 then 1 end), count(CASE WHEN menu_category=4 then 1 end)
+			from foodtrucks;
+		]]>
+	</select>
 
 </mapper>

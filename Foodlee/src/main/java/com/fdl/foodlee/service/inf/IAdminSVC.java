@@ -93,4 +93,6 @@ public interface IAdminSVC {
 	int countOrderSum();
 	int countOrderPriceSum();
 	
+	List<Integer> countMenuCategory();
+	
 }

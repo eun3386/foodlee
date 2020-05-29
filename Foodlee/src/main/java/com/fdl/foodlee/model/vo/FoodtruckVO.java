@@ -13,7 +13,6 @@ public class FoodtruckVO {
 	private String foodtruckMuni; // 푸드트럭 구 이름 ⇔ varchar(256) foodtruck_muni NN
 	private String foodtruckGuCode; // 구 코드 ⇔ int foodtruck_gu_code NN
 	private String foodtruckOperationHour; // 푸드트럭 영업시간 ⇔ varchar (64)  foodtruck_operation_hour NN	
-	private int favoriteCount; // 좋아요 트럭 ⇔ integer favorite_count <<FK>>
 	private int memberLikeCount; // 좋아요 횟수⇔ member_like_count 
 	private String memberLikeIds; // 좋아요 한 회원의 ID목록들⇔ varchar(512) member_like_ids
 	private String sellerFoodtruckCoordinate; // 판매자 푸드트럭 좌표 ⇔ varchar(1024) seller_foodtruck_coordinate NN
@@ -33,12 +32,12 @@ public class FoodtruckVO {
 			String foodtruckLocation, String foodtruckMuni, String foodtruckGuCode, String foodtruckOperationHour,
 			String memberLikeIds, String sellerFoodtruckCoordinate) {
 		this(0, foodtruckImgPath, foodtruckName, foodtruckMainMenu, menuCategory, foodtruckLocation, foodtruckMuni,
-				foodtruckGuCode, foodtruckOperationHour, 0, 0, memberLikeIds, sellerFoodtruckCoordinate, null);
+				foodtruckGuCode, foodtruckOperationHour, 0, memberLikeIds, sellerFoodtruckCoordinate, null);
 	}
 
 	public FoodtruckVO(int sellerId, String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu,
 			int menuCategory, String foodtruckLocation, String foodtruckMuni, String foodtruckGuCode,
-			String foodtruckOperationHour, int favoriteCount, int memberLikeCount, String memberLikeIds,
+			String foodtruckOperationHour, int memberLikeCount, String memberLikeIds,
 			String sellerFoodtruckCoordinate, Timestamp locationUpdatedAt) {
 		super();
 		this.sellerId = sellerId;
@@ -50,7 +49,6 @@ public class FoodtruckVO {
 		this.foodtruckMuni = foodtruckMuni;
 		this.foodtruckGuCode = foodtruckGuCode;
 		this.foodtruckOperationHour = foodtruckOperationHour;
-		this.favoriteCount = favoriteCount;
 		this.memberLikeCount = memberLikeCount;
 		this.memberLikeIds = memberLikeIds;
 		this.sellerFoodtruckCoordinate = sellerFoodtruckCoordinate;
@@ -129,14 +127,6 @@ public class FoodtruckVO {
 		this.foodtruckOperationHour = foodtruckOperationHour;
 	}
 
-	public int getFavoriteCount() {
-		return favoriteCount;
-	}
-
-	public void setFavoriteCount(int favoriteCount) {
-		this.favoriteCount = favoriteCount;
-	}
-
 	public int getMemberLikeCount() {
 		return memberLikeCount;
 	}
@@ -174,8 +164,8 @@ public class FoodtruckVO {
 		return "FoodtruckVO [sellerId=" + sellerId + ", foodtruckImgPath=" + foodtruckImgPath + ", foodtruckName="
 				+ foodtruckName + ", foodtruckMainMenu=" + foodtruckMainMenu + ", menuCategory=" + menuCategory
 				+ ", foodtruckLocation=" + foodtruckLocation + ", foodtruckMuni=" + foodtruckMuni + ", foodtruckGuCode="
-				+ foodtruckGuCode + ", foodtruckOperationHour=" + foodtruckOperationHour + ", favoriteCount="
-				+ favoriteCount + ", memberLikeCount=" + memberLikeCount + ", memberLikeIds=" + memberLikeIds
+				+ foodtruckGuCode + ", foodtruckOperationHour=" + foodtruckOperationHour + 
+				", memberLikeCount=" + memberLikeCount + ", memberLikeIds=" + memberLikeIds
 				+ ", sellerFoodtruckCoordinate=" + sellerFoodtruckCoordinate + ", locationUpdatedAt="
 				+ locationUpdatedAt + "]";
 	}

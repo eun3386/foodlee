@@ -222,4 +222,9 @@ public class AdminMysqlMybatisDAOImpl implements IAdminDAO {
 		return sstem.selectOne("IAdminDAO.SQL_SELECT_ORDER_PRICE_SUM");
 	}
 
+	@Override
+	public List<Integer> countMenuCategory() {
+		return sstem.selectList("IAdminDAO.SQL_SELECT_MENU_CATEGORYS");
+	}
+
 }
