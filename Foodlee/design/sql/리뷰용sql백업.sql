@@ -27,7 +27,7 @@ CREATE TABLE `events` (
   `event_title` varchar(128) NOT NULL COMMENT '이벤트제목',
   `event_content` text NOT NULL COMMENT '이벤트내용',
   `event_start_date` date NOT NULL COMMENT '이벤트 시작 날짜',
-  `event_end_date` date NOT NULL COMMENT '이벤트 종료 날짜',
+  `event_end_date` date DEFAULT NULL COMMENT '이벤트 종료 날짜',
   `event_ongoing` int(11) NOT NULL DEFAULT '1' COMMENT '진행중 여부 1=진행 0=종료 ',
   `event_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '이벤트등록날짜 CURRENT_TIMESTAMP',
   `event_updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -37,7 +37,7 @@ CREATE TABLE `events` (
   `event_tags` varchar(1024) DEFAULT NULL,
   `event_file_path` varchar(2048) DEFAULT NULL,
   PRIMARY KEY (`event_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (1,'밤도깨비야시장','잠정 중단','2020-05-28','0000-00-00',1,'2020-05-28 07:42:24',NULL,0,0,NULL,NULL,NULL);
+INSERT INTO `events` VALUES (1,'밤도깨비야시장','잠정 중단','2020-05-28','0000-00-00',1,'2020-05-28 07:42:24',NULL,0,0,NULL,NULL,NULL),(2,'awefadwg','기존 DB에 저장된 내용을 에디터에 적용할 문구기존 DB에 저장된 내용을 에디터에 적용할 문구<p>asdfae<img src=\"/foodlee/resources/photo_upload/2020052911020196f8f61b-92dc-4a15-bd19-12f2f47b5c18.jpg\" title=\"65565156_1396549007168144_4736165101399791856_n.jpg\" width=\"500\" height=\"500\" rwidth=\"500\" rheight=\"500\" style=\"border-color: rgb(0, 0, 0); width: 500px; height: 500px;\">&nbsp;</p>','2020-05-29','2020-05-30',1,'2020-05-29 02:03:19',NULL,0,0,NULL,NULL,'C:\\fusion11\\spring_ws\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Foodlee\\resources/photo_upload'),(3,'werfawet','기존 DB에 저장된 내용을 에디터에 적용할 문구<p>a<img src=\"/foodlee/resources/photo_upload/20200529110619225f036d-b6c5-44bc-bf3c-612f27be7c4e.gif\" title=\"%EA%B7%80%EC%97%AC%EC%9A%B4%EA%B3%A0%EC%96%91%EC%9D%B4_12.gif\">&nbsp;</p>','2020-05-29','1970-01-01',1,'2020-05-29 02:06:23',NULL,0,0,NULL,NULL,'C:\\fusion11\\spring_ws\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Foodlee\\resources/photo_upload'),(4,'aegadrg','기존 DB에 저장된 내용을 에디터에 적용할 문구<br style=\"clear:both;\"><p><img src=\"/foodlee/resources/photo_upload/202005291129302c49f54d-d7a4-434f-9ae1-8b202ecbbb1f.jpg\" title=\"%EB%8F%85%EA%B1%B0%EB%AF%B8%EC%84%B1%EC%9A%B4.jpg\"  width=\"1920\" height=\"1080\" style=\"border-color: rgb(0, 0, 0); width: 1920px; height: 1080px;\"><br style=\"clear:both;\">&nbsp;</p>','2020-05-29','2020-08-28',1,'2020-05-29 02:31:51','2020-05-29 02:31:51',0,1,NULL,NULL,'C:\\fusion11\\spring_ws\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Foodlee\\resources/photo_upload'),(5,'gkgkgk','점심시간<img src=\"/foodlee/resources/photo_upload/20200529114731b2b56ea5-acde-4784-a571-86bcbe7ef8de.jpg\" title=\"%EC%97%AC%EC%9A%B0%EB%AA%A8%ED%94%BC%EC%84%B1%EC%9A%B4.jpg\"  width=\"740\" height=\"416\" style=\"border-color: rgb(0, 0, 0); width: 740px; height: 416px; border-width: 0px; border-style: solid;\" border=\"0\" align=\"\" rwidth=\"\" rheight=\"\"><br style=\"clear:both;\">','2020-05-29','1970-01-01',1,'2020-05-29 02:48:00','2020-05-29 02:48:00',0,1,NULL,NULL,'C:\\fusion11\\spring_ws\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Foodlee\\resources/photo_upload/20200529114731b2b56ea5-acde-4784-a571-86bcbe7ef8de.jpg'),(6,'홈ㄴㄷ교ㅗㄷㄱ','고양이<img src=\"/foodlee/resources/photo_upload/20200529115017469a238a-5acf-460a-bf62-3091a52277c9.jpg\" title=\"65565156_1396549007168144_4736165101399791856_n.jpg\"  width=\"600\" height=\"600\" rwidth=\"600\" rheight=\"600\" style=\"border-color: rgb(0, 0, 0); width: 600px; height: 600px;\"><br style=\"clear:both;\"><p>&nbsp;</p>','2020-05-29','1970-01-01',1,'2020-05-29 02:50:31','2020-05-29 02:50:31',0,1,NULL,NULL,'20200529115017469a238a-5acf-460a-bf62-3091a52277c9.jpg'),(7,'누룽지탕','누룽지탕<img src=\"/foodlee/resources/photo_upload/20200529134752dd9d8c80-7d2a-497b-b70f-d80d16a4eb44.jpg\" title=\"%EB%88%84%EB%A3%BD%EC%A7%80%ED%83%95.jpg\"  width=\"600\" height=\"600\" rwidth=\"600\" rheight=\"600\" style=\"border-color: rgb(0, 0, 0); width: 600px; height: 600px;\"><br style=\"clear:both;\"><p>&nbsp;</p>','2020-05-29','1970-01-01',1,'2020-05-29 04:48:04','2020-05-29 04:48:04',0,1,NULL,NULL,'20200529134752dd9d8c80-7d2a-497b-b70f-d80d16a4eb44.jpg'),(8,'누룽지탕','기존 DB에 저장된 내용을 에디터에 적용할 문구누룽지탕<img src=\"/foodlee/resources/photo_upload/20200529134752dd9d8c80-7d2a-497b-b70f-d80d16a4eb44.jpg\" title=\"%EB%88%84%EB%A3%BD%EC%A7%80%ED%83%95.jpg\" width=\"600\" height=\"600\" rwidth=\"600\" rheight=\"600\" style=\"border-color: rgb(0, 0, 0); width: 600px; height: 600px;\"><br style=\"clear:both;\"><p>&nbsp;</p>','2020-05-29','1970-01-01',1,'2020-05-29 04:49:08','2020-05-29 04:49:08',0,1,NULL,NULL,''),(9,'누룽지탕','누룽지<img src=\"/foodlee/resources/photo_upload/20200529135031fa77b097-eeed-4e8d-a14a-eaaa9f068916.jpg\" title=\"%EB%88%84%EB%A3%BD%EC%A7%80%ED%83%95.jpg\"  width=\"600\" height=\"600\" rwidth=\"600\" rheight=\"600\" style=\"border-color: rgb(0, 0, 0); width: 600px; height: 600px;\"><br style=\"clear:both;\"><p>&nbsp;</p>','2020-05-29','1970-01-01',1,'2020-05-29 04:50:52','2020-05-29 04:50:52',0,1,NULL,NULL,'20200529135031fa77b097-eeed-4e8d-a14a-eaaa9f068916.jpg'),(10,'누룽지탕2','기존 DB에 저장된 내용을 에디터에 적용할 문구기존 DB에 저장된 내용을 에디터에 적용할 문구누룽지<img src=\"/foodlee/resources/photo_upload/20200529135031fa77b097-eeed-4e8d-a14a-eaaa9f068916.jpg\" title=\"%EB%88%84%EB%A3%BD%EC%A7%80%ED%83%95.jpg\" width=\"600\" height=\"600\" rwidth=\"600\" rheight=\"600\" style=\"border-color: rgb(0, 0, 0); width: 600px; height: 600px;\"><br style=\"clear:both;\"><p>&nbsp;</p>','2020-05-29',NULL,1,'2020-05-29 04:54:35','2020-05-29 04:54:35',0,1,NULL,NULL,''),(11,'은하수','은하<img src=\"/foodlee/resources/photo_upload/20200529135849d9a61689-eb20-4d18-a940-72f6809236fb.jpg\" title=\"%EC%9D%80%ED%95%98%EC%88%98.jpg\"  width=\"1920\" height=\"600\" style=\"border-color: rgb(0, 0, 0); width: 1920px; height: 600px; border-width: 0px; border-style: solid;\" border=\"0\" align=\"\" rwidth=\"\" rheight=\"600\" noadjust=\"true\"><br style=\"clear:both;\"><p>&nbsp;</p>','2020-05-29',NULL,0,'2020-05-29 04:59:37','2020-05-29 04:59:37',0,1,NULL,NULL,'20200529135849d9a61689-eb20-4d18-a940-72f6809236fb.jpg');
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,7 +59,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-28 16:50:00
+-- Dump completed on 2020-05-29 14:48:38
+
 
 -- ------------------------------------------------------
 -- Server version	5.6.25

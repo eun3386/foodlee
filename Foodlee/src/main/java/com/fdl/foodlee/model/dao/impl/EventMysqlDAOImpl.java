@@ -30,7 +30,7 @@ public class EventMysqlDAOImpl implements IEventDAO {
 			"select * from events where event_id = ?";
 		public static final String SQL_EVENT_INSERT_VO
 			//= "insert into values(),(),()";
-			= "INSERT INTO events VALUES (null,?,?,?,?,1,now(),null,0,0,NULL,NULL,?)";
+			= "INSERT INTO events VALUES (null,?,?,?,?,?,now(),null,0,0,NULL,NULL,?)";
 			//insert into events values(null,'2020-05-07','2020-06-30',1,'테스트','이벤트테스트',0,0,null,null,null,now(),null);
 			//*="INSERT INTO events VALUES (1,'밤도깨비야시장','잠정 중단','2020-05-28','0000-00-00',1,now(),null,0,0,NULL,NULL,NULL)";
 		public static final String SQL_EVENT_SHOWALL_PG
@@ -104,11 +104,12 @@ public class EventMysqlDAOImpl implements IEventDAO {
 //				if(ev.getEventEndDate() != null)
 //					edd = new java.sql.Date(ev.getEventEndDate().getTime());
 				pstmt.setString(3, ev.getEventStartDate());
-				String edd = null;
-				if(ev.getEventEndDate()!=null) 
-					edd = ev.getEventEndDate();
-				pstmt.setString(4, edd);
-				pstmt.setString(5, ev.getFilePath());
+				if(ev.getEventEndDate().equals("1970-01-01"))
+					pstmt.setString(4, null);
+				else
+					pstmt.setString(4, ev.getEventEndDate());
+				pstmt.setInt(5, ev.getEventOngoing());
+				pstmt.setString(6, ev.getFilePath());
 				return pstmt;
 			}
 		};
