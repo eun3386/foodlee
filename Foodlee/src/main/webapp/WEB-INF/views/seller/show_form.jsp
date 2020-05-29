@@ -34,10 +34,14 @@
 			$('btn-edit-submit').show();
 			$("#btn-edit-cancel").attr('disabled',false);
 			$("#btn-edit-cancel").css('cursor','pointer');
+			$("#btn-edit-submit").attr('disabled',false);
+			$("#btn-edit-submit").css('cursor','pointer');
 			$(this).hide();
 		});
 		
 		$("#btn-edit-cancel").on("click", function() {
+			$("#btn-edit-submit").attr('disabled',true);
+			$("#btn-edit-submit").css('cursor','default');
 			$(this).attr('disabled',true);
 			$(this).css('cursor','default');
 			$(".changeInfo").hide();
@@ -45,17 +49,17 @@
 			$("#btn-edit").show();
 		});
 		
-		$('#passwordChk').blur(function(){
-		 	if( $('#newPassword').val() != $('#passwordChk').val() ) {
-		    	if($('#passwordChk').val()!=''){
-			    	alert("비밀번호가 일치하지 않습니다.");
-		    	    $('#passwordChk').val('');
-		          	$('#passwordChk').focus();
-		       	}
-		   	} else {
-			    $('btn-pw-edit-submit').attr('disabled',false);
-		    }
-		});
+// 		$('#passwordChk').blur(function(){
+// 		 	if( $('#newPassword').val() != $('#passwordChk').val() ) {
+// 		    	if($('#passwordChk').val()!=''){
+// 			    	alert("비밀번호가 일치하지 않습니다.");
+// 		    	    $('#passwordChk').val('');
+// 		          	$('#passwordChk').focus();
+// 		       	}
+// 		   	} else {
+// 			    $('btn-pw-edit-submit').attr('disabled',true);
+// 		    }
+// 		});
 		// 
 		var rRnStr = $('input[name=residentRn]').val();
 		var rRnSplit = rRnStr.split('-');
@@ -85,34 +89,17 @@
 		$('#phoneNumber1').val(pnSplit1);
 		$('#phoneNumber2').val(pnSplit2);
 		$('#phoneNumber3').val(pnSplit3);
-		
-		$('input[name=name]', 'input[name=age]', 'input[name=companyRn]', 'input[name=phoneNumber]', 'input[name=email]').blur(function() {
-			var b1 = $('input[name=name]').val();
-			var cRn1 = $('input[name=companyRn1]').val();
-			var cRn2 = $('input[name=companyRn2]').val();
-			var cRn3 = $('input[name=companyRn3]').val();
-			var b2 = cRn1+cRn2+cRn3;
-			var pn1 = $('input[name=phoneNumber1]').val();
-			var pn2 = $('input[name=phoneNumber2]').val();
-			var pn3 = $('input[name=phoneNumber3]').val();
-			var b3 = pn1+pn2+pn3;
-			var b4 = $('input[name=email]').val();
-			if( b1 != null && b2 != null && b3 != null && b4 != null ) {
-				$('#btn-edit-submit').attr('disabled',false);
-				$('#btn-edit-submit').css('cursor','pointer');
-			}
-		});
-		
+		//
 		$('#btn-pw-edit-submit').on("click", function() {
 			$('#pw_form').submit();
 		});
-		
+		//
 		if( $('#addressInput').val() != null ) {
 			var val = $('#addressInput').val();
 			$('#address').attr('value',val);
 			var adVal = $('#address').val();
 		}
-		
+		//
 	});
 </script>
 <title>bossinfo</title>
@@ -147,14 +134,14 @@
 					<tr>
 						<th><label for="login">아이디</label></th>
 						<td>
-							<span>${seller.login}</span>
+							<span class="span">${seller.login}</span>
 						</td>
 						<th></th>
 					</tr>
 					<tr>
 						<th><label for="newPassword">*비밀번호</label></th>
 						<td>
-							<input type="password" id="newPassword" name="newPassword" class="changePassword input" style="display: none">
+							<input type="hidden" id="newPassword" name="newPassword" class="changePassword input" style="display: none" required>
 						</td>
 						<th></th>
 					</tr>
@@ -168,7 +155,7 @@
 					<tr class="changePassword" style="display:none">
 						<th><label for="passwordChk">비밀번호 확인</label></th>
 						<td>
-							<input type="password" id="passwordChk" name="passwordChk" class="input">
+							<input type="hidden" id="passwordChk" name="passwordChk" class="input" required>
 						</td>
 						<th></th>
 					</tr>
@@ -189,7 +176,7 @@
 					<tr>
 						<th><label for="name">*이름</label></th>
 						<td>
-							<span class="info">${seller.name}</span>
+							<span class="info span">${seller.name}</span>
 							<input type="text" id="name" name="name" class="changeInfo input" value="${seller.name}" required>
 						</td>
 						<th></th>
@@ -197,7 +184,7 @@
 					<tr>
 						<th><label for="gender">성별</label></th>
 						<td>
-							<span class="info">${seller.gender}</span>
+							<span class="info span">${seller.gender}</span>
 							<label class="changeInfo"><input type="radio" name="gender" ${seller.gender=='남'?'checked':''} value="남">남</label>
 							<label class="changeInfo"><input type="radio" name="gender" ${seller.gender=='여'?'checked':''} value="여">여</label>
 						</td>
@@ -206,7 +193,7 @@
 					<tr>
 						<th><label for="age">나이</label></th>
 						<td>
-							<span class="info">${seller.age}</span>
+							<span class="info span">${seller.age}</span>
 							<input type="number" class="changeInfo input sm" id="age" name="age" value="${seller.age}">
 						</td>
 						<th></th>
@@ -214,14 +201,14 @@
 					<tr>
 						<th><label for="residentRn1">주민번호</label></th>
 						<td>
-							<span id="residentRn"></span>
+							<span id="residentRn" class="span"></span>
 						</td>
 						<th></th>
 					</tr>
 					<tr>
 						<th><label for="companyRn1">*사업자 번호</label></th>
 						<td>
-							<span class="info" id="companyRn"></span>
+							<span class="info span" id="companyRn"></span>
 							<span class="changeInfo">
 								<input type="text" class="input sm" id="companyRn1" name="companyRn1" maxlength="3" required> - 
 								<input type="text" class="input sm" id="companyRn2" name="companyRn2" maxlength="2" required> - 
@@ -233,7 +220,7 @@
 					<tr>
 						<th><label for="phoneNumber1">*연락처</label></th>
 						<td>
-							<span class="info" id="phoneNumber"></span>
+							<span class="info span" id="phoneNumber"></span>
 							<span class="changeInfo">
 								<input type="text" class="input sm" id="phoneNumber1" name="phoneNumber1" maxlength="3" required> - 
 								<input type="text" class="input sm" id="phoneNumber2" name="phoneNumber2" maxlength="4" required> - 
@@ -245,7 +232,7 @@
 					<tr>
 						<th><label for="email">*이메일</label></th>
 						<td>
-							<span class="info">${seller.email}</span>
+							<span class="info span">${seller.email}</span>
 							<input type="text" class="changeInfo input" id="email" name="email" value="${seller.email}" required>
 						</td>
 						<th></th>
@@ -253,8 +240,8 @@
 					<tr>
 						<th><label for="address">주소</label></th>
 						<td>
-							<span class="info">${seller.address}</span>
-							<textarea rows="2" cols="30" style="resize: none" id="addressInput" class="changeInfo input" >${seller.address}</textarea>
+							<span class="info span">${seller.address}</span>
+							<textarea rows="2" cols="30" style="resize: none" id="addressInput" class="changeInfo input">${seller.address}</textarea>
 							<input type="hidden" id="address" name="address">
 						</td>
 						<th></th>

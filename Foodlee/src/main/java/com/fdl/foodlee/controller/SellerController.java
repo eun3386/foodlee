@@ -88,8 +88,8 @@ public class SellerController {
 		}
 	}
 	
-//	seller/show_edit_form.fdl
-	@RequestMapping(value = "/show_edit_form.fdl", method = RequestMethod.GET)
+//	seller/show_form.fdl
+	@RequestMapping(value = "/show_form.fdl", method = RequestMethod.GET)
 	public ModelAndView sellerInfoAndEditForm(HttpSession ses) { //정보수정
 		ModelAndView mav = new ModelAndView();
 		String login = (String)ses.getAttribute("LoginName");
@@ -97,7 +97,7 @@ public class SellerController {
 		if( sel != null ) {
 			mav.addObject("msg","회원조회 성공 - "+ login);
 			mav.addObject("seller", sel);
-			mav.setViewName("boss/bossinfo/infomodify");
+			mav.setViewName("seller/show_form");
 		} else {
 			mav.addObject("msg","회원조회 실패 - "+ login);
 			mav.setViewName("redirect:boss.fdl");

@@ -104,6 +104,7 @@ body{
 .table_edit .reg_id{font-size:20px; letter-spacing: 7px;font-weight: bold;}
 .table_edit .btn-abs{position: absolute; right: 0; top: -32px; z-index: 99;width:165px;}
 .changeInfo{display: none;}
+.span{font-size: 20px;}
 .btn{background-color:#777; color: white; border: 0; border-radius: 3px;  padding: 4px 10px 6px;cursor:pointer;font-size:16px;}
 .btn.btn-primary{}
 .btn.btn-secondary{background-color:#4da2de}
