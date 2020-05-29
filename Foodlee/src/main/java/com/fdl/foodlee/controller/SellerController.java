@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
+import com.fdl.foodlee.service.inf.IMenuSVC;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
@@ -19,6 +21,9 @@ public class SellerController {
 	
 	@Autowired
 	private ISellerSVC selSvc;
+	
+	@Autowired
+	private IMenuSVC mnSvc;
 	
 //	seller/join_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "/join_form.fdl", 
@@ -85,14 +90,9 @@ public class SellerController {
 	
 //	seller/show_edit_form.fdl
 	@RequestMapping(value = "/show_edit_form.fdl", method = RequestMethod.GET)
-	public ModelAndView infomodify(HttpSession ses) { //정보수정
+	public ModelAndView sellerInfoAndEditForm(HttpSession ses) { //정보수정
 		ModelAndView mav = new ModelAndView();
 		String login = (String)ses.getAttribute("LoginName");
-		if( login == null || login.isEmpty() ) {
-			mav.addObject("msg","회원조회 실패! - 파람에러");
-			mav.setViewName("redirect:boss.fdl");
-			return mav;
-		}
 		SellerVO sel = selSvc.selectOneSeller(login);
 		if( sel != null ) {
 			mav.addObject("msg","회원조회 성공 - "+ login);
@@ -108,7 +108,7 @@ public class SellerController {
 //	seller/pw_chagnge.fdl
 	@RequestMapping(value = "/pw_chagnge.fdl", 
 			method = RequestMethod.POST)
-	public ModelAndView memberPasswordChangeProc(int id, String login, String password) {
+	public ModelAndView sellerPasswordChangeProc(int id, String login, String password) {
 		SellerVO sel = new SellerVO(login, password, null, null, 0, null, null, null, null, null);
 		boolean b = selSvc.updateOneSeller(sel);
 		ModelAndView mav = new ModelAndView();
@@ -125,7 +125,7 @@ public class SellerController {
 //	seller/update.fdl (proc, post, 세션, dao, 회원)
 	@RequestMapping(value = "/update.fdl", 
 			method = RequestMethod.POST)
-	public ModelAndView memberUpdateProc(
+	public ModelAndView sellerUpdateProc(
 			int id, String login, String password, String name, String gender, int age, String residentRn,
 			String email, String phoneNumber, String address , String companyRn) {
 		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null);
@@ -137,6 +137,32 @@ public class SellerController {
 		} else {
 			mav.addObject("msg", "회원 정보 갱신 실패!! " + "<br>" + sel );
 			mav.setViewName("boss/bossinfo/infomodify");
+		}
+		return mav;
+	}
+	
+//	seller/menu_add_form.fdl
+	@RequestMapping(value = "/menu_add_form.fdl", method = RequestMethod.GET)
+	public ModelAndView menuAddForm(HttpSession ses) {
+		String login = (String)ses.getAttribute("LoginName");
+		SellerVO sel = selSvc.selectOneSeller(login);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("sellerId", sel);
+		return mav;
+	}
+	
+//	seller/menu_add.fdl
+	@RequestMapping(value = "/menu_add.fdl", method = RequestMethod.POST)
+	public ModelAndView menuAddProc(String menuName, String menuType, int menuPrice, String menuPic, String menuInfor, String rawMaterials) {
+		MenuVO mn = new MenuVO(0, menuName, menuType, menuPrice, menuPic, menuInfor, rawMaterials);
+		boolean b = mnSvc.updateMenu(mn);
+		ModelAndView mav = new ModelAndView();
+		if( b ) {
+			mav.addObject("msg", "메뉴 추가 성공!! " + "<br>" + mn );
+			mav.setViewName("redirect:boss.fdl");
+		} else {
+			mav.addObject("msg", "메뉴 추가 실패!! " + "<br>" + mn );
+			mav.setViewName("boss/bossmenu/menumodify");
 		}
 		return mav;
 	}

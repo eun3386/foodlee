@@ -152,7 +152,6 @@
 					<input type="hidden" name="residentRn" value="${seller.residentRn}">
 					<input type="hidden" name="companyRn" value="${seller.companyRn}">
 					<input type="hidden" name="phoneNumber" value="${seller.phoneNumber}">
-					${seller.companyRn}
 				<table class="table_edit">
 					<tr>
 						<th><label for="login">아이디</label></th>

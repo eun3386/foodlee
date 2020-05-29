@@ -77,8 +77,12 @@ public class BossController {
 		return "boss";
 	}
 	@RequestMapping(value = "menumodify.fdl", method = RequestMethod.GET)
-	public String menumodify() {//메뉴수정
-		return "boss/bossmenu/menumodify";
+	public ModelAndView menumodify(HttpSession ses) {//메뉴수정
+		String login = (String)ses.getAttribute("LoginName");
+		SellerVO sel = selSvc.selectOneSeller(login);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("seller", sel);
+		return mav;
 	}
 	@RequestMapping(value = "infomodify.fdl", method = RequestMethod.GET)
 	public ModelAndView infomodify(HttpSession ses) {//정보수정
