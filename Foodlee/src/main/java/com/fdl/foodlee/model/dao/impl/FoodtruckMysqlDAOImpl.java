@@ -31,7 +31,7 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 
 	// SQL 정의부
 	private static final String SQL_SELECT_ALL_FOODTRUCK = "select * from foodtrucks";
-	private static final String SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(0,?,?,?,?,?,?,?,0,null,?,null,?)";
+	private static final String SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(0,?,?,?,?,?,?,?,0,0,'',?,null,?)";
 	private static final String SQL_SELECT_FOODTRUCK_SELLER_ID = "select * from foodtrucks where seller_id = ?";
 	private static final String SQL_SELECT_FOODTRUCK_NAME = "select * from foodtrucks where foodtruck_name = ?";
 	private static final String SQL_SELECT_FOODTRUCK_GU_CODE = "select * from foodtrucks where foodtruck_gu_code = ?";
@@ -48,10 +48,9 @@ public class FoodtruckMysqlDAOImpl implements IFoodtruckDAO {
 	@Override
 	public boolean insertNewFoodtruck(FoodtruckVO ft) {
 		int r = jtem.update(SQL_INSERT_FOODTRUCK, ft.getFoodtruckImgPath(), ft.getFoodtruckName(),
-				ft.getFoodtruckMainMenu(), ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
-				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(), ft.getSellerFoodtruckCoordinate(), ft.getMenuCategory());
-		return r == 1;
-		
+				ft.getFoodtruckMainMenu(),  ft.getFoodtruckLocation(), ft.getFoodtruckMuni(),
+				ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(), ft.getSellerFoodtruckCoordinate(),ft.getMenuCategory());
+		return r == 1; 
 	}
 
 	// 판매자가 자신의 푸드 트럭 정보를 업데이트 할 수 있다.

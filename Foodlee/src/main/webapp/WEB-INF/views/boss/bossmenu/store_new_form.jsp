@@ -11,11 +11,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css?family=Roboto|Courgette|Pacifico:400,700" rel="stylesheet">
 <title>store new form</title>
+ <script src="http://code.jquery.com/jquery-latest.min.js"></script><!-- 제일 먼저 안하면 에러 -->
+
 <link href="${pageContext.request.contextPath}/dist/css/style.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ksauwx09vv&submodules=geocoder"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- <script src="http://code.jquery.com/jquery-latest.min.js"></script>
  
  <link href="${pageContext.request.contextPath}/resources/css/boss-ad.css" rel="stylesheet">
 <style type="text/css">
@@ -27,21 +28,7 @@
 </style>
 </head>
 <body>
-<%-- 	<c:choose> --%>
-<%-- 	<c:when test="${fn:endsWith(fp,'.png') or fn:endsWith(fp, '.jpg') or fn:endsWith(fp,'.gif')}">  --%>
-<%-- 		<div id="file_show_${vs.index}" class="image_file"> --%>
-<%-- 				<b> img path: ${fp}</b><br> --%>
-<%-- 				<img alt='origin file은 ${fn:split(fp,"_"[1]}'  --%>
-<%-- 			src="${pageContext.request.contextPath}${fp}"> --%>
-<!-- 		</div> -->
-<%-- 	</c:when> --%>
-<%-- 	<c:when test="${not fn:endsWith(fp,'.png) and not fn:endsWith(fp, '.jpg') and not fn:endsWith(fp,'.gif')}">  --%>
-<%-- 		<div id="file_show_${vs.index}" class="nomal_file"> --%>
-<%-- 			<b>file name: ${fn:split(fp,"_"}[1]</b><br> --%>
-<%-- 			<a href="${pageContext.request.contextPath}">첨부파일 링크</a> --%>
-<!-- 		</div> -->
-<%-- 	</c:when> --%>
-<%-- 	</c:choose> --%>
+
  <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
@@ -125,13 +112,11 @@
                         <!-- ============================================================== -->
                         <li class="nav-item d-none d-md-block">
                             <a class="nav-link" href="javascript:void(0)">
-                                <form>
                                     <div class="customize-input"><!-- 검색부분 -->
                                         <input class="form-control custom-shadow custom-radius border-0 bg-white"
                                             type="search" placeholder="Search" aria-label="Search">
                                         <i class="form-control-icon" data-feather="search"></i>
                                     </div>
-                                </form>
                             </a>
                         </li>
                         <!-- ============================================================== -->
@@ -213,13 +198,13 @@
                 <!-- *************************************************************** -->
                 <div class="row">
                 <div class="col-lg-12 col-md-12"><!-- col-sm-12 col-md-6 col-lg-4 //col-sm-12 col-md-3 col-lg-3 -->
-                        <div class="card">
-                        <form action="${pageContext.request.contextPath}/store_add.fdl" method="post">
+                        <div class="card text-center">
+                        <form action="${pageContext.request.contextPath}/store_add.fdl" method="post" enctype="multipart/form-data">
                         	<h4 class="card-title">영업시간</h4>
                              <!-- *************************************************************** -->
                               <!-- *************테이블************** -->
                              <!-- *************************************************************** -->
-                             <div class="table-responsive mt-3 col-md-6 col-lg-4"><!-- 요일별 위치 end -->
+                             <div class="table-responsive  mt-3 col-md-6 col-lg-4"><!-- 요일별 위치 end -->
                                 <table class="table table-bordered  table-responsive-lg" id="tr">
 <!--                                     <thead> -->
 <!--                                         <tr> -->
@@ -314,7 +299,8 @@
 		                            <div class="card-body">
 		                                <h4 class="card-title">트럭사진 경로</h4>
 		                                   <div class="form-group">
-		                                   		<input type="file" name="ImgPath" multiple size="64">
+<!-- 		                                   		<input type="file" name="ImgPath" multiple size="64"> -->
+		                                   		<input type="file" name="imgfiles" id="file_add" multiple="multiple">
 		                                   </div>
 		                            </div>
 		                        </div>
@@ -363,9 +349,9 @@
 		                        </div>
 		                    </div><!--대표메뉴 end  -->
 		                    <div class="col-sm-12 col-md-8 col-lg-4"><!--위치죄표  -->
-		                        <div class="card">
-		                            <div class="card-body">
-		                                <h4 class="card-title">트럭위치</h4>
+		                        <div class="card" style="width: 610px;">
+		                            <div class="card-body" style="width: 600px;">
+		                                <h4 class="card-title" >트럭위치</h4>
 		                                   <div class="form-group" id="NaverMap" name="naverMap" style="width: 500px;max-width: 100%; height: 325px; ">
 											
 		                                   </div>
@@ -409,8 +395,8 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script type="text/javascript">
-    var nmap = new naver.maps.Map('naverMap', {// naverMap 값은 div 의 id값
+    <script>
+    var nmap = new naver.maps.Map('NaverMap', {// naverMap 값은 div 의 id값
     	center : new naver.maps.LatLng(37.5782709,126.9770043), //지도 중앙 위치: 위도,경도 설정
     	zoom : 12, //줌 설정 1~14 숫자가 클수록 확대, default 9
     	zoomControl : true, //줌 컨트롤 표시(기본값 표시 안함)

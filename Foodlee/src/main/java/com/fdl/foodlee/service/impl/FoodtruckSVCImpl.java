@@ -30,7 +30,7 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 	@Override
 	public boolean insertNewFoodtruck(FoodtruckVO ft) {
 		// TODO Auto-generated method stub
-		return false;
+		return ftDao.insertNewFoodtruck(ft);
 	}
 
 	@Override
@@ -41,8 +41,8 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 
 	@Override
 	public FoodtruckVO selectOneFoodtruck(String foodtruckName) {
-		FoodtruckVO foodtruckVO = ftDao.selectOneFoodtruck(foodtruckName);
-		return foodtruckVO;
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	@Override
