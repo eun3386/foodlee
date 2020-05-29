@@ -26,6 +26,7 @@ public interface ISellerDAO {
 	
 //	자신의 정보를 갱신 할 수 있다.
 	boolean updateOneSeller(SellerVO sel);
+	boolean updateOneSellerPW(SellerVO sel);
 	
 //	탈퇴 할 수 있다.
 	boolean deleteOneSeller(int id);
