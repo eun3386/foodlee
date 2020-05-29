@@ -22,8 +22,8 @@ public class EventMysqlDAOImpl implements IEventDAO {
 	private JdbcTemplate jtem;
 	
 	public static final String SQL_EVENT_READ_INC = 
-			"update events set event_read_count"
-			+ " = event_read_count + 1 where event_id = ?";
+			"update events set read_count"
+			+ " = read_count + 1 where event_id = ?";
 		public static final String SQL_EVENT_SHOWALL =
 			"select * from events order by created_at desc";
 		public static final String SQL_EVENT_SHOWONE =
