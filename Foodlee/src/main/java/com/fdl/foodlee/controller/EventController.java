@@ -115,7 +115,7 @@ public class EventController {
 				//return "redirect:article_list.my"; // RD
 			} else {
 				System.out.println("게시글 등록 실패: " + title);
-				return "article/at_new_form"; // FW
+				return "event/ev_new_form"; // FW
 			}
 	}
 	
