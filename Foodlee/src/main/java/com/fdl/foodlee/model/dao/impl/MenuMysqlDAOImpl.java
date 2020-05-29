@@ -57,12 +57,12 @@ private String rawMaterials;
 	private JdbcTemplate jtem;
 	
 	// 메뉴를 등록 할 수 있다.
-	@Override
+	@Override //TODO 사진
 	public boolean insertNewMenu(MenuVO mn) {
 		int r = jtem.update(SQL_INSERT_MENU,
 				mn.getMenuId(), mn.getMenuName(),
 				mn.getMenuType(), mn.getMenuPrice(),
-				mn.getMenuPic(), mn.getMenuInfor(),
+				mn.getMenuPic(), mn.getMenuInfor(), 
 				mn.getRawMaterials());
 		return (r == 1);
 	}
