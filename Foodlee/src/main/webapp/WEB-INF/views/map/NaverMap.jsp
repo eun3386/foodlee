@@ -285,7 +285,7 @@ function hideMarker(map, marker) {
     marker.setMap(null);
     
 	var tsellerId = -1;
-	console.log('markers = '+ markers);
+// 	console.log('markers = '+ markers);
 	tsellerId = fodKey[markers.indexOf(marker)];
 	var tt ='li#truck_'+tsellerId;
 	$(tt).remove();
@@ -295,7 +295,7 @@ function hideMarker(map, marker) {
 //
 //트럭 검색 표시
 function searchOneTruckListToCoordinate(keyword) {
-			
+		console.log('keyword = ' + keyword);	
 		var empty = '';
 		if( keyword != null && keyword != empty) {
 			var name = encodeURIComponent(keyword);
@@ -346,11 +346,10 @@ function searchOneTruckListToCoordinate(keyword) {
 						    });
 						});
 						$(tt).on('click', function() {
-// 							console.log('selId = ' + selId);
-// 							var key = parseInt(selId);
-// 							console.log('key = ' + typeof key);
-// 							showOneTruck(key);
-							
+							console.log('selId = ' + selId);
+							var key = parseInt(selId);
+							console.log('key = ' + typeof key);
+							showOneTruck(key);
 						});
 						break;
 					default:
