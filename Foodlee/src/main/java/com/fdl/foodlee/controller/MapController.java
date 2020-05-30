@@ -60,7 +60,7 @@ public class MapController {
 	}
 	
 	// 푸드트럭 상세정보 페이지를 볼수 있다
-		@RequestMapping(value = "showOneTruck.fdl", method = RequestMethod.POST)
+		@RequestMapping(value = "showOneTruck.fdl", method = RequestMethod.GET)
 		public String selectOneShowTruck(Model model, int sid) {
 			FoodtruckVO tshow = fodSvc.selectOneFoodtruck(sid);
 			model.addAttribute("ts", tshow);

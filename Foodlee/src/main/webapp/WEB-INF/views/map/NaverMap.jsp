@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8" charset="utf8" >
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- <div class="search" style=""> -->
-<!--             <input id="address" type="text" placeholder="검색할 주소"> -->
-<!--             <input id="submit" type="button" value="주소 검색"> -->
-<!-- </div> -->
+<div class="search" style="">
+            <input id="address" type="text" placeholder="서울 지역 검색">
+            <input id="submit" type="button" value="지역 검색">
+</div>
 
 <div class="search_map_wrap">
     <div id="map_view"></div>
@@ -13,8 +13,8 @@
         <div class="option">
             <div>
                 <form>
-                    트럭 검색 : <input type="text" id="address" size="15" placeholder="상호명 입력..."> 
-                  <button id="submit" type="submit">검색하기</button> 
+                    트럭 검색 : <input type="text" id="truck_name" size="15" placeholder="상호명 입력..."> 
+                  <button id="truck_submit" type="submit">검색하기</button> 
                 </form>
             </div>
         </div>
@@ -206,6 +206,7 @@ for (var i=0, ii=latlngs.length; i<ii; i++) {
 // 보이는 부분만 마커 표시
 // 'idle' 지도의 움직임이 종료되면(유휴 상태) 이벤트가 발생합니다.
 naver.maps.Event.addListener(map, 'idle', function() {
+// naver.maps.Event.addListener(map, 'mousemove', function() {
     updateMarkers(map, markers);
 });
 
@@ -240,8 +241,37 @@ function showMarker(map, marker) {
 		data: 'sid='+ tsellerId,
 		success: function(res, status, xhr) {
 			console.log("success : " + res);
+			var p = $(res).find("p.truck_list");
+   			var r = $(p).text();
+   			console.log("success p: " + p);
+   			console.log("success r: " + r);
 			$('#placesList').append(res);
-			
+			$(tt).on('mouseover', function() {
+				$(tt).css({"background-color": "rgb(255, 202, 40, 0.7)"});
+				var position = marker.getPosition();
+				console.log(position);
+				map.panTo(position); // 마커 위치로 이동
+// 				var marker = position;
+				//
+				var seq = marker.get('seq');
+				marker.setIcon({
+			        url: HOME_PATH+'resources/imgs/mapMain/sp_pins_spot_v3_over.png',
+			        size: new naver.maps.Size(24, 37),
+			        anchor: new naver.maps.Point(12, 37),
+			        origin: new naver.maps.Point(seq * 29, 50)
+			    });
+			});
+			$(tt).on('mouseout', function() {
+				$(tt).css({"background-color": "rgba(255, 255, 255, 0.7)"});
+				
+				var seq = marker.get('seq');
+				marker.setIcon({
+					url: HOME_PATH+'resources/imgs/mapMain/sp_pins_spot_v3.png',
+			        size: new naver.maps.Size(24, 37),
+			        anchor: new naver.maps.Point(12, 37),
+			        origin: new naver.maps.Point(seq * 29, 50)
+			    });
+			});
 		}, 
 		error: function(xhr, status) {
 			console.log("error : " + status);
@@ -255,6 +285,7 @@ function hideMarker(map, marker) {
     marker.setMap(null);
     
 	var tsellerId = -1;
+	console.log('markers = '+ markers);
 	tsellerId = fodKey[markers.indexOf(marker)];
 	var tt ='li#truck_'+tsellerId;
 	$(tt).remove();
@@ -264,6 +295,7 @@ function hideMarker(map, marker) {
 //
 //트럭 검색 표시
 function searchOneTruckListToCoordinate(keyword) {
+			
 		var empty = '';
 		if( keyword != null && keyword != empty) {
 			var name = encodeURIComponent(keyword);
@@ -274,11 +306,52 @@ function searchOneTruckListToCoordinate(keyword) {
 		   		success: function(res, status, xhr) {
 		   			var p = $(res).find("p.truck_list");
 		   			var r = $(p).text();
+		   			var li = $(p).parent().attr("id");
+		   			var tt = '#'+li;
+		   			console.log("success li: " + li);
 		   			console.log("success p: " + p);
 		   			console.log("success r: " + r);
 		   			switch (r) {
 					case keyword:
 						$('#placesList').html(res);
+							var selId = -1;
+							selId = tt.split('_')[1];
+							console.log('selId = ' + selId);
+							var marker = markers[selId-1];
+							console.log('marker = ' + marker);
+						$(tt).on('mouseover', function() {
+							$(tt).css({"background-color": "rgb(255, 202, 40, 0.7)"});
+							var position = marker.getPosition();
+							console.log(position);
+							map.panTo(position); // 마커 위치로 이동
+//			 				var marker = position;
+							//
+							var seq = marker.get('seq');
+							marker.setIcon({
+						        url: HOME_PATH+'resources/imgs/mapMain/sp_pins_spot_v3_over.png',
+						        size: new naver.maps.Size(24, 37),
+						        anchor: new naver.maps.Point(12, 37),
+						        origin: new naver.maps.Point(seq * 29, 50)
+						    });
+						});
+						$(tt).on('mouseout', function() {
+							$(tt).css({"background-color": "rgba(255, 255, 255, 0.7)"});
+							
+							var seq = marker.get('seq');
+							marker.setIcon({
+								url: HOME_PATH+'resources/imgs/mapMain/sp_pins_spot_v3.png',
+						        size: new naver.maps.Size(24, 37),
+						        anchor: new naver.maps.Point(12, 37),
+						        origin: new naver.maps.Point(seq * 29, 50)
+						    });
+						});
+						$(tt).on('click', function() {
+// 							console.log('selId = ' + selId);
+// 							var key = parseInt(selId);
+// 							console.log('key = ' + typeof key);
+// 							showOneTruck(key);
+							
+						});
 						break;
 					default:
 						alert('검색결과가 없습니다');
@@ -297,7 +370,7 @@ function searchOneTruckListToCoordinate(keyword) {
 //트럭 상세정보
 function showOneTruck(foodId) {
 	$.ajax({
-		type: 'post',
+		type: 'get',
 		url: HOME_PATH+'showOneTruck.fdl',
 		data: 'fsTruck='+ foodId,
 		success: function(res, status, xhr) {
@@ -308,33 +381,6 @@ function showOneTruck(foodId) {
 		}
 	});
 }
-// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-function addMarker(position, idx, title) {
- var marker = new naver.maps.Marker({
-     map: map,
-     position: position, // 마커의 위치
-     icon: {
-     	url: HOME_PATH+'resources/imgs/mapMain/sp_pins_spot_v3_over.png',// 마커 이미지 스프라이트 이미지를 씁니다
-         size: new naver.maps.Size(24, 37), // 마커 이미지의 크기
-         anchor: new naver.maps.Point(12, 37), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-         origin: new naver.maps.Point(i*29, 0) // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-     },
-     zIndex: 100
- });
- marker.setMap(map); // 지도 위에 마커를 표출합니다
- markers.push(marker);  // 배열에 생성된 마커를 추가합니다
-
- return marker;
-}
-
-// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-function removeMarker() {
- for ( var i = 0; i < markers.length; i++ ) {
-     markers[i].setMap(null);
- }   
- markers = [];
-}
-
 // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
 function displayPagination(pagination) {
  var paginationEl = document.getElementById('pagination'),
@@ -491,6 +537,7 @@ function OneClickHandler(seq) {
         }
     }
 }
+//
 // 좌표 검색  및 주소 표시
 function searchCoordinateToAddress(latlng) {
 	
@@ -535,51 +582,51 @@ function searchCoordinateToAddress(latlng) {
 }
 //
 // 주소 검색 표시
-// function searchAddressToCoordinate(address) {
-//     naver.maps.Service.geocode({
-//         query: address
-//     }, function(status, response) {
-//         if (status === naver.maps.Service.Status.ERROR) {
-//             return alert('잘못된 입력입니다!');
-//         }
+function searchAddressToCoordinate(address) {
+    naver.maps.Service.geocode({
+        query: address
+    }, function(status, response) {
+        if (status === naver.maps.Service.Status.ERROR) {
+            return alert('잘못된 입력입니다!');
+        }
 
-//         if (response.v2.meta.totalCount === 0) {
-//             return alert('검색어를 찾을수 없습니다');
-//         }
+        if (response.v2.meta.totalCount === 0) {
+            return alert('검색어를 찾을수 없습니다');
+        }
 
-//         var htmlAddresses = [],
-//             item = response.v2.addresses[0],
-//             position = new naver.maps.Point(item.x, item.y);
+        var htmlAddresses = [],
+            item = response.v2.addresses[0],
+            position = new naver.maps.Point(item.x, item.y);
         
-//         if (item.roadAddress) {
-//             htmlAddresses.push('[도로명 주소] ' + item.roadAddress);
-//         }
+        if (item.roadAddress) {
+            htmlAddresses.push('[도로명 주소] ' + item.roadAddress);
+        }
 
-//         if (item.jibunAddress) {
-//             htmlAddresses.push('[지번 주소] ' + item.jibunAddress);
-//         }
+        if (item.jibunAddress) {
+            htmlAddresses.push('[지번 주소] ' + item.jibunAddress);
+        }
 
-//         if (item.englishAddress) {
-//             htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
-//         }
-//         var mapAddress = infoWindow.setContent([
-//             '<div class="info" style="padding:10px;min-width:200px;line-height:150%;">',
-//             '<h4 style="margin-top:5px;">검색 주소 : '+ address +'</h4>',
-//             htmlAddresses.join('<br />'),
-//             '</div>'
-//         ].join('\n'));
+        if (item.englishAddress) {
+            htmlAddresses.push('[영문명 주소] ' + item.englishAddress);
+        }
+        var mapAddress = infoWindow.setContent([
+            '<div class="info" style="padding:10px;min-width:200px;line-height:150%;">',
+            '<h4 style="margin-top:5px;">검색 주소 : '+ address +'</h4>',
+            htmlAddresses.join('<br />'),
+            '</div>'
+        ].join('\n'));
         
-//         infoWindow.open(map, position);
+        infoWindow.open(map, position);
         
-//         $('.info').on('click', function() {
-//        		infoWindow.close();
-// 		})
-//         //
-//         map.setCenter(position);
-// 		console.log('position: '+position);
-//     });
+        $('.info').on('click', function() {
+       		infoWindow.close();
+		})
+        //
+        map.setCenter(position);
+		console.log('position: '+position);
+    });
     
-// }
+}
 //
 function initGeocoder() {
     if (!map.isStyleMapReady) {
@@ -591,16 +638,21 @@ function initGeocoder() {
         console.log('position'+e.coord);
     });
 	// 검색 창  키 이벤트
-//     $('#address').on('keydown', function(e) {
-//         var keyCode = e.which;
-//         if (keyCode == 13) { // Enter Key
-//             searchAddressToCoordinate($('#address').val());
-//         }
-//     });
+    $('#address').on('keydown', function(e) {
+        var keyCode = e.which;
+        if (keyCode == 13) { // Enter Key
+            searchAddressToCoordinate($('#address').val());
+        }
+    });
 	// 검색창 마우스 이벤트
     $('#submit').on('click', function(e) {
         e.preventDefault();
-        searchOneTruckListToCoordinate($('#address').val());
+        searchAddressToCoordinate($('#address').val());
+    });
+	// 트럭 검색창 마우스 이벤트
+    $('#truck_submit').on('click', function(e) {
+        e.preventDefault();
+        searchOneTruckListToCoordinate($('#truck_name').val());
     });
 	
 }

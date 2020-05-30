@@ -9,11 +9,15 @@
                  <a class="map_login" href="#">Login</a>
                  <a class="map_join" href="#">Join</a>
              </c:if>
-             <c:if test="${not empty LoginName and LoginName ne 'admin'}">
+             <c:if test="${not empty LoginName and LoginType eq 4}">	
              	<a href="${pageContext.request.contextPath}/my_page.fdl">마이페이지</a>
              	<a href="${pageContext.request.contextPath}/logout.fdl">로그아웃</a>
              </c:if>
-             <c:if test="${not empty LoginName and LoginName eq 'admin'}">
+             <c:if test="${not empty LoginName and LoginType eq 5}">
+             	<a href="${pageContext.request.contextPath}/boss.fdl">마이페이지</a>
+             	<a href="${pageContext.request.contextPath}/logout.fdl">로그아웃</a>
+             </c:if>
+             <c:if test="${not empty LoginName and LoginType eq 6}">
              	<a href="${pageContext.request.contextPath}/admin.fdl">어드민페이지</a>
              	<a href="${pageContext.request.contextPath}/logout.fdl">로그아웃</a>
              </c:if>
