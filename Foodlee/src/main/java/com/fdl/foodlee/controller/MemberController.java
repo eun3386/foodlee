@@ -51,7 +51,6 @@ public class MemberController {
 		String email = request.getParameter("email");
 		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
-		System.out.println(upfiles);
 		
 		String realPath = ses.getServletContext().getRealPath(IMemberFileSVC.DEF_UPLOAD_DEST) + "/";
 		

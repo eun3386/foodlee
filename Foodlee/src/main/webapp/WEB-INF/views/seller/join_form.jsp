@@ -45,13 +45,42 @@
 			});
 		});
 		
+		$('#uploadImg').click(function() {
+			$('input[type=file]').click();
+		});
+		
+		$('#input_img').on('change', function(e) {
+			var files = e.target.files;
+			var filesArr = Array.prototype.slice.call(files);
+			
+			filesArr.forEach(function(f) {
+				if(!f.type.match("image.*")) {
+					alert("확장자는 이미지 확장자만 가능합니다.");
+					return;
+				}
+				
+				sel_file = f;
+				
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#uploadImg').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(f);
+			});
+		});
+		
 	});
 </script>
 <div id="join_form">   
-    <form action="${pageContext.request.contextPath}/seller/join.fdl" method="post">
+    <form action="${pageContext.request.contextPath}/seller/join.fdl" method="post" enctype="multipart/form-data">
     	<table id="join_table" border="0">
         	<tr>
-        		<td><img id="join_img" alt="사진" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG"> </td>
+        		<td>
+        			<div id="img_wrap">
+        				<img id="uploadImg" alt="사진" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG" style="cursor: pointer; width: 150px; height: 150px;">
+        				<input type="file" id="input_img" name="upfiles" multiple="multiple" style="display: none">
+        			</div>
+        		</td>
         		<td id="txtarea"><textarea rows="10" cols="100" style="resize: none;" readonly>판매자 회원가입 소개글 더미</textarea></td>
         		<td>
         			<input type="hidden" id="join_msg" name="join_msg" value="${msg}">
