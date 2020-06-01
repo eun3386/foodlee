@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="common/_common.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,12 +50,6 @@
 			$("#main-content").load(url);
     	});
 		
-		$('#id_pw_find').on('click', function() {
-    		var ROOT_PATH = '${pageContext.request.contextPath}';
-    		var url = ROOT_PATH+'/find_form.fdl';
-			$("#login_form").load(url);
-    	});
-		
 		$('#login_submit_btn').on('click', function() {
 			var login = $('input[name=login]').val();
 			var password = $('input[name=password]').val();
@@ -101,7 +96,6 @@
 </script>
 	<title> 푸들이 - 푸드트럭 나들이 </title>
 </head>
-
 <body id="wrapper">
     <div id="main-header">
         <a href="${pageContext.request.contextPath}/main.fdl"><img class="logo" src="resources/css/imgs/logo.png"></a>
@@ -124,77 +118,53 @@
     <hr class="line">
     </div>
     <div id="main-content">
-
-<div id="login_wrap">
-	<div id="login_form">
-		<form id="form" name="login_form1">
-	 		<table border='0'>
-	 			<tr class="title">
-	 				<th>푸들이 로그인</th>
-	 			</tr>
-	 			<tr>
-	 				<td>
-	 					<label for='login_input' class="lb">아이디:</label>
-	 				</td>			
-	 			</tr>
-	 			<tr>
-	 				<td>
-	 					<input type="text" id='login_input'	name="login" 
-	 						size='22' placeholder="아이디 입력" required> 					
-	 				</td>
-	 			</tr>
-	 			<tr>
-	 				<td>
-	 					<label for='password' class="lb">비밀번호:</label>
-	 				</td>
-	 			</tr>
-	 			<tr>
-	 				<td>
-	 					<input type="password" id='password'
-	 						name="password" size='22' 
-	 						maxlength="10" placeholder="비밀번호 입력" required> 					
-	 				</td>
-	 			</tr>
-	 			<tr>
-	 				<td id="find_td">
-	 					<a id="id_pw_find" href="#">아이디/비밀번호 찾기</a>
-	 				</td>
-	 			</tr>
-	 			<tr class="submit">
-	 				<td>
-						<input id="login_submit_btn" type="button" value="로그인">
-	 				</td>
-	 			</tr>
-	 		</table>
-	 	</form>
-	</div>
-</div>
-
+		<div id="login_wrap">
+			<div id="login_form">
+				<form id="form" name="login_form1">
+			 		<table border='0'>
+			 			<tr class="title">
+			 				<th>푸들이 로그인</th>
+			 			</tr>
+			 			<tr>
+			 				<td>
+			 					<label for='login_input' class="lb">아이디:</label>
+			 				</td>			
+			 			</tr>
+			 			<tr>
+			 				<td>
+			 					<input type="text" id='login_input'	name="login" 
+			 						size='22' placeholder="아이디 입력" required> 					
+			 				</td>
+			 			</tr>
+			 			<tr>
+			 				<td>
+			 					<label for='password' class="lb">비밀번호:</label>
+			 				</td>
+			 			</tr>
+			 			<tr>
+			 				<td>
+			 					<input type="password" id='password'
+			 						name="password" size='22' 
+			 						maxlength="10" placeholder="비밀번호 입력" required> 					
+			 				</td>
+			 			</tr>
+			 			<tr>
+			 				<td id="find_td">
+			 					<a id="id_pw_find" href="${pageContext.request.contextPath}/find_form.fdl">아이디/비밀번호 찾기</a>
+			 				</td>
+			 			</tr>
+			 			<tr class="submit">
+			 				<td>
+								<input id="login_submit_btn" type="button" value="로그인">
+			 				</td>
+			 			</tr>
+			 		</table>
+			 	</form>
+			</div>
+		</div>
     </div>
-    
     <div id="footer">
     	<%@include file="common/_footer.jsp" %>
     </div>
-	<script type="text/javascript" src="resources/js/slick.min.js"></script>
-	<script type="text/javascript">
-// 	슬라이드
-		$('.map_slider').slick({
-			  dots: false, // 속성설정
-			  slidesToShow: 1, // 보여주는 화면 개수
-			  slidesToScroll: 1, // 한줄 슬라이드
-			  autoplay: true, // 자동 재생
-			  autoplaySpeed: 2000, // 재생 속도
-			  arrows: false, // 화살표 없애기
-			  responsive: [ // 반응형 에 대한 설정
-	                {
-	                    breakpoint: 768,
-	                    settings: {
-	                        arrows: false,
-	                        dots: false
-	                        }
-	                }
-	                ]
-		});
-	</script>
 </body>
 </html>

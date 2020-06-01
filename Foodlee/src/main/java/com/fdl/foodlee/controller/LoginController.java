@@ -140,17 +140,17 @@ public class LoginController {
 		if( mbPw != null && selPw != null ) {
 			mav.addObject("pw", mbPw);
 			System.out.println("AllPw = " + mbPw);
-			mav.setViewName("redirect:/main.fdl");
+			mav.setViewName("redirect:/login_form.fdl");
 		} else if( mbPw != null && selPw == null ) {
 			mav.addObject("pw", mbPw);
 			System.out.println("mbPw = " + mbPw);
-			mav.setViewName("redirect:/main.fdl");
+			mav.setViewName("redirect:/login_form.fdl");
 		} else if( mbPw == null && selPw != null ) {
 			mav.addObject("pw", selPw);
 			System.out.println("selPw = " + selPw);
-			mav.setViewName("redirect:/main.fdl");
+			mav.setViewName("redirect:/login_form.fdl");
 		} else {
-			mav.setViewName("find_form.fdl");
+			mav.setViewName("find_form");
 		}
 		return mav;
 	}
