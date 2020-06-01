@@ -1,5 +1,7 @@
 package com.fdl.foodlee.service.inf;
 
+import java.util.List;
+
 import com.fdl.foodlee.model.vo.MemberVO;
 
 public interface IMemberSVC {
@@ -8,7 +10,7 @@ public interface IMemberSVC {
 	boolean insertNewMemberWithCrypto(MemberVO mb);
 	
 //	아이디를 찾을 수 있다.
-	String selectMemberLogin(String name, String phoneNumber);
+	List<String> selectMemberLogin(String name, String phoneNumber);
 	
 //	비밀번호를 찾을 수 있다.
 	String selectMemberPassword(String login, String email);

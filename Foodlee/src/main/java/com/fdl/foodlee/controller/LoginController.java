@@ -1,5 +1,7 @@
 package com.fdl.foodlee.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,15 +105,54 @@ public class LoginController {
 	}
 	
 //	find_id.fdl
-	@RequestMapping(value = "find_id.fdl", method = RequestMethod.GET)
-	public String findIdProc(String name, String phoneNumber) {
-		return null;
+	@RequestMapping(value = "find_id.fdl", method = RequestMethod.POST)
+	public ModelAndView findIdProc(String name, String phoneNumber, HttpSession ses) {
+		List<String> mbIdList = mbSvc.selectMemberLogin(name, phoneNumber);
+		List<String> selIdList = selSvc.selectSellerLogin(name, phoneNumber);
+		ModelAndView mav = new ModelAndView();
+		if( mbIdList != null && selIdList != null ) {
+			for (int i = 0; i < selIdList.size(); i++) {
+				mbIdList.add(selIdList.get(i));
+			}
+			mav.addObject("idList", mbIdList);
+			System.out.println("AllIdList = " + mbIdList);
+			mav.setViewName("redirect:/main.fdl");
+		} else if( mbIdList != null && selIdList == null ) {
+			mav.addObject("idList", mbIdList);
+			System.out.println("mbIdList = " + mbIdList);
+			mav.setViewName("redirect:/main.fdl");
+		} else if( mbIdList == null && selIdList != null ) {
+			mav.addObject("idList", selIdList);
+			System.out.println("selIdList = " + selIdList);
+			mav.setViewName("redirect:/main.fdl");
+		} else {
+			mav.setViewName("find_form.fdl");
+		}
+		return mav;
 	}
 	
 //	find_pw.fdl
-	@RequestMapping(value = "find_pw.fdl", method = RequestMethod.GET)
-	public String findPasswordProc(String login, String email) {
-		return null;
+	@RequestMapping(value = "find_pw.fdl", method = RequestMethod.POST)
+	public ModelAndView findPasswordProc(String login, String email) {
+		String mbPw = mbSvc.selectMemberPassword(login, email);
+		String selPw = selSvc.selectSellerPassword(login, email);
+		ModelAndView mav = new ModelAndView();
+		if( mbPw != null && selPw != null ) {
+			mav.addObject("pw", mbPw);
+			System.out.println("AllPw = " + mbPw);
+			mav.setViewName("redirect:/main.fdl");
+		} else if( mbPw != null && selPw == null ) {
+			mav.addObject("pw", mbPw);
+			System.out.println("mbPw = " + mbPw);
+			mav.setViewName("redirect:/main.fdl");
+		} else if( mbPw == null && selPw != null ) {
+			mav.addObject("pw", selPw);
+			System.out.println("selPw = " + selPw);
+			mav.setViewName("redirect:/main.fdl");
+		} else {
+			mav.setViewName("find_form.fdl");
+		}
+		return mav;
 	}
 	
 //	join_choice_form.fdl (form; get; 비회원)

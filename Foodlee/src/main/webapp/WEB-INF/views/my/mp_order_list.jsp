@@ -17,28 +17,18 @@
 					</div>
 				</div>
 
-				<table class="table" id="dataTable">
+				<table class="table" id="orderTable">
 					<thead>
 						<tr>
-							<th>NO.</th>
+							<th>주문번호</th>
 							<th>가게</th>
 							<th>메뉴</th>
-							<th>수량</th>
 							<th>결제금액</th>
-							<th>리뷰 쓰기</th>
+							<th>주문일시</th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:forEach items="${orderList}" var="order">
-							<tr>
-								<td>${order.id}</td>
-								<td>${order.foodtruck}</td>
-								<td>${order.menu}</td>
-								<td>${order.count}</td>
-								<td>${order.price}</td>
-								<td></td>
-							</tr>
-						</c:forEach>
+					<tbody id ="listOrder">
+		
 					</tbody>
 				</table>
 
@@ -55,7 +45,34 @@
 		</section>
 
 <script>
-
+$(function(){
+	$.ajax({
+		url : "my_order_list.fdl",
+		type : "get",
+		success : function(data){
+			var html = "";
+			data.forEach(function(item){
+				html += '<tr>';
+					html += '<td>' + item.orderId + '</td>';
+					html += '<td>' + item.sellerId + '</td>';
+					html += '<td>' + item.orderName + '</td>';
+					html += '<td>' + item.orderPriceSum + '</td>';
+					html += '<td>' + new Date(item.orderDate) + '</td>';
+				html += '</tr>';
+			})
+			$("#listOrder").empty().append(html);
+		},
+		error : function(err1,err2,err3){
+			console.log(err1)
+			console.log(err2)
+			console.log(err3)
+			
+		},
+		complete : function(){
+			console.log("complete");			
+		}
+	})
+});
 
 </script>
 </body>

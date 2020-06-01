@@ -33,7 +33,7 @@
 <script>
 $(function(){
 	$.ajax({
-		url : "get_my_order_list.fdl",
+		url : "my_like_list.fdl",
 		type : "get",
 		success : function(data){
 			var html = "";

@@ -1,5 +1,7 @@
 package com.fdl.foodlee.model.dao.inf;
 
+import java.util.List;
+
 import com.fdl.foodlee.model.vo.SellerVO;
 
 public interface ISellerDAO {
@@ -8,7 +10,7 @@ public interface ISellerDAO {
 	boolean insertNewSellerWithCrypto(SellerVO sel);
 	
 ///	아이디를 찾을 수 있다.
-	String selectSellerLogin(String name, String phoneNumber);
+	List<String> selectSellerLogin(String name, String phoneNumber);
 	
 //	비밀번호를 찾을 수 있다.
 	String selectSellerPassword(String login, String email);

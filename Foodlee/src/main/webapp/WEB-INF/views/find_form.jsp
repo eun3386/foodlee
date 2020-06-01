@@ -13,6 +13,7 @@
 			$('#lb2').html('휴대폰번호:');
 			$('input[id=input2]').attr('placeholder', '휴대폰번호 입력');
 			$('input[id=input2]').attr('name', 'phoneNumber');
+			$('form[name=find_form]').attr('action','${pageContext.request.contextPath}/find_id.fdl');
 		});
 		
 		$('#find_pw').on('click', function() {
@@ -24,25 +25,63 @@
 			$('#lb2').html('이메일:');
 			$('input[id=input2]').attr('placeholder', '이메일 입력');
 			$('input[id=input2]').attr('name', 'email');
+			$('form[name=find_form]').attr('action','${pageContext.request.contextPath}/find_pw.fdl');
+			console.log($('input[id=input1]').val());
+			console.log($('input[id=input2]').val());
 		});
     	
-		$('#find_submit_btn').on('click', function() {
-			var tUrl = "${pageContext.request.contextPath}/";
-			tUrl += "find.fdl";
-			var param = $('form[name=find_form]').serialize();
-			$.ajax ({
-				type: get,
-				url: tUrl,
-				data: param,
-				sucess: function(res) {
-					
-				}
-			});
-		});
+// 		$('#find_submit_btn').on('click', function() {
+// 			var tUrl = "${pageContext.request.contextPath}/";
+// 			if($('#find_id').is(':checked')) {
+// 				tUrl += "find_id.fdl";
+// 				var name = $('input[name=name]').val();
+// 			 	var tel = $('input[name=phoneNumber]').val();
+// 			 	var postData = {'user_name' : name , 'user_phoneNumber' : tel};
+// 				$.ajax({
+// 			        url:tUrl,
+// 			        type:'POST',
+// 			        data: postData,
+// 			        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+// 			        dataType : "json",
+// 			        success:function(data){
+// // 			        	var emailLists = data.user_email;
+// // 			        	var emailLength = emailLists.length
+// // 			        	var emailfind = emailLists.substring(1, emailLength-1)
+// // 			       	 		 $("#emailList").append("<h1>"+"회원님의 정보로 등록된 이메일은 : "+emailfind+" 입니다.</h1>")
+	
+// 			        },
+// 			        error: function (XMLHttpRequest, textStatus, errorThrown){
+// 			        	alert('정보를 다시 입력해주시길 바랍니다.' );
+// 			        }
+// 				});
+// 			} else {
+// 				tUrl += "find_pw.fdl";
+// 				var login = $('input[name=login]').val();
+// 			 	var email = $('input[name=email]').val();
+// 			 	var postData = {'user_login' : login , 'user_email' : email };
+// 				$.ajax({
+// 			        url:tUrl,
+// 			        type:'POST',
+// 			        data: postData,
+// 			        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+// 			        dataType : "json",
+// 			        success:function(data){
+// // 			        	var emailLists = data.user_email;
+// // 			        	var emailLength = emailLists.length
+// // 			        	var emailfind = emailLists.substring(1, emailLength-1)
+// // 			       	 		 $("#emailList").append("<h1>"+"회원님의 정보로 등록된 이메일은 : "+emailfind+" 입니다.</h1>")
+	
+// 			        },
+// 			        error: function (XMLHttpRequest, textStatus, errorThrown){
+	
+// 			        	alert('정보를 다시 입력해주시길 바랍니다.' );
+// 			        }
+// 			}
+// 		});
 		
 	});
 </script>
-<form name="find_form">
+<form name="find_form" method="post">
 	<table border='0'>
 		<tr class="title">
 			<th>아이디/비밀번호 찾기</th>
@@ -79,7 +118,7 @@
 	 	</tr>
 		<tr class="submit">
 			<td>
-				<input id="find_submit_btn" type="button" value="찾기">
+				<input id="find_submit_btn" type="submit" value="찾기">
 			</td>
 		</tr>
 	</table>

@@ -17,7 +17,7 @@
 					</div>
 				</div>
 
-				<table class="table sm" id="dataTable">
+				<table class="table sm" id="qnaTable">
 					<thead>
 						<tr>
 							<th>푸드트럭</th>
@@ -25,14 +25,8 @@
 							<th>답변</th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:forEach items="${qnaList}" var="qna">
-							<tr>
-								<td>${qna.foodtruck}</td>
-								<td>${qna.question}</td>
-								<td>${qna.answer}</td>
-							</tr>
-						</c:forEach>	
+					<tbody id = "listQna">
+			
 					</tbody>
 				</table>
 				
@@ -54,7 +48,7 @@
 					</div>
 				</div>
 
-				<table class="table sm" id="dataTable">
+				<table class="table sm" id="reviewTable">
 					<thead>
 						<tr>
 							<th>푸드트럭</th>
@@ -63,33 +57,71 @@
 							<th>사장님의 말</th>
 						</tr>
 					</thead>
-					<tbody>
-						<c:forEach items="${reviewList}" var="review">
-							<tr>
-								<td>${review.foodtruck}</td>
-								<td>${review.picture}</td>
-								<td>${review.content}</td>
-								<td>${review.selreply}</td>
-							</tr>
-						</c:forEach>
+					<tbody id = "listRv">
+						
 					</tbody>
 				</table>
 				
-<!-- 				<div class="pagination"> -->
-<!-- 					<a href="#">&lt;</a> -->
-<!-- 					<a href="#" class="active">1</a> -->
-<!-- 					<a href="#">2</a> -->
-<!-- 					<a href="#">3</a> -->
-<!-- 					<a href="#">4</a> -->
-<!-- 					<a href="#">5</a> -->
-<!-- 					<a href="#">&gt;</a> -->
-<!-- 				</div> -->
 			</div>
 		</section>
 	
 
 <script>
+$(function(){
+	$.ajax({
+		url : "my_QnA_list.fdl",
+		type : "get",
+		success : function(data){
+			var html = "";
+			data.forEach(function(item){
+					html += '<tr>';
+						html += '<td>' + item.sellerId + '</td>';
+						html += '<td>' + item.qnaContent + '</td>';
+						html += '<td>' + item.qnaCreatedAt + '</td>';
+				html += '</tr>';
+			})
+			$("#listQna").empty().append(html);
+		},
+		error : function(err1,err2,err3){
+			console.log(err1)
+			console.log(err2)
+			console.log(err3)
+			
+		},
+		complete : function(){
+			console.log("complete");			
+		}
+	})
+});
 
+
+$(function(){
+	$.ajax({
+		url : "my_review.fdl",
+		type : "get",
+		success : function(data){
+			var html = "";
+			data.forEach(function(item){
+					html += '<tr>';
+						html += '<td>' + item.sellerId + '</td>';
+						html += '<td>' + item.reviewPic + '</td>';
+						html += '<td>' + item.reviewContent + '</td>';
+						html += '<td>' + item.reviewCreatedAt + '</td>';
+				html += '</tr>';
+			})
+			$("#listRv").empty().append(html);
+		},
+		error : function(err1,err2,err3){
+			console.log(err1)
+			console.log(err2)
+			console.log(err3)
+			
+		},
+		complete : function(){
+			console.log("complete");			
+		}
+	})
+});
 </script>
 </body>
 </html>

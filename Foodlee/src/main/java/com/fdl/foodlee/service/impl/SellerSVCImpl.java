@@ -1,5 +1,7 @@
 package com.fdl.foodlee.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +66,7 @@ public class SellerSVCImpl implements ISellerSVC {
 	}
 
 	@Override
-	public String selectSellerLogin(String name, String phoneNumber) {
+	public List<String> selectSellerLogin(String name, String phoneNumber) {
 		return selDao.selectSellerLogin(name, phoneNumber);
 	}
 
