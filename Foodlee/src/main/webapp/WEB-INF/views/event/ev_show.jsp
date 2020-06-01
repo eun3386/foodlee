@@ -11,7 +11,7 @@
 <div id="at_show">
 		<table border="1">
 			<tr> <td>번호: ${event.eventId}</td> 
-			<td>시작일: ${event.eventStartDate} 종료일: ${event. eventEndDate} 
+			<td>시작일: ${event.eventStartDate} 종료일: ${event.eventEndDate} 
 			<c:if test="${event.eventOngoing eq 1}">진행중</c:if>
 			<c:if test="${event.eventOngoing eq 0}">종료</c:if></td></tr>
 			<tr> <td>제목:</td> <td>${event.eventTitle}</td>  </tr>
@@ -40,19 +40,18 @@
 				    pattern="yyyy년 MM월 dd일 - HH시 mm분 ss초" /></td>  </tr>
 		</table>
 		
+		<div id="ev_menu">
+		<a href="${pageContext.request.contextPath}/#event-list">목록</a> |
 		<c:if test="${not empty LoginName}">
-		<div id="at_menu">
 			<c:if test="${LoginName eq 'admin'}">
-			<a href
-	="${pageContext.request
-.contextPath}/event_edit_form.fdl?evId=${event.eventId}">편집</a> | 
-			<a href="#">삭제</a> |
+				<a href="${pageContext.request.contextPath}/event_edit_form.fdl?evId=${event.eventId}">편집</a> | 
+				<a href="#">삭제</a> |
 			</c:if>
 <!-- 			<a href="#">좋아요</a> |   -->
 <%-- 			<a href="${pageContext.request --%>
 <%-- .contextPath}/answer/new_form.fdl?mbId=${mbId}&evId=${article.id}">댓글추가</a> --%>
-		</div>
 		</c:if>		
+		</div>
 	</div>
 </body>
 </html>

@@ -33,6 +33,7 @@ public interface IEventSVC {
 //		event_update.fdl (post, proc, dao, param...vo)
 	boolean updateEvent(String eventTitle, String eventContent, Date eventStartDate, 
 			boolean eventOngoing);
+	boolean updateEvent(EventVO ev);
 	boolean increaseReadCount(int evId);
 	boolean isAlreadyLikedMembers(int evId, int mbId); // lc++
 	boolean addLikeMembers(int evId, int mbId); // lc++
@@ -69,6 +70,7 @@ public interface IEventSVC {
 			int pn, String orderCol, 
 			boolean order, String target, 
 			Date startDate, Date endDate);
+	
 	
 	
 	

@@ -47,7 +47,7 @@ public class EventVO {
 		this.eventTitle = eventTitle;
 		this.eventContent = eventContent;
 		this.eventStartDate = eventStartDate;
-		this.eventEndDate = eventEndDate;
+		this.eventEndDate = eventEndDate == null || eventEndDate.isEmpty() ? "1970-01-01":eventEndDate;
 		this.eventOngoing = eventOngoing;
 		this.eventCreatedAt = eventCreatedAt;
 		this.eventUpdatedAt = eventUpdatedAt;

@@ -80,7 +80,8 @@ public class EventMysqlDAOImpl implements IEventDAO {
 			+ "vAsCnt from articles A order by "
 			+ "A.created_at desc limit ?, ?";
 		public static final String SQL_EVENT_UPDATE
-		= "update events set title=?, content=?, tags=? ,updated_at = now() where id = ?";
+		= "update events set event_title=?, event_content=?, event_start_date=?, event_end_date=?,"
+				+ "event_ongoing=?, event_updated_at = now(), tags=? where event_id = ?";
 		
 	@Override
 	public boolean insertNewEvent(EventVO ev) {
@@ -293,8 +294,15 @@ public class EventMysqlDAOImpl implements IEventDAO {
 
 	@Override
 	public boolean updateEvent(EventVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+		int r = jtem.update(SQL_EVENT_UPDATE, 
+				vo.getEventTitle(), 
+				vo.getEventContent(), 
+				vo.getEventStartDate(),
+				vo.getEventEndDate(), 
+				vo.getEventOngoing(), 
+				vo.getTags(), 
+				vo.getEventId());
+		return r == 1;
 	}
 
 	

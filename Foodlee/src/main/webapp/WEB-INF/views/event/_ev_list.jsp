@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
 	function selectEvent(evId) {
 		window.location.href		
 			= '${pageContext.request.contextPath}'
-			+ '/event_show.fdl?id='+ evId;
+			+ '/event_show.fdl?id='+evId;
 	}
 
   </script>
@@ -52,9 +52,10 @@ pageEncoding="UTF-8"%>
         </thead>
         <tbody>
         <%int i=1;%>
-        <c:forEach var="ev" items="${events}" varStatus="vs"> 
-            <tr>
-                <td>${(vs.index+1)}</td> 
+        <c:forEach var="ev" items="${events}" varStatus="vs">
+            <tr onclick="selectEvent(${ev.eventId})">
+                <c:if test="${pn gt 1}"><td>${vs.index+1+(10*(pn-1))}</td></c:if>
+                <c:if test="${pn eq 1}"><td>${(vs.index+1)}</td></c:if>
                 <c:if test="${ev.eventOngoing eq 1}" >
                 <td><img class="td-ongoing" src="<%=request.getContextPath()%>/resources/css/imgs/event-on.jpg"></td>
                 </c:if>

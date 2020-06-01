@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,7 @@ import com.fdl.foodlee.model.vo.EventVO;
 import com.fdl.foodlee.model.vo.virtual.EventRowVO;
 import com.fdl.foodlee.service.inf.IEventAnswerSVC;
 import com.fdl.foodlee.service.inf.IEventSVC;
+
 
 
 @Controller
@@ -104,7 +106,7 @@ public class EventController {
 					//.insertNewEventReturnKey(title, content, std, edd, onGoing, filePath);
 					.insertNewEventReturnKey(title, content, std, edd, onGoing, realFileNm);
 			
-			// 상세보기 => atId?
+			// 상세보기 => evId?
 			if( evRtkey > 0 ) {
 				//System.out.println("게시글 등록 성공: " + title);
 				System.out.println("게시글 등록 성공: " + evRtkey);
@@ -212,7 +214,7 @@ public class EventController {
 //				model.addAttribute("answers", evAsList );
 //			} else {
 //				model.addAttribute("msg", "댓글리스트 조회 실패");
-//			}			
+//			}	
 			return "event/ev_show";
 		} else {			
 			model.addAttribute("msg", 
@@ -225,7 +227,63 @@ public class EventController {
 //	event_like.fdl (get, proc, dao, param?evId&mbId..) 
 //- 관리자가 자신의 게시글을 편집 갱신 할 수 있다
 //	event_edit_form.fdl (get, proc, dao, param?id)
-//	event_update.fdl (post, proc, dao, param...vo)
+//	event_edit_form.fdl (get, proc, dao, param?id)
+	@RequestMapping(value = "event_edit_form.fdl", 
+			method = RequestMethod.GET)
+	public String eventEditForm(HttpSession ses,
+			Model model, 
+			@RequestParam(value = "evId", 
+			 defaultValue = "0") int id) {
+		if( id == 0 ) {
+			return "redirect:/#event-list";
+		} 
+		EventVO ev = evSvc.selectOneEvent(id);
+		if( ev != null ) {
+			model.addAttribute("event", ev);
+			return "event/ev_edit_form";
+		} else {
+			model.addAttribute("msg", 
+					"게시글편집폼 준비 실패: 게시글 없음");
+//			return "redirect:event_show.fdl?id="+id;
+			return "redirect:/#event-list";
+		}
+	}	
+//	article_update.my (post, proc, dao, param...vo)
+	@RequestMapping(value = "event_update.fdl", 
+			method = RequestMethod.POST)
+	public String articleUpdateProc(
+			//Model model,
+			HttpSession ses, 
+			@ModelAttribute(value = "event") EventVO ev // vo를 command객체로 사용하자.
+//			@RequestParam(value="id",
+//			 required = true)int id,
+//			@RequestParam(value="title",
+//			 required = true) String title, 
+//			@RequestParam(value="content",
+//			 required = true)String content,
+//			@RequestParam(value="tags",
+//			 required = true)String tags,
+//			@RequestParam(value="memberId",
+//			 required = true)int memberId
+			) {
+		System.out.println("event update: "+
+			ev);
+		
+		if(ev.getEventEndDate() == null || ev.getEventEndDate().isEmpty()) ev.setEventEndDate("1970-01-01"); 
+		//	at.getTitle());
+		// memberId와 ses.mbId가 사실 일치해야 함...
+		
+		//boolean b = atSvc.updateArticle(
+		// id, title, content, tags);
+		boolean b = evSvc.updateEvent(ev);
+		if( b ) {
+			return "redirect:event_show.fdl?id="
+					+ev.getEventId();
+		} else {
+			//model.addAttribute("article", at);
+			return "event/ev_edit_form";
+		}
+	}
 //- 관리자가 자신의 게시글을 삭제 할 수 있다
 //	event_remove.fdl (get, proc, dao, param?id)
 //- 이벤트 게시글 리스트를 조회할 수 있다. (페이지네이션, 정렬, 태그)

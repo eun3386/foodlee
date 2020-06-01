@@ -67,6 +67,14 @@ public class EventSVCImpl implements IEventSVC {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	@Override
+	public boolean updateEvent(EventVO ev) {
+//		if( ev.getLikeMembers() == null || 
+//				ev.getLikeMembers().isEmpty() )
+				//return false; // 의도적 에러...
+			return evDao.updateEvent(ev);	
+	}
 
 	@Override
 	public boolean increaseReadCount(int evId) {
@@ -167,6 +175,8 @@ public class EventSVCImpl implements IEventSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 
 }
