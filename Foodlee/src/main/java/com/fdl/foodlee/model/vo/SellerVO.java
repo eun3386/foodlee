@@ -19,15 +19,16 @@ public class SellerVO {
 	private String companyRn; // 사업자등록번호 Company Registration Number, CRn ⇔ varchar(10) company_Rn
 	private Timestamp loginTime; // 로그인일자 ⇔ timestamp login_time
 	private Timestamp logoutTime; // 로그아웃일자 ⇔ timestamp logout_time
+	private String imgPath;
 	
 	public SellerVO() {}
 	public SellerVO(String login, String password, String name, String gender, int age, String residentRn, String email,
-			String phoneNumber, String address, String companyRn) {
-		this(0, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null);
+			String phoneNumber, String address, String companyRn, String imgPath) {
+		this(0, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null, imgPath);
 	}
 	public SellerVO(int sellerId, String type, String login, String password, String name, String gender, int age, String residentRn,
 			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt, String companyRn,
-			Timestamp loginTime, Timestamp logoutTime) {
+			Timestamp loginTime, Timestamp logoutTime, String imgPath) {
 		super();
 		this.sellerId = sellerId;
 		this.type = type;
@@ -45,15 +46,16 @@ public class SellerVO {
 		this.companyRn = companyRn;
 		this.loginTime = loginTime;
 		this.logoutTime = logoutTime;
+		this.imgPath = imgPath;
 	}
 	
 	@Override
 	public String toString() {
-		return "SellerVO [sellerId=" + sellerId + ", type=" + type + ", login=" + login + ", password=" + password + ", name="
-				+ name + ", gender=" + gender + ", age=" + age + ", residentRn=" + residentRn + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt="
-				+ updatedAt + ", companyRn=" + companyRn + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime
-				+ "]";
+		return "SellerVO [sellerId=" + sellerId + ", type=" + type + ", login=" + login + ", password=" + password
+				+ ", name=" + name + ", gender=" + gender + ", age=" + age + ", residentRn=" + residentRn + ", email="
+				+ email + ", phoneNumber=" + phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt
+				+ ", updatedAt=" + updatedAt + ", companyRn=" + companyRn + ", loginTime=" + loginTime + ", logoutTime="
+				+ logoutTime + ", imgPath=" + imgPath + "]";
 	}
 	
 	public int getSellerId() {
@@ -151,6 +153,12 @@ public class SellerVO {
 	}
 	public void setLogoutTime(Timestamp logoutTime) {
 		this.logoutTime = logoutTime;
+	}
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 	
 }

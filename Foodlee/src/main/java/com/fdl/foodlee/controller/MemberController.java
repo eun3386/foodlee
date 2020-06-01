@@ -1,5 +1,6 @@
 package com.fdl.foodlee.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.service.inf.IMemberFileSVC;
 import com.fdl.foodlee.service.inf.IMemberSVC;
 
 @Controller
@@ -21,6 +24,8 @@ public class MemberController {
 	
 	@Autowired
 	private IMemberSVC mbSvc;
+	@Autowired
+	private IMemberFileSVC mbFileSvc;
 	
 //	member/join_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "/join_form.fdl", 
@@ -32,7 +37,8 @@ public class MemberController {
 //	member/join.fdl (proc; post; dao; 비회원)
 	@RequestMapping(value = "/join.fdl", 
 			method = RequestMethod.POST)
-	public ModelAndView memberJoinProc(
+	@ResponseBody
+	public ModelAndView memberJoinProc(List<MultipartFile> upfiles,
 			HttpServletRequest request, HttpSession ses) {
 		
 		// 요청 파라미터 뽑기
@@ -45,9 +51,19 @@ public class MemberController {
 		String email = request.getParameter("email");
 		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
+		System.out.println(upfiles);
+		
+		String realPath = ses.getServletContext().getRealPath(IMemberFileSVC.DEF_UPLOAD_DEST) + "/";
+		
+		Map<String, Object> rMap
+		 = mbFileSvc.writeUploadedMultipleFiles(upfiles, realPath, (String)ses.getAttribute("LoginName"));
+		String filePath = (String)rMap.get("muliFPs");
+		
+		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
+		System.out.println("총 볼륨(MB): "+ rMap.get("totalMB") +"MB");
 		
 		// 암호화 적용 (aes 알고리즘)
-		MemberVO mb = new MemberVO(login, password, name, gender, age, residentRN, email, phoneNumber, address);
+		MemberVO mb = new MemberVO(login, password, name, gender, age, residentRN, email, phoneNumber, address, filePath);
 //		int key = mbSvc.insertNewMemberWithCryptoReturnKey(mb);
 		boolean b = mbSvc.insertNewMemberWithCrypto(mb);
 

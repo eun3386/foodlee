@@ -123,29 +123,30 @@ public class BossController {
 	
 	//차트를 보여 줄 수 있다.
 	@RequestMapping(value = "boss.fdl", method = RequestMethod.GET)
-	public ModelAndView boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
-		int orderId = Integer.parseInt(request.getParameter("orderId")); // 주문번호 <<PK>>
-		String login = request.getParameter("login"); // 주문한 사람의 아이디 <<FK>>
-		int sellerId = Integer.parseInt(request.getParameter("sellerId")); // 판매자 번호 <<FK>>
-		String orderName = request.getParameter("orderName"); // 주문한 메뉴 이름 (,)구분
-		String orderNumber = request.getParameter("orderNumber"); // 주문한 메뉴 개수 (,)구분
-		String orderPrice = request.getParameter("orderPrice"); // 주문한 메뉴의 가격 (,)구분
-		int orderPriceSum = Integer.parseInt(request.getParameter("orderPriceSum")); // 주문한 메뉴의 총가격
-		int orderState = Integer.parseInt(request.getParameter("orderState")); // 주문 상황 (1 회원 주문 2 회원 취소 3 판매자 주문 접수 4 판매자 주문 거절 5 판매자 주문 취소)
-		String orderReason = request.getParameter("orderReason"); // 판매자 주문 취소/거절 사유
-		String orderMerchantUid = request.getParameter("orderMerchantUid"); // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
-		String orderRequests = request.getParameter("orderRequests"); // 요청사항
-		long orderDate = (Long)request.getAttribute("orderDate"); // 주문일자
-		OrderVO vo = new OrderVO(orderId,login,sellerId,orderName,orderNumber,orderPrice,orderPriceSum,orderRequests,orderMerchantUid);//orderDate
-		model.addAttribute(vo);
-	//	boolean b = orSvc.memberOrderList(vo);
-		ModelAndView vo1 = new ModelAndView();
+//	public ModelAndView boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
+		public String boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
+//		int orderId = Integer.parseInt(request.getParameter("orderId")); // 주문번호 <<PK>>
+//		String login = request.getParameter("login"); // 주문한 사람의 아이디 <<FK>>
+//		int sellerId = Integer.parseInt(request.getParameter("sellerId")); // 판매자 번호 <<FK>>
+//		String orderName = request.getParameter("orderName"); // 주문한 메뉴 이름 (,)구분
+//		String orderNumber = request.getParameter("orderNumber"); // 주문한 메뉴 개수 (,)구분
+//		String orderPrice = request.getParameter("orderPrice"); // 주문한 메뉴의 가격 (,)구분
+//		int orderPriceSum = Integer.parseInt(request.getParameter("orderPriceSum")); // 주문한 메뉴의 총가격
+//		int orderState = Integer.parseInt(request.getParameter("orderState")); // 주문 상황 (1 회원 주문 2 회원 취소 3 판매자 주문 접수 4 판매자 주문 거절 5 판매자 주문 취소)
+//		String orderReason = request.getParameter("orderReason"); // 판매자 주문 취소/거절 사유
+//		String orderMerchantUid = request.getParameter("orderMerchantUid"); // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
+//		String orderRequests = request.getParameter("orderRequests"); // 요청사항
+//		long orderDate = (Long)request.getAttribute("orderDate"); // 주문일자
+//		OrderVO vo = new OrderVO(orderId,login,sellerId,orderName,orderNumber,orderPrice,orderPriceSum,orderRequests,orderMerchantUid);//orderDate
+//		model.addAttribute(vo);
+//	//	boolean b = orSvc.memberOrderList(vo);
+//		ModelAndView vo1 = new ModelAndView();
 		/*
 		 * request.setAttribute("vo", vo); RequestDispatcher dis =
 		 * request.getRequestDispatcher("Ex04_VO_rec.jsp"); dis.forward(request,
 		 * response);
 		 */
-		return vo1;
+		return "boss";
 	}
 	@RequestMapping(value = "menumodify.fdl", method = RequestMethod.GET)
 	public ModelAndView menumodify(HttpSession ses) {//메뉴수정

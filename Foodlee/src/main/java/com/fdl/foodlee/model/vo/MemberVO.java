@@ -18,22 +18,22 @@ public class MemberVO {
 	private Timestamp updatedAt; // 수정날짜 ⇔ timestamp updated_at
 	private Timestamp loginTime; // 로그인일자 ⇔ timestamp login_time
 	private Timestamp logoutTime; // 로그아웃일자 ⇔ timestamp logout_time
+	private String imgPath;
 	
 	public MemberVO() {}
-	
 	public MemberVO(String name, String phoneNumber, String gender, String address) {
-		this.gender = gender;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
+		this.gender = gender;
 		this.address = address;
 	}
 	public MemberVO(String login, String password, String name, String gender, int age, String residentRn, String email,
-			String phoneNumber, String address) {
-		this(0, "member", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, null, null);
+			String phoneNumber, String address, String imgPath) {
+		this(0, "member", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, null, null, imgPath);
 	}
 	public MemberVO(int id, String type, String login, String password, String name, String gender, int age, String residentRn,
 			String email, String phoneNumber, String address, Timestamp joinedAt, Timestamp updatedAt,
-			Timestamp loginTime, Timestamp logoutTime) {
+			Timestamp loginTime, Timestamp logoutTime, String imgPath) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -50,6 +50,7 @@ public class MemberVO {
 		this.updatedAt = updatedAt;
 		this.loginTime = loginTime;
 		this.logoutTime = logoutTime;
+		this.imgPath = imgPath;
 	}
 	
 	@Override
@@ -57,9 +58,9 @@ public class MemberVO {
 		return "MemberVO [id=" + id + ", type=" + type + ", login=" + login + ", password=" + password + ", name="
 				+ name + ", gender=" + gender + ", age=" + age + ", residentRn=" + residentRn + ", email=" + email
 				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", joinedAt=" + joinedAt + ", updatedAt="
-				+ updatedAt + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime + "]";
+				+ updatedAt + ", loginTime=" + loginTime + ", logoutTime=" + logoutTime + ", imgPath=" + imgPath + "]";
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -150,7 +151,11 @@ public class MemberVO {
 	public void setLogoutTime(Timestamp logoutTime) {
 		this.logoutTime = logoutTime;
 	}
-	
-	
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 	
 }

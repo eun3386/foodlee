@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link href="${pageContext.request.contextPath}/resources/css/join.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="smartEditor/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -30,7 +28,6 @@
 					switch(res) {
 						case 'no': 
 							msg = '이미 사용중인 아이디입니다.';
-							//$('input[type=submit]').attr('disabled','disabled');
 							$('input[type=submit]').attr('disabled',true);
 							break;
 						case 'yes':
@@ -47,39 +44,42 @@
 			});
 		});
 		
+		$('#uploadImg').click(function() {
+			$('input[type=file]').click();
+		});
+		
+		$('#input_img').on('change', function(e) {
+			var files = e.target.files;
+			var filesArr = Array.prototype.slice.call(files);
+			
+			filesArr.forEach(function(f) {
+				if(!f.type.match("image.*")) {
+					alert("확장자는 이미지 확장자만 가능합니다.");
+					return;
+				}
+				
+				sel_file = f;
+				
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#uploadImg').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(f);
+			});
+		});
+		
 	});
 </script>
 <div id="join_form">
-    <form action="${pageContext.request.contextPath}/member/join.fdl" method="post">
+    <form action="${pageContext.request.contextPath}/member/join.fdl" method="post" enctype="multipart/form-data">
         <table id="join_table" border="0">
         	<tr>
-        		<td><img alt="사진" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG"> </td>
-        		<script type="text/javascript"> 
-					var oEditors = []; 
-					$(function(){ 
-						nhn.husky.EZCreator.createInIFrame({ 
-							oAppRef: oEditors, elPlaceHolder: "ir1", 
-							//SmartEditor2Skin.html 파일이 존재하는 경로 
-							sSkinURI: "smartEditor/SmartEditor2Skin.html", 
-							htParams : { 
-								// 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
-								bUseToolbar : true, 
-								// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
-								bUseVerticalResizer : true, 
-								// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
-								bUseModeChanger : true, 
-								fOnBeforeUnload : function(){ 
-									
-								} 
-							}, 
-							fOnAppLoad : function(){ 
-								//기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용 
-								oEditors.getById["ir1"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]); 
-							}, 
-								fCreator: "createSEditor2" 
-						}); 
-					}); 
-				</script>
+        		<td>
+        			<div id="img_wrap">
+        				<img id="uploadImg" alt="사진" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG" style="cursor: pointer; width: 150px; height: 150px;">
+        				<input type="file" id="input_img" name="upfiles" multiple="multiple" style="display: none">
+        			</div>
+        		</td>
         		<td id="txtarea"><textarea rows="10" cols="100" style="resize: none;" readonly>일반 회원가입 소개글 더미</textarea></td>
         	</tr>
             <tr>

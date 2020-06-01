@@ -26,7 +26,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	// SQL 정의부
 	private static final String SQL_INSERT_MEMBER_CRYPTO 
 	= "insert into members values(null, 'member', ?, hex(aes_encrypt(?,?)), "
-		+"?, ?, ?, ?, ?, ?, ?, now(), now(), null, null)";
+		+"?, ?, ?, ?, ?, ?, ?, now(), now(), null, null, ?)";
 	private static final String SQL_MEMBER_DUPCHECK
 	= "select count(id) from members where login = ?";
 	private static final String SQL_LOGIN_AUTH
@@ -49,7 +49,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 		+ "character set utf8) as pw from members where login = ? && email = ?";
 	private static final String SQL_UPDATE_MEMBER
 	= "update members set password=hex(aes_encrypt(?,?)), name=?, gender=?, "
-		+"age=?, email=?, phone_number=?, address=?, updated_at=now() where id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), img_path=? where id = ?";
 	private static final String SQL_DELETE_MEMBER
 	= "delete from members where id = ?";
 	
@@ -61,7 +61,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 		int r = jtem.update(SQL_INSERT_MEMBER_CRYPTO,
 				mb.getLogin(), mb.getPassword(), mb.getLogin(),
 				mb.getName(), mb.getGender(), mb.getAge(), mb.getResidentRn(),
-				mb.getEmail(), mb.getPhoneNumber(), mb.getAddress()
+				mb.getEmail(), mb.getPhoneNumber(), mb.getAddress(), mb.getImgPath()
 				);
 		return r == 1;
 	}
@@ -103,7 +103,8 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 								rs.getTimestamp("joined_at"),
 								rs.getTimestamp("updated_at"),
 								rs.getTimestamp("login_time"),
-								rs.getTimestamp("logout_time") );
+								rs.getTimestamp("logout_time"),
+								rs.getString("img_path"));
 					}
 				} , id);
 		} catch (DataAccessException e) {
@@ -142,7 +143,7 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 			int r = jtem.update(SQL_UPDATE_MEMBER, 
 				mb.getPassword(), mb.getLogin(), mb.getName(),
 				mb.getGender(), mb.getAge(), mb.getEmail(), mb.getPhoneNumber(),
-				mb.getAddress(), mb.getId() );
+				mb.getAddress(), mb.getImgPath(), mb.getId() );
 			return r == 1;
 		} catch (DataAccessException e) {
 			System.out.println("dao/ 일반 회원 정보 갱신 실패 - " + mb.getId());

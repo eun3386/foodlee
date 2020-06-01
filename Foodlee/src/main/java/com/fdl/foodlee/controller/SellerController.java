@@ -1,5 +1,8 @@
 package com.fdl.foodlee.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
+import com.fdl.foodlee.service.inf.IMemberFileSVC;
 import com.fdl.foodlee.service.inf.IMenuSVC;
+import com.fdl.foodlee.service.inf.ISellerFileSVC;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
@@ -25,6 +31,9 @@ public class SellerController {
 	@Autowired
 	private IMenuSVC mnSvc;
 	
+	@Autowired
+	private ISellerFileSVC selFileSvc;
+	
 //	seller/join_form.fdl (form; get; 비회원)
 	@RequestMapping(value = "/join_form.fdl", 
 			method = RequestMethod.GET)
@@ -35,7 +44,7 @@ public class SellerController {
 //	seller/join.fdl (proc; post; dao; 비회원)
 	@RequestMapping(value = "/join.fdl", 
 			method = RequestMethod.POST)
-	public ModelAndView sellerJoinProc(
+	public ModelAndView sellerJoinProc(List<MultipartFile> upfiles,
 			HttpServletRequest request, HttpSession ses) {
 		// 요청 파라미터 뽑기
 		String login = request.getParameter("id");
@@ -49,8 +58,17 @@ public class SellerController {
 		String address = request.getParameter("address");
 		String companyRN = request.getParameter("companyRN1")+"-"+request.getParameter("companyRN2")+"-"+request.getParameter("companyRN3");
 		
+		String realPath = ses.getServletContext().getRealPath(ISellerFileSVC.DEF_UPLOAD_DEST) + "/";
+		
+		Map<String, Object> rMap
+		 = selFileSvc.writeUploadedMultipleFiles(upfiles, realPath, (String)ses.getAttribute("LoginName"));
+		String filePath = (String)rMap.get("muliFPs");
+		
+		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
+		System.out.println("총 볼륨(MB): "+ rMap.get("totalMB") +"MB");
+		
 		// 암호화 적용 (aes 알고리즘)
-		SellerVO sel = new SellerVO(login, password, name, gender, age, residentRN, email, phoneNumber, address, companyRN);
+		SellerVO sel = new SellerVO(login, password, name, gender, age, residentRN, email, phoneNumber, address, companyRN, filePath);
 //		int key = seSvc.insertNewSellerWithCryptoReturnKey(sel);
 		boolean b = selSvc.insertNewSellerWithCrypto(sel);
 
@@ -124,7 +142,7 @@ public class SellerController {
 	@RequestMapping(value = "/pw_chagnge.fdl", 
 			method = RequestMethod.POST)
 	public ModelAndView sellerPasswordChangeProc(int id, String login, String password) {
-		SellerVO sel = new SellerVO(login, password, null, null, 0, null, null, null, null, null);
+		SellerVO sel = new SellerVO(login, password, null, null, 0, null, null, null, null, null, null);
 		boolean b = selSvc.updateOneSeller(sel);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
@@ -153,8 +171,9 @@ public class SellerController {
 		String phoneNumber = request.getParameter("phoneNumber1")+"-"+request.getParameter("phoneNumber2")+"-"+request.getParameter("phoneNumber3");
 		String address = request.getParameter("address");
 		String companyRn = request.getParameter("companyRn1")+"-"+request.getParameter("companyRn2")+"-"+request.getParameter("companyRn3");
+		String imgPath = request.getParameter("imgPath");
 		
-		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null);
+		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null, imgPath);
 		boolean b = selSvc.updateOneSeller(sel);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
