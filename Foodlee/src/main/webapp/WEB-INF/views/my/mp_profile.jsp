@@ -7,6 +7,7 @@
 
 </head>
 <body>
+
 		
 		<section class="main_section" id="section_edit">
 			<div class="wrapper">
@@ -17,21 +18,21 @@
 					</div>
 				</div>
 				<div class="content">
-					<div class="profile_wrap">
-						<img src="./resources/css/imgs/mypage/profile.png">
-						<img class="photo" src="./resources/css/imgs/mypage/photo.png">
-					</div>
+<!-- 					<div class="profile_wrap"> -->
+<!-- 						<img src="./resources/css/imgs/mypage/profile.png"> -->
+<!-- 						<img class="photo" src="./resources/css/imgs/mypage/photo.png"> -->
+<!-- 					</div> -->
 					<form action="my_info_update.fdl" method="post">
 					<table class="table_edit">
 						<tbody>
 							<tr>
 								<th>이름</th>
-								<td><input type="text" class="input" value="${member.name}"></td>
+								<td><input type="text" name = "name" class="input" value="${member.name}"></td>
 								<th></th>
 							</tr>
 							<tr>
 								<th>아이디</th>
-								<td><span class='id' value="${member.login}">${member.login}</span></td>
+								<td><input class = "id" name = "login" type="text" value="${member.login}"></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -57,7 +58,7 @@
 							</tr>
 							<tr>
 								<th>성별</th>
-								<td><label><input type="radio" name="gender" checked="checked">남</label> <label><input type="radio" name="gender">여</label></td>
+								<td><label><input type="radio" name="gender" checked="checked"  >남</label> <label><input type="radio" name="gender" >여</label></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -67,7 +68,7 @@
 							</tr>
 							<tr>
 								<th>연락처</th>
-								<td><input type="text" class="input sm" value="${member.phoneNumber}"></td>
+								<td><input type="text" name="phoneNumber" class="input sm" value="${member.phoneNumber}">&emsp;</td>
 								<th></th>
 							</tr>
 							<tr>
@@ -80,7 +81,7 @@
 							</tr>
 							<tr>
 								<th></th>
-								<td colspan="2"><input type="text" class="input" id="sample2_address" placeholder="주소"></td>
+								<td colspan="2"><input type="text" name="address" class="input" id="sample2_address" placeholder="주소" value="${member.address}"></td>
 								
 							</tr>
 							<tr>
@@ -115,6 +116,8 @@
 		<%@include file="../common/_footer.jsp" %>
 	</div>
 <script>
+
+
 $(function() {
 	  $("#changePasswordButton").on("click", function(e){
 		  e.preventDefault();

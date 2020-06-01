@@ -2,9 +2,11 @@ package com.fdl.foodlee.controller;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -19,9 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.vo.FoodtruckVO;
+import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.service.inf.IFoodtruckFileSVC;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
+import com.fdl.foodlee.service.inf.IOrderSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
@@ -36,7 +40,8 @@ public class BossController {
 	
 	@Autowired
 	private IFoodtruckFileSVC fdfSvc;
-	
+	@Autowired
+	private IOrderSVC orSvc;
 
 	// 판매자의 새 푸드트럭을 등록 할 수 있다. 트럭 등록 성공시 트럭pk뽑아서 트럭 상세보기로 redi 한다
 	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET) 
@@ -116,27 +121,31 @@ public class BossController {
 		return mv; 
 	}
 	
-
-//public interface IFoodtruckDAO {
-	// 판매자의 새 푸드트럭을 등록 할 수 있다.
-//	public boolean insertNewFoodtruck(FoodtruckVO ft);
-	/*
-	 * if( authResult == MyCode.SELLER_LOGIN_AUTH_OK ) {
-	 * ses.setAttribute("LoginName", login); ses.setAttribute("LoginType",
-	 * authResult); ses.setAttribute("LoginTime", System.currentTimeMillis() ); int
-	 * id = selSvc.selectSellerIdbyLogin(login); ses.setAttribute("id", new
-	 * Integer(id) ); selSvc.updateSellerLoginTime(id);
-	 * mav.setViewName("redirect:/main.fdl"); 
-	 * }else {
-			return "푸드트럭 등록 실패";
-		}
-	 */
-
 	//차트를 보여 줄 수 있다.
 	@RequestMapping(value = "boss.fdl", method = RequestMethod.GET)
-	public String boss() {//시작화면
-		
-		return "boss";
+	public ModelAndView boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
+		int orderId = Integer.parseInt(request.getParameter("orderId")); // 주문번호 <<PK>>
+		String login = request.getParameter("login"); // 주문한 사람의 아이디 <<FK>>
+		int sellerId = Integer.parseInt(request.getParameter("sellerId")); // 판매자 번호 <<FK>>
+		String orderName = request.getParameter("orderName"); // 주문한 메뉴 이름 (,)구분
+		String orderNumber = request.getParameter("orderNumber"); // 주문한 메뉴 개수 (,)구분
+		String orderPrice = request.getParameter("orderPrice"); // 주문한 메뉴의 가격 (,)구분
+		int orderPriceSum = Integer.parseInt(request.getParameter("orderPriceSum")); // 주문한 메뉴의 총가격
+		int orderState = Integer.parseInt(request.getParameter("orderState")); // 주문 상황 (1 회원 주문 2 회원 취소 3 판매자 주문 접수 4 판매자 주문 거절 5 판매자 주문 취소)
+		String orderReason = request.getParameter("orderReason"); // 판매자 주문 취소/거절 사유
+		String orderMerchantUid = request.getParameter("orderMerchantUid"); // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
+		String orderRequests = request.getParameter("orderRequests"); // 요청사항
+		long orderDate = (Long)request.getAttribute("orderDate"); // 주문일자
+		OrderVO vo = new OrderVO(orderId,login,sellerId,orderName,orderNumber,orderPrice,orderPriceSum,orderRequests,orderMerchantUid);//orderDate
+		model.addAttribute(vo);
+	//	boolean b = orSvc.memberOrderList(vo);
+		ModelAndView vo1 = new ModelAndView();
+		/*
+		 * request.setAttribute("vo", vo); RequestDispatcher dis =
+		 * request.getRequestDispatcher("Ex04_VO_rec.jsp"); dis.forward(request,
+		 * response);
+		 */
+		return vo1;
 	}
 	@RequestMapping(value = "menumodify.fdl", method = RequestMethod.GET)
 	public ModelAndView menumodify(HttpSession ses) {//메뉴수정

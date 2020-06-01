@@ -21,11 +21,11 @@ public class MemberVO {
 	
 	public MemberVO() {}
 	
-	public MemberVO(String login, String name, String phoneNumber, String gender) {
-		this.login = login;
+	public MemberVO(String name, String phoneNumber, String gender, String address) {
 		this.gender = gender;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
+		this.address = address;
 	}
 	public MemberVO(String login, String password, String name, String gender, int age, String residentRn, String email,
 			String phoneNumber, String address) {

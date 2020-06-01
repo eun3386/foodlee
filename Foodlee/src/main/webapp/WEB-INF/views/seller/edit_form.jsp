@@ -141,7 +141,7 @@
 					<tr>
 						<th><label for="newPassword">*비밀번호</label></th>
 						<td>
-							<input type="password" id="newPassword" name="newPassword" class="changePassword input" style="display: none" required>
+							<input type="hidden" id="newPassword" name="newPassword" class="changePassword input" style="display: none" required>
 						</td>
 						<th></th>
 					</tr>
@@ -155,7 +155,7 @@
 					<tr class="changePassword" style="display:none">
 						<th><label for="passwordChk">비밀번호 확인</label></th>
 						<td>
-							<input type="password" id="passwordChk" name="passwordChk" class="input" required>
+							<input type="hidden" id="passwordChk" name="passwordChk" class="input" required>
 						</td>
 						<th></th>
 					</tr>

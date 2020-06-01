@@ -37,8 +37,6 @@ public class SellerController {
 			method = RequestMethod.POST)
 	public ModelAndView sellerJoinProc(
 			HttpServletRequest request, HttpSession ses) {
-		//HttpSession ses = request.getSession();
-		
 		// 요청 파라미터 뽑기
 		String login = request.getParameter("id");
 		String password = request.getParameter("password");
@@ -90,7 +88,7 @@ public class SellerController {
 	
 //	seller/show_form.fdl
 	@RequestMapping(value = "/show_form.fdl", method = RequestMethod.GET)
-	public ModelAndView sellerInfoAndEditForm(HttpSession ses) { //정보수정
+	public ModelAndView sellerShowForm(HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
 		String login = (String)ses.getAttribute("LoginName");
 		SellerVO sel = selSvc.selectOneSeller(login);
@@ -98,6 +96,23 @@ public class SellerController {
 			mav.addObject("msg","회원조회 성공 - "+ login);
 			mav.addObject("seller", sel);
 			mav.setViewName("seller/show_form");
+		} else {
+			mav.addObject("msg","회원조회 실패 - "+ login);
+			mav.setViewName("redirect:boss.fdl");
+		}
+		return mav;
+	}
+	
+//	seller/edit_form.fdl
+	@RequestMapping(value = "/edit_form.fdl", method = RequestMethod.GET)
+	public ModelAndView sellerEditForm(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		String login = (String)ses.getAttribute("LoginName");
+		SellerVO sel = selSvc.selectOneSeller(login);
+		if( sel != null ) {
+			mav.addObject("msg","회원조회 성공 - "+ login);
+			mav.addObject("seller", sel);
+			mav.setViewName("seller/edit_form");
 		} else {
 			mav.addObject("msg","회원조회 실패 - "+ login);
 			mav.setViewName("redirect:boss.fdl");
@@ -125,15 +140,26 @@ public class SellerController {
 //	seller/update.fdl (proc, post, 세션, dao, 회원)
 	@RequestMapping(value = "/update.fdl", 
 			method = RequestMethod.POST)
-	public ModelAndView sellerUpdateProc(
-			int id, String login, String password, String name, String gender, int age, String residentRn,
-			String email, String phoneNumber, String address , String companyRn) {
+	public ModelAndView sellerUpdateProc(HttpServletRequest request, HttpSession ses) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String gender = request.getParameter("gender");
+		int age = Integer.parseInt(request.getParameter("age"));
+		String residentRn = request.getParameter("residentRn1")+"-"+request.getParameter("residentRn2");
+		String email = request.getParameter("email");
+		String phoneNumber = request.getParameter("phoneNumber1")+"-"+request.getParameter("phoneNumber2")+"-"+request.getParameter("phoneNumber3");
+		String address = request.getParameter("address");
+		String companyRn = request.getParameter("companyRn1")+"-"+request.getParameter("companyRn2")+"-"+request.getParameter("companyRn3");
+		
 		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null);
 		boolean b = selSvc.updateOneSeller(sel);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
 			mav.addObject("msg", "회원 정보 갱신 성공!! " + "<br>" + sel );
-			mav.setViewName("redirect:/seller/show_edit_form.fdl?login="+login);
+			mav.setViewName("redirect:/seller/show_form.fdl?login="+login);
 		} else {
 			mav.addObject("msg", "회원 정보 갱신 실패!! " + "<br>" + sel );
 			mav.setViewName("boss/bossinfo/infomodify");
@@ -148,7 +174,7 @@ public class SellerController {
 		SellerVO sel = selSvc.selectOneSeller(login);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("seller", sel);
-		mav.setViewName("boss/bossmenu/menumodify");
+		mav.setViewName("seller/menu_add_form");
 		return mav;
 	}
 	
