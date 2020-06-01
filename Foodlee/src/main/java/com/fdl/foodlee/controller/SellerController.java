@@ -174,7 +174,7 @@ public class SellerController {
 		SellerVO sel = selSvc.selectOneSeller(login);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("seller", sel);
-		mav.setViewName("boss/bossmenu/menumodify");
+		mav.setViewName("seller/menu_add_form");
 		return mav;
 	}
 	
