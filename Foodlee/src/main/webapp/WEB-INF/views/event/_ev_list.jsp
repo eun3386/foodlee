@@ -54,7 +54,7 @@ pageEncoding="UTF-8"%>
         <%int i=1;%>
         <c:forEach var="ev" items="${events}" varStatus="vs"> 
             <tr>
-                <td>${vs.index+1}</td> 
+                <td>${(vs.index+1)}</td> 
                 <c:if test="${ev.eventOngoing eq 1}" >
                 <td><img class="td-ongoing" src="<%=request.getContextPath()%>/resources/css/imgs/event-on.jpg"></td>
                 </c:if>
