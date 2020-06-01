@@ -1,25 +1,37 @@
 package com.fdl.foodlee.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.OrderVO;
+import com.fdl.foodlee.model.vo.ReviewVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.mypage.MypageService;
+import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.ILoginSVC;
+import com.fdl.foodlee.service.inf.IMemberLikeTruckSVC;
 import com.fdl.foodlee.service.inf.IMemberSVC;
+import com.fdl.foodlee.service.inf.IMenuSVC;
+import com.fdl.foodlee.service.inf.IOrderSVC;
 import com.fdl.foodlee.service.inf.IQnaSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.IReviewSVC;
+import com.fdl.foodlee.service.inf.ISellerSVC;
 
 @Controller
 public class MypageController {
@@ -34,14 +46,28 @@ public class MypageController {
 	private IQnaSVC qnaSvc;
 	@Autowired
 	private IReviewFileSVC rvFileSvc;
+	@Autowired
+	private IOrderSVC orderSvc;
+	@Autowired
+	private IFoodtruckSVC fdSvc;
+	@Autowired
+	private IMemberLikeTruckSVC mltSvc;
+	@Autowired
+	private ISellerSVC sellSvc;
+	@Autowired
+	private IMenuSVC menuSvc;
+	@Autowired
+	private MypageService mypageService; 
 	   
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 
+	// 일반 회원 정보
 	@RequestMapping(value = "my_page.fdl", method = RequestMethod.GET)
 	public ModelAndView mypage(HttpSession ses) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("member", mbSvc.selectOneMember((String)ses.getAttribute("LoginName")));
 		mav.setViewName("mypage");
+		System.out.println("회원조회성공");
 		return mav;
 	}
 
@@ -53,14 +79,15 @@ public class MypageController {
 //		return mav;
 //	}
 	
-	@Autowired
-	private MypageService mypageService; 
+
 	
 	@RequestMapping(value = "my_info_update.fdl", method = RequestMethod.POST)
-	public String updateMem(@RequestParam String login,
-			@RequestParam String name,@RequestParam String gender,
-			@RequestParam String phoneNumber) {
-		if (mypageService.updateMypageInfo(new MemberVO(login, name, phoneNumber, gender)) > 0) {
+	public String updateMem(String name, String gender, String phoneNumber, 
+				String address, HttpSession ses) {
+		System.out.println(name +"-"+ phoneNumber+"-"+ gender+"-"+ address);
+		MemberVO mb = new MemberVO(name, phoneNumber, gender, address);
+		mb.setLogin( (String)ses.getAttribute("LoginName"));
+		if (mypageService.updateMypageInfo(mb) > 0) {
 			return "my/my_page_mem_success";
 		} else {
 			return "my/my_page_mem_error";
@@ -76,6 +103,7 @@ public class MypageController {
 			mav.addObject("msg","회원조회 성공 - "+ login);
 			mav.addObject("member", mem);
 			mav.setViewName("my/mp_profile");
+			System.out.println("회원 조회 성공");
 		} else {
 			mav.addObject("msg","회원조회 실패 - "+ login);
 			mav.setViewName("my/mp_profile");
@@ -84,5 +112,33 @@ public class MypageController {
 	return mav;
 	}
 
+	
+	// 주문내역
+	@RequestMapping(value = "get_my_order_list.fdl", method = RequestMethod.GET)
+	@ResponseBody
+	public List<FoodtruckVO> getLikeFoodtruck(HttpSession ses) {
+		System.out.println(ses.getAttribute("LoginName"));
+		return mypageService.getLikeFoodtruck((String)ses.getAttribute("LoginName"));
+	}
+	
+	// 주문내역
+	@RequestMapping(value = "my_order_list.fdl", method = RequestMethod.GET)
+	public ModelAndView orderList(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("order", orderSvc.memberOrderList((String)ses.getAttribute("LoginName")));
+		mav.setViewName("mypage");
+		System.out.println("주문내역 조회성공");
+		return mav;
+		
+	}
+	
+	// 리뷰 목록
+	@RequestMapping(value = "my_review.fdl", method = RequestMethod.GET)
+	public String reviewList(HttpSession ses, Model model) {
+		List<ReviewVO> reviewList = rvSvc.showAllReviewLogin((String)ses.getAttribute("LoginName"));
+		model.addAttribute("reviewList", reviewList);
+		System.out.println("리뷰조회성공");
+		return "my/mp_comment_list";
+	}
 	
 }
