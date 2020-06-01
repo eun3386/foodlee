@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
 import com.fdl.foodlee.model.vo.OrderVO;
+import com.fdl.foodlee.model.vo.QnaVO;
 import com.fdl.foodlee.model.vo.ReviewVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.mypage.MypageService;
@@ -113,8 +114,8 @@ public class MypageController {
 	}
 
 	
-	// 주문내역
-	@RequestMapping(value = "get_my_order_list.fdl", method = RequestMethod.GET)
+	// 좋아요내역
+	@RequestMapping(value = "my_like_list.fdl", method = RequestMethod.GET)
 	@ResponseBody
 	public List<FoodtruckVO> getLikeFoodtruck(HttpSession ses) {
 		System.out.println(ses.getAttribute("LoginName"));
@@ -123,22 +124,32 @@ public class MypageController {
 	
 	// 주문내역
 	@RequestMapping(value = "my_order_list.fdl", method = RequestMethod.GET)
-	public ModelAndView orderList(HttpSession ses) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("order", orderSvc.memberOrderList((String)ses.getAttribute("LoginName")));
-		mav.setViewName("mypage");
-		System.out.println("주문내역 조회성공");
-		return mav;
-		
+	@ResponseBody
+	public List<OrderVO> orderList(HttpSession ses) {
+		return mypageService.orderlist((String)ses.getAttribute("LoginName"));
+	}
+//	public ModelAndView orderList(HttpSession ses) {
+//		ModelAndView mav = new ModelAndView();
+//		mav.addObject("order", orderSvc.memberOrderList((String)ses.getAttribute("LoginName")));
+//		mav.setViewName("mypage");
+//		System.out.println("주문내역 조회성공");
+//		return mav;
+//		
+//	}
+	
+	// QnA 목록
+	@RequestMapping(value = "my_QnA_list.fdl", method = RequestMethod.GET)
+	@ResponseBody
+	public List<QnaVO> qnaList(HttpSession ses) {
+		return mypageService.qnaList((String)ses.getAttribute("LoginName"));
 	}
 	
 	// 리뷰 목록
 	@RequestMapping(value = "my_review.fdl", method = RequestMethod.GET)
-	public String reviewList(HttpSession ses, Model model) {
-		List<ReviewVO> reviewList = rvSvc.showAllReviewLogin((String)ses.getAttribute("LoginName"));
-		model.addAttribute("reviewList", reviewList);
-		System.out.println("리뷰조회성공");
-		return "my/mp_comment_list";
+	@ResponseBody
+	public List<ReviewVO> reviewList(HttpSession ses) {
+//		List<ReviewVO> reviewList = rvSvc.showAllReviewLogin((String)ses.getAttribute("LoginName"));
+		return mypageService.reviewList((String)ses.getAttribute("LoginName"));
 	}
 	
 }

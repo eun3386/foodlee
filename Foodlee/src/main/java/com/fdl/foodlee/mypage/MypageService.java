@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.OrderVO;
+import com.fdl.foodlee.model.vo.QnaVO;
+import com.fdl.foodlee.model.vo.ReviewVO;
 
 @Service
 public class MypageService {
@@ -21,4 +24,15 @@ public class MypageService {
 		return mypageDao.getLikeFoodtruck(name);
 	}
 	
+	public List<OrderVO> orderlist(String name) {
+		return mypageDao.getOrderList(name);
+	}
+	
+	public List<QnaVO> qnaList(String name) {
+		return mypageDao.getQnaList(name);
+	}
+	
+	public List<ReviewVO> reviewList(String name) {
+		return mypageDao.getReviewList(name);
+	}
 }
