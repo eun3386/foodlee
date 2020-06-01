@@ -28,7 +28,10 @@ public class FoodtruckVO {
 	public static final int riceCar = 4;
 	
 	public FoodtruckVO() {}
-	
+	public FoodtruckVO(int favoriteCount, int memberLikeCount) {
+		this.favoriteCount = favoriteCount;
+		this.memberLikeCount = memberLikeCount;
+	}
 	public FoodtruckVO(String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu, int menuCategory,
 			String foodtruckLocation, String foodtruckMuni, int foodtruckGuCode, String foodtruckOperationHour,
 			String sellerFoodtruckCoordinate) {

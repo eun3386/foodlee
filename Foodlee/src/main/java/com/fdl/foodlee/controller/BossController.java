@@ -28,6 +28,7 @@ import com.fdl.foodlee.service.inf.IBannerSVC;
 import com.fdl.foodlee.service.inf.IFoodtruckFileSVC;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.IOrderSVC;
+import com.fdl.foodlee.service.inf.IQnaSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
@@ -43,13 +44,16 @@ public class BossController {
 	@Autowired
 	private IFoodtruckFileSVC fdfSvc;
 	@Autowired
-	private IOrderSVC orSvc;
+	private IOrderSVC ordSvc;
 
 	@Autowired
 	private IBannerFileSVC baFileSvc;
 	
 	@Autowired
 	private IBannerSVC baSvc;
+	
+	@Autowired
+	IQnaSVC qnaSvc;
 	
 	// 판매자의 새 푸드트럭을 등록 할 수 있다. 트럭 등록 성공시 트럭pk뽑아서 트럭 상세보기로 redi 한다
 	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET) 
@@ -131,29 +135,72 @@ public class BossController {
 	
 	//차트를 보여 줄 수 있다.
 	@RequestMapping(value = "boss.fdl", method = RequestMethod.GET)
-//	public ModelAndView boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
-		public String boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
-//		int orderId = Integer.parseInt(request.getParameter("orderId")); // 주문번호 <<PK>>
-//		String login = request.getParameter("login"); // 주문한 사람의 아이디 <<FK>>
-//		int sellerId = Integer.parseInt(request.getParameter("sellerId")); // 판매자 번호 <<FK>>
+	public String boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
+		String login = (String) ses.getAttribute("login"); // 주문한 사람의 아이디 <<FK>> o
+//		int sellerId = Integer.parseInt(request.getParameter("sellerId")); // 판매자 번호 <<FK>> o
 //		String orderName = request.getParameter("orderName"); // 주문한 메뉴 이름 (,)구분
 //		String orderNumber = request.getParameter("orderNumber"); // 주문한 메뉴 개수 (,)구분
 //		String orderPrice = request.getParameter("orderPrice"); // 주문한 메뉴의 가격 (,)구분
-//		int orderPriceSum = Integer.parseInt(request.getParameter("orderPriceSum")); // 주문한 메뉴의 총가격
-//		int orderState = Integer.parseInt(request.getParameter("orderState")); // 주문 상황 (1 회원 주문 2 회원 취소 3 판매자 주문 접수 4 판매자 주문 거절 5 판매자 주문 취소)
-//		String orderReason = request.getParameter("orderReason"); // 판매자 주문 취소/거절 사유
-//		String orderMerchantUid = request.getParameter("orderMerchantUid"); // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
-//		String orderRequests = request.getParameter("orderRequests"); // 요청사항
-//		long orderDate = (Long)request.getAttribute("orderDate"); // 주문일자
-//		OrderVO vo = new OrderVO(orderId,login,sellerId,orderName,orderNumber,orderPrice,orderPriceSum,orderRequests,orderMerchantUid);//orderDate
-//		model.addAttribute(vo);
-//	//	boolean b = orSvc.memberOrderList(vo);
+//		int orderPriceSum = Integer.parseInt(request.getParameter("orderPriceSum")); // 주문한 메뉴의 총가격 o
+//		String orderReason = request.getParameter("orderReason"); // 판매자 주문 취소/거절 사유 0
+//		//String orderMerchantUid = request.getParameter("orderMerchantUid"); // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
+//		//String orderRequests = request.getParameter("orderRequests"); // 요청사항
+//		String orderDateStr = (String) request.getAttribute("orderDate"); // 주문일자 0
+//		
+//		int favoriteCount = Integer.parseInt(request.getParameter("favoriteCount")); // o좋아요 트럭 ⇔ integer favorite_count <<FK>>
+//		int memberLikeCount = Integer.parseInt(request.getParameter("memberLikeCount")); // o좋아요 횟수⇔ member_like_count 
+//		
+//		String sellerlogin = request.getParameter("login"); //판매자 id o
+//		
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date orderDate;
+//		OrderVO ovo = null;
+//		try {
+//			orderDate = sdf.parse(orderDateStr);
+//			 ovo = new OrderVO(login,sellerId,orderName,orderNumber,orderPrice,orderPriceSum,
+//					new Timestamp(orderDate.getTime())
+//					);//orderDate
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+		
+		
+//		}
+		
+		SellerVO svo = this.selSvc.selectOneSeller(login);
+		
+//		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(svo.getSellerId()) ;
+		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(11) ;
+		
+//		model.addAttribute("ovo",ovo); //orderVO
+		model.addAttribute("fvo",fvo); //foodtruckVO
+		model.addAttribute("svo",svo); //sellerVO
+	//	boolean b = selSvc.insertNewSellerWithCrypto(svo);
+	//order 리스트
+//		List<OrderVO> orList = ordSvc.sellerOrderList(svo.getSellerId());
+		List<OrderVO> orList = ordSvc.sellerOrderList(11);
+		model.addAttribute("orSize", orList.size());
+		model.addAttribute("orders", orList);
+		
+		int[] cntOPS =  new int[4];
+		for (OrderVO od : orList) {
+			if( od.getOrderPriceSum() < 10000 ) cntOPS[0]++;
+			else if( od.getOrderPriceSum() < 30000 ) cntOPS[1]++;
+			if( od.getOrderPriceSum() < 50000 ) cntOPS[2]++;
+			else cntOPS[3]++;
+		}
+		model.addAttribute("cntOPS", cntOPS);
 //		ModelAndView vo1 = new ModelAndView();
-		/*
-		 * request.setAttribute("vo", vo); RequestDispatcher dis =
-		 * request.getRequestDispatcher("Ex04_VO_rec.jsp"); dis.forward(request,
-		 * response);
-		 */
+//		vo1.setViewName("boss");
+//		vo1.addObject("login", login); //ovo 주문한 사람의 아이디 <<FK>>
+//		vo1.addObject("sellerlogin", sellerlogin); //svo판매자 id 
+//		vo1.addObject("sellerId", sellerId); //ovo판매자 번호 <<FK>>
+//		vo1.addObject("orderPriceSum", orderPriceSum); //ovo 주문한 메뉴의 총가격
+//		vo1.addObject("orderDate", orderDateStr); //ovo 주문일자
+//		vo1.addObject("favoriteCount", favoriteCount); // fvo 좋아요 트럭 ⇔ integer favorite_count <<FK>>
+//		vo1.addObject("memberLikeCount", memberLikeCount); // fvo 좋아요 횟수⇔ member_like_count 
+//		vo1.addObject("orderReason", orderReason); // 판매자 주문 취소/거절 사유
+
 		return "boss";
 	}
 	@RequestMapping(value = "menumodify.fdl", method = RequestMethod.GET)

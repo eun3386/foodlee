@@ -86,7 +86,7 @@
       });// end of ready()
 
 
-출처: https://rongscodinghistory.tistory.com/40 [악덕고용주의 개발 일기]
+//출처: https://rongscodinghistory.tistory.com/40 [악덕고용주의 개발 일기]
 </script>
 <title>orderlist</title>
 </head>

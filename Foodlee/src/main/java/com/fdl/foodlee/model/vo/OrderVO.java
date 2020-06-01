@@ -18,21 +18,21 @@ public class OrderVO {
 
 	public OrderVO() {}
 	
-	public OrderVO(int orderId, String login, int sellerId, String orderName, String orderNumber, String orderPrice,
-			int orderPriceSum, String orderRequests, String orderMerchantUid) {
+	public OrderVO(String login, int sellerId, String orderName, String orderNumber, String orderPrice,
+			int orderPriceSum, Timestamp orderDate) {
 		/*
 		 * this(orderId, login, sellerId, orderName, orderNumber, orderPrice,
 		 * orderPriceSum, orderState, orderRequests, orderMerchantUid, null);
 		 */
-		this.orderId = orderId;
+		this.orderId = 0;
 		this.login = login;
 		this.sellerId = sellerId;
 		this.orderName = orderName;
 		this.orderNumber = orderNumber;
 		this.orderPrice = orderPrice;
 		this.orderPriceSum = orderPriceSum;
-		this.orderRequests = orderRequests;
-		this.orderMerchantUid = orderMerchantUid;
+//		this.orderRequests = orderRequests;
+//		this.orderMerchantUid = orderMerchantUid;
 	}
 	
 	public OrderVO(int orderId, String login, int sellerId, String orderName, String orderNumber, String orderPrice,

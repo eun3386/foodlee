@@ -22,6 +22,9 @@ public class SellerVO {
 	private String imgPath;
 	
 	public SellerVO() {}
+	public SellerVO(String login) {
+		this.login = login;
+	}
 	public SellerVO(String login, String password, String name, String gender, int age, String residentRn, String email,
 			String phoneNumber, String address, String companyRn, String imgPath) {
 		this(0, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null, imgPath);

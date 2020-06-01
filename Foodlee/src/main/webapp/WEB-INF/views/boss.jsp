@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html dir="ltr" lang="ko">
 <head>
@@ -43,12 +46,29 @@
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
+//   	     var s1 = 0; var s2 = 0; var s3 = 0; var s4 = 0;
+//   	     for ( var i =0; i< orSize; i++) {
+//   	         switch (i) {
+//   	     	case  orders.orderPriceSum>0 &&  orders.orderPriceSum<10000:
+//   	     		s1 = s1 +1;
+//   	     		break;
+//   	     	case  orders.orderPriceSum>=10000 &&  orders.orderPriceSum<30000:
+//   	     		s2 = s2 +1;
+//   	     		break;
+//   	     	case  orders.orderPriceSum>=30000 &&  orders.orderPriceSum<50000:
+//   	     		s3 = s3 +1;
+//   	     		break;
+//   	     	default:
+//   	     		s4 = s4 +1;
+//   	     		break;
+//   	     	}
+//   	     }
         var data = google.visualization.arrayToDataTable([
           ['주문금액', '주문횟수'],
-          ['만원미만', 246],
-          ['3만원미만', 108],
-          ['5만원미만',    124],
-          ['5만원이상',    159]
+          ['만원미만',  254 ],
+          ['3만원미만', 124 ],
+          ['5만원미만', 14 ],
+          ['5만원이상', 145 ]
 
         ]);
 
@@ -73,17 +93,31 @@
     google.charts.load('current', {packages: ['corechart', 'line']});
     google.charts.setOnLoadCallback(drawChart);
     
+	
+    
     function drawChart() { 
+    	var week =['일','월','화','수','목','금','토'];
+    	var today = new Date(); // 오늘
+    	var yday1 = new Date(today.valueOf()-(24*60*60*1000)); //어제
+    	var yday2 = new Date(today.valueOf()-(2*24*60*60*1000)); //이틀전
+    	var yday3 = new Date(today.valueOf()-(3*24*60*60*1000)); //3일전
+    	var yday4 = new Date(today.valueOf()-(4*24*60*60*1000)); //4일전
+    	var yday5 = new Date(today.valueOf()-(5*24*60*60*1000)); //5일전
+    	var yday6 = new Date(today.valueOf()-(6*24*60*60*1000)); //6일전
+    	var day = week[today.getDay()];var day1 = week[yday1.getDay()];var day2 = week[yday2.getDay()];var day3 = week[yday3.getDay()];
+    	var day4 = week[yday4.getDay()];var day5 = week[yday5.getDay()];var day6 = week[yday6.getDay()];//요일 인덱스 구하기
+    	
+    	var month = date.getMonth()+1; //월 구하기
         var data = google.visualization.arrayToDataTable([
         	['week', '이번주','지난주'], 
-            ['월', 797, 709],  ['화', 864, 906],  ['수', 822, 802],  ['목', 814, 851],  
-            ['금', 899, 809],  ['토', 1137, 913],  ['일', 1176, 917] 
+            ['day6', 797, 709],  ['day5', 864, 906],  ['day4', 822, 802],  ['day3', 814, 851],  
+            ['day2', 899, 809],  ['day1', 1137, 913],  ['day', 1176, 917] 
         /* ['month', '개체수1'], 
         ['1월', 797],   ['2월', 864],  ['3월', 822],  ['4월', 814],  ['5월', 899],  ['6월', 1137],
         ['7월', 1176], ['8월', 1276], ['9월', 1694], ['10월', 2141], ['11월', 2609], ['12월', 2954]  */
         ]); 
         var options = { 
-          hAxis: { title: '한주간 수입' },
+          hAxis: { title: '한주간 매출' },
           curveType: 'function', 
 /*           legend: { position: 'bottom' },  */
              tooltip:{isHtml: true }, 
@@ -196,101 +230,10 @@
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                        <!-- Notification -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
-                                id="bell" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <span><i data-feather="bell" class="svg-icon"></i></span>
-                                <span class="badge badge-primary notify-no rounded-circle">5</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-left mailbox animated bounceInDown">
-                                <ul class="list-style-none">
-                                    <li>
-                                        <div class="message-center notifications position-relative">
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <div class="btn btn-danger rounded-circle btn-circle">
-                                                <i data-feather="airplay" class="text-white"></i></div>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Luanch Admin</h6>
-                                                    <span class="font-12 text-nowrap d-block text-muted">Just see
-                                                        the my new
-                                                        admin!</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-success text-white rounded-circle btn-circle"><i
-                                                        data-feather="calendar" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Event today</h6>
-                                                    <span
-                                                        class="font-12 text-nowrap d-block text-muted text-truncate">Just
-                                                        a reminder that you have event</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-info rounded-circle btn-circle"><i
-                                                        data-feather="settings" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Settings</h6>
-                                                    <span
-                                                        class="font-12 text-nowrap d-block text-muted text-truncate">You
-                                                        can customize this template
-                                                        as you want</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)"
-                                                class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                                <span class="btn btn-primary rounded-circle btn-circle"><i
-                                                        data-feather="box" class="text-white"></i></span>
-                                                <div class="w-75 d-inline-block v-middle pl-2">
-                                                    <h6 class="message-title mb-0 mt-1">Pavan kumar</h6> <span
-                                                        class="font-12 text-nowrap d-block text-muted">Just
-                                                        see the my admin!</span>
-                                                    <span class="font-12 text-nowrap d-block text-muted">9:02 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link pt-3 text-center text-dark" href="javascript:void(0);">
-                                            <strong>Check all notifications</strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- End Notification -->
-                        <!-- ============================================================== -->
-                        <!-- create new -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i data-feather="settings" class="svg-icon"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->
-<ul class="nav justify-content-center" >
+					<ul class="nav justify-content-center" >
 					  <li class="nav-item">
 					    <a class="nav-link active" href="boss.fdl">시작화면</a>
 					  </li>
@@ -333,7 +276,7 @@
                                 <img src="assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>안녕하세요,</span> <span
-                                        class="text-dark">판매자님</span> <i data-feather="chevron-down"
+                                        class="text-dark">${svo.login}님</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -449,7 +392,7 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">1538</h2>
+                                        <h2 class="text-dark mb-1 font-weight-medium">${fvo.favoriteCount}</h2>
                                         <span
                                             class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span>
                                     </div>
@@ -487,26 +430,28 @@
  								<div class="float-left">
                                 <div id="donutchart" class="mt-2 float-left" style="height: 315px; width:100%;"></div><!-- height:460px; height:283px; 원형차트 -->
                                 </div>
-	                               <ul class="list-style-none mb-0">
+                                
+                        
+                                <ul class="list-style-none mb-0">
                                     <li>
                                         <i class="fas fa-circle text-primary font-10 mr-2"></i>
                                         <span class="text-muted">만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">246</span>
+                                        <span class="text-dark float-right font-weight-medium">${cntOPS[0]}</span>
                                     </li>
                                     <li class="mt-3">
                                         <i class="fas fa-circle text-danger font-10 mr-2"></i>
                                         <span class="text-muted">3만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">108</span>
+                                        <span class="text-dark float-right font-weight-medium">${cntOPS[1]}</span>
                                     </li>
                                     <li class="mt-3">
                                         <i class="fas fa-circle text-cyan font-10 mr-2"></i>
                                         <span class="text-muted">5만원 미만</span>
-                                        <span class="text-dark float-right font-weight-medium">124</span>
+                                        <span class="text-dark float-right font-weight-medium">${cntOPS[2]}</span>
                                     </li>
                                     <li class="mt-3">
                                         <i class="fas fa-circle text-warning font-10 mr-2"></i>
                                         <span class="text-muted">5만원 이상</span>
-                                        <span class="text-dark float-right font-weight-medium">159</span>
+                                        <span class="text-dark float-right font-weight-medium">${cntOPS[3]}</span>
                                     </li>
                                 </ul>
                                 <div class="mt-3">
