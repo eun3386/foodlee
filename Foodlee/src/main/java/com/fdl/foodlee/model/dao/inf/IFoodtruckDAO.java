@@ -1,6 +1,7 @@
 package com.fdl.foodlee.model.dao.inf;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 
@@ -25,4 +26,12 @@ public interface IFoodtruckDAO {
 	public List<FoodtruckVO> searchAllFoodtruckWithGuCode(int guCode);
 	// 등록된 푸드 트럭 리스트를 조회 할수 있다
 	public List<FoodtruckVO> searchAddAllFoodtruckList();
+	// 푸드 트럭 리스트 조회 (페이지네이션)
+	List<FoodtruckVO> showAllFoodtrucks(
+			int offset, int limit);
+	
+	public List<FoodtruckVO> showCategoryFoodtrcuks(int category, int offset, int limit);
+	
+	int checkNumberOfFoodtrucks();
+	public int checkNumberOfFoodtrucksForMenu(int menuCategory);
 }

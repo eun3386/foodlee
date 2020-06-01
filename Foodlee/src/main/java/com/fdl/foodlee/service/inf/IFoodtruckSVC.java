@@ -1,6 +1,7 @@
 package com.fdl.foodlee.service.inf;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 
@@ -29,6 +30,15 @@ public interface IFoodtruckSVC {
 	public List<FoodtruckVO> searchAllFoodtruckWithGuCode(int guCode);
 	// 등록된 푸드 트럭 리스트를 조회 할수 있다
 	public List<FoodtruckVO> searchAddAllFoodtruckList();
+	// 페이지 네이션
+	public static final int MENU_CONTENT_PAGE_SIZE = 8;
+	public static final int TOP_CONTENT_PAGE_SIZE = 4;
+	public static final int LAST_TOP_CONTENT_PAGE_SIZE = 2;
+	List<FoodtruckVO> showTop10Foodtrucks(int pn);
 	
+	List<FoodtruckVO> showCategoryFoodtrucks(int mc, int pn);
+	// 현재 최대 페이지 번호
+	public int checkMaxTop10PageNumber();
+	public int checkMaxPageNumberForMenu(int menuCategory);
 
 }

@@ -106,5 +106,57 @@ public class FoodtruckSVCImpl implements IFoodtruckSVC {
 		// TODO Auto-generated method stub
 		return ftDao.searchAddAllFoodtruckList();
 	}
-
+	
+	// 푸드 트럭 리스트 조회 페이지네이션
+	public List<FoodtruckVO> showTop10Foodtrucks(int toppn) {
+		int offset = (toppn-1) * TOP_CONTENT_PAGE_SIZE; // pn이 뭔지 offset은 어떤건지..
+		int maxTopPg = checkMaxTop10PageNumber();
+		List<FoodtruckVO> topFtList
+			= ftDao.showAllFoodtrucks(offset, toppn == maxTopPg ? LAST_TOP_CONTENT_PAGE_SIZE : TOP_CONTENT_PAGE_SIZE);
+		System.out.println("ftsvc: toppn "+ toppn + 
+					" foodtrucks = "
+					+ topFtList.size());
+		return topFtList;
+	}
+	
+	@Override 
+	public List<FoodtruckVO> showCategoryFoodtrucks(int mc, int pn) {
+		int offset = (pn-1) * MENU_CONTENT_PAGE_SIZE;
+		List<FoodtruckVO> ftList
+			= ftDao.showCategoryFoodtrcuks(mc, offset, MENU_CONTENT_PAGE_SIZE);
+		System.out.println("ftsvc: pn " + pn +
+					" foodtrucks = "
+					+ ftList.size());
+		return ftList;
+	}
+	
+	// 현재 최대 페이지 번호
+		
+	// Top10 리스트에 따른 페이지
+	public int checkMaxTop10PageNumber() {
+		int totalRecords = ftDao.checkNumberOfFoodtrucks();
+		int maxTopPg = (totalRecords / TOP_CONTENT_PAGE_SIZE) + (totalRecords % TOP_CONTENT_PAGE_SIZE == 0 ? 0 : 1);
+		return maxTopPg;
+	}
+	// 메뉴에 따른 페이지
+	@Override
+	public int checkMaxPageNumberForMenu(int menuCategory) {
+		int totalRecords = ftDao.checkNumberOfFoodtrucksForMenu(menuCategory);
+		int maxPg = (totalRecords / MENU_CONTENT_PAGE_SIZE) + (totalRecords % MENU_CONTENT_PAGE_SIZE == 0 ? 0 : 1);
+		return maxPg;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

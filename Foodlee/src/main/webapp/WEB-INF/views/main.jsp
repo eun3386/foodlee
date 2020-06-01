@@ -237,9 +237,11 @@
 		<div id="introduce" style="position:relative; top:-160px; padding-top:120px;" >
 			<%@include file="common/_introduce.jsp" %>
 		</div>
-        <div id="truck-list">
-        	<%@include file="truck/truckList.jsp" %>
+        <div id="truck-list">        	
         </div>
+        <script type="text/javascript">
+        	$("#truck-list").load("<%=application.getContextPath()%>/truckList.fdl");
+        </script>
         <div id="event-list">
  		</div>
  		<script type="text/javascript">

@@ -2,21 +2,43 @@
 
 #trucklist_all_page {
 	width: 960px;
-	height: 1100px;
+	height: 1130px;
 	position: static;
+	display: block;
+}
+
+#top_foodtruck_content {
+	width: 960px;
+	height: 285px;
+}
+
+#top_foodtruck_content button:hover {
+	background-color: yellow;
+	color: white;
+	text-shadow: 5px 1px 3px #400000;
+}
+
+.top_truck_card {
+	display: inline-block;
+	border: 2px solid gray;
+	background-color: orange;
+	
+/* 	margin: 4px 4px; */
+	margin-left: 27px;
+	width: 200px;
+	height: 260px;
+	text-align: center;
 }
 
 /* 공통 부분 */
 .truck_card {
-/* 	position: absolute; */
 	display: inline-block;
 	border: 2px solid gray;
 	background-color: orange;
-	padding: 3px 10px;
-	margin: 4px 4px;
-	margin-left: 23px;
+	margin-left: 27px;
+	margin-top: 20px;
 	width: 200px;
-	height: 200px;
+	height: 260px;
 	text-align: center;
 }
 
@@ -35,17 +57,18 @@ button {
 	cursor: pointer;
 }
 
-#trucklist_page tbody tr:hover{
-    cursor: pointer;
-    background-color: transparent !important;
-}
+/* #trucklist_page tbody tr:hover{ */
+/*     cursor: pointer; */
+/*     background-color: transparent !important; */
+/* } */
 
 /* nav */
 #trucklist_nav {
 	float: left;
 	width: 960px;
 	height: 25px;
-	position: absolute;
+/* 	position: absolute; */
+	display: block;
 }
 
 #ranktrucks {
@@ -73,7 +96,7 @@ button {
 /* trucklist_page */
 #trucklist_page {
 	width: 960px;
-	height: 1050px;
+	height: 1110px;
 	background-image: url('/foodlee/resources/css/imgs/truckDetail/background_truck2.jpg');
 	background-repeat: repeat-x;
 	background-size: cover;
@@ -86,11 +109,8 @@ button {
 #toplist_content {
 	float: left;
 	width: 960px;
-	height: 250px;
-/* 	display: inline; */
-	position: absolute;
-	top: 50px;
-	left: 16px;
+	height: 305px;
+	diplay: block;
 }
 
 #top_content_table {
@@ -108,12 +128,15 @@ button {
 	float: left;
 	width: 960px;
 	height: 150px;
-	position: absolute;
-	top: 300px;
+/* 	position: absolute; */
+	top: 330px;
+	diplay: block;
 }
 
 .menu1, .menu2, .menu3, .menu4 {
-	padding: 80px;
+	padding: 70px;
+/* 	margin-top: 20px; */
+	display: inline-block;
 }
 
 #menu_content button {
@@ -141,14 +164,10 @@ button {
 	width: 960px;
 	height: 600px;
 	left: 16px;
-	position: absolute;
-	top: 450px;
-	margin-top: 80px;
-}
-
-#menu_content_table {
-	width: 960px;
-/* 	margin-top: 100px; */
+/* 	position: absolute; */
+	top: 480px;
+	diplay: block;
+/* 	margin-top: 80px; */
 }
 
 #menu_truck_content button:hover {
@@ -160,23 +179,23 @@ button {
 /* 푸터 */
 #foodtruckList_footer {
 	width: 960px;
-	height: 50px;
+	heigth: 50px;
 	background-color: white;
-	display: block;
+	diplay: block;
 	text-align: center;
 }
 
-.foodtrucklist_pagenation {
-	display: inline-block;
-}
-
 .foodtrucklist_pagenation a {
+	diplay: inline-block;
+	width: 40px;
+	height: 40px;
 	color: black;
 	float: left;
-	padding: 8px 16px;
+/* 	padding: 8px 16px; */
 	text-decoration: none;
 	border: 1px solid #ddd;
-	margin: 0 4px;
+/* 	margin: 0 4px; */
+	margin-left: 360px;
 	font-size: 22px;
 }
 
@@ -193,8 +212,3 @@ button {
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
-
-
-
-
-
