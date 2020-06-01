@@ -3,7 +3,9 @@ package com.fdl.foodlee.model.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +64,6 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 				mb.getEmail(), mb.getPhoneNumber(), mb.getAddress()
 				);
 		return r == 1;
-	}
-	
-	@Override
-	public int insertNewMemberWithCryptoReturnKey(MemberVO mb) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -173,21 +169,25 @@ public class MemberMysqlDAOImpl implements IMemberDAO {
 	}
 
 	@Override
-	public String selectMemberLogin(String name, String phoneNumber) {
-		Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_MEMBER_FIND_ID,
-				new Object[]{name, phoneNumber},
-				new int[]{Types.VARCHAR, Types.VARCHAR} );
-		String dbLogin = (String) rMap.get("login");
-		return dbLogin;
+	public List<String> selectMemberLogin(String name, String phoneNumber) {
+		List<String> mbIdList = jtem.query
+				(SQL_SELECT_MEMBER_FIND_ID, BeanPropertyRowMapper
+						.newInstance(String.class), name, phoneNumber);
+		return mbIdList;
 	}
 
 	@Override
 	public String selectMemberPassword(String login, String email) {
-		Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_MEMBER_FIND_PW,
-				new Object[]{login, email},
-				new int[]{Types.VARCHAR, Types.VARCHAR} );
-		String dbPW = (String) rMap.get("pw");
-		return dbPW;
+		try {
+			Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_MEMBER_FIND_PW,
+					new Object[]{login,login,email},
+					new int[]{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR} );
+			String dbPW = (String) rMap.get("pw");
+			return dbPW;
+		} catch (DataAccessException e) {
+			System.out.println("dao / 비밀번호 조회 실패." );
+			return null;
+		}
 	}
 
 }

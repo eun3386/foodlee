@@ -3,6 +3,7 @@ package com.fdl.foodlee.model.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,25 +180,27 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		int r = jtem.update(SQL_UPDATE_SELLER_LOGOUT_TIME, id);
 		return r == 1;
 	}
-
 	
 	@Override
-	public String selectSellerLogin(String name, String phoneNumber) {
-		Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_SELLER_FIND_ID,
-				new Object[]{name, phoneNumber},
-				new int[]{Types.VARCHAR, Types.VARCHAR} );
-		String dbLogin = (String) rMap.get("login");
-		return dbLogin;
+	public List<String> selectSellerLogin(String name, String phoneNumber) {
+		List<String> selIdList = jtem.query
+				(SQL_SELECT_SELLER_FIND_ID, BeanPropertyRowMapper
+						.newInstance(String.class), name, phoneNumber);
+		return selIdList;
 	}
-	
 
 	@Override
 	public String selectSellerPassword(String login, String email) {
-		Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_SELLER_FIND_PW,
-				new Object[]{login, email},
-				new int[]{Types.VARCHAR, Types.VARCHAR} );
-		String dbPW = (String) rMap.get("pw");
-		return dbPW;
+		try {
+			Map<String, Object> rMap = jtem.queryForMap(SQL_SELECT_SELLER_FIND_PW,
+					new Object[]{login,login,email},
+					new int[]{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR} );
+			String dbPW = (String) rMap.get("pw");
+			return dbPW;
+		} catch (DataAccessException e) {
+			System.out.println("dao / 비밀번호 조회 실패." );
+			return null;
+		}
 	}
 
 }
