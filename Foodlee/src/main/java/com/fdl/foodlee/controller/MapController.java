@@ -74,8 +74,9 @@ public class MapController {
 		// - 배너 리스트를 볼 수 있다
 		int max = 50000; // 어드민이 설정
 		int min = 10000; // 어드민이 설정
-		int limit = 5; // 어드민이 설정
+		int limit = 100; // 어드민이 설정
 		int avg = (max + min)/2;
+		
 //		System.out.println("BannerList...");
 		List<BannerAddVO> baList = bSvc.showAddBannerList(min, max, limit);
 		List<BannerAddVO> baTopList = new ArrayList<BannerAddVO>();

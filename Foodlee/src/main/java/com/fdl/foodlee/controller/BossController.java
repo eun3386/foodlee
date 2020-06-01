@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.SellerVO;
+import com.fdl.foodlee.service.inf.IBannerFileSVC;
+import com.fdl.foodlee.service.inf.IBannerSVC;
 import com.fdl.foodlee.service.inf.IFoodtruckFileSVC;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
 import com.fdl.foodlee.service.inf.IOrderSVC;
@@ -43,6 +45,12 @@ public class BossController {
 	@Autowired
 	private IOrderSVC orSvc;
 
+	@Autowired
+	private IBannerFileSVC baFileSvc;
+	
+	@Autowired
+	private IBannerSVC baSvc;
+	
 	// 판매자의 새 푸드트럭을 등록 할 수 있다. 트럭 등록 성공시 트럭pk뽑아서 트럭 상세보기로 redi 한다
 	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET) 
 	public	String storeinfo() {//트럭등록 
@@ -184,10 +192,58 @@ public class BossController {
 	public String position() {//리뷰목록
 		return "boss/bossinfo/position";
 	}
-	@RequestMapping(value = "ad.fdl", method = RequestMethod.GET)
-	public String ad() {//광고
-		return "boss/bossinfo/ad2";
-	}
+	// 배너 광고 신청
+		// banner_apply.fdl
+		@RequestMapping(value = "banner_apply.fdl", 
+				method = RequestMethod.POST)
+		@ResponseBody
+		public String bannerApplyProc(HttpServletRequest req,
+				 List<MultipartFile> upfiles,
+				HttpSession ses) {
+			System.out.println("banner_apply()");
+//			System.out.println("multipart: " + upfile.getName());
+			System.out.println("multipart size: " 
+							+ upfiles.size());
+			Timestamp adDate = Timestamp.valueOf(req.getParameter("adStartDate") + " 00:00:00");		
+			System.out.println("upfiles = " + req.getParameter("upfiles"));
+			System.out.println("adDate =" + adDate);
+			String realPath =  
+				ses.getServletContext()
+				.getRealPath(IBannerFileSVC.DEF_UPLOAD_DEST)
+						 + "/";
+			baFileSvc.makeUserDir(ses, "aaa");
+			System.out.println("realPath =" + realPath);
+			System.out.println("adPrice =" + req.getParameter("adPrice"));
+			int adPrice =  Integer.parseInt(req.getParameter("adPrice"));
+//			String filePath 
+//				= atFileSvc.writeUploadedFile(upfile, 
+//					realPath, (String)ses
+//						.getAttribute("mbLoginName"));
+			System.out.println("upfiles = " + upfiles.get(0));
+			//String filePath  // 다수개 처리
+			Map<String, Object> rMap
+			 = baFileSvc.writeUploadedMultipleFiles(upfiles, 
+				realPath, "aaa");
+//				(String)ses
+//					.getAttribute("mbLoginName"));
+			String filePath = (String)rMap.get("muliFPs");
+			
+			System.out.println("총 파일 수: " + rMap.get("fileCnt"));
+			System.out.println("총 볼륨(MB): "+ rMap.get("totalMB") 
+					+"MB");
+			int selId = (int) ses.getAttribute("id");
+			// public img src... 
+			int baRtkey = this.baSvc.insertNewBannerReturnKey(filePath, adPrice, adDate, adDate, 0, selId);
+			// 상세보기 => atId?
+			if( baRtkey > 0 ) {
+				System.out.println("배너 신청 성공: " + baRtkey);
+				return "redirect:ad.fdl?id="+baRtkey; // 결제 
+				//return "redirect:article_list.my"; // RD
+			} else {
+				System.out.println("배너 신청 실패: " + selId);
+				return "boss/bossinfo/ad2"; // FW
+			}
+		}	
 //	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET)
 //	public String storeinfo() {//트럭정보
 //		return "boss/bossmenu/storeinfo";

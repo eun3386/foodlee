@@ -1,11 +1,17 @@
 package com.fdl.foodlee.model.dao.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IBannerDAO;
@@ -18,21 +24,20 @@ public class BannerMysqlDAOImpl implements IBannerDAO {
 //	public static final String SQL_BANNER_SHOWALL =
 //			"select * from banner order by ad_start_date asc";
 	public static final String SQL_BANNER_ADD_LIST =
-			"select B.fod_id as sel_num,"
-			+ "(select A.login from sellers A where B.fod_id = A.seller_id) as sel_login, "
+			"select B.seller_id as sel_num,"
+			+ "(select A.login from sellers A where B.seller_id = A.seller_id) as sel_login, "
 			+ "B.ad_img as img_path, B.ad_price as price, B.ad_start_date as st_day, "
 			+ "B.ad_end_date as ed_day from banner B where "
 			+ "B.ad_price between ? and ? order by ad_start_date asc limit ?";
 	
 	public static final String SQL_BANNER_SHOWALL_ID =
-			"select * from banner where fod_id = ? order by ad_start_date asc";
+			"select * from banner where banner_id = ? order by ad_start_date asc";
 	public static final String SQL_BANNER_SHOWONE = 
-			"select * from banner where fod_id = ?";
+			"select * from banner where banner_id = ?";
 	public static final String SQL_INSERT_BANNER = 
-			"insert into banner values(?,?,?,?,?)";
+			"insert into banner values(null,?,?,?,DATE_ADD(?, INTERVAL 1 MONTH),0,0)";
 	public static final String SQL_ADD_BANNER = 
 			"select * from banner where ad_price=? order by ad_start_date asc limit 10";
-	
 	@Autowired
 	private JdbcTemplate jtem;
 	
@@ -61,10 +66,49 @@ public class BannerMysqlDAOImpl implements IBannerDAO {
 
 	@Override
 	public boolean insertAddBanner(BannerVO bn) {
-		int r = jtem.update(SQL_INSERT_BANNER,
-				bn.getFodId(),bn.getAdPrice(),
-				bn.getadStartDate(),bn.getAdEndDate(),bn.getAdLocation());
-		return r == 1;
+//		int r = jtem.update(SQL_INSERT_BANNER,
+//				bn.getSellerId(),bn.getAdPrice(),
+//				bn.getAdStartDate(),bn.getAdEndDate());
+//		return r == 1;
+		return false;
 	}
+
+	@Override
+	public int insertNewBannerReturnKey(BannerVO bn) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertNewBannerReturnKey2(BannerVO bn) {
+		// System.out.println("psc/keyholder...");
+		KeyHolder kh = new GeneratedKeyHolder();
+		PreparedStatementCreator psc
+		 = new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement pstmt 
+					= con.prepareStatement(
+							SQL_INSERT_BANNER,
+							new String[] {"bannerId"});
+				pstmt.setInt(1, bn.getAdPrice());
+				pstmt.setString(2, bn.getAdImg());
+				pstmt.setTimestamp(3, bn.getAdStartDate());
+				pstmt.setTimestamp(4, bn.getAdStartDate());
+				
+				return pstmt;
+			}
+		};
+		
+		jtem.update(psc, kh);
+		Number r = kh.getKey(); // PK
+		return r.intValue();
+	}
+
+//	@Override
+//	public int insertNewBannerReturnKey(String adImg, int sellerId) {
+//		
+//	}
 
 }

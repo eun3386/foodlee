@@ -272,6 +272,9 @@ function showMarker(map, marker) {
 			        origin: new naver.maps.Point(seq * 29, 50)
 			    });
 			});
+			$(tt).on('click', function() {
+				location.href = HOME_PATH+'truckDetail.fdl?sellerId='+tsellerId;
+			})
 		}, 
 		error: function(xhr, status) {
 			console.log("error : " + status);
@@ -346,11 +349,8 @@ function searchOneTruckListToCoordinate(keyword) {
 						    });
 						});
 						$(tt).on('click', function() {
-							console.log('selId = ' + selId);
-							var key = parseInt(selId);
-							console.log('key = ' + typeof key);
-							showOneTruck(key);
-						});
+							location.href = HOME_PATH+'truckDetail.fdl?sellerId='+selId;
+						})
 						break;
 					default:
 						alert('검색결과가 없습니다');

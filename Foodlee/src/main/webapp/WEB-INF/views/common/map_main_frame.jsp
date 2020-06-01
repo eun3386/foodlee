@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<script type="text/javascript">
+var HOME_PATH = '${pageContext.request.contextPath}/';
+	function selectTopOneBanner(selId) {
+		location.href = HOME_PATH+'truckDetail.fdl?sellerId='+selId;
+	}
+	function selectBottomOneBanner(selId) {
+		location.href = HOME_PATH+'truckDetail.fdl?sellerId='+selId;
+	}
+</script>	
 <section>
 	<!--  이미지 슬라이드 top -->
 	<div class="map_slider">

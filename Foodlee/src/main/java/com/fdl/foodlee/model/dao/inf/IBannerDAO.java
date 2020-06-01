@@ -17,4 +17,9 @@ public interface IBannerDAO {
 	List<BannerVO> insertApplyBanner(int fodId, int price);
 //	판매자가 일정 금액 기준 등록시간 선착순으로 배너를 등록 할 수 있다 
 	boolean insertAddBanner(BannerVO bn);
+	
+//	판매자가 신규 배너이미지를 등록 할 수 있다 (+파일업로드..)
+	int insertNewBannerReturnKey(BannerVO bn);	
+//	int insertNewBannerReturnKey(String adImg, int sellerId);	
+	int insertNewBannerReturnKey2(BannerVO bn);
 }

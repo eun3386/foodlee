@@ -1,5 +1,6 @@
 package com.fdl.foodlee.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,33 @@ public class BannerSVCImpl implements IBannerSVC {
 		// TODO Auto-generated method stub
 		return bannerDAO.insertAddBanner(bn);
 	}
+
+	@Override
+	public int insertNewBannerReturnKey(BannerVO bn) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertNewBannerReturnKey2(BannerVO bn) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int insertNewBannerReturnKey(String adImg, int adPrice, Timestamp adStartDate, Timestamp adEndDate,
+			int adWaiting, int sellerId) {
+		// TODO Auto-generated method stub
+		BannerVO bn = new BannerVO(adPrice, adImg, adStartDate, adEndDate, adWaiting, sellerId);
+		
+		//return atDao.insertNewArticleReturnKey(at);
+		return bannerDAO.insertNewBannerReturnKey2(bn);
+	}
+
+//	@Override
+//	public int insertNewBannerReturnKey(String adImg, int sellerId) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 }

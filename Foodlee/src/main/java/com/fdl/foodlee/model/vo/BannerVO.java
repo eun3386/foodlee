@@ -1,35 +1,47 @@
 package com.fdl.foodlee.model.vo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class BannerVO {
-	private int fodId; // 푸드트럭 번호 <<FK>>
+	private int bannerId; // 푸드트럭 번호 <<FK>>
 	private int adPrice; // 광고금액
 	private String adImg; // 광고 이미지
-	private Date adStartDate; // 적용 시작 기간
-	private Date adEndDate; // 적용 종료 기간
-	private String adLocation; // 노출 위치
+	private Timestamp adStartDate; // 적용 시작 기간
+	private Timestamp adEndDate; // 적용 종료 기간
+	private int adWaiting; // 신청 대기
+	private int sellerId; // 판매자 아이디 <<FK>>
 	
 	public BannerVO() {}
 	
-	public BannerVO(int fodId, int adPrice, String adImg, Date adStartDate, Date adEndDate, String adLocation) {
+	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, int adWaiting, int sellerId) {
+		this(adPrice, adImg, adStartDate, null, adWaiting, sellerId);
+	}
+	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, int adWaiting,
+			int sellerId) {
+		this(0, adPrice, adImg, adStartDate, adEndDate, adWaiting, sellerId);
+		
+	}
+	
+	public BannerVO(int bannerId, int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, int adWaiting,
+			int sellerId) {
 		super();
-		this.fodId = fodId;
+		this.bannerId = bannerId;
 		this.adPrice = adPrice;
 		this.adImg = adImg;
 		this.adStartDate = adStartDate;
 		this.adEndDate = adEndDate;
-		this.adLocation = adLocation;
+		this.adWaiting = adWaiting;
+		this.sellerId = sellerId;
 	}
-	
-	public int getFodId() {
-		return fodId;
+
+	public int getBannerId() {
+		return bannerId;
 	}
-	
-	public void setFodId(int fodId) {
-		this.fodId = fodId;
+
+	public void setBannerId(int bannerId) {
+		this.bannerId = bannerId;
 	}
-	
+
 	public int getAdPrice() {
 		return adPrice;
 	}
@@ -37,42 +49,52 @@ public class BannerVO {
 	public void setAdPrice(int adPrice) {
 		this.adPrice = adPrice;
 	}
-	
+
 	public String getAdImg() {
 		return adImg;
 	}
-	
+
 	public void setAdImg(String adImg) {
 		this.adImg = adImg;
 	}
-	
-	public Date getadStartDate() {
+
+	public Timestamp getAdStartDate() {
 		return adStartDate;
 	}
 
-	public void setadStartDate(Date adStartDate) {
+	public void setAdStartDate(Timestamp adStartDate) {
 		this.adStartDate = adStartDate;
 	}
-	
-	public Date getAdEndDate() {
+
+	public Timestamp getAdEndDate() {
 		return adEndDate;
 	}
 
-	public void setAdEndDate(Date adEndDate) {
+	public void setAdEndDate(Timestamp adEndDate) {
 		this.adEndDate = adEndDate;
 	}
-	
-	public String getAdLocation() {
-		return adLocation;
+
+	public int getAdWaiting() {
+		return adWaiting;
 	}
 
-	public void setAdLocation(String adLocation) {
-		this.adLocation = adLocation;
+	public void setAdWaiting(int adWaiting) {
+		this.adWaiting = adWaiting;
+	}
+
+	public int getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(int sellerId) {
+		this.sellerId = sellerId;
 	}
 
 	@Override
 	public String toString() {
-		return "BannerVO [adPrice=" + adPrice + ", adStartDate=" + adStartDate + ", adLocation=" + adLocation + "]";
+		return "BannerVO [bannerId=" + bannerId + ", adPrice=" + adPrice + ", adImg=" + adImg + ", adStartDate="
+				+ adStartDate + ", adEndDate=" + adEndDate + ", adWaiting=" + adWaiting + ", sellerId=" + sellerId
+				+ "]";
 	}
 	
 }
