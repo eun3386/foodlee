@@ -3,8 +3,10 @@ package com.fdl.foodlee.service.inf;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.fdl.foodlee.model.vo.EventVO;
+import com.fdl.foodlee.model.vo.virtual.EventRowVO;
 
 public interface IEventSVC {
 //	- 관리자가 신규 이벤트 게시글을 등록할 수 있다.(+파일업로드..)
@@ -42,21 +44,32 @@ public interface IEventSVC {
 //	- 이벤트 게시글 리스트를 조회할 수 있다. (페이지네이션, 정렬, 태그)
 //		event_list.fdl (get, proc, dao)
 	List<EventVO> showAllEvents();
+	List<EventRowVO> showAllEventsForRow(int pn);
+	List<Map<String, Object>> showAllEventsForMap(int pageNumber);
+	
+	//
 	List<EventVO> showAllEvents(boolean order);
-//		event_list.fdl (get, proc, dao, param?pn&order)
-	List<EventVO> showAllEvents(int offset, int limit);
-	List<EventVO> showAllEvents(int offset, int limit, boolean order);
-	List<EventVO> showAllEvents(int offset, int limit, boolean order, Date startDate, Date endDate);
+	public static final int PAGE_SIZE = 10; 
+	List<EventVO> showAllEvents(int pn);
+	
+	
+	int checkMaxPageNumber(); // 현재 최대 페이지 번호
+	Map<String, Integer> checkMaxPageNumber(String target, String keyword);
+		// 해당 키워드에 대한 현제 최대 페이지 번호
+//	event_list.fdl (get, proc, dao, param?pn&order)
 //	- 이벤트 게시글 리스트를 검색할 수 있다. (페이지네이션, 정렬)
 //		event_search.fdl (post, proc, dao, param?pn&order&keyword&날짜 범위..)
 	List<EventVO> showAllEvents(String keyword, 
-			int offset, int limit, 
-		boolean order, Date startDate, Date endDate);
-	int checkNumberOfEvents();
-	List<EventVO> searchEventForTitle(String keyword, String target, String orderBy);
-	List<EventVO> searchEventForContent(String keyword, String target, String orderBy);
-	List<EventVO> searchEventForTags(String keyword, String target, String orderBy);
-	List<EventVO> searchEventForAll(String keyword, String target, String orderBy);
-	List<EventVO> searchEventForColumn(String keyword, String target, String orderBy);
+			int pn, Date startDate, Date endDate);
+	
+	List<EventVO> searchEvents(String keyword, 
+			int pn, String orderCol, 
+			boolean order, String target);
+	List<EventVO> searchEvents(String keyword, 
+			int pn, String orderCol, 
+			boolean order, String target, 
+			Date startDate, Date endDate);
+	
+	
 	
 }

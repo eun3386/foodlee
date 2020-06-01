@@ -5,14 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>푸들이 - 이벤트</title>
 </head>
 <body>
 <div id="at_show">
-		<table border='0'>
-			<tr> <td>번호:</td> <td>${event.eventId}</td> <td>시작일:</td> <td>${event.eventStartDate}</td> 
-			<td>종료일:</td> <td>${event. eventEndDate}</td> 
-			<td><c:if test="${event.eventOngoing eq 1}">진행</c:if>
+		<table border="1">
+			<tr> <td>번호: ${event.eventId}</td> 
+			<td>시작일: ${event.eventStartDate} 종료일: ${event. eventEndDate} 
+			<c:if test="${event.eventOngoing eq 1}">진행중</c:if>
 			<c:if test="${event.eventOngoing eq 0}">종료</c:if></td></tr>
 			<tr> <td>제목:</td> <td>${event.eventTitle}</td>  </tr>
 			<tr> <td>내용:</td> 

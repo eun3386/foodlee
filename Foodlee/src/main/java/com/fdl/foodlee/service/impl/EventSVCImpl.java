@@ -1,13 +1,16 @@
 package com.fdl.foodlee.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.dao.inf.IEventDAO;
 import com.fdl.foodlee.model.vo.EventVO;
+import com.fdl.foodlee.model.vo.virtual.EventRowVO;
 import com.fdl.foodlee.service.inf.IEventSVC;
 
 @Service
@@ -15,13 +18,13 @@ public class EventSVCImpl implements IEventSVC {
 	
 	@Autowired
 	private IEventDAO evDao;
-	
+
 	@Override
 	public boolean insertNewEvent(EventVO ev) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	@Override
 	public boolean insertNewEvent(String title, String content, String filePath, int memberId) {
 		// TODO Auto-generated method stub
@@ -60,13 +63,14 @@ public class EventSVCImpl implements IEventSVC {
 	}
 
 	@Override
-	public boolean updateEvent(String eventTitle, String eventContent, Date eventStartDate, 
-			boolean eventOngoing) {
+	public boolean updateEvent(String eventTitle, String eventContent, Date eventStartDate, boolean eventOngoing) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean increaseReadCount(int evId) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -99,6 +103,16 @@ public class EventSVCImpl implements IEventSVC {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public List<EventRowVO> showAllEventsForRow(int pn) {
+		return null;
+	}
+
+	@Override
+	public List<Map<String, Object>> showAllEventsForMap(int pn) {
+		return null;
+	}
 
 	@Override
 	public List<EventVO> showAllEvents(boolean order) {
@@ -107,66 +121,52 @@ public class EventSVCImpl implements IEventSVC {
 	}
 
 	@Override
-	public List<EventVO> showAllEvents(int offset, int limit) {
+	public List<EventVO> showAllEvents(int pn) {
+		int offset = (pn-1) * PAGE_SIZE;
+		List<EventVO> evList
+			= evDao.showAllEvents(offset, PAGE_SIZE);
+		System.out.println("evsvc: pn "+ pn + 
+					" events: pn = " + evList.size());
+		return evList;
+	}
+
+	@Override
+	public int checkMaxPageNumber() {
+		int totalRecords = evDao.checkNumberOfEvents();
+		int maxPg = totalRecords / PAGE_SIZE + (
+				totalRecords % PAGE_SIZE == 0 ?
+						0 : 1 );
+		return maxPg;
+	}
+
+	@Override
+	public Map<String, Integer> checkMaxPageNumber(String target, String keyword) {
+		int totalRecords = evDao.checkNumberOfEvents(target, keyword);
+		int maxPg = totalRecords / PAGE_SIZE + (totalRecords % PAGE_SIZE == 0 ? 0 : 1);
+		HashMap<String, Integer> rMap = new HashMap<>();
+		rMap.put("totalRecords", totalRecords);
+		rMap.put("maxPg", maxPg);
+		return rMap;	
+	}
+
+	@Override
+	public List<EventVO> showAllEvents(String keyword, int pn, Date startDate, Date endDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EventVO> showAllEvents(int offset, int limit, boolean order) {
+	public List<EventVO> searchEvents(String keyword, int pn, String orderCol, boolean order, String target) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<EventVO> showAllEvents(int offset, int limit, boolean order, Date startDate, Date endDate) {
+	public List<EventVO> searchEvents(String keyword, int pn, String orderCol, boolean order, String target,
+			Date startDate, Date endDate) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<EventVO> showAllEvents(String keyword, int offset, int limit, boolean order, Date startDate,
-			Date endDate) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int checkNumberOfEvents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<EventVO> searchEventForTitle(String keyword, String target, String orderBy) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EventVO> searchEventForContent(String keyword, String target, String orderBy) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EventVO> searchEventForTags(String keyword, String target, String orderBy) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EventVO> searchEventForAll(String keyword, String target, String orderBy) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<EventVO> searchEventForColumn(String keyword, String target, String orderBy) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 
 }

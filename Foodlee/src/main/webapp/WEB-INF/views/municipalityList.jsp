@@ -22,9 +22,16 @@
     $(document).ready(function () {
           $(".fa-times").click(function() {
              window.close(); 
-          });
+          });  
     });
-  </script>
+    
+    function selectFoodtruck(sId) {
+  		window.open(window.location.href		
+  				= '${pageContext.request.contextPath}/truckDetail.fdl?sellerId='+sId,
+  						"","width=1645px,height=980px");
+  	}   
+    
+  </script> 
     <style>
         .ui-tooltip {
             
@@ -43,10 +50,10 @@
                 <th id="th-no">No.</th> <th id="th-img"><img src="resources/css/imgs/truck.png"></th> <th id="th-name">상호</th> <th id="th-menu">대표메뉴</th> <th id="th-loca">위치</th> <th id="th-hour">영업시간</th> <th id="th-like"><i class="fas fa-heart"></i></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody><%int i=1; %>
         	<c:forEach var="ft" items="${ftList}">
-            <tr>
-                <td>${ft.sellerId}</td> <td><img src="${ft.foodtruckImgPath}"></td> <td><b>${ft.foodtruckName}</b></td> <td class="tooltip" title="${ft.foodtruckMainMenu}">
+            <tr onclick="selectFoodtruck(${ft.sellerId})">
+                <td><%=i++%></td> <td><img src="${ft.foodtruckImgPath}"></td> <td><b>${ft.foodtruckName}</b></td> <td class="tooltip" title="${ft.foodtruckMainMenu}">
 <!--                 치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대  10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원"> -->
                 <div class="meme">
                     <p class="menu-spec">${ft.foodtruckMainMenu }

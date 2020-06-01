@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,12 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.fdl.foodlee.model.vo.EventAnswerVO;
 import com.fdl.foodlee.model.vo.EventVO;
+import com.fdl.foodlee.model.vo.virtual.EventRowVO;
 import com.fdl.foodlee.service.inf.IEventAnswerSVC;
-import com.fdl.foodlee.service.inf.IEventFileSVC;
 import com.fdl.foodlee.service.inf.IEventSVC;
 
 
@@ -234,6 +231,43 @@ public class EventController {
 //- 이벤트 게시글 리스트를 조회할 수 있다. (페이지네이션, 정렬, 태그)
 //	event_list.fdl (get, proc, dao)
 //	event_list.fdl (get, proc, dao, param?pn&order)
+//	@RequestMapping(value = "main.fdl", 
+	@RequestMapping(value = "event_list.fdl", 
+			method = RequestMethod.GET)
+	public ModelAndView eventListProc(
+				@RequestParam(value = "pn",
+				required = false, 
+				defaultValue = "1")
+				int pageNumber) {
+				//int pn) {
+		System.out.println("eventListProc(PN)..");
+		int maxPG = evSvc.checkMaxPageNumber();
+		if( pageNumber > maxPG || pageNumber <= 0 ) {
+			System.out.println("잘못된 페이지 번호: " + pageNumber);
+			return new ModelAndView(
+				"redirect:event_list.fdl?pn=1");
+		}
+		
+		List<EventVO> evList =
+				evSvc.showAllEvents(pageNumber);
+		
+		ModelAndView mav = 
+			new ModelAndView("event/_ev_list");
+		if( evList != null ) {
+			mav.addObject("evSize", evList.size());
+			mav.addObject("events", evList);
+			mav.addObject("maxPn", maxPG);
+			mav.addObject("pn", pageNumber); // 활성페이지			
+			
+			System.out.println("게시글리스트 pg 조회 성공: "
+					+ evList.size());
+		} else {
+			mav.addObject("msg", "게시글리스트 pg 조회 실패!");
+		}
+		
+		//return "article/at_list";
+		return mav;
+	}
 //- 이벤트 게시글 리스트를 검색할 수 있다. (페이지네이션, 정렬)
 //	event_form.fdl (get, form) 
 //	event_search.fdl (post, proc, dao, param?pn&order&keyword&날짜 범위..)

@@ -2,8 +2,10 @@ package com.fdl.foodlee.model.dao.inf;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.fdl.foodlee.model.vo.EventVO;
+import com.fdl.foodlee.model.vo.virtual.EventRowVO;
 
 public interface IEventDAO {
 //	- 관리자가 신규 이벤트 게시글을 등록할 수 있다.(+파일업로드..)
@@ -37,6 +39,10 @@ public interface IEventDAO {
 	List<EventVO> showAllEvents(boolean order);
 //		event_list.fdl (get, proc, dao, param?pn&order)
 	List<EventVO> showAllEvents(int offset, int limit);
+	List<EventRowVO> showAllEventsForRow(int offset, int limit);
+	List<Map<String, Object>> showAllEventsForMap(int offset, int limit);
+	
+	//
 	List<EventVO> showAllEvents(int offset, int limit, boolean order);
 	List<EventVO> showAllEvents(int offset, int limit, boolean order, String startDate, String endDate);
 //	- 이벤트 게시글 리스트를 검색할 수 있다. (페이지네이션, 정렬)
@@ -45,11 +51,22 @@ public interface IEventDAO {
 			int offset, int limit, 
 		boolean order, Date startDate, Date endDate);
 	int checkNumberOfEvents();
+	int checkNumberOfEvents(String target, String keyword);
+	
 	List<EventVO> searchEventForTitle(String keyword, String target, String orderBy);
 	List<EventVO> searchEventForContent(String keyword, String target, String orderBy);
 	List<EventVO> searchEventForTags(String keyword, String target, String orderBy);
+	//
 	List<EventVO> searchEventForAll(String keyword, String target, String orderBy);
 	List<EventVO> searchEventForColumn(String keyword, String target, String orderBy);
+	List<EventVO> searchEventForAll(String keyword, 
+			String target, String orderBy, 
+			int offset, int pageSize);
+	List<EventVO> searchEventForColumn(String keyword, 
+			String target, String orderBy,
+			int offset, int pageSize);
+	boolean updateEvent(EventVO vo);
+	
 	
 
 	

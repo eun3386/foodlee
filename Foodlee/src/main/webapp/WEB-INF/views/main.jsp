@@ -248,8 +248,14 @@
         	<%@include file="truck/truckList.jsp" %>
         </div>
         <div id="event-list">
-        	<%@include file="event/_ev_list.jsp" %>
-        </div>
+ 		</div>
+ 		<script type="text/javascript">
+ 			function loadEvList(pn) {
+ 				$("#event-list").load("${pageContext.request.contextPath}/event_list.fdl?pn="+pn)
+ 			}
+ 			
+ 			loadEvList(1);
+ 		</script>
     </div>
     
     <div id="footer">

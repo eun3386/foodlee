@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
   <script>
       $( function() {
         $( document ).tooltip();
@@ -32,7 +35,8 @@ pageEncoding="UTF-8"%>
 
 <!--http://naver.github.io/smarteditor2/demo/-->
 <!--네이버 스마트 에디터-->
-<body>
+<!-- <body> -->
+<c:if test="${!empty evSize}">
 <div id = "event-list-wrap">
     <table id="event-list-table" border="0">
         <caption id="gu-truck-info"><img src="resources/css/imgs/foodlee-face-white.png" class="face-white"> <span id="gu">푸들이</span> EVENT
@@ -47,32 +51,54 @@ pageEncoding="UTF-8"%>
             </tr>
         </thead>
         <tbody>
-        <%for(int i=1; i<=10; i++){%> 
-            <tr >
-                <td><%=i %></td> 
-                <td><img class="td-ongoing" src="resources/css/imgs/event-on.jpg"></td> 
-                <td><b>밤도깨비 야시장 잠정 중단 안내</b></td> 
-                <td class="tooltip" title="">
+        <%int i=1;%>
+        <c:forEach var="ev" items="${events}" varStatus="vs"> 
+            <tr>
+                <td>${vs.index+1}</td> 
+                <c:if test="${ev.eventOngoing eq 1}" >
+                <td><img class="td-ongoing" src="<%=request.getContextPath()%>/resources/css/imgs/event-on.jpg"></td>
+                </c:if>
+                <c:if test="${ev.eventOngoing eq 0}" >
+                <td><img class="td-ongoing" src="<%=request.getContextPath()%>/resources/css/imgs/event-off.jpg"></td>
+                </c:if>  
+                <td><b>${ev.eventTitle }</b></td> 
+                <td class="tooltip" title="${ev.eventTitle }">
 	                <div class="event-period">
-	                    <p>2020-04-03 ~ <br>2020-11-01<br></p>
+	                    <p>${ev.eventStartDate} ~ <br>${ev.eventEndDate}<br></p>
 	                </div>
                 </td> 
-                <td>2020-05-05</td>
-                <td><i class="fas fa-heart"></i> 32</td> 
-                <td>101</td>
+                <td>${ev.eventCreatedAt}</td>
+                <td><i class="fas fa-heart"></i> ${ev.likeCount}</td> 
+                <td>${ev.readCount}</td>
             </tr>
-        <%} %>
+			</c:forEach>
         </tbody>
     </table>    
     <ul id="page">
-        <li><i class="fas fa-angle-left fa-2x"></i></li> 
-        <li></li> 
-        <li id="selected"><i class="fas fa-circle"></i></li> 
-        <li><i class="fas fa-circle"></i></li> 
-        <li></li> 
-        <li><i class="fas fa-angle-right fa-2x"></i></li>
+    	
+    	<c:if test="${pn>1}">
+	        <li><a onclick="loadEvList(${pn-1})"><i class="fas fa-angle-left fa-2x"></i></a></li>
+		</c:if>
+	        <li></li> 
+	    <c:forEach varStatus="vs" begin="1" end="${maxPn}" step="1">
+	        <c:if test="${vs.current eq pn }">
+	        	<li id="selected"><i class="fas fa-circle"></i></li>
+	        </c:if>
+	        <c:if test="${vs.current ne pn }">
+	        	<li><a onclick="loadEvList(${vs.current})"><i class="fas fa-circle"></i></a></li>
+	        </c:if> 
+	    </c:forEach>
+	        <li></li>
+	    <c:if test="${pn < maxPn }"> 
+	        <li><a onclick="loadEvList(${pn+1})"><i class="fas fa-angle-right fa-2x"></i></a></li>
+	    </c:if>
+	    <c:if test="${pn > maxPn }"> 
+	        <li><i class="fas fa-angle-right fa-2x"></i></li>
+	    </c:if>
+       
     </ul>
 </div>
-</body>
+</c:if>
+<!-- </body> -->
 <!-- </html> -->
 

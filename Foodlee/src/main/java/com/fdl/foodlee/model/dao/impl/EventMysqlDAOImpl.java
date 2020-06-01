@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.IEventDAO;
 import com.fdl.foodlee.model.vo.EventVO;
+import com.fdl.foodlee.model.vo.virtual.EventRowVO;
 @Repository
 public class EventMysqlDAOImpl implements IEventDAO {
 	@Autowired
@@ -34,10 +36,10 @@ public class EventMysqlDAOImpl implements IEventDAO {
 			//insert into events values(null,'2020-05-07','2020-06-30',1,'테스트','이벤트테스트',0,0,null,null,null,now(),null);
 			//*="INSERT INTO events VALUES (1,'밤도깨비야시장','잠정 중단','2020-05-28','0000-00-00',1,now(),null,0,0,NULL,NULL,NULL)";
 		public static final String SQL_EVENT_SHOWALL_PG
-			= "SELECT * FROM events order by created_at "
+			= "SELECT * FROM events order by event_created_at "
 					+ "desc limit ?, ?";
 		public static final String SQL_CHECK_EVENT_NUMBERS
-			= "select count(id) as cnt from events";
+			= "select count(*) as cnt from events";
 		public static final String SQL_SEARCH_TITLE 
 			= "SELECT * FROM events where title like " +
 			"concat('%',?,'%') ";
@@ -68,6 +70,15 @@ public class EventMysqlDAOImpl implements IEventDAO {
 				+ "content like concat('%%',?,'%%') or "
 				+ "tags like concat('%%',?,'%%') %s"
 				+ " limit ?, ?";
+		public static final String SQL_ARTICLE_SHOWALL_PG_JOIN
+		= "select A.id vId, A.title vTitle,"
+			+ " A.read_count vRc,"
+			+ "	(select name from members C "
+			+ "where A.member_id = C.id) vUser, "
+			+ "A.created_at vDay, (select count(*) "
+			+ "from answers B where B.article_id = A.id) "
+			+ "vAsCnt from articles A order by "
+			+ "A.created_at desc limit ?, ?";
 		public static final String SQL_EVENT_UPDATE
 		= "update events set title=?, content=?, tags=? ,updated_at = now() where id = ?";
 		
@@ -164,6 +175,17 @@ public class EventMysqlDAOImpl implements IEventDAO {
 	}
 
 	@Override
+	public int checkNumberOfEvents(String target, String keyword) {
+		if(target.equals("all")) {
+			return jtem.queryForObject(SQL_CHECK_SEARCH_ALL, Integer.class,
+					keyword, keyword, keyword);
+		} else {
+			String sql = String.format(SQL_CHECK_SEARCH_ANYCOLUMN, target);
+			return jtem.queryForObject(sql, Integer.class, keyword);
+		}
+	}
+
+	@Override
 	public boolean deleteEvent(int evId) {
 		// TODO Auto-generated method stub
 		return false;
@@ -174,7 +196,7 @@ public class EventMysqlDAOImpl implements IEventDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public List<EventVO> showAllEvents(boolean order) {
 		// TODO Auto-generated method stub
@@ -183,8 +205,24 @@ public class EventMysqlDAOImpl implements IEventDAO {
 
 	@Override
 	public List<EventVO> showAllEvents(int offset, int limit) {
-		// TODO Auto-generated method stub
+		return jtem.query(SQL_EVENT_SHOWALL_PG, 
+				BeanPropertyRowMapper
+				.newInstance(EventVO.class)
+				, offset, limit);
+	}
+	
+	@Override
+	public List<EventRowVO> showAllEventsForRow(
+			int offset, int limit) {
 		return null;
+	}
+	
+	@Override
+	public List<Map<String, Object>> 
+		showAllEventsForMap(
+			int offset, int limit) {
+		return jtem.queryForList(SQL_ARTICLE_SHOWALL_PG_JOIN, 
+				offset, limit);
 	}
 
 	@Override
@@ -208,8 +246,7 @@ public class EventMysqlDAOImpl implements IEventDAO {
 
 	@Override
 	public int checkNumberOfEvents() {
-		// TODO Auto-generated method stub
-		return 0;
+		return jtem.queryForObject(SQL_CHECK_EVENT_NUMBERS, Integer.class);
 	}
 
 	@Override
@@ -241,6 +278,25 @@ public class EventMysqlDAOImpl implements IEventDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<EventVO> searchEventForAll(String keyword, String target, String orderBy, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EventVO> searchEventForColumn(String keyword, String target, String orderBy, int offset, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean updateEvent(EventVO vo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 
 }
