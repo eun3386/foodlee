@@ -198,9 +198,9 @@
 		$('#join_submit_btn').click(function() {
 			var result = confirm('가입 하시겠습니까?');
 			if(result) { //yes 
-				location.replace('${pageContext.request.contextPath}/seller/join.fdl'); 
+				location.replace('${pageContext.request.contextPath}/login_form.fdl');
 			} else { //no
-				
+				location.replace('${pageContext.request.contextPath}/seller/join_form.fdl'); 
 			} 
 		});
 		

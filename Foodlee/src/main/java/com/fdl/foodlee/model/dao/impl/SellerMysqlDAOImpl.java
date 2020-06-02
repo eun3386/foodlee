@@ -156,13 +156,13 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 	}
 	
 	@Override
-	public boolean updateOneSellerPW(SellerVO sel) {
+	public boolean updateOneSellerPW(int id, String login, String password) {
 		try {
 			int r = jtem.update(SQL_UPDATE_SELLER_PW, 
-				sel.getPassword(), sel.getLogin(), sel.getSellerId());
+				password, login, id);
 			return r == 1;
 		} catch (DataAccessException e) {
-			System.out.println("dao/ 판매자 회원 비밀번호 정보 갱신 실패 - " + sel.getSellerId());
+			System.out.println("dao/ 판매자 회원 비밀번호 정보 갱신 실패 - " + id);
 			return false;
 		}
 	}

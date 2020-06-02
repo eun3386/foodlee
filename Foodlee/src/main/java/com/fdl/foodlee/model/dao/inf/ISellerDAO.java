@@ -32,7 +32,7 @@ public interface ISellerDAO {
 	
 //	자신의 정보를 갱신 할 수 있다.
 	boolean updateOneSeller(SellerVO sel);
-	boolean updateOneSellerPW(SellerVO sel);
+	boolean updateOneSellerPW(int id, String login, String password);
 	
 //	탈퇴 할 수 있다.
 	boolean deleteOneSeller(int id);
@@ -53,6 +53,8 @@ public interface ISellerDAO {
 		List<SellerVO> showAllSellerJoin(SellerVO sv);
 		List<SellerVO> showAllSellerJoin(int mbId, String login);
 		HashMap<String, Object> showAllJoin();
+
+		
 		
 	}
 

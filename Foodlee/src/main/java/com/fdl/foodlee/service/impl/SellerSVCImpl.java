@@ -74,5 +74,10 @@ public class SellerSVCImpl implements ISellerSVC {
 	public String selectSellerPassword(String login, String email) {
 		return selDao.selectSellerPassword(login, email);
 	}
+
+	@Override
+	public boolean updateOneSellerPW(int id, String login, String password) {
+		return selDao.updateOneSellerPW(id, login, password);
+	}
 	
 }

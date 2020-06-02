@@ -93,7 +93,7 @@ body{
 /* 나의정보수정 */
 #section_edit .content{position: relative; max-width: 830px; margin: 0 auto;}
 .profile_wrap{position:absolute;left:-50px; top:0;}
-.profile_wrap>.photo{position:absolute;right:0;bottom:0;cursor:pointer;}
+.profile_wrap>.photo{position:absolute;left:150px; top: 20px; right:0;bottom:0;cursor:pointer; border: 2px solid orange;}
 .table_edit{margin-left: auto;}
 .table_edit th{font-size:20px;text-align:left;padding:10px 30px 10px 0;}
 .table_edit th:last-child{width:150px;}

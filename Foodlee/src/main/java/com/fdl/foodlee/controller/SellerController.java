@@ -144,17 +144,19 @@ public class SellerController {
 	}
 	
 //	seller/pw_chagnge.fdl
-	@RequestMapping(value = "/pw_chagnge.fdl", 
+	@RequestMapping(value = "/pw_change.fdl", 
 			method = RequestMethod.POST)
-	public ModelAndView sellerPasswordChangeProc(int id, String login, String password) {
-		SellerVO sel = new SellerVO(login, password, null, null, 0, null, null, null, null, null, null);
-		boolean b = selSvc.updateOneSeller(sel);
+	public ModelAndView sellerPasswordChangeProc(HttpServletRequest request, HttpSession ses) {
+		
+		int id = Integer.parseInt(request.getParameter("id"));
+		String login = request.getParameter("login");		
+		String password = request.getParameter("password");
+		
+		boolean b = selSvc.updateOneSellerPW(id, login, password);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
-			mav.addObject("msg", "회원 비밀번호 갱신 성공!! " + "<br>" + sel );
-			mav.setViewName("redirect:/seller/show_edit_form.fdl?login="+login);
+			mav.setViewName("redirect:/seller/show_form.fdl?login="+login);
 		} else {
-			mav.addObject("msg", "회원 비밀번호 갱신 실패!! " + "<br>" + sel );
 			mav.setViewName("boss/bossinfo/infomodify");
 		}
 		return mav;
@@ -182,10 +184,8 @@ public class SellerController {
 		boolean b = selSvc.updateOneSeller(sel);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
-			mav.addObject("msg", "회원 정보 갱신 성공!! " + "<br>" + sel );
 			mav.setViewName("redirect:/seller/show_form.fdl?login="+login);
 		} else {
-			mav.addObject("msg", "회원 정보 갱신 실패!! " + "<br>" + sel );
 			mav.setViewName("boss/bossinfo/infomodify");
 		}
 		return mav;

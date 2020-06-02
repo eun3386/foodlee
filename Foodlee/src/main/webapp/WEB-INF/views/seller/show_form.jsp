@@ -38,14 +38,16 @@
 		});
 		
 		$('#passwordChk').blur(function(){
-		 	if( $('#newPassword').val() != $('#passwordChk').val() ) {
-		    	if($('#passwordChk').val()!=''){
+			if( $(this).val() == '' ) return;
+			
+		 	if( $('#newPassword').val() != $(this).val() ) {
+		    	if($(this).val()!=''){
 			    	alert("비밀번호가 일치하지 않습니다.");
-		    	    $('#passwordChk').val('');
-		          	$('#passwordChk').focus();
+		    	    $(this).val('');
+		          	$(this).focus();
 		       	}
 		   	} else {
-			    $('btn-pw-edit-submit').attr('disabled',true);
+			    $('btn-pw-edit-submit').attr('disabled',false);
 		    }
 		});
 		// 
@@ -78,8 +80,17 @@
 		$('#phoneNumber2').val(pnSplit2);
 		$('#phoneNumber3').val(pnSplit3);
 		//
-		$('#btn-pw-edit-submit').on("click", function() {
-			$('#pw_form').submit();
+		$('#btn-pw-edit-submit').click(function() {
+			$('#pw_edit_submit_btn').click(function() {
+				var result = confirm('비밀번호를 변경 하시겠습니까?');
+				if(result) { //yes 
+					alert('비밀번호가 변경되었습니다.');
+					location.replace('${pageContext.request.contextPath}/seller/show_form.fdl');
+				} else { //no
+					location.replace('${pageContext.request.contextPath}/seller/show_form.fdl'); 
+				}
+			});
+			
 		});
 		//
 		if( $('#addressInput').val() != null ) {
@@ -88,6 +99,35 @@
 			var adVal = $('#address').val();
 		}
 		//
+		function chkPwd(str){
+			var pw = str;
+			var num = pw.search(/[0-9]/g);
+			var eng = pw.search(/[a-z]/ig);
+			var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+			if(pw.length < 8 || pw.length > 20){
+				alert("8자리 ~ 20자리 이내로 입력해주세요.");
+				return false;
+			}
+			if(pw.search(/₩s/) != -1){
+				alert("비밀번호는 공백없이 입력해주세요.");
+				return false;
+			} if(num < 0 || eng < 0 || spe < 0 ){
+				alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+				return false;
+			}
+			return true;
+		}
+		$('#newPassword').blur(function(){
+			
+			if( $('#newPassword').val() == '' || $('#newPassword').val() == 'undefined') return;
+			
+			if(!chkPwd( $.trim($('#newPassword').val()))){
+				$('#newPassword').val('');
+				return false;
+			}
+		});
+		
 	});
 </script>
 <title>bossinfo</title>
@@ -105,19 +145,15 @@
 			</div>
 			<div class="content">
 				<div class="profile_wrap">
-					<img src="${pageContext.request.contextPath}/resources/css/imgs/mypage/profile.png">
-					<img class="photo" src="${pageContext.request.contextPath}/resources/css/imgs/mypage/photo.png">
+					<img id="uploadImg" class="photo" style="width: 150px; height: 150px;" alt="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG" src="${pageContext.request.contextPath}${seller.imgPath}">
 				</div>
 				<form id="pw_form" style="display: inline;" action="${pageContext.request.contextPath}/seller/pw_change.fdl" method="post">
-					<input type="hidden" name="password">
-				</form>
-				<form style="display: inline;" action="${pageContext.request.contextPath}/seller/update.fdl" method="post">
-					<input type="hidden" name="id" value="${seller.sellerId}">
-					<input type="hidden" name="login" value="${seller.login}">
-					<input type="hidden" name="password" value="${seller.password}">
-					<input type="hidden" name="residentRn" value="${seller.residentRn}">
-					<input type="hidden" name="companyRn" value="${seller.companyRn}">
-					<input type="hidden" name="phoneNumber" value="${seller.phoneNumber}">
+				<input type="hidden" name="id" value="${seller.sellerId}">
+				<input type="hidden" name="login" value="${seller.login}">
+				<input type="hidden" name="password" value="${seller.password}">
+				<input type="hidden" name="residentRn" value="${seller.residentRn}">
+				<input type="hidden" name="companyRn" value="${seller.companyRn}">
+				<input type="hidden" name="phoneNumber" value="${seller.phoneNumber}">
 				<table class="table_edit">
 					<tr>
 						<th><label for="login">아이디</label></th>
@@ -129,7 +165,7 @@
 					<tr>
 						<th><label for="newPassword">*비밀번호</label></th>
 						<td>
-							<input type="password" id="newPassword" name="newPassword" class="changePassword input" style="display: none" required>
+							<input type="password" id="newPassword" name="password" class="changePassword input" style="display: none" required>
 						</td>
 						<th></th>
 					</tr>
@@ -150,7 +186,7 @@
 					<tr class="changePassword" style="display:none">
 						<td colspan="3">
 							<div id="div-pw-edit">
-								<button class="btn btn-secondary" id="btn-pw-edit-submit">비밀번호 변경</button>
+								<input type="submit" class="btn btn-secondary" id="btn-pw-edit-submit" value="비밀번호 변경" style="cursor: pointer;">
 							</div>
 						</td>
 					</tr>
@@ -225,7 +261,7 @@
 						</td>
 						<th></th>
 					</tr>
-				</table>	
+				</table>
 				</form>
 			</div>
 		</div>

@@ -200,9 +200,9 @@
 		$('#join_submit_btn').click(function() {
 			var result = confirm('가입 하시겠습니까?');
 			if(result) { //yes 
-				$(this).submit();
+				location.replace('${pageContext.request.contextPath}/login_form.fdl');
 			} else { //no
-				location.replace('${pageContext.request.contextPath}/join_form.fdl');
+				location.replace('${pageContext.request.contextPath}/member/join_form.fdl');
 			} 
 		});
 		
@@ -327,7 +327,7 @@
 		            <tr>
 		            	<th class="lb"></th>
 		            	<td id="join_submit" style="padding-top: 10px;">
-		            		<input type="button" id="join_submit_btn" class="join_btn btn" value="가입" disabled="disabled">&nbsp;&nbsp;
+		            		<input type="submit" id="join_submit_btn" class="join_btn btn" value="가입" disabled="disabled">&nbsp;&nbsp;
 		            		<input type="reset" class="join_btn btn" value="리셋">
 		            	</td>
 		            </tr>
