@@ -23,7 +23,7 @@ public class SellerVO {
 	
 	public SellerVO() {}
 	public SellerVO(String login) {
-		this.login = login;
+		this(0, null, login, null, null,null, 0, null, null, null, null, null, null, null, null, null, null);
 	}
 	public SellerVO(String login, String password, String name, String gender, int age, String residentRn, String email,
 			String phoneNumber, String address, String companyRn, String imgPath) {
