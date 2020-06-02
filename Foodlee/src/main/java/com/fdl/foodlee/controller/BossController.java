@@ -142,7 +142,7 @@ public class BossController {
 	//차트를 보여 줄 수 있다.
 	@RequestMapping(value = "boss.fdl", method = RequestMethod.GET)
 	public String boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
-		String login = (String) ses.getAttribute("login"); // 주문한 사람의 아이디 <<FK>> o		
+		String login = (String) ses.getAttribute("LoginName"); // 주문한 사람의 아이디 <<FK>> o		
 		SellerVO svo = this.selSvc.selectOneSeller(login);
 		
 		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(svo.getSellerId()) ;
@@ -305,7 +305,6 @@ public class BossController {
 			System.out.println("realPath =" + realPath);
 			System.out.println("adPrice =" + req.getParameter("adPrice"));
 			int adPrice =  Integer.parseInt(req.getParameter("adPrice"));
-			ses.setAttribute("bannerPrice", adPrice);
 //			String filePath 
 //				= atFileSvc.writeUploadedFile(upfile, 
 //					realPath, (String)ses
