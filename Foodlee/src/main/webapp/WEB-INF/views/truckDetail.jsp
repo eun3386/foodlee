@@ -32,6 +32,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <script src="resources/js/truckDetail.js"></script>
+<script>
+	var xLo = "${foodT.sellerFoodtruckCoordinate}".split(",")[0];
+	var yLo = "${foodT.sellerFoodtruckCoordinate}".split(",")[1];
+</script>
 <body>
 
 <!-- 	<div class="main_box"> -->
@@ -76,7 +80,7 @@
 	<div id="main_wrap">
 	<div id="info">
 		<div id="car_detail">
-			<img src="<%=CON%>/resources/imgs/truckDetail/car.jpg"
+			<img src="<%=CON%>/resources/imgs/foodtruck/${foodT.foodtruckImgPath}"
 				style="width: 350px; height: 250px; float: left; margin-bottom: 15px;">
 			<div id="car_des"
 				style="float: left; margin-left: 420px; position: absolute; font-family: '나눔바른고딕', sans-serif;">

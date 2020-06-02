@@ -625,7 +625,7 @@ $(document).ready(function() { // ready 시작
 				            pay_method : 'card',
 				            merchant_uid : 'merchant_' + new Date().getTime(),
 				            name : foodTName + ' 결제',
-				            amount : 1004,
+				            amount : priceSum,
 				            buyer_email : email,
 				            buyer_name : name,
 				            buyer_tel : phoneNumber,
@@ -807,14 +807,14 @@ $(document).ready(function() { // ready 시작
 	    zoomControl: false
 	};
 		
-	var cityhall = new naver.maps.LatLng(37.5666805, 126.9784147),
+	var mapLocat = new naver.maps.LatLng(xLo, yLo),
 	    map = new naver.maps.Map('map', {
-	        center: cityhall.destinationPoint(0, 500),
+	        center: mapLocat.destinationPoint(0, 500),
 	        zoom: 15
 	    }),
 	    marker = new naver.maps.Marker({
 	        map: map,
-	        position: cityhall
+	        position: mapLocat
 	    });
 	var foodTName = $("#foodTName").val();
 	var foodTMuni = $("#foodTMuni").val();

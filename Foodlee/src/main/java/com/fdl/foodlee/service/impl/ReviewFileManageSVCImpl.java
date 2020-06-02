@@ -84,23 +84,17 @@ public class ReviewFileManageSVCImpl implements IReviewFileSVC {
 		// 사용자 전용 고유 폴더 만들기..
 		String userRealPath = ses.getServletContext().getRealPath(DEF_UPLOAD_DEST) + "\\" + login;
 		System.out.println("userRealPath = " + userRealPath);
-		
+
 		File upbFolder = new File(ses.getServletContext().getRealPath(DEF_UPLOAD_DES));
 		if (!upbFolder.isDirectory()) {
 			try {
 				Files.createDirectory(upbFolder.toPath());
 				
 				File upFolder = new File(ses.getServletContext().getRealPath(DEF_UPLOAD_DEST));
-				// upFolder.mkdir();
-				
 				Files.createDirectory(upFolder.toPath());
 				
 				File userFolder = new File(userRealPath);
-				
 				Files.createDirectory(userFolder.toPath());
-				// userFolder.canWrite();
-				// return userFolder.mkdir();
-				System.out.println("폴더 생성에 성공함");
 				return true;
 			} catch (IOException e) {
 				System.out.println("폴더 생성 에러 에러 이유:");
@@ -108,14 +102,42 @@ public class ReviewFileManageSVCImpl implements IReviewFileSVC {
 				return false;
 			}
 		} else {
-			System.err.println("이미 폴더가 존재");
-			return false;
+			File upFolder = new File(ses.getServletContext().getRealPath(DEF_UPLOAD_DEST));
+			
+			if(!upFolder.isDirectory()) {
+				try {
+					Files.createDirectory(upFolder.toPath());
+					
+					File userFolder = new File(userRealPath);
+
+					try {
+						Files.createDirectory(userFolder.toPath());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return false;
+			} else {
+				File userFolder = new File(userRealPath);
+
+				try {
+					Files.createDirectory(userFolder.toPath());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.out.println("폴더 생성에 성공함");
+				return true;
+			}
+
 		}
 	}
 
 	@Override
 	// public String writeUploadedMultipleFiles(
-	public Map<String, Object> writeUploadedMultipleFiles(List<MultipartFile> reviewPic, String realPath, String login) {
+	public Map<String, Object> writeUploadedMultipleFiles(List<MultipartFile> reviewPic, String realPath,
+			String login) {
 		StringBuffer sb = new StringBuffer();
 		long totalByte = 0L;
 		for (int i = 0; i < reviewPic.size(); i++) {
