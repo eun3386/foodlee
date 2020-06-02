@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.vo.EventVO;
@@ -35,6 +40,7 @@ public class EventController {
 	private IEventSVC evSvc;
 	@Autowired
 	private IEventAnswerSVC asSvc;
+	
 	
 	public String filePath = null;
 	String realFileNm = "";
@@ -225,6 +231,37 @@ public class EventController {
 	
 //- 회원이 이벤트 게시글을 좋아요 할 수 있다
 //	event_like.fdl (get, proc, dao, param?evId&mbId..) 
+//	@RequestMapping(value = "event_like.fdl", method = RequestMethod.GET)
+//	@ResponseBody
+//	public ResponseEntity<Map<String, Object>> foodTruckLike(@RequestParam(value = "tgSr") int tgSr,
+//			@RequestParam(value = "sesMb") int sesMb, HttpSession ses) {
+//		ResponseEntity<Map<String, Object>> re = null;
+//		Map<String, Object> map = new HashMap<>();
+//		int sesMbId = (int)ses.getAttribute("id"); // (int) ses.getAttribute("mbId");
+//		if (sesMbId == sesMb) {
+//			Map<String, Object> lkMap = mltSvc.processMemberLike(tgSr, sesMb);
+//			int cntLikes = (int) lkMap.get("cntLikes");
+//			String typeLike = (String) lkMap.get("typeLike");
+//			if (cntLikes >= 0) {
+//				map.put("code", 1); // OK
+//				map.put("type", typeLike);
+//				map.put("msg", "좋아요 " + (typeLike.equals("add") ? "추가" : "취소") + " 완료");
+//				map.put("cntLikes", cntLikes);
+//				re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+//			} else {
+//				map.put("code", 2); // OK. DAO/SVC error
+//				map.put("type", typeLike);
+//				map.put("msg", "좋아요 " + (typeLike.equals("add") ? "추가" : "취소") + " DAO/SVC error");
+//				re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+//			}
+//		} else {
+//			// 세션 불일치..
+//			map.put("code", 3); // ERROR 3
+//			map.put("msg", "세션 불일치..");
+//			re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.FORBIDDEN);
+//		}
+//		return re;
+//	}
 //- 관리자가 자신의 게시글을 편집 갱신 할 수 있다
 //	event_edit_form.fdl (get, proc, dao, param?id)
 //	event_edit_form.fdl (get, proc, dao, param?id)
@@ -251,7 +288,7 @@ public class EventController {
 //	article_update.my (post, proc, dao, param...vo)
 	@RequestMapping(value = "event_update.fdl", 
 			method = RequestMethod.POST)
-	public String articleUpdateProc(
+	public String eventUpdateProc(
 			//Model model,
 			HttpSession ses, 
 			@ModelAttribute(value = "event") EventVO ev // vo를 command객체로 사용하자.

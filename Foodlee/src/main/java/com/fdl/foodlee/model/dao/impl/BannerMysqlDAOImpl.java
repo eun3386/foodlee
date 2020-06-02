@@ -3,6 +3,7 @@ package com.fdl.foodlee.model.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -33,13 +34,25 @@ public class BannerMysqlDAOImpl implements IBannerDAO {
 	public static final String SQL_BANNER_SHOWALL_ID =
 			"select * from banner where banner_id = ? order by ad_start_date asc";
 	public static final String SQL_BANNER_SHOWONE = 
-			"select * from banner where banner_id = ?";
+			"select * from banner where seller_id = ?";
 	public static final String SQL_INSERT_BANNER = 
-			"insert into banner values(null,?,?,?,DATE_ADD(?, INTERVAL 1 MONTH),0,0)";
+			"insert into banner values(null,?,?,?,DATE_ADD(?, INTERVAL 1 MONTH), ?, ?)";
+	public static final String SQL_BANNER_TIME =
+			"select DATE_ADD(?, INTERVAL 1 MONTH) from banner where seller_id = ? ";
 	public static final String SQL_ADD_BANNER = 
 			"select * from banner where ad_price=? order by ad_start_date asc limit 10";
+	
+	public static final String SQL_BANNER_LIST = 
+			"select * from banner";
+	
 	@Autowired
 	private JdbcTemplate jtem;
+	
+	@Override
+	public List<BannerVO> bannerAllList() {
+		List<BannerVO> bnList = jtem.query(SQL_BANNER_LIST, BeanPropertyRowMapper.newInstance(BannerVO.class));
+		return bnList;
+	}
 	
 	@Override
 	public List<BannerAddVO> showAddBannerList(int min, int max, int limit) {
@@ -96,6 +109,8 @@ public class BannerMysqlDAOImpl implements IBannerDAO {
 				pstmt.setString(2, bn.getAdImg());
 				pstmt.setTimestamp(3, bn.getAdStartDate());
 				pstmt.setTimestamp(4, bn.getAdStartDate());
+				pstmt.setInt(5, bn.getadType());
+				pstmt.setInt(6, bn.getSellerId());
 				
 				return pstmt;
 			}
@@ -105,7 +120,6 @@ public class BannerMysqlDAOImpl implements IBannerDAO {
 		Number r = kh.getKey(); // PK
 		return r.intValue();
 	}
-
 //	@Override
 //	public int insertNewBannerReturnKey(String adImg, int sellerId) {
 //		

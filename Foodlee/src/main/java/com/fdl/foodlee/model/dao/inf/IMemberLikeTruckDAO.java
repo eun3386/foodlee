@@ -6,5 +6,5 @@ public interface IMemberLikeTruckDAO {
 	String currentLikeMembers(int id);
 	int countLikeFoodtruck(int id);
 	boolean memberLikeADD(Map<String,Object> pMap);
-	boolean memberLikeRemove(Map<String,Object> pMap);	
+	boolean memberLikeRemove(Map<String,Object> pMap);
 }

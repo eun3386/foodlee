@@ -262,7 +262,7 @@
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user"
                                         class="svg-icon mr-2 ml-1"></i>
                                     My Profile</a>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="credit-card"
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/ad2.fdl"><i data-feather="credit-card"
                                         class="svg-icon mr-2 ml-1"></i>
                                     My Balance</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"

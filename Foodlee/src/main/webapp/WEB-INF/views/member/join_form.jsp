@@ -49,6 +49,9 @@
 			return true;
 		}
 		$('#password').blur(function(){
+			
+			if( $('#password').val() == '' || $('#password').val() == 'undefined') return;
+			
 			if(!chkPwd( $.trim($('#password').val()))){
 				$('#password').val('');
 				return false;
@@ -70,6 +73,9 @@
 		$("input[name='phoneNumber']").blur(function(){
 		
 			var phonenum = $('#phoneNumber').val();
+			
+			if( phonenum == '' || phonenum == 'undefined') return;
+			
 			var regPhone = /(01[0|1|6|9|7])[-](\d{3}|\d{4})[-](\d{4}$)/g;
 			
 			if(!regPhone.test(phonenum)){
@@ -99,7 +105,7 @@
 							$('input[type=submit]').attr('disabled',false);
 							break;
 						case 'error':
-							msg = '요청 및 DB 에러!!';
+							msg = '아이디 미입력 또는 요청 및 DB 에러!!';
 							$('input[type=submit]').attr('disabled',true);
 							break;
 					}
@@ -140,6 +146,9 @@
 		
 		$('input[name=id]').blur(function() {
 			var idReg = /^[A-Za-z]+[A-Za-z0-9]{5,19}$/g;
+			
+			if( $("input[name=id]").val() == '' || $("input[name=id]").val() == 'undefined') return;
+			
 	        if( !idReg.test( $("input[name=id]").val() ) ) {
 	            alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
 	            return;
@@ -170,7 +179,7 @@
                 <th class="lb"><label for="id">*아이디</label></th>
                 <td style="width: 500px;">
                     <input type="text" class="input" id="id" name="id" maxlength="20" size="35" placeholder="아이디 입력" required>
-                    <input type="button" id="dupchk" class="btn" value="중복확인">
+                    <input type="button" id="dupchk" class="btn" style="margin-left: 3px;" value="중복확인">
                 </td>
             </tr>
                     
@@ -235,14 +244,14 @@
             <tr>
                 <th class="lb" style="vertical-align: middle;"><label for="address">주소(사는곳)</label></th>
                 <td>
-                	<textarea rows="2" cols="30" style="resize: none" id="addressInput" class="input"></textarea>
+                	<textarea rows="2" cols="30" style="resize: none; margin-top: 10px;" id="addressInput" class="input"></textarea>
                     <input type="hidden" class="input" size="70" id="address" name="address">
                 </td>
             </tr>
             
             <tr>
             	<th class="lb"></th>
-            	<td id="join_submit">
+            	<td id="join_submit" style="padding-top: 10px;">
             		<input type="submit" id="join_submit_btn" class="join_btn btn" value="가입" disabled="disabled">&nbsp;&nbsp;
             		<input type="reset" class="join_btn btn" value="리셋">
             	</td>

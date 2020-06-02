@@ -1,5 +1,6 @@
 package com.fdl.foodlee.model.dao.inf;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.fdl.foodlee.model.vo.BannerAddVO;
@@ -8,7 +9,7 @@ import com.fdl.foodlee.model.vo.BannerVO;
 public interface IBannerDAO {
 	
 //	배너의 리스트 볼 수 있다
-//	List<BannerVO> showAllBanner();
+	List<BannerVO> bannerAllList();
 	List<BannerAddVO> showAddBannerList(int min, int max, int limit);
 	List<BannerVO> showAllBannerId(int id);
 //	배너의 트럭 상세보기 할수 있다
@@ -22,4 +23,5 @@ public interface IBannerDAO {
 	int insertNewBannerReturnKey(BannerVO bn);	
 //	int insertNewBannerReturnKey(String adImg, int sellerId);	
 	int insertNewBannerReturnKey2(BannerVO bn);
+	//
 }
