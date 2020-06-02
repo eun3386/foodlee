@@ -35,4 +35,8 @@ public class MypageService {
 	public List<ReviewVO> reviewList(String name) {
 		return mypageDao.getReviewList(name);
 	}
+	
+	public int cancelOrder (String name) {
+		return mypageDao.cancelOrder(name);
+	}
 }

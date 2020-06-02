@@ -129,7 +129,7 @@ public class OrderVO {
 	}
 	
 	public void setOrderState(int orderState) {
-		this.orderPriceSum = orderState;
+		this.orderState = orderState;
 	}
 	
 	public String getOrderReason() {

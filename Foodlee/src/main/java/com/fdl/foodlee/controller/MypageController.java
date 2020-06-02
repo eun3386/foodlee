@@ -128,6 +128,13 @@ public class MypageController {
 	public List<OrderVO> orderList(HttpSession ses) {
 		return mypageService.orderlist((String)ses.getAttribute("LoginName"));
 	}
+	public ModelAndView cancelOrder(HttpSession ses) {
+		ModelAndView mav = new ModelAndView();
+		String login = (String)ses.getAttribute("LoginName");
+		int name = mypageService.cancelOrder(login);
+		return mav;
+		
+	}
 //	public ModelAndView orderList(HttpSession ses) {
 //		ModelAndView mav = new ModelAndView();
 //		mav.addObject("order", orderSvc.memberOrderList((String)ses.getAttribute("LoginName")));

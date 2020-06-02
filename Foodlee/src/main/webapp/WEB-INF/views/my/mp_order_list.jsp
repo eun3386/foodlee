@@ -1,12 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
+<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
   <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>	
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>		
+<script>
+$(document).ready(function() {
+	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
+	    $('#orderTable').DataTable( {
+	        "pagingType": "full_numbers",
+	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
+	        "language": {
+	        	"search": "검색 _INPUT_ ",
+	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
+	            "zeroRecords": "결과가 없습니다",
+	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
+	            "infoEmpty": "값이 없습니다.",
+	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
+	            "paginate": {
+	              "first": '처음',
+	              "last": '끝',
+	              "previous": "이전",
+	              "next": "다음"
+	            }
+	        }
+	    });
+	});
+	 
+</script>
 
 </head>
 <body>
@@ -29,6 +59,7 @@
 							<th>결제금액</th>
 							<th>주문일시</th>
 							<th>주문현황</th>
+							<th>주문취소</th>
 						</tr>
 					</thead>
 					<tbody id ="listOrder" class ="ftLink">
@@ -60,10 +91,35 @@ $(function(){
 					html += '<td>' + item.orderId + '</td>';
 					html += '<td><a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.orderFoodtruckName + '</a></td>';
 					html += '<td>' + item.orderName + '</td>';
-					html += '<td>' + item.orderPriceSum + '</td>';
+					html += '<td>' + item.orderPriceSum + '원</td>';
 					html += '<td>' + moment(item.orderDate).format('YYYY-MM-DD HH:mm:ss') + '</td>';
-					html += '<td>' + item.orderState + '</td>';
+					html += '<td>';
+				
+					//if( item.orderState == undefined || item.orderState == null ) item.orderState = 0;
+					
+ 					var orVals = ['Error! 관리자에게 문의해주세요', '주문완료', '주문취소', '조리중', '판매자 주문거절', '판매자 주문취소'];
+
+ 					html += orVals[item.orderState];
+					
+					// 					switch(item.orderState) {
+// 						case 1: html += '주문완료'; break;
+// 					}
+					html += '</td>';
+					
+					html += '<td>';
+					
+	
+					html += '<input type="button" id="cancelBt" onclick="" value="취소하기">';
+					
+					if( item.orderState > 2)
+						$("#cancelBt").attr("disabled", true);
+					else
+						$("#cancelBt").attr("disabled", false);
+					
+					html += '</td>';
+				
 				html += '</tr>';
+				
 			})
 			$("#listOrder").empty().append(html);
 		},
@@ -78,6 +134,7 @@ $(function(){
 		}
 	})
 });
+
 
 </script>
 </body>
