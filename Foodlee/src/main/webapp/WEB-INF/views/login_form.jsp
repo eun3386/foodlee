@@ -45,9 +45,15 @@
 	$(document).ready(function () {
 		
 		$('#join').on('click', function() {
-    		var ROOT_PATH = '<%= application.getContextPath() %>';
-    		var url = ROOT_PATH+'/join_choice_form.fdl';
+    		var ROOT_PATH = '${pageContext.request.contextPath}/';
+    		var url = ROOT_PATH+'join_choice_form.fdl';
 			$("#main-content").load(url);
+    	});
+		
+		$('#id_pw_find').on('click', function() {
+    		var ROOT_PATH = '${pageContext.request.contextPath}/';
+    		var url = ROOT_PATH+'find_form.fdl';
+			$("#login_form").load(url);
     	});
 		
 		$('#login_submit_btn').on('click', function() {
@@ -150,7 +156,7 @@
 			 			</tr>
 			 			<tr>
 			 				<td id="find_td">
-			 					<a id="id_pw_find" href="${pageContext.request.contextPath}/find_form.fdl">아이디/비밀번호 찾기</a>
+			 					<a id="id_pw_find" href="#">아이디/비밀번호 찾기</a>
 			 				</td>
 			 			</tr>
 			 			<tr class="submit">

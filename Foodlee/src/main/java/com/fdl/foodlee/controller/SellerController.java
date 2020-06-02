@@ -57,6 +57,11 @@ public class SellerController {
 		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
 		String companyRN = request.getParameter("companyRN1")+"-"+request.getParameter("companyRN2")+"-"+request.getParameter("companyRN3");
+		System.out.println(upfiles);
+		
+		System.out.println((String)ses.getAttribute("LoginName"));
+		
+		selFileSvc.makeUserDir(ses, "test");
 		
 		String realPath = ses.getServletContext().getRealPath(ISellerFileSVC.DEF_UPLOAD_DEST) + "/";
 		
