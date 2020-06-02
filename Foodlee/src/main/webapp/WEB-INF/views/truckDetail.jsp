@@ -210,7 +210,7 @@
 									삭제</button>
 									<br>
 								</c:if>
-								<c:if test="${sellerLogin.login eq LoginName and foodT.sellerId eq sellerId and rv.reviewDepth eq 0 and empty reviewList[vs.index+1].reviewPnum}">
+								<c:if test="${foodT.sellerId eq sellerId and foodT.sellerId eq sellerId and rv.reviewDepth eq 0 and empty reviewList[vs.index+1].reviewPnum}">
 									<button id="reply_button_${rv.reviewId}" onclick="reply_review(${rv.reviewId})">답변</button>
 								</c:if>
 								</span>
@@ -360,7 +360,10 @@
 							<c:when test="${qna.qnaSecret eq true}">
 								<c:choose>
 									<c:when test="${qna.qnaDepth eq 0}">
-										<c:if test="${qna.login eq LoginName or not empty sellerLogin.login and sellerLogin.login eq LoginName}">
+										<c:if test="${qna.login eq LoginName}">
+											<i class="fas fa-lock"></i> ${qna.login}
+										</c:if>
+										<c:if test="${foodT.sellerId eq sellerId}">
 											<i class="fas fa-lock"></i> ${qna.login}
 										</c:if>
 									</c:when>
@@ -385,7 +388,10 @@
 							<c:when test="${qna.qnaSecret eq true}">
 								<c:choose>
 									<c:when test="${qna.qnaDepth eq 0}">
-										<c:if test="${qna.login eq LoginName or not empty sellerLogin.login and sellerLogin.login eq LoginName}">
+										<c:if test="${qna.login eq LoginName}">
+											<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+										</c:if>
+										<c:if test="${foodT.sellerId eq sellerId}">
 											<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
 										</c:if>
 									</c:when>
@@ -411,7 +417,7 @@
 								삭제</button>
 								<br>
 							</c:if>
-							<c:if test="${sellerLogin.login eq LoginName and foodT.sellerId eq sellerId and qna.qnaDepth eq 0 and empty qnaList[qnavs.index+1].qnaPnum}">
+							<c:if test="${foodT.sellerId eq sellerId and foodT.sellerId eq sellerId and qna.qnaDepth eq 0 and empty qnaList[qnavs.index+1].qnaPnum}">
 								<input type="hidden" id="hdSecret_${qna.qnaId}" value="${qnaList[qnavs.index].qnaSecret}">
 								<button id="reply_button_qna_${qna.qnaId}" onclick="reply_qna(${qna.qnaId})">답변</button>
 							</c:if>

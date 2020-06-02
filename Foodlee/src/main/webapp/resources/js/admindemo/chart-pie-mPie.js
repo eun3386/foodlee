@@ -15,8 +15,8 @@ var myPieChart = new Chart(ctx, {
       // label: ["일반 회원 남성", "일반 회원 여성"],
       data: [mmale, mfemale],
       backgroundColor: ['#2e59d9', 'red'],
-      hoverBackgroundColor: ['#2e59d9', '#red'],
-      hoverBorderColor: "rgba(234, 236, 244, 1)",
+      // hoverBackgroundColor: ['#2e59d9', '#red'],
+      // hoverBorderColor: "rgba(234, 236, 244, 1)",
       // label: '일반 회원'
     }, {
     	// label: ["판매자 남성", "판매자 여성"],

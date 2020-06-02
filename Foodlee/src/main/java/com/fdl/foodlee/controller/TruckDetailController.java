@@ -98,7 +98,8 @@ public class TruckDetailController {
 		} else {
 			return "redirect:/main.fdl";
 		}
-		ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(getSellerId)); // 셀러
+		
+		// ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(getSellerId)); // 셀러
 		
 		// int mbId = (int)ses.getAttribute("id");
 		
@@ -117,6 +118,7 @@ public class TruckDetailController {
 				String getLoginType = String.valueOf(ses.getAttribute("LoginType"));
 				if (Integer.parseInt(getLoginType) == 5) {
 					getTruckSellerId = sellSvc.selectOneSeller((String)ses.getAttribute("LoginName")).getSellerId();
+					ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(getTruckSellerId)); // 셀러
 				}
 			}
 		}
