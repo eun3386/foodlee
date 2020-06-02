@@ -29,8 +29,9 @@ public class FoodtruckVO {
 	
 	public FoodtruckVO() {}
 	public FoodtruckVO(int favoriteCount, int memberLikeCount) {
-		this.favoriteCount = favoriteCount;
-		this.memberLikeCount = memberLikeCount;
+//		this.favoriteCount = favoriteCount;
+//		this.memberLikeCount = memberLikeCount;
+		this(0, null, null, null, 0, null, null,0,	null, favoriteCount, memberLikeCount, null, null, null);
 	}
 	public FoodtruckVO(String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu, int menuCategory,
 			String foodtruckLocation, String foodtruckMuni, int foodtruckGuCode, String foodtruckOperationHour,
