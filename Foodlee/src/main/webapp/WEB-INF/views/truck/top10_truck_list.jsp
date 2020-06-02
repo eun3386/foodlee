@@ -7,14 +7,16 @@
 	
 		<div id="top_foodtruck_content">
 			<c:forEach var="foodtruck" items="${topFtList}" varStatus="vs" >
-				<button type="button" onclick="" class="top_truck_card">
-					<img src="<%=CON%>/resources/imgs/foodtruck/${foodtruck.foodtruckImgPath}" width="100px" height="100px"> <br>
-					<c:out value="${foodtruck.foodtruckName}" /> <br>
-					<c:out value="${foodtruck.foodtruckMainMenu}" /> <br>
-					<c:out value="${foodtruck.foodtruckLocation}" /> <br>
-					<c:out value="♥${foodtruck.memberLikeCount}" /> <br>
-<%-- 					<c:if test="${vs.index == 10}"></c:if> --%>
-				</button>
+				<a href="<%=CON%>/truckDetail.fdl?sellerId=${foodtruck.sellerId}">
+						<button type="button" onclick="" class="top_truck_card">
+							<img src="<%=CON%>/resources/imgs/foodtruck/${foodtruck.foodtruckImgPath}" width="100px" height="100px"> <br>
+							<c:out value="${foodtruck.foodtruckName}" /> <br>
+							<c:out value="${foodtruck.foodtruckMainMenu}" /> <br>
+							<c:out value="${foodtruck.foodtruckLocation}" /> <br>
+							<c:out value="♥${foodtruck.memberLikeCount}" /> <br>
+		<%-- 					<c:if test="${vs.index == 10}"></c:if> --%>
+						</button>
+				</a>
 			</c:forEach>
 		</div>
 		<div class="foodtrucklist_pagenation" style="text-align: center">
