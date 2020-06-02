@@ -142,49 +142,19 @@ public class BossController {
 	//차트를 보여 줄 수 있다.
 	@RequestMapping(value = "boss.fdl", method = RequestMethod.GET)
 	public String boss(HttpServletRequest request, HttpSession ses, Model model) {//시작화면
-		String login = (String) ses.getAttribute("login"); // 주문한 사람의 아이디 <<FK>> o
-//		int sellerId = Integer.parseInt(request.getParameter("sellerId")); // 판매자 번호 <<FK>> o
-//		String orderName = request.getParameter("orderName"); // 주문한 메뉴 이름 (,)구분
-//		String orderNumber = request.getParameter("orderNumber"); // 주문한 메뉴 개수 (,)구분
-//		String orderPrice = request.getParameter("orderPrice"); // 주문한 메뉴의 가격 (,)구분
-//		int orderPriceSum = Integer.parseInt(request.getParameter("orderPriceSum")); // 주문한 메뉴의 총가격 o
-//		String orderReason = request.getParameter("orderReason"); // 판매자 주문 취소/거절 사유 0
-//		//String orderMerchantUid = request.getParameter("orderMerchantUid"); // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
-//		//String orderRequests = request.getParameter("orderRequests"); // 요청사항
-//		String orderDateStr = (String) request.getAttribute("orderDate"); // 주문일자 0
-//		
-//		int favoriteCount = Integer.parseInt(request.getParameter("favoriteCount")); // o좋아요 트럭 ⇔ integer favorite_count <<FK>>
-//		int memberLikeCount = Integer.parseInt(request.getParameter("memberLikeCount")); // o좋아요 횟수⇔ member_like_count 
-//		
-//		String sellerlogin = request.getParameter("login"); //판매자 id o
-//		
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date orderDate;
-//		OrderVO ovo = null;
-//		try {
-//			orderDate = sdf.parse(orderDateStr);
-//			 ovo = new OrderVO(login,sellerId,orderName,orderNumber,orderPrice,orderPriceSum,
-//					new Timestamp(orderDate.getTime())
-//					);//orderDate
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-		
-		
-//		}
-		
+		String login = (String) ses.getAttribute("login"); // 주문한 사람의 아이디 <<FK>> o		
 		SellerVO svo = this.selSvc.selectOneSeller(login);
 		
-//		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(svo.getSellerId()) ;
-		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(11) ;
+		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(svo.getSellerId()) ;
+//		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(11) ;
 		
 //		model.addAttribute("ovo",ovo); //orderVO
 		model.addAttribute("fvo",fvo); //foodtruckVO
 		model.addAttribute("svo",svo); //sellerVO
 	//	boolean b = selSvc.insertNewSellerWithCrypto(svo);
 	//order 리스트
-//		List<OrderVO> orList = ordSvc.sellerOrderList(svo.getSellerId());
-		List<OrderVO> orList = ordSvc.sellerOrderList(11);
+		List<OrderVO> orList = ordSvc.sellerOrderList(svo.getSellerId());
+//		List<OrderVO> orList = ordSvc.sellerOrderList(11);
 		model.addAttribute("orSize", orList.size());
 		model.addAttribute("orders", orList);
 		
@@ -259,24 +229,13 @@ public class BossController {
 		
 		model.addAttribute("today", today1);
 		model.addAttribute("ytday", ytday);
-		model.addAttribute("today1", yesterday1);
-		model.addAttribute("today2", yesterday2);
-		model.addAttribute("today3", yesterday3);
-		model.addAttribute("today4", yesterday4);
-		model.addAttribute("today5", yesterday5);
-		model.addAttribute("today6", yesterday6);
+//		model.addAttribute("today1", yesterday1);
+//		model.addAttribute("today2", yesterday2);
+//		model.addAttribute("today3", yesterday3);
+//		model.addAttribute("today4", yesterday4);
+//		model.addAttribute("today5", yesterday5);
+//		model.addAttribute("today6", yesterday6);
 		model.addAttribute("wsel", wsel);
-		
-		//		ModelAndView vo1 = new ModelAndView();
-//		vo1.setViewName("boss");
-//		vo1.addObject("login", login); //ovo 주문한 사람의 아이디 <<FK>>
-//		vo1.addObject("sellerlogin", sellerlogin); //svo판매자 id 
-//		vo1.addObject("sellerId", sellerId); //ovo판매자 번호 <<FK>>
-//		vo1.addObject("orderPriceSum", orderPriceSum); //ovo 주문한 메뉴의 총가격
-//		vo1.addObject("orderDate", orderDateStr); //ovo 주문일자
-//		vo1.addObject("favoriteCount", favoriteCount); // fvo 좋아요 트럭 ⇔ integer favorite_count <<FK>>
-//		vo1.addObject("memberLikeCount", memberLikeCount); // fvo 좋아요 횟수⇔ member_like_count 
-//		vo1.addObject("orderReason", orderReason); // 판매자 주문 취소/거절 사유
 
 		return "boss";
 	}
