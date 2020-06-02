@@ -116,11 +116,9 @@ public class SellerController {
 		String login = (String)ses.getAttribute("LoginName");
 		SellerVO sel = selSvc.selectOneSeller(login);
 		if( sel != null ) {
-			mav.addObject("msg","회원조회 성공 - "+ login);
 			mav.addObject("seller", sel);
 			mav.setViewName("seller/show_form");
 		} else {
-			mav.addObject("msg","회원조회 실패 - "+ login);
 			mav.setViewName("redirect:boss.fdl");
 		}
 		return mav;
@@ -133,11 +131,9 @@ public class SellerController {
 		String login = (String)ses.getAttribute("LoginName");
 		SellerVO sel = selSvc.selectOneSeller(login);
 		if( sel != null ) {
-			mav.addObject("msg","회원조회 성공 - "+ login);
 			mav.addObject("seller", sel);
 			mav.setViewName("seller/edit_form");
 		} else {
-			mav.addObject("msg","회원조회 실패 - "+ login);
 			mav.setViewName("redirect:boss.fdl");
 		}
 		return mav;
@@ -209,10 +205,8 @@ public class SellerController {
 		boolean b = mnSvc.insertNewMenu(mn);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
-			mav.addObject("msg", "메뉴 추가 성공!! " + "<br>" + mn );
 			mav.setViewName("redirect:/boss.fdl");
 		} else {
-			mav.addObject("msg", "메뉴 추가 실패!! " + "<br>" + mn );
 			mav.setViewName("boss/bossmenu/menumodify");
 		}
 		return mav;

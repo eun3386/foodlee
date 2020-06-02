@@ -91,9 +91,11 @@ body{
 
 
 /* 나의정보수정 */
+#back {position:absolute;left: 550px;top: 460px;z-index: 99;}
 #section_edit .content{position: relative; max-width: 830px; margin: 0 auto;}
 .profile_wrap{position:absolute;left:-50px; top:0;}
-.profile_wrap>.photo{position:absolute;left:150px; top: 20px; right:0;bottom:0;cursor:pointer; border: 2px solid orange;}
+.profile_wrap>.selPhoto{position:absolute;left:150px; top: 20px; right:0;bottom:0;cursor:pointer; border: 2px solid orange;}
+.profile_wrap>.editPhoto{position:absolute;left:50px; top: 20px; right:0;bottom:0;cursor:pointer; border: 2px solid orange;}
 .table_edit{margin-left: auto;}
 .table_edit th{font-size:20px;text-align:left;padding:10px 30px 10px 0;}
 .table_edit th:last-child{width:150px;}
@@ -108,12 +110,12 @@ body{
 .btn{background-color:#777; color: white; border: 0; border-radius: 3px;  padding: 4px 10px 6px;cursor:pointer;font-size:16px;}
 .btn.btn-primary{}
 .btn.btn-secondary{background-color:#4da2de}
-.btn.btn-danger{margin-top:15px;background-color:#de4d4d}
+.btn.btn-danger{margin-top:15px;background-color:#de4d4d z-index: 99;}
 #div-pw {position: absolute; left: 146px; top: -40px; z-index: 99;width:165px;}
 #div-pw-edit {position: absolute; right: 10px; top: -40px; z-index: 99;width:165px;}
 #div-pw-edit-cancel {position: absolute; right: -120px; top: -43px; z-index: 99;width:165px;}
 #btn-edit-submit, #btn-edit-cancel, #btn-pw-edit-submit {cursor: default;}
-#div-edit{position: absolute; top: 15.7px; left: -56px;}
+#div-edit{position: absolute; top: 15.7px;  z-index: 99;left: -66px;}
 
 /* 푸터 */
 .map_footer {text-align: center; padding: 30px 50px; }

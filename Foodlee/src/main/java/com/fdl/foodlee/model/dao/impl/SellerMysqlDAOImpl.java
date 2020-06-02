@@ -160,6 +160,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		try {
 			int r = jtem.update(SQL_UPDATE_SELLER_PW, 
 				password, login, id);
+			System.out.println("r = "+r);
 			return r == 1;
 		} catch (DataAccessException e) {
 			System.out.println("dao/ 판매자 회원 비밀번호 정보 갱신 실패 - " + id);

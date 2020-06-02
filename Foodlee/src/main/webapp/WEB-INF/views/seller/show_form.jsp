@@ -22,19 +22,16 @@
 		
 		$("#div-pw-edit-cancel").on("click", function(e){
 			e.preventDefault();
-			$('btn-pw-edit-submit').attr('disabled',true);
 			$(".changePassword").hide();
 			$('#div-pw').show();
 		});
 		
 		$("#btn-edit").on("click", function(e) {
-			e.preventDefault();
-			$(".changeInfo").show();
-			$(".info").hide();
-			$('btn-edit-submit').show();
-			$("#btn-edit-submit").attr('disabled',false);
-			$("#btn-edit-submit").css('cursor','pointer');
-			$(this).hide();
+			location.href = "${pageContext.request.contextPath}/seller/edit_form.fdl";
+		});
+		
+		$("#back_btn").on("click", function(e) {
+			location.href = "${pageContext.request.contextPath}/boss.fdl";
 		});
 		
 		$('#passwordChk').blur(function(){
@@ -50,6 +47,7 @@
 			    $('btn-pw-edit-submit').attr('disabled',false);
 		    }
 		});
+		
 		// 
 		var rRnStr = $('input[name=residentRn]').val();
 		var rRnSplit = rRnStr.split('-');
@@ -57,8 +55,6 @@
 		var rRnSplit2 = rRnSplit[1];
 		var rRnSplit2Str = rRnSplit2.substring(0,1)+'******';
 		$('#residentRn').html(rRnSplit1+'-'+rRnSplit2Str);
-		$('#residentRn1').val(rRnSplit1);
-		$('#residentRn2').val(rRnSplit2Str);
 		//
 		var cRnStr = $('input[name=companyRn]').val();
 		var cRnSplit = cRnStr.split('-');
@@ -66,9 +62,6 @@
 		var cRnSplit2 = cRnSplit[1];
 		var cRnSplit3 = cRnSplit[2];
 		$('#companyRn').html(cRnSplit1+'-'+cRnSplit2+'-'+cRnSplit3);
-		$('#companyRn1').val(cRnSplit1);
-		$('#companyRn2').val(cRnSplit2);
-		$('#companyRn3').val(cRnSplit3);
 		//
 		var pnStr = $('input[name=phoneNumber]').val();
 		var pnSplit = pnStr.split('-');
@@ -76,29 +69,18 @@
 		var pnSplit2 = pnSplit[1];
 		var pnSplit3 = pnSplit[2];
 		$('#phoneNumber').html(pnSplit1+'-'+pnSplit2+'-'+pnSplit3);
-		$('#phoneNumber1').val(pnSplit1);
-		$('#phoneNumber2').val(pnSplit2);
-		$('#phoneNumber3').val(pnSplit3);
 		//
+		
 		$('#btn-pw-edit-submit').click(function() {
-			$('#pw_edit_submit_btn').click(function() {
-				var result = confirm('비밀번호를 변경 하시겠습니까?');
-				if(result) { //yes 
-					alert('비밀번호가 변경되었습니다.');
-					location.replace('${pageContext.request.contextPath}/seller/show_form.fdl');
-				} else { //no
-					location.replace('${pageContext.request.contextPath}/seller/show_form.fdl'); 
-				}
-			});
-			
+			var result = confirm('비밀번호를 변경 하시겠습니까?');
+			if(result) { //yes 
+				alert('비밀번호가 변경되었습니다.');
+				location.replace('${pageContext.request.contextPath}/seller/show_form.fdl');
+			} else { //no
+				location.replace('${pageContext.request.contextPath}/seller/show_form.fdl'); 
+			}
 		});
-		//
-		if( $('#addressInput').val() != null ) {
-			var val = $('#addressInput').val();
-			$('#address').attr('value',val);
-			var adVal = $('#address').val();
-		}
-		//
+		
 		function chkPwd(str){
 			var pw = str;
 			var num = pw.search(/[0-9]/g);
@@ -130,11 +112,10 @@
 		
 	});
 </script>
-<title>bossinfo</title>
+<title>푸들이 - 판매자 정보</title>
 </head>
 <body id="wrapper">
 <div id="infomain">
-	<!-- 마이페이지 시작-->
 	<section class="main_section" id="section_edit">
 		<div class="wrapper">
 			<div class="title">
@@ -144,13 +125,15 @@
 				</div>
 			</div>
 			<div class="content">
+				<div id="back">
+					<button class="btn" id="back_btn" style="cursor: pointer;">뒤로가기</button>
+				</div>
 				<div class="profile_wrap">
-					<img id="uploadImg" class="photo" style="width: 150px; height: 150px;" alt="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG" src="${pageContext.request.contextPath}${seller.imgPath}">
+					<img id="uploadImg" class="selPhoto" style="width: 150px; height: 150px; cursor: default;" src="${pageContext.request.contextPath}${seller.imgPath}">
 				</div>
 				<form id="pw_form" style="display: inline;" action="${pageContext.request.contextPath}/seller/pw_change.fdl" method="post">
 				<input type="hidden" name="id" value="${seller.sellerId}">
 				<input type="hidden" name="login" value="${seller.login}">
-				<input type="hidden" name="password" value="${seller.password}">
 				<input type="hidden" name="residentRn" value="${seller.residentRn}">
 				<input type="hidden" name="companyRn" value="${seller.companyRn}">
 				<input type="hidden" name="phoneNumber" value="${seller.phoneNumber}">
@@ -256,7 +239,9 @@
 					<tr>
 						<th></th>
 						<td>
-							<div id="div-edit"><button class="btn btn-primary" id="btn-edit">수정</button></div>
+							<div id="div-edit">
+								<button class="btn btn-primary" id="btn-edit">수정</button>
+							</div>
 							<button class="btn btn-danger">회원탈퇴</button>
 						</td>
 						<th></th>
@@ -266,10 +251,6 @@
 			</div>
 		</div>
 	</section>
-	<!--마이페이지 끝  -->
-</div>
-<div id="footer">
-		
 </div>
 </body>
 </html>

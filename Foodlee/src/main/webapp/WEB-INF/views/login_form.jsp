@@ -145,7 +145,7 @@
 			 				<td>
 			 					<input type="password" id='password'
 			 						name="password" size='22' 
-			 						maxlength="10" placeholder="비밀번호 입력" required> 					
+			 						maxlength="20" placeholder="비밀번호 입력" required> 					
 			 				</td>
 			 			</tr>
 			 			<tr>
