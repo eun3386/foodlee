@@ -95,7 +95,15 @@ public interface IAdminSVC {
 	int countOrderPriceSum();
 	
 	Map<String,Object> countMenuCategory();
+	List<Map<String,Object>> countMonthOrder();
+	List<Map<String,Object>> countMonthOrderPriceSum();
 	List<MemberVO> showAllMember();
 	List<SellerVO> showAllSeller();
+	List<Integer> lastLoginListMembers();
+	List<Integer> lastLoginListSellers();
+	Map<String,Object> countMembersGender();
+	List<Map<String,Object>> countMonthMembers();
+	Map<String,Object> countSellersGender();
+	List<Map<String,Object>> countMonthSellers();
 	
 }

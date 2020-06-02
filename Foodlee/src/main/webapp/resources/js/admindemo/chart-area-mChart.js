@@ -45,8 +45,8 @@ var myLineChart = new Chart(ctx, {
 	// labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
 	labels: monthArray,
     datasets: [{
-    	  label: "주문건수",
-    	  yAxisID: 'order',
+    	  label: "일반회원 가입건수",
+    	  yAxisID: 'members',
           lineTension: 0.3,
           backgroundColor: "rgba(78, 115, 223, 0.05)",
           borderColor: "rgba(78, 115, 223, 1)",
@@ -59,10 +59,11 @@ var myLineChart = new Chart(ctx, {
           pointHitRadius: 10,
           pointBorderWidth: 2,
           // data: [0, 100, 200, 300, 400, 500],
-          data: mOrderNum,
-	}, {
-		  label: "총합가격",
-		  yAxisID: 'price',
+          data: mMembersJoin,
+	}
+    , {
+		  label: "판매자 가입건수",
+		  yAxisID: 'sellers',
 	      lineTension: 0.3,
 	      backgroundColor: "rgba(225, 18, 18, 0.05)",
 	      borderColor: "rgba(225, 18, 18, 1)",
@@ -74,10 +75,10 @@ var myLineChart = new Chart(ctx, {
 	      pointHoverBorderColor: "rgba(225, 18, 18, 1)",
 	      pointHitRadius: 10,
 	      pointBorderWidth: 2,
-	      // data: [50000, 200000, 600000, 120000, 180000, 250000],
-	      data: mOrderPriceSum,
-	      
-	}]
+	      // data: [50, 20, 600, 1000, 1800, 2500],
+	      data: mSellersJoin,
+	}
+	]
   },
   options: {
     maintainAspectRatio: false,
@@ -103,7 +104,7 @@ var myLineChart = new Chart(ctx, {
         }
       }],
       yAxes: [{
-          id: 'order',
+          id: 'members',
           type: 'linear',
           position: 'left',
           ticks: {
@@ -121,8 +122,10 @@ var myLineChart = new Chart(ctx, {
               borderDash: [2],
               zeroLineBorderDash: [2]
             }, 
-        }, {
-          id: 'price',
+        }
+      
+      , {
+          id: 'sellers',
           type: 'linear',
           position: 'right',
           ticks: {
@@ -140,7 +143,9 @@ var myLineChart = new Chart(ctx, {
               borderDash: [2],
               zeroLineBorderDash: [2]
             },
-        }]
+        }
+        
+        ]
     },
     legend: {
       display: true

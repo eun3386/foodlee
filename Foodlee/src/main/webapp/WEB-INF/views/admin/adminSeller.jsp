@@ -96,7 +96,6 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Member :</h6>
-            <a class="collapse-item" href="#">전체 회원 관리</a>
             <a class="collapse-item" href="<%= CON %>/adminMember.fdl">일반 회원 관리</a>
             <a class="collapse-item" href="<%= CON %>/adminSeller.fdl">판매자 회원 관리</a>
           </div>
@@ -112,11 +111,9 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">회원 :</h6>
-            <a class="collapse-item" href="utilities-other.html">회원 가입 통계</a>
-            <a class="collapse-item" href="utilities-color.html">회원 정보 통계</a>
-            <h6 class="collapse-header">푸드트럭 :</h6>
-            <a class="collapse-item" href="utilities-border.html">푸드트럭 통계</a>
-            <a class="collapse-item" href="utilities-animation.html">메뉴 카테고리 통계</a>
+            <a class="collapse-item" href="<%= CON %>/adminMemberChart.fdl">회원 가입 및 정보 통계</a>
+<!--             <h6 class="collapse-header">푸드트럭 :</h6> -->
+<%--             <a class="collapse-item" href="<%= CON %>/adminTruckMenuChart.fdl">푸드트럭 및 메뉴 통계</a> --%>
           </div>
         </div>
       </li>
@@ -181,13 +178,12 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="admin_logout.fdl" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              	[임시]Admin 로그인 중
-                <c:if test="${not empty adLoginName}">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                <c:out value="${adLoginName}" default="guest"/> 로그인 중...
+              <a id="aId" onMouseOver="this.innerHTML='로그아웃'" onMouseOut="this.innerHTML='<c:out value="${LoginName}"/> 로그인 중'"
+              class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/logout.fdl" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <c:if test="${not empty LoginName}">
+                <span class="mr-2 d-none d-lg-inline text-black-1100">
+                <c:out value="${LoginName}" default="guest"/> 로그인 중
                 </span>
-                	<i class="fas fa-user-cog"></i>
                 </c:if>
               </a>
             </li>

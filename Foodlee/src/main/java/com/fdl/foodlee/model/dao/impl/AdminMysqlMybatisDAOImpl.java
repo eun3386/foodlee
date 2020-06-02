@@ -230,6 +230,20 @@ public class AdminMysqlMybatisDAOImpl implements IAdminDAO {
 		//System.out.println("am" + am.get("a"));
 		return am;
 	}
+	
+	public List<Map<String,Object>> countMonthOrder() {
+		List<Map<String,Object>> am = sstem.selectList("IAdminDAO.SQL_SELECT_MONTH_ORDER_NUMBER");
+		//Map<String,Object> am = sstem.selectMap("IAdminDAO.SQL_SELECT_MENU_CATEGORYS", "a");
+		//System.out.println("am" + am.get("a"));
+		return am;
+	}
+	
+	public List<Map<String,Object>> countMonthOrderPriceSum() {
+		List<Map<String,Object>> am = sstem.selectList("IAdminDAO.SQL_SELECT_MONTH_ORDER_PRICE_SUM");
+		//Map<String,Object> am = sstem.selectMap("IAdminDAO.SQL_SELECT_MENU_CATEGORYS", "a");
+		//System.out.println("am" + am.get("a"));
+		return am;
+	}
 
 	@Override
 	public List<MemberVO> showAllMember() {
@@ -239,6 +253,40 @@ public class AdminMysqlMybatisDAOImpl implements IAdminDAO {
 	@Override
 	public List<SellerVO> showAllSeller() {
 		return sstem.selectList("IAdminDAO.SQL_SELECT_ALL_SELLERS");
+	}
+	
+	@Override
+	public List<Integer> lastLoginListMembers() {
+		return sstem.selectList("IAdminDAO.SQL_SELECT_LAST_LOGIN_DAY_MEMBERS");
+	}
+	
+	@Override
+	public List<Integer> lastLoginListSellers() {
+		return sstem.selectList("IAdminDAO.SQL_SELECT_LAST_LOGIN_DAY_SELLERS");
+	}
+	
+	@Override
+	public Map<String,Object> countMembersGender() {
+		Map<String,Object> am = sstem.selectOne("IAdminDAO.SQL_SELECT_MEMBERS_GENDER");
+		return am;
+	}
+
+	@Override
+	public List<Map<String, Object>> countMonthMembers() {
+		List<Map<String,Object>> am = sstem.selectList("IAdminDAO.SQL_SELECT_MONTH_MEMBERS_NUMBER");
+		return am;
+	}
+
+	@Override
+	public Map<String, Object> countSellersGender() {
+		Map<String,Object> am = sstem.selectOne("IAdminDAO.SQL_SELECT_SELLERS_GENDER");
+		return am;
+	}
+
+	@Override
+	public List<Map<String, Object>> countMonthSellers() {
+		List<Map<String,Object>> am = sstem.selectList("IAdminDAO.SQL_SELECT_MONTH_SELLERS_NUMBER");
+		return am;
 	}
 
 }

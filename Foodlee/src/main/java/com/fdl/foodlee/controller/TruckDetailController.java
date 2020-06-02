@@ -195,7 +195,7 @@ public class TruckDetailController {
 		rvFileSvc.makeUserDir(ses, rv.getLogin());
 		
 		System.out.println("경로" + realPath);
-		Map<String, Object> rMap = rvFileSvc.writeUploadedMultipleFiles(imgfiles, realPath, "poro"
+		Map<String, Object> rMap = rvFileSvc.writeUploadedMultipleFiles(imgfiles, realPath, rv.getLogin()
 				/*(String) ses.getAttribute("mbLoginName")*/);
 		
 		String filePath = (String)rMap.get("muliFPs");

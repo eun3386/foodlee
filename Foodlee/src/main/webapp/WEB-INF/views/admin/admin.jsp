@@ -20,14 +20,24 @@
   <link href="resources/adminTool/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
   <script>
   	// var loginName = "${LoginName}";
   	var snack = "${mapCategory['snack']}";
   	var meal = "${mapCategory['meal']}";
   	var dessert = "${mapCategory['dessert']}";
   	var riceCar = "${mapCategory['riceCar']}";
+  	
+  	var mOrderNum = new Array(); 
+  	var mOrderPriceSum = new Array();
+  	
+  	<c:forEach var="mOrder" items="${monthOrder}" varStatus="vs">
+		mOrderNum.push('<c:out value="${mOrder.c}"></c:out>');
+	</c:forEach>
+	
+	<c:forEach var="mOrderPrice" items="${monthOrderPrice}" varStatus="vs">
+		mOrderPriceSum.push('<c:out value="${mOrderPrice.r}"></c:out>');
+	</c:forEach>
+  	
   </script>
 </head>
 
@@ -71,7 +81,6 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Member :</h6>
-            <a class="collapse-item" href="#">전체 회원 관리</a>
             <a class="collapse-item" href="<%= CON %>/adminMember.fdl">일반 회원 관리</a>
             <a class="collapse-item" href="<%= CON %>/adminSeller.fdl">판매자 회원 관리</a>
           </div>
@@ -87,11 +96,9 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">회원 :</h6>
-            <a class="collapse-item" href="utilities-other.html">회원 가입 통계</a>
-            <a class="collapse-item" href="utilities-color.html">회원 정보 통계</a>
+            <a class="collapse-item" href="<%= CON %>/adminMemberChart.fdl">회원 가입 및 정보 통계</a>
             <h6 class="collapse-header">푸드트럭 :</h6>
-            <a class="collapse-item" href="utilities-border.html">푸드트럭 통계</a>
-            <a class="collapse-item" href="utilities-animation.html">메뉴 카테고리 통계</a>
+            <a class="collapse-item" href="<%= CON %>/adminTruckMenuChart.fdl">푸드트럭 및 메뉴 통계</a>
           </div>
         </div>
       </li>
@@ -156,13 +163,12 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="admin_logout.fdl" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              	[임시]Admin 로그인 중
-                <c:if test="${not empty adLoginName}">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                <c:out value="${adLoginName}" default="guest"/> 로그인 중...
+              <a id="aId" onMouseOver="this.innerHTML='로그아웃'" onMouseOut="this.innerHTML='<c:out value="${LoginName}"/> 로그인 중'"
+              class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/logout.fdl" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <c:if test="${not empty LoginName}">
+                <span class="mr-2 d-none d-lg-inline text-black-1100">
+                <c:out value="${LoginName}" default="guest"/> 로그인 중
                 </span>
-                	<i class="fas fa-user-cog"></i>
                 </c:if>
               </a>
             </li>
@@ -326,7 +332,7 @@
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">월별 주문 현황</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">2020년 월별 주문 현황</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -340,6 +346,8 @@
                     </div>
                   </div>
                 </div>
+                
+                <!-- test -->
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-area">
@@ -427,6 +435,9 @@
 <!--     </div> -->
 <!--   </div> -->
 
+</body>
+ <!-- Custom styles for this template-->
+  <link href="resources/css/sb-admin-2.min.css" rel="stylesheet">
   <!-- Bootstrap core JavaScript-->
   <script src="resources/adminTool/jquery/jquery.min.js"></script>
 
@@ -439,6 +450,4 @@
   <!-- Page level custom scripts -->
   <script src="resources/js/admindemo/chart-area-demo.js"></script>
   <script src="resources/js/admindemo/chart-pie-demo.js"></script>
-
-</body>
 </html>

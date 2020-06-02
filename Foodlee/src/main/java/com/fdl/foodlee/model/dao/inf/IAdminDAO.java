@@ -96,4 +96,12 @@ public interface IAdminDAO {
 	Map<String,Object> countMenuCategory();
 	List<MemberVO> showAllMember();
 	List<SellerVO> showAllSeller();
+	List<Map<String,Object>> countMonthOrder();
+	List<Map<String,Object>> countMonthOrderPriceSum();
+	List<Integer> lastLoginListMembers();
+	List<Integer> lastLoginListSellers();
+	Map<String,Object> countMembersGender();
+	List<Map<String,Object>> countMonthMembers();
+	Map<String,Object> countSellersGender();
+	List<Map<String,Object>> countMonthSellers();
 }

@@ -37,6 +37,10 @@ public class AdminController {
 		ses.setAttribute("orderCount", adSvc.countOrderSum());
 		ses.setAttribute("orderPriceSum", adSvc.countOrderPriceSum());
 		*/
+		if (ses.getAttribute("LoginType") == null || (int)ses.getAttribute("LoginType") != 6) {
+			return "redirect:/main.fdl";
+		}
+		
 		model.addAttribute("memberCount", adSvc.countMembers());
 		model.addAttribute("sellerCount", adSvc.countSellers());
 		model.addAttribute("foodtruckCount", adSvc.countFoodTrucks());
@@ -48,11 +52,21 @@ public class AdminController {
 		
 		Map<String, Object> am = adSvc.countMenuCategory();
 		model.addAttribute("mapCategory", am);
+		
+		List<Map<String, Object>> monthOrder = adSvc.countMonthOrder();
+		List<Map<String, Object>> monthOrderPrice = adSvc.countMonthOrderPriceSum();
+		
+		model.addAttribute("monthOrder", monthOrder);
+		model.addAttribute("monthOrderPrice", monthOrderPrice);
+		
 		return "admin/admin";
 	}
 	
 	@RequestMapping(value = "adminMember.fdl", method = RequestMethod.GET)
 	public String adminMember(HttpSession ses, Model model) {
+		if (ses.getAttribute("LoginType") == null || (int)ses.getAttribute("LoginType") != 6) {
+			return "redirect:/main.fdl";
+		}
 		List<MemberVO> mbList = adSvc.showAllMember();
 		
 		model.addAttribute("mbList", mbList);
@@ -61,10 +75,66 @@ public class AdminController {
 	
 	@RequestMapping(value = "adminSeller.fdl", method = RequestMethod.GET)
 	public String adminSeller(HttpSession ses, Model model) {
+		if (ses.getAttribute("LoginType") == null || (int)ses.getAttribute("LoginType") != 6) {
+			return "redirect:/main.fdl";
+		}
 		List<SellerVO> sellerList = adSvc.showAllSeller();
 		
 		model.addAttribute("sellerList", sellerList);
 		return "admin/adminSeller";
+	}
+	
+	@RequestMapping(value = "adminMemberChart.fdl", method = RequestMethod.GET)
+	public String adminMemberChart(HttpSession ses, Model model) {
+		if (ses.getAttribute("LoginType") == null || (int)ses.getAttribute("LoginType") != 6) {
+			return "redirect:/main.fdl";
+		}
+		int lastLoginMembersSum = 0;
+		int lastLoginSellersSum = 0;
+		
+		List<Integer> lastListMembers = adSvc.lastLoginListMembers();
+		List<Integer> lastListSellers = adSvc.lastLoginListSellers();
+		
+		for (Integer integer : lastListMembers) {
+			lastLoginMembersSum += integer;
+		}
+		
+		for (Integer integer : lastListSellers) {
+			lastLoginSellersSum += integer;
+		}
+		
+		List<Map<String, Object>> monthMembers = adSvc.countMonthMembers();
+		Map<String, Object> membersGender = adSvc.countMembersGender();
+		
+		List<Map<String, Object>> monthSellers = adSvc.countMonthSellers();
+		Map<String, Object> sellersGender = adSvc.countSellersGender();
+		
+		
+		model.addAttribute("membersGender", membersGender);
+		model.addAttribute("monthMembers", monthMembers);
+		model.addAttribute("sellersGender", sellersGender);
+		model.addAttribute("monthSellers", monthSellers);
+		model.addAttribute("memberCount", adSvc.countMembers());
+		model.addAttribute("sellerCount", adSvc.countSellers());
+		model.addAttribute("orderCount", adSvc.countOrderSum());
+		model.addAttribute("orderPriceSum", adSvc.countOrderPriceSum());
+		model.addAttribute("lastLoginSumMembers", lastLoginMembersSum);
+		model.addAttribute("lastLoginSumSellers", lastLoginSellersSum);
+		
+		
+		return "admin/adminMemberChart";
+	}
+	
+	@RequestMapping(value = "adminTruckMenuChart.fdl", method = RequestMethod.GET)
+	public String adminTruckMenuChart(HttpSession ses, Model model) {
+		if (ses.getAttribute("LoginType") == null || (int)ses.getAttribute("LoginType") != 6) {
+			return "redirect:/main.fdl";
+		}
+		model.addAttribute("memberCount", adSvc.countMembers());
+		model.addAttribute("sellerCount", adSvc.countSellers());
+		model.addAttribute("orderCount", adSvc.countOrderSum());
+		model.addAttribute("orderPriceSum", adSvc.countOrderPriceSum());
+		return "admin/adminTruckMenuChart";
 	}
 	
 }

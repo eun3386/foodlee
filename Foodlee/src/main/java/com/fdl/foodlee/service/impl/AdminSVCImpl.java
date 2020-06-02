@@ -225,8 +225,7 @@ public class AdminSVCImpl implements IAdminSVC {
 
 	@Override
 	public int countTodayOrders() {
-		// TODO Auto-generated method stub
-		return 0;
+		return adDao.countTodayOrders();
 	}
 
 	@Override
@@ -257,6 +256,46 @@ public class AdminSVCImpl implements IAdminSVC {
 	@Override
 	public List<SellerVO> showAllSeller() {
 		return adDao.showAllSeller();
+	}
+
+	@Override
+	public List<Map<String, Object>> countMonthOrder() {
+		return adDao.countMonthOrder();
+	}
+
+	@Override
+	public List<Map<String, Object>> countMonthOrderPriceSum() {
+		return adDao.countMonthOrderPriceSum();
+	}
+	
+	@Override
+	public List<Integer> lastLoginListMembers() {
+		return adDao.lastLoginListMembers();
+	}
+	
+	@Override
+	public List<Integer> lastLoginListSellers() {
+		return adDao.lastLoginListSellers();
+	}
+
+	@Override
+	public Map<String, Object> countMembersGender() {
+		return adDao.countMembersGender();
+	}
+
+	@Override
+	public List<Map<String, Object>> countMonthMembers() {
+		return adDao.countMonthMembers();
+	}
+
+	@Override
+	public Map<String, Object> countSellersGender() {
+		return adDao.countSellersGender();
+	}
+
+	@Override
+	public List<Map<String, Object>> countMonthSellers() {
+		return adDao.countMonthSellers();
 	}
 	
 }

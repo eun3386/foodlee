@@ -78,7 +78,7 @@
 	
 	<select id="showAllMember" parameterType="memberVO" resultType="memberVO">
 		<![CDATA[
-		SELECT * FROM MEMBERS ORDER BY created_at desc
+			SELECT * FROM MEMBERS ORDER BY created_at desc
 		]]>
 	</select>
 	
@@ -120,7 +120,8 @@
 <!-- 	</delete> -->
 	<select id="SQL_SELECT_MEMBER_COUNT" resultType="int">
 		<![CDATA[
-			select count(*) from members
+			select count(*) from members where type != "admin"
+			
 		]]>
 	</select>
 	
@@ -176,15 +177,84 @@
 		]]>
 	</select>
 	
+<!-- 	SELECT DATE_FORMAT(order_date,'%Y-%m') m, COUNT(*) c FROM orders GROUP BY m; -->
+	<select id="SQL_SELECT_MONTH_ORDER_NUMBER" resultType="map">
+		<![CDATA[
+			select * from(
+				select date_format(td.temp_date, '%Y-%m') m, count(o.order_date) c
+				from tempdate td left join orders o on 
+				(date_format(td.temp_date, '%Y-%m') = date_format(o.order_date, '%Y-%m'))
+				group by m) a;
+		]]>
+	</select>
+	
+<!-- 	SELECT DATE_FORMAT(order_date,'%Y-%m') m, IFNULL(sum(order_price_sum), 0) as r FROM orders GROUP BY m; -->
+	<select id="SQL_SELECT_MONTH_ORDER_PRICE_SUM" resultType="map">
+		<![CDATA[
+			select * from(
+					select date_format(td.temp_date, '%Y-%m') m, IFNULL(sum(order_price_sum), 0) r
+					from tempdate td left join orders o on 
+					(date_format(td.temp_date, '%Y-%m') = date_format(o.order_date, '%Y-%m'))
+					group by m) a;
+		]]>
+	</select>
+	
 	<select id="SQL_SELECT_ALL_MEMBERS" resultMap="mbResultMap">
 		<![CDATA[
-			select * from members;
+			SELECT * FROM MEMBERS where type != "admin"
 		]]>
 	</select>
 	
 	<select id="SQL_SELECT_ALL_SELLERS" resultMap="sellerResultMap">
 		<![CDATA[
 			select * from sellers;
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_LAST_LOGIN_DAY_MEMBERS" resultType="int">
+		<![CDATA[
+			select ifnull(TIMESTAMPDIFF(DAY, login_time, logout_time), 0) from members;
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_LAST_LOGIN_DAY_SELLERS" resultType="int">
+		<![CDATA[
+			select ifnull(TIMESTAMPDIFF(DAY, login_time, logout_time), 0) from sellers;
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_MEMBERS_GENDER" resultType="map">
+		<![CDATA[
+			select count(CASE WHEN gender="남" then 1 end) 남, count(CASE WHEN gender="여" then 1 end) 여
+			from members where type != "admin";
+		]]>
+	</select>
+	
+	<select id="SQL_SELECT_SELLERS_GENDER" resultType="map">
+		<![CDATA[
+			select count(CASE WHEN gender="남" then 1 end) 남, count(CASE WHEN gender="여" then 1 end) 여 from sellers;
+		]]>
+	</select>
+	
+<!-- 	SELECT DATE_FORMAT(joined_at,'%Y-%m') m, COUNT(*) c FROM members GROUP BY m; -->
+	<select id="SQL_SELECT_MONTH_MEMBERS_NUMBER" resultType="map">
+		<![CDATA[
+			select * from(
+				select date_format(td.temp_date, '%Y-%m') m, count(mb.joined_at) c
+				from tempdate td left join members mb on 
+				(date_format(td.temp_date, '%Y-%m') = date_format(mb.joined_at, '%Y-%m'))
+				group by m) a;
+		]]>
+	</select>
+	
+<!-- 	SELECT DATE_FORMAT(joined_at,'%Y-%m') m, COUNT(*) c FROM sellers GROUP BY m; -->
+	<select id="SQL_SELECT_MONTH_SELLERS_NUMBER" resultType="map">
+		<![CDATA[
+			select * from(
+				select date_format(td.temp_date, '%Y-%m') m, count(sr.joined_at) c
+				from tempdate td left join sellers sr on 
+				(date_format(td.temp_date, '%Y-%m') = date_format(sr.joined_at, '%Y-%m'))
+				group by m) a;
 		]]>
 	</select>
 

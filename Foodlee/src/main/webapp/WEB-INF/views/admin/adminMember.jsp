@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String CON = application.getContextPath();
 %>    
@@ -27,10 +28,59 @@
 
   <!-- Core plugin JavaScript-->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
   <script src="resources/adminTool/jquery-easing/jquery.easing.min.js"></script>
-
+  <style>
+  /*
+  #mask {  
+    position:absolute;  
+    z-index:9000;  
+    background-color:#000;  
+    display:none;  
+    left:0;
+    top:0;
+	} 
+	.window {
+	    display: none;
+	    position:absolute;  
+	    left:50%;
+	    top:15%;
+	    margin-left: -500px;
+	    width:1000px;
+	    height:500px;
+	    background-color:#FFF;
+	    z-index:10000;   
+	}
+	#dataTable tr.mbCList:hover {
+		background-color: #FFA500;
+		color: white;
+		cursor: pointer;
+	}
+	#dataTable td.sorting_1 {
+		color: blue;
+	}
+	*/
+  </style>
   <script>
+  /*
+  function wrapWindowByMask(){
+		 
+	    //화면의 높이와 너비를 구한다.
+	    var maskHeight = $(document).height();  
+	    var maskWidth = $(window).width();  
+
+	    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채운다.
+	    $("#mask").css({"width":maskWidth,"height":maskHeight});  
+
+	    // $("#mask").fadeIn(0);      
+	    $("#mask").fadeTo("slow",0.6);    
+
+	    //윈도우 같은 거 띄운다.
+	    $(".window").show();
+
+	}*/
+  
 	  $(document).ready(function() {
 		  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
 		    $('#dataTable').DataTable( {
@@ -51,6 +101,27 @@
 		            }
 		        }
 		    });
+			
+	  		/*
+		    //검은 막 띄우기
+		    $(".mbCList").click(function(e){
+		        e.preventDefault();
+		        wrapWindowByMask();
+		    });
+
+		    //닫기 버튼을 눌렀을 때
+		    $(".window .close").click(function (e) {  
+		        //링크 기본동작은 작동하지 않도록 한다.
+		        e.preventDefault();  
+		        $("#mask, .window").hide();  
+		    });       
+
+		    //검은 막을 눌렀을 때
+		    $("#mask").click(function () {  
+		        $(this).hide();  
+		        $(".window").hide();  
+		    });
+		    */
 		});
   	
   </script>
@@ -96,7 +167,6 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Member :</h6>
-            <a class="collapse-item" href="#">전체 회원 관리</a>
             <a class="collapse-item" href="<%= CON %>/adminMember.fdl">일반 회원 관리</a>
             <a class="collapse-item" href="<%= CON %>/adminSeller.fdl">판매자 회원 관리</a>
           </div>
@@ -112,11 +182,9 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">회원 :</h6>
-            <a class="collapse-item" href="utilities-other.html">회원 가입 통계</a>
-            <a class="collapse-item" href="utilities-color.html">회원 정보 통계</a>
-            <h6 class="collapse-header">푸드트럭 :</h6>
-            <a class="collapse-item" href="utilities-border.html">푸드트럭 통계</a>
-            <a class="collapse-item" href="utilities-animation.html">메뉴 카테고리 통계</a>
+            <a class="collapse-item" href="<%= CON %>/adminMemberChart.fdl">회원 가입 및 정보 통계</a>
+<!--             <h6 class="collapse-header">푸드트럭 :</h6> -->
+<%--             <a class="collapse-item" href="<%= CON %>/adminTruckMenuChart.fdl">푸드트럭 및 메뉴 통계</a> --%>
           </div>
         </div>
       </li>
@@ -181,13 +249,12 @@
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="admin_logout.fdl" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              	[임시]Admin 로그인 중
-                <c:if test="${not empty adLoginName}">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                <c:out value="${adLoginName}" default="guest"/> 로그인 중...
+              <a id="aId" onMouseOver="this.innerHTML='로그아웃'" onMouseOut="this.innerHTML='<c:out value="${LoginName}"/> 로그인 중'"
+              class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/logout.fdl" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <c:if test="${not empty LoginName}">
+                <span class="mr-2 d-none d-lg-inline text-black-1100">
+                <c:out value="${LoginName}" default="guest"/> 로그인 중
                 </span>
-                	<i class="fas fa-user-cog"></i>
                 </c:if>
               </a>
             </li>
@@ -204,7 +271,13 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">일반 회원 관리</h1>
           </div>
-
+			
+			
+			<div id="mask"></div>
+	          <div class="window">
+	          	<div>test</div>
+	          </div>
+	          
            <div class="container-fluid">
 
           <!-- Page Heading -->
@@ -226,12 +299,13 @@
                       <th>핸드폰 번호</th>
                       <th>주소</th>
                       <th>가입일</th>
+                      <th>마지막 로그인</th>
                     </tr>
                   </thead>
 <%--                 <c:forEach var="" items="" vs=""> --%>
                   <tbody>
 				  <c:forEach var="mb" items="${mbList}" varStatus="vs">
-                    <tr>
+                    <tr class="mbCList">
                       <td>${mb.login}</td>
                       <td>${mb.name}</td>
                       <td>${mb.gender}</td>
@@ -239,7 +313,8 @@
                       <td>${mb.email}</td>
                       <td>${mb.phoneNumber}</td>
                       <td>${mb.address}</td>
-                      <td>${mb.joinedAt}</td>
+                      <td><fmt:formatDate value="${mb.joinedAt}" pattern="yyyy-MM-dd"/></td>
+                      <td><fmt:formatDate value="${mb.loginTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                     </tr>
                   </c:forEach>
                   </tbody>
