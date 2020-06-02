@@ -98,7 +98,7 @@ body{
 .table_edit td{position:relative;}
 .table_edit .id{font-size:20px;}
 .table_edit .input{font-size:17px; border:1px solid #aaa; border-radius: 3px; padding:5px 7px; letter-spacing: 1px; }
-.table_edit .input.sm{width:50px; }
+.table_edit .input.sm{width:150px; }
 .table_edit .reg_id{font-size:20px; letter-spacing: 7px;font-weight: bold;}
 .table_edit .btn-abs{position: absolute; right: 0; top: -32px; z-index: 99;width:165px;}
 .btn{background-color: #777; color: white; border: 0; border-radius: 3px; margin-left: 10px; padding: 4px 10px 6px;cursor:pointer;font-size:16px;}

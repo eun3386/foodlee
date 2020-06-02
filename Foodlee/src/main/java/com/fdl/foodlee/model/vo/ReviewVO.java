@@ -12,6 +12,8 @@ public class ReviewVO {
 	private String reviewPic; // 리뷰 사진
 	private Timestamp reviewCreatedAt; // 리뷰 작성일
 	
+	private String reviewFoodtruckName; //은경
+	
 	public ReviewVO() {}
 	
 	public ReviewVO(int reviewId, String login, int sellerId, int reviewDepth, String reviewContent, Timestamp reviewCreatedAt) {
@@ -109,7 +111,17 @@ public class ReviewVO {
 	public void setReviewCreatedAt(Timestamp reviewCreatedAt) {
 		this.reviewCreatedAt = reviewCreatedAt;
 	}
+	
+	//은경
+	public String getReviewFoodtruckName() {
+		return reviewFoodtruckName;
+	}
 
+	public void setReviewFoodtruckName(String reviewFoodtruckName) {
+		this.reviewFoodtruckName = reviewFoodtruckName;
+	}
+	//
+	
 	@Override
 	public String toString() {
 		return "ReviewVO [reviewId=" + reviewId + ", login=" + login + ", sellerId=" + sellerId + ", reviewDepth=" + reviewDepth + ", reviewPnum="

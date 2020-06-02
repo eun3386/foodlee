@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>	
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
 
@@ -22,10 +24,10 @@
 						<tr>
 							<th>푸드트럭</th>
 							<th>질문</th>
-							<th>답변</th>
+							<th>질문등록일</th>
 						</tr>
 					</thead>
-					<tbody id = "listQna">
+					<tbody id = "listQna" class ="ftLink">
 			
 					</tbody>
 				</table>
@@ -54,10 +56,10 @@
 							<th>푸드트럭</th>
 							<th>리뷰사진</th>
 							<th>리뷰내용</th>
-							<th>사장님의 말</th>
+							<th>리뷰작성일</th>
 						</tr>
 					</thead>
-					<tbody id = "listRv">
+					<tbody id = "listRv" class ="ftLink">
 						
 					</tbody>
 				</table>
@@ -67,6 +69,13 @@
 	
 
 <script>
+// $(document).ready(function()) {
+// 	$("td#ftLink").click(function(){
+// 		location.href = $(this).attr("http://localhost:8082/foodlee/truckDetail.fdl?sellerId=")
+// 	})
+// }
+
+
 $(function(){
 	$.ajax({
 		url : "my_QnA_list.fdl",
@@ -75,9 +84,9 @@ $(function(){
 			var html = "";
 			data.forEach(function(item){
 					html += '<tr>';
-						html += '<td>' + item.sellerId + '</td>';
+						html += '<td><a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.qnaFoodtruckName + '</a></td>';
 						html += '<td>' + item.qnaContent + '</td>';
-						html += '<td>' + item.qnaCreatedAt + '</td>';
+						html += '<td>' + moment(item.qnaCreatedAt).format('YYYY-MM-DD HH:mm:ss') + '</td>';
 				html += '</tr>';
 			})
 			$("#listQna").empty().append(html);
@@ -103,10 +112,10 @@ $(function(){
 			var html = "";
 			data.forEach(function(item){
 					html += '<tr>';
-						html += '<td>' + item.sellerId + '</td>';
+						html += '<td><a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.reviewFoodtruckName + '</a></td>';
 						html += '<td>' + item.reviewPic + '</td>';
 						html += '<td>' + item.reviewContent + '</td>';
-						html += '<td>' + item.reviewCreatedAt + '</td>';
+						html += '<td>' + moment(item.reviewCreatedAt).format('YYYY-MM-DD HH:mm:ss') + '</td>';
 				html += '</tr>';
 			})
 			$("#listRv").empty().append(html);

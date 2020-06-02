@@ -40,7 +40,9 @@ $(function(){
 			data.forEach(function(item){
 				html += '<div class="card_wrap"><div class="card">'; 
 					html += '<div class="thumb"> ';
+					html += '<a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">';
 						html += '<img src="./resources/imgs/truckDetail/' + item.foodtruckImgPath + '">';
+							html += '</a>';
 					html += '</div>'; 
 					html += '<div class="content">';
 						html += '<div class="foodtruck_name">' + item.foodtruckName + '</div>';

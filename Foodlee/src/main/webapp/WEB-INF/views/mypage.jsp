@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,50 +44,6 @@
         }
     });
 });
- 
- $(document).ready(function() {
-	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
-	    $('#qnaTable').DataTable( {
-	        "pagingType": "full_numbers",
-	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
-	        "language": {
-	        	"search": "검색 _INPUT_ ",
-	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
-	            "zeroRecords": "결과가 없습니다",
-	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
-	            "infoEmpty": "값이 없습니다.",
-	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
-	            "paginate": {
-	              "first": '처음',
-	              "last": '끝',
-	              "previous": "이전",
-	              "next": "다음"
-	            }
-	        }
-	    });
-	});
- 
- $(document).ready(function() {
-	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
-	    $('#reviewTable').DataTable( {
-	        "pagingType": "full_numbers",
-	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
-	        "language": {
-	        	"search": "검색 _INPUT_ ",
-	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
-	            "zeroRecords": "결과가 없습니다",
-	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
-	            "infoEmpty": "값이 없습니다.",
-	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
-	            "paginate": {
-	              "first": '처음',
-	              "last": '끝',
-	              "previous": "이전",
-	              "next": "다음"
-	            }
-	        }
-	    });
-	});
  
   	
   </script>

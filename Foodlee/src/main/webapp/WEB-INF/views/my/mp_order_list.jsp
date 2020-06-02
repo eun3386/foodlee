@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>	
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>		
+
 </head>
 <body>
 
@@ -25,9 +28,10 @@
 							<th>메뉴</th>
 							<th>결제금액</th>
 							<th>주문일시</th>
+							<th>주문현황</th>
 						</tr>
 					</thead>
-					<tbody id ="listOrder">
+					<tbody id ="listOrder" class ="ftLink">
 		
 					</tbody>
 				</table>
@@ -54,10 +58,11 @@ $(function(){
 			data.forEach(function(item){
 				html += '<tr>';
 					html += '<td>' + item.orderId + '</td>';
-					html += '<td>' + item.sellerId + '</td>';
+					html += '<td><a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.orderFoodtruckName + '</a></td>';
 					html += '<td>' + item.orderName + '</td>';
 					html += '<td>' + item.orderPriceSum + '</td>';
-					html += '<td>' + new Date(item.orderDate) + '</td>';
+					html += '<td>' + moment(item.orderDate).format('YYYY-MM-DD HH:mm:ss') + '</td>';
+					html += '<td>' + item.orderState + '</td>';
 				html += '</tr>';
 			})
 			$("#listOrder").empty().append(html);

@@ -68,7 +68,7 @@
 							</tr>
 							<tr>
 								<th>연락처</th>
-								<td><input type="text" name="phoneNumber" class="input sm" value="${member.phoneNumber}">&emsp;</td>
+								<td><input type="text" name="phoneNumber" class="input sm" value="${member.phoneNumber}"></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -110,11 +110,6 @@
 			</div>
 		</section>
 
-	</div>
-	
-	<div id='footer'>
-		<%@include file="../common/_footer.jsp" %>
-	</div>
 <script>
 
 

@@ -11,6 +11,8 @@ public class QnaVO {
 	private String qnaPnum; // 답글일 경우 해당 문의번호
 	private boolean qnaSecret; // 비밀글 여부
 	private Timestamp qnaCreatedAt; // 문의 작성일
+	
+	private String qnaFoodtruckName; // 은경
 
 	public QnaVO() {}
 	
@@ -97,7 +99,17 @@ public class QnaVO {
 	public void setQnaCreatedAt(Timestamp qnaCreatedAt) {
 		this.qnaCreatedAt = qnaCreatedAt;
 	}
+	
+	//은경
+	public String getQnaFoodtruckName() {
+		return qnaFoodtruckName;
+	}
 
+	public void setQnaFoodtruckName(String qnaFoodtruckName) {
+		this.qnaFoodtruckName = qnaFoodtruckName;
+	}
+	//
+	
 	@Override
 	public String toString() {
 		return "QnaVO [qnaId=" + qnaId + ", login=" + login + ", sellerId=" + sellerId + ", qnaContent=" + qnaContent + ", qnaDepth=" + qnaDepth

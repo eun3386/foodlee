@@ -15,6 +15,8 @@ public class OrderVO {
 	private String orderMerchantUid; // 주문 결과 반환될 가맹점에서 생성/관리하는 고유 주문번호
 	private String orderRequests; // 요청사항
 	private Timestamp orderDate; // 주문일자
+	
+	private String orderFoodtruckName; // 은경
 
 	public OrderVO() {}
 	
@@ -161,7 +163,17 @@ public class OrderVO {
 	public void setOrderDate(Timestamp orderDate) {
 		this.orderDate = orderDate;
 	}
+	
+	//은경
+	public String getOrderFoodtruckName() {
+		return orderFoodtruckName;
+	}
 
+	public void setOrderFoodtruckName(String orderFoodtruckName) {
+		this.orderFoodtruckName = orderFoodtruckName;
+	}
+	//
+	
 	@Override
 	public String toString() {
 		return "OrderVO [orderId=" + orderId + ", login=" + login + ", sellerId=" + sellerId + ", orderName=" + orderName + ", orderNumber="
