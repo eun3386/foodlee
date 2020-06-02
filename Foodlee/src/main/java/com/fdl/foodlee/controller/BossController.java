@@ -147,7 +147,8 @@ public class BossController {
 		
 		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(svo.getSellerId()) ;
 //		FoodtruckVO fvo = this.fdSvc.selectOneFoodtruck(11) ;
-		
+		System.out.println(svo+" svo");
+		System.out.println(fvo+" fvo");
 //		model.addAttribute("ovo",ovo); //orderVO
 		model.addAttribute("fvo",fvo); //foodtruckVO
 		model.addAttribute("svo",svo); //sellerVO
@@ -157,6 +158,8 @@ public class BossController {
 //		List<OrderVO> orList = ordSvc.sellerOrderList(11);
 		model.addAttribute("orSize", orList.size());
 		model.addAttribute("orders", orList);
+		
+		System.out.println(">> orList: " + orList);
 		
 		int[] cntOPS =  new int[4];
 		for (OrderVO od : orList) {
@@ -187,7 +190,7 @@ public class BossController {
 		dDate4 = new Date(dDate4.getTime()+(1000*60*60*24*-4));
 		dDate5 = new Date(dDate5.getTime()+(1000*60*60*24*-5));
 		dDate6 = new Date(dDate6.getTime()+(1000*60*60*24*-6));
-		SimpleDateFormat dSdf = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
+		SimpleDateFormat dSdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
 		SimpleDateFormat ydt = new SimpleDateFormat("E", Locale.KOREA);
 //		SimpleDateFormat dSdf = new SimpleDateFormat("MM/dd", Locale.KOREA);
 		String ttday1 = dSdf.format(today);
@@ -218,14 +221,17 @@ public class BossController {
 		int wsel[] = new int[7];
 		for (OrderVO od : orList) {
 			String orderdate = dSdf.format(od.getOrderDate());
-			if (orderdate == ttday1) {wsel[0] = wsel[0] + od.getOrderPriceSum();}
-			if (orderdate == yesterday1) {wsel[1] = wsel[1] + od.getOrderPriceSum();}
-			if (orderdate == yesterday2) {wsel[2] = wsel[2] + od.getOrderPriceSum();}
-			if (orderdate == yesterday3) {wsel[3] = wsel[3] + od.getOrderPriceSum();}
-			if (orderdate == yesterday4) {wsel[4] = wsel[4] + od.getOrderPriceSum();}
-			if (orderdate == yesterday5) {wsel[5] = wsel[5] + od.getOrderPriceSum();}
-			if (orderdate == yesterday6) {wsel[6] = wsel[6] + od.getOrderPriceSum();}
+			if (orderdate.equals(ttday1) ) {wsel[0] = wsel[0] + od.getOrderPriceSum();}
+			else if (orderdate.equals(yesterday1) ) {wsel[1] = wsel[1] + od.getOrderPriceSum();}
+			else if (orderdate.equals(yesterday2) ) {wsel[2] = wsel[2] + od.getOrderPriceSum();}
+			else if (orderdate.equals(yesterday3)) {wsel[3] = wsel[3] + od.getOrderPriceSum();}
+			else if (orderdate.equals(yesterday4) ) {wsel[4] = wsel[4] + od.getOrderPriceSum();}
+			else if (orderdate.equals(yesterday5)) {wsel[5] = wsel[5] + od.getOrderPriceSum();}
+			else if (orderdate.equals(yesterday6)) {wsel[6] = wsel[6] + od.getOrderPriceSum();}
+			else System.out.println("그럴리 없다..");
 		}
+		
+		System.out.println("wsels : " + wsel);
 		
 		model.addAttribute("today", today1);
 		model.addAttribute("ytday", ytday);
@@ -305,6 +311,7 @@ public class BossController {
 			System.out.println("realPath =" + realPath);
 			System.out.println("adPrice =" + req.getParameter("adPrice"));
 			int adPrice =  Integer.parseInt(req.getParameter("adPrice"));
+			ses.setAttribute("bannerPrice", adPrice);
 //			String filePath 
 //				= atFileSvc.writeUploadedFile(upfile, 
 //					realPath, (String)ses

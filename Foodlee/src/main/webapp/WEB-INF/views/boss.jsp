@@ -50,16 +50,16 @@
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-          var data = google.visualization.arrayToDataTable([
-            ['주문금액', '주문횟수'],
-            ['만원미만', ${cntOPS[0]}],
-            ['3만원미만', ${cntOPS[1]}],
-            ['5만원미만',    ${cntOPS[2]}],
-            ['5만원이상',    ${cntOPS[3]}]
+    	    var data = google.visualization.arrayToDataTable([
+                ['주문금액', '주문횟수'],
+                ['만원미만', ${cntOPS[0]}],
+                ['3만원미만', ${cntOPS[1]}],
+                ['5만원미만',    ${cntOPS[2]}],
+                ['5만원이상',    ${cntOPS[3]}]
 
-          ]);
+              ]);
 
-          var options = {
+          var options1 = {
            /*  title: '주문금액', */
             pieHole: 0.4,
             legend:{position: 'none'},
@@ -71,8 +71,8 @@
             1: { color: '#c784de' } */
           };
 
-          var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-          chart.draw(data, options);
+          var chart1 = new google.visualization.PieChart(document.getElementById('donutchart'));
+          chart1.draw(data, options1);
         }
 
     </script>
@@ -91,15 +91,21 @@
 //     	var day = week[today.getDay()];var day1 = week[yday1.getDay()];var day2 = week[yday2.getDay()];var day3 = week[yday3.getDay()];
 //     	var day4 = week[yday4.getDay()];var day5 = week[yday5.getDay()];var day6 = week[yday6.getDay()];//요일 인덱스 구하기   	
 //     	var month = date.getMonth()+1; //월 구하기
-        var data = google.visualization.arrayToDataTable([
-        	['week', '이번주','지난주'], 
-            ['${ytday[5]}', ${wsel[6]}, 709],  ['${ytday[4]}', ${wsel[5]}, 906],  ['${ytday[3]}', ${wsel[4]}, 802],  ['${ytday[2]}', ${wsel[3]}, 851],  
-            ['${ytday[1]}', ${wsel[2]}, 809],  ['${ytday[0]}', ${wsel[1]}, 913],  ['${today}', ${wsel[0]}, 917] 
-        /* ['month', '개체수1'], 
+
+/* ['month', '개체수1'], 
         ['1월', 797],   ['2월', 864],  ['3월', 822],  ['4월', 814],  ['5월', 899],  ['6월', 1137],
         ['7월', 1176], ['8월', 1276], ['9월', 1694], ['10월', 2141], ['11월', 2609], ['12월', 2954]  */
+        var data2 = google.visualization.arrayToDataTable([
+        	['week', '이번주','지난주'], 
+            ['${ytday[5]}', ${wsel[6]}, 17090],  
+            ['${ytday[4]}', ${wsel[5]}, 22906],  
+            ['${ytday[3]}', ${wsel[4]}, 11802],  
+            ['${ytday[2]}', ${wsel[3]}, 33851],  
+            ['${ytday[1]}', ${wsel[2]}, 31109],  
+            ['${ytday[0]}', ${wsel[1]}, 10913],  
+            ['${today}', ${wsel[0]}, 917] 
         ]); 
-        var options = { 
+        var options2 = { 
           hAxis: { title: '한주간 매출' },
           curveType: 'function', 
 /*           legend: { position: 'bottom' },  */
@@ -108,10 +114,10 @@
           focusTarget: 'category', 
           crosshair: { trigger: 'both',orientation: 'vertical', color: 'silver', opacity: 0.1  },
           pointSize: 5,
-          pointShape: 'sircle'
+          pointShape: 'circle'
        }; 
-       var chart = new google.visualization.LineChart(document.getElementById('curve_chart')); 
-       chart.draw(data, options); 
+       var chart2 = new google.visualization.LineChart(document.getElementById('curve_chart')); 
+       chart2.draw(data2, options2); 
       }
     </script>
       <script type="text/javascript">
@@ -123,7 +129,7 @@
         ["1월", 894, "#5f76e8"], ["2월", 1049, "#fdc16a"], ["3월", 1930, "#ff4f70"],
         ["4월", 2145, "color: #01caf1"], ["5월", 2145, "color: #5f76e8"], ["6월", 245, "color: #fdc16a"],
         ["7월", 215, "color: #ff4f70"],  ["8월", 145, "color: #01caf1"],  ["9월", 2145, "color: #5f76e8"],
-        ["10월", null, "color: #fdc16a"],   ["11월", null, "color: #ff4f70"],   ["12월", null, "color: #01caf1"]
+        ["10월", 0, "color: #fdc16a"],   ["11월", 0, "color: #ff4f70"],   ["12월", 0, "color: #01caf1"]
       ]);
 
       var view = new google.visualization.DataView(data);
@@ -135,17 +141,17 @@
                        2]
       );
 
-      var options = {
+      var options3 = {
         //title: 월별 매출,
         width: 600,
         height: 400,
         bar: {groupWidth: "75%"},
         legend: { position: "none" },
       };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-      chart.draw(view, options);
+      var chart3 = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart3.draw(view, options3);
   }
-})
+
   </script>
 </head>
 
@@ -178,7 +184,7 @@
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
                         <!-- Logo icon -->
-                        <a href="index.html">
+                        <a href="main.fdl">
                             <b class="logo-icon">
                                 <!-- Dark Logo icon -->
                                 <img src="resources/imgs/boss/logo-icon.png" alt="homepage" class="dark-logo" />
@@ -309,20 +315,14 @@
                         <div class="d-flex align-items-center">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+                                    <li class="breadcrumb-item"><!-- <a href="index.html"></a> -->
                                     </li>
                                 </ol>
                             </nav>
                         </div>
                     </div>
                     <div class="col-5 align-self-center">
-                        <div class="customize-input float-right">
-                            <select class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-                                <option selected>Aug 19</option>
-                                <option value="1">July 19</option>
-                                <option value="2">Jun 19</option>
-                            </select>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

@@ -19,6 +19,7 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 	public static final String SQL_ORDER_CANCEL_MEMBER = "update orders set order_state='2'"
 			+ " where order_id=?";
 	public static final String SQL_ORDER_MEMBER_LIST = "select * from orders where login=?";
+	public static final String SQL_ORDER_MEMBER_LIST_BY_SELID = "select * from orders where seller_id =?";
 	public static final String SQL_ORDER_RECEIPT = "update orders set order_state='3'"
 			+ " where order_id=? and seller_id=?"; 
 	public static final String SQL_ORDER_REJECTION_CANCEL = "update orders set order_state=?"
@@ -74,7 +75,7 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 	
 	@Override
 	public List<OrderVO> sellerOrderList(int sellerId) {
-		return jtem.query(SQL_ORDER_MEMBER_LIST,
+		return jtem.query(SQL_ORDER_MEMBER_LIST_BY_SELID,
 		 		 BeanPropertyRowMapper.newInstance(OrderVO.class), sellerId);
 	}
 
