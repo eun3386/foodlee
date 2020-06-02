@@ -77,3 +77,77 @@
     .signup-form a:hover{
 		text-decoration: underline;
 	}
+/* --- 배너 css ---	 */
+.add-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+/*     margin-right: -15px; */
+/*     margin-left: -15px; */
+}
+.close-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+.add-row .breadcrumb_tite {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Abel', sans-serif;
+}
+.breadcrumb_tite h1 {
+    font-size: 30px;
+    color: #fff;
+    background: #ffca28;
+/*     display: inline-block; */
+    padding: 5px 30px 5px 30px;
+    letter-spacing: 2px;
+    font-weight: 900;
+	line-height: 1.5em;
+    word-break: keep-all;
+}
+.card-title {
+	font-size: 20px;
+    color: rgb(243, 156, 18);
+/*     padding-bottom: 5px; */
+	margin-bottom: 0px;
+    font-weight: bold;
+}
+.ad_dotted {
+    border-bottom: 1px dashed #dbdbdb;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    color: #878787;
+    line-height: 18px;
+}
+.ad-info {
+	padding: 0 35px;
+	margin-top: 30px;
+}
+.ad-add {
+	padding: 0 35px;
+}
+.ad-close {
+	padding: 0 35px;
+}
+.banner-navbar {
+    background: #ff9c12;
+}
+.banner-nav {
+	list-style: none;
+	margin: 0 auto;
+	padding: 0 0 0 0;
+}
+.banner-nav li {
+	display: inline-block;
+}
+.banner-nav li a {
+	font-size: 25px;
+    color: #fff;
+/*     display: inline-block; */
+    padding: 5px 30px 5px 30px;
+    letter-spacing: 2px;
+    font-weight: 900;
+	line-height: 1.5em;
+    word-break: keep-all;
+}

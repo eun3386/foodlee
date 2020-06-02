@@ -305,6 +305,7 @@ public class BossController {
 			System.out.println("realPath =" + realPath);
 			System.out.println("adPrice =" + req.getParameter("adPrice"));
 			int adPrice =  Integer.parseInt(req.getParameter("adPrice"));
+			ses.setAttribute("bannerPrice", adPrice);
 //			String filePath 
 //				= atFileSvc.writeUploadedFile(upfile, 
 //					realPath, (String)ses

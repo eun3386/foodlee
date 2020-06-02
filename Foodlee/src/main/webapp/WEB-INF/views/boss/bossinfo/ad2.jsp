@@ -15,64 +15,11 @@
 <link href="${pageContext.request.contextPath}/dist/css/style.min.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  
+ <link href="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
  
  <link href="${pageContext.request.contextPath}/resources/css/boss-ad.css" rel="stylesheet">
  <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<style>
-.add-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-/*     margin-right: -15px; */
-/*     margin-left: -15px; */
-}
-.close-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-}
-.add-row .breadcrumb_tite {
-    text-align: center;
-    text-transform: uppercase;
-    font-family: 'Abel', sans-serif;
-}
-.breadcrumb_tite h1 {
-    font-size: 30px;
-    color: #fff;
-    background: #ffca28;
-/*     display: inline-block; */
-    padding: 5px 30px 5px 30px;
-    letter-spacing: 2px;
-    font-weight: 900;
-	line-height: 1.5em;
-    word-break: keep-all;
-}
-.card-title {
-	font-size: 20px;
-    color: rgb(243, 156, 18);
-/*     padding-bottom: 5px; */
-	margin-bottom: 0px;
-    font-weight: bold;
-}
-.ad_dotted {
-    border-bottom: 1px dashed #dbdbdb;
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    color: #878787;
-    line-height: 18px;
-}
-.ad-info {
-	padding: 0 35px;
-	margin-top: 30px;
-}
-.ad-add {
-	padding: 0 35px;
-}
-.ad-close {
-	padding: 0 35px;
-}
-</style>
 <script>
 
 function getContextPath() {
@@ -166,29 +113,106 @@ function getContextPath() {
 // }
 // //	});
 // }
-// function selectButton(a) {
-	function selectButton(a) {
-		
-	}
+window.onload = function() {
 	
-	window.onload = function() {
-		
-	    document.getElementById('banner_add1').onclick = function() {
-	        document.getElementById('banner_form1').submit();
-	        return false;
-	    };
-	};
-// }
-$(document).ready(function() {
-// 	$('.btn-primary').on('click', function() {
-	
-		
-	
-	
-// 	$('#b').on('click', function() {
-	
-});
+    document.getElementById('banner_add1').onclick = function() {
+        document.getElementById('banner_form1').submit();
+        return false;
+    };
+    document.getElementById('banner_add2').onclick = function() {
+        document.getElementById('banner_form2').submit();
+        return false;
+    };
+};
 </script>
+		<header class="topbar" data-navbarbg="skin6">
+            <nav class="navbar top-navbar navbar-expand-md">
+                <div class="navbar-header" data-logobg="skin6">
+                    <!-- This is for the sidebar toggle which is visible on mobile only -->
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+                            class="ti-menu ti-close"></i></a>
+                    <!-- ============================================================== -->
+                    <!-- Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- End Logo -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Toggle which is visible on mobile only -->
+                    <!-- ============================================================== -->
+                    <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)"
+                        data-toggle="collapse" data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i
+                            class="ti-more"></i></a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse collapse banner-navbar" id="navbarSupportedContent"><!-- 헤더부분 -->
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <!-- ============================================================== -->
+                    <!-- Right side toggle and nav items -->
+					<ul class="banner-nav" >
+					  <li class="ba-nav-item">
+					    <a class="ba-nav-link active" href="boss.fdl">시작화면</a>
+					  </li>
+					  <li class="ba-nav-item">
+					    <a class="ba-nav-link" href="<%=application.getContextPath()%>/seller/menu_add_form.fdl">메뉴추가/수정</a>
+					    <!--  style="a {color: #7c8798} a:hover {color: #5f76e8;}"style.min.css 6242 -->
+					  </li>
+					  <li class="ba-nav-item">
+					    <a class="ba-nav-link" href="<%=application.getContextPath()%>/seller/show_form.fdl">정보조회/수정</a>
+					  </li>
+					  <li class="ba-nav-item">
+					    <a class="ba-nav-link" href="<%=application.getContextPath()%>/seller/orderlist.fdl" >주문리스트</a>
+					  </li>
+					  <li class="ba-nav-item">
+					    <a class="ba-nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
+					  </li>
+					</ul>
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav float-right"><!--  오른쪽 부분-->
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <img src="assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
+                                    width="40">
+                                <span class="ml-2 d-none d-lg-inline-block"><span style="color: #fff">안녕하세요 ${svo.login == '' ? Guest : svo.login}님</span> 
+                                <i data-feather="chevron-down" class="svg-icon"></i></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
+                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user"
+                                        class="svg-icon mr-2 ml-1"></i>
+                                    My Profile</a>
+                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
+                                        class="svg-icon mr-2 ml-1"></i>
+                                    Inbox</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
+                                        class="svg-icon mr-2 ml-1"></i>
+                                    Account Setting</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
+                                        class="svg-icon mr-2 ml-1"></i>
+                                    Logout</a>
+                                <div class="dropdown-divider"></div>
+                            </div>
+                        </li>
+                        <!-- ============================================================== -->
+                        <!-- User profile and search -->
+                        <!-- ============================================================== -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
 <div class="page-wrapper" style="display: block;">
 	<!-- ============================================================== -->
 	<div class="page-breadcrumb">
@@ -230,8 +254,8 @@ $(document).ready(function() {
 						<div>
 							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">배너 타입</h6>
 							<div class="d-inline-flex align-items-center">
-								<h2 class="text-dark mb-1 font-weight-medium">${baType == 0 ? "" : baType == 1 ? "파워링크" : baType == 3 ? "파워링크" : ""}</h2>
-								<span class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">55,000 ￦
+								<h2 class="text-dark mb-1 font-weight-medium">${baType == 0 ? "" : baType == 1 ? "파워 링크" : baType == 3 ? "배너 광고" : ""}</h2>
+								<span class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">${bannerPrice}￦
 								</span>
 							</div>
 						</div>

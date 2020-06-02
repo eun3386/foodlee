@@ -27,7 +27,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <%-- <link href="<%=application.getContextPath()%>/boss/bossorder/orderlist.fdl" > --%>
     <title>seller</title>
-
+	
+	 <!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
     <!-- Custom CSS -->
 <!--     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet"> -->
     <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
@@ -141,6 +145,7 @@
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
   }
+})
   </script>
 </head>
 
@@ -262,7 +267,7 @@
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="user"
                                         class="svg-icon mr-2 ml-1"></i>
                                     My Profile</a>
-                                <a class="dropdown-item" href="${pageContext.request.contextPath}/ad2.fdl"><i data-feather="credit-card"
+                                <a id="bannerLink" class="dropdown-item" href="${pageContext.request.contextPath}/ad2.fdl"><i data-feather="credit-card"
                                         class="svg-icon mr-2 ml-1"></i>
                                     My Balance</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
@@ -294,7 +299,7 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
-        <div class="page-wrapper">
+        <div id="page-container" class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
