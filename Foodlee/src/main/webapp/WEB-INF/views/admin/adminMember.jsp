@@ -273,10 +273,10 @@
           </div>
 			
 			
-			<div id="mask"></div>
-	          <div class="window">
-	          	<div>test</div>
-	          </div>
+<!-- 			<div id="mask"></div> -->
+<!-- 	          <div class="window"> -->
+<!-- 	          	<div>test</div> -->
+<!-- 	          </div> -->
 	          
            <div class="container-fluid">
 
