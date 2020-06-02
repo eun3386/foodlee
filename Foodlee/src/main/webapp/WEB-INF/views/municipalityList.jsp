@@ -53,7 +53,7 @@
         <tbody><%int i=1; %>
         	<c:forEach var="ft" items="${ftList}">
             <tr onclick="selectFoodtruck(${ft.sellerId})">
-                <td><%=i++%></td> <td><img src="${ft.foodtruckImgPath}"></td> <td><b>${ft.foodtruckName}</b></td> <td class="tooltip" title="${ft.foodtruckMainMenu}">
+                <td><%=i++%></td> <td><img src="resources/imgs/foodtruck2/${ft.foodtruckImgPath}" style="width:70px"></td> <td><b>${ft.foodtruckName}</b></td> <td class="tooltip" title="${ft.foodtruckMainMenu}">
 <!--                 치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대  10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원&#13;치킨 소 7,000원/대 10,000원"> -->
                 <div class="meme">
                     <p class="menu-spec">${ft.foodtruckMainMenu }

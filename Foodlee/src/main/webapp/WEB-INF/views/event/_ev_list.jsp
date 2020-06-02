@@ -65,7 +65,7 @@ pageEncoding="UTF-8"%>
                 <td><b>${ev.eventTitle }</b></td> 
                 <td class="tooltip" title="${ev.eventTitle }">
 	                <div class="event-period">
-	                    <p>${ev.eventStartDate} ~ <br>${ev.eventEndDate}<br></p>
+	                    <p>${ev.eventStartDate} ~ <br><c:if test="${ev.eventEndDate eq '1970-01-01'}"></c:if><c:if test="${ev.eventEndDate ne '1970-01-01'}">${ev.eventEndDate}</c:if><br></p>
 	                </div>
                 </td> 
                 <td>${ev.eventCreatedAt}</td>
