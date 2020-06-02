@@ -3,6 +3,7 @@ package com.fdl.foodlee.model.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.fdl.foodlee.model.dao.inf.ISellerDAO;
+import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 
 // 빈 자동 등록 : MVC 저장단 처리
@@ -202,6 +205,48 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 			System.out.println("dao / 비밀번호 조회 실패." );
 			return null;
 		}
+	}
+
+	@Override
+	public List<FoodtruckVO> showAllFoodtruck(int offset, int limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<OrderVO> showAllMenu(int offset, int limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberVO> showAllMemberJoin(MemberVO mv) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<MemberVO> showAllMemberJoin(int mbId, String login) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SellerVO> showAllSellerJoin(SellerVO sv) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SellerVO> showAllSellerJoin(int mbId, String login) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<String, Object> showAllJoin() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

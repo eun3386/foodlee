@@ -46,72 +46,51 @@
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-//   	     var s1 = 0; var s2 = 0; var s3 = 0; var s4 = 0;
-//   	     for ( var i =0; i< orSize; i++) {
-//   	         switch (i) {
-//   	     	case  orders.orderPriceSum>0 &&  orders.orderPriceSum<10000:
-//   	     		s1 = s1 +1;
-//   	     		break;
-//   	     	case  orders.orderPriceSum>=10000 &&  orders.orderPriceSum<30000:
-//   	     		s2 = s2 +1;
-//   	     		break;
-//   	     	case  orders.orderPriceSum>=30000 &&  orders.orderPriceSum<50000:
-//   	     		s3 = s3 +1;
-//   	     		break;
-//   	     	default:
-//   	     		s4 = s4 +1;
-//   	     		break;
-//   	     	}
-//   	     }
-        var data = google.visualization.arrayToDataTable([
-          ['주문금액', '주문횟수'],
-          ['만원미만',  254 ],
-          ['3만원미만', 124 ],
-          ['5만원미만', 14 ],
-          ['5만원이상', 145 ]
+          var data = google.visualization.arrayToDataTable([
+            ['주문금액', '주문횟수'],
+            ['만원미만', ${cntOPS[0]}],
+            ['3만원미만', ${cntOPS[1]}],
+            ['5만원미만',    ${cntOPS[2]}],
+            ['5만원이상',    ${cntOPS[3]}]
 
-        ]);
+          ]);
 
-        var options = {
-         /*  title: '주문금액', */
-          pieHole: 0.4,
-          legend:{position: 'none'},
-/*           legend: { position: 'bottom', maxLines: 4 }, */
-          colors: ['#5f76e8','#ff4f70','#01caf1','#fdc16a']
-          
-          /* colors: ['#a561bd','#c784de'] */
-/*           0: { color: '#a561bd' },
-          1: { color: '#c784de' } */
-        };
+          var options = {
+           /*  title: '주문금액', */
+            pieHole: 0.4,
+            legend:{position: 'none'},
+  /*           legend: { position: 'bottom', maxLines: 4 }, */
+            colors: ['#5f76e8','#ff4f70','#01caf1','#fdc16a']
+            
+            /* colors: ['#a561bd','#c784de'] */
+  /*           0: { color: '#a561bd' },
+            1: { color: '#c784de' } */
+          };
 
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
+          var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+          chart.draw(data, options);
+        }
 
     </script>
     <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
-    
-	
-    
     function drawChart() { 
-    	var week =['일','월','화','수','목','금','토'];
-    	var today = new Date(); // 오늘
-    	var yday1 = new Date(today.valueOf()-(24*60*60*1000)); //어제
-    	var yday2 = new Date(today.valueOf()-(2*24*60*60*1000)); //이틀전
-    	var yday3 = new Date(today.valueOf()-(3*24*60*60*1000)); //3일전
-    	var yday4 = new Date(today.valueOf()-(4*24*60*60*1000)); //4일전
-    	var yday5 = new Date(today.valueOf()-(5*24*60*60*1000)); //5일전
-    	var yday6 = new Date(today.valueOf()-(6*24*60*60*1000)); //6일전
-    	var day = week[today.getDay()];var day1 = week[yday1.getDay()];var day2 = week[yday2.getDay()];var day3 = week[yday3.getDay()];
-    	var day4 = week[yday4.getDay()];var day5 = week[yday5.getDay()];var day6 = week[yday6.getDay()];//요일 인덱스 구하기
-    	
-    	var month = date.getMonth()+1; //월 구하기
+//     	var week =['일','월','화','수','목','금','토'];
+//     	var today = new Date(); // 오늘
+//     	var yday1 = new Date(today.valueOf()-(24*60*60*1000)); //어제
+//     	var yday2 = new Date(today.valueOf()-(2*24*60*60*1000)); //이틀전
+//     	var yday3 = new Date(today.valueOf()-(3*24*60*60*1000)); //3일전
+//     	var yday4 = new Date(today.valueOf()-(4*24*60*60*1000)); //4일전
+//     	var yday5 = new Date(today.valueOf()-(5*24*60*60*1000)); //5일전
+//     	var yday6 = new Date(today.valueOf()-(6*24*60*60*1000)); //6일전
+//     	var day = week[today.getDay()];var day1 = week[yday1.getDay()];var day2 = week[yday2.getDay()];var day3 = week[yday3.getDay()];
+//     	var day4 = week[yday4.getDay()];var day5 = week[yday5.getDay()];var day6 = week[yday6.getDay()];//요일 인덱스 구하기   	
+//     	var month = date.getMonth()+1; //월 구하기
         var data = google.visualization.arrayToDataTable([
         	['week', '이번주','지난주'], 
-            ['day6', 797, 709],  ['day5', 864, 906],  ['day4', 822, 802],  ['day3', 814, 851],  
-            ['day2', 899, 809],  ['day1', 1137, 913],  ['day', 1176, 917] 
+            ['${ytday[5]}', ${wsel[6]}, 709],  ['${ytday[4]}', ${wsel[5]}, 906],  ['${ytday[3]}', ${wsel[4]}, 802],  ['${ytday[2]}', ${wsel[3]}, 851],  
+            ['${ytday[1]}', ${wsel[2]}, 809],  ['${ytday[0]}', ${wsel[1]}, 913],  ['${today}', ${wsel[0]}, 917] 
         /* ['month', '개체수1'], 
         ['1월', 797],   ['2월', 864],  ['3월', 822],  ['4월', 814],  ['5월', 899],  ['6월', 1137],
         ['7월', 1176], ['8월', 1276], ['9월', 1694], ['10월', 2141], ['11월', 2609], ['12월', 2954]  */
@@ -134,7 +113,7 @@
       <script type="text/javascript">
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
+    function drawChart() {	
       var data = google.visualization.arrayToDataTable([
         ["Element", "만 원", { role: "style" } ],
         ["1월", 894, "#5f76e8"], ["2월", 1049, "#fdc16a"], ["3월", 1930, "#ff4f70"],
@@ -543,21 +522,21 @@
     <script src="assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- apps -->
+<!--     apps -->
     <script src="dist/js/app-style-switcher.js"></script>
     <script src="dist/js/feather.min.js"></script>
     <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
     <script src="dist/js/sidebarmenu.js"></script>
-    <!--Custom JavaScript -->
+<!--     Custom JavaScript -->
     <script src="dist/js/custom.min.js"></script>
-    <!--This page JavaScript -->
-    <script src="assets/extra-libs/c3/d3.min.js"></script>
-    <script src="assets/extra-libs/c3/c3.min.js"></script>
-    <script src="assets/libs/chartist/dist/chartist.min.js"></script>
-    <script src="assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
-    <script src="assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="dist/js/pages/dashboards/dashboard1.min.js"></script>
+<!--     This page JavaScript -->
+<!--     <script src="assets/extra-libs/c3/d3.min.js"></script> -->
+<!--     <script src="assets/extra-libs/c3/c3.min.js"></script> -->
+<!--     <script src="assets/libs/chartist/dist/chartist.min.js"></script> -->
+<!--     <script src="assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script> -->
+<!--     <script src="assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script> -->
+<!--     <script src="assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script> -->
+<!--     <script src="dist/js/pages/dashboards/dashboard1.min.js"></script> -->
 </body>
 
 </html>

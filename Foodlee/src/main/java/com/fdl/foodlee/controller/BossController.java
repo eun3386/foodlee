@@ -3,7 +3,12 @@ package com.fdl.foodlee.controller;
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -189,8 +195,79 @@ public class BossController {
 			if( od.getOrderPriceSum() < 50000 ) cntOPS[2]++;
 			else cntOPS[3]++;
 		}
+		System.out.println(cntOPS[0]);	System.out.println(cntOPS[1]);	System.out.println(cntOPS[2]);	System.out.println(cntOPS[3]);
 		model.addAttribute("cntOPS", cntOPS);
-//		ModelAndView vo1 = new ModelAndView();
+		
+		
+		Calendar cal = Calendar.getInstance(Locale.KOREA);
+		SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd");    
+		Date today = new Date();
+		String date =  formatter.format(today);
+		
+		Date dDate1 = new Date();
+		Date dDate2 = new Date();
+		Date dDate3 = new Date();
+		Date dDate4 = new Date();
+		Date dDate5 = new Date();
+		Date dDate6 = new Date();
+		
+		dDate1 = new Date(dDate1.getTime()+(1000*60*60*24*-1));
+		dDate2 = new Date(dDate2.getTime()+(1000*60*60*24*-2));
+		dDate3 = new Date(dDate3.getTime()+(1000*60*60*24*-3));
+		dDate4 = new Date(dDate4.getTime()+(1000*60*60*24*-4));
+		dDate5 = new Date(dDate5.getTime()+(1000*60*60*24*-5));
+		dDate6 = new Date(dDate6.getTime()+(1000*60*60*24*-6));
+		SimpleDateFormat dSdf = new SimpleDateFormat("yyyy/MM/dd", Locale.KOREA);
+		SimpleDateFormat ydt = new SimpleDateFormat("E", Locale.KOREA);
+//		SimpleDateFormat dSdf = new SimpleDateFormat("MM/dd", Locale.KOREA);
+		String ttday1 = dSdf.format(today);
+		String yesterday1 = dSdf.format(dDate1);
+		String yesterday2 = dSdf.format(dDate2);
+		String yesterday3 = dSdf.format(dDate3);
+		String yesterday4 = dSdf.format(dDate4);
+		String yesterday5 = dSdf.format(dDate5);
+		String yesterday6 = dSdf.format(dDate6);
+		
+		String[] ytday = {ydt.format(dDate1),ydt.format(dDate2),ydt.format(dDate3),
+				ydt.format(dDate4),ydt.format(dDate5),ydt.format(dDate6)};
+		System.out.println(ytday[0]);
+		String[] week = {"일","월","화","수","목","금","토"};
+		
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
+		int date1 = cal.get(Calendar.DATE);
+		int weeks = cal.get(Calendar.DAY_OF_WEEK)-1;
+		//cal.add(Calendar.DAY_OF_WEEK,-1);
+		//String[] days = new String[14];
+		int yesWeeks = 6;
+		if( weeks > 0 ) yesWeeks = weeks - 1 ;
+		String today1 = week[weeks];
+		String yesterday = week[yesWeeks];
+		//System.out.println(yesterday + "," + today1);	
+
+		int wsel[] = new int[7];
+		for (OrderVO od : orList) {
+			String orderdate = dSdf.format(od.getOrderDate());
+			if (orderdate == ttday1) {wsel[0] = wsel[0] + od.getOrderPriceSum();}
+			if (orderdate == yesterday1) {wsel[1] = wsel[1] + od.getOrderPriceSum();}
+			if (orderdate == yesterday2) {wsel[2] = wsel[2] + od.getOrderPriceSum();}
+			if (orderdate == yesterday3) {wsel[3] = wsel[3] + od.getOrderPriceSum();}
+			if (orderdate == yesterday4) {wsel[4] = wsel[4] + od.getOrderPriceSum();}
+			if (orderdate == yesterday5) {wsel[5] = wsel[5] + od.getOrderPriceSum();}
+			if (orderdate == yesterday6) {wsel[6] = wsel[6] + od.getOrderPriceSum();}
+		}
+		
+		model.addAttribute("today", today1);
+		model.addAttribute("ytday", ytday);
+		model.addAttribute("today1", yesterday1);
+		model.addAttribute("today2", yesterday2);
+		model.addAttribute("today3", yesterday3);
+		model.addAttribute("today4", yesterday4);
+		model.addAttribute("today5", yesterday5);
+		model.addAttribute("today6", yesterday6);
+		model.addAttribute("wsel", wsel);
+		
+		//		ModelAndView vo1 = new ModelAndView();
 //		vo1.setViewName("boss");
 //		vo1.addObject("login", login); //ovo 주문한 사람의 아이디 <<FK>>
 //		vo1.addObject("sellerlogin", sellerlogin); //svo판매자 id 

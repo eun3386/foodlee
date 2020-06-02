@@ -32,6 +32,9 @@ public class LoginSVCImpl implements ILoginSVC {
 		// 가입된 회원인지?
 		MemberVO mb = mbDao.selectOneMember(login);
 		SellerVO sel = selDao.selectOneSeller(login);
+		
+		System.out.println(">>>> mb " + mb + ", sel " + sel);
+		
 		int id = 0;
 		String dbPW = "";
 		boolean rMb = false;
