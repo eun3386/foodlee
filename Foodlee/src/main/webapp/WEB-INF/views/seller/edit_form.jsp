@@ -63,7 +63,7 @@
 			 }
 		});
 		// TODO
-		$('.photo').click(function() {
+		$('.editPhoto').click(function() {
 			$('input[type=file]').click();
 		});
 		
@@ -97,12 +97,13 @@
 			}
 		});
 		
-		$('#join_submit_btn').click(function() {
-			var result = confirm('가입 하시겠습니까?');
+		$('#btn-edit-submit').click(function() {
+			var result = confirm('수정 완료 하시겠습니까?');
 			if(result) { //yes 
-				location.replace('${pageContext.request.contextPath}/login_form.fdl');
+				alert('수정이 완료되었습니다.');
+				location.replace('${pageContext.request.contextPath}/seller_show_form.fdl');
 			} else { //no
-				location.replace('${pageContext.request.contextPath}/seller/join_form.fdl'); 
+				location.replace('${pageContext.request.contextPath}/seller/edit_form.fdl'); 
 			} 
 		});
 		//
@@ -124,6 +125,7 @@
 			<div class="content">
 				<div class="profile_wrap">
 					<img id="uploadImg" class="editPhoto" style="width: 150px; height: 150px; cursor: pointer;" src="${pageContext.request.contextPath}${seller.imgPath}">
+					<input type="file" id="input_img" name="upfiles" multiple="multiple" style="display: none">
 				</div>
 				<form style="display: inline;" action="${pageContext.request.contextPath}/seller/update.fdl" method="post">
 					<input type="hidden" name="id" value="${seller.sellerId}">
@@ -181,7 +183,7 @@
 						<th></th>
 					</tr>
 					<tr>
-						<th><label for="address">주소</label></th>
+						<th><label for="address">주소(사는곳)</label></th>
 						<td>
 							<textarea rows="2" cols="30" style="resize: none" id="addressInput" class="input">${seller.address}</textarea>
 							<input type="hidden" id="address" name="address">
