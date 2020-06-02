@@ -8,21 +8,21 @@ public class BannerVO {
 	private String adImg; // 광고 이미지
 	private Timestamp adStartDate; // 적용 시작 기간
 	private Timestamp adEndDate; // 적용 종료 기간
-	private int adWaiting; // 신청 대기
+	private int adType; // 신청 대기
 	private int sellerId; // 판매자 아이디 <<FK>>
 	
 	public BannerVO() {}
 	
-	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, int adWaiting, int sellerId) {
-		this(adPrice, adImg, adStartDate, null, adWaiting, sellerId);
+	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, int adType, int sellerId) {
+		this(adPrice, adImg, adStartDate, null, adType, sellerId);
 	}
-	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, int adWaiting,
+	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, int adType,
 			int sellerId) {
-		this(0, adPrice, adImg, adStartDate, adEndDate, adWaiting, sellerId);
+		this(0, adPrice, adImg, adStartDate, adEndDate, adType, sellerId);
 		
 	}
 	
-	public BannerVO(int bannerId, int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, int adWaiting,
+	public BannerVO(int bannerId, int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, int adType,
 			int sellerId) {
 		super();
 		this.bannerId = bannerId;
@@ -30,7 +30,7 @@ public class BannerVO {
 		this.adImg = adImg;
 		this.adStartDate = adStartDate;
 		this.adEndDate = adEndDate;
-		this.adWaiting = adWaiting;
+		this.adType = adType;
 		this.sellerId = sellerId;
 	}
 
@@ -74,12 +74,12 @@ public class BannerVO {
 		this.adEndDate = adEndDate;
 	}
 
-	public int getAdWaiting() {
-		return adWaiting;
+	public int getadType() {
+		return adType;
 	}
 
-	public void setAdWaiting(int adWaiting) {
-		this.adWaiting = adWaiting;
+	public void setadType(int adType) {
+		this.adType = adType;
 	}
 
 	public int getSellerId() {
@@ -93,7 +93,7 @@ public class BannerVO {
 	@Override
 	public String toString() {
 		return "BannerVO [bannerId=" + bannerId + ", adPrice=" + adPrice + ", adImg=" + adImg + ", adStartDate="
-				+ adStartDate + ", adEndDate=" + adEndDate + ", adWaiting=" + adWaiting + ", sellerId=" + sellerId
+				+ adStartDate + ", adEndDate=" + adEndDate + ", adType=" + adType + ", sellerId=" + sellerId
 				+ "]";
 	}
 	

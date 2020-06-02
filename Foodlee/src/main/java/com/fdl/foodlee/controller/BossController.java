@@ -316,6 +316,11 @@ public class BossController {
 	public String position() {//리뷰목록
 		return "boss/bossinfo/position";
 	}
+	
+	@RequestMapping(value = "ad2.fdl", method = RequestMethod.GET)
+	public String bannerAdd() {
+		return "boss/bossinfo/ad2";
+	}
 	// 배너 광고 신청
 		// banner_apply.fdl
 		@RequestMapping(value = "banner_apply.fdl", 
@@ -325,17 +330,19 @@ public class BossController {
 				 List<MultipartFile> upfiles,
 				HttpSession ses) {
 			System.out.println("banner_apply()");
+			int baType = Integer.parseInt(req.getParameter("bannerType"));
+			ses.setAttribute("baType", baType);
 //			System.out.println("multipart: " + upfile.getName());
 			System.out.println("multipart size: " 
 							+ upfiles.size());
-			Timestamp adDate = Timestamp.valueOf(req.getParameter("adStartDate") + " 00:00:00");		
+			
 			System.out.println("upfiles = " + req.getParameter("upfiles"));
-			System.out.println("adDate =" + adDate);
 			String realPath =  
 				ses.getServletContext()
 				.getRealPath(IBannerFileSVC.DEF_UPLOAD_DEST)
 						 + "/";
-			baFileSvc.makeUserDir(ses, "aaa");
+			String login = (String) ses.getAttribute("LoginName");
+			baFileSvc.makeUserDir(ses, login);
 			System.out.println("realPath =" + realPath);
 			System.out.println("adPrice =" + req.getParameter("adPrice"));
 			int adPrice =  Integer.parseInt(req.getParameter("adPrice"));
@@ -347,7 +354,7 @@ public class BossController {
 			//String filePath  // 다수개 처리
 			Map<String, Object> rMap
 			 = baFileSvc.writeUploadedMultipleFiles(upfiles, 
-				realPath, "aaa");
+				realPath, login);
 //				(String)ses
 //					.getAttribute("mbLoginName"));
 			String filePath = (String)rMap.get("muliFPs");
@@ -356,15 +363,18 @@ public class BossController {
 			System.out.println("총 볼륨(MB): "+ rMap.get("totalMB") 
 					+"MB");
 			int selId = (int) ses.getAttribute("id");
+			System.out.println("selId = " + selId);
+			Timestamp adDate = Timestamp.valueOf(req.getParameter("adStartDate") + " 00:00:00");		
+			ses.setAttribute("baStrTime", adDate);
+			System.out.println("adDate =" + adDate);
 			// public img src... 
-			int baRtkey = this.baSvc.insertNewBannerReturnKey(filePath, adPrice, adDate, adDate, 0, selId);
+			int baRtkey = this.baSvc.insertNewBannerReturnKey(filePath, adPrice, adDate, adDate, baType, selId);
 			// 상세보기 => atId?
 			if( baRtkey > 0 ) {
 				System.out.println("배너 신청 성공: " + baRtkey);
-				return "redirect:ad.fdl?id="+baRtkey; // 결제 
-				//return "redirect:article_list.my"; // RD
+				return "redirect:/ad2.fdl?id="+baRtkey; // 결제 
 			} else {
-				System.out.println("배너 신청 실패: " + selId);
+				System.out.println("배너 신청 실패: " + baRtkey);
 				return "boss/bossinfo/ad2"; // FW
 			}
 		}	

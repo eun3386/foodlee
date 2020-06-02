@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.dao.inf.IBannerDAO;
@@ -16,6 +17,13 @@ public class BannerSVCImpl implements IBannerSVC {
 	
 	@Autowired
 	private IBannerDAO bannerDAO;
+	
+
+	@Override
+	public List<BannerVO> bannerAllList() {
+		// TODO Auto-generated method stub
+		return bannerDAO.bannerAllList();
+	}
 	
 	@Override
 	public List<BannerAddVO> showAddBannerList(int min, int max, int limit) {
@@ -68,11 +76,11 @@ public class BannerSVCImpl implements IBannerSVC {
 		//return atDao.insertNewArticleReturnKey(at);
 		return bannerDAO.insertNewBannerReturnKey2(bn);
 	}
-
 //	@Override
 //	public int insertNewBannerReturnKey(String adImg, int sellerId) {
 //		// TODO Auto-generated method stub
 //		return 0;
 //	}
+
 
 }

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import java.util.Base64.Decoder;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,12 +72,12 @@ public class MapController {
 		}
 	
 	@RequestMapping(value = "mapMain.fdl", method = RequestMethod.GET)
-	public String mapMain(Model model) {
+	public String mapMain(Model model, HttpSession ses) {
 		
 		// - 배너 리스트를 볼 수 있다
 		int max = 50000; // 어드민이 설정
 		int min = 10000; // 어드민이 설정
-		int limit = 100; // 어드민이 설정
+		int limit = 10; // 어드민이 설정
 		int avg = (max + min)/2;
 		
 //		System.out.println("BannerList...");
@@ -95,6 +98,7 @@ public class MapController {
 	//					model.addAttribute("msg", "배너  bottom 리스트 조회 성공: " + baList.size());
 					}
 				}
+			ses.setAttribute("baList", baList);
 			model.addAttribute("baTopList", baTopList);
 			model.addAttribute("baBtmList", baBtmList);
 		} else {

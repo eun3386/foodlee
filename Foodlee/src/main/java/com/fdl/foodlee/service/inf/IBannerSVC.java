@@ -9,6 +9,7 @@ import com.fdl.foodlee.model.vo.BannerVO;
 public interface IBannerSVC {
 	
 	//	배너의 리스트 볼 수 있다
+		List<BannerVO> bannerAllList();
 		List<BannerAddVO> showAddBannerList(int min, int max, int limit);
 		List<BannerVO> showAllBannerId(int id);
 	//	배너의 트럭 상세보기 할수 있다
@@ -21,5 +22,6 @@ public interface IBannerSVC {
 //		판매자가 신규 배너이미지를 등록 할 수 있다 (+파일업로드..)
 		int insertNewBannerReturnKey(BannerVO bn);	
 		int insertNewBannerReturnKey(String adImg, int price, Timestamp adStartDate, Timestamp adEndDate, int adWaiting,  int sellerId);	
-		int insertNewBannerReturnKey2(BannerVO bn);	
+		int insertNewBannerReturnKey2(BannerVO bn);
+		//
 }

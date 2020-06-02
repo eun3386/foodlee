@@ -1,5 +1,10 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="com.fdl.foodlee.controller.TruckDetailController" %>	
 <link href="https://fonts.googleapis.com/css?family=Roboto|Courgette|Pacifico:400,700" rel="stylesheet">
 <title>ad</title>
  <!-- jquery -->
@@ -77,32 +82,33 @@ function getContextPath() {
 
 	var URLHD = getContextPath() + '/';
 
-function selectButton(a) {
-	if($('#banner_date'+ a).val() != '') {
-		var data = new FormData($('#banner_file'+a));
-//     	jQuery.each(jQuery('#banner_file'+a)[0].files, function(i, file) {
-//     	    data.append('file-'+i, file);
-//     	});
-		var sel = $('#banner_sellId').val();
-        var price = $('#banner_price'+a).val();
-        var file = data;
-        var ba_date = $('#banner_date'+a).val();
-        console.log('ba_date = ' + ba_date);
-	 $.ajax({
-        	contentType: false,
-            processData: false,
-		    type: "post",
-		    url: URLHD + 'banner_apply.fdl',
-		    data: {
-		    	"banner_sellId" : sel,
-		    	"banner_price" : price,
-		    	"banner_file" : file,
-		    	"banner_date" : ba_date,
-		    	},
-		    	success: function(data, textStatus) {
-		    		console.log("요청사항" + orderRequests);
-		    }
-		});
+// function selectButton(a) {
+// 	if($('#banner_date'+ a).val() != '') {
+// 		var data = new FormData();
+// // 		var data = new FormData($('#banner_file'+a));
+// //     	jQuery.each(jQuery('#banner_file'+a)[0].files, function(i, file) {
+// //     	    data.append('file-'+i, file);
+// //     	});
+// 		var sel = $('#banner_sellId').val();
+//         var price = $('#banner_price'+a).val();
+//         var file = data;
+//         var ba_date = $('#banner_date'+a).val();
+//         console.log('ba_date = ' + ba_date);
+// 	 $.ajax({
+//         	contentType: false,
+//             processData: false,
+// 		    type: "post",
+// 		    url: URLHD + 'banner_apply.fdl',
+// 		    data: {
+// 		    	"banner_sellId" : sel,
+// 		    	"banner_price" : price,
+// 		    	"banner_file" : file,
+// 		    	"banner_date" : ba_date,
+// 		    	},
+// 		    	success: function(data, textStatus) {
+// 		    		console.log("요청사항" + orderRequests);
+// 		    }
+// 		});
 	/*var IMP = window.IMP; // 생략가능
 	IMP.init('imp78872704'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 	IMP.request_pay({
@@ -155,11 +161,24 @@ function selectButton(a) {
 	    }
 	    alert(msg);
 	});*/
-} else {
-	alert('등록 실패');
-}
-//	});
-}
+// } else {
+// 	alert('등록 실패');
+// }
+// //	});
+// }
+// function selectButton(a) {
+	function selectButton(a) {
+		
+	}
+	
+	window.onload = function() {
+		
+	    document.getElementById('banner_add1').onclick = function() {
+	        document.getElementById('banner_form1').submit();
+	        return false;
+	    };
+	};
+// }
 $(document).ready(function() {
 // 	$('.btn-primary').on('click', function() {
 	
@@ -196,22 +215,11 @@ $(document).ready(function() {
 						<div>
 							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">광고 시작 기한</h6>
 							<div class="d-inline-flex align-items-center">
-								<h2 class="text-dark mb-1 font-weight-medium">2020-05-27</h2>
-								<span class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">24:00 ~</span>
+								<h2 class="text-dark mb-1 font-weight-medium"><fmt:formatDate value="${baStrTime}" pattern="yyyy-MM-dd"/></h2>
+								<span class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">24:00 ~</span><br>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card border-right">
-				<div class="card-body">
-					<div class="d-flex d-lg-flex d-md-block align-items-center">
-						<div>
-							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">광고 종료 기한</h6>
-							<div class="d-inline-flex align-items-center">
-								<h2 class="text-dark mb-1 font-weight-medium">2020-06-27</h2>
-								<span class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">~ 24:00</span>
-							</div>
+							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">배너 유효기간</h6>
+							<span style="color: red; font-size: 10px;">신청 기간으로 부터 그다음달 00시 입니다</span>
 						</div>
 					</div>
 				</div>
@@ -222,7 +230,7 @@ $(document).ready(function() {
 						<div>
 							<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">배너 타입</h6>
 							<div class="d-inline-flex align-items-center">
-								<h2 class="text-dark mb-1 font-weight-medium">파워 링크</h2>
+								<h2 class="text-dark mb-1 font-weight-medium">${baType == 0 ? "" : baType == 1 ? "파워링크" : baType == 3 ? "파워링크" : ""}</h2>
 								<span class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">55,000 ￦
 								</span>
 							</div>
@@ -241,10 +249,10 @@ $(document).ready(function() {
                 <!-- *************************************************************** -->
                    <div class="add-row"><!--옴ㄹ기기 -->
                        <div class="signup-form pl-4 mb-5">
-<%-- 						    <form class="mt-4" action="${pageContext.request.contextPath}/banner_apply.fdl" enctype="multipart/form-data" method="post"> --%>
-						    <form class="mt-4" enctype="multipart/form-data" method="post">
+						    <form id="banner_form1" class="mt-4" action="${pageContext.request.contextPath}/banner_apply.fdl" enctype="multipart/form-data" method="post">
+<!-- 						    <form class="mt-4" enctype="multipart/form-data" method="post"> -->
 								<div class="form-header">
-									<h2>파워링크</h2>
+									<input type="hidden" name="bannerType" value="1"><h2>파워링크</h2>
 <!-- 									<p>Fill out this form to start your free trial!</p> -->
 								</div>
 						        <div class="form-group">
@@ -268,15 +276,15 @@ $(document).ready(function() {
 						        	<input id="banner_file1" type="file" name="upfiles" placeholder="첨부파일명들" multiple="multiple" size='64'>
 						        </div>
 								<div class="form-group">
-									<button onclick="selectButton('1')" id="banner_add1" class="btn btn-primary btn-block btn-lg">등록</button>
+									<button type="button" id="banner_add1" onclick="selectButton(1)" class="btn btn-primary btn-block btn-lg">등록</button>
 								</div>	
 						    </form>
 						    </div>
 						    <div class="signup-form pl-4 mb-5">
-<%-- 						    <form class="mt-4" action="${pageContext.request.contextPath}/banner_apply.fdl" enctype="multipart/form-data" method="post"> --%>
-						    <form class="mt-4" enctype="multipart/form-data" method="post">
+						    <form id="banner_form2" class="mt-4" action="${pageContext.request.contextPath}/banner_apply.fdl" enctype="multipart/form-data" method="post">
+<!-- 						    <form class="mt-4" enctype="multipart/form-data" method="post"> -->
 								<div class="form-header">
-									<h2>배너광고</h2>
+									<input type="hidden" name="bannerType" value="3"><h2>배너광고</h2>
 <!-- 									<p>Fill out this form to start your free trial!</p> -->
 								</div>
 						        <div class="form-group">
@@ -298,7 +306,7 @@ $(document).ready(function() {
 						        	<input id="banner_file2" type="file" name="upfiles" placeholder="첨부파일명들" multiple="multiple" size='64'>
 						        </div>
 								<div class="form-group">
-									<button onclick="selectButton('2')" id="banner_add2" class="btn btn-primary btn-block btn-lg">등록</button>
+									<button type="button" onclick="selectButton(2)" id="banner_add2" class="btn btn-primary btn-block btn-lg">등록</button>
 								</div>	
 						    </form>
 						    </div>
