@@ -97,8 +97,8 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">회원 :</h6>
             <a class="collapse-item" href="<%= CON %>/adminMemberChart.fdl">회원 가입 및 정보 통계</a>
-            <h6 class="collapse-header">푸드트럭 :</h6>
-            <a class="collapse-item" href="<%= CON %>/adminTruckMenuChart.fdl">푸드트럭 및 메뉴 통계</a>
+<!--             <h6 class="collapse-header">푸드트럭 :</h6> -->
+<%--             <a class="collapse-item" href="<%= CON %>/adminTruckMenuChart.fdl">푸드트럭 및 메뉴 통계</a> --%>
           </div>
         </div>
       </li>
