@@ -103,7 +103,7 @@
             ['${ytday[2]}', ${wsel[3]}, 33851],  
             ['${ytday[1]}', ${wsel[2]}, 31109],  
             ['${ytday[0]}', ${wsel[1]}, 10913],  
-            ['${today}', ${wsel[0]}, 917] 
+            ['${today}', ${wsel[0]}, 10917] 
         ]); 
         var options2 = { 
           hAxis: { title: '한주간 매출' },
@@ -195,7 +195,7 @@
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <img src="resources/imgs/boss/logo-text.png" alt="homepage" class="dark-logo" />
+                                <img src="resources/imgs/boss/Seller5.png" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo text -->
 <!--                                 <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /> -->
                             </span>
@@ -343,7 +343,7 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">236</h2>
+                                        <h2 class="text-dark mb-1 font-weight-medium">${cntOPStot}</h2>
                                         <span
                                             class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none">+18.33%</span>
                                     </div>
@@ -360,7 +360,7 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium"><sup
-                                            class="set-doller">￦</sup>18,306</h2>
+                                            class="set-doller">￦</sup>${wseltot}</h2>
                                     <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">주간매출
                                     </h6>
                                 </div>
@@ -376,7 +376,7 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <div class="d-inline-flex align-items-center">
-                                        <h2 class="text-dark mb-1 font-weight-medium">${fvo.favoriteCount}</h2>
+                                        <h2 class="text-dark mb-1 font-weight-medium">${fvo.memberLikeCount}</h2>
                                         <span
                                             class="badge bg-danger font-12 text-white font-weight-medium badge-pill ml-2 d-md-none d-lg-block">-18.33%</span>
                                     </div>

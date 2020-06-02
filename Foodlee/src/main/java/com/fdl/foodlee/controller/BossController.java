@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -169,8 +170,12 @@ public class BossController {
 			else cntOPS[3]++;
 		}
 		System.out.println(cntOPS[0]);	System.out.println(cntOPS[1]);	System.out.println(cntOPS[2]);	System.out.println(cntOPS[3]);
+		int cntOPStot =0;
+		for (int i = 0; i < cntOPS.length; i++) {
+			cntOPStot +=cntOPS[i];
+		}
 		model.addAttribute("cntOPS", cntOPS);
-		
+		model.addAttribute("cntOPStot", cntOPStot);
 		
 		Calendar cal = Calendar.getInstance(Locale.KOREA);
 		SimpleDateFormat  formatter = new SimpleDateFormat("yyyy-MM-dd");    
@@ -232,7 +237,10 @@ public class BossController {
 		}
 		
 		System.out.println("wsels : " + wsel);
-		
+		int wseltot = 0;
+		for (int i = 0; i < wsel.length; i++) {
+			wseltot = wseltot+ wsel[i];
+		}
 		model.addAttribute("today", today1);
 		model.addAttribute("ytday", ytday);
 //		model.addAttribute("today1", yesterday1);
@@ -242,6 +250,7 @@ public class BossController {
 //		model.addAttribute("today5", yesterday5);
 //		model.addAttribute("today6", yesterday6);
 		model.addAttribute("wsel", wsel);
+		model.addAttribute("wseltot", wseltot);
 
 		return "boss";
 	}
