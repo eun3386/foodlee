@@ -356,7 +356,7 @@
 							<c:when test="${qna.qnaSecret eq true}">
 								<c:choose>
 									<c:when test="${qna.qnaDepth eq 0}">
-										<c:if test="${qna.login eq LoginName or sellerLogin.login eq LoginName}">
+										<c:if test="${qna.login eq LoginName or not empty sellerLogin.login and sellerLogin.login eq LoginName}">
 											<i class="fas fa-lock"></i> ${qna.login}
 										</c:if>
 									</c:when>
@@ -381,7 +381,7 @@
 							<c:when test="${qna.qnaSecret eq true}">
 								<c:choose>
 									<c:when test="${qna.qnaDepth eq 0}">
-										<c:if test="${qna.login eq LoginName or sellerLogin.login eq LoginName}">
+										<c:if test="${qna.login eq LoginName or not empty sellerLogin.login and sellerLogin.login eq LoginName}">
 											<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
 										</c:if>
 									</c:when>
