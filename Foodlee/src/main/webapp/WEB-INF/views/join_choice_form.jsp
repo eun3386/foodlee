@@ -67,7 +67,7 @@
 
 	});
 </script>
-<div class="wrap">
+<div class="wrap" style="height: 960px;">
 	<div>
 		<table border="0" id="choice_table">
 			<tr>

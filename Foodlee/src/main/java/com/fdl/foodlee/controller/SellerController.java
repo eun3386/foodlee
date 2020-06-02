@@ -61,12 +61,12 @@ public class SellerController {
 		
 		System.out.println((String)ses.getAttribute("LoginName"));
 		
-		selFileSvc.makeUserDir(ses, "test");
+		selFileSvc.makeUserDir(ses, login);
 		
 		String realPath = ses.getServletContext().getRealPath(ISellerFileSVC.DEF_UPLOAD_DEST) + "/";
 		
 		Map<String, Object> rMap
-		 = selFileSvc.writeUploadedMultipleFiles(upfiles, realPath, (String)ses.getAttribute("LoginName"));
+		 = selFileSvc.writeUploadedMultipleFiles(upfiles, realPath, login);
 		String filePath = (String)rMap.get("muliFPs");
 		
 		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
@@ -82,7 +82,7 @@ public class SellerController {
 		ModelAndView mav = new ModelAndView();		
 //		if( key > 0 ) {
 		if( b ) {
-			mav.addObject("msg", "판매자 회원 가입 성공!!");
+			mav.addObject("msg", login+"님 판매자 회원 가입 성공!!");
 			mav.setViewName("redirect:/main.fdl");	
 		} else {
 			mav.addObject("msg", "판매자 회원 가입 실패~");

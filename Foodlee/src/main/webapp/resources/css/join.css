@@ -1,19 +1,12 @@
 @charset "UTF-8";
 
-#img_wrap {
-	width: 250px;
-	height: 250px;
-}
+
 .lb {
 	text-align: right;
 	padding: 5px 20px;
 }
-.input {
-	padding-left: 50px;
-}
 #join_submit {
 	text-align: right;
-	padding-right: 100px;
 }
 #join_table {
 	margin: 0 auto;
@@ -22,9 +15,9 @@
 #txtarea {
 	padding: 15px 50px;
 }
-input {
-	height: 25px;
-}
+/* input { */
+/* 	height: 25px; */
+/* } */
 #dupchk {
 	width: 70px;
 }

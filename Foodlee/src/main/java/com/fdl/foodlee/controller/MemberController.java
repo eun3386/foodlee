@@ -54,8 +54,10 @@ public class MemberController {
 		
 		String realPath = ses.getServletContext().getRealPath(IMemberFileSVC.DEF_UPLOAD_DEST) + "/";
 		
+		mbFileSvc.makeUserDir(ses, login);
+		
 		Map<String, Object> rMap
-		 = mbFileSvc.writeUploadedMultipleFiles(upfiles, realPath, (String)ses.getAttribute("LoginName"));
+		 = mbFileSvc.writeUploadedMultipleFiles(upfiles, realPath, login);
 		String filePath = (String)rMap.get("muliFPs");
 		
 		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
@@ -71,7 +73,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();		
 //		if( key > 0 ) {
 		if( b ) {
-			mav.addObject("msg", "일반 회원 가입 성공!!");
+			mav.addObject("msg", login+"님 일반 회원 가입 성공!!");
 			mav.setViewName("redirect:/main.fdl");
 		} else {
 			mav.addObject("msg", "일반 회원 가입 실패~");
