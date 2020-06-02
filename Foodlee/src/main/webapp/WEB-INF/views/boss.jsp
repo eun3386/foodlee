@@ -269,7 +269,7 @@
                                     My Profile</a>
                                 <a id="bannerLink" class="dropdown-item" href="${pageContext.request.contextPath}/ad2.fdl"><i data-feather="credit-card"
                                         class="svg-icon mr-2 ml-1"></i>
-                                    My Balance</a>
+                                    Banner apply</a>
                                 <a class="dropdown-item" href="javascript:void(0)"><i data-feather="mail"
                                         class="svg-icon mr-2 ml-1"></i>
                                     Inbox</a>
