@@ -202,7 +202,7 @@
         <a href="${pageContext.request.contextPath}/main.fdl"><img class="logo" src="resources/css/imgs/logo.png"></a>
         <span id="loginjoin">
 			<c:if test="${empty LoginName}">
-			<a href="${pageContext.request.contextPath}/login_form.fdl" id='login'>로그인</a> / <a href="#" id='join'>회원가입</a></span>
+			<a href="${pageContext.request.contextPath}/login_form.fdl" id='login'>로그인</a> / <a href="${pageContext.request.contextPath}/join_choice_form.fdl" id='join'>회원가입</a></span>
 	        </c:if>
 	        <c:if test="${not empty LoginName and LoginType eq 4}">
 	        <a href="${pageContext.request.contextPath}/my_page.fdl" id='mypage'>마이페이지</a> / <a href="${pageContext.request.contextPath}/logout.fdl" id="logout">로그아웃</a>
