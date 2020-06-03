@@ -19,12 +19,12 @@ public class EventAnswerSVCImpl implements IEventAnswerSVC {
 	private IEventAnswerDAO evAsDao;
 	
 	@Override
-	public boolean answerAdd(EventAnswerVO evAs) {
+	public int answerAdd(EventAnswerVO evAs) {
 		if( evAs == null || evAs.getEvAsReply() == null || 
 				evAs.getEvAsReply().isEmpty() )
 //				||
 //				evAs.getEvAsReply().length() <= 10 )
-			return false; // 의도적 에러 발생...
+			return 0; // 의도적 에러 발생...
 		return evAsDao.answerAdd(evAs);
 	}
 
@@ -54,7 +54,7 @@ public class EventAnswerSVCImpl implements IEventAnswerSVC {
 	@Override
 	public EventAnswerVO answerSelectOne(int evAsId) {
 		// TODO Auto-generated method stub
-		return null;
+		return evAsDao.answerSelectOne(evAsId);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import com.fdl.foodlee.model.vo.EventVO;
 
 public interface IEventAnswerDAO {
 //	answer_add	
-	boolean answerAdd(EventAnswerVO evAs);
+	int answerAdd(EventAnswerVO evAs);
 	boolean answerAdd(String evAsReply, int eventId, int memberId);
 //	answer_list /all
 	List<EventAnswerVO> answerList();

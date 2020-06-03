@@ -66,8 +66,7 @@ $("#save").click(function(){
 	});
 	
 function cancel() {
-	window.location.href="${pageContext.request.contextPath}";
-// 	/#event-list";
+	window.location.href="${pageContext.request.contextPath}/#event-list";
 }
 </script>
 </body>

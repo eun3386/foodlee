@@ -32,30 +32,23 @@ public class EventAnswerController {
 // - 회원이 대상 게시글에 대해 답글을  추가할 수 있다.
 //	answer_new_form.fdl
 //	answer/new_form.fdl
-	@RequestMapping(value = "/new_form.fdl", method = RequestMethod.GET)
-	public String answerNewForm(HttpSession ses, 
-			@RequestParam(value="evId") int evId,
-			@RequestParam(value="id") int mbId,
-			@ModelAttribute(value = "as") EventAnswerVO evAs,
-			Model model) {
-		int sesMbId = (int) ses.getAttribute("id");
-		if(sesMbId == mbId) {
-			model.addAttribute("evId", evId);
-			MemberVO mb = mbSvc.selectOneMember(mbId);
-			model.addAttribute("member", mb);
-			if(evAsSvc.answerAdd(evAs)) {
-				return "redirect:/event_show.fdl?id="+evAs.getEventId();
-			} else {
-				
-			}
-			return "answer/as_new_form";
-		} else {
-			System.out.println("댓글 등록 실패!");
-			MemberVO mb = mbSvc.selectOneMember(evAs.getMemberId());
-			model.addAttribute("member", mb);
-			return "answer/as_new_form";
-		}
-	}
+//	@RequestMapping(value = "/answer_add.fdl", method = RequestMethod.POST)
+//	public String answerNewForm(HttpSession ses, 
+//			@RequestParam(value="evId") int evId,
+//			@RequestParam(value="id") int mbId,
+//			Model model) {
+//		int sesMbId = (int) ses.getAttribute("id");
+//		if(sesMbId == mbId) {
+//			model.addAttribute("evId", evId);
+//			MemberVO mb = mbSvc.selectOneMember(mbId);
+//			model.addAttribute("member", mb);
+////			return "answer/as_new_form";
+//			return "add.fdl";
+//		} else {
+//			System.out.println("댓글 추가 : 회원 id 불일치!");
+//			return "redirect:event_show.fdl?id="+evId;
+//		}
+//	}
 
 //	answer_add.fdl
 	@RequestMapping(value="/add.fdl", method = RequestMethod.POST)
@@ -64,9 +57,16 @@ public class EventAnswerController {
 			HttpSession ses, Model model
 			) {
 		System.out.println("command as: " + evAs);
-		if(evAsSvc.answerAdd(evAs)) {
-			return "redirect:/event_show.fdl?id="+evAs.getEventId();
-		} else {
+		int ekey = evAsSvc.answerAdd(evAs);
+		if(ekey > 0) {
+			System.out.println("댓글 등록 성공!");
+			
+			EventAnswerVO as = evAsSvc.answerSelectOne(ekey);
+			System.out.println("as="+as);
+			model.addAttribute("as", as);
+			return "eventAnswer/as_one";
+			//return "redirect:/event_show.fdl?id="+evAs.getEventId();
+		} else { // 0
 			System.out.println("댓글 등록 실패!");
 			MemberVO mb = mbSvc.selectOneMember(evAs.getMemberId());
 			model.addAttribute("member", mb);
@@ -76,7 +76,7 @@ public class EventAnswerController {
 	
 //	- 댓글 리스트가 게시글 상세보기에 연동 표시될 수 있다.
 //	answer_list.fdl
-	@RequestMapping(value = "/list.fdl", method = RequestMethod.POST)
+	@RequestMapping(value = "/list.fdl", method = RequestMethod.GET)
 	public String answerListProc(
 			@RequestParam(value = "evId") int evId, Model model
 			) {
@@ -85,7 +85,7 @@ public class EventAnswerController {
 			model.addAttribute("evId", evId);
 			model.addAttribute("asSize", asList.size());
 			model.addAttribute("answers", asList);
-			return "answer/as_list";
+			return "eventAnswer/as_list";
 		} else {
 			return "redirect:/event_show_fdl?id="+evId;
 		}

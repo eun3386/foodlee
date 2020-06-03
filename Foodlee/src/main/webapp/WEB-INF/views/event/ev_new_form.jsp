@@ -53,7 +53,7 @@
 			</script>
 		 </td> </tr> 
 		<tr> <td colspan="2"> <input type="button" id="save" value="저장"/> 
-		<input type="button" value="취소"/> </td> 
+		<input type="button" value="취소" onclick="cancel()"/> </td> 
 		</tr> 
 	</table> 
 </form>
@@ -62,6 +62,10 @@ $("#save").click(function(){
 	oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); 
 	$("#frm").submit(); 
 	});
+
+function cancel() {
+	window.location.href="${pageContext.request.contextPath}/#event-list";
+}
 </script>
 </body>
 </html>

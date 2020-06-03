@@ -19,6 +19,12 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
 
 <style type="text/css">
+#container{
+	width:1900px;
+	
+}
+
+
 .follow_red {
 	color: red;
 }
@@ -241,56 +247,54 @@ table{
 <%-- 		<a href="${pageContext.request.contextPath}/#event-list">목록</a>  --%>
 		<c:if test="${not empty LoginName}"> 
 		<c:if test="${LoginName eq 'admin'}"> 
-				 | <a href="${pageContext.request.contextPath}/event_edit_form.fdl?evId=${event.eventId}">편집</a> |  
- 				<a href="#">삭제</a> | 
+				 | <button type="button" class="btn btn-xs btn-warning" onclick="modify()">편집</button>
+<%-- 				 <a href="${pageContext.request.contextPath}/event_edit_form.fdl?evId=${event.eventId}" class="btn-xs">편집</a> |   --%>
+<!--  				<a href="#">삭제</a> |  -->
 		</c:if> 
 <!-- 			<a href="#">좋아요</a> |  <br> -->
-			<div><input type="text" name="reply"><a href="${pageContext.request.contextPath}/answer/new_form.fdl?id=${id}&evId=${event.eventId}">댓글추가</a></div>
- 			 
+			<div><input type="text" name="reply" placeholder="댓글 추가 입력">
+			<a onclick="addAnswer(${id},${event.eventId})">댓글추가</a></div>
+	<script type="text/javascript">
+		function addAnswer(mbId,eventId) {
+			var url = '${pageContext.request.contextPath}/answer/add.fdl';
+			var answer = $('input[name=reply]').val();
+			var params = "memberId="+mbId+"&eventId="+eventId
+				+"&evAsReply="+encodeURIComponent(answer);
+			$.ajax({
+				type: 'post',
+				url: url,
+				data: params,
+				success: function(res, status, xhr) {
+					console.log(res);
+					$('#answer_list ul').prepend(res);
+				},
+				fail: function(xhr, status) {
+					alert("error: " + status);
+				}
+			});
+		}
+	</script> 			 
  			 
  		</c:if>		 
  		</div>
  		
-	<div id="answer_list">
-		<c:choose>
-			<c:when test="${!empty asSize}">
-				<ul>
-					<c:forEach var="as" items="${answers}">
-					<li>
-<%-- 					 <b id="ascmp_${as.evAsId}"> --%>
-<%-- 					<span class="heart" onclick="cmp_inc(${as.evAsId},${as.memberId},${as.articleId})">♥</span> --%>
-<%-- 					${as.compassion}</b>  --%>
-						 [${as.memberId}회원] 
-						 ${as.evAsReply} - 
-						 <fmt:formatDate  
-						 value="${as.createdAt}"  
-		pattern="yyyy년MM월dd일 (HH시mm분ss초)"/> / 
-						 <fmt:formatDate  
-						 value="${as.updatedAt}"  
-		pattern="yyyy년MM월dd일 (HH시mm분ss초)"/>
-				
-				<c:if test="${!empty loginName and 
-					 id eq as.memberId}">					
-					<input type="button" value="편집" 
-					 onclick
-			="editAnswer(${as.evAsId},${as.memberId},${as.eventId})">
-				</c:if>	
-		
-					</li>
-					</c:forEach>
-				</ul>
-			</c:when>
-			<c:when test="${empty asSize}">
-				<i>"아직 댓글이 없습니다!"</i>
-			</c:when>
-		</c:choose>
+	<div id="answer_list">	
 	</div> 
+	<script type="text/javascript">
+		$("#answer_list").load('${pageContext.request.contextPath}/answer/list.fdl?evId=${event.eventId}');
+	</script>
+	
 	</div>
 	<script type="text/javascript">
 	function backToTheList() {
   		window.open(window.location.href		
   				= '${pageContext.request.contextPath}/#event-list');
-  	}
+	}
+	function modify() {
+  		window.open(window.location.href		
+  				= "${pageContext.request.contextPath}/event_edit_form.fdl?evId=${event.eventId}");
+	}
+	
 	</script>
 </body>
 

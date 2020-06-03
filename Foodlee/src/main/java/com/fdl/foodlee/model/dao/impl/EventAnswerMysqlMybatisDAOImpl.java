@@ -19,10 +19,12 @@ public class EventAnswerMysqlMybatisDAOImpl implements IEventAnswerDAO {
 	private SqlSessionTemplate sstem;
 	
 	@Override
-	public boolean answerAdd(EventAnswerVO evAs) {
+	public int answerAdd(EventAnswerVO evAs) {
 		System.out.println("mybatis: answerAdd()..");
-		int r = this.sstem.insert("IAnswerDAO.answerAdd", evAs);
-		return r == 1;
+		int r = this.sstem.insert("IEventAnswerDAO.answerAdd", evAs);
+		int ekey = evAs.getEvAsId();
+		System.out.println("ekey = " + ekey);
+		return r == 1 ? ekey: 0;
 	}
 
 	@Override
