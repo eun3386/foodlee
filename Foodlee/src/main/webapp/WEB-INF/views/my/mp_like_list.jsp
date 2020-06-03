@@ -36,7 +36,7 @@ $(function(){
 				html += '<div class="card_wrap"><div class="card">'; 
 					html += '<div class="thumb"> ';
 					html += '<a href="${pageContext.request.contextPath}/truckDetail.fdl?sellerId=' + item.sellerId + '">';
-						html += '<img src="./resources/imgs/foodtruck2/' + item.foodtruckImgPath + '" width="220px"; height="170px";>';
+						html += '<img src="${pageContext.request.contextPath}/resources/imgs/foodtruck2/' + item.foodtruckImgPath + '" width="220px"; height="170px";>';
 							html += '</a>';
 					html += '</div>'; 
 					html += '<div class="content">';

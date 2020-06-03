@@ -68,9 +68,9 @@
 							</tr>
 							<tr>
 								<th><label for="phoneNumber1">연락처</label></th>
-								<td><input type="text" class="input sm" id="phoneNumber1" name="phoneNumber1" maxlength="3" required> - </td>
-								<td><input type="text" class="input sm" id="phoneNumber2" name="phoneNumber2" maxlength="4" required> - </td>
-								<td><input type="text" class="input sm" id="phoneNumber3" name="phoneNumber3" maxlength="4" required></td>
+								<td><input type="text" class="input sm" id="phoneNumber1" name="phoneNumber1" maxlength="3" required> - 
+								<input type="text" class="input sm" id="phoneNumber2" name="phoneNumber2" maxlength="4" required> -
+								<input type="text" class="input sm" id="phoneNumber3" name="phoneNumber3" maxlength="4" required></td>
 								<th></th>
 							</tr>
 							<tr>

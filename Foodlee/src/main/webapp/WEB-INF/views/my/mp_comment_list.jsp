@@ -56,7 +56,7 @@
 					<thead>
 						<tr>
 							<th>푸드트럭</th>
-							<th>리뷰사진</th>
+<!-- 							<th>리뷰사진</th> -->
 							<th>리뷰내용</th>
 							<th>리뷰작성일</th>
 						</tr>
@@ -160,7 +160,7 @@ $(function(){
 			data.forEach(function(item){
 					html += '<tr>';
 						html += '<td><a href="${pageContext.request.contextPath}/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.reviewFoodtruckName + '</a></td>';
-						html += '<td>' + item.reviewPic + '</td>';
+
 						html += '<td>' + item.reviewContent + '</td>';
 						html += '<td>' + moment(item.reviewCreatedAt).format('YYYY-MM-DD HH:mm:ss') + '</td>';
 				html += '</tr>';

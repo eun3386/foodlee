@@ -87,7 +87,7 @@ $(function(){
 			data.forEach(function(item){
 				html += '<tr>';
 					html += '<td>' + item.orderId + '</td>';
-					html += '<td><a href="${pageContext.request.contextPath}truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.orderFoodtruckName + '</a></td>';
+					html += '<td><a href="${pageContext.request.contextPath}/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.orderFoodtruckName + '</a></td>';
 					html += '<td>' + item.orderName + '</td>';
 					html += '<td>' + item.orderPriceSum + '원</td>';
 					html += '<td>' + moment(item.orderDate).format('YYYY-MM-DD HH:mm:ss') + '</td>';
