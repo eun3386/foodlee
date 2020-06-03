@@ -319,6 +319,10 @@ public class BossController {
 		return "boss/bossorder/orderlist";
 	}
 	
+	@RequestMapping(value = "ad2.fdl", method = RequestMethod.GET)
+	public String bannerAdd() {
+		return "boss/bossinfo/ad2";
+	}
 	// 배너 광고 신청
 		// banner_apply.fdl
 		@RequestMapping(value = "banner_apply.fdl", 
@@ -335,7 +339,6 @@ public class BossController {
 			System.out.println("upfiles = " + upfiles);
 //			String baType = req.getParameter("bannerType");
 			System.out.println("baType = " + baType);
-			ses.setAttribute("baType", baType);
 			System.out.println("multipart size: " 
 							+ upfiles.size());
 			
@@ -348,7 +351,6 @@ public class BossController {
 			System.out.println("realPath =" + realPath);
 //			int adPrice =  Integer.parseInt(req.getParameter("adPrice"));
 			System.out.println("adPrice = " + adPrice);
-			ses.setAttribute("bannerPrice", adPrice);
 //			String filePath 
 //				= baFileSvc.writeUploadedFile(upfile, 
 //					realPath, (String)ses
@@ -364,12 +366,17 @@ public class BossController {
 			System.out.println("총 볼륨(MB): "+ rMap.get("totalMB") 
 					+"MB");
 			int selId = (int) ses.getAttribute("id");
+			
+			ses.setAttribute("baType", baType);
+			
+			ses.setAttribute("bannerPrice", adPrice);
+			
 			System.out.println("selId = " + selId);
 			Timestamp adDate = Timestamp.valueOf( adStartDate + " 00:00:00");	
+			ses.setAttribute("baStrTime", adDate);
 //			SimpleDateFormat adDate = new SimpleDateFormat();
 			System.out.println("adStartDate = " + adStartDate);
 			
-			ses.setAttribute("baStrTime", adDate);
 			System.out.println("adDate =" + adDate);
 			// public img src... 
 			int baRtkey = this.baSvc.insertNewBannerReturnKey(filePath, adPrice, adDate, adDate, baType, selId);

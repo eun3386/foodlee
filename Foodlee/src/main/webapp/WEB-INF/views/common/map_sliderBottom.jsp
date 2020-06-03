@@ -4,7 +4,7 @@
 <c:forEach var="bg" items="${baBtmList}" varStatus="status">
 	<div class="slider_bottom" onclick="selectBottomOneBanner(${bg.selNum})">
 		<figure>
-			<img src="resources/imgs/mapMain/${bg.imgPath}">
+			<img src="resources/imgs/mapMain/foodtruckBanner${bg.imgPath}">
 		</figure>
 	</div>
 </c:forEach>

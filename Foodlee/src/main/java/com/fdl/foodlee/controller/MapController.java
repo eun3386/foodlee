@@ -75,8 +75,8 @@ public class MapController {
 	public String mapMain(Model model, HttpSession ses) {
 		
 		// - 배너 리스트를 볼 수 있다
-		int max = 50000; // 어드민이 설정
-		int min = 10000; // 어드민이 설정
+		int max = 55000; // 어드민이 설정
+		int min = 45000; // 어드민이 설정
 		int limit = 10; // 어드민이 설정
 		int avg = (max + min)/2;
 		
@@ -88,7 +88,7 @@ public class MapController {
 			for (BannerAddVO ba : baList) {
 					if(ba.getPrice() >= avg) {
 						baTopList.add(ba);
-//						System.out.println(baTopList);
+						System.out.println(baTopList);
 //						System.out.println("가격"+ba.getPrice());	
 //						System.out.println("배너 top 리스트 조회 성공: " + baTopList.size() + "개");
 					} else {
