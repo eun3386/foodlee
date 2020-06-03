@@ -183,6 +183,9 @@
 					  <li class="nav-item">
 					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=application.getContextPath()%>/store_new_form.fdl" >트럭등록</a>
+					  </li>
 					</ul>
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-right"><!--  오른쪽 부분-->
@@ -300,7 +303,12 @@
                       <td>${od.orderName}</td>
                       <td>${od.orderPrice}</td>
                       <td>${od.orderPriceSum}</td>
-                      <td>${od.orderState}</td>
+                      <td><c:if test="${od.orderState eq 1}"><c:out value="회원주문" /></c:if>
+                      <c:if test="${od.orderState eq 2}"><c:out value="회원취소" /></c:if>
+                      <c:if test="${od.orderState eq 3}"><c:out value="판매자 주문 접수" /></c:if>
+                      <c:if test="${od.orderState eq 4}"><c:out value="판매자 주문 거절" /></c:if>
+                      <c:if test="${od.orderState eq 5}"><c:out value="판매자 주문 취소" /></c:if>
+                      </td>
                       <td>${od.orderRequests}</td>
                       <td>${od.orderDate}</td>
                       <td>${od.login}</td>

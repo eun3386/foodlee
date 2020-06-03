@@ -5,7 +5,7 @@
 	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 	
 	
-		<div id="top_foodtruck_content">
+		<div id="top_foodtruck_content" class="ft_con">
 			<c:forEach var="foodtruck" items="${topFtList}" varStatus="vs" >
 				<a href="${pageContext.request.contextPath}/truckDetail.fdl?sellerId=${foodtruck.sellerId}">
 						<button type="button" onclick="" class="top_truck_card">
