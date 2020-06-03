@@ -300,7 +300,12 @@
                       <td>${od.orderName}</td>
                       <td>${od.orderPrice}</td>
                       <td>${od.orderPriceSum}</td>
-                      <td>${od.orderState}</td>
+                      <td><c:if test="${od.orderState eq 1}"><c:out value="회원주문" /></c:if>
+                      <c:if test="${od.orderState eq 2}"><c:out value="회원취소" /></c:if>
+                      <c:if test="${od.orderState eq 3}"><c:out value="판매자 주문 접수" /></c:if>
+                      <c:if test="${od.orderState eq 4}"><c:out value="판매자 주문 거절" /></c:if>
+                      <c:if test="${od.orderState eq 5}"><c:out value="판매자 주문 취소" /></c:if>
+                      </td>
                       <td>${od.orderRequests}</td>
                       <td>${od.orderDate}</td>
                       <td>${od.login}</td>

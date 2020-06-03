@@ -389,7 +389,7 @@
                             <div class="d-flex d-lg-flex d-md-block align-items-center">
                                 <div>
                                     <h2 class="text-dark mb-1 font-weight-medium">
-                                    <sup class="set-doller">￦</sup>864만</h2>
+                                    <sup class="set-doller">￦</sup>86445600</h2>
                                     <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">월매출</h6>
                                 </div>
                                 <div class="ml-auto mt-md-3 mt-lg-0">
