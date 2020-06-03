@@ -102,7 +102,7 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">트럭등록</a>
 					  </li>
 					</ul>
                     <!-- ============================================================== -->
@@ -146,9 +146,8 @@
                                         class="svg-icon mr-2 ml-1"></i>
                                     Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Logout</a>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/logout.fdl" id="logout">
+                                <i data-feather="power" class="svg-icon mr-2 ml-1"></i>  Logout</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
                                         Profile</a></div>
@@ -174,13 +173,7 @@
                 <div class="row">
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a class="menur" href="#">메뉴등록</a></li>
-            						<li class="breadcrumb-item"><a class="menum" href="#">메뉴수정</a></li>
-            						<li class="breadcrumb-item"><a class="store" href="#">가게정보</a></li>
-                                </ol>
-                            </nav>
+                           
                         </div>
                     </div>
                 </div>
