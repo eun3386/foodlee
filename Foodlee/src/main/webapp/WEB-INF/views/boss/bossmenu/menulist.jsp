@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
+<%
+	String CON = application.getContextPath();
+%>
 <!DOCTYPE html>
 <html dir="ltr" lang="ko">
 <head>
@@ -225,9 +228,8 @@
                                         class="svg-icon mr-2 ml-1"></i>
                                     Account Setting</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
-                                        class="svg-icon mr-2 ml-1"></i>
-                                    Logout</a>
+                                <a class="dropdown-item" href="${pageContext.request.contextPath}/logout.fdl" id="logout">
+                                <i data-feather="power" class="svg-icon mr-2 ml-1"></i>  Logout</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="pl-4 p-3"><a href="javascript:void(0)" class="btn btn-sm btn-info">View
                                         Profile</a></div>
@@ -294,7 +296,7 @@
                       <th>메뉴종류</th>
                       <th>메뉴가격</th>
                       <th>메뉴정보</th>
-                      <th>메뉴원재료</th>
+                      <th>메뉴사진</th>
                     </tr>
                   </thead>
 <%--                 <c:forEach var="" items="" vs=""> --%>
@@ -306,7 +308,9 @@
                       <td>${mn.menuType}</td>
                       <td>${mn.menuPrice}</td>
                       <td>${mn.menuInfor}</td>
-                      <td>${mn.rawMaterials}</td>
+                      <td style="border-left: none;"><img
+									src="<%=CON%>/resources/imgs/truckDetail/sellerid/${mn.sellerId}/${mn.menuPic}"
+									style="width: 130px; height: 100px;"></td>
                     </tr>
                   </c:forEach>
                   </tbody>
