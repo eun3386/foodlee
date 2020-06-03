@@ -28,12 +28,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fdl.foodlee.model.vo.FoodtruckVO;
+import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.service.inf.IBannerFileSVC;
 import com.fdl.foodlee.service.inf.IBannerSVC;
 import com.fdl.foodlee.service.inf.IFoodtruckFileSVC;
 import com.fdl.foodlee.service.inf.IFoodtruckSVC;
+import com.fdl.foodlee.service.inf.IMenuSVC;
 import com.fdl.foodlee.service.inf.IOrderSVC;
 import com.fdl.foodlee.service.inf.IQnaSVC;
 import com.fdl.foodlee.service.inf.IReviewFileSVC;
@@ -61,6 +63,9 @@ public class BossController {
 	
 	@Autowired
 	IQnaSVC qnaSvc;
+	
+	@Autowired
+	private IMenuSVC muSvc;
 	
 	// 판매자의 새 푸드트럭을 등록 할 수 있다. 트럭 등록 성공시 트럭pk뽑아서 트럭 상세보기로 redi 한다
 	@RequestMapping(value = "storeinfo.fdl", method = RequestMethod.GET) 
@@ -278,17 +283,32 @@ public class BossController {
 		}
 		return mav;
 	}
-	@RequestMapping(value = "orderlist.fdl", method = RequestMethod.GET)
-	public String orderlist() { //주문리스트
-		return "boss/bossorder/orderlist";
+	//메뉴리스트
+	@RequestMapping(value = "menulist.fdl", method = RequestMethod.GET)
+	public String menulist(HttpSession ses, Model model) { //메뉴리스트
+		String login = (String) ses.getAttribute("LoginName"); 	
+			System.out.println("login: "+login);
+		SellerVO svo = this.selSvc.selectOneSeller(login);
+			System.out.println("svo: "+svo);
+		List<MenuVO> menuList = muSvc.showAllMenu(svo.getSellerId());
+			System.out.println("menuList: "+menuList);
+		model.addAttribute("svo",svo); //sellerVO
+		model.addAttribute("menuList", menuList);
+		return "boss/bossmenu/menulist";
 	}
+	@RequestMapping(value = "menuadd.fdl", method = RequestMethod.GET)
+	public String menuadd(HttpSession ses, Model model) { //메뉴리스트
+		return "boss/bossmenu/menuadd";
+	}
+	
+	
 	@RequestMapping(value = "review.fdl", method = RequestMethod.GET)
 	public String order() {//리뷰목록
 		return "boss/bossreview/review";
 	}
-	@RequestMapping(value = "position.fdl", method = RequestMethod.GET)
-	public String position() {//리뷰목록
-		return "boss/bossinfo/position";
+	@RequestMapping(value = "orderlist.fdl", method = RequestMethod.GET)
+	public String orderlist() {//주문리스트
+		return "boss/bossorder/orderlist";
 	}
 	
 	@RequestMapping(value = "ad2.fdl", method = RequestMethod.GET)

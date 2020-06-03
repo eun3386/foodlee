@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,12 +19,16 @@ import org.springframework.stereotype.Repository;
 import com.fdl.foodlee.model.dao.inf.ISellerDAO;
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 
 // 빈 자동 등록 : MVC 저장단 처리
 @Repository
 public class SellerMysqlDAOImpl implements ISellerDAO {
+	
+	@Autowired
+	private SqlSessionTemplate sstem;
 	
 	private static final String SQL_INSERT_SELLER_CRYPTO 
 	= "insert into sellers values(null, 'seller', ?, hex(aes_encrypt(?,?)), "

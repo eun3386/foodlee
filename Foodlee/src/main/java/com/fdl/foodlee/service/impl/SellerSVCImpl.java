@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fdl.foodlee.model.dao.inf.ISellerDAO;
+import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.service.inf.ISellerSVC;
 
@@ -79,5 +81,6 @@ public class SellerSVCImpl implements ISellerSVC {
 	public boolean updateOneSellerPW(int id, String login, String password) {
 		return selDao.updateOneSellerPW(id, login, password);
 	}
+	
 	
 }

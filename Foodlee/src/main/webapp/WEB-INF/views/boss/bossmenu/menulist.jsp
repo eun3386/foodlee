@@ -24,7 +24,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <%-- <link href="<%=application.getContextPath()%>/boss/bossorder/orderlist.fdl" > --%>
-    <title>orderlist</title>
+    <title>menulist</title>
 	
 	 <!-- jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -255,9 +255,15 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">List Media</h4>
                         <div class="d-flex align-items-center">
-                            
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+			     <li class="breadcrumb-item"><a href="<%=application.getContextPath()%>/menulist.fdl" class="text-muted">메뉴리스트</a></li>
+			     <li class="breadcrumb-item"><a href="<%=application.getContextPath()%>/seller/menu_add_form.fdl" class="text-muted">메뉴추가</a></li>
+			     <li class="breadcrumb-item"><a href="<%=application.getContextPath()%>/menuadd.fdl" class="text-muted">메뉴수정</a></li>
+                                </ol>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -280,7 +286,7 @@
 	            <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-warning">주문 리스트</h6>
+              <h6 class="m-0 font-weight-bold text-warning">메뉴 리스트</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">

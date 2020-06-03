@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fdl.foodlee.model.vo.FoodtruckVO;
 import com.fdl.foodlee.model.vo.MemberVO;
+import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.OrderVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 
@@ -53,8 +54,6 @@ public interface ISellerDAO {
 		List<SellerVO> showAllSellerJoin(SellerVO sv);
 		List<SellerVO> showAllSellerJoin(int mbId, String login);
 		HashMap<String, Object> showAllJoin();
-
-		
 		
 	}
 

@@ -12,9 +12,6 @@
     <!-- - width=device-width : 페이지의 너비를 기기의 스크린 너비로 설정합니다. 즉, 렌더링 영역을 기기의 뷰포트의 크기와 같게 만들어 줍니다.
 - initial-scale=1.0 : 처음 페이지 로딩시 확대/축소가 되지 않은 원래 크기를 사용하도록 합니다. 0~10 사이의 값을 가집니다.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
 <style type="text/css">
 #main-wrapper[data-layout=vertical][data-sidebartype=full] .page-wrapper
 	{
@@ -107,6 +104,9 @@
         ]); 
         var options2 = { 
           hAxis: { title: '한주간 매출' },
+          vAxis: {
+              viewWindow: {min: 0 }  },
+
           curveType: 'function', 
 /*           legend: { position: 'bottom' },  */
              tooltip:{isHtml: true }, 
@@ -228,7 +228,8 @@
 					    <a class="nav-link active" href="boss.fdl">시작화면</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/menu_add_form.fdl">메뉴추가/수정</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/menulist.fdl">메뉴추가/수정</a>
+<!-- 					    /seller/menu_add_form.fdl -->
 					    <!--  style="a {color: #7c8798} a:hover {color: #5f76e8;}"style.min.css 6242 -->
 					  </li>
 					  <li class="nav-item">
@@ -248,13 +249,11 @@
                         <!-- ============================================================== -->
                         <li class="nav-item d-none d-md-block">
                             <a class="nav-link" href="javascript:void(0)">
-                                <form>
                                     <div class="customize-input"><!-- 검색부분 -->
                                         <input class="form-control custom-shadow custom-radius border-0 bg-white"
                                             type="search" placeholder="Search" aria-label="Search">
                                         <i class="form-control-icon" data-feather="search"></i>
                                     </div>
-                                </form>
                             </a>
                         </li>
                         <!-- ============================================================== -->

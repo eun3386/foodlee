@@ -24,7 +24,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
     <%-- <link href="<%=application.getContextPath()%>/boss/bossorder/orderlist.fdl" > --%>
-    <title>orderlist</title>
+    <title>menulist</title>
 	
 	 <!-- jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -50,28 +50,6 @@
 	<script src="resources/adminTool/jquery-easing/jquery.easing.min.js"></script>
 
 	<script>
-	  $(document).ready(function() {
-		  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
-		    $('#dataTable').DataTable( {
-		        "pagingType": "full_numbers",
-		        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
-		        "language": {
-		        	"search": "검색 _INPUT_ ",
-		            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
-		            "zeroRecords": "결과가 없습니다",
-		            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
-		            "infoEmpty": "값이 없습니다.",
-		            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
-		            "paginate": {
-		              "first": '처음',
-		              "last": '끝',
-		              "previous": "이전",
-		              "next": "다음"
-		            }
-		        }
-		    });
-		});
-  	
 	  $(document).ready(function() {
 			var ROOT_PATH = '<%= application.getContextPath() %>';
 			
@@ -255,9 +233,15 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"></h4>
+                        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">List Media</h4>
                         <div class="d-flex align-items-center">
-                            
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb m-0 p-0">
+			     <li class="breadcrumb-item"><a href="<%=application.getContextPath()%>/menulist.fdl" class="text-muted">메뉴리스트</a></li>
+			     <li class="breadcrumb-item"><a href="<%=application.getContextPath()%>/seller/menu_add_form.fdl" class="text-muted">메뉴추가</a></li>
+			     <li class="breadcrumb-item"><a href="#move3" class="text-muted">메뉴수정</a></li>
+                                </ol>
+                            </nav>
                         </div>
                     </div>
                 </div>
@@ -279,86 +263,9 @@
 	        <div class="col-12">
 	            <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-warning">주문 리스트</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="display" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-<!--                       <th>메뉴사진</th> -->
-                      <th>메뉴이름</th>
-                      <th>메뉴종류</th>
-                      <th>메뉴가격</th>
-                      <th>메뉴정보</th>
-                      <th>메뉴원재료</th>
-                    </tr>
-                  </thead>
-<%--                 <c:forEach var="" items="" vs=""> --%>
-                  <tbody>
-				  <c:forEach var="mn" items="${menuList}" varStatus="vs">
-                    <tr>
-<%--                       <td>${mn.menuPic}</td> --%>
-                      <td>${mn.menuName}</td>
-                      <td>${mn.menuType}</td>
-                      <td>${mn.menuPrice}</td>
-                      <td>${mn.menuInfor}</td>
-                      <td>${mn.rawMaterials}</td>
-                    </tr>
-                  </c:forEach>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <%@include file="../../seller/menu_add_form.jsp" %>
           </div>
-
         </div>
-<!-- 	            /.row -->
-<!-- 	            <div class="row" id="move2"> -->
-<!-- 	                <div class="col-12" > -->
-<!-- 	                    <div class="card"> -->
-<!-- 	                        <div class="card-body"> -->
-<!-- 	                            <h5 class="card-title">리뷰목록</h5> -->
-	                            
-<!-- 	                            페이지 넘기기 top -->
-<!-- 	                             <div class="col-lg-4 mb-4"> -->
-<!-- 	                               <nav aria-label="Page navigation example"> -->
-<!-- 	                                 <ul class="pagination justify-content-center"> -->
-<!-- 	                                     <li class="page-item"> -->
-<!-- 	                                         <a class="page-link" href="javascript:void(0)" -->
-<!-- 	                                             aria-label="Previous"> -->
-<!-- 	                                             <span aria-hidden="true">&laquo;</span> -->
-<!-- 	                                             <span class="sr-only">Previous</span> -->
-<!-- 	                                         </a> -->
-<!-- 	                                     </li> -->
-<!-- 	                                     <li class="page-item"><a class="page-link" -->
-<!-- 	                                             href="javascript:void(0)">1</a></li> -->
-<!-- 	                                     <li class="page-item"><a class="page-link" -->
-<!-- 	                                             href="javascript:void(0)">2</a></li> -->
-<!-- 	                                     <li class="page-item"><a class="page-link" -->
-<!-- 	                                             href="javascript:void(0)">3</a></li> -->
-<!-- 	                                     <li class="page-item"> -->
-<!-- 	                                         <a class="page-link" href="javascript:void(0)" aria-label="Next"> -->
-<!-- 	                                             <span aria-hidden="true">&raquo;</span> -->
-<!-- 	                                             <span class="sr-only">Next</span> -->
-<!-- 	                                         </a> -->
-<!-- 	                                     </li> -->
-<!-- 	                                 </ul> -->
-<!-- 	                             </nav> -->
-<!-- 	                         </div> -->
-<!-- 	                            페이지 넘기기 end -->
-<!-- 	                        </div> -->
-<!-- 	                    </div> -->
-<!-- 	                </div> -->
-<!-- 	                <div class="col-12" id="move3"> -->
-<!-- 	                    <div class="card"> -->
-<!-- 	                        <div class="card-body"> -->
-<!-- 	                            <h5 class="card-title">문의하기</h5> -->
-<!-- 	                        </div> -->
-<!-- 	                    </div> -->
-<!-- 	                </div> -->
-<!-- 	            </div> -->
 	        </div>
 	    </div>
                 <!-- ============================================================== -->
