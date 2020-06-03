@@ -43,12 +43,12 @@
 							</tr>
 							<tr class="changePassword" style="display:none">
 								<th>비밀번호 변경</th>
-								<td><input type="password" class="input"></td>
+								<td><input type="password" class="input" placeholder="새 비밀번호"></td>
 								<th></th>
 							</tr>
 							<tr class="changePassword" style="display:none">
 								<th>변경 확인</th>
-								<td><input type="password" class="input"></td>
+								<td><input type="password" class="input" placeholder="새 비밀번호 확인"></td>
 								<th></th>
 							</tr>
 							<tr class="changePassword" style="display:none">
