@@ -28,14 +28,14 @@
                  <a class="map_hsub_tit" href="#">푸들이</a>
              </div>
              <!-- //header_tit -->
-             <div class="map_header_icon">
-                 <ol>
-                     <li><a href="#"><i class="fa fa-html5" aria-hidden="true"></i><span>HTML5</span></a></li>
-                     <li><a href="#"><i class="fa fa-github" aria-hidden="true"></i><span>GitHub</span></a></li>
-                     <li><a href="#" class="facebook"><i class="fa fa-facebook-square" aria-hidden="true"></i><span>Fackbook</span></a></li>
-                     <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i><span>twitter</span></a></li>
-                 </ol>
-             </div>
+<!--              <div class="map_header_icon"> -->
+<!--                  <ol> -->
+<!--                      <li><a href="#"><i class="fa fa-html5" aria-hidden="true"></i><span>HTML5</span></a></li> -->
+<!--                      <li><a href="#"><i class="fa fa-github" aria-hidden="true"></i><span>GitHub</span></a></li> -->
+<!--                      <li><a href="#" class="facebook"><i class="fa fa-facebook-square" aria-hidden="true"></i><span>Fackbook</span></a></li> -->
+<!--                      <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i><span>twitter</span></a></li> -->
+<!--                  </ol> -->
+<!--              </div> -->
              <!-- //header_icon -->
          </div>
      </div>
