@@ -311,10 +311,6 @@ public class BossController {
 		return "boss/bossorder/orderlist";
 	}
 	
-	@RequestMapping(value = "ad2.fdl", method = RequestMethod.GET)
-	public String bannerAdd() {
-		return "boss/bossinfo/ad2";
-	}
 	// 배너 광고 신청
 		// banner_apply.fdl
 		@RequestMapping(value = "banner_apply.fdl", 
