@@ -127,6 +127,7 @@ public class BannerFileManageSVCImpl implements IBannerFileSVC {
 		System.out.println("login = " + login);
 		for (int i = 0; i < upfiles.size(); i++) {
 			MultipartFile uf = upfiles.get(i);
+			System.out.println("uf = " + uf);
 			String fp = this.writeUploadedFile(uf, 
 					realPath, login);
 			System.out.println("fp = " + fp);

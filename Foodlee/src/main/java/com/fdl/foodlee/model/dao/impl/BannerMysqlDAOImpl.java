@@ -109,7 +109,7 @@ public class BannerMysqlDAOImpl implements IBannerDAO {
 				pstmt.setString(2, bn.getAdImg());
 				pstmt.setTimestamp(3, bn.getAdStartDate());
 				pstmt.setTimestamp(4, bn.getAdStartDate());
-				pstmt.setInt(5, bn.getadType());
+				pstmt.setString(5, bn.getadType());
 				pstmt.setInt(6, bn.getSellerId());
 				
 				return pstmt;

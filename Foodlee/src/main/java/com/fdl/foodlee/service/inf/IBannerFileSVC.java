@@ -16,6 +16,7 @@ public interface IBannerFileSVC {
 	boolean makeUserDir(HttpSession ses, String login);
 	//String writeUploadedMultipleFiles(
 	Map<String,Object> writeUploadedMultipleFiles(		
+//			MultipartFile upfiles, 
 			List<MultipartFile> upfiles, 
 			String realPath, String login);
 }
