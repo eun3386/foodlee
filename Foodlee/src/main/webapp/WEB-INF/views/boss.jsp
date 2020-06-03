@@ -236,12 +236,9 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/show_form.fdl">정보조회/수정</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/orderlist.fdl" >주문리스트</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
-					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
-					  </li>
-					</ul>
+					  					</ul>
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-right"><!--  오른쪽 부분-->
                         <!-- ============================================================== -->
