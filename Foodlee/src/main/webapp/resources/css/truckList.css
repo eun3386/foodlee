@@ -14,7 +14,7 @@
 
 #top_foodtruck_content button:hover {
 	background-color: yellow;
-	color: white;
+	color: #000080;
 	text-shadow: 5px 1px 3px #400000;
 }
 
@@ -40,6 +40,12 @@
 	width: 200px;
 	height: 260px;
 	text-align: center;
+}
+
+.ft_con {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;	
 }
 
 #highline {
@@ -82,9 +88,6 @@ button {
 	height: 24px;
 }
 
-#truck_search {
-	float: right;
-}
 
 #ft_search {
 	width: 200px;
@@ -119,7 +122,7 @@ button {
 
 #top_content button:hover {
 	background-color: yellow;
-	color: white;
+	color: #000080;
 	text-shadow: 5px 1px 3px #400000;
 }
 
@@ -172,7 +175,7 @@ button {
 
 #menu_truck_content button:hover {
 	background-color: yellow;
-	color: white;
+	color: #000080;
 	text-shadow: 5px 1px 3px #400000;
 }
 

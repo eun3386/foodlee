@@ -295,7 +295,8 @@
 				<div class="add"
 					style="border: 1px solid gray; width: 250px; margin-right: 5px; cursor: pointer;"
 					onclick="addToList(${menuvs.count})">
-					<img src="<%=CON%>/resources/imgs/truckDetail/sellerid/${menu.sellerId}/${menu.menuPic}"
+<%-- 					<img src="<%=CON%>/resources/imgs/truckDetail/sellerid/${menu.sellerId}/${menu.menuPic}" --%>
+						<img src="<%=CON%>/${menu.menuPic}"
 						style="width: 250px; height: 150px;">
 					<h3 id="pname${menuvs.count}"><c:out value="${menu.menuName}"/></h3>
 					<span id="pprice${menuvs.count}"><c:out value="${menu.menuPrice}"/></span>원
@@ -315,8 +316,9 @@
 										<div style=""><c:out value="${menu.menuInfor}"/></div>
 									</div>
 								</td>
-								<td style="border-left: none;"><img
-									src="<%=CON%>/resources/imgs/truckDetail/sellerid/${menu.sellerId}/${menu.menuPic}"
+								<td style="border-left: none;">
+<%-- 									<img src="<%=CON%>/resources/imgs/truckDetail/sellerid/${menu.sellerId}/${menu.menuPic}" --%>
+									<img src="<%=CON%>/${menu.menuPic}"
 									style="width: 130px; height: 100px;"></td>
 						</c:forEach>
 						</table>

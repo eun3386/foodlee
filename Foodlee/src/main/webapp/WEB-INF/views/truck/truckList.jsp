@@ -13,9 +13,6 @@
 						<em>Top 10 푸드 트럭 리스트</em>
 					</div>
 				
-					<div id="truck_search" style="display: inline-block">
-						<input type="search" name="search" placeholder="검색" id="ft_search">
-					</div>
 				</div>
 				<div id="toplist_content">
 					<%@include file="top10_truck_list.jsp" %>
@@ -37,7 +34,7 @@
 						</div>
 					</div>
 					
-					<div id="menu_truck_content">
+					<div id="menu_truck_content" class="ft_con">
 						<c:forEach var="foodtruck" items="${ftList}" varStatus="vs">
 							<a href="<%=CON%>/truckDetail.fdl?sellerId=${foodtruck.sellerId}">
 									<c:if test="${vs.index % 4 == 0}"><br></c:if>
