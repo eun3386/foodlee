@@ -17,7 +17,11 @@
 <!-- 						<img class="photo" src="./resources/css/imgs/mypage/photo.png"> -->
 <!-- 					</div> -->
 					<form action="my_info_update.fdl" method="post">
-					<table class="table_edit">
+					<input type="hidden" name="login" value="${member.login}">
+					<input type="hidden" name="password" value="${member.password}">
+					<input type="hidden" name="residentRn" value="${member.residentRn}">
+					<input type="hidden" name="phoneNumber" value="${member.phoneNumber}">
+					<table class="table_edit" border = 10;>
 						<tbody>
 							<tr>
 								<th>이름</th>
@@ -58,13 +62,15 @@
 								<th></th>
 							</tr>
 							<tr>
-								<th>주민번호</th>
-								<td><span class="reg_id" value="${member.residentRn}">${member.residentRn}</span></td>
+								<th><label for="residentRn1">주민번호</label></th>
+								<td><span class="reg_id" id="residentRn"></span></td>
 								<th></th>
 							</tr>
 							<tr>
-								<th>연락처</th>
-								<td><input type="text" name="phoneNumber" class="input sm" value="${member.phoneNumber}"></td>
+								<th><label for="phoneNumber1">연락처</label></th>
+								<td><input type="text" class="input sm" id="phoneNumber1" name="phoneNumber1" maxlength="3" required> - </td>
+								<td><input type="text" class="input sm" id="phoneNumber2" name="phoneNumber2" maxlength="4" required> - </td>
+								<td><input type="text" class="input sm" id="phoneNumber3" name="phoneNumber3" maxlength="4" required></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -107,7 +113,24 @@
 		</section>
 
 <script>
-
+var rRnStr = $('input[name=residentRn]').val();
+var rRnSplit = rRnStr.split('-');
+var rRnSplit1 = rRnSplit[0];
+var rRnSplit2 = rRnSplit[1];
+var rRnSplit2Str = rRnSplit2.substring(0,1)+'******';
+$('#residentRn').html(rRnSplit1+'-'+rRnSplit2Str);
+$('#residentRn1').val(rRnSplit1);
+$('#residentRn2').val(rRnSplit2Str);
+//
+var pnStr = $('input[name=phoneNumber]').val();
+var pnSplit = pnStr.split('-');
+var pnSplit1 = pnSplit[0];
+var pnSplit2 = pnSplit[1];
+var pnSplit3 = pnSplit[2];
+$('#phoneNumber').html(pnSplit1+'-'+pnSplit2+'-'+pnSplit3);
+$('#phoneNumber1').val(pnSplit1);
+$('#phoneNumber2').val(pnSplit2);
+$('#phoneNumber3').val(pnSplit3);
 
 $(function() {
 	  $("#changePasswordButton").on("click", function(e){

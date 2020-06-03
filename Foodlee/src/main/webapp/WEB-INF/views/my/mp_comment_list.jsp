@@ -131,7 +131,7 @@ $(function(){
 			var html = "";
 			data.forEach(function(item){
 					html += '<tr>';
-						html += '<td><a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.qnaFoodtruckName + '</a></td>';
+						html += '<td><a href="${pageContext.request.contextPath}/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.qnaFoodtruckName + '</a></td>';
 						html += '<td>' + item.qnaContent + '</td>';
 						html += '<td>' + moment(item.qnaCreatedAt).format('YYYY-MM-DD HH:mm:ss') + '</td>';
 				html += '</tr>';
@@ -159,7 +159,7 @@ $(function(){
 			var html = "";
 			data.forEach(function(item){
 					html += '<tr>';
-						html += '<td><a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.reviewFoodtruckName + '</a></td>';
+						html += '<td><a href="${pageContext.request.contextPath}/truckDetail.fdl?sellerId=' + item.sellerId + '">' + item.reviewFoodtruckName + '</a></td>';
 						html += '<td>' + item.reviewPic + '</td>';
 						html += '<td>' + item.reviewContent + '</td>';
 						html += '<td>' + moment(item.reviewCreatedAt).format('YYYY-MM-DD HH:mm:ss') + '</td>';

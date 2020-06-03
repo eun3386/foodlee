@@ -35,7 +35,7 @@ $(function(){
 			data.forEach(function(item){
 				html += '<div class="card_wrap"><div class="card">'; 
 					html += '<div class="thumb"> ';
-					html += '<a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">';
+					html += '<a href="${pageContext.request.contextPath}/truckDetail.fdl?sellerId=' + item.sellerId + '">';
 						html += '<img src="./resources/imgs/foodtruck2/' + item.foodtruckImgPath + '" width="220px"; height="170px";>';
 							html += '</a>';
 					html += '</div>'; 
