@@ -21,7 +21,7 @@ public interface IBannerSVC {
 		
 //		판매자가 신규 배너이미지를 등록 할 수 있다 (+파일업로드..)
 		int insertNewBannerReturnKey(BannerVO bn);	
-		int insertNewBannerReturnKey(String adImg, int price, Timestamp adStartDate, Timestamp adEndDate, int adWaiting,  int sellerId);	
+		int insertNewBannerReturnKey(String adImg, int price, Timestamp adStartDate, Timestamp adEndDate, String bannerType,  int sellerId);	
 		int insertNewBannerReturnKey2(BannerVO bn);
 		//
 }

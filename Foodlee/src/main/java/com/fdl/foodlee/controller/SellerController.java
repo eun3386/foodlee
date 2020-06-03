@@ -34,19 +34,19 @@ public class SellerController {
 	@Autowired
 	private ISellerFileSVC selFileSvc;
 	
-//	seller/join_form.fdl (form; get; 비회원)
+//	seller/join_form.fdl (form; get; 鍮꾪쉶�썝)
 	@RequestMapping(value = "/join_form.fdl", 
 			method = RequestMethod.GET)
 	public String sellerJoinForm() {
 		return "seller/join_form";
 	}
 	
-//	seller/join.fdl (proc; post; dao; 비회원)
+//	seller/join.fdl (proc; post; dao; 鍮꾪쉶�썝)
 	@RequestMapping(value = "/join.fdl", 
 			method = RequestMethod.POST)
 	public ModelAndView sellerJoinProc(List<MultipartFile> upfiles,
 			HttpServletRequest request, HttpSession ses) {
-		// 요청 파라미터 뽑기
+		// �슂泥� �뙆�씪誘명꽣 戮묎린
 		String login = request.getParameter("id");
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
@@ -57,9 +57,6 @@ public class SellerController {
 		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
 		String companyRN = request.getParameter("companyRN1")+"-"+request.getParameter("companyRN2")+"-"+request.getParameter("companyRN3");
-		System.out.println(upfiles);
-		
-		System.out.println((String)ses.getAttribute("LoginName"));
 		
 		selFileSvc.makeUserDir(ses, login);
 		
@@ -69,35 +66,35 @@ public class SellerController {
 		 = selFileSvc.writeUploadedMultipleFiles(upfiles, realPath, login);
 		String filePath = (String)rMap.get("muliFPs");
 		
-		System.out.println("총 파일 수: " + rMap.get("fileCnt"));
-		System.out.println("총 볼륨(MB): "+ rMap.get("totalMB") +"MB");
+		System.out.println("珥� �뙆�씪 �닔: " + rMap.get("fileCnt"));
+		System.out.println("珥� 蹂쇰ⅷ(MB): "+ rMap.get("totalMB") +"MB");
 		
-		// 암호화 적용 (aes 알고리즘)
+		// �븫�샇�솕 �쟻�슜 (aes �븣怨좊━利�)
 		SellerVO sel = new SellerVO(login, password, name, gender, age, residentRN, email, phoneNumber, address, companyRN, filePath);
 //		int key = seSvc.insertNewSellerWithCryptoReturnKey(sel);
 		boolean b = selSvc.insertNewSellerWithCrypto(sel);
 
-		// 응답 성공유무에 따라 view 분기/ mav 리턴
-		// dao 응답을 통해 model 데이터를 생성
+		// �쓳�떟 �꽦怨듭쑀臾댁뿉 �뵲�씪 view 遺꾧린/ mav 由ы꽩
+		// dao �쓳�떟�쓣 �넻�빐 model �뜲�씠�꽣瑜� �깮�꽦
 		ModelAndView mav = new ModelAndView();		
 //		if( key > 0 ) {
 		if( b ) {
-			mav.addObject("msg", login+"님 판매자 회원 가입 성공!!");
+			mav.addObject("msg", login+"�떂 �뙋留ㅼ옄 �쉶�썝 媛��엯 �꽦怨�!!");
 			mav.setViewName("redirect:/main.fdl");	
 		} else {
-			mav.addObject("msg", "판매자 회원 가입 실패~");
+			mav.addObject("msg", "�뙋留ㅼ옄 �쉶�썝 媛��엯 �떎�뙣~");
 			mav.setViewName("seller/join_form"); // fw?
 		}		
 		return mav;
 	}
 	
-//	seller/dupcheck.fdl (proc; get; dao; 비회원)
+//	seller/dupcheck.fdl (proc; get; dao; 鍮꾪쉶�썝)
 	@RequestMapping(value = "/dupcheck.fdl", 
 			method = RequestMethod.GET)
 	@ResponseBody
 	public String sellerLoginDuplicateProc(
 			String login) {
-		// req.getParam과 타입맵핑을 자동으로 해줌
+		// req.getParam怨� ���엯留듯븨�쓣 �옄�룞�쑝濡� �빐以�
 		if( login != null && !login.isEmpty() ) {
 			if( selSvc.isDuplicatedSeller(login) ) {
 				return "no";
@@ -158,10 +155,10 @@ public class SellerController {
 		return mav;
 	}
 	
-//	seller/update.fdl (proc, post, 세션, dao, 회원)
+//	seller/update.fdl (proc, post, �꽭�뀡, dao, �쉶�썝)
 	@RequestMapping(value = "/update.fdl", 
 			method = RequestMethod.POST)
-	public ModelAndView sellerUpdateProc(HttpServletRequest request, HttpSession ses) {
+	public ModelAndView sellerUpdateProc(List<MultipartFile> upfiles, HttpServletRequest request, HttpSession ses) {
 		
 		int id = Integer.parseInt(request.getParameter("id"));
 		String login = request.getParameter("login");
@@ -171,18 +168,28 @@ public class SellerController {
 		int age = Integer.parseInt(request.getParameter("age"));
 		String residentRn = request.getParameter("residentRn1")+"-"+request.getParameter("residentRn2");
 		String email = request.getParameter("email");
-		String phoneNumber = request.getParameter("phoneNumber1")+"-"+request.getParameter("phoneNumber2")+"-"+request.getParameter("phoneNumber3");
+		String phoneNumber = request.getParameter("phoneNumber");
 		String address = request.getParameter("address");
 		String companyRn = request.getParameter("companyRn1")+"-"+request.getParameter("companyRn2")+"-"+request.getParameter("companyRn3");
-		String imgPath = request.getParameter("imgPath");
 		
-		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null, imgPath);
+		selFileSvc.makeUserDir(ses, login);
+		
+		String realPath = ses.getServletContext().getRealPath(ISellerFileSVC.DEF_UPLOAD_DEST) + "/";
+		
+		Map<String, Object> rMap
+		 = selFileSvc.writeUploadedMultipleFiles(upfiles, realPath, login);
+		String filePath = (String)rMap.get("muliFPs");
+		
+		System.out.println("珥� �뙆�씪 �닔: " + rMap.get("fileCnt"));
+		System.out.println("珥� 蹂쇰ⅷ(MB): "+ rMap.get("totalMB") +"MB");
+		
+		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null, filePath);
 		boolean b = selSvc.updateOneSeller(sel);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
 			mav.setViewName("redirect:/seller/show_form.fdl?login="+login);
 		} else {
-			mav.setViewName("boss/bossinfo/infomodify");
+			mav.setViewName("seller/edit_form");
 		}
 		return mav;
 	}

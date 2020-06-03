@@ -321,16 +321,20 @@ public class BossController {
 				method = RequestMethod.POST)
 		@ResponseBody
 		public String bannerApplyProc(HttpServletRequest req,
-				 List<MultipartFile> upfiles,
+				@RequestParam("ups") List<MultipartFile> upfiles,
+				@RequestParam("baType") String baType,
+				@RequestParam("adPrice") int adPrice,
+				@RequestParam("adStartDate") String adStartDate,
+//				@RequestParam("adStartDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date adStartDate,
 				HttpSession ses) {
 			System.out.println("banner_apply()");
-			int baType = Integer.parseInt(req.getParameter("bannerType"));
+			System.out.println("upfiles = " + upfiles);
+//			String baType = req.getParameter("bannerType");
+			System.out.println("baType = " + baType);
 			ses.setAttribute("baType", baType);
-//			System.out.println("multipart: " + upfile.getName());
 			System.out.println("multipart size: " 
 							+ upfiles.size());
 			
-			System.out.println("upfiles = " + req.getParameter("upfiles"));
 			String realPath =  
 				ses.getServletContext()
 				.getRealPath(IBannerFileSVC.DEF_UPLOAD_DEST)
@@ -338,20 +342,18 @@ public class BossController {
 			String login = (String) ses.getAttribute("LoginName");
 			baFileSvc.makeUserDir(ses, login);
 			System.out.println("realPath =" + realPath);
-			System.out.println("adPrice =" + req.getParameter("adPrice"));
-			int adPrice =  Integer.parseInt(req.getParameter("adPrice"));
+//			int adPrice =  Integer.parseInt(req.getParameter("adPrice"));
+			System.out.println("adPrice = " + adPrice);
 			ses.setAttribute("bannerPrice", adPrice);
 //			String filePath 
-//				= atFileSvc.writeUploadedFile(upfile, 
+//				= baFileSvc.writeUploadedFile(upfile, 
 //					realPath, (String)ses
-//						.getAttribute("mbLoginName"));
-			System.out.println("upfiles = " + upfiles.get(0));
+//						.getAttribute("LoginName"));
+//			System.out.println("upfiles = " + upfiles.get(0));
 			//String filePath  // 다수개 처리
 			Map<String, Object> rMap
 			 = baFileSvc.writeUploadedMultipleFiles(upfiles, 
 				realPath, login);
-//				(String)ses
-//					.getAttribute("mbLoginName"));
 			String filePath = (String)rMap.get("muliFPs");
 			
 			System.out.println("총 파일 수: " + rMap.get("fileCnt"));
@@ -359,7 +361,10 @@ public class BossController {
 					+"MB");
 			int selId = (int) ses.getAttribute("id");
 			System.out.println("selId = " + selId);
-			Timestamp adDate = Timestamp.valueOf(req.getParameter("adStartDate") + " 00:00:00");		
+			Timestamp adDate = Timestamp.valueOf( adStartDate + " 00:00:00");	
+//			SimpleDateFormat adDate = new SimpleDateFormat();
+			System.out.println("adStartDate = " + adStartDate);
+			
 			ses.setAttribute("baStrTime", adDate);
 			System.out.println("adDate =" + adDate);
 			// public img src... 
@@ -367,7 +372,8 @@ public class BossController {
 			// 상세보기 => atId?
 			if( baRtkey > 0 ) {
 				System.out.println("배너 신청 성공: " + baRtkey);
-				return "redirect:/ad2.fdl?id="+baRtkey; // 결제 
+//				return "redirect:/ad2.fdl?id="+baRtkey; // 결제 
+				return "redirect:/bossinfo/ad2?id="+baRtkey; // 결제 
 			} else {
 				System.out.println("배너 신청 실패: " + baRtkey);
 				return "boss/bossinfo/ad2"; // FW

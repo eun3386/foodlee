@@ -8,21 +8,21 @@ public class BannerVO {
 	private String adImg; // 광고 이미지
 	private Timestamp adStartDate; // 적용 시작 기간
 	private Timestamp adEndDate; // 적용 종료 기간
-	private int adType; // 신청 대기
+	private String adType; // 신청 대기
 	private int sellerId; // 판매자 아이디 <<FK>>
 	
 	public BannerVO() {}
 	
-	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, int adType, int sellerId) {
+	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, String adType, int sellerId) {
 		this(adPrice, adImg, adStartDate, null, adType, sellerId);
 	}
-	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, int adType,
+	public BannerVO(int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, String adType,
 			int sellerId) {
 		this(0, adPrice, adImg, adStartDate, adEndDate, adType, sellerId);
 		
 	}
 	
-	public BannerVO(int bannerId, int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, int adType,
+	public BannerVO(int bannerId, int adPrice, String adImg, Timestamp adStartDate, Timestamp adEndDate, String adType,
 			int sellerId) {
 		super();
 		this.bannerId = bannerId;
@@ -74,11 +74,11 @@ public class BannerVO {
 		this.adEndDate = adEndDate;
 	}
 
-	public int getadType() {
+	public String getadType() {
 		return adType;
 	}
 
-	public void setadType(int adType) {
+	public void setadType(String adType) {
 		this.adType = adType;
 	}
 

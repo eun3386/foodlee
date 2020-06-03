@@ -67,20 +67,20 @@ public class BannerSVCImpl implements IBannerSVC {
 		return 0;
 	}
 
-	@Override
-	public int insertNewBannerReturnKey(String adImg, int adPrice, Timestamp adStartDate, Timestamp adEndDate,
-			int adWaiting, int sellerId) {
-		// TODO Auto-generated method stub
-		BannerVO bn = new BannerVO(adPrice, adImg, adStartDate, adEndDate, adWaiting, sellerId);
-		
-		//return atDao.insertNewArticleReturnKey(at);
-		return bannerDAO.insertNewBannerReturnKey2(bn);
-	}
 //	@Override
 //	public int insertNewBannerReturnKey(String adImg, int sellerId) {
 //		// TODO Auto-generated method stub
 //		return 0;
 //	}
+
+	@Override
+	public int insertNewBannerReturnKey(String adImg, int price, Timestamp adStartDate, Timestamp adEndDate,
+			String bannerType, int sellerId) {
+		BannerVO bn = new BannerVO(price, adImg, adStartDate, adEndDate, bannerType, sellerId);
+		
+		//return atDao.insertNewArticleReturnKey(at);
+		return bannerDAO.insertNewBannerReturnKey2(bn);
+	}
 
 
 }
