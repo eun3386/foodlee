@@ -63,11 +63,11 @@ pageEncoding="UTF-8"%>
                 <td><img class="td-ongoing" src="<%=request.getContextPath()%>/resources/css/imgs/event-off.jpg"></td>
                 </c:if>  
                 <td><b>${ev.eventTitle }</b></td> 
-                <td class="tooltip" title="${ev.eventTitle }">
+	            <td>
 	                <div class="event-period">
 	                    <p>${ev.eventStartDate} ~ <br><c:if test="${ev.eventEndDate eq '1970-01-01'}"></c:if><c:if test="${ev.eventEndDate ne '1970-01-01'}">${ev.eventEndDate}</c:if><br></p>
 	                </div>
-                </td> 
+               	</td>
                 <td>${ev.eventCreatedAt}</td>
                 <td><i class="fas fa-heart"></i> ${ev.likeCount}</td> 
                 <td>${ev.readCount}</td>

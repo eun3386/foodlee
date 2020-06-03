@@ -35,7 +35,7 @@ public class MemberLikeEventMybatisDAOImpl implements IMemberLikeEventDAO {
 
 	@Override
 	public int countLikeEvent(int event_id) {
-		return sstem.selectOne("IMemberLikeEventDAO.SQL_countLikeFoodtruck", event_id);
+		return sstem.selectOne("IMemberLikeEventDAO.SQL_countLikeEvent", event_id);
 		// return jtem.queryForObject(SQL_COUNT_LIKE_FOODTRUCK, Integer.class, id);
 	}
 

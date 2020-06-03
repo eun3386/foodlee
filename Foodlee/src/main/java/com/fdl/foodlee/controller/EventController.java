@@ -31,6 +31,8 @@ import com.fdl.foodlee.model.vo.EventVO;
 import com.fdl.foodlee.model.vo.virtual.EventRowVO;
 import com.fdl.foodlee.service.inf.IEventAnswerSVC;
 import com.fdl.foodlee.service.inf.IEventSVC;
+import com.fdl.foodlee.service.inf.IMemberLikeEventSVC;
+import com.fdl.foodlee.service.inf.IMemberLikeTruckSVC;
 
 
 
@@ -40,7 +42,8 @@ public class EventController {
 	private IEventSVC evSvc;
 	@Autowired
 	private IEventAnswerSVC asSvc;
-	
+	@Autowired
+	private IMemberLikeEventSVC mleSvc;
 	
 	public String filePath = null;
 	String realFileNm = "";
@@ -53,6 +56,7 @@ public class EventController {
 		// 
 		return "event/ev_new_form";
 	}
+	
 	
 //	photouploader.fdl
 	@RequestMapping(value = "/smartEditor/sample/photo_uploader/photouploader.fdl", method = RequestMethod.POST)
@@ -103,7 +107,7 @@ public class EventController {
 	
 	//event_add.fdl
 	@RequestMapping(value = "event_add.fdl", method = RequestMethod.POST)
-	public String eventShowProc(String title, 
+	public String eventAddProc(String title, 
 			@RequestParam(value = "tags", required = false, defaultValue = "")String tags, String content, String std, @RequestParam(value = "edd", required = false, defaultValue = "1970-01-01")String edd, int onGoing) {
 		System.out.println("eventNewForm() ... ");
 		// 
@@ -179,14 +183,21 @@ public class EventController {
 //	event_show.fdl (get, proc, dao, param?id)
 	@RequestMapping(value = "event_show.fdl", 
 			method = RequestMethod.GET)
-	public String eventShowProc(HttpSession ses, 
+//	public String eventShowProc(HttpSession ses,
+	public ModelAndView eventShowPage(HttpSession ses,
 			int id, Model model) {
-		EventVO ev = 
-			this.evSvc.selectOneEvent(id);
-		if( ev != null ) {
-			System.out.println("게시글 상세조회 성공 "
-						+ ev);
-			model.addAttribute("event", ev);
+		if (ses.getAttribute("LoginName") != null) {
+
+			int isAlreadyLiked = mleSvc.isAlreadyLikedMember(id, (int) ses.getAttribute("id"));
+			model.addAttribute("isAlreadyLiked", (isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_ONE
+					|| isAlreadyLiked == IMemberLikeTruckSVC.LIKE_MB_FOUND_OTHERS));
+		}
+			EventVO ev = this.evSvc.selectOneEvent(id);
+			if( ev != null ) {
+				System.out.println("게시글 상세조회 성공 "
+							+ ev);
+				model.addAttribute("event", ev);
+			
 //			String evFilePath = ev.getFilePath();
 //			int fpsCount = -1;
 //			if( evFilePath != null && !evFilePath.isEmpty() ) {
@@ -221,47 +232,47 @@ public class EventController {
 //			} else {
 //				model.addAttribute("msg", "댓글리스트 조회 실패");
 //			}	
-			return "event/ev_show";
+			return new ModelAndView("event/ev_show");
 		} else {			
 			model.addAttribute("msg", 
 				"게시글 상세조회 실패 - " + id);
-			return "redirect:main.fdl";
+			return new ModelAndView("redirect:main.fdl");
 		}
 	}	
 	
 //- 회원이 이벤트 게시글을 좋아요 할 수 있다
 //	event_like.fdl (get, proc, dao, param?evId&mbId..) 
-//	@RequestMapping(value = "event_like.fdl", method = RequestMethod.GET)
-//	@ResponseBody
-//	public ResponseEntity<Map<String, Object>> foodTruckLike(@RequestParam(value = "tgSr") int tgSr,
-//			@RequestParam(value = "sesMb") int sesMb, HttpSession ses) {
-//		ResponseEntity<Map<String, Object>> re = null;
-//		Map<String, Object> map = new HashMap<>();
-//		int sesMbId = (int)ses.getAttribute("id"); // (int) ses.getAttribute("mbId");
-//		if (sesMbId == sesMb) {
-//			Map<String, Object> lkMap = mltSvc.processMemberLike(tgSr, sesMb);
-//			int cntLikes = (int) lkMap.get("cntLikes");
-//			String typeLike = (String) lkMap.get("typeLike");
-//			if (cntLikes >= 0) {
-//				map.put("code", 1); // OK
-//				map.put("type", typeLike);
-//				map.put("msg", "좋아요 " + (typeLike.equals("add") ? "추가" : "취소") + " 완료");
-//				map.put("cntLikes", cntLikes);
-//				re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-//			} else {
-//				map.put("code", 2); // OK. DAO/SVC error
-//				map.put("type", typeLike);
-//				map.put("msg", "좋아요 " + (typeLike.equals("add") ? "추가" : "취소") + " DAO/SVC error");
-//				re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
-//			}
-//		} else {
-//			// 세션 불일치..
-//			map.put("code", 3); // ERROR 3
-//			map.put("msg", "세션 불일치..");
-//			re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.FORBIDDEN);
-//		}
-//		return re;
-//	}
+	@RequestMapping(value = "event_like.fdl", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> eventLike(@RequestParam(value = "tgSr") int tgSr,
+			@RequestParam(value = "sesMb") int sesMb, HttpSession ses) {
+		ResponseEntity<Map<String, Object>> re = null;
+		Map<String, Object> map = new HashMap<>();
+		int sesMbId = (int)ses.getAttribute("id"); // (int) ses.getAttribute("mbId");
+		if (sesMbId == sesMb) {
+			Map<String, Object> lkMap = mleSvc.processMemberLike(tgSr, sesMb);
+			int cntLikes = (int) lkMap.get("cntLikes");
+			String typeLike = (String) lkMap.get("typeLike");
+			if (cntLikes >= 0) {
+				map.put("code", 1); // OK
+				map.put("type", typeLike);
+				map.put("msg", "좋아요 " + (typeLike.equals("add") ? "추가" : "취소") + " 완료");
+				map.put("cntLikes", cntLikes);
+				re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			} else {
+				map.put("code", 2); // OK. DAO/SVC error
+				map.put("type", typeLike);
+				map.put("msg", "좋아요 " + (typeLike.equals("add") ? "추가" : "취소") + " DAO/SVC error");
+				re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			}
+		} else {
+			// 세션 불일치..
+			map.put("code", 3); // ERROR 3
+			map.put("msg", "세션 불일치..");
+			re = new ResponseEntity<Map<String, Object>>(map, HttpStatus.FORBIDDEN);
+		}
+		return re;
+	}
 //- 관리자가 자신의 게시글을 편집 갱신 할 수 있다
 //	event_edit_form.fdl (get, proc, dao, param?id)
 //	event_edit_form.fdl (get, proc, dao, param?id)

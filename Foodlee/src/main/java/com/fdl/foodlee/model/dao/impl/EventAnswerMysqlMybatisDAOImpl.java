@@ -1,6 +1,8 @@
 package com.fdl.foodlee.model.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.fdl.foodlee.model.dao.inf.IEventAnswerDAO;
 import com.fdl.foodlee.model.vo.EventAnswerVO;
 import com.fdl.foodlee.model.vo.EventVO;
+
 @Repository("mybatisEvAsRepo")
 public class EventAnswerMysqlMybatisDAOImpl implements IEventAnswerDAO {
 	@Autowired
@@ -17,8 +20,9 @@ public class EventAnswerMysqlMybatisDAOImpl implements IEventAnswerDAO {
 	
 	@Override
 	public boolean answerAdd(EventAnswerVO evAs) {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("mybatis: answerAdd()..");
+		int r = this.sstem.insert("IAnswerDAO.answerAdd", evAs);
+		return r == 1;
 	}
 
 	@Override
@@ -29,38 +33,45 @@ public class EventAnswerMysqlMybatisDAOImpl implements IEventAnswerDAO {
 
 	@Override
 	public List<EventAnswerVO> answerList() {
-		// TODO Auto-generated method stub
-		return null;
+		List<EventAnswerVO> evAsList = sstem.selectList("IEventAnswerDAO.answerList");
+		System.out.println("mybatis: answerList()..");
+		return evAsList;
 	}
 
 	@Override
 	public List<EventAnswerVO> answerListForEvent(int eventId) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("mybatis: answerListForEvent()");
+		return sstem.selectList(
+			"IEventAnswerDAO.answerListForEvent", eventId);
 	}
 
 	@Override
 	public int increaseCompassion(int asId, int memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("mybatis: increaseCompassion()");
+		int r = sstem.update("IEventAnswerDAO.increaseCompassion", asId);
+		return r;
 	}
 
 	@Override
 	public EventAnswerVO answerSelectOne(int evAsId) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("mybatis: answerSelectOne()");
+		return sstem.selectOne("IEventAnswerDAO.answerSelectOne", evAsId);
 	}
 
 	@Override
 	public boolean answerUpdate(EventAnswerVO evAs) {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("mybatis: answerUpdate()");
+		System.out.println(evAs);
+		int r = sstem.update("IEventAnswerDAO.answerUpdate", evAs);
+		System.out.println("r => " + r);
+		return r == 1;
 	}
 
 	@Override
 	public boolean answerRemove(int evAsId) {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("mybatis: answerRemove()");
+		int r = sstem.delete("IEventAnswerDAO.answerRemove", evAsId);
+		return r == 1;
 	}
 
 	@Override
@@ -71,8 +82,10 @@ public class EventAnswerMysqlMybatisDAOImpl implements IEventAnswerDAO {
 
 	@Override
 	public int checkNumberOfAnswersForEvent(int eventId) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = sstem.selectOne("IEventAnswerDAO.checkNumberOfAnswersForEvent", eventId);
+		System.out.println("mybatis: checkNumberOfAnswersForEvent()..");
+		System.out.println("answer개수: "+ cnt);
+		return cnt;
 	}
 
 	@Override
@@ -80,5 +93,7 @@ public class EventAnswerMysqlMybatisDAOImpl implements IEventAnswerDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+
 
 }

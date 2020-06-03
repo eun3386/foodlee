@@ -20,8 +20,12 @@ public class EventAnswerSVCImpl implements IEventAnswerSVC {
 	
 	@Override
 	public boolean answerAdd(EventAnswerVO evAs) {
-		// TODO Auto-generated method stub
-		return false;
+		if( evAs == null || evAs.getEvAsReply() == null || 
+				evAs.getEvAsReply().isEmpty() )
+//				||
+//				evAs.getEvAsReply().length() <= 10 )
+			return false; // 의도적 에러 발생...
+		return evAsDao.answerAdd(evAs);
 	}
 
 	@Override
@@ -39,12 +43,11 @@ public class EventAnswerSVCImpl implements IEventAnswerSVC {
 	@Override
 	public List<EventAnswerVO> answerListForEvent(int eventId) {
 		// TODO Auto-generated method stub
-		return null;
+		return evAsDao.answerListForEvent(eventId);
 	}
 
 	@Override
 	public int increaseCompassion(int asId, int memberId) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

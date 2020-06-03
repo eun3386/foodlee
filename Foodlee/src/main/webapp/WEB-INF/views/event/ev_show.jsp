@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>푸들이 - 이벤트</title>
-<!-- 합쳐지고 최소화된 최신 CSS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS-->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- 부가적인 테마 -->
@@ -16,6 +17,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
+
 <style type="text/css">
 .follow_red {
 	color: red;
@@ -24,76 +26,78 @@
 .follow_orange {
 	color: orange;
 }
+
+table{
+	border-bottom: 1px;
+}
 </style>
 	<script type="text/javascript">
 	// 좋아요
-	$(document).on("click", "span.mb_follow", function() {
+	$(document).ready(function() {
+		function getContextPath() {
+		  var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+		  return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+		};
+
+		var URLHD = getContextPath() + '/';
 		
-		if($("#login").val() != "") {
-			if($("#LoginType").val() == 4) {
-				$(".follow_msg").css("display", "none");
-				var tgSr = $(this).attr("tg_sr");
-				var sesMb = $(this).attr("ses_mb");
-				$.ajax({
-					type: 'get',
-					url: URLHD + 'event_like.fdl',
-					data: 'tgSr='+ tgSr + "&sesMb="+ sesMb,
-					dataType: 'json',
-					success: function(res,status,xhr) {
-					console.log(res);
-					console.log("코드: "+ res.code
-						+ ", 메세지: " + res.msg	);
-					var likeCode = res.code;
-					switch( likeCode ) {
-						case 1:
-							$('#follow_cnt').text(res.cntLikes);
-							$('#follow_msg').css('display', 'inline');
-							$('#follow_msg').text("좋아요 하였습니다.");
-							$('#follow_msg').fadeOut(2000);
-							// $('.follow_msg').css('display', 'inline');
-							// $('.follow_msg').html(res.msg);							
-							// $('.follow_msg').css('color', 'blue');
-							if( res.type == 'add' )
-								$('.fa-heart').css('color', 'red');
-							else { // 'cancel'
-								$('#follow_msg').text("좋아요를 취소 하였습니다.");
+		$(document).on("click", "span.mb_follow", function() {
+			if($("#login").val() != "") {
+				if($("#LoginType").val() == 4) {
+					$(".follow_msg").css("display", "none");
+					var tgSr = $(this).attr("tg_sr");
+					var sesMb = $(this).attr("ses_mb");
+					$.ajax({
+						type: 'get',
+						url: URLHD + 'event_like.fdl',
+						data: 'tgSr='+ tgSr + "&sesMb="+ sesMb,
+						dataType: 'json',
+						success: function(res,status,xhr, data) {
+							console.log(data);
+						console.log(res);
+						console.log("코드: "+ res.code
+							+ ", 메세지: " + res.msg	);
+						var likeCode = res.code;
+						switch( likeCode ) {
+							case 1:
+								$('#follow_cnt').text(res.cntLikes);
+								$('#follow_msg').css('display', 'inline');
+								$('#follow_msg').text("좋아요 하였습니다.");
 								$('#follow_msg').fadeOut(2000);
-								$('.fa-heart').css('color', 'gray');
-							}
-							break;
-						case 2:
-							// $('.follow_msg').css('display', 'inline');
-							// $('.follow_msg').html(res.msg);
-							// $('.follow_msg').css('color', 'red');
-							break;
-						default:
-							
+								// $('.follow_msg').css('display', 'inline');
+								// $('.follow_msg').html(res.msg);							
+								// $('.follow_msg').css('color', 'blue');
+								if( res.type == 'add' )
+									$('.fa-heart').css('color', 'red');
+								else { // 'cancel'
+									$('#follow_msg').text("좋아요를 취소 하였습니다.");
+									$('#follow_msg').fadeOut(2000);
+									$('.fa-heart').css('color', 'gray');
+								}
+								break;
+							case 2:
+								// $('.follow_msg').css('display', 'inline');
+								// $('.follow_msg').html(res.msg);
+								// $('.follow_msg').css('color', 'red');
+								break;
+							default:
+								
+						}
+					},
+					error: function(xhr,status) {
+						console.log("에러");
+						console.log(xhr);
+						console.log(xhr.status);
+						console.log(status);
 					}
-				},
-				error: function(xhr,status) {
-					console.log("에러");
-					console.log(xhr);
-					console.log(xhr.status);
-					console.log(status);
+					});
+				} else {
+					alert('회원이 아닙니다. 좋아요는 회원만 가능합니다.');	
 				}
-				});
 			} else {
-				Swal.fire({
-				  text: "좋아요는 회원만 가능합니다.",
-				  icon: "warning",
-				  button: "확인",
-				  dangerMode: true,
-				});
+				alert('ee');
 			}
-		} else {
-			Swal.fire({
-			  title: "로그인 오류",
-			  text: "좋아요를 하시려면 로그인을 해주세요",
-			  icon: "warning",
-			  button: "확인",
-			  dangerMode: true,
-			});
-		}
+		});
 	});
 	</script>
 </head>
@@ -184,20 +188,21 @@
     
     
 <div id="container">
-		<table border="1">
-			<tr> <td>번호: ${event.eventId}</td> 
-			<td>시작일: ${event.eventStartDate} 
+		<table style="border:1">
+			<tr> 
+<%-- 			<td>번호: ${event.eventId}</td>  --%>
+			<td>제목:</td> <td>${event.eventTitle}</td><td>시작일: ${event.eventStartDate} 
 			종료일: <c:if test="${event.eventEndDate eq '1970-01-01'}"></c:if>
 			<c:if test="${event.eventEndDate ne '1970-01-01'}">${event.eventEndDate}</c:if>
 			<c:if test="${event.eventOngoing eq 1}"><img src="<%=request.getContextPath()%>/resources/css/imgs/event-on.jpg"></c:if>
 			<c:if test="${event.eventOngoing eq 0}"><img src="<%=request.getContextPath()%>/resources/css/imgs/event-off.jpg"></c:if></td></tr>
-			<tr> <td>제목:</td> <td>${event.eventTitle}</td>  </tr>
+<%-- 			<tr> <td>제목:</td> <td>${event.eventTitle}</td>  </tr> --%>
 			<tr> <td>내용:</td> 
 				<td style="overflow: hidden;"> <div>${event.eventContent} </div></td>  </tr>
 			<tr> <td>조회수:</td> <td>${event.readCount}번</td>  </tr>
 			<tr> <td>좋아요수:</td> <td>${event.likeCount}번</td>  </tr>
 			
-			<tr> <td>좋아요회원들:</td> <td>${event.likeMembers}</td>  </tr>
+			<tr> <td>좋아요회원들:</td> <td><span id='likeMembers'>${event.likeMembers}</span></td>  </tr>
 			<tr> <td>태그들:</td> <td>${event.tags}</td>  </tr>
 <!-- 			<tr> <td>첨부파일:</td>  -->
 <!-- 			<td> -->
@@ -215,23 +220,78 @@
 			<tr> <td>수정일:</td> <td>
  				<fmt:formatDate value="${event.eventUpdatedAt}"  
 				    pattern="yyyy년 MM월 dd일 - HH시 mm분 ss초" /></td>  </tr> 
-	</table>  
+	</table>
+		<div id="member_like" style="margin-top: 30px;">
+			<input id="LoginType" type="hidden" value="${LoginType}">
+			<span id="follow" tg_sr='${event.eventId}' ses_mb='${id}' class="mb_follow">
+				<i class="fas fa-heart fa-lg follow_${isAlreadyLiked ? 'red': 'orange'}"></i>
+			</span>
+			<span id="follow_cnt"><c:out value="${event.likeCount}" default="0" /></span>
+<!-- 				<div style="float: left;"> -->
+<!-- 					<i class="fas fa-map fa-lg" -->
+<!-- 						style="margin-left: 80px; position: absolute;"></i> -->
+<!-- 				</div> -->
+		</div>
+			<div id="follow_msg" style="margin-top: 5px; font-size: 11px; display:none; font-color: red;"></div>
+			<c:if test="${isAlreadyLiked eq true}">
+				<div class="follow_msg already" style="margin-top: 5px; font-size: 11px; font-color: red;">해당 이벤트를 좋아요 하고 있습니다.</div>
+			</c:if>
 		<div id="ev_menu"> 
-		<a href="${pageContext.request.contextPath}/#event-list">목록<i class="fas fa-heart fa-lg follow_red"></i></a> 
+		<button type="button" class="btn btn-success btn-xs" onclick="backToTheList()">목록</button>
+<%-- 		<a href="${pageContext.request.contextPath}/#event-list">목록</a>  --%>
 		<c:if test="${not empty LoginName}"> 
 		<c:if test="${LoginName eq 'admin'}"> 
 				 | <a href="${pageContext.request.contextPath}/event_edit_form.fdl?evId=${event.eventId}">편집</a> |  
  				<a href="#">삭제</a> | 
 		</c:if> 
-			<span id="follow" tg_sr='${event.eventId}' ses_mb='${id}' class="mb_follow">
-<%-- 					<i class="fas fa-heart fa-lg follow_${isAlreadyLiked ? 'red': 'orange'}"></i> --%>
-					
-			</span>
 <!-- 			<a href="#">좋아요</a> |  <br> -->
-			<div><input type="text" name="reply"><a href="${pageContext.request.contextPath}/answer/new_form.fdl?mbId=${mbId}&evId=${event.eventId}">댓글추가</a></div>
+			<div><input type="text" name="reply"><a href="${pageContext.request.contextPath}/answer/new_form.fdl?id=${id}&evId=${event.eventId}">댓글추가</a></div>
+ 			 
  			 
  		</c:if>		 
- 		</div> 
+ 		</div>
+ 		
+	<div id="answer_list">
+		<c:choose>
+			<c:when test="${!empty asSize}">
+				<ul>
+					<c:forEach var="as" items="${answers}">
+					<li>
+<%-- 					 <b id="ascmp_${as.evAsId}"> --%>
+<%-- 					<span class="heart" onclick="cmp_inc(${as.evAsId},${as.memberId},${as.articleId})">♥</span> --%>
+<%-- 					${as.compassion}</b>  --%>
+						 [${as.memberId}회원] 
+						 ${as.evAsReply} - 
+						 <fmt:formatDate  
+						 value="${as.createdAt}"  
+		pattern="yyyy년MM월dd일 (HH시mm분ss초)"/> / 
+						 <fmt:formatDate  
+						 value="${as.updatedAt}"  
+		pattern="yyyy년MM월dd일 (HH시mm분ss초)"/>
+				
+				<c:if test="${!empty loginName and 
+					 id eq as.memberId}">					
+					<input type="button" value="편집" 
+					 onclick
+			="editAnswer(${as.evAsId},${as.memberId},${as.eventId})">
+				</c:if>	
+		
+					</li>
+					</c:forEach>
+				</ul>
+			</c:when>
+			<c:when test="${empty asSize}">
+				<i>"아직 댓글이 없습니다!"</i>
+			</c:when>
+		</c:choose>
+	</div> 
 	</div>
+	<script type="text/javascript">
+	function backToTheList() {
+  		window.open(window.location.href		
+  				= '${pageContext.request.contextPath}/#event-list');
+  	}
+	</script>
 </body>
+
 </html>
