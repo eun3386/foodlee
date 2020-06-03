@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
+
 	
 		<section class="main_section" id="section_menu">
 			<div class="wrapper">
@@ -41,7 +36,7 @@ $(function(){
 				html += '<div class="card_wrap"><div class="card">'; 
 					html += '<div class="thumb"> ';
 					html += '<a href="http://localhost:8082/foodlee/truckDetail.fdl?sellerId=' + item.sellerId + '">';
-						html += '<img src="./resources/imgs/truckDetail/' + item.foodtruckImgPath + '">';
+						html += '<img src="./resources/imgs/foodtruck2/' + item.foodtruckImgPath + '" width="220px"; height="170px";>';
 							html += '</a>';
 					html += '</div>'; 
 					html += '<div class="content">';
@@ -65,5 +60,3 @@ $(function(){
 });
 
 </script>
-</body>
-</html>

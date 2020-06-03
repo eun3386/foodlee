@@ -36,7 +36,7 @@ public class MypageService {
 		return mypageDao.getReviewList(name);
 	}
 	
-	public int cancelOrder (String name) {
+	public int cancelOrder (OrderVO name) {
 		return mypageDao.cancelOrder(name);
 	}
 }

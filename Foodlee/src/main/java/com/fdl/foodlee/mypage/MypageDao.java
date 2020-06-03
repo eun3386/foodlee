@@ -29,7 +29,7 @@ public class MypageDao {
 	}
 	
 	public List<OrderVO> getOrderList(String name) {
-		return jtem.query("select O.order_id as orderId, O.seller_id as sellerId, O.order_state as orderState, O.order_name as orderName, O.order_price_sum as orderPriceSum, O.order_date as orderDate,  (select T.foodtruck_name from foodtrucks T where T.seller_id = O.seller_id) as orderFoodtruckName from orders O where O.login = ?",
+		return jtem.query("select O.order_id as orderId, O.login as login, O.seller_id as sellerId, O.order_state as orderState, O.order_name as orderName, O.order_price_sum as orderPriceSum, O.order_date as orderDate,  (select T.foodtruck_name from foodtrucks T where T.seller_id = O.seller_id) as orderFoodtruckName from orders O where O.login = ?",
 				BeanPropertyRowMapper.newInstance(OrderVO.class), name);
 	}
 	
@@ -43,7 +43,7 @@ public class MypageDao {
 				BeanPropertyRowMapper.newInstance(ReviewVO.class), name);
 	}
 	
-	public int cancelOrder (String name) {
-		return jtem.update("update orders set order_state = 2 where login = ?");
+	public int cancelOrder (OrderVO name) {
+		return jtem.update("update orders set order_state = 2 where login = ?", name.getOrderState() );
 	}
 }

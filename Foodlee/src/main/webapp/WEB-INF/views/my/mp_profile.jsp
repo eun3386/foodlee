@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 
-</head>
-<body>
 
 		
 		<section class="main_section" id="section_edit">
@@ -37,7 +31,7 @@
 							</tr>
 							<tr>
 								<th>비밀번호</th>
-								<td><input type="password" class="input" value="${member.password}"></td>
+								<td><input type="password" class="input" value="현재 비밀번호를 입력해 주세요"></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -58,7 +52,9 @@
 							</tr>
 							<tr>
 								<th>성별</th>
-								<td><label><input type="radio" name="gender" checked="checked"  >남</label> <label><input type="radio" name="gender" >여</label></td>
+								<td>
+									<label><input type="radio" name="gender" ${member.gender=='남'?'checked':''} value="남">남</label> 
+									<label><input type="radio" name="gender" ${member.gender=='여'?'checked':''} value="여">여</label></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -208,5 +204,3 @@ function initLayerPosition(){
 }
 
 </script>
-</body>
-</html>

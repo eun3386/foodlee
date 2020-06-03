@@ -2,6 +2,7 @@ package com.fdl.foodlee.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -128,13 +129,29 @@ public class MypageController {
 	public List<OrderVO> orderList(HttpSession ses) {
 		return mypageService.orderlist((String)ses.getAttribute("LoginName"));
 	}
-	public ModelAndView cancelOrder(HttpSession ses) {
-		ModelAndView mav = new ModelAndView();
-		String login = (String)ses.getAttribute("LoginName");
-		int name = mypageService.cancelOrder(login);
-		return mav;
-		
+	
+	@RequestMapping(value = "my_order_cancel.fdl", method = RequestMethod.GET)
+	// public String cancelOrder(HttpServletRequest req) {
+	public String cancelOrder(@RequestParam(value="oid") int orderId, @RequestParam(value="login") String login) {
+		//int orderId = Integer.parseInt(req.getParameter("orderId"));
+		//String login = req.getParameter("login");
+		orderSvc.memberOrderCancel(orderId, login);
+		return "redirect:/my_page.fdl";
 	}
+	
+//	public String cancelOrder(int orderId, int orderState, HttpSession ses) {
+//		OrderVO od = new OrderVO(orderId, orderState);
+//		od.setLogin((String)ses.getAttribute("LoginName"));
+//		return "redirect:my_order_list.fdl";
+//	}
+	
+//	public ModelAndView cancelOrder(HttpSession ses) {
+//		ModelAndView mav = new ModelAndView();
+//		String login = (String)ses.getAttribute("LoginName");
+//		int name = mypageService.cancelOrder(login);
+//		return mav;
+//		
+//	}
 //	public ModelAndView orderList(HttpSession ses) {
 //		ModelAndView mav = new ModelAndView();
 //		mav.addObject("order", orderSvc.memberOrderList((String)ses.getAttribute("LoginName")));

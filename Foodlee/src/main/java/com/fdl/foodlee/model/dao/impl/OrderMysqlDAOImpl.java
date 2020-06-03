@@ -51,7 +51,7 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 
 	@Override
 	public boolean memberOrderCancel(int orderId, String login) {
-		int r = jtem.update(SQL_ORDER_CANCEL_MEMBER, orderId, login); 
+		int r = jtem.update(SQL_ORDER_CANCEL_MEMBER, orderId); 
 		return r == 1;
 	}
 

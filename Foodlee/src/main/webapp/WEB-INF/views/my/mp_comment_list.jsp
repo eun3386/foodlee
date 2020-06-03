@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 
 <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
@@ -12,52 +8,9 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   
 <script>
-$(document).ready(function() {
-	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
-	    $('#qnaTable').DataTable( {
-	        "pagingType": "full_numbers",
-	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
-	        "language": {
-	        	"search": "검색 _INPUT_ ",
-	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
-	            "zeroRecords": "결과가 없습니다",
-	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
-	            "infoEmpty": "값이 없습니다.",
-	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
-	            "paginate": {
-	              "first": '처음',
-	              "last": '끝',
-	              "previous": "이전",
-	              "next": "다음"
-	            }
-	        }
-	    });
-	});
 
-$(document).ready(function() {
-	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
-	    $('#reviewTable').DataTable( {
-	        "pagingType": "full_numbers",
-	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
-	        "language": {
-	        	"search": "검색 _INPUT_ ",
-	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
-	            "zeroRecords": "결과가 없습니다",
-	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
-	            "infoEmpty": "값이 없습니다.",
-	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
-	            "paginate": {
-	              "first": '처음',
-	              "last": '끝',
-	              "previous": "이전",
-	              "next": "다음"
-	            }
-	        }
-	    });
-	});
 </script>
-</head>
-<body>
+
 
 		<section class="main_section" id="section_manage">
 			<div class="wrapper">
@@ -123,6 +76,51 @@ $(document).ready(function() {
 // 		location.href = $(this).attr("http://localhost:8082/foodlee/truckDetail.fdl?sellerId=")
 // 	})
 // }
+$(document).ready(function() {
+	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
+	    $('#qnaTable').DataTable( {
+	        "pagingType": "full_numbers",
+	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
+	        "language": {
+	        	"search": "검색 _INPUT_ ",
+	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
+	            "zeroRecords": "결과가 없습니다",
+	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
+	            "infoEmpty": "값이 없습니다.",
+	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
+	            "paginate": {
+	              "first": '처음',
+	              "last": '끝',
+	              "previous": "이전",
+	              "next": "다음"
+	            }
+	        }
+	    });
+	});
+
+$(document).ready(function() {
+	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
+	    $('#reviewTable').DataTable( {
+	        "pagingType": "full_numbers",
+	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
+	        "language": {
+	        	"search": "검색 _INPUT_ ",
+	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
+	            "zeroRecords": "결과가 없습니다",
+	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
+	            "infoEmpty": "값이 없습니다.",
+	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
+	            "paginate": {
+	              "first": '처음',
+	              "last": '끝',
+	              "previous": "이전",
+	              "next": "다음"
+	            }
+	        }
+	    });
+	});
+
+
 
 
 $(function(){
@@ -181,5 +179,3 @@ $(function(){
 	})
 });
 </script>
-</body>
-</html>

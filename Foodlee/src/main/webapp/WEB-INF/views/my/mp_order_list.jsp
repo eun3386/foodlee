@@ -3,10 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 
 <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
@@ -14,32 +11,9 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>	
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>		
 <script>
-$(document).ready(function() {
-	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
-	    $('#orderTable').DataTable( {
-	        "pagingType": "full_numbers",
-	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
-	        "language": {
-	        	"search": "검색 _INPUT_ ",
-	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
-	            "zeroRecords": "결과가 없습니다",
-	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
-	            "infoEmpty": "값이 없습니다.",
-	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
-	            "paginate": {
-	              "first": '처음',
-	              "last": '끝',
-	              "previous": "이전",
-	              "next": "다음"
-	            }
-	        }
-	    });
-	});
-	 
+
 </script>
 
-</head>
-<body>
 
 		<section class="main_section" id="section_orderlist">
 			<div class="wrapper">
@@ -80,6 +54,30 @@ $(document).ready(function() {
 		</section>
 
 <script>
+$(document).ready(function() {
+	  // http://blog.naver.com/PostView.nhn?blogId=93immm&logNo=221348202134&parentCategoryNo=&categoryNo=341&viewDate=&isShowPopularPosts=true&from=search
+	    $('#orderTable').DataTable( {
+	        "pagingType": "full_numbers",
+	        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "전부"]],
+	        "language": {
+	        	"search": "검색 _INPUT_ ",
+	            "lengthMenu": "_MENU_ 개씩 페이지에 표시하기",
+	            "zeroRecords": "결과가 없습니다",
+	            "info": " 현재  _PAGE_ 마지막 _PAGES_ 총 개수 : _MAX_",
+	            "infoEmpty": "값이 없습니다.",
+	            "infoFiltered": "(_MAX_ 개의 값 중 _TOTAL_ 개 검색됨)",
+	            "paginate": {
+	              "first": '처음',
+	              "last": '끝',
+	              "previous": "이전",
+	              "next": "다음"
+	            }
+	        }
+	    });
+	});
+
+
+
 $(function(){
 	$.ajax({
 		url : "my_order_list.fdl",
@@ -108,20 +106,25 @@ $(function(){
 					
 					html += '<td>';
 					
-	
-					html += '<input type="button" id="cancelBt" onclick="" value="취소하기">';
-					
-					if( item.orderState > 2)
-						$("#cancelBt").attr("disabled", true);
-					else
-						$("#cancelBt").attr("disabled", false);
-					
+					var btndis = item.orderState == 1 ? '': 'disabled'; 
+					//var loginId = item.login;
+					var loginId = "test1234";
+					html += '<input type="button" id="cancelBt_'+item.orderId+'" onclick="cancelOrder('+item.orderId+' , ' +'\'' + loginId +'\'' +')" value="취소하기" '+
+						btndis
+						+'>';
+								
 					html += '</td>';
 				
 				html += '</tr>';
 				
 			})
 			$("#listOrder").empty().append(html);
+			
+// 			if( item.orderState > 2)
+// 				$("#cancelBt").attr("disabled", true);
+// 			else
+// 				$("#cancelBt").attr("disabled", false);
+
 		},
 		error : function(err1,err2,err3){
 			console.log(err1)
@@ -135,7 +138,9 @@ $(function(){
 	})
 });
 
+function cancelOrder(id, login) {
+	alert("정말 취소하시겠습니까?");
+	location.href = "${pageContext.request.contextPath}/my_order_cancel.fdl?oid="+id +"&login=" +login;
+}
 
 </script>
-</body>
-</html>
