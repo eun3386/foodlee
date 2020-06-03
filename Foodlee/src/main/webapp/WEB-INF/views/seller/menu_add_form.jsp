@@ -63,11 +63,13 @@
 				</div>
 			</div>
 			<div class="content">
+				<form style="display: inline;" action="${pageContext.request.contextPath}/seller/menu_add.fdl" method="post" enctype="multipart/form-data">
 				<div class="profile_wrap">
 					<img id="uploadImg" class="photo" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG">
 					<input type="file" id="input_img" name="upfiles" multiple="multiple" style="display: none">
 				</div>
-				<form style="display: inline;" action="${pageContext.request.contextPath}/seller/menu_add.fdl" method="post">
+				
+					<input type="hidden" name="login" value="${seller.login}">
 					<input type="hidden" name="id" value="${seller.sellerId}">
 					<input type="hidden" name="menuPic" value="메뉴사진더미">
 				<table class="table_edit">

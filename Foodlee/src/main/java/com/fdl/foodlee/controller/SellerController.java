@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fdl.foodlee.model.vo.MenuVO;
 import com.fdl.foodlee.model.vo.SellerVO;
 import com.fdl.foodlee.service.inf.IMemberFileSVC;
+import com.fdl.foodlee.service.inf.IMenuFileSVC;
 import com.fdl.foodlee.service.inf.IMenuSVC;
 import com.fdl.foodlee.service.inf.ISellerFileSVC;
 import com.fdl.foodlee.service.inf.ISellerSVC;
@@ -33,6 +34,9 @@ public class SellerController {
 	
 	@Autowired
 	private ISellerFileSVC selFileSvc;
+	
+	@Autowired
+	private IMenuFileSVC mnFileSvc;
 	
 //	seller/join_form.fdl (form; get; 鍮꾪쉶�썝)
 	@RequestMapping(value = "/join_form.fdl", 
@@ -196,9 +200,26 @@ public class SellerController {
 	
 //	seller/menu_add.fdl
 	@RequestMapping(value = "/menu_add.fdl", method = RequestMethod.POST)
-	public ModelAndView menuAddProc(int id, String menuName, String menuType, int menuPrice, String menuPic, String menuInfor, String rawMaterials) {
-		MenuVO mn = new MenuVO(id, menuName, menuType, menuPrice, menuPic, menuInfor, rawMaterials);
+	public ModelAndView menuAddProc(List<MultipartFile> upfiles, HttpServletRequest request, HttpSession ses, int id, String menuName, String menuType, int menuPrice, String menuPic, String menuInfor, String rawMaterials) {
+		
+		String login = request.getParameter("login");
+		System.out.println(login);
+		System.out.println(upfiles);
+		
+		mnFileSvc.makeUserDir(ses, login);
+		
+		String realPath = ses.getServletContext().getRealPath(IMenuFileSVC.DEF_UPLOAD_DEST) + "/";
+		System.out.println(realPath);
+		Map<String, Object> rMap
+		 = mnFileSvc.writeUploadedMultipleFiles(upfiles, realPath, login);
+		String filePath = (String)rMap.get("muliFPs");
+		
+		System.out.println("珥� �뙆�씪 �닔: " + rMap.get("fileCnt"));
+		System.out.println("珥� 蹂쇰ⅷ(MB): "+ rMap.get("totalMB") +"MB");
+		
+		MenuVO mn = new MenuVO(id, menuName, menuType, menuPrice, filePath, menuInfor, rawMaterials);
 		boolean b = mnSvc.insertNewMenu(mn);
+		
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
 			mav.setViewName("redirect:/menulist.fdl");

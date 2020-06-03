@@ -91,7 +91,7 @@ body{
 
 
 /* 나의정보수정 */
-#back {position:absolute;left: 550px;top: 460px;z-index: 99;}
+#back {position:absolute;left: 550px;top: 463px;z-index: 99;}
 #section_edit .content{position: relative; max-width: 830px; margin: 0 auto;}
 .profile_wrap{position:absolute;left:-50px; top:0;}
 .profile_wrap>.selPhoto{position:absolute;left:150px; top: 20px; right:0;bottom:0;cursor:pointer; border: 2px solid orange;}
