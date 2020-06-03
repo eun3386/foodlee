@@ -62,30 +62,6 @@
 			 	 return false;    
 			 }
 		});
-		// TODO
-		$('.editPhoto').click(function() {
-			$('input[type=file]').click();
-		});
-		
-		$('#input_img').on('change', function(e) {
-			var files = e.target.files;
-			var filesArr = Array.prototype.slice.call(files);
-			
-			filesArr.forEach(function(f) {
-				if(!f.type.match("image.*")) {
-					alert("확장자는 이미지 확장자만 가능합니다.");
-					return;
-				}
-				
-				sel_file = f;
-				
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$('#uploadImg').attr('src', e.target.result);
-				}
-				reader.readAsDataURL(f);
-			});
-		});
 		
 		$('#addressInput').blur(function() {
 			if( $('#addressInput').val() != null ) {
@@ -108,6 +84,7 @@
 		});
 		//
 		
+		
 	});
 </script>
 <title>푸들이 - 판매자 정보 수정</title>
@@ -123,10 +100,6 @@
 				</div>
 			</div>
 			<div class="content">
-				<div class="profile_wrap">
-					<img id="uploadImg" class="editPhoto" style="width: 150px; height: 150px; cursor: pointer;" src="${pageContext.request.contextPath}${seller.imgPath}">
-					<input type="file" id="input_img" name="upfiles" multiple="multiple" style="display: none">
-				</div>
 				<form style="display: inline;" action="${pageContext.request.contextPath}/seller/update.fdl" method="post">
 					<input type="hidden" name="id" value="${seller.sellerId}">
 					<input type="hidden" name="login" value="${seller.login}">
@@ -193,8 +166,8 @@
 					<tr>
 						<th></th>
 						<td>
-							<input type="submit" class="btn" id="btn-edit-submit" value="수정완료" disabled="disabled">
-							<button class="btn btn-primary" id="btn-edit-cancel">뒤로가기</button>
+							<input type="submit" class="btn" id="btn-edit-submit" value="수정완료">
+							<a href="${pageContext.request.contextPath}/seller_show_form.fdl"><button class="btn btn-primary" id="btn-edit-cancel">뒤로가기</button></a>
 						</td>
 						<th></th>
 					</tr>

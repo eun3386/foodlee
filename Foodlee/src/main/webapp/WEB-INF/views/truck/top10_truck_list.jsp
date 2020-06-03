@@ -7,9 +7,9 @@
 	
 		<div id="top_foodtruck_content">
 			<c:forEach var="foodtruck" items="${topFtList}" varStatus="vs" >
-				<a href="<%=CON%>/truckDetail.fdl?sellerId=${foodtruck.sellerId}">
+				<a href="${pageContext.request.contextPath}/truckDetail.fdl?sellerId=${foodtruck.sellerId}">
 						<button type="button" onclick="" class="top_truck_card">
-							<img src="<%=CON%>/resources/imgs/foodtruck/${foodtruck.foodtruckImgPath}" width="100px" height="100px"> <br>
+							<img src="${pageContext.request.contextPath}/resources/imgs/foodtruck/${foodtruck.foodtruckImgPath}" width="100px" height="100px"> <br>
 							<c:out value="${foodtruck.foodtruckName}" /> <br>
 							<c:out value="${foodtruck.foodtruckMainMenu}" /> <br>
 							<c:out value="${foodtruck.foodtruckLocation}" /> <br>

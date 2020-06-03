@@ -172,18 +172,7 @@ public class SellerController {
 		String address = request.getParameter("address");
 		String companyRn = request.getParameter("companyRn1")+"-"+request.getParameter("companyRn2")+"-"+request.getParameter("companyRn3");
 		
-		selFileSvc.makeUserDir(ses, login);
-		
-		String realPath = ses.getServletContext().getRealPath(ISellerFileSVC.DEF_UPLOAD_DEST) + "/";
-		
-		Map<String, Object> rMap
-		 = selFileSvc.writeUploadedMultipleFiles(upfiles, realPath, login);
-		String filePath = (String)rMap.get("muliFPs");
-		
-		System.out.println("珥� �뙆�씪 �닔: " + rMap.get("fileCnt"));
-		System.out.println("珥� 蹂쇰ⅷ(MB): "+ rMap.get("totalMB") +"MB");
-		
-		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null, filePath);
+		SellerVO sel = new SellerVO(id, "seller", login, password, name, gender, age, residentRn, email, phoneNumber, address, null, null, companyRn, null, null, null);
 		boolean b = selSvc.updateOneSeller(sel);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {

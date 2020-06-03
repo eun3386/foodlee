@@ -55,7 +55,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		+ "character set utf8) as pw from sellers where login = ? && email = ?";
 	private static final String SQL_UPDATE_SELLER
 	= "update sellers set name=?, gender=?, "
-		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_Rn=?, img_path=? where seller_id = ?";
+		+"age=?, email=?, phone_number=?, address=?, updated_at=now(), company_Rn=? where seller_id = ?";
 	private static final String SQL_UPDATE_SELLER_PW
 	= "update sellers set password=hex(aes_encrypt(?,?)) where seller_id=?";
 	private static final String SQL_DELETE_SELLER
@@ -151,7 +151,7 @@ public class SellerMysqlDAOImpl implements ISellerDAO {
 		try {
 			int r = jtem.update(SQL_UPDATE_SELLER, 
 				sel.getName(), sel.getGender(), sel.getAge(), sel.getEmail(), sel.getPhoneNumber(),
-				sel.getAddress(), sel.getCompanyRn(), sel.getImgPath(), sel.getSellerId() );
+				sel.getAddress(), sel.getCompanyRn(), sel.getSellerId() );
 			return r == 1;
 		} catch (DataAccessException e) {
 			System.out.println("dao/ 판매자 회원 정보 갱신 실패 - " + sel.getSellerId());
