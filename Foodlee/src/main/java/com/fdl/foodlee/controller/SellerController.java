@@ -196,14 +196,14 @@ public class SellerController {
 	
 //	seller/menu_add.fdl
 	@RequestMapping(value = "/menu_add.fdl", method = RequestMethod.POST)
-	public ModelAndView menuAddProc(String menuName, String menuType, int menuPrice, String menuPic, String menuInfor, String rawMaterials) {
-		MenuVO mn = new MenuVO(0, menuName, menuType, menuPrice, menuPic, menuInfor, rawMaterials);
+	public ModelAndView menuAddProc(int id, String menuName, String menuType, int menuPrice, String menuPic, String menuInfor, String rawMaterials) {
+		MenuVO mn = new MenuVO(id, menuName, menuType, menuPrice, menuPic, menuInfor, rawMaterials);
 		boolean b = mnSvc.insertNewMenu(mn);
 		ModelAndView mav = new ModelAndView();
 		if( b ) {
-			mav.setViewName("redirect:/boss.fdl");
+			mav.setViewName("redirect:/menulist.fdl");
 		} else {
-			mav.setViewName("boss/bossmenu/menumodify");
+			mav.setViewName("seller/menu_add_form");
 		}
 		return mav;
 	}

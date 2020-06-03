@@ -22,6 +22,30 @@
 			}
 		});
 		
+		$('.photo').click(function() {
+			$('input[type=file]').click();
+		});
+		
+		$('#input_img').on('change', function(e) {
+			var files = e.target.files;
+			var filesArr = Array.prototype.slice.call(files);
+			
+			filesArr.forEach(function(f) {
+				if(!f.type.match("image.*")) {
+					alert("확장자는 이미지 확장자만 가능합니다.");
+					return;
+				}
+				
+				sel_file = f;
+				
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#uploadImg').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(f);
+			});
+		});
+		
 	});
 </script>
 <title>메뉴추가/수정</title>
@@ -40,8 +64,8 @@
 			</div>
 			<div class="content">
 				<div class="profile_wrap">
-					<img src="${pageContext.request.contextPath}/resources/css/imgs/mypage/profile.png">
-					<img class="photo" src="${pageContext.request.contextPath}/resources/css/imgs/mypage/photo.png">
+					<img id="uploadImg" class="photo" src="${pageContext.request.contextPath}/resources/imgs/join/profile_dummy.PNG">
+					<input type="file" id="input_img" name="upfiles" multiple="multiple" style="display: none">
 				</div>
 				<form style="display: inline;" action="${pageContext.request.contextPath}/seller/menu_add.fdl" method="post">
 					<input type="hidden" name="id" value="${seller.sellerId}">
