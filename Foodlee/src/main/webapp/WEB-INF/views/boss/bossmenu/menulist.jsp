@@ -3,9 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-<%
-	String CON = application.getContextPath();
-%>
+
 <!DOCTYPE html>
 <html dir="ltr" lang="ko">
 <head>
@@ -292,6 +290,7 @@
                   <thead>
                     <tr>
 <!--                       <th>메뉴사진</th> -->
+					<th>메뉴번호</th>
                       <th>메뉴이름</th>
                       <th>메뉴종류</th>
                       <th>메뉴가격</th>
@@ -304,12 +303,12 @@
 				  <c:forEach var="mn" items="${menuList}" varStatus="vs">
                     <tr>
 <%--                       <td>${mn.menuPic}</td> --%>
+					<td>${mn.menuId}</td>
                       <td>${mn.menuName}</td>
                       <td>${mn.menuType}</td>
                       <td>${mn.menuPrice}</td>
                       <td>${mn.menuInfor}</td>
-                      <td style="border-left: none;"><img
-									src="<%=CON%>/resources/imgs/truckDetail/sellerid/${mn.sellerId}/${mn.menuPic}"
+                      <td><img	src="<%=application.getContextPath()%>${mn.menuPic}"
 									style="width: 130px; height: 100px;"></td>
                     </tr>
                   </c:forEach>
