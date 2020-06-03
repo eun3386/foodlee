@@ -108,7 +108,7 @@ $(function(){
 					
 					var btndis = item.orderState == 1 ? '': 'disabled'; 
 					//var loginId = item.login;
-					var loginId = "test1234";
+					var loginId = item.login;
 					html += '<input type="button" id="cancelBt_'+item.orderId+'" onclick="cancelOrder('+item.orderId+' , ' +'\'' + loginId +'\'' +')" value="취소하기" '+
 						btndis
 						+'>';
