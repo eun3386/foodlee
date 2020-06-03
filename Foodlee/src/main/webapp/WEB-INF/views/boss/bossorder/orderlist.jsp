@@ -183,6 +183,9 @@
 					  <li class="nav-item">
 					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
+					  <li class="nav-item">
+					    <a class="nav-link" href="<%=application.getContextPath()%>/store_new_form.fdl" >트럭등록</a>
+					  </li>
 					</ul>
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-right"><!--  오른쪽 부분-->

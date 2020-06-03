@@ -199,7 +199,7 @@
                 <div class="row">
                 <div class="col-lg-12 col-md-12"><!-- col-sm-12 col-md-6 col-lg-4 //col-sm-12 col-md-3 col-lg-3 -->
                         <div class="card text-center">
-                        <form action="${pageContext.request.contextPath}/store_add.fdl" method="post" enctype="multipart/form-data">
+                        <form action="${pageContext.request.contextPath}/storeinfo.fdl" method="post" enctype="multipart/form-data">
                         	<h4 class="card-title">영업시간</h4>
                              <!-- *************************************************************** -->
                               <!-- *************테이블************** -->

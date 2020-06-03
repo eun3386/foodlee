@@ -187,7 +187,7 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/store_new_form.fdl" >트럭등록</a>
 					  </li>
 					</ul>
                     <!-- ============================================================== -->
@@ -261,13 +261,7 @@
                 <div class="row">
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb m-0 p-0">
-                                    <li class="breadcrumb-item"><a class="menur" href="#">메뉴등록</a></li>
-            						<li class="breadcrumb-item"><a class="menum" href="#">메뉴수정</a></li>
-            						<li class="breadcrumb-item"><a class="store" href="#">가게정보</a></li>
-                                </ol>
-                            </nav>
+                            
                         </div>
                     </div>
                 </div>
