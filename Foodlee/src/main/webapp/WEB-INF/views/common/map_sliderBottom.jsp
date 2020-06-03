@@ -7,4 +7,4 @@
 			<img src="${pageContext.request.contextPath}${bg.imgPath}">
 		</figure>
 	</div>
-</c:forEach>
+</c:forEach> 
