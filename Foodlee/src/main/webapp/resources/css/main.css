@@ -150,7 +150,7 @@ span#adminlogout a{
 .map_row {padding: 0 10px;}
 
 /* 헤더 */
-.map_header {height: 250px;}
+.map_header {height: 200px;}
 .map_header .map_header_login {text-align: right; font-weight: 900;}
 .map_header .map_header_login a {color: #fff; padding: 8px 0 6px 10px; display: inline-block; transition: color 0.3s ease; font-family: 'Abel', sans-serif;}
 .map_header .map_header_login a:hover {color: rgb(243, 156, 18);}
