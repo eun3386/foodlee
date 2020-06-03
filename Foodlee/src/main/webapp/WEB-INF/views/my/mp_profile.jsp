@@ -35,7 +35,7 @@
 							</tr>
 							<tr>
 								<th>비밀번호</th>
-								<td><input type="password" class="input" value="현재 비밀번호를 입력해 주세요"></td>
+								<td><input type="password" class="input" placeholder="현재 비밀번호"></td>
 								<th></th>
 							</tr>
 							<tr>
@@ -52,7 +52,7 @@
 								<th></th>
 							</tr>
 							<tr class="changePassword" style="display:none">
-								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary">비밀번호 변경</button></div></td>
+								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary" disabled>비밀번호 변경</button></div></td>
 							</tr>
 							<tr>
 								<th>성별</th>
@@ -75,21 +75,22 @@
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td><input type="text" class="input" id="sample2_postcode" placeholder="우편번호"></td>
+								<td><input type="text" name="address" class="input" id="sample2_address" placeholder="주소" value="${member.address}"></td>
+<!-- 								<td><input type="text" class="input" id="sample2_postcode" placeholder="우편번호"></td> -->
 								<th></th>
 							</tr>
 							<tr>
-								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary" onclick="sample2_execDaumPostcode()">우편번호 찾기</button></div></td>
+<!-- 								<td colspan="3"><div class=" btn-abs"><button class="btn btn-secondary" onclick="sample2_execDaumPostcode()">우편번호 찾기</button></div></td> -->
 							</tr>
 							<tr>
 								<th></th>
-								<td colspan="2"><input type="text" name="address" class="input" id="sample2_address" placeholder="주소" value="${member.address}"></td>
+<%-- 								<td colspan="2"><input type="text" name="address" class="input" id="sample2_address" placeholder="주소" value="${member.address}"></td> --%>
 								
 							</tr>
 							<tr>
 								<th></th>
-								<td><input type="text" class="input" id="sample2_detailAddress" placeholder="상세주소"></td>
-								<td><input type="text" class="input" id="sample2_extraAddress" placeholder="참고항목"></td>
+<!-- 								<td><input type="text" class="input" id="sample2_detailAddress" placeholder="상세주소"></td> -->
+<!-- 								<td><input type="text" class="input" id="sample2_extraAddress" placeholder="참고항목"></td> -->
 <!-- 								<th></th> -->
 							</tr>
 							
