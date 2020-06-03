@@ -136,6 +136,8 @@ public class MypageController {
 		//int orderId = Integer.parseInt(req.getParameter("orderId"));
 		//String login = req.getParameter("login");
 		orderSvc.memberOrderCancel(orderId, login);
+		String mid = orderSvc.showOneMid(orderId);
+		orderSvc.cancelPayment(orderSvc.getImportToken(), mid);
 		return "redirect:/my_page.fdl";
 	}
 	

@@ -26,6 +26,7 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 			+ ", order_reason=? where order_id=? and seller_id=?";
 	public static final String SQL_ORDER_SELLER_LIST = "select * from orders where seller_id=?";
 	public static final String SQL_ORDER_SHOW_ONE = "select * from orders where order_id=?";
+	public static final String SQL_SELECT_ONE_MID = "select order_merchant_uid from orders where order_id=?";
 	
 	@Autowired
 	private JdbcTemplate jtem;
@@ -83,6 +84,11 @@ public class OrderMysqlDAOImpl implements IOrderDAO {
 	public OrderVO showOneOrder(int orderId) {
 		return jtem.queryForObject(SQL_ORDER_SHOW_ONE,
 		 		 BeanPropertyRowMapper.newInstance(OrderVO.class), orderId);
+	}
+	
+	@Override
+	public String showOneMid(int orderId) {
+		return jtem.queryForObject(SQL_SELECT_ONE_MID, String.class, orderId);
 	}
 
 }

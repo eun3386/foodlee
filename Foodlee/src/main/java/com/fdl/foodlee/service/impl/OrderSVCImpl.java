@@ -72,6 +72,11 @@ public class OrderSVCImpl implements IOrderSVC {
 	public OrderVO showOneOrder(int orderId) {
 		return orderDao.showOneOrder(orderId);
 	}
+	
+	@Override
+	public String showOneMid(int orderId) {
+		return orderDao.showOneMid(orderId);
+	}
 
 	// 아임포트 인증(토큰)을 받아주는 함수
 	@Override
@@ -174,5 +179,5 @@ public class OrderSVCImpl implements IOrderSVC {
 			return null;
 		}
 	}
-
+	
 }

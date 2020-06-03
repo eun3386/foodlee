@@ -23,4 +23,6 @@ public interface IOrderSVC {
 	public String getImportToken();
 	
 	public int cancelPayment(String token, String mid);
+	
+	public String showOneMid(int orderId);
 }

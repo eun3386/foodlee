@@ -20,4 +20,5 @@ public interface IOrderDAO {
 	// 하나의 주문 내역을 볼 수 있다.
 	OrderVO showOneOrder(int orderId);
 	
+	String showOneMid(int orderId);
 }
