@@ -28,13 +28,7 @@
 </head>
 <body id="wrapper">
 	<div id="infomain">
-	<nav id=" in-main-header" class="navbar navbar-light bg-light justify-content-between">
-		<form class="form-inline">
-			<a class="infomodify" href="#">정보수정</a>
-			<a class="ad" href="#">광고노출</a> 
-			<a class="position" href="#">위치등록</a>
- 		</form>
-	</nav>
+
 	</div>
 	<section class="main_section" id="section_edit">
 		<div class="wrapper">

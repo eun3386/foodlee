@@ -27,8 +27,10 @@
     <title>orderlist</title>
 	
 	 <!-- jquery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 	
     <!-- Custom CSS -->
 <!--     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet"> -->
@@ -44,9 +46,6 @@
     
 <![endif]-->
 	<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
- 
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
- 	<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 	<script src="resources/adminTool/jquery-easing/jquery.easing.min.js"></script>
 
 	<script>
@@ -182,7 +181,7 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/show_form.fdl">정보조회/수정</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/orderlist.fdl" >주문리스트</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
@@ -280,7 +279,7 @@
 	            <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-warning">주문 리스트</h6>
+              <h6 class="m-0 font-weight-bold text-cyan">주문 리스트</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -288,23 +287,27 @@
                   <thead>
                     <tr>
 <!--                       <th>메뉴사진</th> -->
-                      <th>메뉴이름</th>
-                      <th>메뉴종류</th>
+                      <th>주문메뉴</th>
                       <th>메뉴가격</th>
-                      <th>메뉴정보</th>
-                      <th>메뉴원재료</th>
+                      <th>메뉴총가격</th>
+                      <th>주문상황</th>
+                      <th>요청사항</th>
+                      <th>요청사항</th>
+                      <th>구매자</th>
                     </tr>
                   </thead>
 <%--                 <c:forEach var="" items="" vs=""> --%>
                   <tbody>
-				  <c:forEach var="mn" items="${menuList}" varStatus="vs">
+				  <c:forEach var="od" items="${orderList}" varStatus="vs">
                     <tr>
 <%--                       <td>${mn.menuPic}</td> --%>
-                      <td>${mn.menuName}</td>
-                      <td>${mn.menuType}</td>
-                      <td>${mn.menuPrice}</td>
-                      <td>${mn.menuInfor}</td>
-                      <td>${mn.rawMaterials}</td>
+                      <td>${od.orderName}</td>
+                      <td>${od.orderPrice}</td>
+                      <td>${od.orderPriceSum}</td>
+                      <td>${od.orderState}</td>
+                      <td>${od.orderRequests}</td>
+                      <td>${od.orderDate}</td>
+                      <td>${od.login}</td>
                     </tr>
                   </c:forEach>
                   </tbody>
@@ -390,7 +393,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+<!--     <script src="assets/libs/jquery/dist/jquery.min.js"></script> -->
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <!--     apps -->

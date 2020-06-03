@@ -307,7 +307,15 @@ public class BossController {
 		return "boss/bossreview/review";
 	}
 	@RequestMapping(value = "orderlist.fdl", method = RequestMethod.GET)
-	public String orderlist() {//주문리스트
+	public String orderlist(HttpSession ses, Model model) {//주문리스트
+		String login = (String) ses.getAttribute("LoginName"); 	
+		System.out.println("login: "+login);
+		SellerVO svo = this.selSvc.selectOneSeller(login);
+			System.out.println("svo: "+svo);
+		List<OrderVO> orderList = ordSvc.sellerOrderList(svo.getSellerId());
+			System.out.println("menuList: "+orderList);
+		model.addAttribute("svo",svo); //sellerVO
+		model.addAttribute("orderList", orderList);
 		return "boss/bossorder/orderlist";
 	}
 	

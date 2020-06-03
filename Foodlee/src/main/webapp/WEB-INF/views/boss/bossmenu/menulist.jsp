@@ -27,8 +27,10 @@
     <title>menulist</title>
 	
 	 <!-- jquery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
 	
     <!-- Custom CSS -->
 <!--     <link href="assets/extra-libs/c3/c3.min.css" rel="stylesheet"> -->
@@ -44,9 +46,6 @@
     
 <![endif]-->
 	<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
- 
-	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
- 	<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 	<script src="resources/adminTool/jquery-easing/jquery.easing.min.js"></script>
 
 	<script>
@@ -182,7 +181,7 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/show_form.fdl">정보조회/수정</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/seller/orderlist.fdl" >주문리스트</a>
+					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
 					    <a class="nav-link" href="<%=application.getContextPath()%>/review.fdl">수정</a>
@@ -396,7 +395,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+<!--     <script src="assets/libs/jquery/dist/jquery.min.js"></script> -->
     <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
     <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <!--     apps -->
