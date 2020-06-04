@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-	
+
 <!DOCTYPE html>
 <html dir="ltr" lang="ko">
 <head>
@@ -26,6 +26,11 @@
 	margin-right: 130px;
 }
 </style>
+<script type="text/javascript">
+function clickevent() {	
+	window.location.href ="${pageContext.request.contextPath}/store_add.fdl";
+}
+</script>
 </head>
 <body>
 
@@ -128,7 +133,7 @@
                                 <img src="assets/images/users/profile-pic.jpg" alt="user" class="rounded-circle"
                                     width="40">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>안녕하세요,</span> <span
-                                        class="text-dark">판매자님</span> <i data-feather="chevron-down"
+                                        class="text-dark">${sellerId}님</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
@@ -192,7 +197,7 @@
                 <div class="row">
                 <div class="col-lg-12 col-md-12"><!-- col-sm-12 col-md-6 col-lg-4 //col-sm-12 col-md-3 col-lg-3 -->
                         <div class="card text-center">
-                        <form action="${pageContext.request.contextPath}/storeinfo.fdl" method="post" enctype="multipart/form-data">
+                        <form action="${pageContext.request.contextPath}/store_add.fdl" method="post" enctype="multipart/form-data">
                         	<h4 class="card-title">영업시간</h4>
                              <!-- *************************************************************** -->
                               <!-- *************테이블************** -->
@@ -356,7 +361,7 @@
 		                        </div>
 		                    </div><!--위치 end  -->
                             <div class="form-group"><!-- 보내기 -->
-									<button type="submit" class="btn btn-primary btn-block btn-lg">등록</button>
+									<input type="submit" class="btn btn-primary btn-block btn-lg" value="등록">
 								</div>
                             </form>
                         </div>

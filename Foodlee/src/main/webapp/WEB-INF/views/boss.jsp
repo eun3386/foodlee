@@ -239,7 +239,8 @@
 					    <a class="nav-link" href="<%=application.getContextPath()%>/orderlist.fdl" >주문리스트</a>
 					  </li>
 					  <li class="nav-item">
-					    <a class="nav-link" href="<%=application.getContextPath()%>/store_new_form.fdl" >트럭등록</a>
+<%-- 					    <a class="nav-link" href="<%=application.getContextPath()%>/store_add.fdl" >트럭등록</a> --%>
+<a class="nav-link" href="<%=application.getContextPath()%>/store_new_form.fdl" >트럭등록</a>
 					  </li>
 					  					</ul>
                     <!-- ============================================================== -->

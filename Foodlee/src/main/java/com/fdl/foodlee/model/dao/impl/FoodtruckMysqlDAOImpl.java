@@ -48,7 +48,7 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	private static final String SQL_SELECT_ALL_FOODTRUCK =
 			"select * from foodtrucks"; 
 	private static final String
-		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(null,?,?,?,?,?,?,?,?,0,null,?,null)";
+		SQL_INSERT_FOODTRUCK = "insert into foodtrucks values(?,?,?,?,?,?,?,?,0,null,?,null,?)";
 	private static final String
 		SQL_SELECT_FOODTRUCK_SELLER_ID = "select * from foodtrucks where seller_id = ?";
 	private static final String
@@ -85,10 +85,10 @@ private Timestamp locationUpdatedAt; // 위치이동날짜 ⇔ timestamp locatio
 	public boolean insertNewFoodtruck(FoodtruckVO ft) {
 		int r = jtem.update(SQL_INSERT_FOODTRUCK,
 					ft.getSellerId(), ft.getFoodtruckImgPath(), ft.getFoodtruckName(),
-					ft.getFoodtruckMainMenu(), ft.getMenuCategory(), ft.getFoodtruckLocation(),
+					ft.getFoodtruckMainMenu(),  ft.getFoodtruckLocation(),
 					ft.getFoodtruckMuni(), ft.getFoodtruckGuCode(), ft.getFoodtruckOperationHour(),
-					ft.getMemberLikeCount(), ft.getMemberLikeIds(), ft.getSellerFoodtruckCoordinate(),
-					ft.getLocationUpdatedAt());
+					 ft.getSellerFoodtruckCoordinate(),
+					 ft.getMenuCategory());
 		return r == 1; 
 	}
 

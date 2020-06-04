@@ -33,10 +33,10 @@ public class FoodtruckVO {
 //		this.memberLikeCount = memberLikeCount;
 		this(0, null, null, null, 0, null, null,0,	null, favoriteCount, memberLikeCount, null, null, null);
 	}
-	public FoodtruckVO(String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu, int menuCategory,
+	public FoodtruckVO(int sellerId,String foodtruckImgPath, String foodtruckName, String foodtruckMainMenu, int menuCategory,
 			String foodtruckLocation, String foodtruckMuni, int foodtruckGuCode, String foodtruckOperationHour,
 			String sellerFoodtruckCoordinate) {
-		this(0, foodtruckImgPath, foodtruckName, foodtruckMainMenu, menuCategory, foodtruckLocation, foodtruckMuni,
+		this(sellerId, foodtruckImgPath, foodtruckName, foodtruckMainMenu, menuCategory, foodtruckLocation, foodtruckMuni,
 				foodtruckGuCode, foodtruckOperationHour, 0, 0, null, sellerFoodtruckCoordinate, null);
 	}
 	

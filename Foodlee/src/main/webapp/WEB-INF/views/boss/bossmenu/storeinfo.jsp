@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html dir="ltr" lang="ko">
 <head>
@@ -287,12 +290,12 @@
                                     <tbody>
                                         <tr>
                                         	<td><h4 class="card-title">영업시간</h4></td>
-                                            <td><h3 class="card-title">${foodtruckOperationHour}</h3>
+                                            <td><h3 class="card-title">${ft.foodtruckOperationHour}</h3>
                                         </tr>
 	                                     <tr>
                                             <td scope="row">구 이름</td>
 		                                <td>
-										<h3 class="card-title">${foodtruckMuni}</h3>
+										<h3 class="card-title">${ft.foodtruckMuni}</h3>
 										</td>
 	                                </tr>
                                     </tbody>
@@ -302,7 +305,7 @@
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">판매트럭 이름</h4>
-		                                <h3 class="card-title">${foodtruckName}</h3>
+		                                <h3 class="card-title">${ft.foodtruckName}</h3>
 		                            </div>
 		                        </div>
 		                    </div><!--트럭이름   end-->
@@ -310,7 +313,7 @@
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">판매트럭 상세위치</h4>
-		                                <h3 class="card-title">${sellerFoodtruckCoordinate}</h3>
+		                                <h3 class="card-title">${ft.sellerFoodtruckCoordinate}</h3>
 		                            </div>
 		                        </div>
 		                    </div><!--트럭이름   end-->
@@ -324,11 +327,18 @@
 		                                <h4 class="card-title">트럭사진</h4>
 <!-- 		                                /uploads/foodtruck/test/UP_푸들2_20200529105415_6bdfd4e8-e851-4d99-b123-ea16d8b807d8.jpg -->
 <!-- 		                                /uploads/foodtruck/login/UP_푸들2_20200529105415_6bdfd4e8-e851-4d99-b123-ea16d8b807d8.jpg -->
-<%-- 		                                <h3 class="card-title">${realPath}</h3><!-- pageContext.request.contextPath/uploads/foodtruck/test/UP_푸들2_20200529105415_6bdfd4e8-e851-4d99-b123-ea16d8b807d8.jpg --> --%>
 		                                <td style="border-left: none;">
-<%-- 		                            <img src="<%=application.getContextPath()%>/uploads/foodtruck/${sellerId}/${imgfiles}" --%>
+		                                
+		                                <c:if test="${fpsCount eq 0}"><B>이미지 없음</B></c:if>
+		                                <c:forEach var="realPath" items="${fps}">
+		                                
+		                                
+		                                
  										<img src="${pageContext.request.contextPath}${realPath}"
-									style="width: 130px; height: 100px;"></td>
+										style="width: 130px; height: 100px;">  <br>
+									
+									</c:forEach>
+									</td>
 		                            </div>
 		                        </div>
 		                    </div><!-- 트럭사진 end  -->
@@ -336,7 +346,7 @@
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">트럭 카테고리</h4>
-		                                <h3 class="card-title">${menuCategory}</h3>
+		                                <h3 class="card-title">${ft.menuCategory}</h3>
 		                            </div>
 		                        </div>
 		                    </div><!--트럭카테고리 end  -->
@@ -347,7 +357,7 @@
 		                            <div class="card-body">
 		                                <h4 class="card-title">대표메뉴</h4>
 		                                   <div class="form-group">
-		                                       <h3 class="card-title">${foodtruckMainMenu}</h3>
+		                                       <h3 class="card-title">${ft.foodtruckMainMenu}</h3>
 		                                   </div>
 		                            </div>
 		                        </div>
@@ -356,7 +366,7 @@
 		                        <div class="card">
 		                            <div class="card-body">
 		                                <h4 class="card-title">트럭위치</h4>
-		                                <h3 class="card-title">${foodtruckLocation}</h3>
+		                                <h3 class="card-title">${ft.foodtruckLocation}</h3>
 		                            </div>
 		                        </div>
 		                    </div><!--위치 end  -->
