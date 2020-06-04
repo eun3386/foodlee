@@ -56,7 +56,7 @@
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <img src="resources/imgs/boss/logo-text.png" alt="homepage" class="dark-logo" />
+                                <img src="resources/imgs/boss/Seller5.png" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo text -->
 <!--                                 <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" /> -->
                             </span>
