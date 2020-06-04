@@ -87,22 +87,65 @@ public class TruckDetailController {
 	
 	@RequestMapping(value = "reviewList.fdl", method = RequestMethod.GET)
 	public ModelAndView reviewList(@RequestParam(value="sellerId") int sellerId, 
-			Model model, HttpServletRequest req) {
-		model.addAttribute("reviewList", null);
+			Model model, HttpServletRequest req, HttpSession ses) {
 		List<ReviewVO> reviewList = rvSvc.showAllReview(sellerId);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("reviewList", reviewList);
+		
+		int getSellerId = 1;
+
+		if ((req.getParameter("sellerId") != null)) {
+			if(fdSvc.selectOneFoodtruck(Integer.parseInt((req.getParameter("sellerId")))) != null) {
+				getSellerId = Integer.parseInt((req.getParameter("sellerId")));
+			} 
+		}
+		
+		int getTruckSellerId = 0;
+		String getLoginType = String.valueOf(ses.getAttribute("LoginType"));
+		if (Integer.parseInt(getLoginType) == 5) {
+			getTruckSellerId = sellSvc.selectOneSeller((String)ses.getAttribute("LoginName")).getSellerId();
+			ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(getTruckSellerId)); // 셀러
+		}
+		
+		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(getSellerId);
+		System.out.println(fd.getFoodtruckName());
+		model.addAttribute("foodT", fd);
+		
+		ses.setAttribute("sellerId", getTruckSellerId);
+		
 		return mav;
 	}
 	
 	@RequestMapping(value = "qnaList.fdl", method = RequestMethod.GET)
 	public ModelAndView qnaList(@RequestParam(value="sellerId") int sellerId, 
-			Model model, HttpServletRequest req) {
+			Model model, HttpServletRequest req, HttpSession ses) {
 		List<QnaVO> qnaList = qnaSvc.showAllQna(sellerId);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("qnaList", qnaList);
+		
+		int getSellerId = 1;
+
+		if ((req.getParameter("sellerId") != null)) {
+			if(fdSvc.selectOneFoodtruck(Integer.parseInt((req.getParameter("sellerId")))) != null) {
+				getSellerId = Integer.parseInt((req.getParameter("sellerId")));
+			} 
+		}
+		
+		int getTruckSellerId = 0;
+		String getLoginType = String.valueOf(ses.getAttribute("LoginType"));
+		if (Integer.parseInt(getLoginType) == 5) {
+			getTruckSellerId = sellSvc.selectOneSeller((String)ses.getAttribute("LoginName")).getSellerId();
+			ses.setAttribute("sellerLogin", sellSvc.selectOneSeller(getTruckSellerId)); // 셀러
+		}
+		
+		FoodtruckVO fd = this.fdSvc.selectOneFoodtruck(getSellerId);
+		System.out.println(fd.getFoodtruckName());
+		model.addAttribute("foodT", fd);
+		
+		ses.setAttribute("sellerId", getTruckSellerId);
+		
 		return mav;
 	}
 	

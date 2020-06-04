@@ -90,19 +90,20 @@
 					}
 					pageContext.setAttribute("fps", fps);
 					%>
+					<div id="file_show" class="image_file">
 					<c:forEach var="fp" items="${pageScope.fps}" varStatus="vs">
 						<c:choose>
 							<c:when
 								test="${fn:endsWith(fp,'.png')
 						or fn:endsWith(fp,'.jpg') 
 						or fn:endsWith(fp,'.gif')}">
-								<div id="file_show_${fp}" class="image_file">
-									<img src="${pageContext.request.contextPath}${fp}"
-										style="margin-top: 10px; width: 250px;">
-								</div>
+									<img src="${pageContext.request.contextPath}${fp}" 
+										style="margin-top: 10px;
+										width: 250px; ">
 							</c:when>
 						</c:choose>
 					</c:forEach>
+					</div>
 				</c:if>
 			</li>
 		</ul>
