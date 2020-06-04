@@ -221,6 +221,11 @@ function handleImgFileSelect(e) {
 
         var reader = new FileReader();
         reader.onload = function(e) {
+        	$("#img_display").css("display", "block");
+        	$("#img_pr").css("display", "block");
+        	$(".imgs_wrap").css("display", "block");
+        	
+        	
             // var html = "CONTENT";
 //        	$("#img_pr").css("display", "block");
         	var html = // (index == 0 ? "<div style='margin-bottom: 10px;'><br>이미지 미리보기</div>" : "") + 
@@ -317,7 +322,7 @@ function reply_add_review(id) {
 	var moText = $("#review_reply_"+id).children("textarea").val();
 	var login = $("#login").val();
 	var sellerId = $("#sellerId").val();
-		
+	
 	$.ajax({
 	    type: "post",
 	    url: URLHD + 'review_reply_add.fdl',
@@ -328,7 +333,8 @@ function reply_add_review(id) {
 	    	"sellerId" : sellerId
 	    	},
 	    	success: function(data, textStatus) {
-	    		location.href = URLHD + "truckDetail.fdl?sellerId="+sellerId;
+	    		// location.href = URLHD + "truckDetail.fdl?sellerId="+sellerId;
+	    		ajaxReview(sellerId);
 	    }
 	});
 	// location.href = URLHD + "truckDetail.fdl?sellerId="+sellerId;
@@ -372,7 +378,21 @@ function del_review(id, rd) {
 		})
 		.then((result) => {
 		  if (result.value) {
-			  location.href= URLHD + 'reivew_delete.fdl?id='+id+'&depth='+rd+'&sid='+sid;
+			  $.ajax({
+				    type: "post",
+				    url: URLHD + 'review_delete.fdl',
+				    data: {
+				    	"id" : id,
+				    	"depth" : rd,
+				    	"sellerId" : sid
+				    	},
+				    	success: function(data, textStatus) {
+				    		// location.href = URLHD + "truckDetail.fdl?sellerId="+sellerId;
+				    		// location.href= URLHD + 'review_delete.fdl?id='+id+'&depth='+rd+'&sid='+sid;
+				    		ajaxReview(sid);
+				    }
+				});
+			  
 		  } else {
 		    return; 
 		  }
@@ -445,7 +465,8 @@ function reply_add_qna(id) {
 	    	"secret" : secret
 	    	},
 	    	success: function(data, textStatus) {
-	    		location.href = URLHD + "truckDetail.fdl?sellerId="+sellerId;
+	    		// location.href = URLHD + "truckDetail.fdl?sellerId="+sellerId;
+	    		ajaxQna(sellerId);
 	    }
 	});
 }
@@ -464,6 +485,7 @@ function cancel_reply_qna(id) {
 function del_qna(id, rd) {
 	var sid = $("#sellerId").val();
 	var titleText = "";
+	var URLHD = getContextPath() + '/';
 	
 	if (rd == 0) {
 		titleText = "QnA를 삭제하시겠습니까?"
@@ -482,7 +504,21 @@ function del_qna(id, rd) {
 		})
 		.then((result) => {
 		  if (result.value) {
-			  location.href= URLHD + 'qna_delete.fdl?id='+id+'&depth='+rd+'&sid='+sid;
+			  $.ajax({
+				    type: "post",
+				    url: URLHD + 'qna_delete.fdl',
+				    data: {
+				    	"id" : id,
+				    	"depth" : rd,
+				    	"sellerId" : sid
+				    	},
+				    	success: function(data, textStatus) {
+				    		// location.href = URLHD + "truckDetail.fdl?sellerId="+sellerId;
+				    		// location.href= URLHD + 'review_delete.fdl?id='+id+'&depth='+rd+'&sid='+sid;
+				    		ajaxQna(sid);
+				    }
+				});
+			  // location.href= URLHD + 'qna_delete.fdl?id='+id+'&depth='+rd+'&sid='+sid;
 		  } else {
 		    return;
 		  }
@@ -501,7 +537,84 @@ function reply_qna(id) {
 
 // qna끝----------------------------------------------------------------------------------------------------------------------------
 
+function replyMore() {
+	if ($(".reply").size() <= 3) {
+		$('#read-more-review').css("display", "none");
+	}
+	
+	$(".reply").slice(0, 3).show(); // select the first ten
+	$("#read-more-review").click(function(e) { // click event for load more
+	    e.preventDefault();
+	    $(".reply:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+	    // 더보기 스크롤 자동이동
+	    // var position = $("#reviews_window").offset();
+	    // $('#reviews_window').animate({scrollTop : position.top}, 2000);
+	    // $('#reviews_window').scrollTop($('#reviews_window').prop('scrollHeight'));
+	    if($(".reply:hidden").length == 0){ // check if any hidden divs still exist
+	        // alert("No more divs"); // alert if there are none left
+	        $('#read-more-review').css("display", "none");
+	    }
+	    // $('#reviews_window').scrollTop($('#reviews_window').height());
+	});
+}
 
+function qnaMore() {
+ if ($(".qna_items").size() <= 3) {
+    	$('#read-more-qna').css("display", "none");
+    }
+    
+    $(".qna_items").slice(0, 3).show(); // select the first ten
+    $("#read-more-qna").click(function(e) { // click event for load more
+        e.preventDefault();
+        $(".qna_items:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
+        if($(".qna_items:hidden").length == 0){ // check if any hidden divs still exist
+            // alert("No more divs"); // alert if there are none left
+            $('#read-more-qna').css("display", "none");
+        }
+    });
+}
+
+function ajaxReview(sellerId) {
+	$.ajax({
+	       type : "GET", //전송방식을 지정한다 (POST,GET)
+	       url : URLHD + "reviewList.fdl?sellerId="+sellerId,//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+	       dataType : "html",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
+	       error : function() {
+	           alert("통신실패!!!!");
+	       },
+	       success : function(Parse_data){
+	    	   var newHtml = Parse_data.replace(/(\r\n|\n|\r)/gm,"");
+	    	   $('#inputReview').empty().html(newHtml.trim());
+	    	   replyMore();
+	    	   $(".reply").show();
+	       }
+	        
+	   });
+}
+
+function ajaxQna(sellerId) {
+	$.ajax({
+	       type : "GET", //전송방식을 지정한다 (POST,GET)
+	       url : URLHD + "qnaList.fdl?sellerId="+sellerId,//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+	       dataType : "html",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
+	       error : function() {
+	           alert("통신실패!!!!");
+	       },
+	       success : function(Parse_data){
+	    	   /*
+	    	   var newHtml = Parse_data.replace(/(\r\n|\n|\r)/gm,"");
+	    	   $('#inputQna').empty().html(newHtml.trim());
+	    	   */
+	    	   $('#inputQna').html(Parse_data);
+	    	   qnaMore();
+	    	   $(".qna_items").show();
+	       }
+	        
+	   });
+}
+
+
+// function 끝
 $(document).ready(function() { // ready 시작
 	$('#loginHeader').on('click', function() {
 		var ROOT_PATH = getContextPath() + '/';
@@ -571,6 +684,86 @@ $(document).ready(function() { // ready 시작
 			    return;
 			  }
 		});
+	});
+	
+	// 리뷰 추가
+	
+	$("#review_add").click(function (event) {
+		var sellerId = $("#sellerId").val();
+	    //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음
+	    event.preventDefault();
+	    var URLHD = getContextPath() + '/';
+	    // Get form
+	    var form = $('#fileUploadFormReview')[0];
+
+	    // Create an FormData object 
+	    var data = new FormData(form);
+
+	   // disabled the submit button
+	    $("#review_add").prop("disabled", true);
+
+	    $.ajax({
+	        type: "POST",
+	        enctype: 'multipart/form-data',
+	        url: URLHD + "new_review.fdl",
+	        data: data,
+	        processData: false,
+	        contentType: false,
+	        cache: false,
+	        timeout: 600000,
+	        success: function (data) {
+	            $("#review_add").prop("disabled", false);
+	            console.log("complete");
+	            ajaxReview(sellerId);
+	            $("#re_area").val("");
+	            $("#img_display").css("display", "none");
+	        },
+	        error: function (e) {
+	            console.log("ERROR : ", e);
+	            $("#review_add").prop("disabled", false);
+	            console.log("fail");
+	        }
+	    });
+
+	});
+	
+	// qna 추가
+	$("#qna_add").click(function (event) {
+		var sellerId = $("#sellerId").val();
+	    //preventDefault 는 기본으로 정의된 이벤트를 작동하지 못하게 하는 메서드이다. submit을 막음
+	    event.preventDefault();
+	    var URLHD = getContextPath() + '/';
+	    // Get form
+	    var form = $('#fileUploadFormQna')[0];
+
+	    // Create an FormData object 
+	    var data = new FormData(form);
+
+	   // disabled the submit button
+	    $("#qna_add").prop("disabled", true);
+
+	    $.ajax({
+	        type: "POST",
+	        enctype: 'multipart/form-data',
+	        url: URLHD + "new_qna.fdl",
+	        data: data,
+	        processData: false,
+	        contentType: false,
+	        cache: false,
+	        timeout: 600000,
+	        success: function (data) {
+	            $("#qna_add").prop("disabled", false);
+	            console.log("complete");
+	            ajaxQna(sellerId);
+	            $("#re_area_qna").val("");
+	        },
+	        error: function (e) {
+	            console.log("ERROR : ", e);
+	            $("#qna_add").prop("disabled", false);
+	            console.log("fail");
+	        }
+	    });
+
 	});
 	
 	// 결제클릭
@@ -867,39 +1060,10 @@ $(document).ready(function() { // ready 시작
 	*/
     
     // 
-
-    if ($(".reply").size() <= 3) {
-    	$('#read-more-review').css("display", "none");
-    }
     
-	$(".reply").slice(0, 3).show(); // select the first ten
-    $("#read-more-review").click(function(e) { // click event for load more
-        e.preventDefault();
-        $(".reply:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
-        // 더보기 스크롤 자동이동
-        // var position = $("#reviews_window").offset();
-        // $('#reviews_window').animate({scrollTop : position.top}, 2000);
-        // $('#reviews_window').scrollTop($('#reviews_window').prop('scrollHeight'));
-        if($(".reply:hidden").length == 0){ // check if any hidden divs still exist
-            // alert("No more divs"); // alert if there are none left
-            $('#read-more-review').css("display", "none");
-        }
-        // $('#reviews_window').scrollTop($('#reviews_window').height());
-    });
-	
-    if ($(".qna_items").size() <= 3) {
-    	$('#read-more-qna').css("display", "none");
-    }
-    
-    $(".qna_items").slice(0, 3).show(); // select the first ten
-    $("#read-more-qna").click(function(e) { // click event for load more
-        e.preventDefault();
-        $(".qna_items:hidden").slice(0, 3).show(); // select next 10 hidden divs and show them
-        if($(".qna_items:hidden").length == 0){ // check if any hidden divs still exist
-            // alert("No more divs"); // alert if there are none left
-            $('#read-more-qna').css("display", "none");
-        }
-    });
+    replyMore();
+	qnaMore();
+   
 	
  // 기존 css에서 플로팅 배너 위치(top)값을 가져와 저장한다.
 	var floatPosition = parseInt($("#_order").css('top'));

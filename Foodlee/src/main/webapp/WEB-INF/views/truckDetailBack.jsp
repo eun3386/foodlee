@@ -163,11 +163,100 @@
 			<div id="reviews_section">
 			<div id="reviews_window">
 			
-			<div id="inputReview">
-			<!--  jsp 리뷰  -->
-				<jsp:include page="reviewList.jsp" flush="true"/>
-			</div>
-			
+			<c:choose>
+			<c:when test="${empty reviewList}">
+				<c:if test="${empty LoginName}">
+					<hr>
+						<h3 style="text-align: center; margin-top: 9px; margin-bottom: 9px;">
+							로그인 하셔서 첫 번째 리뷰를 달아주세요.
+						</h3>
+					<hr>
+				</c:if>
+				<c:if test="${not empty LoginName}">
+					<hr>
+						<h3 style="text-align: center; margin-top: 9px; margin-bottom: 9px;">
+							첫 번째 리뷰를 달아주세요.
+						</h3>
+					<hr>
+				</c:if>
+			</c:when>
+			</c:choose>
+				<c:forEach var="rv" items="${reviewList}" varStatus="vs">
+				<div id="reply_${rv.reviewId}" class="reply"
+					style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
+					<c:if test="${rv.reviewDepth eq 1}">padding-left: 40px;</c:if>
+					">
+					<ul class="truckDetailUL" style="list-style: none; padding: 0;">
+						<li>
+							<div style="float: left;">
+							</div>
+							<div class="nickname" style="padding-top: 2px;">
+							<c:if test="${rv.reviewDepth eq 1}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i></c:if>
+							<c:choose>
+							<c:when test="${rv.reviewDepth eq 0}">${rv.login}</c:when>
+							<c:when test="${rv.reviewDepth eq 1}">사장님</c:when>
+							</c:choose>
+							</div>
+							<div class="date" style="padding-top: 4px; font-size: 12px;">
+							<span id="fmt_${rv.reviewId}"><fmt:formatDate value="${rv.reviewCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</span>
+							
+							<c:if test="${rv.reviewContent ne '삭제된 리뷰입니다.'}">
+								<span style="float: right; margin-right: 15px;">
+								<c:if test="${rv.login eq LoginName}">
+									<button id="mod_${rv.reviewId}" onclick="modify_review(${rv.reviewId})" 
+									style="margin-bottom: 3px;">수정</button>
+									<br><button onclick="del_review(${rv.reviewId}, ${rv.reviewDepth})" style="margin-bottom: 3px;">
+									삭제</button>
+									<br>
+								</c:if>
+								<c:if test="${foodT.sellerId eq sellerId and foodT.sellerId eq sellerId and rv.reviewDepth eq 0 and empty reviewList[vs.index+1].reviewPnum}">
+									<button id="reply_button_${rv.reviewId}" onclick="reply_review(${rv.reviewId})">답변</button>
+								</c:if>
+								</span>
+							</c:if>
+							</div>
+						</li>
+						<li>
+							<div id="con_${rv.reviewId}" style="padding-top: 15px;"><c:out value="${rv.reviewContent}"/>
+							</div>
+							<c:if test="${!empty rv.reviewPic}">
+							
+							<c:set var="flName" value="${rv.reviewPic}"></c:set>
+							<%
+								String filePath = (String)pageContext.getAttribute("flName");
+								String fps[] = null;
+								int fpsCount = 1;
+								if (filePath != null && !filePath.isEmpty()) {
+									if (filePath.indexOf("|") != -1) {
+										fps = filePath.split("\\" + "|");
+										fpsCount = fps.length;
+									} else {
+										fpsCount = 1;
+										fps = new String[] { filePath };
+									}
+								} else {
+									fpsCount = 0;
+								}
+								pageContext.setAttribute("fps", fps);
+							%>
+							<c:forEach var="fp" items="${pageScope.fps}" varStatus="vs">
+								<c:choose>
+									<c:when test="${fn:endsWith(fp,'.png')
+										or fn:endsWith(fp,'.jpg') 
+										or fn:endsWith(fp,'.gif')}">
+										<div id="file_show_${fp}" class="image_file">
+											<img src="${pageContext.request.contextPath}${fp}" 
+												style="margin-top:10px; width: 250px;">
+										</div>
+									</c:when>
+								</c:choose>
+							</c:forEach>
+							</c:if>
+						</li>
+					</ul>
+				</div>
+				</c:forEach>
 				</div>
 				<div id="read-more-review" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
 					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white; padding-top: 7px;">리뷰 더보기</div>
@@ -177,7 +266,7 @@
 <!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
 <!--  						max-height: 250px; border-radius: 3px 3px 3px 3px; overflow-y: auto; white-space: pre-line;"> -->
 <!-- 					</div> -->
-					<form method="post" enctype="multipart/form-data" id="fileUploadFormReview">
+					<form action="${pageContext.request.contextPath}/new_review.fdl" method="post" enctype="multipart/form-data">
 					<textarea name="reviewContent" id="re_area" wrap="hard" onkeydown="resize(this)" onkeyup="resize(this)" placeholder="사진 업로드는 4개까지 가능합니다."
 						style="resize:none; width: 800px; min-height: 80px; max-height: 180px;">${!empty rv ? rv.review_content:''}</textarea>
 						<input type="hidden" name="sellerId" value="${foodT.sellerId}">
@@ -188,11 +277,9 @@
 	 						margin-left: -3px; background-color: orange; border: 1px solid gray;">이미지 추가</button>
 						<button type="submit" id="review_add" style="width: 100px; height: 30px; float: right; margin-top: 25px; 
 						margin-bottom: 30px; margin-left: -3px; background-color: orange; border: 1px solid gray;">리뷰달기</button>
-						<div id="img_display">
-					        <div id="img_pr" style="position: absolute; display:none; margin-top: 40px;"><br>이미지 미리보기</div>
-					        <div class="imgs_wrap">
-					            <img id="img"/>
-					        </div>
+				        <div id="img_pr" style="position: absolute; display:none; margin-top: 40px;"><br>이미지 미리보기</div>
+				        <div class="imgs_wrap">
+				            <img id="img"/>
 				        </div>
 					</form>
 				</div>
@@ -252,14 +339,139 @@
 	
 	<section class="section" id="content3">
 	<div id="QnA_Section">
-		<div id="inputQna">
-			<jsp:include page="qnaList.jsp" flush="true"/>
-		</div>
+		<c:if test="${empty qnaList}">
+			<hr>
+				<h3 style="text-align: center; margin-top: 9px; margin-bottom: 9px;">QnA가 없습니다.</h3>
+			<hr>
+		</c:if>
+		<c:forEach var="qna" items="${qnaList}" varStatus="qnavs">
+			<div id="qna_id_${qna.qnaId}" class="qna_items"
+				style="border: 1px solid #ccc; margin-bottom: -1px; padding-left: 10px;
+				<c:if test="${qna.qnaDepth eq 1}">padding-left: 40px;</c:if>
+				">
+				<ul class="truckDetailUL" style="list-style: none; padding: 0;">
+					<li>
+						<div style="float: left;">
+						</div>
+						<div class="nickname" style="padding-top: 2px;">
+						<c:choose>
+							<c:when test="${qna.qnaSecret eq false}">
+								<c:if test="${qna.qnaDepth eq 0}">${qna.login}</c:if>
+								<c:if test="${qna.qnaDepth eq 1}"><i class='fas fa-reply fa-rotate-180 fa-lg'></i>사장님</c:if>
+							</c:when>
+							<c:when test="${qna.qnaSecret eq true}">
+								<c:choose>
+									<c:when test="${qna.qnaDepth eq 0}">
+										<c:if test="${qna.login eq LoginName}">
+											<i class="fas fa-lock"></i> ${qna.login}
+										</c:if>
+										<c:if test="${foodT.sellerId eq sellerId}">
+											<i class="fas fa-lock"></i> ${qna.login}
+										</c:if>
+									</c:when>
+									<c:when test="${qna.qnaDepth eq 1}">
+										<c:if test="${foodT.sellerId eq sellerId}">
+											<i class="fas fa-lock"></i> <i class='fas fa-reply fa-rotate-180 fa-lg'></i>사장님
+										</c:if>									
+										<c:if test="${qnaList[qnavs.index-1].qnaId eq qnaList[qnavs.index].qnaPnum and qnaList[qnavs.index-1].login eq LoginName}">
+											<i class="fas fa-lock"></i> <i class='fas fa-reply fa-rotate-180 fa-lg'></i>사장님
+										</c:if>
+									</c:when>
+								</c:choose>
+							</c:when>
+						</c:choose>
+						</div>
+						<div class="date" style="padding-top: 4px; font-size: 12px;">
+						<span id="fmt_qna_${qna.qnaId}">
+						<c:choose>
+							<c:when test="${qna.qnaSecret eq false}">
+								<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+							</c:when>
+							<c:when test="${qna.qnaSecret eq true}">
+								<c:choose>
+									<c:when test="${qna.qnaDepth eq 0}">
+										<c:if test="${qna.login eq LoginName}">
+											<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+										</c:if>
+										<c:if test="${foodT.sellerId eq sellerId}">
+											<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+										</c:if>
+									</c:when>
+									<c:when test="${qna.qnaDepth eq 1}">
+									<c:if test="${foodT.sellerId eq sellerId}">
+										<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+									</c:if>	
+									<c:if test="${qnaList[qnavs.index-1].qnaId eq qnaList[qnavs.index].qnaPnum and qnaList[qnavs.index-1].login eq LoginName}">
+										<fmt:formatDate value="${qna.qnaCreatedAt}" pattern="yyyy-MM-dd HH:mm:ss"/>
+									</c:if>
+									</c:when>
+								</c:choose>
+							</c:when>
+						</c:choose>
+						</span>
+						
+						<c:if test="${qna.qnaContent ne '삭제된 QnA입니다.'}">
+							<span style="float: right; margin-right: 15px;">
+							<c:if test="${qna.login eq LoginName}">
+								<button id="mod_qna_${qna.qnaId}" onclick="modify_qna(${qna.qnaId})" 
+								style="margin-bottom: 3px;">수정</button>
+								<br><button onclick="del_qna(${qna.qnaId}, ${qna.qnaDepth})" style="margin-bottom: 3px;">
+								삭제</button>
+								<br>
+							</c:if>
+							<c:if test="${foodT.sellerId eq sellerId and foodT.sellerId eq sellerId and qna.qnaDepth eq 0 and empty qnaList[qnavs.index+1].qnaPnum}">
+								<input type="hidden" id="hdSecret_${qna.qnaId}" value="${qnaList[qnavs.index].qnaSecret}">
+								<button id="reply_button_qna_${qna.qnaId}" onclick="reply_qna(${qna.qnaId})">답변</button>
+							</c:if>
+							</span>
+						</c:if>
+						</div>
+					</li>
+					<li>
+					<div id="con_qna_${qna.qnaId}" style="padding-top: 15px;">
+					<c:choose>
+						<c:when test="${qna.qnaSecret eq false}"><c:out value="${qna.qnaContent}"/></c:when>
+						<c:when test="${qna.qnaSecret eq true}">
+							<c:choose>
+								<c:when test="${qna.qnaDepth eq 0}">
+									<c:if test="${qna.login eq LoginName}">
+										<c:out value="${qna.qnaContent}"/>
+									</c:if>
+									<c:if test="${qna.login ne LoginName and foodT.sellerId eq sellerId}">
+										<c:out value="${qna.qnaContent}"/>
+									</c:if>
+									<c:if test="${qna.login ne LoginName and foodT.sellerId ne sellerId}">
+										<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
+									</c:if>
+								</c:when>
+								<c:when test="${qna.qnaDepth eq 1}">
+									<c:choose>
+										<c:when test="${qnaList[qnavs.index-1].qnaId eq qnaList[qnavs.index].qnaPnum}">
+											<c:if test="${foodT.sellerId eq sellerId}">
+												<c:out value="${qna.qnaContent}"/>
+											</c:if>
+											<c:if test="${qnaList[qnavs.index-1].login eq LoginName}">
+												<c:out value="${qna.qnaContent}"/>
+											</c:if>
+											<c:if test="${foodT.sellerId ne sellerId and qnaList[qnavs.index-1].login ne LoginName}">
+												<i class="fas fa-lock" style="padding-bottom: 16px;"></i> 해당 QnA는 비밀글 입니다.
+											</c:if>
+										</c:when>
+									</c:choose>
+								</c:when>
+							</c:choose>
+						</c:when>
+					</c:choose>
+					</div>
+					</li>
+				</ul>
+			</div>
+		</c:forEach>
 			<div id="read-more-qna" style="text-align: center; font-size: 18px; vertical-align: middle;
 				background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white; padding-top: 7px;">Q&amp;A 더보기</div>
 				<div id="qna-insert">
 					<h3 style="padding-top: 10px;">QnA달기</h3>
-					<form action="${pageContext.request.contextPath}/new_qna.fdl" method="post" id="fileUploadFormQna">
+					<form action="${pageContext.request.contextPath}/new_qna.fdl" method="post">
 					<span style="float: left; margin-bottom: 3px;">
 					<!-- <input type='hidden' name="secret"> -->
 					<input type="checkbox" name="secret" value="true" style="display: inline;">비밀글 여부</span>

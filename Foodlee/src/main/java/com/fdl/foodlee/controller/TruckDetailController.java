@@ -84,6 +84,29 @@ public class TruckDetailController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
+	@RequestMapping(value = "reviewList.fdl", method = RequestMethod.GET)
+	public ModelAndView reviewList(@RequestParam(value="sellerId") int sellerId, 
+			Model model, HttpServletRequest req) {
+		model.addAttribute("reviewList", null);
+		List<ReviewVO> reviewList = rvSvc.showAllReview(sellerId);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("reviewList", reviewList);
+		return mav;
+	}
+	
+	@RequestMapping(value = "qnaList.fdl", method = RequestMethod.GET)
+	public ModelAndView qnaList(@RequestParam(value="sellerId") int sellerId, 
+			Model model, HttpServletRequest req) {
+		List<QnaVO> qnaList = qnaSvc.showAllQna(sellerId);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("qnaList", qnaList);
+		return mav;
+	}
+	
+	
 	@RequestMapping(value = "truckDetail.fdl", method = RequestMethod.GET)
 	public String truckDetail(HttpSession ses, Model model, HttpServletRequest req) {
 		// ses.setAttribute("mbId", 1); // 멤버 아이디 임시 설정
@@ -153,10 +176,14 @@ public class TruckDetailController {
 		return "truckDetail";
 	}
 	
-	@RequestMapping(value = "reivew_delete.fdl", method = RequestMethod.GET)
-	public String reviewDelete(@RequestParam("id")int id, @RequestParam("depth")int depth, @RequestParam("sid")int sid) {
+	@RequestMapping(value = "review_delete.fdl", method = RequestMethod.POST)
+	@ResponseBody
+	public String reviewDelete(HttpServletRequest req) {
+		int id = Integer.parseInt(req.getParameter("id"));
+		int depth = Integer.parseInt(req.getParameter("depth"));
 		rvSvc.deleteReview(id, depth);
-		return "redirect:/truckDetail.fdl?sellerId="+sid;
+		// return "redirect:/truckDetail.fdl?sellerId="+sid;
+		return null;
 	}
 	
 	@RequestMapping(value = "reivew_update.fdl", method = RequestMethod.POST)
@@ -178,15 +205,10 @@ public class TruckDetailController {
 		ReviewVO rv = new ReviewVO(0, login, sellerId, 1, pnum, rvReply, null, null);
 		boolean r = rvSvc.reviewReply(rv);
 		
-		return "redirect:/truckDetail.fdl?sellerId="+sellerId;
+		// return "redirect:/truckDetail.fdl?sellerId="+sellerId;
+		return null;
 	}
 	
-	@RequestMapping(value = "review_list.fdl", method = RequestMethod.GET)
-	public List<ReviewVO> reviewList(Model model, HttpServletRequest req) {
-		int getSellerId = Integer.parseInt((req.getParameter("sellerId")));
-		return rvSvc.showAllReview(getSellerId);
-	}
-
 	@RequestMapping(value = "new_review.fdl", method = RequestMethod.POST)
 	public String newReview(@ModelAttribute(value="rv") ReviewVO rv, List<MultipartFile> imgfiles, HttpSession ses, Model model) {
 		System.out.println(rv.getReviewContent());
@@ -232,10 +254,14 @@ public class TruckDetailController {
 	}
 	
 	// QNA 시작
-	@RequestMapping(value = "qna_delete.fdl", method = RequestMethod.GET)
-	public String QnaDelete(@RequestParam("id")int id, @RequestParam("depth")int depth, @RequestParam("sid")int sid) {
+	@RequestMapping(value = "qna_delete.fdl", method = RequestMethod.POST)
+	@ResponseBody
+	public String QnaDelete(HttpServletRequest req) {
+		int id = Integer.parseInt(req.getParameter("id"));
+		int depth = Integer.parseInt(req.getParameter("depth"));
 		qnaSvc.deleteQna(id, depth);
-		return "redirect:/truckDetail.fdl?sellerId="+sid;
+		// return "redirect:/truckDetail.fdl?sellerId="+sid;
+		return null;
 	}
 	
 	@RequestMapping(value = "qna_update.fdl", method = RequestMethod.POST)
