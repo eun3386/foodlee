@@ -49,7 +49,7 @@
 	font-size: large;
 }
 
-#login_input, #password, #input1, #input2 {
+#login_input, #password, #name, #phoneNumber, #email, #login {
 	border: 2px solid #DADADA;
 	margin: 3px auto;
 	margin-bottom: 15px;
