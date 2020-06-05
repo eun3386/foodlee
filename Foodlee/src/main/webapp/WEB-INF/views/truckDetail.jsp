@@ -172,6 +172,7 @@
 				<div id="read-more-review" style="text-align: center; font-size: 18px; vertical-align: middle; margin-bottom: 20px;
 					background-color: DodgerBlue; opacity: 0.7; height: 30px; color: white; padding-top: 7px;">리뷰 더보기</div>
 <%-- 				<c:if test="${foodT.sellerId ne sellerId}"> 리뷰 달기 판매자 금지--%>
+				<c:if test="${LoginType eq 4}">
 				<div id="review-insert">
 					<h3 style="padding-top: 10px;">리뷰달기</h3>
 <!-- 					<div id="writeTextarea" style="border: 1px gray solid; min-height: 80px; overflow-x: hidden; -->
@@ -196,6 +197,7 @@
 				        </div>
 					</form>
 				</div>
+				</c:if>
 <%-- 			</c:if> --%>
 			</div>
 <!-- 			<div id="test_list"></div> -->
